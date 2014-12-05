@@ -64,14 +64,9 @@
     <div id="mainContainer" class="container-fluid">
         <div id="mainRow" class="row">
             <div id="leftSide" class="col-md-3">
-                <p>&nbsp</p>
-                <p>&nbsp</p>
                 <p>leftSide</p>
             </div>
             <div id="mapSide" class="col-md-9">
-                <p>&nbsp</p>
-                <p>&nbsp</p>
-                <p>mapSide</p>
             </div>
         </div>
     </div>
@@ -84,5 +79,17 @@
     <script src="../../assets/js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+    <script>
+    function initialize() {
+      var mapProp = {
+        center:new google.maps.LatLng(24.9853919,121.5865058),
+        zoom:12,
+        mapTypeId:google.maps.MapTypeId.ROADMAP
+      };
+      var map=new google.maps.Map(document.getElementById("mapSide"),mapProp);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
   </body>
 </html>

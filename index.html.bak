@@ -54,7 +54,6 @@
             <p id="my-login-message"></p>
         </div>
         <a href="/cp1">cp1</a>
-        <a href="/main_map">ExchangeWorld</a>
     </div>
 
     <!-- ENDBLOCK: Your playground -->

@@ -36,7 +36,7 @@ def main_map():
     }
     return static_file('main_map.html', root='./')
 	
-@app.route('/index')
+@app.route('/')
 def index():
     template_data = {
         'facebook_app_id': FACEBOOK_APP_ID

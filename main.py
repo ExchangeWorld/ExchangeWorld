@@ -29,14 +29,16 @@ app = Bottle()
 def static(filename):
     return static_file(filename, root='static/')
 
-@app.route('/main_map')
+
+#@app.route('/main_map')
+@app.route('/')
 def main_map():
     template_data = {
         'facebook_app_id': FACEBOOK_APP_ID
     }
     return static_file('main_map.html', root='./')
 	
-@app.route('/')
+@app.route('/fb_test')
 def index():
     template_data = {
         'facebook_app_id': FACEBOOK_APP_ID

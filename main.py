@@ -47,10 +47,17 @@ def index():
 
 @app.route('/cp1')
 def cp1():
-    fb_access_token = request.cookies['fb_access_token']
-    fb_graph = facebook.GraphAPI(fb_access_token)
-    profile = fb_graph.get_object("me")
-    return json.dumps(profile)
+	return '''
+<script> 
+	$(function() {
+		$("#includedContent").load("b.html"); 
+	}); 
+</script>
+	'''
+   # fb_access_token = request.cookies['fb_access_token']
+    #fb_graph = facebook.GraphAPI(fb_access_token)
+    #profile = fb_graph.get_object("me")
+    #return json.dumps(profile)
         
     #    return "cp1"
 

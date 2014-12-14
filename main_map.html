@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template -->
     <link href="static/css/customized.css" rel="stylesheet" type="text/css" charset="utf-8">
+    <link href="static/home-03b2f3d29cb61f65e848770009364984.css" rel="stylesheet" type="text/css" charset="utf-8">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -45,7 +46,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="cp1">Seek</a></li>
+            <li class="active"><a href="#testing" onClick="load_seek()">Seek</a></li>
             <li><a href="#help">Help</a></li>
             <li><a href="#about">About</a></li>
             <li class="dropdown">
@@ -63,10 +64,12 @@
 
     <div id="mainContainer" class="container-fluid">
         <div id="mainRow" class="row">
-            <div id="leftSide" class="col-md-3">
+            <div id="leftSide" class="col-md-4">
+                        <li class="event_list_entry">            <div class="event-vote vote-widget">             <span class="index badge">2</span              ></div><a href="/events/12-14--25"> 
+              <div class="buttons"></div> <div class="left"> <div class="event_thumb" style="background-image: url('https://scontent-b.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/c75.0.200.200/p200x200/10352148_1527623704164451_548395675862471315_n.jpg?oh=e159becdb60c02f321551f2bab34c017&amp;oe=551892E5');"></div> <div class="event_icons">   </div> </div> <div class="rsvp-status" style="display:none"></div> <div class="title"> 物品名稱 </div> <div class="time"> 類別 </div> <div class="location"> 地點 </div> <!--<div class="categories"></div>--> <div class="attending-count">  欲交換物品    </div> <div class="list_entry_icons nav_event"></div> <div class="promoted_event" style="display:none;"> Featured Event </div> <!--<div class="event-list-button"></div>--> <div class="event-friends-container"><div class="event-friends"></div></div> <div style="clear:both"></div> </a></li>
                 <p>leftSide</p>
             </div>
-            <div id="mapSide" class="col-md-9">
+            <div id="mapSide" class="col-md-8">
             </div>
         </div>
     </div>
@@ -79,6 +82,7 @@
     <script src="../../assets/js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="static/custom.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script>
     function initialize() {

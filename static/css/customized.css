@@ -45,3 +45,23 @@ body
 	height: inherit;
 	background-color: gray;
 }
+
+#searchOptions
+{
+	padding-top: 0px;
+	background-color: silver;
+}
+
+#searchResults
+{
+	padding-top: 0px;
+	background-color: silver;
+	font-size: 75%;
+}
+
+.searchResult
+{
+	padding-top: 0px;
+	padding-left: 15px;
+	background-color: silver;
+}

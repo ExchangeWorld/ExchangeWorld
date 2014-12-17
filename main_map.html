@@ -47,7 +47,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li id="seek"><a href="#seek" onClick="load_seek()" style="font-weight:bolder">Seek</a></li>
-            <li id="post" class="active"><a href="#post" onClick="load_post()" style="font-weight:bolder">Post</a></li>
+            <li id="post"><a href="#post" onClick="load_post()" style="font-weight:bolder">Post</a></li>
             <li id="about"><a href="#about" style="font-weight:bolder">About</a></li>
             <li id="help"><a href="#help" style="font-weight:bolder">Help</a></li>
             <li class="dropdown" style="margin-left: 368px">
@@ -70,55 +70,23 @@
             <div id="leftSide" class="col-md-3">
             	<div id="leftSideSwitch" style="margin-top: 10px">
             		<!-- Add anything with JS or Backend -->
-                    <span class="label label-default" style="margin-bottom: 10px">What do you have?</span>
-            		<div class="dropdown" style="margin-top: 10px; margin-bottom: 10px">
-      						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-      						Categories
-      						<span class="caret">
-      						</span>
-      						</button>
-    						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Antiques</a></li>
-    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Art</a></li>
-    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Book</a></li>
-    							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Clothing</a></li>
-    						</ul>
-					     </div>
-
-					<div class="input-group">
-						<span class="input-group-addon">Name</span>
-						<input type="text" class="form-control" placeholder="Input what you have!">
-					</div>
-
-					<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">
-						<div class="col-md-5">
-							<div class="thumbnail"><img src="static/img/alt.gif" alt="..."></div>
-						</div>
-						<div class="col-md-7">
-							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span>  Upload thumbnail</button>
-						</div>
-					</div>
-
-                    <hr style="border-color: #6E6E6E; border-width: 2px; margin-top:0px">
-
-                    <span class="label label-default">Select what you want</span>
-
-                    <div class="dropdown" style="margin-top: 10px; margin-bottom: 10px">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                        Categories
-                        <span class="caret">
-                        </span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Antiques</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Art</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Book</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Clothing</a></li>
-                        </ul>
-                    </div>
-
-				</div>
+                    <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">
+				        <div class="col-md-5">
+				            <div class="thumbnail">
+				                <img src="static/img/alt.gif" alt="...">
+				            </div>
+				        </div>
+				        <div class="col-md-6">
+			                <ul class="list-group" style="font-size: 70%">
+								<li class="list-group-item">ID : </li>
+								<li class="list-group-item">E-mail : </li>
+								<li class="list-group-item">Nickname : </li>
+							</ul>
+				        </div>
+				    </div>
+                </div>
             </div>
+
             <div id="mapSide" class="col-md-9">
             </div>
         </div>

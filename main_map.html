@@ -55,7 +55,7 @@
               <ul class="dropdown-menu" role="menu">
                 <li id="seekers"><a href="#seekers">Seekers</a></li>
                 <li id="my_exchanges"><a href="#my_exchanges">My exchanges</a></li>
-                <li id="profile"><a href="#profile">Profile</a></li>
+                <li id="profile" onClick="load_profile()"><a href="#profile">Profile</a></li>
                 <li role="presentation" class="divider"></li>
                 <li id="logout" ><a href="#logout">Logout</a></li>
               </ul>
@@ -67,23 +67,12 @@
 
     <div id="mainContainer" class="container-fluid">
         <div id="mainRow" class="row">
+        	<div id="slideSpace">
+        		<!-- Only for Jquery Animate -->
+        	</div>
             <div id="leftSide" class="col-md-3">
             	<div id="leftSideSwitch" style="margin-top: 10px">
             		<!-- Add anything with JS or Backend -->
-                    <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">
-				        <div class="col-md-5">
-				            <div class="thumbnail">
-				                <img src="static/img/alt.gif" alt="...">
-				            </div>
-				        </div>
-				        <div class="col-md-6">
-			                <ul class="list-group" style="font-size: 70%">
-								<li class="list-group-item">ID : </li>
-								<li class="list-group-item">E-mail : </li>
-								<li class="list-group-item">Nickname : </li>
-							</ul>
-				        </div>
-				    </div>
                 </div>
             </div>
 

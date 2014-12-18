@@ -11,6 +11,7 @@ body
 	height: 100%;
     width: 100%;
     position: absolute;
+    overflow:hidden;
 }
 
 .container-fluid
@@ -38,6 +39,8 @@ body
 {
 	height: inherit;
 	background-color: silver;
+    overflow-y:hidden;
+    overflow-x:hidden;
 }
 
 #mapSide

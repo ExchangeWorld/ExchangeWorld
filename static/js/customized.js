@@ -24,13 +24,15 @@ function load_seek()
 
 function load_post()
 {
-	if(lastStage == "post") return;
-	$('#leftSideSwitch').hide();
-	document.getElementById("seek").className = "";
-	document.getElementById("leftSideSwitch").innerHTML = postInnerHTML;
-	document.getElementById("post").className = "active";
-	$('#leftSideSwitch').show('fast');
-	lastStage = "post";
+    if(lastStage == "post") return;
+    $('#leftSideSwitch').hide();
+    document.getElementById("seek").className = "";
+    document.getElementById("leftSideSwitch").innerHTML = postInnerHTML;
+    document.getElementById("post").className = "active";
+    $('#leftSideSwitch').show('fast');
+    lastStage = "post";
+
+    //$('#slideSpace').animate({ 'margin-left':'0%'}, 1000);
 }
 
 function load_profile()

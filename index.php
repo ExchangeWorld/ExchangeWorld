@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -100,6 +101,43 @@
     <div id="mainRow" class="row">
       <div id="leftSide" class="col-md-3">
         <div id="leftSideSwitch" style="margin-top: 10px">
+        	
+        	<div class="input-group input-group-lg" style="margin-top: 20px; margin-bottom: 10px">
+        		<input type="text" class="form-control" placeholder="Seek anything">
+        		<span class="input-group-btn"><button class="btn btn-default" type="button">Go!</button>
+        			</span></div><p style="font-size: small">or</p>
+        				<div id="searchOptions" class="row"><div class="col-md-4"><div class="dropdown">
+        					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Distance<span class="caret"></span></button><ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"><li role="presentation"><a role="menuitem" tabindex="-1" href="#">&lt; 500m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">500 ~ 1500m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">1500 ~ 5000m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">&gt; 5000m</a></li></ul></div></div><div class="col-md-4"><div class="dropdown"><button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Categories<span class="caret"></span></button><ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Antiques</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Art</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Book</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Clothing</a></li></ul></div></div><div class="col-md-4"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Seek</button></div></div><hr style="border-color: #6E6E6E; border-width: 2px">
+        						<div id="searchResults" class="row">
+  				<?php
+						include("include/connect.php");	
+						$sql = "SELECT * FROM `goods`";
+						$result=mysql_query($sql) or die(mysql_error());
+						while ($row = mysql_fetch_array($result)) {
+							//echo "<option value='".trim($row['Region_Code'])."'>".trim($row['Region_Name'])."</option>";
+							echo '<div class="row searchResult" onClick="load_exchange()"><div class="col-md-5"><div class="thumbnail"><img src="'.trim($row['photoPath']).'" alt="..."></div></div><div class="col-md-7"><p>Name: '.trim($row['gname']).'</p><p>Category: '.trim($row['categories']).'</p><p>Want for: '.trim($row['want']).'</p><p>Position: ('.trim($row['posX']).','.trim($row['posY']).')</p></div></div>';
+						}
+					?>
+					</div>
+	<!--
+        						<div class="row searchResult" onClick="load_exchange()">
+        							<div class="col-md-5">
+        								<div class="thumbnail">
+        								<img src="static/img/alt.gif" alt="...">
+        								</div>
+        								</div>
+        								<div class="col-md-7">
+        									<p>Name: </p>
+        									<p>Category: </p>
+        									<p>Want for: </p>
+        									<p>Position: </p>
+        								</div>
+        							</div>
+        						</div>
+        						-->
+<!-- 這邊可以繼續往下列class="row searchResult"，藉由累加_後面的數字 -->
+
+
           <!-- Add anything with JS or Backend -->
         </div>
       </div>
@@ -135,7 +173,7 @@
       var map = new google.maps.Map(document.getElementById("mapSide"), mapProp);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
-    load_seek();
+    //load_seek();
   </script>
 </body>
 </html>

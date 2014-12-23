@@ -49,7 +49,7 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li id="seek">
-            <a href="#seek" onclick="load_seek()">
+            <a href="#" >
               <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
               Seek
             </a>
@@ -114,10 +114,9 @@
 						$sql = "SELECT * FROM `goods`";
 						$result=mysql_query($sql) or die(mysql_error());
 						while ($row = mysql_fetch_array($result)) {
-							//echo "<option value='".trim($row['Region_Code'])."'>".trim($row['Region_Name'])."</option>";
-							echo '<div class="row searchResult" onClick="load_exchange()"><div class="col-md-5"><div class="thumbnail"><img src="'.trim($row['photoPath']).'" alt="..."></div></div><div class="col-md-7"><p>Name: '.trim($row['gname']).'</p><p>Category: '.trim($row['categories']).'</p><p>Want for: '.trim($row['want']).'</p><p>Position: ('.trim($row['posX']).','.trim($row['posY']).')</p></div></div>';
+							echo '<div class="row searchResult" data-value="'.trim($row['gid']).'" ><div class="col-md-5"><div class="thumbnail"><img src="'.trim($row['photoPath']).'" alt="..."></div></div><div class="col-md-7"><p>Name: '.trim($row['gname']).'</p><p>Category: '.trim($row['categories']).'</p><p>Want for: '.trim($row['want']).'</p><p>Position: ('.trim($row['posX']).','.trim($row['posY']).')</p></div></div>';
 						}
-					?>
+				?>
 					</div>
 	<!--
         						<div class="row searchResult" onClick="load_exchange()">

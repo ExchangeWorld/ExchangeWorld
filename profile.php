@@ -3,7 +3,7 @@
 	$search = $_GET['uid'];
 	$sql = "SELECT *
 			FROM user
-			WHERE uid LIKE '$search'";
+			WHERE fb_id LIKE '$search'";
 
 	$result=mysql_query($sql) or die(mysql_error());
 //	$result = mysql_query($sql);	

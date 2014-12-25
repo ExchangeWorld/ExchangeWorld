@@ -107,7 +107,19 @@
 
     <!-- BLOCK: Your script playground -->
     <script id="my-script-playground">
+        //var myID;
         window.fbLoaded = function(){
+            FB.Event.subscribe('auth.login', function(response) {
+                // when user has been logged in, this block will be triggered.
+                var msg = "You're logged in.";
+                $("#my-login-message").html(msg);
+                console.log("Your login response:");
+                console.log(response);
+
+                // fetch the profile
+                fetch_my_profile();
+                //window.location.href='index.php?id='+uid;
+            });
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
                     // the user is logged in and has authenticated your
@@ -117,6 +129,9 @@
                     // and signed request each expire
                     fetch_my_profile();
                     var uid = response.authResponse.userID;
+                    window.location.href='index.php?id='+uid;
+
+                    
                     var accessToken = response.authResponse.accessToken;
                 } else if (response.status === 'not_authorized') {
                     // the user is logged in to Facebook, 
@@ -127,16 +142,6 @@
             });
 
             // define the events when login status changed.
-            FB.Event.subscribe('auth.login', function(response) {
-                // when user has been logged in, this block will be triggered.
-                var msg = "You're logged in.";
-                $("#my-login-message").html(msg);
-                console.log("Your login response:");
-                console.log(response);
-
-                // fetch the profile
-                fetch_my_profile();
-            });
 
             // define the action when user clicked the login button.
             $("#my-login-button").click(function(){

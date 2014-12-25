@@ -30,9 +30,40 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <script src="./include/FBappID.js"></script>
+
 </head>
 
 <body role="document">
+    <!-- BLOCK: FB SDK initialization -->
+    <div id="fb-root"></div>
+    <script>
+    window.fbAsyncInit = function() {
+        // init the FB JS SDK
+        FB.init({
+        appId      : FacebookAppId,                        // App ID from the app dashboard
+        cookie     : true,                                 // Allowed server-side to fetch fb auth cookie
+        status     : true,                                 // Check Facebook Login status
+        xfbml      : true                                  // Look for social plugins on the page
+        });
+
+        // Additional initialization code such as adding Event Listeners goes here
+        window.fbLoaded();
+
+   };
+    // Load the SDK asynchronously
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        //js.src = "http://connect.facebook.net/en_US/all.js";
+        // Debug version of Facebook JS SDK
+        js.src = "http://connect.facebook.net/en_US/all/debug.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- ENDBLOCK: FB SDK initialization -->
+
 
   <!-- Fixed navbar -->
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -49,7 +80,7 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li id="seek">
-            <a href="#" >
+            <a href="#seek" >
               <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
               Seek
             </a>
@@ -76,16 +107,39 @@
             </a>
           </li>
 
-          <li class="dropdown" style="left: 80%">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Me <!--<span class="caret"></span>--></a>
-            <ul class="dropdown-menu" role="menu">
-              <li id="seekers"><a href="#seekers">Seekers</a></li>
-              <li id="my_exchanges"><a href="#my_exchanges">My exchanges</a></li>
-              <li id="profile" onclick="load_profile()"><a href="#profile">Profile</a></li>
-              <li role="presentation" class="divider"></li>
-              <li id="logout"><a href="#logout">Logout</a></li>
+          <!--<button id="login" class="btn btn-primary" style="left: 65%">Facebook</button>-->
+          <fb:login-button id ="login" class="nav navbar-nav" style="left: 70%" scope="user_likes,user_photos" onlogin='window.location.reload(true);'></fb:login-button>
+          <li class="dropdown" style="left: 70%">
+ 
+            <a id="myname" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <img id="myhead" src="./static/img/alt.gif" height="20" width="20"></img>
+            </a>
+            <ul id="myMenu" class="dropdown-menu" role="menu">
+                <li id="profile" class="owner" data-value="..............."><a href="#">Profile</a></li>
+                <li id="seekers"><a href="#seekers">Seekers</a></li>
+                <li id="my_exchanges"><a href="#my_exchanges">My exchanges</a></li>
+                <li role="presentation" class="divider"></li>
+                <li id="logout"><a href="#logout">Logout</a></li>
             </ul>
-          </li>
+<!--        <?php
+ /*           include("include/connect.php"); 
+            $myID = $_GET['id'];
+            $sql = "SELECT * FROM `user` WHERE `fb_id` = $myID";
+            $result=mysql_query($sql) or die(mysql_error());
+            $row = mysql_fetch_array($result);
+
+            echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">';
+            echo '<img src="'.trim($row['photoPath']).'" height="20" width="20"></img>'.trim($row['username']);
+            echo '</a><ul class="dropdown-menu" role="menu">
+                        <li id="profile" class="owner" data-value="'.trim($row['uid']).'"><a href="#">Profile</a></li>
+                        <li id="seekers"><a href="#seekers">Seekers</a></li>
+                        <li id="my_exchanges"><a href="#my_exchanges">My exchanges</a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li id="logout"><a href="#logout">Logout</a></li>
+                      </ul>';*/
+        ?>-->
+
+         </li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -103,12 +157,12 @@
         <div id="leftSideSwitch" style="margin-top: 10px">
         	
         	<div class="input-group input-group-lg" style="margin-top: 20px; margin-bottom: 10px">
-        		<input type="text" class="form-control" placeholder="Seek anything">
-        		<span class="input-group-btn"><button class="btn btn-default" type="button">Go!</button>
-        			</span></div><p style="font-size: small">or</p>
-        				<div id="searchOptions" class="row"><div class="col-md-4"><div class="dropdown">
-        					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Distance<span class="caret"></span></button><ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"><li role="presentation"><a role="menuitem" tabindex="-1" href="#">&lt; 500m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">500 ~ 1500m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">1500 ~ 5000m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">&gt; 5000m</a></li></ul></div></div><div class="col-md-4"><div class="dropdown"><button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Categories<span class="caret"></span></button><ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Antiques</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Art</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Book</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Clothing</a></li></ul></div></div><div class="col-md-4"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Seek</button></div></div><hr style="border-color: #6E6E6E; border-width: 2px">
-        						<div id="searchResults" class="row">
+        	<input type="text" class="form-control" placeholder="Seek anything">
+        	<span class="input-group-btn"><button class="btn btn-default" type="button">Go!</button>
+        	</span></div><p style="font-size: small">or</p>
+        	<div id="searchOptions" class="row"><div class="col-md-4"><div class="dropdown">
+        	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Distance<span class="caret"></span></button><ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"><li role="presentation"><a role="menuitem" tabindex="-1" href="#">&lt; 500m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">500 ~ 1500m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">1500 ~ 5000m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">&gt; 5000m</a></li></ul></div></div><div class="col-md-4"><div class="dropdown"><button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Categories<span class="caret"></span></button><ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Antiques</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Art</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Book</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Clothing</a></li></ul></div></div><div class="col-md-4"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Seek</button></div></div><hr style="border-color: #6E6E6E; border-width: 2px">
+        	<div id="searchResults" class="row">
   				<?php
 						include("include/connect.php");	
 						$sql = "SELECT * FROM `goods`";
@@ -159,7 +213,7 @@
   <script src="static/js/customized.js"></script>
   <!--<script src="../../assets/js/docs.min.js"></script>-->
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-  <!--<!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->-->
+  <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
   <script src="static/js/perfect-scrollbar.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js"></script>
   <script>
@@ -174,5 +228,63 @@
     google.maps.event.addDomListener(window, 'load', initialize);
     //load_seek();
   </script>
+
+
+      <!-- BLOCK: Your script playground -->
+    <script id="script-playground">
+        //var myID;
+        window.fbLoaded = function(){
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    // the user is logged in and has authenticated your
+                    // app, and response.authResponse supplies
+                    // the user's ID, a valid access token, a signed
+                    // request, and the time the access token 
+                    // and signed request each expire
+                    var uid = response.authResponse.userID;
+                    $("#profile").attr('data-value', uid);
+
+                    FB.api('/me/picture?width=250', function(response) {
+                        my_picture_url = response.data.url;
+                        $("#myhead").attr('src', my_picture_url);
+                    });
+                    FB.api('/me', function(response) {
+                        $("#myname").append(response.name);
+                    });
+                    $("#myname").show();
+                    $("#login").hide();
+                   //$("#myMenu").disabled=false;
+                    //$("#myname").html()
+                    //window.location.href='index.php?id='+uid;
+
+                    
+                    //var accessToken = response.authResponse.accessToken;
+                } else if (response.status === 'not_authorized') {
+                   // the user is logged in to Facebook, 
+                   // but has not authenticated your app
+                   alert("not_authorized");
+                } else {
+                    // the user isn't logged in to Facebook.
+                    $("#myname").hide();
+                    $("#login").show();
+                    //$("#myMenu").disabled=true;
+                }
+            });
+
+
+            // define the action when user clicked the login button.
+            $("#logout").click(function(){
+                FB.logout();
+ 
+            });
+            $("#login").click(function(){
+               // FB.login();
+
+            });
+
+        };
+
+    </script>
+    <!-- ENDBLOCK: Your script playground -->
 </body>
 </html>

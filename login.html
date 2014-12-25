@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+    Facebook Code Example
+    @author: LittleQ <littleq0903@gmail.com>
+    @date: 2013-11-23
+    -->
+    <meta charset="UTF-8">
+    <title>FB API EXAMPLE</title>
+
+    <!-- BLOCK: Loading libraries -->
+    <script src="./include/FBappID.js"></script>
+  <!--  <script src="../your_secret.js"></script>-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <!-- ENDBLOCK: Loading libraries -->
+
+</head>
+<body>
+    <!-- BLOCK: FB SDK initialization -->
+    <div id="fb-root"></div>
+    <script>
+    window.fbAsyncInit = function() {
+        // init the FB JS SDK
+        FB.init({
+        appId      : FacebookAppId,                        // App ID from the app dashboard
+        cookie     : true,                                 // Allowed server-side to fetch fb auth cookie
+        status     : true,                                 // Check Facebook Login status
+        xfbml      : true                                  // Look for social plugins on the page
+        });
+
+        // Additional initialization code such as adding Event Listeners goes here
+        window.fbLoaded();
+    };
+
+    // Load the SDK asynchronously
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        //js.src = "http://connect.facebook.net/en_US/all.js";
+        // Debug version of Facebook JS SDK
+        js.src = "http://connect.facebook.net/en_US/all/debug.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- ENDBLOCK: FB SDK initialization -->
+    
+    <!-- BLOCK: Your playground -->
+
+    <!-- Button for login to Facebook -->
+    <div id="my-html-playground" class="container">
+        <div id="my-login-control" class="well">
+            <button id="my-login-button" class="btn btn-primary">Login with Facebook</button>
+            <p id="my-login-message"></p>
+            <button id="my-logout-button" class="btn btn-primary">Login out Facebook</button>
+            <a href="index.php">ExchangeWorld </a> 
+        </div>
+
+        <!-- Profile Area -->
+        <div id="my-profile" class="row">
+            <div class="col-md-3">
+                <!-- Profile Picture -->
+                <img id="my-profile-picture" class="img-thumbnail" src="" alt="">
+            </div>
+            <div class="col-md-9">
+                <!-- Profile Information -->
+                <dl class="dl-horizontal">
+                    <dt>Name</dt>
+                    <dd id="my-profile-name"></dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Gender</dt>
+                    <dd id="my-profile-gender"></dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Email</dt>
+                    <dd id="my-profile-email"></dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt>Facebook ID</dt>
+                    <dd id="my-profile-facebook-id"></dd>
+                </dl>
+
+  <!--              <button id="my-friend-button" class="btn btn-primary">Be My Friend!</button>-->
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="my-like-btn" class="col-md-8">
+                <!-- Comments 
+                <div class="fb-comments" data-href="https://www.facebook.com"></div>
+                -->
+            </div>
+            <div id="my-comments" class="col-md-4">
+                <!-- Like Button
+                <div class="fb-like" data-href="https://www.facebook.com"></div>
+                -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ENDBLOCK: Your playground -->
+
+    <!-- BLOCK: Your script playground -->
+    <script id="my-script-playground">
+        window.fbLoaded = function(){
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    // the user is logged in and has authenticated your
+                    // app, and response.authResponse supplies
+                    // the user's ID, a valid access token, a signed
+                    // request, and the time the access token 
+                    // and signed request each expire
+                    fetch_my_profile();
+                    var uid = response.authResponse.userID;
+                    var accessToken = response.authResponse.accessToken;
+                } else if (response.status === 'not_authorized') {
+                    // the user is logged in to Facebook, 
+                    // but has not authenticated your app
+                } else {
+                    // the user isn't logged in to Facebook.
+                }
+            });
+
+            // define the events when login status changed.
+            FB.Event.subscribe('auth.login', function(response) {
+                // when user has been logged in, this block will be triggered.
+                var msg = "You're logged in.";
+                $("#my-login-message").html(msg);
+                console.log("Your login response:");
+                console.log(response);
+
+                // fetch the profile
+                fetch_my_profile();
+            });
+
+            // define the action when user clicked the login button.
+            $("#my-login-button").click(function(){
+                FB.login();
+            });
+            $("#my-logout-button").click(function(){
+                FB.logout();
+            });
+
+            // send me a friend request by using Facebok Friends Dialog
+           /* $("#my-friend-button").click(function(){
+                FB.api('/me', function (profile_response) {
+                    var my_id = profile_response.id;
+
+                    FB.ui({
+                        'method': 'friends',
+                        'id': my_id
+                    }, function(friend_response) {
+                        var she_say_yes = friend_response.action;
+
+                        if (she_say_yes) {
+                            alert("Thank you! We will be good friends.");
+                        } else {
+                            alert("Alright, it must be my wrong :(");
+                        }
+                    });
+                });
+            });
+*/
+            var fetch_my_profile = function () {
+                var my_name;
+                var my_gender;
+                var my_email;
+                var my_facebook_id;
+                var my_picture_url ;
+
+                FB.api('/me/picture?width=250', function(response) {
+                    /*
+                    Fetching profile picture from Facebook.
+                    For more detail, please visit the following url:
+
+                    (Graph API: User/Picture reference)
+                    https://developers.facebook.com/docs/graph-api/reference/user/picture/
+                    */
+                    my_picture_url = response.data.url;
+                    $("#my-profile-picture").attr('src', my_picture_url);
+                
+                });
+
+                FB.api('/me', function(response) {
+                    /*
+                    Fetching profile information.
+                    For more detail, please vist the following url:
+
+                    (Graph API: User documentation)
+                    https://developers.facebook.com/docs/graph-api/reference/user/
+                    */
+                    my_name = response.name;
+                    my_gender = response.gender;
+                    //var my_email = response.email;
+                    my_facebook_id = response.id;
+
+                    $("#my-profile-name").html(my_name);
+                    $("#my-profile-gender").html(my_gender);
+                  //  $("#my-profile-email").html(email);
+                    $("#my-profile-facebook-id").html(my_facebook_id);
+                    
+
+                   // alert(my_facebook_id);
+                    $.ajax({
+                        type: "GET",
+                        url: "createAccount.php",
+                        dataType: "text",
+                        data: { 
+                            name : my_name,
+                            gender : my_gender,    
+                           // my_email : response.email,
+                            facebook_id : my_facebook_id,
+                            picture_url : my_picture_url 
+                        },
+                        success: function(response){
+                            console.log(response);
+                        //    alert(response);
+                        },
+                        error: function(xhr,ajaxOption,thrownError){
+                            alert(thrownError);
+                            alert(JSON.stringify(xhr));
+                        }
+                    });
+                });
+ 
+
+            };
+        };
+
+    </script>
+    <!-- ENDBLOCK: Your script playground -->
+    
+</body>
+</html>

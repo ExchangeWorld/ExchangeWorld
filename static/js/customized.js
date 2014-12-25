@@ -117,7 +117,7 @@ $(document).ready(function() {
 				document.getElementById("about").className = "";
 				document.getElementById("help").className = "";
 				document.getElementById("seek").className = "active";
-				}
+			}
 		});
 	});
 });

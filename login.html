@@ -7,7 +7,7 @@
     @date: 2013-11-23
     -->
     <meta charset="UTF-8">
-    <title>FB API EXAMPLE</title>
+    <title>Welcome to ExchangeWorld</title>
 
     <!-- BLOCK: Loading libraries -->
     <script src="./include/FBappID.js"></script>
@@ -115,10 +115,9 @@
                 $("#my-login-message").html(msg);
                 console.log("Your login response:");
                 console.log(response);
-
                 // fetch the profile
                 fetch_my_profile();
-                //window.location.href='index.php?id='+uid;
+                window.location.href='index.php';
             });
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
@@ -128,15 +127,15 @@
                     // request, and the time the access token 
                     // and signed request each expire
                     fetch_my_profile();
-                    var uid = response.authResponse.userID;
-                    window.location.href='index.php?id='+uid;
-
-                    
-                    var accessToken = response.authResponse.accessToken;
+                    console.log("Facebook logged in");
+                    //var uid = response.authResponse.userID;
+                    //var accessToken = response.authResponse.accessToken;
                 } else if (response.status === 'not_authorized') {
+                    alert("not_authorized");
                     // the user is logged in to Facebook, 
                     // but has not authenticated your app
                 } else {
+                    console.log("isn't login");
                     // the user isn't logged in to Facebook.
                 }
             });

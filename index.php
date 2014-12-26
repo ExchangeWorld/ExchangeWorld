@@ -31,6 +31,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <script src="./include/FBappID.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 </head>
 
@@ -232,7 +233,6 @@
 
       <!-- BLOCK: Your script playground -->
     <script id="script-playground">
-        //var myID;
         window.fbLoaded = function(){
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
@@ -241,6 +241,8 @@
                     // the user's ID, a valid access token, a signed
                     // request, and the time the access token 
                     // and signed request each expire
+                    fetch_my_profile();
+
                     var uid = response.authResponse.userID;
                     $("#profile").attr('data-value', uid);
 
@@ -253,35 +255,64 @@
                     });
                     $("#myname").show();
                     $("#login").hide();
-                   //$("#myMenu").disabled=false;
-                    //$("#myname").html()
-                    //window.location.href='index.php?id='+uid;
-
-                    
-                    //var accessToken = response.authResponse.accessToken;
                 } else if (response.status === 'not_authorized') {
-                   // the user is logged in to Facebook, 
-                   // but has not authenticated your app
-                   alert("not_authorized");
+	                alert("not_authorized");
+                    // the user is logged in to Facebook, 
+                    // but has not authenticated your app
                 } else {
                     // the user isn't logged in to Facebook.
                     $("#myname").hide();
                     $("#login").show();
-                    //$("#myMenu").disabled=true;
                 }
             });
-
 
             // define the action when user clicked the login button.
             $("#logout").click(function(){
                 FB.logout();
- 
-            });
-            $("#login").click(function(){
-               // FB.login();
-
+                $("#myname").hide();
+                $("#login").show();
             });
 
+            var fetch_my_profile = function () {
+                var my_name;
+                var my_gender;
+                var my_email;
+                var my_facebook_id;
+                var my_picture_url ;
+
+                FB.api('/me/picture?width=250', function(response) {
+                    my_picture_url = response.data.url;
+                    $("#my-profile-picture").attr('src', my_picture_url);
+                });
+                FB.api('/me', function(response) {
+                    my_name = response.name;
+                    my_gender = response.gender;
+                    //var my_email = response.email;
+                    my_facebook_id = response.id;
+
+                    $.ajax({
+                        type: "GET",
+                        url: "createAccount.php",
+                        dataType: "text",
+                        data: { 
+                            name : my_name,
+                            gender : my_gender,    
+                           // my_email : response.email,
+                            facebook_id : my_facebook_id,
+                            picture_url : my_picture_url 
+                        },
+                        success: function(response){
+                            console.log(response);
+                        //    alert(response);
+                        },
+                        error: function(xhr,ajaxOption,thrownError){
+                            alert(thrownError);
+                            alert(JSON.stringify(xhr));
+                        }
+                    });
+                });
+
+            };
         };
 
     </script>

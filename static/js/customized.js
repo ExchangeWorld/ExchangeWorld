@@ -50,7 +50,7 @@ $(document).ready(function() {
  		if (val != 0){
 			$.ajax({
 				type: "GET",
-				url: "exchange.php",
+				url: "./php_script/exchange.php",
 				dataType: "json",
 				data: {	
 					gid: val
@@ -78,7 +78,7 @@ $(document).ready(function() {
         if(val !=0){
 			$.ajax({
 				type: "GET",
-				url: "profile.php",
+				url: "./php_script/profile.php",
 				dataType: "json",
 				data: {	
 					uid: val
@@ -106,7 +106,7 @@ $(document).ready(function() {
 		$.ajax({
 			//type: "GET",
 			dataType: "json",
-			url: "seek.php",
+			url: "./php_script/seek.php",
 			success: function(response){
 
 				$('#leftSideSwitch').hide().html('<div class="input-group input-group-lg" style="margin-top: 20px; margin-bottom: 10px"><input type="text" class="form-control" placeholder="Seek anything"><span class="input-group-btn"><button class="btn btn-default" type="button">Go!</button></span></div><p style="font-size: small">or</p><div id="searchOptions" class="row"><div class="col-md-4"><div class="dropdown"><button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Distance<span class="caret"></span></button><ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"><li role="presentation"><a role="menuitem" tabindex="-1" href="#">&lt; 500m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">500 ~ 1500m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">1500 ~ 5000m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">&gt; 5000m</a></li></ul></div></div><div class="col-md-4"><div class="dropdown"><button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Categories<span class="caret"></span></button><ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Antiques</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Art</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Book</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Clothing</a></li></ul></div></div><div class="col-md-4"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Seek</button></div></div><hr style="border-color: #6E6E6E; border-width: 2px"><div id="searchResults" class="row">').show('fast');

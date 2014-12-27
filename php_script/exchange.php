@@ -1,5 +1,5 @@
 <?php
-	include("include/connect.php");
+	include("../include/connect.php");
 	$search = $_GET['gid'];
 	$sql = "SELECT `goods`. * , `user`.`username`
 			FROM `goods`, `user`

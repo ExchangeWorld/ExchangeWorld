@@ -1,5 +1,5 @@
 <?php
-	include("include/connect.php");	
+	include("../include/connect.php");	
 	$sql = "SELECT * 
 			FROM goods";
 	$result=mysql_query($sql) or die(mysql_error());

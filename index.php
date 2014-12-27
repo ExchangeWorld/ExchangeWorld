@@ -292,7 +292,7 @@
 
                     $.ajax({
                         type: "GET",
-                        url: "createAccount.php",
+                        url: "./php_script/createAccount.php",
                         dataType: "text",
                         data: { 
                             name : my_name,

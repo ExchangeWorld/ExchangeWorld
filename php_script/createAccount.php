@@ -1,5 +1,5 @@
 <?php
-	include("include/connect.php");
+	include("../include/connect.php");
 	$id     = $_GET['facebook_id'];
 	$name   = $_GET['name'];
 	$gender = $_GET['gender'];

@@ -15,5 +15,5 @@
 	if(! $retval ){
 	    die('Could not enter data: ' . mysql_error());
 	}
-	echo "create_new_account_success".$insertSQL;
+	echo "new post successful".$insertSQL;
 ?>

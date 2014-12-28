@@ -122,9 +122,9 @@ $(document).ready(function() {
         val = $(this).attr('data-value');
  		if (val != 0){
 			$.ajax({
-				type: "GET",
-				url: "./php_script/exchange.php",
-				dataType: "json",
+				type     : "GET",
+				url      : "./php_script/exchange.php",
+				dataType : "json",
 				data: {	
 					gid: val
 				},
@@ -144,6 +144,7 @@ $(document).ready(function() {
 		}
     });
 
+	// Handle new post
 	$("#leftSideSwitch").on("click", ".submit", function(event){
 	    var post_gname  	 = $("#gName").val();
 	    var post_want   	 = $("#want_name").val();
@@ -156,9 +157,9 @@ $(document).ready(function() {
 	    else if(post_categories=="3") post_categories == "Arts";
 
 		$.ajax({
-			type: "GET",
-			url: "./php_script/post.php",
-			dataType: "text",
+			type     : "GET",
+			url      : "./php_script/post.php",
+			dataType : "text",
 			data: {
 				gname 	   : post_gname,	
 				want  	   : post_want,
@@ -167,7 +168,8 @@ $(document).ready(function() {
 				description: post_description
 			},
 			success: function(response){
-				alert("success");
+				//alert("success");
+				console.log(response);
 				$( "#seek" ).trigger( "click" );
 			},
 			error: function(xhr,ajaxOption,thrownError){
@@ -183,9 +185,9 @@ $(document).ready(function() {
        // alert(val);
         if(val !=0){
 			$.ajax({
-				type: "GET",
-				url: "./php_script/profile.php",
-				dataType: "json",
+				type     : "GET",
+				url      : "./php_script/profile.php",
+				dataType : "json",
 				data: {	
 					uid: val
 				},
@@ -202,19 +204,19 @@ $(document).ready(function() {
 					alert(JSON.stringify(xhr));
 				}
 		    });
-
         }
-
 	});
 
 	// Handle User clicking SEEK on navbar
 	$("#seek").on("click", function(event){
 		$.ajax({
-			//type: "GET",
-			dataType: "json",
-			url: "./php_script/seek.php",
+			type     : "GET",
+			url      : "./php_script/seek.php",
+			dataType : "json",
+			data : {
+				data: "?"
+			},
 			success: function(response){
-
 				$('#leftSideSwitch').hide().html('<div class="input-group input-group-lg" style="margin-top: 20px; margin-bottom: 10px"><input type="text" class="form-control" placeholder="Seek anything"><span class="input-group-btn"><button class="btn btn-default" type="button">Go!</button></span></div><p style="font-size: small">or</p><div id="searchOptions" class="row"><div class="col-md-4"><div class="dropdown"><button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Distance<span class="caret"></span></button><ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"><li role="presentation"><a role="menuitem" tabindex="-1" href="#">&lt; 500m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">500 ~ 1500m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">1500 ~ 5000m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">&gt; 5000m</a></li></ul></div></div><div class="col-md-4"><div class="dropdown"><button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Categories<span class="caret"></span></button><ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Antiques</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Art</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Book</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Clothing</a></li></ul></div></div><div class="col-md-4"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Seek</button></div></div><hr style="border-color: #6E6E6E; border-width: 2px"><div id="searchResults" class="row">').show('fast');
 				for (var i = 0; i < response.length; i++){
 					$('#leftSideSwitch').append('<div class="row searchResult" data-value="'+response[i]["gid"]+'" ><div class="col-md-5"><div class="thumbnail"><img src="'+response[i]["photoPath"]+'" alt="..."></div></div><div class="col-md-7"><p>Name: '+response[i]["gname"]+'</p><p>Category: '+response[i]["categories"]+'</p><p>Want for: '+response[i]["want"]+'</p><p>Position: ('+response[i]["posX"]+','+response[i]["posY"]+')</p></div></div>');
@@ -223,6 +225,10 @@ $(document).ready(function() {
 				document.getElementById("about").className = "";
 				document.getElementById("help").className = "";
 				document.getElementById("seek").className = "active";
+			},
+			error: function(xhr,ajaxOption,thrownError){
+				alert(thrownError);
+				alert(JSON.stringify(xhr));
 			}
 		});
 	});

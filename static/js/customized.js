@@ -159,11 +159,7 @@ $(document).ready(function() {
 		}
     });
 
-<<<<<<< HEAD
 	// Handle new post
-=======
-	//Handle New post
->>>>>>> origin/photoUpload
 	$("#leftSideSwitch").on("click", ".submit", function(event){
 	    var post_gname  	 = $("#gName").val();
 	    var post_want   	 = $("#want_name").val();

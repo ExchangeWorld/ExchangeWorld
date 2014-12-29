@@ -5,8 +5,6 @@ var forGoBack = [];
 
 var seekInnerHTML = '<div class="input-group input-group-lg" style="margin-top: 20px; margin-bottom: 10px"><input type="text" class="form-control" placeholder="Seek anything"><span class="input-group-btn"><button class="btn btn-default" type="button">Go!</button></span></div><p style="font-size: small">or</p><div id="searchOptions" class="row"><div class="col-md-4"><div class="dropdown"><button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Distance<span class="caret"></span></button><ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"><li role="presentation"><a role="menuitem" tabindex="-1" href="#">&lt; 500m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">500 ~ 1500m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">1500 ~ 5000m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">&gt; 5000m</a></li></ul></div></div><div class="col-md-4"><div class="dropdown"><button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Categories<span class="caret"></span></button><ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Antiques</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Art</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Book</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Clothing</a></li></ul></div></div><div class="col-md-4"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Seek</button></div></div><hr style="border-color: #6E6E6E; border-width: 2px"><div id="searchResults" class="row"><div id="searchResult_1" class="row searchResult" onClick="load_exchange()"><div class="col-md-5"><div class="thumbnail"><img src="static/img/alt.gif" alt="..."></div></div><div class="col-md-7"><p>Name: </p><p>Category: </p><p>Want for: </p><p>Position: </p></div></div><div id="searchResult_2" class="row searchResult" onClick="load_exchange()"><div class="col-md-5"><div class="thumbnail"><img src="static/img/alt.gif" alt="..."></div></div><div class="col-md-7"><p>Name: </p><p>Category: </p><p>Want for: </p><p>Position: </p></div></div><!-- 這邊可以繼續往下列class="row searchResult"，藉由累加_後面的數字 --></div>';
 
-var postInnerHTML = '<span class="label label-default" style="margin-bottom: 10px">1 . What do you have?</span><div class="dropdown" style="margin-top: 10px; margin-bottom: 10px"><button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Categories<span class="caret"></span></button><ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Antiques</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Art</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Book</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Clothing</a></li></ul></div><div class="input-group"><span class="input-group-addon">Name</span><input type="text" class="form-control" placeholder="What it called?"></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><div class="thumbnail"><img src="static/img/alt.gif" alt="..."></div></div><div class="col-md-7"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span>  Upload thumbnail</button></div></div><hr style="border-color: #6E6E6E; border-width: 2px; margin-top:0px"><span class="label label-default">2 . Select what you want</span><div class="dropdown" style="margin-top: 10px; margin-bottom: 10px"><button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Categories<span class="caret"></span></button><ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Antiques</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Art</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Book</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Clothing</a></li></ul></div><div class="input-group"><span class="input-group-addon">Name</span><input type="text" class="form-control" placeholder="What it called?"></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px"><div class="col-md-12"><textarea class="form-control" rows="1" cols="37" placeholder="Describe more about that"></textarea></div></div><hr style="border-color: #6E6E6E; border-width: 2px; margin-top:15px"><span class="label label-default">3 . Mark where you can exchange</span><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-10"><button type="button" class="btn btn-default">Mark!</button></div></div>';
-
 var profileInnerHTML = '<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button onClick="goback()" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">ID : </li><li class="list-group-item">E-mail : </li><li class="list-group-item">Nickname : </li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"><li role="presentation"><a href="#">Follow + </a></li><li role="presentation" class="active"><a href="#">Seekers <span class="badge">42</span></a></li><li role="presentation" class="active"><a href="#">Follower <span class="badge">3</span></a></li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Exchanging</h3></div><div class="panel-body"><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Exchanged</h3></div><div class="panel-body"><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div></div></div></div></div>';
 
 var exchangeInnerHTML = '<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button onClick="goback()" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">Name : </li><li class="list-group-item">Genre : </li><li class="list-group-item">Wanted : </li><li onClick="load_profile()" class="list-group-item">Owner : </li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 5px; font-size: 85%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading">Description : </div><div class="panel-body"><p>Description content~</p><p>.</p><p>.</p></div></div></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">You might also check ...</h3></div><div class="panel-body"><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div></div></div></div></div>';
@@ -26,7 +24,6 @@ var newPost_innerHTML='\
       <span class="input-group-addon">Name</span>\
       <input id="gName" name="gName" class="form-control" placeholder="What it called" required="" type="text">\
     </div>\
-    \
   </div>\
 </div>\
 \
@@ -42,32 +39,24 @@ var newPost_innerHTML='\
   </div>\
 </div>\
 \
-<!-- File Button --> \
-<form id="uploadForm" action="./php_script/upload.php"  method="post" enctype="multipart/form-data">\
-<div id="targetLayer">No Image</div>\
-<div id="uploadFormLayer">\
-<label>Upload Image File:</label><br/>\
-<input name="userImage" type="file" class="inputFile" />\
-<input type="submit" value="Submit" class="btnSubmit" />\
-</form>\
+<!-- File Button -->\
 <span class="label label-default" style="margin-bottom: 10px">2 . Upload Photo?</span>\
-<div class="form-group">\
-  <div class="col-md-4">\
-    <input id="photo" name="photo" class="input-file" type="file">\
-  </div>\
-</div>\
-\
+<form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data">\
+	<div id="targetLayer"></div>\
+	<div id="uploadFormLayer">\
+		<input name="userImage" class="inputFile" type="file">\
+		<input value="Submit"   class="btnSubmit" type="submit">\
+	</div>\
+</form>\
 <!-- Textarea -->\
 <div class="form-group">\
-  <div class="col-md-10">                     \
+  <div class="col-md-10">\
     <textarea class="form-control" id="description" name="description">say more about your goods</textarea>\
   </div>\
 </div>\
 <!-- Button -->\
 <div class="form-group">\
-  <div class="col-md-4">\
     <button id="mark_location" name="mark_location" class="btn btn-info">Mark Place!</button>\
-  </div>\
 </div>\
 <!-- Prepended text-->\
 <span class="label label-default" style="margin-bottom: 10px">3 . What do you want?</span>\
@@ -113,6 +102,23 @@ function load_post()
     $('#leftSideSwitch').show('fast');
     lastStage = "post";
 
+	$("#uploadForm").on("submit", function(e) {
+		e.preventDefault();
+		$.ajax({
+        	url        : "./php_script/upload.php",
+			type       : "POST",
+			data       : new FormData(this),
+			contentType: false,
+    	    cache      : false,
+			processData: false,
+			success: function(data) {
+				$("#targetLayer").html(data);
+		    },
+		  	error: function() {
+	    	} 	        
+	    });
+	});
+
     //$('#slideSpace').animate({ 'margin-left':'0%'}, 1000);
 }
 
@@ -124,28 +130,8 @@ function load_profile()
 	lastStage = "profile";
 }
 
+
 $(document).ready(function() {
-
-	$("#uploadForm").on('submit',(function(e) {
-		e.preventDefault();
-		$.ajax({
-        	url: "./php_script/upload.php",
-			type: "POST",
-			data:  new FormData(this),
-			contentType: false,
-    	    cache: false,
-			processData:false,
-			success: function(data)
-		    {
-			$("#targetLayer").html(data);
-		    },
-		  	error: function() 
-	    	{
-	    	} 	        
-	   });
-	}));
-
-
 	// Handle User clicking the specific goods.
     $("#leftSideSwitch").on("click",".searchResult", function(event) {
         val = $(this).attr('data-value');
@@ -173,12 +159,14 @@ $(document).ready(function() {
 		}
     });
 
+	//Handle New post
 	$("#leftSideSwitch").on("click", ".submit", function(event){
 	    var post_gname  	 = $("#gName").val();
 	    var post_want   	 = $("#want_name").val();
 	    var post_description = $("#description").val();
-	    var post_categories  = $("#categories").val();
 	    var post_ownerID     = $("#profile").attr('data-value');
+	    var post_photo		 = $("#goods_photo").attr('src');
+	    var post_categories  = $("#categories").val();
 	    if(post_categories=="-1") alert("please select categories!");
 	    else if(post_categories=="1") post_categories == "Books";
 	    else if(post_categories=="2") post_categories == "Clothes";
@@ -193,10 +181,12 @@ $(document).ready(function() {
 				want  	   : post_want,
 				categories : post_categories,
 				ownerID    : post_ownerID,
-				description: post_description
+				description: post_description,
+				photoPath  : post_photo
 			},
 			success: function(response){
 				alert("success");
+				console.log(response);
 				$( "#seek" ).trigger( "click" );
 			},
 			error: function(xhr,ajaxOption,thrownError){

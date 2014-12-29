@@ -5,10 +5,11 @@
 	$want		= $_GET['want'];
 	$description= $_GET['description'];
 	$ownerID	= $_GET['ownerID'];
+	$photoPath  = $_GET['photoPath'];
 
 
 //	$Key = get_Key_id();
-	$insertSQL = "INSERT INTO `exchangeworld`.`goods` (`gname`, `categories`, `want`, `description`, `ownerID`) VALUES ('$gname', '$categories', '$want', '$description', '$ownerID')";
+	$insertSQL = "INSERT INTO `exchangeworld`.`goods` (`gname`, `categories`, `want`, `description`, `ownerID`, `photoPath`) VALUES ('$gname', '$categories', '$want', '$description', '$ownerID', '$photoPath')";
 	// `catrgories`, `want`, `description`
 //	$insertSQL = "INSERT INTO `exchangeworld`.`user` (`uid`, `exchangeTable`, `followerTable`, `seekerTable`, `fb_id`, `username` , `email`, `nickname`, `photoPath`) VALUES ('$Key', '$Key', '$Key', '$Key', '$id', '$name', 'test@gmail.com', 'thisisnickname', '$picture')";
 	$retval = mysql_query($insertSQL);

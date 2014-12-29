@@ -18,7 +18,6 @@
     <link href="static/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <!-- <link href="static/home-03b2f3d29cb61f65e848770009364984.css" rel="stylesheet" type="text/css" charset="utf-8"> -->
     <link href="static/css/customized.css" rel="stylesheet" type="text/css" charset="utf-8">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -42,15 +41,14 @@
         window.fbAsyncInit = function () {
             // init the FB JS SDK
             FB.init({
-                appId: FacebookAppId,                        // App ID from the app dashboard
-                cookie: true,                                 // Allowed server-side to fetch fb auth cookie
-                status: true,                                 // Check Facebook Login status
-                xfbml: true                                  // Look for social plugins on the page
+                appId: FacebookAppId,    // App ID from the app dashboard
+                cookie: true,            // Allowed server-side to fetch fb auth cookie
+                status: true,            // Check Facebook Login status
+                xfbml: true              // Look for social plugins on the page
             });
 
             // Additional initialization code such as adding Event Listeners goes here
             window.fbLoaded();
-
         };
         // Load the SDK asynchronously
         (function (d, s, id) {
@@ -122,24 +120,6 @@
                             <li role="presentation" class="divider"></li>
                             <li id="logout"><a href="#logout">Logout</a></li>
                         </ul>
-                        <!--        <?php
-                                    /*           include("include/connect.php"); 
-                                    $myID = $_GET['id'];
-                                    $sql = "SELECT * FROM `user` WHERE `fb_id` = $myID";
-                                    $result=mysql_query($sql) or die(mysql_error());
-                                    $row = mysql_fetch_array($result);
-
-                                    echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">';
-                                    echo '<img src="'.trim($row['photoPath']).'" height="20" width="20"></img>'.trim($row['username']);
-                                    echo '</a><ul class="dropdown-menu" role="menu">
-                                    <li id="profile" class="owner" data-value="'.trim($row['uid']).'"><a href="#">Profile</a></li>
-                                    <li id="seekers"><a href="#seekers">Seekers</a></li>
-                                    <li id="my_exchanges"><a href="#my_exchanges">My exchanges</a></li>
-                                    <li role="presentation" class="divider"></li>
-                                    <li id="logout"><a href="#logout">Logout</a></li>
-                                    </ul>';*/
-                                    ?>-->
-
                     </li>
                 </ul>
             </div>
@@ -149,12 +129,8 @@
 
     <div id="mainContainer" class="container-fluid">
         <div id="mainRow" class="row">
-
             <!-- For LeftSide Switch Animate -->
-            <div id="slideSpace" style="width: 25%; height: inherit; position: absolute;">
-            </div>
-            <!--------------------------------->
-
+            <div id="slideSpace" style="width: 25%; height: inherit; position: absolute;"></div>
             <div id="leftSide" class="col-md-3">
                 <div id="leftSideSwitch" style="margin-top: 10px">
 
@@ -207,41 +183,21 @@
                     <hr style="border-color: #6E6E6E; border-width: 2px">
 
                     <div id="searchResults" class="row">
-                        <?php
+<?php
 						include("include/connect.php");	
 						$sql = "SELECT * FROM `goods`";
 						$result=mysql_query($sql) or die(mysql_error());
 						while ($row = mysql_fetch_array($result)) {
 							echo '<div class="row searchResult" data-value="'.trim($row['gid']).'" ><div class="col-md-5"><div class="thumbnail"><img src="'.trim($row['photoPath']).'" alt="..."></div></div><div class="col-md-7"><p>Name: '.trim($row['gname']).'</p><p>Category: '.trim($row['categories']).'</p><p>Want for: '.trim($row['want']).'</p><p>Position: ('.trim($row['posX']).','.trim($row['posY']).')</p></div></div>';
 						}
-                        ?>
+?>
                     </div>
-
-                    <!--
-        						<div class="row searchResult" onClick="load_exchange()">
-        							<div class="col-md-5">
-        								<div class="thumbnail">
-        								<img src="static/img/alt.gif" alt="...">
-        								</div>
-        								</div>
-        								<div class="col-md-7">
-        									<p>Name: </p>
-        									<p>Category: </p>
-        									<p>Want for: </p>
-        									<p>Position: </p>
-        								</div>
-        							</div>
-        						</div>
-        						-->
-                    <!-- 這邊可以繼續往下列class="row searchResult"，藉由累加_後面的數字 -->
-
 
                     <!-- Add anything with JS or Backend -->
                 </div>
             </div>
 
-            <div id="mapSide" class="col-md-9">
-            </div>
+            <div id="mapSide" class="col-md-9"></div>
 
         </div>
     </div>
@@ -249,8 +205,6 @@
     <!-- Junks put here -->
     <div id="exchange"></div>
 
-    <!-- Bootstrap core JavaScript
-  ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
@@ -272,7 +226,6 @@
             var map = new google.maps.Map(document.getElementById("mapSide"), mapProp);
         }
         google.maps.event.addDomListener(window, 'load', initialize);
-        //load_seek();
     </script>
 
 
@@ -356,10 +309,8 @@
                         }
                     });
                 });
-
             };
         };
-
     </script>
     <!-- ENDBLOCK: Your script playground -->
 </body>

@@ -262,28 +262,3 @@ function goback()
 			break;
 	}
 }
-
-$(document).ready(function () {
-    //$('#leftSide').perfectScrollbar({
-    //    suppressScrollX: true
-    //});
-
-    //$('.navbar-brand').click(function () {
-    //    $('#leftSide').scrollTop(0);
-    //    $('#leftSide').perfectScrollbar('update');
-    //});
-
-    //$('#post').click(function () {
-    //    $('#leftSide').perfectScrollbar('destroy');
-    //});
-
-    //$('#seek').click(function () {
-
-    //});
-
-    //$('#exchange').click(function () {
-
-    //});
-
-
-});

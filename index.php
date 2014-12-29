@@ -122,24 +122,6 @@
                 <li role="presentation" class="divider"></li>
                 <li id="logout"><a href="#logout">Logout</a></li>
             </ul>
-<!--        <?php
- /*           include("include/connect.php"); 
-            $myID = $_GET['id'];
-            $sql = "SELECT * FROM `user` WHERE `fb_id` = $myID";
-            $result=mysql_query($sql) or die(mysql_error());
-            $row = mysql_fetch_array($result);
-
-            echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">';
-            echo '<img src="'.trim($row['photoPath']).'" height="20" width="20"></img>'.trim($row['username']);
-            echo '</a><ul class="dropdown-menu" role="menu">
-                        <li id="profile" class="owner" data-value="'.trim($row['uid']).'"><a href="#">Profile</a></li>
-                        <li id="seekers"><a href="#seekers">Seekers</a></li>
-                        <li id="my_exchanges"><a href="#my_exchanges">My exchanges</a></li>
-                        <li role="presentation" class="divider"></li>
-                        <li id="logout"><a href="#logout">Logout</a></li>
-                      </ul>';*/
-        ?>-->
-
          </li>
         </ul>
       </div><!--/.nav-collapse -->
@@ -173,26 +155,7 @@
 						}
 				?>
 					</div>
-	<!--
-        						<div class="row searchResult" onClick="load_exchange()">
-        							<div class="col-md-5">
-        								<div class="thumbnail">
-        								<img src="static/img/alt.gif" alt="...">
-        								</div>
-        								</div>
-        								<div class="col-md-7">
-        									<p>Name: </p>
-        									<p>Category: </p>
-        									<p>Want for: </p>
-        									<p>Position: </p>
-        								</div>
-        							</div>
-        						</div>
-        						-->
-<!-- 這邊可以繼續往下列class="row searchResult"，藉由累加_後面的數字 -->
-
-
-          <!-- Add anything with JS or Backend -->
+         <!-- Add anything with JS or Backend -->
         </div>
       </div>
 

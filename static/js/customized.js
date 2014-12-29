@@ -43,6 +43,13 @@ var newPost_innerHTML='\
 </div>\
 \
 <!-- File Button --> \
+<form id="uploadForm" action="./php_script/upload.php"  method="post" enctype="multipart/form-data">\
+<div id="targetLayer">No Image</div>\
+<div id="uploadFormLayer">\
+<label>Upload Image File:</label><br/>\
+<input name="userImage" type="file" class="inputFile" />\
+<input type="submit" value="Submit" class="btnSubmit" />\
+</form>\
 <span class="label label-default" style="margin-bottom: 10px">2 . Upload Photo?</span>\
 <div class="form-group">\
   <div class="col-md-4">\
@@ -84,6 +91,7 @@ var newPost_innerHTML='\
 </form>-->\
 ';
 
+
 function load_seek()
 {
 	if(lastStage == "seek") return;
@@ -117,6 +125,27 @@ function load_profile()
 }
 
 $(document).ready(function() {
+
+	$("#uploadForm").on('submit',(function(e) {
+		e.preventDefault();
+		$.ajax({
+        	url: "./php_script/upload.php",
+			type: "POST",
+			data:  new FormData(this),
+			contentType: false,
+    	    cache: false,
+			processData:false,
+			success: function(data)
+		    {
+			$("#targetLayer").html(data);
+		    },
+		  	error: function() 
+	    	{
+	    	} 	        
+	   });
+	}));
+
+
 	// Handle User clicking the specific goods.
     $("#leftSideSwitch").on("click",".searchResult", function(event) {
         val = $(this).attr('data-value');
@@ -210,7 +239,7 @@ $(document).ready(function() {
 	// Handle User clicking SEEK on navbar
 	$("#seek").on("click", function(event){
 		$.ajax({
-			//type: "GET",
+			type: "POST",
 			dataType: "json",
 			url: "./php_script/seek.php",
 			success: function(response){

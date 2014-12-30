@@ -18,11 +18,47 @@
   <!-- Theme CSS -->
   <link href="static/css/Homepage/style.css" rel="stylesheet">
   <link href="static/css/Homepage/default.css" rel="stylesheet">
-
+  
+  <!-- BLOCK: Loading libraries -->
+  <script src="./include/FBappID.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <!-- ENDBLOCK: Loading libraries -->
 
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+    <!-- BLOCK: FB SDK initialization -->
+    <div id="fb-root"></div>
+    <script>
+    window.fbAsyncInit = function() {
+        // init the FB JS SDK
+        FB.init({
+        appId      : FacebookAppId,                        // App ID from the app dashboard
+        cookie     : true,                                 // Allowed server-side to fetch fb auth cookie
+        status     : true,                                 // Check Facebook Login status
+        xfbml      : true                                  // Look for social plugins on the page
+        });
+
+        // Additional initialization code such as adding Event Listeners goes here
+        window.fbLoaded();
+    };
+
+    // Load the SDK asynchronously
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        //js.src = "http://connect.facebook.net/en_US/all.js";
+        // Debug version of Facebook JS SDK
+        js.src = "http://connect.facebook.net/en_US/all/debug.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- ENDBLOCK: FB SDK initialization -->
+	
+	
   <!-- Preloader -->
   <div id="preloader">
     <div id="load"></div>
@@ -43,7 +79,6 @@
       <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
         <ul class="nav navbar-nav">
 
-          <li id="sign-in"><a href="#">Sign In</a></li>
           <!--<li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -74,7 +109,7 @@
     <div class="container">
       <div class="row" style="padding-top: 50px">
         <div class="col-lg-2 col-lg-offset-5">
-          <button class="btn-fb-login">Login with Facebook</button>
+          <button id="my-login-button" class="btn btn-primary">Login with Facebook</button>
         </div>
       </div>
     </div>
@@ -142,7 +177,8 @@
             </div>
           </div>
         </div>
-		
+	</div>
+	 <div class="row">	
         <div class="col-xs-6 col-sm-3 col-md-3">
           <div class="wow bounceInUp" data-wow-delay="1s">
             <div class="team boxed-grey">
@@ -175,88 +211,6 @@
     </div>
   </section>
   <!-- /Section: about -->
-
-  <!-- Section: services -->
-  <section id="service" class="home-section text-center bg-gray">
-
-    <div class="heading-about">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-lg-offset-2">
-            <div class="wow bounceInDown" data-wow-delay="0.4s">
-              <div class="section-heading">
-                <h2>Our Services</h2>
-                <i class="fa fa-2x fa-angle-down"></i>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-2 col-lg-offset-5">
-          <hr class="marginbot-50">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3 col-md-3">
-          <div class="wow fadeInLeft" data-wow-delay="0.2s">
-            <div class="service-box">
-              <div class="service-icon">
-                <img src="static/img/Homepage/icons/service-icon-1.png" alt="" />
-              </div>
-              <div class="service-desc">
-                <h5>Print</h5>
-                <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3 col-md-3">
-          <div class="wow fadeInUp" data-wow-delay="0.2s">
-            <div class="service-box">
-              <div class="service-icon">
-                <img src="static/img/Homepage/icons/service-icon-2.png" alt="" />
-              </div>
-              <div class="service-desc">
-                <h5>Web Design</h5>
-                <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3 col-md-3">
-          <div class="wow fadeInUp" data-wow-delay="0.2s">
-            <div class="service-box">
-              <div class="service-icon">
-                <img src="static/img/Homepage/icons/service-icon-3.png" alt="" />
-              </div>
-              <div class="service-desc">
-                <h5>Photography</h5>
-                <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3 col-md-3">
-          <div class="wow fadeInRight" data-wow-delay="0.2s">
-            <div class="service-box">
-              <div class="service-icon">
-                <img src="static/img/Homepage/icons/service-icon-4.png" alt="" />
-              </div>
-              <div class="service-desc">
-                <h5>Cloud System</h5>
-                <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- /Section: services -->
 
   <!-- Section: contact -->
   <section id="contact" class="home-section text-center">
@@ -341,23 +295,20 @@
             <h5>Main Office</h5>
 
             <address>
-              <strong>Squas Design, Inc.</strong><br>
-              Tower 795 Folsom Ave, Beautiful Suite 600<br>
-              San Francisco, CA 94107<br>
-              <abbr title="Phone">P:</abbr> (123) 456-7890
+              <strong>公司 : 許陳鮑白張股份有限公司</strong><br>
+              台北市文山區指南路二段64號<br>
+              <br>
+              <abbr title="Phone">Phone:</abbr> (02) 29393091
             </address>
 
             <address>
               <strong>Email</strong><br>
-              <a href="mailto:#">email.name@example.com</a>
+              <a href="mailto:#">example@nccu.edu.tw</a>
             </address>
             <address>
               <strong>We're on social networks</strong><br>
               <ul class="company-social">
                 <li class="social-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                <li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                <li class="social-dribble"><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>
-                <li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
               </ul>
             </address>
 
@@ -385,7 +336,52 @@
       </div>
     </div>
   </footer>
+  
+  
+<!-- BLOCK: Facebook javascript playground -->
+    <script id="my-script-playground">
+        //var myID;
+        window.fbLoaded = function(){
+            FB.Event.subscribe('auth.login', function(response) {
+                // when user has been logged in, this block will be triggered.
+                var msg = "You're logged in.";
+                $("#my-login-message").html(msg);
+                console.log("Your login response:");
+                console.log(response);
+                // fetch the profile
+                fetch_my_profile();
+                window.location.href='index.php';
+            });
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    // the user is logged in and has authenticated your
+                    // app, and response.authResponse supplies
+                    // the user's ID, a valid access token, a signed
+                    // request, and the time the access token 
+                    // and signed request each expire
+                    fetch_my_profile();
+                    console.log("Facebook logged in");
+                    //var uid = response.authResponse.userID;
+                    //var accessToken = response.authResponse.accessToken;
+                } else if (response.status === 'not_authorized') {
+                    alert("not_authorized");
+                    // the user is logged in to Facebook, 
+                    // but has not authenticated your app
+                } else {
+                    console.log("isn't login");
+                    // the user isn't logged in to Facebook.
+                }
+            });
 
+            // define the events when login status changed.
+
+            // define the action when user clicked the login button.
+            $("#my-login-button").click(function(){
+                FB.login();
+            });
+	</script>
+  <!-- END OF facebook javascript -->
+  
   <!-- Core JavaScript Files -->
 
   <script src="static/js/jquery-1.11.2.min.js"></script>

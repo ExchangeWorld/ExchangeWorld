@@ -5,7 +5,7 @@ if(is_array($_FILES)) {
 		$targetPath = "./images/database/".$_FILES['userImage']['name'];
 		if(move_uploaded_file($sourcePath, ".".$targetPath)) {
 ?>
-			<img id="goods_photo" src="<?php echo $targetPath ?>" width="100px" height="100px" />
+			<div id="goods_photo" data-value="<?php echo $targetPath ?>" ></div>
 <?php
 		}
 	}

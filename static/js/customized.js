@@ -44,8 +44,9 @@ var newPost_innerHTML='\
 <form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data">\
 	<div id="targetLayer"></div>\
 	<div id="uploadFormLayer">\
-		<input name="userImage" class="inputFile" type="file">\
-		<input value="Submit"   class="btnSubmit" type="submit">\
+		<input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*">\
+    	<img id="photo_preview" width="200" src="#" alt="　"/>\
+    	<input id="submit" value="Submit"   class="btnSubmit" type="submit">\
 	</div>\
 </form>\
 <!-- Textarea -->\
@@ -80,6 +81,16 @@ var newPost_innerHTML='\
 </form>-->\
 ';
 
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#photo_preview').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+    
 
 function load_seek()
 {
@@ -119,6 +130,11 @@ function load_post()
 	    });
 	});
 
+	//$("#submit").hide();
+    $("#imgUpload").change(function(){
+        readURL(this);
+		// $( "#uploadForm" ).submit();
+    });
     //$('#slideSpace').animate({ 'margin-left':'0%'}, 1000);
 }
 
@@ -161,11 +177,12 @@ $(document).ready(function() {
 
 	// Handle new post
 	$("#leftSideSwitch").on("click", ".submit", function(event){
+//		$("#submit").trigger("submit");
 	    var post_gname  	 = $("#gName").val();
 	    var post_want   	 = $("#want_name").val();
 	    var post_description = $("#description").val();
 	    var post_ownerID     = $("#profile").attr('data-value');
-	    var post_photo		 = $("#goods_photo").attr('src');
+	    var post_photo		 = $("#goods_photo").attr('data-value');
 	    var post_categories  = $("#categories").val();
 	    if(post_categories=="-1") alert("please select categories!");
 	    else if(post_categories=="1") post_categories == "Books";
@@ -186,7 +203,7 @@ $(document).ready(function() {
 			},
 			success: function(response){
 				console.log(response);
-				$( "#seek" ).trigger( "click" );
+				//$( "#seek" ).trigger( "click" );
 			},
 			error: function(xhr,ajaxOption,thrownError){
 				alert(thrownError);

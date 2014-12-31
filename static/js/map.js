@@ -31,6 +31,8 @@ function initialize() {
         browserSupportFlag = true;
         navigator.geolocation.getCurrentPosition(function (position) {
             centerLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            map.setCenter(centerLocation);
+            addMarker(centerLocation);
         }, function () {
             handleNoGeolocation(browserSupportFlag);
         });
@@ -40,8 +42,7 @@ function initialize() {
         handleNoGeolocation(browserSupportFlag);
     }
     map = new google.maps.Map(document.getElementById("mapCanvas"), mapProp);
-    map.setCenter(centerLocation);
-    addMarker(centerLocation);
+    centerLocation = map.getCenter();
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('autocomplete-group'));
     autocomplete = new google.maps.places.Autocomplete(

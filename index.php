@@ -199,7 +199,7 @@
 
             <div id="mapSide" class="col-md-9"></div>
 
-        </div>
+            </div>
     </div>
 
     <!-- Junks put here -->
@@ -216,18 +216,7 @@
     <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
     <script src="static/js/perfect-scrollbar.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script>
-        function initialize() {
-            var mapProp = {
-                center: new google.maps.LatLng(24.9853919, 121.5865058),
-                zoom: 15,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            var map = new google.maps.Map(document.getElementById("mapSide"), mapProp);
-        }
-        google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-
+    <script src="static/js/map.js"></script>
 
     <!-- BLOCK: Your script playground -->
     <script id="script-playground">

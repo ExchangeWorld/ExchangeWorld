@@ -1,73 +1,74 @@
-@font-face 
-{
+@font-face {
     font-family: noto;
     src: url(../fonts/NotoSans-Regular-webfont.woff);
 }
 
-body
-{
-	font-family: noto;
-	font-size: large;
-	height: 100%;
+body {
+    font-family: noto;
+    font-size: large;
+    height: 100%;
     width: 100%;
     position: absolute;
-    overflow:hidden;
+    overflow: hidden;
 }
 
-.container-fluid
-{
-	height: inherit;
+.container-fluid {
+    height: inherit;
 }
 
-.row
-{
-	padding-top: 50px;
-	background-color: #3C3C3C;
+.row {
+    padding-top: 50px;
+    background-color: #3C3C3C;
 }
 
-#mainContainer
-{
-	height: inherit;
+#mainContainer {
+    height: inherit;
 }
 
-#mainRow
-{
-	height: inherit;
+#mainRow {
+    height: inherit;
 }
 
-#leftSide
-{
-	height: inherit;
-	background-color: silver;
-    overflow-y:hidden;
-    overflow-x:hidden;
+#leftSide {
+    height: inherit;
+    background-color: silver;
+    overflow-y: hidden;
+    overflow-x: hidden;
     z-index: 168;
     -webkit-box-shadow: 4px 0px 5px 0px rgba(0, 0, 0, 0.59);
-    -moz-box-shadow:    4px 0px 5px 0px rgba(0, 0, 0, 0.59);
-    box-shadow:         4px 0px 5px 0px rgba(0, 0, 0, 0.59);
+    -moz-box-shadow: 4px 0px 5px 0px rgba(0, 0, 0, 0.59);
+    box-shadow: 4px 0px 5px 0px rgba(0, 0, 0, 0.59);
 }
 
-#mapSide
-{
-	height: inherit;
-	background-color: gray;
+#searchOptions {
+    padding-top: 0px;
+    background-color: silver;
 }
 
-#searchOptions
-{
-	padding-top: 0px;
-	background-color: silver;
+#searchResults {
+    padding-top: 0px;
+    background-color: silver;
 }
 
-#searchResults
-{
-	padding-top: 0px;
-	background-color: silver;
+.searchResult {
+    padding-top: 0px;
+    padding-left: 15px;
+    background-color: silver;
 }
 
-.searchResult
-{
-	padding-top: 0px;
-	padding-left: 15px;
-	background-color: silver;
+#mapSide {
+    height: inherit;
+    background-color: gray;
+}
+
+#autocomplete-group {
+    width: 25%;
+    margin-left: 25px;
+    margin-top: 16px;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.36);
+}
+
+#autocomplete {
+    text-overflow: ellipsis;
 }

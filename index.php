@@ -183,23 +183,32 @@
                     <hr style="border-color: #6E6E6E; border-width: 2px">
 
                     <div id="searchResults" class="row">
-<?php
+                        <?php
 						include("include/connect.php");	
 						$sql = "SELECT * FROM `goods`";
 						$result=mysql_query($sql) or die(mysql_error());
 						while ($row = mysql_fetch_array($result)) {
 							echo '<div class="row searchResult" data-value="'.trim($row['gid']).'" ><div class="col-md-5"><div class="thumbnail"><img src="'.trim($row['photoPath']).'" alt="..."></div></div><div class="col-md-7"><p>Name: '.trim($row['gname']).'</p><p>Category: '.trim($row['categories']).'</p><p>Want for: '.trim($row['want']).'</p><p>Position: ('.trim($row['posX']).','.trim($row['posY']).')</p></div></div>';
 						}
-?>
+                        ?>
                     </div>
 
                     <!-- Add anything with JS or Backend -->
                 </div>
             </div>
 
-            <div id="mapSide" class="col-md-9"></div>
+            <div id="mapSide" class="col-md-9">
+                <!-- /input-group -->
+                <div id="autocomplete-group" class="input-group" >
+                    <input id="autocomplete" type="text" class="form-control" placeholder="Search for..." aria-describedby="basic-addon1">
+                    <!--<span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </span>-->
+                </div>
 
+                <div id="mapCanvas" style="height: inherit; margin-left: -15px; margin-right: -15px;"></div>
             </div>
+        </div>
     </div>
 
     <!-- Junks put here -->
@@ -215,7 +224,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
     <script src="static/js/perfect-scrollbar.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTmx_RgDS6MWl-MdyidKhpCKXMs3pV63Y&signed_in=false&v=3.exp&libraries=places"></script>
     <script src="static/js/map.js"></script>
 
     <!-- BLOCK: Your script playground -->

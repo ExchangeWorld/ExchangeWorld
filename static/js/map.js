@@ -2,17 +2,17 @@
 
 var marker;
 var map;
-var centerLocation;
-var defaultLaction = new google.maps.LatLng(24.9853919, 121.5865058);
+var centerLocation = new google.maps.LatLng(24.9853919, 121.5865058);
+var defaultLaction;
 var browserSupportFlag = new Boolean();
 
 function initialize() {
+
     var mapProp = {
         //center: new google.maps.LatLng(24.9853919, 121.5865058),
         zoom: 17,
-        center: defaultLaction,
         panControl: false,
-
+        mapMaker:false,
         zoomControl: true,
         zoomControlOptions: {
             position: google.maps.ControlPosition.RIGHT_TOP
@@ -25,13 +25,12 @@ function initialize() {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
+
     // Try W3C Geolocation (Preferred)
     if (navigator.geolocation) {
         browserSupportFlag = true;
         navigator.geolocation.getCurrentPosition(function (position) {
             centerLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            map.setCenter(centerLocation);
-            addMarker(centerLocation);
         }, function () {
             handleNoGeolocation(browserSupportFlag);
         });
@@ -40,14 +39,21 @@ function initialize() {
         browserSupportFlag = false;
         handleNoGeolocation(browserSupportFlag);
     }
+    map = new google.maps.Map(document.getElementById("mapCanvas"), mapProp);
+    map.setCenter(centerLocation);
+    addMarker(centerLocation);
 
-    map = new google.maps.Map(document.getElementById("mapSide"), mapProp);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('autocomplete-group'));
+    autocomplete = new google.maps.places.Autocomplete(
+      /** @type {HTMLInputElement} */(document.getElementById('autocomplete')), { boundbounds: map.getBounds() });
+
     google.maps.event.addListener(map, 'click', function (event) {
         if (marker == null)
             addMarker(event.latLng);
         else
             moveMarker(event.latLng);
     });
+    google.maps.event.addListener(autocomplete, 'places_changed', function () { });
 }
 
 function handleNoGeolocation(errorFlag) {

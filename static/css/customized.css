@@ -1,9 +1,11 @@
-@font-face {
+@font-face
+{
     font-family: noto;
     src: url(../fonts/NotoSans-Regular-webfont.woff);
 }
 
-body {
+body
+{
     font-family: noto;
     font-size: large;
     height: 100%;
@@ -12,24 +14,35 @@ body {
     overflow: hidden;
 }
 
-.container-fluid {
+#login
+{
+    margin-top: 12px;
+    margin-left: 10px;
+}
+
+.container-fluid
+{
     height: inherit;
 }
 
-.row {
+.row
+{
     padding-top: 50px;
     background-color: #3C3C3C;
 }
 
-#mainContainer {
+#mainContainer
+{
     height: inherit;
 }
 
-#mainRow {
+#mainRow
+{
     height: inherit;
 }
 
-#leftSide {
+#leftSide
+{
     height: inherit;
     background-color: silver;
     overflow-y: hidden;
@@ -40,28 +53,46 @@ body {
     box-shadow: 4px 0px 5px 0px rgba(0, 0, 0, 0.59);
 }
 
-#searchOptions {
+#searchOptions
+{
     padding-top: 0px;
     background-color: silver;
 }
 
-#searchResults {
+#searchResults
+{
     padding-top: 0px;
     background-color: silver;
 }
 
-.searchResult {
-    padding-top: 0px;
-    padding-left: 15px;
-    background-color: silver;
+.row .searchResult
+{
+    padding: 0px;
+    padding-top: 20px;
+    border: 2px solid #a1a1a1;
+    background: #dddddd;
+    margin: 0px;
 }
 
-#mapSide {
+.searchResultDescription .list-group-item
+{
+    font-size: 14px;
+    padding: 9px;
+}
+
+.img-rounded
+{
+    width: 100%;
+}
+
+#mapSide
+{
     height: inherit;
     background-color: gray;
 }
 
-#autocomplete-group {
+#autocomplete-group
+{
     width: 25%;
     margin-left: 25px;
     margin-top: 16px;
@@ -69,6 +100,7 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.36);
 }
 
-#autocomplete {
+#autocomplete
+{
     text-overflow: ellipsis;
 }

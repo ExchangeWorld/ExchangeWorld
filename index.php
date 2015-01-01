@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -25,12 +25,11 @@
     <!--<script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
     <script src="./include/FBappID.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="static/js/ajaxfileupload.js"></script>
 
 </head>
 
@@ -38,7 +37,8 @@
     <!-- BLOCK: FB SDK initialization -->
     <div id="fb-root"></div>
     <script>
-        window.fbAsyncInit = function () {
+        window.fbAsyncInit = function ()
+        {
             // init the FB JS SDK
             FB.init({
                 appId: FacebookAppId,    // App ID from the app dashboard
@@ -51,7 +51,8 @@
             window.fbLoaded();
         };
         // Load the SDK asynchronously
-        (function (d, s, id) {
+        (function (d, s, id)
+        {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) { return; }
             js = d.createElement(s); js.id = id;
@@ -62,8 +63,6 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <!-- ENDBLOCK: FB SDK initialization -->
-
-
     <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -86,29 +85,31 @@
                     </li>
 
                     <li id="post">
-                        <a href="#post" onclick="load_post()">
+                        <a href="#post">
                             <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
                             Post
                         </a>
                     </li>
 
                     <li id="about">
-                        <a href="#about" onclick="load_about()">
+                        <a href="#about">
                             <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
                             About
                         </a>
                     </li>
 
                     <li id="help">
-                        <a href="#help" onclick="load_help()">
+                        <a href="#help">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                             Help
                         </a>
                     </li>
 
-                    <!--<button id="login" class="btn btn-primary" style="left: 65%">Facebook</button>-->
-                    <fb:login-button id="login" class="nav navbar-nav" style="left: 70%" scope="user_likes,user_photos" onlogin='window.location.reload(true);'></fb:login-button>
-                    <li class="dropdown" style="left: 70%">
+                    <li>
+                        <div id="login" class="fb-login-button" data-scope="user_likes,user_photos" onlogin='window.location.reload(true);' data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
+                    </li>
+
+                    <li class="dropdown">
 
                         <a id="myname" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <img id="myhead" src="./static/img/alt.gif" height="20" width="20"></img>
@@ -134,17 +135,16 @@
             <div id="leftSide" class="col-md-3">
                 <div id="leftSideSwitch" style="margin-top: 10px">
 
-                    <div class="input-group input-group-lg" style="margin-top: 20px; margin-bottom: 10px">
+                    <div class="input-group" style="margin-top: 15px; margin-bottom: 10px">
                         <input type="text" class="form-control" placeholder="Seek anything">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">Go!</button>
                         </span>
                     </div>
-                    <p style="font-size: small">or</p>
 
                     <div id="searchOptions" class="row">
-                        <div class="col-md-4">
-                            <div class="dropdown">
+                        <div class="col-md-12">
+                            <div class="btn-group">
                                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
                                     Distance
                                     <span class="caret"></span>
@@ -156,10 +156,8 @@
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&gt; 5000m</a></li>
                                 </ul>
                             </div>
-                        </div>
 
-                        <div class="col-md-4">
-                            <div class="dropdown">
+                            <div class="btn-group">
                                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
                                     Categories
                                     <span class="caret"></span>
@@ -172,24 +170,31 @@
                                 </ul>
                             </div>
                         </div>
-
-                        <div class="col-md-4">
-                            <button type="button" class="btn btn-default">
-
-                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>Seek</button>
-                        </div>
                     </div>
 
                     <hr style="border-color: #6E6E6E; border-width: 2px">
 
                     <div id="searchResults" class="row">
                         <?php
-						include("include/connect.php");	
-						$sql = "SELECT * FROM `goods`";
-						$result=mysql_query($sql) or die(mysql_error());
-						while ($row = mysql_fetch_array($result)) {
-							echo '<div class="row searchResult" data-value="'.trim($row['gid']).'" ><div class="col-md-5"><div class="thumbnail"><img src="'.trim($row['photoPath']).'" alt="..."></div></div><div class="col-md-7"><p>Name: '.trim($row['gname']).'</p><p>Category: '.trim($row['categories']).'</p><p>Want for: '.trim($row['want']).'</p><p>Position: ('.trim($row['posX']).','.trim($row['posY']).')</p></div></div>';
-						}
+                        include("include/connect.php");
+                        $sql = "SELECT * FROM `goods`";
+                        $result=mysql_query($sql) or die(mysql_error());
+                        while ($row = mysql_fetch_array($result)) {
+                        echo '
+                        <div class="row searchResult" data-value="'.trim($row['gid']).'">
+                            <div class="col-md-6">
+                                <img src="'.trim($row['photoPath']).'" alt="..." class="img-rounded">
+                            </div>
+                            <div class="col-md-6 searchResultDescription">
+                                <ul class="list-group">
+                                    <li class="list-group-item">Name: '.trim($row['gname']).'</li>
+                                    <li class="list-group-item">Category: '.trim($row['categories']).'</li>
+                                    <li class="list-group-item">Want for: '.trim($row['want']).'</li>
+                                    <li class="list-group-item">Position: ('.trim($row['posX']).','.trim($row['posY']).')</li>
+                                </ul>
+                            </div>
+                        </div>';
+                        }
                         ?>
                     </div>
 
@@ -199,7 +204,7 @@
 
             <div id="mapSide" class="col-md-9">
                 <!-- /input-group -->
-                <div id="autocomplete-group" class="input-group" >
+                <div id="autocomplete-group" class="input-group">
                     <input id="autocomplete" type="text" class="form-control" placeholder="Search for..." aria-describedby="basic-addon1">
                     <!--<span class="input-group-btn">
                         <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
@@ -216,6 +221,7 @@
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="static/js/ajaxfileupload.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
 
     <!--<script src="static/js/bootstrap.min.js"></script>-->
@@ -229,33 +235,40 @@
 
     <!-- BLOCK: Your script playground -->
     <script id="script-playground">
-        window.fbLoaded = function () {
-            FB.getLoginStatus(function (response) {
-                if (response.status === 'connected') {
+        window.fbLoaded = function ()
+        {
+            FB.getLoginStatus(function (response)
+            {
+                if (response.status === 'connected')
+                {
                     // the user is logged in and has authenticated your
                     // app, and response.authResponse supplies
                     // the user's ID, a valid access token, a signed
-                    // request, and the time the access token 
+                    // request, and the time the access token
                     // and signed request each expire
                     fetch_my_profile();
 
                     var uid = response.authResponse.userID;
                     $("#profile").attr('data-value', uid);
 
-                    FB.api('/me/picture?width=250', function (response) {
+                    FB.api('/me/picture?width=250', function (response)
+                    {
                         my_picture_url = response.data.url;
                         $("#myhead").attr('src', my_picture_url);
                     });
-                    FB.api('/me', function (response) {
+                    FB.api('/me', function (response)
+                    {
                         $("#myname").append(response.name);
                     });
                     $("#myname").show();
                     $("#login").hide();
-                } else if (response.status === 'not_authorized') {
+                } else if (response.status === 'not_authorized')
+                {
                     alert("not_authorized");
-                    // the user is logged in to Facebook, 
+                    // the user is logged in to Facebook,
                     // but has not authenticated your app
-                } else {
+                } else
+                {
                     // the user isn't logged in to Facebook.
                     $("#myname").hide();
                     $("#login").show();
@@ -263,24 +276,28 @@
             });
 
             // define the action when user clicked the login button.
-            $("#logout").click(function () {
+            $("#logout").click(function ()
+            {
                 FB.logout();
                 $("#myname").hide();
                 $("#login").show();
             });
 
-            var fetch_my_profile = function () {
+            var fetch_my_profile = function ()
+            {
                 var my_name;
                 var my_gender;
                 var my_email;
                 var my_facebook_id;
                 var my_picture_url;
 
-                FB.api('/me/picture?width=250', function (response) {
+                FB.api('/me/picture?width=250', function (response)
+                {
                     my_picture_url = response.data.url;
                     $("#my-profile-picture").attr('src', my_picture_url);
                 });
-                FB.api('/me', function (response) {
+                FB.api('/me', function (response)
+                {
                     my_name = response.name;
                     my_gender = response.gender;
                     //var my_email = response.email;
@@ -297,11 +314,13 @@
                             facebook_id: my_facebook_id,
                             picture_url: my_picture_url
                         },
-                        success: function (response) {
+                        success: function (response)
+                        {
                             console.log(response);
                             //    alert(response);
                         },
-                        error: function (xhr, ajaxOption, thrownError) {
+                        error: function (xhr, ajaxOption, thrownError)
+                        {
                             alert(thrownError);
                             alert(JSON.stringify(xhr));
                         }

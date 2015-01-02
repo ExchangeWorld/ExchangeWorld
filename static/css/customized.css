@@ -93,6 +93,12 @@ body
     background-color: gray;
 }
 
+.row .postGroup
+{
+    padding-top: 0px;
+    background-color: silver;
+}
+
 #autocomplete-group
 {
     width: 25%;

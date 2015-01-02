@@ -5,64 +5,85 @@
 
 <!-- Prepended text-->
 <span class="label label-default" style="margin-bottom: 10px">1 . What do you have?</span>
-<div class="form-group">
+<div class="row postGroup">
     <div class="col-md-10">
-        <div class="input-group">
-            <span class="input-group-addon">Name</span>
-            <input id="gName" name="gName" class="form-control" placeholder="What it called" required="" type="text">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">Name</span>
+                <input id="gName" name="gName" class="form-control" placeholder="What it called" required="" type="text">
+            </div>
         </div>
     </div>
 </div>
 
 <!-- Select Basic -->
-<div class="form-group">
+<div class="row postGroup">
     <div class="col-md-10">
-        <select id="categories" name="categories" class="form-control">
-            <option value="-1">Categories</option>
-            <option value="1">Books</option>
-            <option value="2">Clothes</option>
-            <option value="3">Arts</option>
-        </select>
+        <div class="form-group">
+            <select id="categories" name="categories" class="form-control">
+                <option value="-1">Categories</option>
+                <option value="1">Books</option>
+                <option value="2">Clothes</option>
+                <option value="3">Arts</option>
+            </select>
+        </div>
     </div>
 </div>
 
 <!-- File Button -->
 <span class="label label-default" style="margin-bottom: 10px">2 . Upload Photo?</span>
-<form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data">
-    <div id="targetLayer"></div>
-    <div id="uploadFormLayer">
-        <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*">
-        <img id="photo_preview" width="200" src="#" alt="　" />
-        <input id="submit" value="Submit" class="btnSubmit" type="submit">
-    </div>
-</form>
-<!-- Textarea -->
-<div class="form-group">
+<div class="row postGroup">
     <div class="col-md-10">
-        <textarea class="form-control" id="description" name="description">say more about your goods</textarea>
-    </div>
-</div>
-<!-- Button -->
-<div class="form-group">
-    <button id="mark_location" name="mark_location" class="btn btn-info">Mark Place!</button>
-</div>
-<!-- Prepended text-->
-<span class="label label-default" style="margin-bottom: 10px">3 . What do you want?</span>
-<div class="form-group">
-    <div class="col-md-10">
-        <div class="input-group">
-            <span class="input-group-addon">Name</span>
-            <input id="want_name" name="want_name" class="form-control" placeholder="What you want" type="text">
-        </div>
-    </div>
-</div>
-<!-- Button -->
-<div class="form-group">
-    <label class="col-md-4 control-label" for="submit"></label>
-    <div class="col-md-4">
-        <button id="submit" name="submit" class="btn btn-primary submit">POST!</button>
+        <form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data">
+            <div id="targetLayer"></div>
+            <div id="uploadFormLayer">
+                <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*">
+                <img id="photo_preview" width="200" src="#" alt="　" />
+                <input id="submit" value="Submit" class="btnSubmit" type="submit">
+            </div>
+        </form>
     </div>
 </div>
 
+<!-- Textarea -->
+<div class="row postGroup">
+    <div class="col-md-10">
+        <div class="form-group">
+            <textarea class="form-control" id="description" name="description">say more about your goods</textarea>
+        </div>
+    </div>
+</div>
+
+<!-- Button -->
+<div class="row postGroup">
+    <div class="col-md-10">
+        <div class="form-group">
+            <button id="mark_location" name="mark_location" class="btn btn-info">Mark Place!</button>
+        </div>
+    </div>
+</div>
+
+<!-- Prepended text-->
+<span class="label label-default" style="margin-bottom: 10px">3 . What do you want?</span>
+<div class="row postGroup">
+    <div class="col-md-10">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">Name</span>
+                <input id="want_name" name="want_name" class="form-control" placeholder="What you want" type="text">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button -->
+<div class="row postGroup">
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="submit"></label>
+        <div class="col-md-4">
+            <button id="submit" name="submit" class="btn btn-primary submit">POST!</button>
+        </div>
+    </div>
+</div>
 <!--</fieldset>
 </form>-->

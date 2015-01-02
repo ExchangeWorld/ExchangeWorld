@@ -1,76 +1,6 @@
 // JavaScript Document
 
-var postInnerHTML='\
-<!--<form class="form-horizontal" id ="new_post"  method="POST" enctype="multipart/form-data">\
-<fieldset>-->\
-\
-<!-- Form Name -->\
-<legend>Post Goods</legend>\
-\
-<!-- Prepended text-->\
-<span class="label label-default" style="margin-bottom: 10px">1 . What do you have?</span>\
-<div class="form-group">\
-  <div class="col-md-10">\
-    <div class="input-group">\
-      <span class="input-group-addon">Name</span>\
-      <input id="gName" name="gName" class="form-control" placeholder="What it called" required="" type="text">\
-    </div>\
-  </div>\
-</div>\
-\
-<!-- Select Basic -->\
-<div class="form-group">\
-  <div class="col-md-10">\
-    <select id="categories" name="categories" class="form-control">\
-      <option value="-1">Categories</option>\
-      <option value="1">Books</option>\
-      <option value="2">Clothes</option>\
-      <option value="3">Arts</option>\
-    </select>\
-  </div>\
-</div>\
-\
-<!-- File Button -->\
-<span class="label label-default" style="margin-bottom: 10px">2 . Upload Photo?</span>\
-<form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data">\
-	<div id="targetLayer"></div>\
-	<div id="uploadFormLayer">\
-		<input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*">\
-    	<img id="photo_preview" width="200" src="#" alt="　"/>\
-    	<input id="submit" value="Submit"   class="btnSubmit" type="submit">\
-	</div>\
-</form>\
-<!-- Textarea -->\
-<div class="form-group">\
-  <div class="col-md-10">\
-    <textarea class="form-control" id="description" name="description">say more about your goods</textarea>\
-  </div>\
-</div>\
-<!-- Button -->\
-<div class="form-group">\
-    <button id="mark_location" name="mark_location" class="btn btn-info">Mark Place!</button>\
-</div>\
-<!-- Prepended text-->\
-<span class="label label-default" style="margin-bottom: 10px">3 . What do you want?</span>\
-<div class="form-group">\
-  <div class="col-md-10">\
-    <div class="input-group">\
-      <span class="input-group-addon">Name</span>\
-      <input id="want_name" name="want_name" class="form-control" placeholder="What you want" type="text">\
-    </div>\
-  </div>\
-</div>\
-<!-- Button -->\
-<div class="form-group">\
-  <label class="col-md-4 control-label" for="submit"></label>\
-  <div class="col-md-4">\
-    <button id="submit" name="submit" class="btn btn-primary submit" >POST!</button>\
-  </div>\
-</div>\
-\
-<!--</fieldset>\
-</form>-->\
-';
+var postInnerHTML = '<!--<form class="form-horizontal" id ="new_post" method="POST" enctype="multipart/form-data"><fieldset>--><!-- Form Name --><legend>Post Goods</legend><!-- Prepended text--><span class="label label-default" style="margin-bottom: 10px">1 . What do you have?</span><div class="row postGroup"> <div class="col-md-10"> <div class="form-group"> <div class="input-group"> <span class="input-group-addon">Name</span> <input id="gName" name="gName" class="form-control" placeholder="What it called" required="" type="text"> </div> </div> </div></div><!-- Select Basic --><div class="row postGroup"> <div class="col-md-10"> <div class="form-group"> <select id="categories" name="categories" class="form-control"> <option value="-1">Categories</option> <option value="1">Books</option> <option value="2">Clothes</option> <option value="3">Arts</option> </select> </div> </div></div><!-- File Button --><span class="label label-default" style="margin-bottom: 10px">2 . Upload Photo?</span><div class="row postGroup"> <div class="col-md-10"> <form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data"> <div id="targetLayer"></div> <div id="uploadFormLayer"> <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*"> <img id="photo_preview" width="200" src="#" alt=" " /> <input id="submit" value="Submit" class="btnSubmit" type="submit"> </div> </form> </div></div><!-- Textarea --><div class="row postGroup"> <div class="col-md-10"> <div class="form-group"> <textarea class="form-control" id="description" name="description">say more about your goods</textarea> </div> </div></div><!-- Button --><div class="row postGroup"> <div class="col-md-10"> <div class="form-group"> <button id="mark_location" name="mark_location" class="btn btn-info">Mark Place!</button> </div> </div></div><!-- Prepended text--><span class="label label-default" style="margin-bottom: 10px">3 . What do you want?</span><div class="row postGroup"> <div class="col-md-10"> <div class="form-group"> <div class="input-group"> <span class="input-group-addon">Name</span> <input id="want_name" name="want_name" class="form-control" placeholder="What you want" type="text"> </div> </div> </div></div><!-- Button --><div class="row postGroup"> <div class="form-group"> <label class="col-md-4 control-label" for="submit"></label> <div class="col-md-4"> <button id="submit" name="submit" class="btn btn-primary submit">POST!</button> </div> </div></div><!--</fieldset></form>-->';
 
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -84,6 +14,7 @@ function readURL(input) {
 
 function load_post()
 {
+	$("#leftSideSwitch").hide().html(postInnerHTML).show('fast');
 	$("#uploadForm").on("submit", function(e) {
 		e.preventDefault();
 		$.ajax({
@@ -194,8 +125,9 @@ $(document).ready(function() {
 
 	// Handle User clicking SEEK on navbar
 	$("#seek").on("click", function(event){
-		
+		$('#leftSideSwitch').hide();
 		$('#leftSideSwitch').html('<div class="input-group" style="margin-top: 15px; margin-bottom: 10px"> <input type="text" class="form-control" placeholder="Seek anything"> <span class="input-group-btn"> <button class="btn btn-default" type="button">Go!</button> </span></div><div id="searchOptions" class="row"> <div class="col-md-12"> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Distance <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&lt; 500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">500 ~ 1500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1500 ~ 5000m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&gt; 5000m</a></li> </ul> </div> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Antiques</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Art</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Book</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Clothing</a></li> </ul> </div> </div></div><hr style="border-color: #6E6E6E; border-width: 2px"><div id="searchResults" class="col-md-12"> </div>');
+		$('#leftSideSwitch').show('fast');
 
 		$.ajax({
 			type     : "GET",
@@ -205,9 +137,8 @@ $(document).ready(function() {
 				data: "?"
 			},
 			success: function(response){
-				//$('#leftSideSwitch').hide().html('').show('fast');
 				for (var i = 0; i < response.length; i++){
-					$('#searchResults').append('<div class="row searchResult" data-value="'+response[i]["gid"]+'"> <div class="col-md-6"><img src="'+response[i]["photopath"]+'" alt="..." class="img-rounded"></div> <div class="col-md-6 searchResultDescription"> <ul class="list-group"> <li class="list-group-item">Name: '+response[i]["gname"]+'</li> <li class="list-group-item">Category: '+response[i]["categories"]+'</li> <li class="list-group-item">Want for: '+response[i]["want"]+'</li> <li class="list-group-item">Position: ('+response[i]["posX"]+','+response[i]["posY"]+')</li> </ul> </div></div>');
+					$('#searchResults').append('<div class="row searchResult" data-value="'+response[i]["gid"]+'"> <div class="col-md-6"><img src="'+response[i]["photoPath"]+'" alt="..." class="img-rounded"></div> <div class="col-md-6 searchResultDescription"> <ul class="list-group"> <li class="list-group-item">Name: '+response[i]["gname"]+'</li> <li class="list-group-item">Category: '+response[i]["categories"]+'</li> <li class="list-group-item">Want for: '+response[i]["want"]+'</li> <li class="list-group-item">Position: ('+response[i]["posX"]+','+response[i]["posY"]+')</li> </ul> </div></div>');
 				}
 				document.getElementById("post").className = "";
 				document.getElementById("about").className = "";

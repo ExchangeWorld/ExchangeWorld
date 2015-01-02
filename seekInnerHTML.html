@@ -1,13 +1,18 @@
 
-<div class="input-group input-group-lg" style="margin-top: 20px; margin-bottom: 10px">
+<div class="input-group" style="margin-top: 15px; margin-bottom: 10px">
     <input type="text" class="form-control" placeholder="Seek anything">
-    <span class="input-group-btn"><button class="btn btn-default" type="button">Go!</button></span>
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+    </span>
 </div>
-<p style="font-size: small">or</p>
+
 <div id="searchOptions" class="row">
-    <div class="col-md-4">
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Distance<span class="caret"></span></button>
+    <div class="col-md-12">
+        <div class="btn-group">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                Distance
+                <span class="caret"></span>
+            </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&lt; 500m</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">500 ~ 1500m</a></li>
@@ -15,11 +20,13 @@
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&gt; 5000m</a></li>
             </ul>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">Categories<span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+
+        <div class="btn-group">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
+                Categories
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Antiques</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Art</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Book</a></li>
@@ -27,31 +34,30 @@
             </ul>
         </div>
     </div>
-    <div class="col-md-4">
-        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Seek</button>
-    </div>
-</div><hr style="border-color: #6E6E6E; border-width: 2px">
-<div id="searchResults" class="row">
-    <div id="searchResult_1" class="row searchResult" onclick="load_exchange()">
-        <div class="col-md-5">
-            <div class="thumbnail"><img src="static/img/alt.gif" alt="..."></div>
+</div>
+
+<hr style="border-color: #6E6E6E; border-width: 2px">
+
+<div id="searchResults" class="col-md-12">
+    <?php
+    include("include/connect.php");
+    $sql = "SELECT * FROM `goods`";
+    $result=mysql_query($sql) or die(mysql_error());
+    while ($row = mysql_fetch_array($result)) {
+    echo '
+    <div class="row searchResult" data-value="'.trim($row['gid']).'">
+        <div class="col-md-6">
+            <img src="'.trim($row['photoPath']).'" alt="..." class="img-rounded">
         </div>
-        <div class="col-md-7">
-            <p>Name: </p>
-            <p>Category: </p>
-            <p>Want for: </p>
-            <p>Position: </p>
+        <div class="col-md-6 searchResultDescription">
+            <ul class="list-group">
+                <li class="list-group-item">Name: '.trim($row['gname']).'</li>
+                <li class="list-group-item">Category: '.trim($row['categories']).'</li>
+                <li class="list-group-item">Want for: '.trim($row['want']).'</li>
+                <li class="list-group-item">Position: ('.trim($row['posX']).','.trim($row['posY']).')</li>
+            </ul>
         </div>
-    </div>
-    <div id="searchResult_2" class="row searchResult" onclick="load_exchange()">
-        <div class="col-md-5">
-            <div class="thumbnail"><img src="static/img/alt.gif" alt="..."></div>
-        </div>
-        <div class="col-md-7">
-            <p>Name: </p>
-            <p>Category: </p>
-            <p>Want for: </p>
-            <p>Position: </p>
-        </div>
-    </div>
+    </div>';
+    }
+    ?>
 </div>

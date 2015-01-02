@@ -112,7 +112,7 @@
                     <li class="dropdown">
 
                         <a id="myname" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <img id="myhead" src="./static/img/alt.gif" height="20" width="20"></img>
+                            <img id="myhead" src="./static/img/alt.gif" height="20" width="20">
                         </a>
                         <ul id="myMenu" class="dropdown-menu" role="menu">
                             <li id="profile" class="owner" data-value="..............."><a href="#">Profile</a></li>
@@ -233,6 +233,8 @@
 
     <!-- BLOCK: Your script playground -->
     <script id="script-playground">
+        $("#myname").hide();
+        
         window.fbLoaded = function ()
         {
             FB.getLoginStatus(function (response)

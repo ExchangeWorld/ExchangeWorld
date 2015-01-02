@@ -194,6 +194,9 @@ $(document).ready(function() {
 
 	// Handle User clicking SEEK on navbar
 	$("#seek").on("click", function(event){
+		
+		$('#leftSideSwitch').html('<div class="input-group" style="margin-top: 15px; margin-bottom: 10px"> <input type="text" class="form-control" placeholder="Seek anything"> <span class="input-group-btn"> <button class="btn btn-default" type="button">Go!</button> </span></div><div id="searchOptions" class="row"> <div class="col-md-12"> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Distance <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&lt; 500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">500 ~ 1500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1500 ~ 5000m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&gt; 5000m</a></li> </ul> </div> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Antiques</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Art</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Book</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Clothing</a></li> </ul> </div> </div></div><hr style="border-color: #6E6E6E; border-width: 2px"><div id="searchResults" class="col-md-12"> </div>');
+
 		$.ajax({
 			type     : "GET",
 			url      : "./php_script/seek.php",
@@ -202,9 +205,9 @@ $(document).ready(function() {
 				data: "?"
 			},
 			success: function(response){
-				$('#leftSideSwitch').hide().html('').show('fast');
+				//$('#leftSideSwitch').hide().html('').show('fast');
 				for (var i = 0; i < response.length; i++){
-					$('#leftSideSwitch').append('<div class="row searchResult" data-value="'+response[i]["gid"]+'" ><div class="col-md-5"><div class="thumbnail"><img src="'+response[i]["photoPath"]+'" alt="..."></div></div><div class="col-md-7"><p>Name: '+response[i]["gname"]+'</p><p>Category: '+response[i]["categories"]+'</p><p>Want for: '+response[i]["want"]+'</p><p>Position: ('+response[i]["posX"]+','+response[i]["posY"]+')</p></div></div>');
+					$('#searchResults').append('<div class="row searchResult" data-value="'+response[i]["gid"]+'"> <div class="col-md-6"><img src="'+response[i]["photopath"]+'" alt="..." class="img-rounded"></div> <div class="col-md-6 searchResultDescription"> <ul class="list-group"> <li class="list-group-item">Name: '+response[i]["gname"]+'</li> <li class="list-group-item">Category: '+response[i]["categories"]+'</li> <li class="list-group-item">Want for: '+response[i]["want"]+'</li> <li class="list-group-item">Position: ('+response[i]["posX"]+','+response[i]["posY"]+')</li> </ul> </div></div>');
 				}
 				document.getElementById("post").className = "";
 				document.getElementById("about").className = "";

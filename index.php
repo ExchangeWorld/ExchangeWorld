@@ -174,7 +174,7 @@
 
                     <hr style="border-color: #6E6E6E; border-width: 2px">
 
-                    <div id="searchResults" class="row">
+                    <div id="searchResults" class="col-md-12">
                         <?php
                         include("include/connect.php");
                         $sql = "SELECT * FROM `goods`";

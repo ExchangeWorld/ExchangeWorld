@@ -228,8 +228,12 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
     <script src="static/js/perfect-scrollbar.min.js"></script>
+
+    <!--------------------------  Google Map Javascript  ---------------------------------------->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTmx_RgDS6MWl-MdyidKhpCKXMs3pV63Y&signed_in=false&v=3.exp&libraries=places"></script>
+    <script src="static/js/richmarker-compiled.js"></script>
     <script src="static/js/map.js"></script>
+    <!----------------------------------------------------------------------------------------->
 
     <!-- BLOCK: Your script playground -->
     <script id="script-playground">

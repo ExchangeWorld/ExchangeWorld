@@ -1,5 +1,7 @@
 ﻿/// <reference path="google-maps-3-vs-1-0.js" />
+/// <reference path="richmarker-compiled.js" />
 
+var markers = [];
 var marker;
 var infowindow;
 var map;
@@ -21,6 +23,8 @@ function initialize() {
     var mapProp = {
         //center: new google.maps.LatLng(24.9853919, 121.5865058),
         zoom: 17,
+        //draggableCursor: 'url(http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/glossy-black-icons-business/080745-glossy-black-icon-business-cursor.png), auto;',
+        disableDoubleClickZoom: false,
         panControl: false,
         mapMaker:false,
         zoomControl: true,
@@ -41,7 +45,7 @@ function initialize() {
         navigator.geolocation.getCurrentPosition(function (position) {
             centerLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             map.setCenter(centerLocation);
-            addMarker(centerLocation);
+            //addMarker(centerLocation);
         }, function () {
             handleNoGeolocation(browserSupportFlag);
             addMarker(centerLocation);
@@ -80,7 +84,7 @@ function initialize() {
             map.setZoom(17);
         }
 
-        marker.setPosition(place.geometry.location);
+        moveMarker(place.geometry.location);
         marker.setVisible(true);
     });
 }
@@ -94,28 +98,24 @@ function handleNoGeolocation(errorFlag) {
 }
 
 function addMarker(location) {
-    //var image = {
-    //  url: place.icon,
-    //  size: new google.maps.Size(71, 71),
-    //  origin: new google.maps.Point(0, 0),
-    //  anchor: new google.maps.Point(17, 34),
-    //  scaledSize: new google.maps.Size(25, 25)
-    //};
 
-    marker = new google.maps.Marker({
+    marker = new RichMarker({
         position: location,
         map: map,
         draggable: true,
-        //icon: image,
-        animation: google.maps.Animation.DROP,
-        //title: 'Hello World!'
+        flat: false,
+        anchor: RichMarkerPosition.MIDDLE,
+        zIndex: 168,
+        content: '<div class="custom-marker">'+
+          '<span><img class="contained-image" src="images/database/monkey.jpg"/></span>' +
+          '</div>'
     });
 
-    marker.setMap(map);
+    //return marker.getPosition();
 };
+
 function moveMarker(location) {
     marker.setPosition(location);
 };
 
 google.maps.event.addDomListener(window, 'load', initialize);
-

@@ -4,6 +4,17 @@ var marker;
 var infowindow;
 var map;
 
+$(document).ready(function () {
+    $(".autocomplete").keyup(function () {
+        $(this).next().toggle(Boolean($(this).val()));
+    });
+    $(".searchclear").toggle(Boolean($(".autocomplete").val()));
+    $(".searchclear").click(function () {
+        $(this).prev().val('').focus();
+        $(this).hide();
+    });
+});
+
 function initialize() {
     var centerLocation = new google.maps.LatLng(24.9853919, 121.5865058);
     var browserSupportFlag = new Boolean();
@@ -107,3 +118,4 @@ function moveMarker(location) {
 };
 
 google.maps.event.addDomListener(window, 'load', initialize);
+

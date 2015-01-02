@@ -205,10 +205,8 @@
             <div id="mapSide" class="col-md-9">
                 <!-- /input-group -->
                 <div id="autocomplete-group" class="input-group">
-                    <input id="autocomplete" type="text" class="form-control" placeholder="Search for..." aria-describedby="basic-addon1">
-                    <!--<span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                    </span>-->
+                    <input id="autocomplete" type="search" class="autocomplete form-control" placeholder="Search for..." value="">
+                    <span class="searchclear glyphicon glyphicon-remove-circle"></span>
                 </div>
 
                 <div id="mapCanvas" style="height: inherit; margin-left: -15px; margin-right: -15px;"></div>

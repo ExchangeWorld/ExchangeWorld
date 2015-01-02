@@ -85,7 +85,7 @@
                     </li>
 
                     <li id="post">
-                        <a href="#post">
+                        <a href="#post" onclick="load_post()">
                             <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
                             Post
                         </a>

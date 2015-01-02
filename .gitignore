@@ -13,6 +13,7 @@ include/connect.php
 *.so
 
 # Packages
+# Packages
 *.egg
 *.egg-info
 dist

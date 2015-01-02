@@ -4,6 +4,7 @@
 /heroku.config
 /heroku.local.config
 /include/connect.php
+include/connect.php
 
 ### Python ###
 *.py[cod]

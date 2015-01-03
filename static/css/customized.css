@@ -65,6 +65,8 @@ body
     padding-left: 0px;
     padding-right: 0px;
     background-color: silver;
+/*    height: inherit;
+    overflow: auto;*/
 }
 
 .searchResult

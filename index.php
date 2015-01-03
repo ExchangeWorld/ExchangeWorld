@@ -15,7 +15,8 @@
     <!-- Bootstrap theme -->
     <link href="static/css/bootstrap-theme.min.css" rel="stylesheet">
 
-    <link href="static/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
+    <!--<link href="static/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">-->
+    <!--<link href="static/css/jquery.jscrollpane.css" rel="stylesheet" type="text/css" charset="utf-8" media="all">-->
 
     <!-- Custom styles for this template -->
     <link href="static/css/customized.css" rel="stylesheet" type="text/css" charset="utf-8">
@@ -30,6 +31,7 @@
     <![endif]-->
 
     <script src="./include/FBappID.js"></script>
+    <script>var loggedInForPost = false;</script>
 
 </head>
 
@@ -77,7 +79,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li id="seek">
+                    <li id="seek" class="active">
                         <a href="#seek">
                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                             Seek
@@ -223,11 +225,13 @@
     <script src="static/js/bootstrap.min.js"></script>
 
     <!--<script src="static/js/bootstrap.min.js"></script>-->
+    <!--<script src="static/js/jquery.mousewheel.min.js"></script>-->
+    <!--<script src="static/js/jquery.jscrollpane.min.js"></script>-->
+    <!--<script src="static/js/perfect-scrollbar.min.js"></script>-->
     <script src="static/js/customized.js"></script>
     <!--<script src="../../assets/js/docs.min.js"></script>-->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
-    <script src="static/js/perfect-scrollbar.min.js"></script>
 
     <!--------------------------  Google Map Javascript  ---------------------------------------->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTmx_RgDS6MWl-MdyidKhpCKXMs3pV63Y&signed_in=false&v=3.exp&libraries=places"></script>
@@ -266,6 +270,9 @@
                     });
                     $("#myname").show();
                     $("#login").hide();
+
+                    loggedInForPost = true;
+
                 } else if (response.status === 'not_authorized')
                 {
                     alert("not_authorized");
@@ -276,6 +283,8 @@
                     // the user isn't logged in to Facebook.
                     $("#myname").hide();
                     $("#login").show();
+
+                    loggedInForPost = false;
                 }
             });
 
@@ -285,6 +294,8 @@
                 FB.logout();
                 $("#myname").hide();
                 $("#login").show();
+
+                loggedInForPost = false;
             });
 
             var fetch_my_profile = function ()

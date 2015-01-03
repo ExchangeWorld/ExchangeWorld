@@ -21,10 +21,9 @@
   
   <!-- BLOCK: Loading libraries -->
   <script src="./include/FBappID.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-  <!-- ENDBLOCK: Loading libraries -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+   <!-- ENDBLOCK: Loading libraries -->
 
 </head>
 
@@ -105,12 +104,11 @@
         <i class="fa fa-angle-double-down animated"></i>
       </a>
     </div>-->
-
-    <div class="container">
+	<div id="my-html-playground" class="container">
       <div class="row" style="padding-top: 50px">
         <div class="col-lg-2 col-lg-offset-5">
-          <button id="my-login-button" class="btn btn-primary">Login with Facebook</button>
-        </div>
+			<button id="my-login-button" class="btn btn-primary">Login with Facebook</button>
+		</div>
       </div>
     </div>
 
@@ -178,6 +176,7 @@
           </div>
         </div>
 	</div>
+	<p>
 	 <div class="row">	
         <div class="col-xs-6 col-sm-3 col-md-3">
           <div class="wow bounceInUp" data-wow-delay="1s">
@@ -337,50 +336,22 @@
     </div>
   </footer>
   
-  
 <!-- BLOCK: Facebook javascript playground -->
-    <script id="my-script-playground">
-        //var myID;
-        window.fbLoaded = function(){
-            FB.Event.subscribe('auth.login', function(response) {
-                // when user has been logged in, this block will be triggered.
-                var msg = "You're logged in.";
-                $("#my-login-message").html(msg);
-                console.log("Your login response:");
-                console.log(response);
-                // fetch the profile
-                fetch_my_profile();
-                window.location.href='index.php';
-            });
-            FB.getLoginStatus(function(response) {
-                if (response.status === 'connected') {
-                    // the user is logged in and has authenticated your
-                    // app, and response.authResponse supplies
-                    // the user's ID, a valid access token, a signed
-                    // request, and the time the access token 
-                    // and signed request each expire
-                    fetch_my_profile();
-                    console.log("Facebook logged in");
-                    //var uid = response.authResponse.userID;
-                    //var accessToken = response.authResponse.accessToken;
-                } else if (response.status === 'not_authorized') {
-                    alert("not_authorized");
-                    // the user is logged in to Facebook, 
-                    // but has not authenticated your app
-                } else {
-                    console.log("isn't login");
-                    // the user isn't logged in to Facebook.
-                }
-            });
-
-            // define the events when login status changed.
-
-            // define the action when user clicked the login button.
-            $("#my-login-button").click(function(){
-                FB.login();
-            });
-	</script>
-  <!-- END OF facebook javascript -->
+	<script id="my-script-playground">
+	window.fbLoaded = function(){
+		FB.Event.subscribe('auth.login',function(response){
+			var msg="You're logged in.";
+			$("#my-login-message").html(msg);
+			console.log("Your login response:");
+			console.log(response);
+			});
+		$("#my-login-button").click(function(){
+			FB.login();
+		});
+	};
+</script>
+<!-- END OF facebook javascript -->
+  
   
   <!-- Core JavaScript Files -->
 

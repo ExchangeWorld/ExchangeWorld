@@ -131,6 +131,20 @@ function postMarker(location) {
     });
 };
 
+function postMarker(location, img) {
+    marker = new RichMarker({
+        position: location,
+        map: map,
+        draggable: true,
+        flat: false,
+        anchor: RichMarkerPosition.MIDDLE,
+        zIndex: 168,
+        content: '<div class="custom-marker normal-item">' +
+          '<span><img class="contained-image" src="' + img + '"/></span>' +
+          '</div>'
+    });
+};
+
 function moveMarker(location) {
     marker.setPosition(location);
 };
@@ -188,8 +202,8 @@ function markersBounds() {
     var sw = new google.maps.LatLng(bottomBound - 0.1, leftBound - 0.1);
     var ne = new google.maps.LatLng(topBound + 0.1, rightBound + 0.1);
 
+    //map.panToBounds(new google.maps.LatLngBounds(sw, ne));
     map.fitBounds(new google.maps.LatLngBounds(sw, ne));
-
     //map.getBounds() .getNorthEast() / getSouthWest()
 }
 

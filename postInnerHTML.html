@@ -34,14 +34,14 @@
 <span class="label label-default" style="margin-bottom: 10px">2 . Upload Photo?</span>
 <div class="row postGroup">
     <div class="col-md-10">
-        <form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data">
-            <div id="targetLayer"></div>
-            <div id="uploadFormLayer">
-                <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*">
-                <img id="photo_preview" width="200" src="#" alt="　" />
-                <input id="submit" value="Submit" class="btnSubmit" type="submit">
-            </div>
-        </form>
+      <form id="uploadForm" name="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data">
+        <div id="targetLayer"></div>
+        <div id="uploadFormLayer">
+          <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*">
+          <img id="photo_preview" width="200" src="#" alt="　" />
+          <input id="submit" value="Submit" class="btnSubmit" type="submit">
+        </div>
+      </form>
     </div>
 </div>
 
@@ -49,7 +49,7 @@
 <div class="row postGroup">
     <div class="col-md-10">
         <div class="form-group">
-            <textarea class="form-control" id="description" name="description">say more about your goods</textarea>
+          <textarea class="form-control" id="description" name="description" placeholder="say more about your goods"></textarea>
         </div>
     </div>
 </div>

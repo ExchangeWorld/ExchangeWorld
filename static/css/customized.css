@@ -120,6 +120,15 @@ body
     text-overflow: ellipsis;
 }
 
+#myLocation
+{
+    width:40px;
+    height:40px;
+    margin-right:10px;
+    margin-bottom:5px;
+    padding: 0 0;
+}
+
 .searchclear {
     position: absolute;
     top: 0;

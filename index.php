@@ -39,8 +39,7 @@
     <!-- BLOCK: FB SDK initialization -->
     <div id="fb-root"></div>
     <script>
-        window.fbAsyncInit = function ()
-        {
+        window.fbAsyncInit = function () {
             // init the FB JS SDK
             FB.init({
                 appId: FacebookAppId,    // App ID from the app dashboard
@@ -53,8 +52,7 @@
             window.fbLoaded();
         };
         // Load the SDK asynchronously
-        (function (d, s, id)
-        {
+        (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) { return; }
             js = d.createElement(s); js.id = id;
@@ -87,7 +85,7 @@
                     </li>
 
                     <li id="post">
-                        <a href="#post" onclick="load_post()">
+                        <a href="#post">
                             <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
                             Post
                         </a>
@@ -135,9 +133,9 @@
             <!-- For LeftSide Switch Animate -->
             <div id="slideSpace" style="width: 25%; height: inherit; position: absolute;"></div>
             <div id="leftSide" class="col-md-3">
-                <div id="leftSideSwitch" >
+                <div id="leftSideSwitch">
 
-<!--                    <div class="input-group" style="margin-top: 15px; margin-bottom: 10px">
+                    <!--                    <div class="input-group" style="margin-top: 15px; margin-bottom: 10px">
                         <input type="text" class="form-control" placeholder="Seek anything">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">Go!</button>
@@ -182,7 +180,7 @@
                         $sql = "SELECT * FROM `goods`";
                         $result=mysql_query($sql) or die(mysql_error());
                         while ($row = mysql_fetch_array($result)) {
-                        echo '
+                            echo '
                         <div class="row searchResult" data-value="'.trim($row['gid']).'">
                             <div class="col-md-6">
                                 <img src="'.trim($row['photoPath']).'" alt="..." class="img-rounded">
@@ -209,6 +207,22 @@
                 <div id="autocomplete-group" class="input-group">
                     <input id="autocomplete" type="search" class="autocomplete form-control" placeholder="Search for..." value="">
                     <span class="searchclear glyphicon glyphicon-remove-circle"></span>
+                </div>
+
+                <div id="mapButton-group" class="btn-group" role="group" aria-label="...">
+                    <button id="myLocation" type="button" class="btn btn-default">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="100%"
+                            viewBox="0 0 480 480" style="enable-background: new 0 0 480 480;" xml:space="preserve">
+                            <path style="fill-rule: evenodd; clip-rule: evenodd;" d="M240,159.909c-44.235,0-80.091,35.859-80.091,80.091
+		                    s35.855,80.091,80.091,80.091c44.231,0,80.091-35.859,80.091-80.091S284.231,159.909,240,159.909z M400,226.667h-25.694
+		                    c-6.267-63.891-57.086-114.701-120.973-120.967V80c0-7.363-5.97-13.333-13.333-13.333S226.667,72.637,226.667,80v25.701
+		                    c-63.889,6.266-114.705,57.075-120.971,120.966H80c-7.363,0-13.333,5.97-13.333,13.333s5.97,13.333,13.333,13.333h25.696
+		                    c6.266,63.891,57.082,114.7,120.971,120.966V400c0,7.363,5.97,13.333,13.333,13.333s13.333-5.97,13.333-13.333v-25.701
+		                    c63.888-6.266,114.707-57.075,120.974-120.966H400c7.363,0,13.333-5.97,13.333-13.333S407.363,226.667,400,226.667z M240,347.669
+		                    c-59.463,0-107.666-48.209-107.666-107.669S180.537,132.331,240,132.331c59.466,0,107.669,48.209,107.669,107.669
+		                    S299.466,347.669,240,347.669z" />
+                        </svg>
+                    </button>
                 </div>
 
                 <div id="mapCanvas" style="height: inherit; margin-left: -15px; margin-right: -15px;"></div>
@@ -241,13 +255,10 @@
     <!-- BLOCK: Your script playground -->
     <script id="script-playground">
         $("#myname").hide();
-        
-        window.fbLoaded = function ()
-        {
-            FB.getLoginStatus(function (response)
-            {
-                if (response.status === 'connected')
-                {
+
+        window.fbLoaded = function () {
+            FB.getLoginStatus(function (response) {
+                if (response.status === 'connected') {
                     // the user is logged in and has authenticated your
                     // app, and response.authResponse supplies
                     // the user's ID, a valid access token, a signed
@@ -258,13 +269,11 @@
                     var uid = response.authResponse.userID;
                     $("#profile").attr('data-value', uid);
 
-                    FB.api('/me/picture?width=250', function (response)
-                    {
+                    FB.api('/me/picture?width=250', function (response) {
                         my_picture_url = response.data.url;
                         $("#myhead").attr('src', my_picture_url);
                     });
-                    FB.api('/me', function (response)
-                    {
+                    FB.api('/me', function (response) {
                         $("#myname").append(response.name);
                     });
                     $("#myname").show();
@@ -272,13 +281,11 @@
 
                     loggedInForPost = true;
 
-                } else if (response.status === 'not_authorized')
-                {
+                } else if (response.status === 'not_authorized') {
                     alert("not_authorized");
                     // the user is logged in to Facebook,
                     // but has not authenticated your app
-                } else
-                {
+                } else {
                     // the user isn't logged in to Facebook.
                     $("#myname").hide();
                     $("#login").show();
@@ -288,8 +295,7 @@
             });
 
             // define the action when user clicked the login button.
-            $("#logout").click(function ()
-            {
+            $("#logout").click(function () {
                 FB.logout();
                 $("#myname").hide();
                 $("#login").show();
@@ -297,21 +303,18 @@
                 loggedInForPost = false;
             });
 
-            var fetch_my_profile = function ()
-            {
+            var fetch_my_profile = function () {
                 var my_name;
                 var my_gender;
                 var my_email;
                 var my_facebook_id;
                 var my_picture_url;
 
-                FB.api('/me/picture?width=250', function (response)
-                {
+                FB.api('/me/picture?width=250', function (response) {
                     my_picture_url = response.data.url;
                     $("#my-profile-picture").attr('src', my_picture_url);
                 });
-                FB.api('/me', function (response)
-                {
+                FB.api('/me', function (response) {
                     my_name = response.name;
                     my_gender = response.gender;
                     //var my_email = response.email;
@@ -328,13 +331,11 @@
                             facebook_id: my_facebook_id,
                             picture_url: my_picture_url
                         },
-                        success: function (response)
-                        {
+                        success: function (response) {
                             console.log(response);
                             //    alert(response);
                         },
-                        error: function (xhr, ajaxOption, thrownError)
-                        {
+                        error: function (xhr, ajaxOption, thrownError) {
                             alert(thrownError);
                             alert(JSON.stringify(xhr));
                         }

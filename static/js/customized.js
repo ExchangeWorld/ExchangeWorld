@@ -65,6 +65,17 @@ function load_post()
     document.getElementById("post").className = "active";
     document.getElementById("about").className = "";
     document.getElementById("help").className = "";
+
+    //Google Map Setting
+    //map.setOptions({draggableCursor: 'default'});
+    map.setOptions({ draggableCursor: 'crosshair', draggingCursor: 'crosshair' });
+    google.maps.event.addListener(map, 'click', function (event) {
+        if (marker == null)
+            postMarker(event.latLng);
+        else
+            moveMarker(event.latLng);
+    });
+    
 }
 
 function load_exchange(event)
@@ -105,8 +116,13 @@ function load_exchange(event)
             },
             success: function (response)
             {
+                //Left Side
                 $('#leftSideSwitch').hide().empty();
                 $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">Name : ' + response["gname"] + '</li><li class="list-group-item">Genre : ' + response["categories"] + '</li><li class="list-group-item">Wanted : ' + response["want"] + '</li><li class="list-group-item owner" data-value="' + response["ownerID"] + '">Owner : ' + response["username"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 5px; font-size: 85%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading">Description : </div><div class="panel-body"><p>Description content~</p><p>.</p><p>.</p></div></div></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">You might also check ...</h3></div><div class="panel-body"><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div></div></div></div></div>').show('fast');
+
+                //Map Side
+                map.setCenter(new google.maps.LatLng(response["posY"], response["posX"]));
+
             },
             error: function (xhr, ajaxOption, thrownError)
             {
@@ -155,6 +171,9 @@ function load_profile()
 
 	                $('#leftSideSwitch').hide().empty();
 	                $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">Name : ' + response["username"] + '</li><li class="list-group-item">E-mail : ' + response["email"] + '</li><li class="list-group-item">Nickname : ' + response["nickname"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"><li role="presentation"><a href="#">Follow + </a></li><li role="presentation" class="active"><a href="#">Seekers <span class="badge">42</span></a></li><li role="presentation" class="active"><a href="#">Follower <span class="badge">3</span></a></li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Exchanging</h3></div><div class="panel-body"><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Exchanged</h3></div><div class="panel-body"><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div></div></div></div></div>').show('fast');
+
+
+                    //Get Exchange Table(?) and represent in map
 	            },
 	            error: function (xhr, ajaxOption, thrownError)
 	            {
@@ -262,10 +281,18 @@ $(document).ready(function ()
             },
             success: function (response)
             {
+
                 for (var i = 0; i < response.length; i++)
                 {
+                    //Left Side
                     $('#searchResults').append('<div class="row searchResult" data-value="' + response[i]["gid"] + '"> <div class="col-md-6"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div> <div class="col-md-6 searchResultDescription"> <ul class="list-group"> <li class="list-group-item">Name: ' + response[i]["gname"] + '</li> <li class="list-group-item">Category: ' + response[i]["categories"] + '</li> <li class="list-group-item">Want for: ' + response[i]["want"] + '</li> <li class="list-group-item">Position: (' + response[i]["posX"] + ',' + response[i]["posY"] + ')</li> </ul> </div></div>');
+
+                    //Map Side
+                    addMarkers(response[i]["posY"], response[i]["posX"], response[i]["photoPath"]);
                 }
+                //fit the map bounds with search results
+                markersBounds();
+
                 document.getElementById("post").className = "";
                 document.getElementById("about").className = "";
                 document.getElementById("help").className = "";
@@ -282,7 +309,22 @@ $(document).ready(function ()
         $('#leftSide').perfectScrollbar(({
             suppressScrollX: true
         }));
+
+        //Google Map Setting
+        if (marker != null)
+            marker.setMap(marker = null);
+        if (markers != null)
+            clearMarkers();
+
+        if (map != null) {
+            map.setOptions({ draggableCursor: 'default', draggingCursor: 'default' });
+            google.maps.event.clearListeners(map, 'click');
+        }
+            
     });
+
+    // Handle User clicking POST on navbar
+    $('#post').click(load_post);
 
    $("#leftSideSwitch").on("click", "#goback", function (event)
    {

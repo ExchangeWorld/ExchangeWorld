@@ -94,7 +94,7 @@ function load_exchange(event)
     //if true, going tmp way
     if(gobackSearchResultDataValueNeedToBeReplaced == false)
     {
-    	val = $(this).attr('data-value');
+        val = $(this).attr('data-value');
     }
     else
     {
@@ -300,7 +300,7 @@ $(document).ready(function ()
                     $('#searchResults').append('<div class="row searchResult" data-value="' + response[i]["gid"] + '"> <div class="col-md-6"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div> <div class="col-md-6 searchResultDescription"> <ul class="list-group"> <li class="list-group-item">Name: ' + response[i]["gname"] + '</li> <li class="list-group-item">Category: ' + response[i]["categories"] + '</li> <li class="list-group-item">Want for: ' + response[i]["want"] + '</li> <li class="list-group-item">Position: (' + response[i]["posX"] + ',' + response[i]["posY"] + ')</li> </ul> </div></div>');
 
                     //Map Side
-                    addMarkers(response[i]["posY"], response[i]["posX"], response[i]["photoPath"]);
+                    addMarkers(response[i]["posY"], response[i]["posX"], response[i]["photoPath"], response[i]["gid"]);
                 }
                 //fit the map bounds with search results
                 markersBounds();

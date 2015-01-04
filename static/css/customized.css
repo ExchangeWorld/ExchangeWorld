@@ -45,12 +45,16 @@ body
 {
     height: inherit;
     background-color: silver;
-    overflow-y: hidden;
-    overflow-x: hidden;
+    overflow: hidden;
     z-index: 168;
     -webkit-box-shadow: 4px 0px 5px 0px rgba(0, 0, 0, 0.59);
     -moz-box-shadow: 4px 0px 5px 0px rgba(0, 0, 0, 0.59);
     box-shadow: 4px 0px 5px 0px rgba(0, 0, 0, 0.59);
+}
+
+#leftSideSwitch 
+{
+    margin-top: 10px;
 }
 
 #searchOptions

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -15,7 +15,7 @@
     <!-- Bootstrap theme -->
     <link href="static/css/bootstrap-theme.min.css" rel="stylesheet">
 
-    <!--<link href="static/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">-->
+    <link href="static/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
     <!--<link href="static/css/jquery.jscrollpane.css" rel="stylesheet" type="text/css" charset="utf-8" media="all">-->
 
     <!-- Custom styles for this template -->
@@ -135,9 +135,9 @@
             <!-- For LeftSide Switch Animate -->
             <div id="slideSpace" style="width: 25%; height: inherit; position: absolute;"></div>
             <div id="leftSide" class="col-md-3">
-                <div id="leftSideSwitch" style="margin-top: 10px">
+                <div id="leftSideSwitch" >
 
-                    <div class="input-group" style="margin-top: 15px; margin-bottom: 10px">
+<!--                    <div class="input-group" style="margin-top: 15px; margin-bottom: 10px">
                         <input type="text" class="form-control" placeholder="Seek anything">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">Go!</button>
@@ -198,7 +198,7 @@
                         </div>';
                         }
                         ?>
-                    </div>
+                    </div>-->
 
                     <!-- Add anything with JS or Backend -->
                 </div>
@@ -224,10 +224,9 @@
     <script type="text/javascript" src="static/js/ajaxfileupload.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
 
-    <!--<script src="static/js/bootstrap.min.js"></script>-->
-    <!--<script src="static/js/jquery.mousewheel.min.js"></script>-->
+    <script src="static/js/jquery.mousewheel.min.js"></script>
     <!--<script src="static/js/jquery.jscrollpane.min.js"></script>-->
-    <!--<script src="static/js/perfect-scrollbar.min.js"></script>-->
+    <script src="static/js/perfect-scrollbar.min.js"></script>
     <script src="static/js/customized.js"></script>
     <!--<script src="../../assets/js/docs.min.js"></script>-->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

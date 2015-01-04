@@ -24,7 +24,10 @@ function readURL(input)
 
 function load_post()
 {
-    if(loggedInForPost == false) return;
+    if (loggedInForPost == false) return;
+
+    //destroy the scroll 
+    $('#leftSide').perfectScrollbar('destroy');
 
     console.log("post!");
     //reset gobackStack
@@ -66,6 +69,9 @@ function load_post()
 
 function load_exchange(event)
 {
+    //destroy the scroll 
+    $('#leftSide').perfectScrollbar('destroy');
+
 	console.log("exchange!" + ", and gobackSearchResultDataValue is: " + gobackSearchResultDataValue);
     //push previous stage to gobackStack, but have to check if come from owner page, if so, have to not push
     if(currentStage == "seek") gobackStack.push(currentStage);
@@ -109,10 +115,14 @@ function load_exchange(event)
             }
         });
     }
+
 }
 
 function load_profile()
 {
+    //destroy the scroll 
+    $('#leftSide').perfectScrollbar('destroy');
+
 	var hidegoback = false;
 	console.log("owner!");
     //push previous stage to gobackStack
@@ -181,6 +191,8 @@ function load_profile()
 
 $(document).ready(function ()
 {
+
+    //load_exchange();
     // Handle User clicking the specific goods.
     // Move to outside by Noel. To fit goback function QwQ
     $("#leftSideSwitch").on("click", ".searchResult", load_exchange);
@@ -265,6 +277,11 @@ $(document).ready(function ()
                 alert(JSON.stringify(xhr));
             }
         });
+
+        //Create the scroll only on Seek
+        $('#leftSide').perfectScrollbar(({
+            suppressScrollX: true
+        }));
     });
 
    $("#leftSideSwitch").on("click", "#goback", function (event)
@@ -292,4 +309,6 @@ $(document).ready(function ()
        }
 
    });
+
+   $('#seek').click();
 });

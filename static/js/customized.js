@@ -328,7 +328,7 @@ $(document).ready(function ()
                 for (var i = 0; i < response.length; i++)
                 {
                     //Left Side
-                    $('#searchResults').append('<div class="row searchResult" data-value="' + response[i]["gid"] + '"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div> <div class="col-md-6 searchResultDescription"> <ul class="list-group"> <li class="list-group-item"> ' + response[i]["gname"] + '</li> <li class="list-group-item">Cate:' + response[i]["categories"] + '</li> <li class="list-group-item">Wanted: ' + response[i]["want"] + '</li></ul> </div></div>');
+                    $('#searchResults').append('<div class="row searchResult" data-value="' + response[i]["gid"] + '"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div> <div class="col-md-7 searchResultDescription"> <ul class="list-group"> <li class="list-group-item"> ' + response[i]["gname"] + '</li> <li class="list-group-item">Cate:' + response[i]["categories"] + '</li> <li class="list-group-item">Wanted: ' + response[i]["want"] + '</li></ul> </div></div>');
 
                     //Map Side
                     addMarkers(response[i]["posY"], response[i]["posX"], response[i]["photoPath"], response[i]["gid"]);

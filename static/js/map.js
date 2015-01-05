@@ -156,6 +156,14 @@ function moveMarker(location) {
     marker.setPosition(location);
 };
 
+function changeMarkerImage(img) {
+    if (marker == null)
+        return;
+    marker.setContent('<div class="custom-marker normal-item">' +
+          '<span><img class="contained-image" src="' + img + '"/></span>' +
+          '</div>')
+}
+
 function addMarkers(lat, lng, img, gid) {
     if (lat > 90 || lat < -90 || lng > 180 || lng < -180) {
         console.log("Uncorrect Latlng");

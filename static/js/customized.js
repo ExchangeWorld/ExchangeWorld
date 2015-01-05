@@ -59,6 +59,7 @@ function load_post()
     $("#imgUpload").change(function ()
     {
         readURL(this);
+        //changeMarkerImage($("#goods_photo").attr('data-value'));
     });
 
     document.getElementById("seek").className = "";
@@ -71,9 +72,9 @@ function load_post()
     map.setOptions({ draggableCursor: 'crosshair', draggingCursor: 'crosshair' });
     google.maps.event.addListener(map, 'click', function (event) {
         if (marker == null)
-            postMarker(event.latLng);
+            postMarker(event.latLng,$("#goods_photo").attr('data-value'));
         else
-            moveMarker(event.latLng);
+            moveMarker(event.latLng,$("#goods_photo").attr('data-value'));
         
     });
     

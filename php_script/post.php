@@ -6,10 +6,12 @@
 	$description= $_GET['description'];
 	$ownerID	= $_GET['ownerID'];
 	$photoPath  = $_GET['photoPath'];
+    $posX       = $_GET['posX'];
+    $posY       = $_GET['posY'];
 
 
 //	$Key = get_Key_id();
-	$insertSQL = "INSERT INTO `exchangeworld`.`goods` (`gname`, `categories`, `want`, `description`, `ownerID`, `photoPath`) VALUES ('$gname', '$categories', '$want', '$description', '$ownerID', '$photoPath')";
+	$insertSQL = "INSERT INTO `exchangeworld`.`goods` (`gname`, `categories`, `want`, `description`, `ownerID`, `photoPath`, `posX`, `posY`) VALUES ('$gname', '$categories', '$want', '$description', '$ownerID', '$photoPath', '$posX','$posY')";
 	// `catrgories`, `want`, `description`
 //	$insertSQL = "INSERT INTO `exchangeworld`.`user` (`uid`, `exchangeTable`, `followerTable`, `seekerTable`, `fb_id`, `username` , `email`, `nickname`, `photoPath`) VALUES ('$Key', '$Key', '$Key', '$Key', '$id', '$name', 'test@gmail.com', 'thisisnickname', '$picture')";
 	$retval = mysql_query($insertSQL);

@@ -21,7 +21,7 @@ $(document).ready(function () {
 
 function initialize() {
     var centerLocation = new google.maps.LatLng(24.9853919, 121.5865058);
-    var browserSupportFlag = new Boolean();
+    
     var mapProp = {
         center: new google.maps.LatLng(24.9853919, 121.5865058),
         zoom: 17,
@@ -99,13 +99,13 @@ function handleNoGeolocation(errorFlag) {
 }
 
 function naigvator() {
+    var browserSupportFlag = new Boolean();
     if (navigator.geolocation) {
         browserSupportFlag = true;
         navigator.geolocation.getCurrentPosition(function (position) {
             var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             map.setCenter(latlng);
             map.setZoom(17);
-            //addMarker(centerLocation);
         }, function () {
             handleNoGeolocation(browserSupportFlag);
         });
@@ -117,6 +117,8 @@ function naigvator() {
 }
 
 function postMarker(location) {
+    if (map == null)
+        return;
 
     marker = new RichMarker({
         position: location,
@@ -132,6 +134,9 @@ function postMarker(location) {
 };
 
 function postMarker(location, img) {
+    if (map == null)
+        return;
+
     marker = new RichMarker({
         position: location,
         map: map,
@@ -146,6 +151,8 @@ function postMarker(location, img) {
 };
 
 function moveMarker(location) {
+    if (marker == null)
+        return;
     marker.setPosition(location);
 };
 

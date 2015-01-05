@@ -74,6 +74,7 @@ function load_post()
             postMarker(event.latLng);
         else
             moveMarker(event.latLng);
+        
     });
     
 }

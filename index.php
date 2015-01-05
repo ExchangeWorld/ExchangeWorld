@@ -132,7 +132,7 @@
         <div id="mainRow" class="row">
             <!-- For LeftSide Switch Animate -->
             <div id="slideSpace" style="width: 25%; height: inherit; position: absolute;"></div>
-            <div id="leftSide" class="col-md-3">
+            <div id="leftSide" class="col-md-4">
                 <div id="leftSideSwitch">
 
                     <!--                    <div class="input-group" style="margin-top: 15px; margin-bottom: 10px">
@@ -202,7 +202,7 @@
                 </div>
             </div>
 
-            <div id="mapSide" class="col-md-9">
+            <div id="mapSide" class="col-md-8">
                 <!-- /input-group -->
                 <div id="autocomplete-group" class="input-group">
                     <input id="autocomplete" type="search" class="autocomplete form-control" placeholder="Search for..." value="">

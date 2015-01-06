@@ -18,46 +18,44 @@
   <!-- Theme CSS -->
   <link href="static/css/Homepage/style.css" rel="stylesheet">
   <link href="static/css/Homepage/default.css" rel="stylesheet">
-  
+
   <!-- BLOCK: Loading libraries -->
   <script src="./include/FBappID.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-   <!-- ENDBLOCK: Loading libraries -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <!-- ENDBLOCK: Loading libraries -->
 
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-    <!-- BLOCK: FB SDK initialization -->
-    <div id="fb-root"></div>
-    <script>
-    window.fbAsyncInit = function() {
-        // init the FB JS SDK
-        FB.init({
-        appId      : FacebookAppId,                        // App ID from the app dashboard
-        cookie     : true,                                 // Allowed server-side to fetch fb auth cookie
-        status     : true,                                 // Check Facebook Login status
-        xfbml      : true                                  // Look for social plugins on the page
-        });
+  <!-- BLOCK: FB SDK initialization -->
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function () {
+      // init the FB JS SDK
+      FB.init({
+        appId: FacebookAppId,                        // App ID from the app dashboard
+        cookie: true,                                 // Allowed server-side to fetch fb auth cookie
+        status: true,                                 // Check Facebook Login status
+        xfbml: true                                  // Look for social plugins on the page
+      });
 
-        // Additional initialization code such as adding Event Listeners goes here
-        window.fbLoaded();
+      // Additional initialization code such as adding Event Listeners goes here
+      window.fbLoaded();
     };
 
     // Load the SDK asynchronously
-    (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        //js.src = "http://connect.facebook.net/en_US/all.js";
-        // Debug version of Facebook JS SDK
-        js.src = "http://connect.facebook.net/en_US/all/debug.js";
-        fjs.parentNode.insertBefore(js, fjs);
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      //js.src = "http://connect.facebook.net/en_US/all.js";
+      // Debug version of Facebook JS SDK
+      js.src = "http://connect.facebook.net/en_US/all/debug.js";
+      fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <!-- ENDBLOCK: FB SDK initialization -->
-	
-	
+  </script>
+  <!-- ENDBLOCK: FB SDK initialization -->
   <!-- Preloader -->
   <div id="preloader">
     <div id="load"></div>
@@ -104,17 +102,16 @@
         <i class="fa fa-angle-double-down animated"></i>
       </a>
     </div>-->
-	<div id="my-html-playground" class="container">
+    <div id="my-html-playground" class="container">
       <div class="row" style="padding-top: 50px">
         <div class="col-lg-2 col-lg-offset-5">
-			<button id="my-login-button" class="btn btn-primary">Login with Facebook</button>
-		</div>
+          <button id="my-login-button" class="btn btn-primary">Login with Facebook</button>
+        </div>
       </div>
     </div>
 
   </section>
   <!-- /Section: intro -->
-
   <!-- Section: about -->
   <section id="about" class="home-section text-center">
     <div class="heading-about">
@@ -175,9 +172,9 @@
             </div>
           </div>
         </div>
-	</div>
-	<p>
-	 <div class="row">	
+      </div>
+      <p></p>
+      <div class="row">
         <div class="col-xs-6 col-sm-3 col-md-3">
           <div class="wow bounceInUp" data-wow-delay="1s">
             <div class="team boxed-grey">
@@ -190,8 +187,8 @@
             </div>
           </div>
         </div>
-		
-		<div class="col-xs-6 col-sm-3 col-md-3">
+
+        <div class="col-xs-6 col-sm-3 col-md-3">
           <div class="wow bounceInUp" data-wow-delay="1.2s">
             <div class="team boxed-grey">
               <div class="inner">
@@ -204,9 +201,6 @@
           </div>
         </div>
       </div>
-
-
-
     </div>
   </section>
   <!-- /Section: about -->
@@ -227,61 +221,59 @@
       </div>
     </div>
   </footer>
-  
-<!-- BLOCK: Facebook javascript playground -->
-	<script id="my-script-playground">
-	window.fbLoaded = function(){
-		FB.Event.subscribe('auth.login',function(response){
-			var msg="You're logged in.";
-			$("#my-login-message").html(msg);
-			console.log("Your login response:");
-			console.log(response);
-						FB.getLoginStatus(function(response) {
-				if (response.status === 'connected') {
-					window.location.href="http://localhost/SNA_final_project/";
-				} else if (response.status === 'not_authorized') {
-					alert("not_authorized");
-					// the user is logged in to Facebook, 
-					// but has not authenticated your app
-				} else {
-					console.log("isn't login");
-					// the user isn't logged in to Facebook.
-				}
-			});
 
-			});
-		$("#my-login-button").click(function(){
-			FB.login();
-			FB.getLoginStatus(function(response) {
-				if (response.status === 'connected') {
-					window.location.href="http://localhost/SNA_final_project/";
-				} else if (response.status === 'not_authorized') {
-					alert("not_authorized");
-					// the user is logged in to Facebook, 
-					// but has not authenticated your app
-				} else {
-					console.log("isn't login");
-					// the user isn't logged in to Facebook.
-				}
-			});
-		});
-        FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') {
-				window.location.href="http://localhost/SNA_final_project/";
-            } else if (response.status === 'not_authorized') {
-                alert("not_authorized");
-                // the user is logged in to Facebook, 
-                // but has not authenticated your app
-            } else {
-                console.log("isn't login");
-                // the user isn't logged in to Facebook.
-            }
+  <!-- BLOCK: Facebook javascript playground -->
+  <script id="my-script-playground">
+    window.fbLoaded = function () {
+      FB.Event.subscribe('auth.login', function (response) {
+        var msg = "You're logged in.";
+        $("#my-login-message").html(msg);
+        console.log("Your login response:");
+        console.log(response);
+        FB.getLoginStatus(function (response) {
+          if (response.status === 'connected') {
+            window.location.href = "http://localhost/SNA_final_project/";
+          } else if (response.status === 'not_authorized') {
+            alert("not_authorized");
+            // the user is logged in to Facebook,
+            // but has not authenticated your app
+          } else {
+            console.log("isn't login");
+            // the user isn't logged in to Facebook.
+          }
         });
-	};
-</script>
-<!-- END OF facebook javascript -->
-  
-  
+
+      });
+      $("#my-login-button").click(function () {
+        FB.login();
+        FB.getLoginStatus(function (response) {
+          if (response.status === 'connected') {
+            window.location.href = "http://localhost/SNA_final_project/";
+          } else if (response.status === 'not_authorized') {
+            alert("not_authorized");
+            // the user is logged in to Facebook,
+            // but has not authenticated your app
+          } else {
+            console.log("isn't login");
+            // the user isn't logged in to Facebook.
+          }
+        });
+      });
+      FB.getLoginStatus(function (response) {
+        if (response.status === 'connected') {
+          window.location.href = "http://localhost/SNA_final_project/";
+        } else if (response.status === 'not_authorized') {
+          alert("not_authorized");
+          // the user is logged in to Facebook,
+          // but has not authenticated your app
+        } else {
+          console.log("isn't login");
+          // the user isn't logged in to Facebook.
+        }
+      });
+    };
+  </script>
+  <!-- END OF facebook javascript -->
   <!-- Core JavaScript Files -->
 
   <script src="static/js/jquery-1.11.2.min.js"></script>
@@ -289,7 +281,7 @@
   <script src="static/js/jquery.easing.min.js"></script>
   <script src="static/js/jquery.scrollTo.js"></script>
   <script src="static/js/wow.min.js"></script>
- 
+
   <!-- Custom Theme JavaScript -->
   <script src="static/js/custom.js"></script>
 

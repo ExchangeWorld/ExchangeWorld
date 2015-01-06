@@ -51,35 +51,25 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li id="seek" class="active">
-                        <a href="#seek">
-                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                            Seek
-                        </a>
+                        <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>  Seek</a>
                     </li>
 
                     <li id="post">
-                        <a href="#post">
-                            <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
-                            Post
-                        </a>
+                        <a href="#post"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>  Post</a>
                     </li>
 
                     <li id="about">
-                        <a href="#about">
-                            <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
-                            About
-                        </a>
+                        <a href="#about"><span class="glyphicon glyphicon-glass" aria-hidden="true"></span>  About</a>
                     </li>
 
                     <li id="help">
-                        <a href="#help">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                            Help
-                        </a>
+                        <a href="#help"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Help</a>
                     </li>
 
                     <li>
-                        <div id="login" class="fb-login-button" data-scope="user_likes,user_photos" onlogin='window.location.reload(true);' data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
+                        <!--<div id="login" class="fb-login-button" data-scope="user_likes,user_photos" onlogin='window.location.reload(true);' data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>-->
+                        <!--<fb:login-button id="login" scope="user_likes,user_photos,email" onlogin="fbLoaded();"></fb:login-button>-->
+                        <div id="login" class="fb-login-button" data-scope="user_likes,user_photos" onlogin='fbLoaded();' data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
                     </li>
 
                     <li class="dropdown">
@@ -203,6 +193,15 @@
         </div>
     </div>
 
+    <!--Overlay Test-->
+    <div id="overlay-login" class="popup">
+        <span class="glyphicon glyphicon-remove popup-close" aria-hidden="true"></span>
+        <div class="overlay-inner">
+            <h3>I'm a super simple (yet cool) overlay.</h3>
+            <h4>Also, I like bacon.</h4>
+        </div>
+    </div>
+
     <!-- Junks put here -->
     <div id="exchange"></div>
 
@@ -226,7 +225,7 @@
     <!----------------------------------------------------------------------------------------->
 
     <script src="static/js/fb.js"></script>
-    
+
 
 </body>
 </html>

@@ -102,3 +102,7 @@ function fetch_my_profile() {
         });
     });
 };
+
+function fbLoginPrompt() {
+
+}

@@ -89,6 +89,10 @@ body {
     width: 100%;
 }
 
+.panel{
+    margin: 0px;
+}
+
 #mapSide {
     height: inherit;
     background-color: gray;

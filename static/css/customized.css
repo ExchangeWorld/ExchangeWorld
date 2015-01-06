@@ -126,14 +126,14 @@ body {
 
 .custom-marker {
     background-color: white;
-    border-width: 3px;
+    border-width: 5px;
     border-style: ridge;
-    padding: 2px;
-    /*-webkit-box-shadow: 0px 0px 37px 2px rgba(0,0,0,1);
-    -moz-box-shadow: 0px 0px 37px 2px rgba(0,0,0,1);
-    box-shadow: 0px 0px 37px 2px rgba(0,0,0,1);*/
-    width: 100px;
-    height: 100px;
+    /*padding: 1px;*/
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    width: 120px;
+    height: 90px;
 }
 
 .normal-item {
@@ -146,7 +146,10 @@ body {
 
 .contained-image {
     max-width: 100%;
-    max-height: 100%;
+    max-height:100%;
+
+    min-width: 100%;
+    min-height: 100%;
 }
 
 #mask {

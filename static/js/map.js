@@ -125,7 +125,7 @@ function postMarker(location) {
         position: location,
         map: map,
         draggable: true,
-        flat: false,
+        flat: true,
         anchor: RichMarkerPosition.MIDDLE,
         zIndex: 168,
         content: '<div class="custom-marker normal-item">'+
@@ -142,7 +142,7 @@ function postMarker(location, img) {
         position: location,
         map: map,
         draggable: true,
-        flat: false,
+        flat: true,
         anchor: RichMarkerPosition.MIDDLE,
         zIndex: 168,
         content: '<div class="custom-marker normal-item">' +
@@ -175,7 +175,7 @@ function addMarkers(lat, lng, img, gid) {
         position: new google.maps.LatLng(lat, lng),
         map: map,
         draggable: false,
-        flat: false,
+        flat: true,
         anchor: RichMarkerPosition.MIDDLE,
         zIndex: markers.length,
         content: '<div class="custom-marker normal-item">' +

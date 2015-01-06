@@ -129,15 +129,9 @@ function load_exchange(event) {
                 //Left Side
                 $('#leftSideSwitch').hide().empty();
                 $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["gname"] + '</li><li class="list-group-item">' + response["categories"] + '</li><li class="list-group-item">Wanted : ' + response["want"] + '</li><li class="list-group-item owner" data-value="' + response["ownerID"] + '"><img src="' + response["owner_photo"] + '" height="20" width="20"> ' + response["username"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 5px; font-size: 85%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading">Description : </div><div class="panel-body"><p>' + response["description"] + '</div></div></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
-/*'
-<div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div>
-<div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div>
-<div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div>
-<div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div>' 
-*/
+
                 //Map Side
                 map.setCenter(new google.maps.LatLng(response["posY"], response["posX"]));
-
             },
             error: function (xhr, ajaxOption, thrownError) {
                 alert(thrownError);
@@ -161,11 +155,6 @@ function load_exchange(event) {
                     var min = 0;
                     var x = Math.floor(Math.random()*(max-min+1)+min);
                     $('#recommandTables').append('<div class="col-md-3 searchResult" data-value="' + response[x]["gid"] + '"><img src="' + response[x]["photoPath"] + '" width="50" class="img-thumbnail" alt="..."></div>');
-                    
-                    /*  else{
-                            If "status" != 0
-                            Then put into Exchanged Table
-                        } */
                 }
             },
             error: function (xhr, ajaxOption, thrownError) {

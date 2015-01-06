@@ -3,7 +3,7 @@
 
 	$sql = "SELECT `goods`. * , `user`.`username`, `user`.`photoPath` as `owner_photo`
 			FROM `goods`, `user`
-			WHERE `goods`.`ownerID` = `user`.`fb_id`";
+			WHERE `goods`.`ownerID` = `user`.`fb_id` ORDER BY `gid` DESC";
 	$result=mysql_query($sql) or die(mysql_error());
 
 	while ($row = mysql_fetch_array($result)) {	

@@ -241,10 +241,10 @@ function load_profile() {
             },
             success: function (response) {
 
-                $('#leftSideSwitch').append('<div class="col-md-12"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Exchanging</h3></div><div id="Exchanging" class="panel-body "></div></div><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Exchanged</h3></div><div id=""Exchanged" class="panel-body"></div></div></div></div>');
+                $('#leftSideSwitch').append('<div class="col-md-12" style="padding: 0px"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Exchanging</h3></div><div id="Exchanging" class="panel-body "></div></div><div class="panel panel-default" style="margin-top: 15px"><div class="panel-heading"><h3 class="panel-title">Exchanged</h3></div><div id="Exchanged" class="panel-body"></div></div></div></div>');
                 for (var i = 0; i < response.length; i++) {
                     if (response[i]["status"] == 0) { // Exchanging
-                        $('#Exchanging').append('<div class="col-md-3 searchResult" data-value="' + response[i]["gid"] + '"><img src="' + response[i]["photoPath"] + '" width="50" class="img-thumbnail" alt="..."></div>');
+                        $('#Exchanging').append('<div class="col-md-3 searchResult" style="padding: 0px; padding-top: 0px; padding-bottom: 0px; border: 0px; background: #fff; margin: 0px;" data-value="' + response[i]["gid"] + '"><img src="' + response[i]["photoPath"] + '" width="50" class="img-thumbnail" alt="..."></div>');
                     }
                     /*  else{
                             If "status" != 0

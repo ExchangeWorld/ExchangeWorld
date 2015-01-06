@@ -36,34 +36,7 @@
 </head>
 
 <body role="document">
-    <!-- BLOCK: FB SDK initialization -->
-    <div id="fb-root"></div>
-    <script>
-        window.fbAsyncInit = function () {
-            // init the FB JS SDK
-            FB.init({
-                appId: FacebookAppId,    // App ID from the app dashboard
-                cookie: true,            // Allowed server-side to fetch fb auth cookie
-                status: true,            // Check Facebook Login status
-                xfbml: true              // Look for social plugins on the page
-            });
 
-            // Additional initialization code such as adding Event Listeners goes here
-            window.fbLoaded();
-        };
-        // Load the SDK asynchronously
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) { return; }
-            js = d.createElement(s); js.id = id;
-            //js.src = "http://connect.facebook.net/en_US/all.js";
-            // Debug version of Facebook JS SDK
-            js.src = "http://connect.facebook.net/en_US/all/debug.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <!-- ENDBLOCK: FB SDK initialization -->
-    <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header" style="margin-left: 8%">
@@ -238,7 +211,7 @@
     <script type="text/javascript" src="static/js/ajaxfileupload.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
 
-    <script src="static/js/jquery.mousewheel.min.js"></script>
+    <!--<script src="static/js/jquery.mousewheel.min.js"></script>-->
     <!--<script src="static/js/jquery.jscrollpane.min.js"></script>-->
     <script src="static/js/perfect-scrollbar.min.js"></script>
     <script src="static/js/customized.js"></script>
@@ -252,98 +225,8 @@
     <script src="static/js/map.js"></script>
     <!----------------------------------------------------------------------------------------->
 
-    <!-- BLOCK: Your script playground -->
-    <script id="script-playground">
-        $("#myname").hide();
+    <script src="static/js/fb.js"></script>
+    
 
-        window.fbLoaded = function () {
-            FB.getLoginStatus(function (response) {
-                if (response.status === 'connected') {
-                    // the user is logged in and has authenticated your
-                    // app, and response.authResponse supplies
-                    // the user's ID, a valid access token, a signed
-                    // request, and the time the access token
-                    // and signed request each expire
-                    fetch_my_profile();
-
-                    var uid = response.authResponse.userID;
-                    $("#profile").attr('data-value', uid);
-
-                    FB.api('/me/picture?width=250', function (response) {
-                        my_picture_url = response.data.url;
-                        $("#myhead").attr('src', my_picture_url);
-                    });
-                    FB.api('/me', function (response) {
-                        $("#myname").append(response.name);
-                    });
-                    $("#myname").show();
-                    $("#login").hide();
-
-                    loggedInForPost = true;
-
-                } else if (response.status === 'not_authorized') {
-                    alert("not_authorized");
-                    // the user is logged in to Facebook,
-                    // but has not authenticated your app
-                } else {
-                    // the user isn't logged in to Facebook.
-                    $("#myname").hide();
-                    $("#login").show();
-
-                    loggedInForPost = false;
-                }
-            });
-
-            // define the action when user clicked the login button.
-            $("#logout").click(function () {
-                FB.logout();
-                $("#myname").hide();
-                $("#login").show();
-
-                loggedInForPost = false;
-            });
-
-            var fetch_my_profile = function () {
-                var my_name;
-                var my_gender;
-                var my_email;
-                var my_facebook_id;
-                var my_picture_url;
-
-                FB.api('/me/picture?width=250', function (response) {
-                    my_picture_url = response.data.url;
-                    $("#my-profile-picture").attr('src', my_picture_url);
-                });
-                FB.api('/me', function (response) {
-                    my_name = response.name;
-                    my_gender = response.gender;
-                    //var my_email = response.email;
-                    my_facebook_id = response.id;
-
-                    $.ajax({
-                        type: "GET",
-                        url: "./php_script/createAccount.php",
-                        dataType: "text",
-                        data: {
-                            name: my_name,
-                            gender: my_gender,
-                            // my_email : response.email,
-                            facebook_id: my_facebook_id,
-                            picture_url: my_picture_url
-                        },
-                        success: function (response) {
-                            console.log(response);
-                            //    alert(response);
-                        },
-                        error: function (xhr, ajaxOption, thrownError) {
-                            alert(thrownError);
-                            alert(JSON.stringify(xhr));
-                        }
-                    });
-                });
-            };
-        };
-    </script>
-    <!-- ENDBLOCK: Your script playground -->
 </body>
 </html>

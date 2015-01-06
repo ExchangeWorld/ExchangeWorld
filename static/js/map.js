@@ -58,6 +58,7 @@ function initialize() {
     //    browserSupportFlag = false;
     //    handleNoGeolocation(browserSupportFlag);
     //}
+    naigvator();
     map = new google.maps.Map(document.getElementById("mapCanvas"), mapProp);
 
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('mapButton-group'));

@@ -132,6 +132,7 @@ function load_exchange(event) {
 
                 //Map Side
                 map.setCenter(new google.maps.LatLng(response["posY"], response["posX"]));
+                map.setZoom(17);
             },
             error: function (xhr, ajaxOption, thrownError) {
                 alert(thrownError);

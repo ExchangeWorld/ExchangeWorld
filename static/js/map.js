@@ -21,7 +21,7 @@ $(document).ready(function () {
 
 function initialize() {
     var centerLocation = new google.maps.LatLng(24.9853919, 121.5865058);
-    
+
     var mapProp = {
         center: new google.maps.LatLng(24.9853919, 121.5865058),
         zoom: 17,
@@ -29,7 +29,7 @@ function initialize() {
         disableDoubleClickZoom: false,
 
         panControl: false,
-        mapMaker:false,
+        mapMaker: false,
         zoomControl: true,
         zoomControlOptions: {
             position: google.maps.ControlPosition.RIGHT_TOP
@@ -59,8 +59,7 @@ function initialize() {
 
         if (place.geometry.viewport)
             map.fitBounds(place.geometry.viewport);
-        else
-        {
+        else {
             map.setCenter(place.geometry.location);
             map.setZoom(17);
         }
@@ -163,7 +162,7 @@ function addMarkers(lat, lng, img, gid) {
           '</div>'
     }));
 
-    google.maps.event.addListener(markers[markers.length - 1], 'click', function() {
+    google.maps.event.addListener(markers[markers.length - 1], 'click', function () {
         //destroy the scroll 
         $('#leftSide').perfectScrollbar('destroy');
 
@@ -202,6 +201,7 @@ function addMarkers(lat, lng, img, gid) {
 
                     //Map Side
                     map.setCenter(new google.maps.LatLng(response["posY"], response["posX"]));
+                    map.setZoom(17);
 
                 },
                 error: function (xhr, ajaxOption, thrownError) {
@@ -215,7 +215,7 @@ function addMarkers(lat, lng, img, gid) {
 }
 
 function clearMarkers() {
-    for (var i = 0; i < markers.length; i++) 
+    for (var i = 0; i < markers.length; i++)
         markers[i].setMap(null);
     markers = [];
 }
@@ -229,8 +229,7 @@ function markersBounds() {
     var topBound = -90;
     var bottomBound = 90;
 
-    for (var i = 0; i < markers.length; i++)
-    {
+    for (var i = 0; i < markers.length; i++) {
         var x = markers[i].getPosition().lng();
         var y = markers[i].getPosition().lat();
 
@@ -253,7 +252,6 @@ function markersBounds() {
     //map.getBounds() .getNorthEast() / getSouthWest()
 }
 
-function getPostMarkerPosition()
-{
+function getPostMarkerPosition() {
     return [marker.getPosition().lat(), marker.getPosition().lng()];
 }

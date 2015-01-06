@@ -174,9 +174,6 @@ body {
 
 .popup {
     display: none;
-    background: #eee;
-    width: 30%;
-    padding: 10px;
     /*border: 2px solid #ddd;*/
     float: left;
     /*font-size: 1.2em;*/
@@ -190,10 +187,20 @@ body {
 }
 
 #overlay-login {
+    background: #eee;
+    padding: 10px;
+    width: 30%;
     text-align: center;
     padding-bottom: 30px;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+#overlay-maintenance {
+    background: #eee;
+    padding: 10px;
+    width: 500px;
+    height: 300px;
 }
 
 .popup-close {
@@ -206,4 +213,8 @@ body {
     -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+.floatinng {
+    z-index: 2000;
 }

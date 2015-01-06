@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="utf-8">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -52,19 +52,19 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li id="seek" class="active">
-                        <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>  Seek</a>
+                        <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>Seek</a>
                     </li>
 
                     <li id="post">
-                        <a href="#post"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>  Post</a>
+                        <a href="#post"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>Post</a>
                     </li>
 
                     <li id="about">
-                        <a href="#about"><span class="glyphicon glyphicon-glass" aria-hidden="true"></span>  About</a>
+                        <a href="#about"><span class="glyphicon glyphicon-glass" aria-hidden="true"></span>About</a>
                     </li>
 
                     <li id="help">
-                        <a href="#help"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Help</a>
+                        <a href="#help"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Help</a>
                     </li>
 
                     <li>
@@ -198,11 +198,16 @@
     <div id="overlay-login" class="popup">
         <span class="glyphicon glyphicon-remove popup-close" aria-hidden="true"></span>
         <div class="overlay-inner">
-<!--            <p>為了維護其他使用者的權益</p>
-            <p>您必須登入後才能擺上自己的物品</p>-->
             <h2>Please Log-in to Post</h2>
             <br />
             <div class="fb-login-button" data-scope="user_likes,user_photos" onlogin='fbLoaded();' data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
+        </div>
+    </div>
+
+    <div id="overlay-maintenance" class="popup">
+        <span class="glyphicon glyphicon-remove popup-close" aria-hidden="true"></span>
+        <div class="overlay-inner" style="text-align: center">
+            <h1>Page is Still on The Make</h1>
         </div>
     </div>
 

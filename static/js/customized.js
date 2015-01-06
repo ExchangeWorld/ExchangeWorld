@@ -18,8 +18,7 @@ function readURL(input) {
 
 function load_post() {
     if (loggedInForPost == false) {
-        //$('body').append("\<div id='overlay-hello' class='popup'><div class='overlay-inner'><h3>I'm a super simple (yet cool) overlay.</h3><h4>Also, I like bacon.</h4><p>Shoulder turducken pastrami meatloaf.  Drumstick short loin pastrami short ribs chuck beef ribs.  Shankle kevin sirloin, fatback hamburger tenderloin t-bone filet mignon short ribs.  Meatball jowl turkey, tri-tip tail salami pastrami spare ribs pork loin porchetta andouille short ribs corned beef tongue pig.  Strip steak pork pancetta tail.  Shank flank meatball, filet mignon jowl brisket pork chop strip steak.<p></div></div>");
-
+       
         // Getting the variable's value from a link
         var loginBox = $('#overlay-login');
 
@@ -430,10 +429,8 @@ $(document).ready(function () {
 
     $("#about").on("click", function (event) {
 
-        //$('body').append("\<div id='overlay-hello' class='popup'><div class='overlay-inner'><h3>I'm a super simple (yet cool) overlay.</h3><h4>Also, I like bacon.</h4><p>Shoulder turducken pastrami meatloaf.  Drumstick short loin pastrami short ribs chuck beef ribs.  Shankle kevin sirloin, fatback hamburger tenderloin t-bone filet mignon short ribs.  Meatball jowl turkey, tri-tip tail salami pastrami spare ribs pork loin porchetta andouille short ribs corned beef tongue pig.  Strip steak pork pancetta tail.  Shank flank meatball, filet mignon jowl brisket pork chop strip steak.<p></div></div>");
-
         // Getting the variable's value from a link
-        var loginBox = $('.popup');
+        var loginBox = $('#overlay-maintenance');
 
         //Fade in the Popup and add close button
         loginBox.fadeIn(300);

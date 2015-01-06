@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="static/img/icon/favicon.ico">
+    <link rel="icon" href="images/favicon.ico">
 
     <title>ExchangeWorld</title>
 
@@ -47,7 +47,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#" style="font-size: 130%;">ExchangeWorld</a>
+                <a class="navbar-brand" href="." style="font-size: 130%; "><img style="display:inline;" src="images/exchange-icon" width="25">ExchangeWorld</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">

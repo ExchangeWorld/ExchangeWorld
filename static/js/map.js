@@ -26,6 +26,7 @@ function initialize() {
         center: new google.maps.LatLng(24.9853919, 121.5865058),
         zoom: 17,
         draggableCursor: 'default',
+        draggingCursor: 'crosshair',
         disableDoubleClickZoom: false,
 
         panControl: false,

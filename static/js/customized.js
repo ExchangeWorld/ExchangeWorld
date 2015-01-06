@@ -458,8 +458,8 @@ $(document).ready(function () {
             $(this).removeClass('emphasis');
         }
     );
+});
 
-
-
+$(window).load(function () {
     $('#seek').click();
 });

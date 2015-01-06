@@ -120,7 +120,7 @@ function load_exchange(event)
             {
                 //Left Side
                 $('#leftSideSwitch').hide().empty();
-                $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["gname"] + '</li><li class="list-group-item">' + response["categories"] + '</li><li class="list-group-item">Wanted : ' + response["want"] + '</li><li class="list-group-item owner" data-value="' + response["ownerID"] + '">Owner : ' + response["username"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 5px; font-size: 85%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading">Description : </div><div class="panel-body"><p>Description content~</p><p>.</p><p>.</p></div></div></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">You might also check ...</h3></div><div class="panel-body"><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div></div></div></div></div>').show('fast');
+                $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["gname"] + '</li><li class="list-group-item">' + response["categories"] + '</li><li class="list-group-item">Wanted : ' + response["want"] + '</li><li class="list-group-item owner" data-value="' + response["ownerID"] + '"><img src="'+response["owner_photo"]+'" height="20" width="20"> ' + response["username"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 5px; font-size: 85%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading">Description : </div><div class="panel-body"><p>Description content~</p><p>.</p><p>.</p></div></div></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">You might also check ...</h3></div><div class="panel-body"><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div><div class="col-md-3"><img src="static/img/alt.gif" class="img-thumbnail" alt="..."></div></div></div></div></div>').show('fast');
 
                 //Map Side
                 map.setCenter(new google.maps.LatLng(response["posY"], response["posX"]));
@@ -173,8 +173,6 @@ function load_profile()
 
 	                $('#leftSideSwitch').hide().empty();
 	                $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["username"] + '</li><li class="list-group-item">' + response["email"] + '</li><li class="list-group-item">' + response["nickname"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"><li role="presentation"><a id="followBtn" href="#">Follow + </a></li><li role="presentation" class="active"><a href="#">Seekers <span class="badge">42</span></a></li><li role="presentation" class="active"><a href="#">Follower <span class="badge">3</span></a></li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
-                    
-                    //Get Exchange Table(?) and represent in map
 	            },
 	            error: function (xhr, ajaxOption, thrownError)
 	            {
@@ -207,29 +205,33 @@ function load_profile()
         }
         
         //Handle Exchanging/Exchanged Tables
+        //Get Exchange Table(?) and represent in map
         $.ajax({
-                type: "GET",
-                url: "./php_script/tables.php",
-                dataType: "json",
-                data: {
-                    uid: val
-                },
-                success: function (response)
-                {
+            type: "GET",
+            url: "./php_script/tables.php",
+            dataType: "json",
+            data: {
+                uid: val
+            },
+            success: function (response)
+            {
 
-                    $('#leftSideSwitch').append('<div class="col-md-12"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Exchanging</h3></div><div id="Exchanging" class="panel-body "></div></div><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Exchanged</h3></div><div id=""Exchanged" class="panel-body"></div></div></div></div>');
-
-                    for(var i=0; i<response.length;i++){
-                        if(response[i]["status"] == 0) // Exchanging
-                            $('#Exchanging').append('<div class="col-md-3 searchResult" data-value="' + response[i]["gid"] + '"><img src="'+response[i]["photoPath"]+'" width="50" class="img-thumbnail" alt="..."></div>');
-                    //  else Exchanged
+                 $('#leftSideSwitch').append('<div class="col-md-12"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Exchanging</h3></div><div id="Exchanging" class="panel-body "></div></div><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Exchanged</h3></div><div id=""Exchanged" class="panel-body"></div></div></div></div>');
+                for(var i=0; i<response.length;i++){
+                    if(response[i]["status"] == 0){ // Exchanging
+                        $('#Exchanging').append('<div class="col-md-3 searchResult" data-value="' + response[i]["gid"] + '"><img src="'+response[i]["photoPath"]+'" width="50" class="img-thumbnail" alt="..."></div>');
                     }
-                },
-                error: function (xhr, ajaxOption, thrownError)
-                {
-                    alert(thrownError);
-                    alert(JSON.stringify(xhr));
+                /*  else{
+                        If "status" != 0
+                        Then put into Exchanged Table
+                    } */ 
                 }
+            },
+            error: function (xhr, ajaxOption, thrownError)
+            {
+                alert(thrownError);
+                alert(JSON.stringify(xhr));
+            }
         });
 
     }
@@ -326,7 +328,7 @@ $(document).ready(function ()
                 for (var i = 0; i < response.length; i++)
                 {
                     //Left Side
-                    $('#searchResults').append('<div class="row searchResult" data-value="' + response[i]["gid"] + '"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div> <div class="col-md-7 searchResultDescription"> <ul class="list-group"> <li class="list-group-item"> ' + response[i]["gname"] + '</li> <li class="list-group-item">' + response[i]["categories"] + '</li> <li class="list-group-item">Wanted: ' + response[i]["want"] + '</li> <li class="list-group-item">Owner: ' + response[i]["username"] + '</li></ul> </div></div>');
+                    $('#searchResults').append('<div class="row searchResult" data-value="' + response[i]["gid"] + '"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div> <div class="col-md-7 searchResultDescription"> <ul class="list-group"> <li class="list-group-item"> ' + response[i]["gname"] + '</li> <li class="list-group-item">' + response[i]["categories"] + '</li> <li class="list-group-item">Wanted: ' + response[i]["want"] + '</li> <li class="list-group-item"><img src="'+response[i]["owner_photo"]+'" height="20" width="20"> ' + response[i]["username"] + '</li></ul> </div></div>');
 
                     //Map Side
                     addMarkers(response[i]["posY"], response[i]["posX"], response[i]["photoPath"], response[i]["gid"]);

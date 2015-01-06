@@ -1,7 +1,7 @@
 <?php
 	include("../include/connect.php");
 	$search = $_GET['gid'];
-	$sql = "SELECT `goods`. * , `user`.`username`
+	$sql = "SELECT `goods`. * , `user`.`username`, `user`.`photoPath` as `owner_photo`
 			FROM `goods`, `user`
 			WHERE `goods`.`gid` = '$search' AND `goods`.`ownerID` = `user`.`fb_id`";
 	$result = mysql_query($sql);	

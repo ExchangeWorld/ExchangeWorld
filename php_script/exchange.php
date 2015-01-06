@@ -12,6 +12,8 @@
 	if($row["categories"]==3) $row["categories"] = "Book";
 	if($row["categories"]==4) $row["categories"] = "Clothing";
 
+	$row["description"] = nl2br($row["description"]);
+
 	//	$rows[] = $row;
 	//}
 	echo json_encode($row);

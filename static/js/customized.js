@@ -17,7 +17,31 @@ function readURL(input) {
 }
 
 function load_post() {
-    if (loggedInForPost == false) return;
+    if (loggedInForPost == false) {
+        //$('body').append("\<div id='overlay-hello' class='popup'><div class='overlay-inner'><h3>I'm a super simple (yet cool) overlay.</h3><h4>Also, I like bacon.</h4><p>Shoulder turducken pastrami meatloaf.  Drumstick short loin pastrami short ribs chuck beef ribs.  Shankle kevin sirloin, fatback hamburger tenderloin t-bone filet mignon short ribs.  Meatball jowl turkey, tri-tip tail salami pastrami spare ribs pork loin porchetta andouille short ribs corned beef tongue pig.  Strip steak pork pancetta tail.  Shank flank meatball, filet mignon jowl brisket pork chop strip steak.<p></div></div>");
+
+        // Getting the variable's value from a link
+        var loginBox = $('#overlay-login');
+
+        //Fade in the Popup and add close button
+        loginBox.fadeIn(300);
+
+        //Set the center alignment padding + border
+        var popMargTop = (loginBox.height() + 24) / 2;
+        var popMargLeft = (loginBox.width() + 24) / 2;
+
+        loginBox.css({
+            'margin-top': -popMargTop,
+            'margin-left': -popMargLeft
+        });
+
+        // Add the mask to body
+        $('body').prepend('<div id="mask"></div>');
+        $('#mask').fadeIn(300);
+
+        return false;
+        //return;
+    }
 
     //destroy the scroll 
     $('#leftSide').perfectScrollbar('destroy');
@@ -48,7 +72,8 @@ function load_post() {
 
     $("#imgUpload").change(function () {
         readURL(this);
-        //changeMarkerImage($("#goods_photo").attr('data-value'));
+
+        changeMarkerImage($("#goods_photo").attr('data-value'));
     });
 
     document.getElementById("seek").className = "";
@@ -338,6 +363,15 @@ $(document).ready(function () {
                 //fit the map bounds with search results
                 markersBounds();
 
+                $('.searchResult').hover(
+                    function () {
+                        $(this).addClass('searchResultSelected');
+                    },
+                    function () {
+                        $(this).removeClass('searchResultSelected');
+                    }
+                );
+
                 document.getElementById("post").className = "";
                 document.getElementById("about").className = "";
                 document.getElementById("help").className = "";
@@ -435,7 +469,9 @@ $(document).ready(function () {
         function () {
             $(this).removeClass('emphasis');
         }
-    )
+    );
+
+
 
     $('#seek').click();
 });

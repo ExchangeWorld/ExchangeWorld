@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="utf-8">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,6 +36,7 @@
 </head>
 
 <body role="document">
+    <div id="fb-root"></div>
 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -197,8 +198,11 @@
     <div id="overlay-login" class="popup">
         <span class="glyphicon glyphicon-remove popup-close" aria-hidden="true"></span>
         <div class="overlay-inner">
-            <h3>I'm a super simple (yet cool) overlay.</h3>
-            <h4>Also, I like bacon.</h4>
+<!--            <p>為了維護其他使用者的權益</p>
+            <p>您必須登入後才能擺上自己的物品</p>-->
+            <h2>Please Log-in to Post</h2>
+            <br />
+            <div class="fb-login-button" data-scope="user_likes,user_photos" onlogin='fbLoaded();' data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
         </div>
     </div>
 

@@ -71,6 +71,15 @@ body {
     margin: 0px;
 }
 
+.searchResultSelected {
+    background: #eeeeee;
+    margin-top:2px;
+    margin-bottom:5px;
+    -webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+    box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75); 
+}
+
 .searchResultDescription .list-group-item {
     font-size: 14px;
     padding: 9px;
@@ -165,8 +174,8 @@ body {
 
 .popup {
     display: none;
-    background: #fff;
-    width: 40%;
+    background: #eee;
+    width: 30%;
     padding: 10px;
     /*border: 2px solid #ddd;*/
     float: left;
@@ -178,6 +187,13 @@ body {
     -moz-box-shadow: 12px 10px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 12px 10px 5px 0px rgba(0,0,0,0.75);
     z-index: 1032;
+}
+
+#overlay-login {
+    text-align: center;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .popup-close {

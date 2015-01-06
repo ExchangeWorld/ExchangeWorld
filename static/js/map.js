@@ -42,22 +42,6 @@ function initialize() {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    // Try W3C Geolocation (Preferred)
-    //if (navigator.geolocation) {
-    //    browserSupportFlag = true;
-    //    navigator.geolocation.getCurrentPosition(function (position) {
-    //        centerLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    //        map.setCenter(centerLocation);
-    //        //addMarker(centerLocation);
-    //    }, function () {
-    //        handleNoGeolocation(browserSupportFlag);
-    //        addMarker(centerLocation);
-    //    });
-    //}
-    //else { // Browser doesn't support Geolocation
-    //    browserSupportFlag = false;
-    //    handleNoGeolocation(browserSupportFlag);
-    //}
     naigvator();
     map = new google.maps.Map(document.getElementById("mapCanvas"), mapProp);
 
@@ -68,8 +52,6 @@ function initialize() {
 
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
         console.log("Autocomplete");
-        //infowindow.close();
-        //marker.setVisible(false);
 
         var place = autocomplete.getPlace();
         if (!place.geometry)
@@ -82,10 +64,8 @@ function initialize() {
             map.setCenter(place.geometry.location);
             map.setZoom(17);
         }
-
-        //moveMarker(place.geometry.location);
-        //marker.setVisible(true);
     });
+
     google.maps.event.addDomListener(document.getElementById('myLocation'), 'click', naigvator);
 }
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -117,22 +97,22 @@ function naigvator() {
     }
 }
 
-function postMarker(location) {
-    if (map == null)
-        return;
+//function postMarker(location) {
+//    if (map == null)
+//        return;
 
-    marker = new RichMarker({
-        position: location,
-        map: map,
-        draggable: true,
-        flat: true,
-        anchor: RichMarkerPosition.MIDDLE,
-        zIndex: 168,
-        content: '<div class="custom-marker normal-item">'+
-          '<span><img class="contained-image" src="images/database/monkey.jpg"/></span>' +
-          '</div>'
-    });
-};
+//    marker = new RichMarker({
+//        position: location,
+//        map: map,
+//        draggable: true,
+//        flat: true,
+//        anchor: RichMarkerPosition.MIDDLE,
+//        zIndex: 10,
+//        content: '<div class="custom-marker normal-item">'+
+//          '<span><img class="contained-image" src="images/database/monkey.jpg"/></span>' +
+//          '</div>'
+//    });
+//};
 
 function postMarker(location, img) {
     if (map == null)
@@ -144,7 +124,7 @@ function postMarker(location, img) {
         draggable: true,
         flat: true,
         anchor: RichMarkerPosition.MIDDLE,
-        zIndex: 168,
+        zIndex: 10,
         content: '<div class="custom-marker normal-item">' +
           '<span><img class="contained-image" src="' + img + '"/></span>' +
           '</div>'

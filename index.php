@@ -64,7 +64,7 @@
                     </li>
 
                     <li id="help">
-                        <a href="#help"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Help</a>
+                        <a href="index.html"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Help</a>
                     </li>
 
                     <li>

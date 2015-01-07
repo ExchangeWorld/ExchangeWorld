@@ -137,7 +137,7 @@ function load_exchange(event) {
                     //e.preventDefault(); // sometimes useful
 
                     // Enter is pressed  Handle comments
-                    if (e.keyCode == 13) { 
+                    if (e.keyCode == 13 && $("#comment").val()!="") { 
                         var targetID = $("#profile").attr("data-value");
                         var comment = $("#comment").val();
                         $.ajax({

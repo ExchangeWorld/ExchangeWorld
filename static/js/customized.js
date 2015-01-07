@@ -569,7 +569,7 @@ $(document).ready(function () {
 
     });
 
-    $("#about").on("click", function (event) {
+    $("#help").on("click", function (event) {
 
         // Getting the variable's value from a link
         var loginBox = $('#overlay-maintenance');

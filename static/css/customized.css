@@ -12,10 +12,6 @@ body {
     overflow: hidden;
 }
 
-.owner {
-    cursor: pointer;
-    cursor: hand;
-}
 
 .dropdown-submenu {
     position:relative;
@@ -116,6 +112,8 @@ body {
     border: 2px solid #a1a1a1;
     background: #dddddd;
     margin: 0px;
+    cursor: pointer;
+    cursor: hand;
 }
 
 .searchResultSelected {
@@ -130,6 +128,11 @@ body {
 .searchResultDescription .list-group-item {
     font-size: 14px;
     padding: 9px;
+}
+
+.owner {
+    cursor: pointer;
+    cursor: hand;
 }
 
 .img-rounded {

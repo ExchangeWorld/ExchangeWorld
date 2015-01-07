@@ -96,7 +96,7 @@
     <div class="slogan" id="slogan_area">
       <h2>WELCOME TO <span class="text_color">ExchangeWorld</span> <p></p>
                               <div id="myname" href="#" >
-                            <img id="myhead" src="./static/img/alt.gif" height="70" width="70">
+                            <img id="myhead" src="./static/img/alt.gif" class="img-circle" height="70" width="70">
                         </div></h2>
       <h2 id="GO"><a href="index.php">GO!</a></h2>
     </div>
@@ -246,8 +246,8 @@
       });
       $("#my-login-button").click(function () {
         FB.login();
-
       });
+	  
       FB.getLoginStatus(function(response) {
           if (response.status === 'connected') {
             $("#LoginStatus").hide();

@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
+  <link rel="icon" href="images/favicon.ico">
 
-  <title>ExchangeWorld</title>
+  <title>Exchange your preloved | USExchange</title>
 
   <!-- Bootstrap core CSS -->
   <link href="static/css/bootstrap.min.css" rel="stylesheet">
@@ -15,6 +16,7 @@
   <!-- Fonts -->
   <link href="static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="static/css/Homepage/animate.css" rel="stylesheet" />
+  <!--<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">-->
   <!-- Theme CSS -->
   <link href="static/css/Homepage/style.css" rel="stylesheet">
   <link href="static/css/Homepage/default.css" rel="stylesheet">
@@ -37,7 +39,8 @@
         appId: FacebookAppId,                        // App ID from the app dashboard
         cookie: true,                                 // Allowed server-side to fetch fb auth cookie
         status: true,                                 // Check Facebook Login status
-        xfbml: true                                  // Look for social plugins on the page
+        xfbml: true,                                  // Look for social plugins on the page
+        version: 'v2.2'
       });
 
       // Additional initialization code such as adding Event Listeners goes here
@@ -49,9 +52,9 @@
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) { return; }
       js = d.createElement(s); js.id = id;
-      //js.src = "http://connect.facebook.net/en_US/all.js";
+      js.src = "http://connect.facebook.net/en_US/all.js";
       // Debug version of Facebook JS SDK
-      js.src = "http://connect.facebook.net/en_US/all/debug.js";
+      //js.src = "http://connect.facebook.net/en_US/all/debug.js";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   </script>
@@ -61,29 +64,22 @@
     <div id="load"></div>
   </div>
 
-  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header page-scroll">
+  <nav class="navbar navbar-custom navbar-fixed-top unselectable" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header page-scroll" style="margin-left:6%">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
           <i class="fa fa-bars"></i>
         </button>
         <a class="navbar-brand" href="index.html">
-          <h1>ExchangeWorld</h1>
+          <img style="max-width:200px; margin-top:-4px;" src="static/img/icon/logo.png" alt="">
         </a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+      <div class="collapse navbar-collapse navbar-right navbar-main-collapse" style="margin-right:6%">
         <ul class="nav navbar-nav">
-
-          <!--<li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Example menu</a></li>
-              <li><a href="#">Example menu</a></li>
-              <li><a href="#">Example menu</a></li>
-            </ul>
-          </li>-->
+          <li id="nav-signin" style="display: none"><a href="#"><span style="margin-right:5px"><img src="static/img/icon/social-31-facebook.png"></span>Sign In</a></li>
+          <li id="nav-explore" style="display: none"><a href="index.php">Explore</a></li>
         </ul>
       </div>
       <!-- /.navbar-collapse -->
@@ -92,32 +88,59 @@
   </nav>
 
   <!-- Section: intro -->
-  <section id="intro" class="intro">
+  <section id="intro" class="intro unselectable">
     <div class="slogan" id="slogan_area">
-      <h2>WELCOME TO <span class="text_color">ExchangeWorld</span> <p></p>
-                              <div id="myname" href="#" >
-                            <img id="myhead" src="./static/img/alt.gif" class="img-circle" height="70" width="70">
-                        </div></h2>
-      <h2 id="GO"><a href="index.php">GO!</a></h2>
+
+      <div class="wow bounceInDown" data-wow-delay="0.4s">
+        <h2>Exchange your preloved</h2>
+      </div>
+
+      <div class="wow bounceInUp" data-wow-delay="0.8s">
+        <h3>with people locally and personally</h3>
+      </div>
     </div>
 
-    <!--<div class="page-scroll">
-      <a href="#service" class="btn btn-circle">
-        <i class="fa fa-angle-double-down animated"></i>
-      </a>
-    </div>-->
-    <div id="my-html-playground" class="container">
+    <div class="container">
       <div class="row" style="padding-top: 50px">
-        <div id="LoginStatus" class="col-lg-2 col-lg-offset-5">
-          <button id="my-login-button" class="btn btn-primary">Login with Facebook</button>
+        <div class="wow bounceInUp" data-wow-delay="1.2s">
+          <div id="Login-msg">
+          </div>
         </div>
       </div>
     </div>
 
   </section>
   <!-- /Section: intro -->
+  <!--  Section: service -->
+  <section id="service" class="home-section text-center" style="display:none">
+    <div class="heading-about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2">
+            <div class="wow bounceInDown" data-wow-delay="0.4s">
+              <div class="section-heading">
+                <h2>Near you</h2>
+                <i class="fa fa-2x fa-angle-down"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2 col-lg-offset-5">
+          <hr class="marginbot-50">
+        </div>
+      </div>
+      <div class="row">
+      </div>
+    </div>
+  </section>
+  <!-- /Section: service -->
   <!-- Section: about -->
-  <section id="about" class="home-section text-center">
+  <section id="about" class="home-section text-center bg-gray">
     <div class="heading-about">
       <div class="container">
         <div class="row">
@@ -133,8 +156,8 @@
         </div>
       </div>
     </div>
-    <div class="container">
 
+    <div class="container">
       <div class="row">
         <div class="col-lg-2 col-lg-offset-5">
           <hr class="marginbot-50">
@@ -202,7 +225,7 @@
           </div>
         </div>
       </div>
-      </div>
+    </div>
   </section>
   <!-- /Section: about -->
 
@@ -217,7 +240,7 @@
               </a>
             </div>
           </div>
-          <p>&copy;Copyright 2014 - Squad. All rights reserved.</p>
+          <p>&copy;Copyright 2015 - USExchange. All rights reserved.</p>
         </div>
       </div>
     </div>
@@ -226,14 +249,23 @@
   <!-- BLOCK: Facebook javascript playground -->
   <script id="my-script-playground">
     window.fbLoaded = function () {
+
+      /*Bug: Auto execute FB.Event.subscribe at chrome ????*/
       FB.Event.subscribe('auth.login', function (response) {
         var msg = "You're logged in.";
         $("#my-login-message").html(msg);
         console.log("Your login response:");
         console.log(response);
+
         FB.getLoginStatus(function (response) {
           if (response.status === 'connected') {
-            window.location.href = "http://localhost/SNA_final_project/";
+            //window.location.href = "index.php";
+            $('#nav-signin').hide();
+            $('#nav-explore').show();
+            FB.api('/me', function (response) {
+              $('#Login-msg').html('<h2>Welcome back, ' + response.name + '</h2><a href="index.php"><h3>Ready to Explore?</h3></a>');
+            });
+
           } else if (response.status === 'not_authorized') {
             alert("not_authorized");
             // the user is logged in to Facebook,
@@ -243,33 +275,38 @@
             // the user isn't logged in to Facebook.
           }
         });
+
       });
-      $("#my-login-button").click(function () {
+
+      $("#nav-signin").click(function () {
         FB.login();
       });
-	  
-      FB.getLoginStatus(function(response) {
-          if (response.status === 'connected') {
-            $("#LoginStatus").hide();
-            //$("#slogan_area").append('<h2>HI ~</h2>');
-            FB.api('/me/picture?width=250', function (response) {
-                my_picture_url = response.data.url;
-                $("#myhead").attr('src', my_picture_url);
-            });
-            FB.api('/me', function (response) {
-                $("#myname").append(response.name);
-            });
-            $("#myname").show();
 
-          }
-          else{
-            $("#myname").hide();
-            $("#myhead").hide();
-            $("#GO").hide();
-          }
+      FB.getLoginStatus(function (response) {
+        if (response.status === 'connected') {
+          //$("#LoginStatus").hide();
+          //$("#slogan_area").append('<h2>HI ~</h2>');
+          //FB.api('/me/picture?width=250', function (response) {
+          //  my_picture_url = response.data.url;
+          //  $("#myhead").attr('src', my_picture_url);
+          //});
+          FB.api('/me', function (response) {
+            $('#Login-msg').html('<h2>Welcome back, ' + response.name + '</h2><a href="index.php"><h3>Ready to Explore?</h3></a>');
+          });
+          //$("#myname").show();
+
+          $('#nav-explore').show();
+        }
+        else {
+          //$("#myname").hide();
+          //$("#myhead").hide();
+          //$("#GO").hide();
+          $('#nav-signin').show();
+        }
       });
-
     };
+
+
   </script>
   <!-- END OF facebook javascript -->
   <!-- Core JavaScript Files -->

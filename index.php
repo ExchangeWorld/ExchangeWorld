@@ -47,24 +47,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="." style="font-size: 130%; "><img style="display:inline;" src="images/exchange-icon" width="25">ExchangeWorld</a>
+                <a class="navbar-brand" href="." style="font-size: 130%;">
+                    <img style="display: inline;" src="images/exchange-icon" width="25">ExchangeWorld</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li id="seek" class="active">
-                        <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>  Seek</a>
+                    <li id="seek" class="active seeking">
+                        <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>Seek</a>
                     </li>
 
                     <li id="post">
-                        <a href="#post"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>  Post</a>
+                        <a href="#post"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>Post</a>
                     </li>
 
                     <li id="about">
-                        <a href="#about"><span class="glyphicon glyphicon-glass" aria-hidden="true"></span>  About</a>
+                        <a href="index.html"><span class="glyphicon glyphicon-glass" aria-hidden="true"></span>About</a>
                     </li>
 
                     <li id="help">
-                        <a href="index.html"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Help</a>
+                        <a href="#help"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Help</a>
                     </li>
 
                     <li>
@@ -105,7 +106,6 @@
                             <button class="btn btn-default" type="button">Go!</button>
                         </span>
                     </div>
-
                     <div id="searchOptions" class="row">
                         <div class="col-md-12">
                             <div class="btn-group">
@@ -120,7 +120,6 @@
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&gt; 5000m</a></li>
                                 </ul>
                             </div>
-
                             <div class="btn-group">
                                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
                                     Categories
@@ -135,9 +134,7 @@
                             </div>
                         </div>
                     </div>
-
                     <hr style="border-color: #6E6E6E; border-width: 2px">
-
                     <div id="searchResults" class="col-md-12">
                         <?php
                         include("include/connect.php");
@@ -232,9 +229,6 @@
     <script src="static/js/richmarker-compiled.js"></script>
     <script src="static/js/map.js"></script>
     <!----------------------------------------------------------------------------------------->
-
     <script src="static/js/fb.js"></script>
-
-
 </body>
 </html>

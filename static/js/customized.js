@@ -163,8 +163,6 @@ function load_exchange(event) {
                     }
                 }, false);
 
-
-
                 //Map Side
                 map.setCenter(new google.maps.LatLng(response["posY"], response["posX"]));
                 map.setZoom(17);
@@ -186,9 +184,8 @@ function load_exchange(event) {
             },
             success: function (response) {
                 for(var i=0; i<response.length;i++){
-                    $('#comment_area').append('<div>'+ response[i]["comment"] +'</div>');
+                    $('#comment_area').append('<div><img src="' + response[i]["commenterPhoto"] + '" height="20" width="20"> '+ response[i]["comment"] +'</div>');
                 }
-
             },
             error: function (xhr, ajaxOption, thrownError) {
                 alert(thrownError);

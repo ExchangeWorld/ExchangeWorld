@@ -233,7 +233,7 @@
         console.log(response);
         FB.getLoginStatus(function (response) {
           if (response.status === 'connected') {
-            window.location.href = "http://localhost/SNA_final_project/";
+            window.location.href = "index.php";
           } else if (response.status === 'not_authorized') {
             alert("not_authorized");
             // the user is logged in to Facebook,

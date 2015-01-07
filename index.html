@@ -239,35 +239,12 @@
             // the user isn't logged in to Facebook.
           }
         });
-
       });
       $("#my-login-button").click(function () {
         FB.login();
-        FB.getLoginStatus(function (response) {
-          if (response.status === 'connected') {
-            window.location.href = "http://localhost/SNA_final_project/";
-          } else if (response.status === 'not_authorized') {
-            alert("not_authorized");
-            // the user is logged in to Facebook,
-            // but has not authenticated your app
-          } else {
-            console.log("isn't login");
-            // the user isn't logged in to Facebook.
-          }
-        });
+
       });
-      FB.getLoginStatus(function (response) {
-        if (response.status === 'connected') {
-          window.location.href = "http://localhost/SNA_final_project/";
-        } else if (response.status === 'not_authorized') {
-          alert("not_authorized");
-          // the user is logged in to Facebook,
-          // but has not authenticated your app
-        } else {
-          console.log("isn't login");
-          // the user isn't logged in to Facebook.
-        }
-      });
+
     };
   </script>
   <!-- END OF facebook javascript -->

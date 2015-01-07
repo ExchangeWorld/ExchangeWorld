@@ -266,7 +266,6 @@
               $('#Login-msg').html('<h2>Welcome back, ' + response.name + '</h2><a href="index.php"><h3>Ready to Explore?</h3></a>');
             });
 
-            window.location.href = "index.php";
           } else if (response.status === 'not_authorized') {
             alert("not_authorized");
             // the user is logged in to Facebook,

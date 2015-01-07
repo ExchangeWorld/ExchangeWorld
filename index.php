@@ -53,20 +53,20 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li id="seek" class="active seeking">
-                        <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>Seek</a>
+                        <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Seek</a>
 
                     </li>
 
                     <li id="post">
-                        <a href="#post"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>Post</a>
+                        <a href="#post"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Post</a>
                     </li>
 
                     <li id="about">
-                        <a href="index.html"><span class="glyphicon glyphicon-glass" aria-hidden="true"></span>About</a>
+                        <a href="index.html"><span class="glyphicon glyphicon-glass" aria-hidden="true"></span> About</a>
                     </li>
 
                     <li id="help">
-                        <a href="#help"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Help</a>
+                        <a href="#help"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Help</a>
                     </li>
 
 

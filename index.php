@@ -60,11 +60,11 @@
                     </li>
 
                     <li id="about">
-                        <a href="#about"><span class="glyphicon glyphicon-glass" aria-hidden="true"></span>  About</a>
+                        <a href="index.html"><span class="glyphicon glyphicon-glass" aria-hidden="true"></span>  About</a>
                     </li>
 
                     <li id="help">
-                        <a href="index.html"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Help</a>
+                        <a href="#help"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Help</a>
                     </li>
 
                     <li>

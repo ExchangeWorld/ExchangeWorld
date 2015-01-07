@@ -10,7 +10,7 @@
 		$SQL = "SELECT `comments`.* , `user`.`photoPath` as `commenterPhoto`
 				FROM `comments`, `user`
 				WHERE `goods_id` = '$gid'
-				AND `user`.`fb_id` =`commenter` ";
+				AND `user`.`fb_id` =`commenter` ORDER BY `comments`.`cid` ASC";
 		$result = mysql_query($SQL) or die(mysql_error()); 
 		while ($row = mysql_fetch_array($result)) {	
 			$rows[] = $row;

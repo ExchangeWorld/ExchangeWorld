@@ -148,8 +148,13 @@ function addMarkers(lat, lng, img, gid) {
     }));
 
     google.maps.event.addListener(markers[markers.length - 1], 'click', function () {
-        //destroy the scroll 
+        //destroy the scroll and reset the scroll 
         $('#leftSide').perfectScrollbar('destroy');
+        $("#leftSide").scrollTop(0);
+        $("#leftSide").perfectScrollbar('update');
+        $('#leftSide').perfectScrollbar(({
+            suppressScrollX: true
+        }));
 
         console.log("exchange!" + ", and gobackSearchResultDataValue is: " + gobackSearchResultDataValue);
         //push previous stage to gobackStack, but have to check if come from owner page, if so, have to not push
@@ -182,7 +187,7 @@ function addMarkers(lat, lng, img, gid) {
                 success: function (response) {
                     //Left Side
                     $('#leftSideSwitch').hide().empty();
-                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["gname"] + '<span class="badge">' + response["categories"] + '</span> </li> <li class="list-group-item">Wanted : ' + response["want"] + '</li><li class="list-group-item owner" data-value="' + response["ownerID"] + '"><img src="' + response["owner_photo"] + '" height="20" width="20"> ' + response["username"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading">Description : </div><div class="panel-body"><p>' + response["description"] + '</div></div></div></div><div class="searchResults" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%"><div id=comment_area></div><div class="col-md-10"> <div class="form-group"> <div class="input-group"> <span class="input-group-addon">Say</span> <input id="comment" name="comment" class="form-control" placeholder="make comment" type="text"> </div> </div> </div>').show('fast');
+                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["gname"] + '<span class="badge">' + response["categories"] + '</span> </li> <li class="list-group-item">Wanted : ' + response["want"] + '</li><li class="list-group-item owner" data-value="' + response["ownerID"] + '"><img src="' + response["owner_photo"] + '" height="20" width="20"> ' + response["username"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading">Description : </div><div class="panel-body"><p>' + response["description"] + '</div></div></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%"> <div class="col-md-12"> <div class="panel panel-default"> <div class="panel-heading" style="font-size: 121%">Comments : </div> <div class="panel-body" style="padding-top:0px;"> <div id=comment_area> <ul class="list-group"></ul> </div> <div class="form-group" style="margin-bottom: 0px; margin-top: 10px;"> <div class="input-group"> <span class="input-group-addon">Say</span> <input id="comment" name="comment" class="form-control" placeholder="leave comment" type="text"> </div> </div> </div> </div> </div></div><div class="searchResults" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
 
 
 
@@ -205,7 +210,7 @@ function addMarkers(lat, lng, img, gid) {
                                     Comment: comment
                                 },
                                 success: function (response) {
-                                    $('#comment_area').append('<div >'+response+'</div>');
+                                    $('#comment_area').append('<li class="list-group-item" style="padding: 5px;">' + response + '</li>');
                                     $("#comment").val('');
 
                                 },
@@ -227,7 +232,7 @@ function addMarkers(lat, lng, img, gid) {
                         },
                         success: function (response) {
                             for(var i=0; i<response.length;i++){
-                                $('#comment_area').append('<div><img class="owner" src="' + response[i]["commenterPhoto"] + ' style="width: 30px; height: 30px;"> '+ response[i]["comment"] +'</div>');
+                                $('#comment_area').append('<li class="list-group-item" style="padding: 5px;"><img class="owner" data-value="'+response[i]["commenter"]+'" src="' + response[i]["commenterPhoto"] + '" style="width: 30px; height: 30px;"> '+ response[i]["comment"] +'</li>');
                             }
                         },
                         error: function (xhr, ajaxOption, thrownError) {
@@ -246,7 +251,7 @@ function addMarkers(lat, lng, img, gid) {
                             uid: val
                         },
                         success: function (response) {
-                            $('#leftSideSwitch').append('<div class="col-md-12" style="padding: 0px"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">You might also check ...</h3></div><div class="panel-body" id="recommandTables"></div></div></div></div>');
+                            $('#leftSideSwitch').append('<div class="col-md-12" style="padding: 0px"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">You might also likes ...</h3></div><div class="panel-body" id="recommandTables"></div></div></div></div>');
                             for (var i = 0; i < 5; i++) {
                                 var min = 0;
                                 var max = response.length - 1;

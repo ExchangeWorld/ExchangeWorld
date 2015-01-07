@@ -208,7 +208,7 @@ function load_exchange(event) {
                         uid : val
                     },
                     success: function (response) {
-                        $('#leftSideSwitch').append('<div class="col-md-12" style="padding: 0px"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">You might also want ...</h3></div><div class="panel-body" id="recommandTables"></div></div></div></div>');
+                        $('#leftSideSwitch').append('<div class="col-md-12" style="padding: 0px"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">You might also likes ...</h3></div><div class="panel-body" id="recommandTables"></div></div></div></div>');
                         for (var i = 0; i < 5; i++) {
                             var min = 0;
                             var max = response.length-1;
@@ -360,44 +360,44 @@ function load_profile() {
     }
 }
 
-function seek_query(search){
-            $.ajax({
-            type: "GET",
-            url: "./php_script/seek.php",
-            dataType: "json",
-            data: {
-                selected: search
-            },
-            success: function (response) {
-                for (var i = 0; i < response.length; i++) {
-                    //Left Side
-                    $('#searchResults').append('<div class="row searchResult" data-value="' + response[i]["gid"] + '"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div> <div class="col-md-7 searchResultDescription"> <ul class="list-group"> <li class="list-group-item"> ' + response[i]["gname"] + '<span class="badge">' + response[i]["categories"] + '</span></li> <li class="list-group-item">Wanted: ' + response[i]["want"] + '</li> <li class="list-group-item"><img src="' + response[i]["owner_photo"] + '" height="20" width="20"> ' + response[i]["username"] + '</li></ul> </div></div>');
+function seek_query(search) {
+    $.ajax({
+        type: "GET",
+        url: "./php_script/seek.php",
+        dataType: "json",
+        data: {
+            selected: search
+        },
+        success: function (response) {
+            for (var i = 0; i < response.length; i++) {
+                //Left Side
+                $('#searchResults').append('<div class="row searchResult" data-value="' + response[i]["gid"] + '"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div> <div class="col-md-7 searchResultDescription"> <ul class="list-group"> <li class="list-group-item"> ' + response[i]["gname"] + '<span class="badge">' + response[i]["categories"] + '</span></li> <li class="list-group-item">Wanted: ' + response[i]["want"] + '</li> <li class="list-group-item"><img src="' + response[i]["owner_photo"] + '" height="20" width="20"> ' + response[i]["username"] + '</li></ul> </div></div>');
 
-                    //Map Side
-                    addMarkers(response[i]["posY"], response[i]["posX"], response[i]["photoPath"], response[i]["gid"]);
-                }
-                //fit the map bounds with search results
-                markersBounds();
-
-                $('.searchResult').hover(
-                    function () {
-                        $(this).addClass('searchResultSelected');
-                    },
-                    function () {
-                        $(this).removeClass('searchResultSelected');
-                    }
-                );
-
-                document.getElementById("post").className = "";
-                document.getElementById("about").className = "";
-                document.getElementById("help").className = "";
-                document.getElementById("seek").className = "active";
-            },
-            error: function (xhr, ajaxOption, thrownError) {
-                alert(thrownError);
-                alert(JSON.stringify(xhr));
+                //Map Side
+                addMarkers(response[i]["posY"], response[i]["posX"], response[i]["photoPath"], response[i]["gid"]);
             }
-        });
+            //fit the map bounds with search results
+            markersBounds();
+
+            $('.searchResult').hover(
+                function () {
+                    $(this).addClass('searchResultSelected');
+                },
+                function () {
+                    $(this).removeClass('searchResultSelected');
+                }
+            );
+
+            document.getElementById("post").className = "";
+            document.getElementById("about").className = "";
+            document.getElementById("help").className = "";
+            document.getElementById("seek").className = "active";
+        },
+        error: function (xhr, ajaxOption, thrownError) {
+            alert(thrownError);
+            alert(JSON.stringify(xhr));
+        }
+    });
 }
 
 $(document).ready(function () {

@@ -93,8 +93,11 @@
 
   <!-- Section: intro -->
   <section id="intro" class="intro">
-    <div class="slogan">
-      <h2>WELCOME TO <span class="text_color">ExchangeWorld</span> </h2>
+    <div class="slogan" id="slogan_area">
+      <h2>WELCOME TO <span class="text_color">ExchangeWorld</span> <p></p>
+                              <div id="myname" href="#" >
+                            <img id="myhead" src="./static/img/alt.gif" height="70" width="70">
+                        </div></h2>
     </div>
 
     <!--<div class="page-scroll">
@@ -104,7 +107,7 @@
     </div>-->
     <div id="my-html-playground" class="container">
       <div class="row" style="padding-top: 50px">
-        <div class="col-lg-2 col-lg-offset-5">
+        <div id="LoginStatus" class="col-lg-2 col-lg-offset-5">
           <button id="my-login-button" class="btn btn-primary">Login with Facebook</button>
         </div>
       </div>
@@ -243,6 +246,25 @@
       $("#my-login-button").click(function () {
         FB.login();
 
+      });
+      FB.getLoginStatus(function(response) {
+          if (response.status === 'connected') {
+            $("#LoginStatus").hide();
+            //$("#slogan_area").append('<h2>HI ~</h2>');
+            FB.api('/me/picture?width=250', function (response) {
+                my_picture_url = response.data.url;
+                $("#myhead").attr('src', my_picture_url);
+            });
+            FB.api('/me', function (response) {
+                $("#myname").append(response.name);
+            });
+            $("#myname").show();
+
+          }
+          else{
+            $("#myname").hide();
+            $("#myhead").hide();
+          }
       });
 
     };

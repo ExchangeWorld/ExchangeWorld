@@ -54,6 +54,7 @@
                 <ul class="nav navbar-nav">
                     <li id="seek" class="active seeking">
                         <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>Seek</a>
+
                     </li>
 
                     <li id="post">
@@ -67,6 +68,8 @@
                     <li id="help">
                         <a href="#help"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Help</a>
                     </li>
+
+
 
                     <li>
                         <!--<div id="login" class="fb-login-button" data-scope="user_likes,user_photos" onlogin='window.location.reload(true);' data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>-->

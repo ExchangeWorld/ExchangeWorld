@@ -7,6 +7,7 @@ var infowindow;
 var map;
 
 $(document).ready(function () {
+
     /*----------------Input Clear Button-----------------*/
     $(".autocomplete").keyup(function () {
         $(this).next().toggle(Boolean($(this).val()));
@@ -181,10 +182,86 @@ function addMarkers(lat, lng, img, gid) {
                 success: function (response) {
                     //Left Side
                     $('#leftSideSwitch').hide().empty();
-                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["gname"] + '<span class="badge">' + response["categories"] + '</span> </li> <li class="list-group-item">Wanted : ' + response["want"] + '</li><li class="list-group-item owner" data-value="' + response["ownerID"] + '"><img src="' + response["owner_photo"] + '" height="20" width="20"> ' + response["username"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading">Description : </div><div class="panel-body"><p>' + response["description"] + '</div></div></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
+                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["gname"] + '<span class="badge">' + response["categories"] + '</span> </li> <li class="list-group-item">Wanted : ' + response["want"] + '</li><li class="list-group-item owner" data-value="' + response["ownerID"] + '"><img src="' + response["owner_photo"] + '" height="20" width="20"> ' + response["username"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading">Description : </div><div class="panel-body"><p>' + response["description"] + '</div></div></div></div><div class="searchResults" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%"><div id=comment_area></div><div class="col-md-10"> <div class="form-group"> <div class="input-group"> <span class="input-group-addon">Say</span> <input id="comment" name="comment" class="form-control" placeholder="make comment" type="text"> </div> </div> </div>').show('fast');
 
+
+
+                    document.getElementById("comment").addEventListener("keydown", function(e) {
+                        if (!e) { var e = window.event; }
+                        //e.preventDefault(); // sometimes useful
+
+                        // Enter is pressed  Handle comments
+                        if (e.keyCode == 13 && $("#comment").val()!="") { 
+                            var targetID = $("#profile").attr("data-value");
+                            var comment = $("#comment").val();
+                            $.ajax({
+                                type: "GET",
+                                url: "./php_script/comments.php",
+                                dataType: "text",
+                                data: {
+                                    type:"write",
+                                    gid : val,
+                                    mID :targetID,
+                                    Comment: comment
+                                },
+                                success: function (response) {
+                                    $('#comment_area').append('<div >'+response+'</div>');
+                                    $("#comment").val('');
+
+                                },
+                                error: function (xhr, ajaxOption, thrownError) {
+                                    alert(thrownError);
+                                    alert(JSON.stringify(xhr));
+                                }
+                            });
+                        }
+                    }, false);
+                    //Handle comments
+                    $.ajax({
+                        type: "GET",
+                        url: "./php_script/comments.php",
+                        dataType: "json",
+                        data: {
+                            type:"fetch",
+                            gid : val
+                        },
+                        success: function (response) {
+                            for(var i=0; i<response.length;i++){
+                                $('#comment_area').append('<div><img class="owner" src="' + response[i]["commenterPhoto"] + ' style="width: 30px; height: 30px;"> '+ response[i]["comment"] +'</div>');
+                            }
+                        },
+                        error: function (xhr, ajaxOption, thrownError) {
+                            alert(thrownError);
+                            alert(JSON.stringify(xhr));
+                        }
+                    });
+
+                    //Handle Random Recommand Tables
+                    $.ajax({
+                        type: "GET",
+                        url: "./php_script/tables.php",
+                        dataType: "json",
+                        data: {
+                            type: "recommand",
+                            uid: val
+                        },
+                        success: function (response) {
+                            $('#leftSideSwitch').append('<div class="col-md-12" style="padding: 0px"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">You might also check ...</h3></div><div class="panel-body" id="recommandTables"></div></div></div></div>');
+                            for (var i = 0; i < 5; i++) {
+                                var min = 0;
+                                var max = response.length - 1;
+                                var xx = Math.floor(Math.random() * (max - min + 1) + min);
+                                //alert(xx);
+                                $('#recommandTables').append('<div class="col-md-3 searchResult" style="padding: 0px; padding-top: 0px; padding-bottom: 0px; border: 0px; background: #fff; margin: 0px;" data-value="' + response[xx]["gid"] + '"><img src="' + response[xx]["photoPath"] + '" style="width: 70px; height: 70px;" class="img-thumbnail" alt="..."></div>');
+                            }
+                        },
+                        error: function (xhr, ajaxOption, thrownError) {
+                            alert(thrownError);
+                            alert(JSON.stringify(xhr));
+                        }
+                    });
                     //Map Side
-                    map.panTo(new google.maps.LatLng(response["posY"], response["posX"]));
+                    map.setCenter(new google.maps.LatLng(response["posY"], response["posX"]));
                     map.setZoom(17);
                 },
                 error: function (xhr, ajaxOption, thrownError) {
@@ -193,30 +270,7 @@ function addMarkers(lat, lng, img, gid) {
                 }
             });
 
-            //Handle Random Recommand Tables
-            $.ajax({
-                type: "GET",
-                url: "./php_script/tables.php",
-                dataType: "json",
-                data: {
-                    type: "recommand",
-                    uid: val
-                },
-                success: function (response) {
-                    $('#leftSideSwitch').append('<div class="col-md-12" style="padding: 0px"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">You might also check ...</h3></div><div class="panel-body" id="recommandTables"></div></div></div></div>');
-                    for (var i = 0; i < 4; i++) {
-                        var min = 0;
-                        var max = response.length - 1;
-                        var xx = Math.floor(Math.random() * (max - min + 1) + min);
-                        //alert(xx);
-                        $('#recommandTables').append('<div class="col-md-3 searchResult" style="padding: 0px; padding-top: 0px; padding-bottom: 0px; border: 0px; background: #fff; margin: 0px;" data-value="' + response[xx]["gid"] + '"><img src="' + response[xx]["photoPath"] + '" width="50" class="img-thumbnail" alt="..."></div>');
-                    }
-                },
-                error: function (xhr, ajaxOption, thrownError) {
-                    alert(thrownError);
-                    alert(JSON.stringify(xhr));
-                }
-            });
+
         }
 
     });

@@ -51,7 +51,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li id="seek" class="active">
+                    <li id="seek" class="active seeking">
                         <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>  Seek</a>
                     </li>
 

@@ -1,9 +1,14 @@
 <?php
 	include("../include/connect.php");	
+	$search = $_GET["selected"];
+	//if($search == "") $search='%';
+	$search = '%'.$search.'%';
 
 	$sql = "SELECT `goods`. * , `user`.`username`, `user`.`photoPath` as `owner_photo`
 			FROM `goods`, `user`
-			WHERE `goods`.`ownerID` = `user`.`fb_id` ORDER BY `gid` DESC";
+			WHERE `goods`.`ownerID` = `user`.`fb_id` 
+			AND `goods`.`gname` LIKE '$search' 
+			ORDER BY `gid` DESC";
 	$result=mysql_query($sql) or die(mysql_error());
 
 	while ($row = mysql_fetch_array($result)) {	

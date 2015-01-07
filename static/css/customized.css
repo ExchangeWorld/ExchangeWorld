@@ -12,6 +12,11 @@ body {
     overflow: hidden;
 }
 
+.owner {
+    cursor: pointer;
+    cursor: hand;
+}
+
 .dropdown-submenu {
     position:relative;
 }

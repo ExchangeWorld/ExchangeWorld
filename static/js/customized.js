@@ -4,7 +4,7 @@ var gobackSearchResultDataValue = 0;
 var gobackSearchResultDataValueNeedToBeReplaced = false;
 
 var seekInnerHTML = '<div class="input-group" style="margin-top: 15px; margin-bottom: 10px"> <input type="text" class="form-control" placeholder="Seek anything"> <span class="input-group-btn"> <button class="btn btn-default" type="button">Go!</button> </span></div><div id="searchOptions" class="row"> <div class="col-md-12"> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Distance <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&lt; 500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">500 ~ 1500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1500 ~ 5000m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&gt; 5000m</a></li> </ul> </div> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Books</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Textbooks</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Magazine</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Movies</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Music CD</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Video Game</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Smart Phone</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tablet</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Camera</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Audio</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Computer Hardware</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Jewelry</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Clothing</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Shoes</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Watches</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Furniture</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Others</a></li></ul> </div> </div></div><hr style="border-color: #6E6E6E; border-width: 2px"><div id="searchResults" class="col-md-12"> </div>';
-var postInnerHTML = '<!--<form class="form-horizontal" id ="new_post" method="POST" enctype="multipart/form-data"><fieldset>--><!-- Form Name --><legend>Post Goods</legend><!-- Prepended text--><span class="label label-default" style="margin-bottom: 10px">1 . What do you have?</span><div class="row postGroup"> <div class="col-md-10"> <div class="form-group"> <div class="input-group"> <span class="input-group-addon">Name</span> <input id="gName" name="gName" class="form-control" placeholder="What it called" required="" type="text"> </div> </div> </div></div><!-- Select Basic --><div class="row postGroup"> <div class="col-md-10"> <div class="form-group"> <select id="categories" name="categories" class="form-control"> <option value="-1">Categories</option> <option value="1">Books</option> <option value="2">Clothes</option> <option value="3">Arts</option> </select> </div> </div></div><!-- File Button --><span class="label label-default" style="margin-bottom: 10px">2 . Upload Photo?</span><div class="row postGroup"> <div class="col-md-10"> <form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data"> <div id="targetLayer"></div> <div id="uploadFormLayer"> <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*"> <img id="photo_preview" width="200" src="#" alt=" " /> <input id="submit" value="Submit" class="btnSubmit" type="submit"> </div> </form> </div></div><!-- Textarea --><div class="row postGroup"> <div class="col-md-10"> <div class="form-group"> <textarea class="form-control" id="description" name="description" placeholder="say more about your goods"></textarea> </div> </div></div><!-- Button --><div class="row postGroup"> <div class="col-md-10"> <div class="form-group"> <button id="mark_location" name="mark_location" class="btn btn-info">Mark Place!</button> </div> </div></div><!-- Prepended text--><span class="label label-default" style="margin-bottom: 10px">3 . What do you want?</span><div class="row postGroup"> <div class="col-md-10"> <div class="form-group"> <div class="input-group"> <span class="input-group-addon">Name</span> <input id="want_name" name="want_name" class="form-control" placeholder="What you want" type="text"> </div> </div> </div></div><!-- Button --><div class="row postGroup"> <div class="form-group"> <label class="col-md-4 control-label" for="submit"></label> <div class="col-md-4"> <button id="submit" name="submit" class="btn btn-primary submit">POST!</button> </div> </div></div><!--</fieldset></form>-->';
+var postInnerHTML = '<!--<form class="form-horizontal" id ="new_post" method="POST" enctype="multipart/form-data"><fieldset>--><!-- Form Name --><legend>Post Goods</legend><!-- Prepended text--><span class="label label-default" style="margin-bottom: 10px">1 . What do you have?</span><div class="row postGroup"> <div class="col-md-10"> <div class="form-group"> <div class="input-group"> <span class="input-group-addon">Name</span> <input id="gName" name="gName" class="form-control" placeholder="What it called" required="" type="text"> </div> </div> </div></div><!-- Select Basic --><div class="row postGroup"> <div class="col-md-10"> <div class="form-group"> <select id="categories" name="categories" class="form-control"> <option value="-1">Categories</option> <option value="1">Books</option> <option value="2">Clothes</option> <option value="3">Arts</option> </select> </div> </div></div><!-- File Button --><span class="label label-default" style="margin-bottom: 10px">2 . Upload Photo?</span><div class="row postGroup"> <div class="col-md-10"> <form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data"> <div id="targetLayer"></div> <div id="uploadFormLayer"> <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*" > <img id="photo_preview" width="200" src="#" alt=" " /> <input id="submit" value="Submit" class="btnSubmit" type="submit"> </div> </form> </div></div><!-- Textarea --><div class="row postGroup"> <div class="col-md-10"> <div class="form-group"> <textarea class="form-control" id="description" name="description" placeholder="say more about your goods"></textarea> </div> </div></div><!-- Button --><div class="row postGroup"> <div class="col-md-10"> <div class="form-group"> <button id="mark_location" name="mark_location" class="btn btn-info">Mark Place!</button> </div> </div></div><!-- Prepended text--><span class="label label-default" style="margin-bottom: 10px">3 . What do you want?</span><div class="row postGroup"> <div class="col-md-10"> <div class="form-group"> <div class="input-group"> <span class="input-group-addon">Name</span> <input id="want_name" name="want_name" class="form-control" placeholder="What you want" type="text"> </div> </div> </div></div><!-- Button --><div class="row postGroup"> <div class="form-group"> <label class="col-md-4 control-label" for="submit"></label> <div class="col-md-4"> <button id="submit" name="submit" class="btn btn-primary submit">POST!</button> </div> </div></div><!--</fieldset></form>-->';
 
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -52,6 +52,14 @@ function load_post() {
     currentStage = "post";
 
     $("#leftSideSwitch").hide().html(postInnerHTML).show('fast');
+    $('#submit').hide();
+
+    $(document).on('change', '#imgUpload', function(){
+        $("#uploadForm").submit();
+        console.log("photo uploaded!");
+    // check FormData and ajax ..
+    });
+    
     $("#uploadForm").on("submit", function (e) {
         e.preventDefault();
         $.ajax({
@@ -316,7 +324,6 @@ function load_profile() {
 }
 
 $(document).ready(function () {
-
     $("#leftSideSwitch").on("click", ".userBtn", function (event) {
         var tagetID = $("#add").attr("data-value");
         var Type = $(this).attr("id");
@@ -369,31 +376,33 @@ $(document).ready(function () {
             var Y = marker.getPosition().lat();
         }
 
-        $.ajax({
-            type: "GET",
-            url: "./php_script/post.php",
-            dataType: "text",
-            data: {
-                gname: post_gname,
-                want: post_want,
-                categories: post_categories,
-                ownerID: post_ownerID,
-                description: post_description,
-                photoPath: post_photo,
-                posX: X,
-                posY: Y
-            },
-            success: function (response) {
-                console.log(response);
-                console.log("POST success");
-                marker.setDraggable(false);
-                $('#seek').trigger("click");
-            },
-            error: function (xhr, ajaxOption, thrownError) {
-                alert(thrownError);
-                alert(JSON.stringify(xhr));
-            }
-        });
+        if(marker!=null && post_categories !=-1){
+            $.ajax({
+                type: "GET",
+                url: "./php_script/post.php",
+                dataType: "text",
+                data: {
+                    gname: post_gname,
+                    want: post_want,
+                    categories: post_categories,
+                    ownerID: post_ownerID,
+                    description: post_description,
+                    photoPath: post_photo,
+                    posX: X,
+                    posY: Y
+                },
+                success: function (response) {
+                    console.log(response);
+                    console.log("POST success");
+                    marker.setDraggable(false);
+                    $('#seek').trigger("click");
+                },
+                error: function (xhr, ajaxOption, thrownError) {
+                    alert(thrownError);
+                    alert(JSON.stringify(xhr));
+                }
+            });
+        }
     });
 
     // Handle load profile
@@ -420,7 +429,6 @@ $(document).ready(function () {
                 data: "?"
             },
             success: function (response) {
-
                 for (var i = 0; i < response.length; i++) {
                     //Left Side
                     $('#searchResults').append('<div class="row searchResult" data-value="' + response[i]["gid"] + '"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div> <div class="col-md-7 searchResultDescription"> <ul class="list-group"> <li class="list-group-item"> ' + response[i]["gname"] + '<span class="badge">' + response[i]["categories"] + '</span></li> <li class="list-group-item">Wanted: ' + response[i]["want"] + '</li> <li class="list-group-item"><img src="' + response[i]["owner_photo"] + '" height="20" width="20"> ' + response[i]["username"] + '</li></ul> </div></div>');

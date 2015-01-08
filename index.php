@@ -48,7 +48,10 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="." style="font-size: 130%;">
-                    <img style="display: inline;" src="images/exchange-icon" width="25">ExchangeWorld</a>
+                    <img style="max-width:200px; margin-top:-8px;" src="static/img/icon/logo.png" alt="">
+                    <!--<img style="display: inline;" src="images/exchange-icon" width="25">ExchangeWorld-->
+
+                </a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">

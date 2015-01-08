@@ -72,5 +72,5 @@ Session.vim
 ### customize ###
 /UI
 /include
-images/database/*.png
-images/database/*.jpg
+#images/database/*.png
+#images/database/*.jpg

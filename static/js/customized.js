@@ -567,6 +567,9 @@ $(document).ready(function () {
                 map.setOptions({ draggableCursor: 'default', draggingCursor: 'default' });
                 google.maps.event.clearListeners(map, 'click');
             }
+            $("#dropdownMenu2").text($(this).text() + ' ');
+            $("#dropdownMenu2").append('<span class="caret"></span>');
+            $(".btn:first-child").val($(this).text());
         }
     });
 

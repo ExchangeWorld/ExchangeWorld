@@ -3,8 +3,8 @@ var gobackStack = [];
 var gobackSearchResultDataValue = 0;
 var gobackSearchResultDataValueNeedToBeReplaced = false;
 
-var seekInnerHTML = '<div class="input-group" style="margin-top: 15px; margin-bottom: 10px"> <input id="searchName" type="text" class="form-control" placeholder="Seek anything"> <span class="input-group-btn"> <button id="searchString" class="btn btn-default seeking" type="button">Go!</button> </span></div><div id="searchOptions" class="row"> <div class="col-md-12"> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Distance <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&lt; 500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">500 ~ 1500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1500 ~ 5000m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&gt; 5000m</a></li> </ul> </div> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Books</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Textbooks</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Magazine</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Movies</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Music CD</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Video Game</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Smart Phone</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tablet</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Camera</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Audio</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Computer Hardware</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Jewelry</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Clothing</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Shoes</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Watches</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Furniture</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#">Others</a></li></ul> </div> </div></div><hr style="border-color: #6E6E6E; border-width: 2px"><div id="searchResults" class="col-md-12"> </div>';
-var postInnerHTML = '<!--<form class="form-horizontal" id ="new_post" method="POST" enctype="multipart/form-data"><fieldset>--><!-- Form Name --><legend>Post Goods</legend><!-- Prepended text--><span class="label label-default" style="margin-bottom: 10px">1 . What do you have?</span><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px;"> <div class="form-group"> <div class="input-group"> <span class="input-group-addon">Name</span> <input id="gName" name="gName" class="form-control" placeholder="What it called" required="" type="text"> </div> </div> </div></div><!-- Select Basic --><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px;"> <div class="form-group"> <select id="categories" name="categories" class="form-control"> <option value="-1">Categories</option> <option value="1">Books</option> <option value="2">Clothes</option> <option value="3">Arts</option> </select> </div> </div></div><!-- File Button --><span class="label label-default" style="margin-bottom: 10px">2 . Upload Photo?</span><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px;"> <form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data"> <div id="targetLayer"></div> <div id="uploadFormLayer"> <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*" > <img id="photo_preview" width="200" src="#" alt=" " style="display: none"/> <input id="submit" value="Submit" class="btnSubmit" type="submit"> </div> </form> </div></div><!-- Textarea --><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px;"> <div class="form-group"> <textarea class="form-control" id="description" name="description" placeholder="say more about your goods"></textarea> </div> </div></div><!-- Button --> <!-- Prepended text--><span class="label label-default" style="margin-bottom: 10px">3 . What do you want?</span><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px;"> <div class="form-group"> <div class="input-group"> <span class="input-group-addon">Name</span> <input id="want_name" name="want_name" class="form-control" placeholder="What you want" type="text"> </div> </div> </div></div><!-- Button --><div class="row postGroup"> <div class="form-group"> <label class="col-md-4 control-label" for="submit"></label> <div class="col-md-4"> <button id="submit" name="submit" class="btn btn-primary submit">POST!</button> </div> </div></div><!--</fieldset></form>-->';
+var seekInnerHTML = '<div class="input-group" style="margin-top: 15px; margin-bottom: 10px"> <input id="searchName" type="text" class="form-control" placeholder="Seek anything"> <span class="input-group-btn"> <button id="searchString" class="btn btn-default seeking" type="button">Go!</button> </span></div><div id="searchOptions" class="row"> <div class="col-md-12"> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Distance <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&lt; 500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">500 ~ 1500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1500 ~ 5000m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&gt; 5000m</a></li> </ul> </div> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Books</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Textbooks</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Magazine</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Movies</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Music CD</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Video Game</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Smart Phone</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Tablet</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Camera</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Audio</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Computer Hardware</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Jewelry</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Clothing</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Shoes</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Watches</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Furniture</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Others</a></li></ul> </div> </div></div><hr style="border-color: #6E6E6E; border-width: 2px"><div id="searchResults" class="col-md-12"> </div>';
+var postInnerHTML = '<!--<form class="form-horizontal" id ="new_post" method="POST" enctype="multipart/form-data"><fieldset>--><!-- Form Name --><legend>Post Goods</legend><!-- Prepended text--><span class="label label-default" style="margin-bottom: 10px">1 . What do you have?</span><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px;"> <div class="form-group"> <div class="input-group"> <span class="input-group-addon">Name</span> <input id="gName" name="gName" class="form-control" placeholder="What it called" required="" type="text"> </div> </div> </div></div><!-- Select Basic --><div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="categories" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Books</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Textbooks</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Magazine</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Movies</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Music CD</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Video Game</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Smart Phone</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Tablet</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Camera</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Audio</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Computer Hardware</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Jewelry</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Clothing</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Shoes</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Watches</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Furniture</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Others</a></li></ul> </div><br/><!-- File Button --><span class="label label-default" style="margin-bottom: 10px">2 . Upload Photo?</span><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px;"> <form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data"> <div id="targetLayer"></div> <div id="uploadFormLayer"> <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*" > <img id="photo_preview" width="200" src="#" alt=" " style="display: none"/> <input id="submit" value="Submit" class="btnSubmit" type="submit"> </div> </form> </div></div><!-- Textarea --><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px;"> <div class="form-group"> <textarea class="form-control" id="description" name="description" placeholder="say more about your goods"></textarea> </div> </div></div><!-- Button --> <!-- Prepended text--><span class="label label-default" style="margin-bottom: 10px">3 . What do you want?</span><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px;"> <div class="form-group"> <div class="input-group"> <span class="input-group-addon">Name</span> <input id="want_name" name="want_name" class="form-control" placeholder="What you want" type="text"> </div> </div> </div></div><!-- Button --><div class="row postGroup"> <div class="form-group"> <label class="col-md-4 control-label" for="submit"></label> <div class="col-md-4"> <button id="submit" name="submit" class="btn btn-primary submit">POST!</button> </div> </div></div><!--</fieldset></form>-->';
 
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -360,12 +360,13 @@ function load_profile() {
     }
 }
 
-function seek_query(search) {
+function seek_query(search, query_type) {
     $.ajax({
         type: "GET",
         url: "./php_script/seek.php",
         dataType: "json",
         data: {
+            type:query_type,
             selected: search
         },
         success: function (response) {
@@ -438,11 +439,7 @@ $(document).ready(function () {
         var post_description = $("#description").val();
         var post_ownerID = $("#profile").attr('data-value');
         var post_photo = $("#goods_photo").attr('data-value');
-        var post_categories = $("#categories").val();
-        if (post_categories == "-1") alert("please select categories!");
-        else if (post_categories == "1") post_categories == "Books";
-        else if (post_categories == "2") post_categories == "Clothes";
-        else if (post_categories == "3") post_categories == "Arts";
+        var post_categories = $(".btn:first-child").val();
 
         var X;
         var Y;
@@ -522,7 +519,7 @@ $(document).ready(function () {
         $('#leftSideSwitch').hide();
         $('#leftSideSwitch').html(seekInnerHTML);
         $('#leftSideSwitch').show('fast');
-        seek_query(search);      
+        seek_query(search, "keywords");      
 
            //Create the scroll only on Seek
         $('#leftSide').perfectScrollbar(({
@@ -538,6 +535,38 @@ $(document).ready(function () {
         if (map != null) {
             map.setOptions({ draggableCursor: 'default', draggingCursor: 'default' });
             google.maps.event.clearListeners(map, 'click');
+        }
+    });
+
+    $("#leftSideSwitch").on("click", ".dropdown",function (event) {
+        //var i=$(this).text();
+        //alert(i);
+        $("#categories").text($(this).text()+' ');
+        $("#categories").append('<span class="caret"></span>');
+        $(".btn:first-child").val($(this).text());
+
+        if ($('#seek').attr("class") == "active") {
+             var search = $(this).text();
+            $('#leftSideSwitch').hide();
+            $('#leftSideSwitch').html(seekInnerHTML);
+            $('#leftSideSwitch').show('fast');
+            seek_query(search, "categories");
+
+            //Create the scroll only on Seek
+            $('#leftSide').perfectScrollbar(({
+                suppressScrollX: true
+            }));
+
+            //Google Map Setting
+            if (marker != null)
+                marker.setMap(marker = null);
+            if (markers != null)
+                clearMarkers();
+
+            if (map != null) {
+                map.setOptions({ draggableCursor: 'default', draggingCursor: 'default' });
+                google.maps.event.clearListeners(map, 'click');
+            }
         }
     });
 
@@ -609,6 +638,7 @@ $(document).ready(function () {
             $(this).removeClass('emphasis');
         }
     );
+
 });
 
 $(window).load(function () {

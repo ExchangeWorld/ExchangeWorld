@@ -42,7 +42,8 @@ function fbLoaded() {
                 $("#myhead").attr('src', my_picture_url);
             });
             FB.api('/me', function (response) {
-                $("#myname").append(response.name);
+                if($("#myname").text().search(response.name) == -1)
+                    $("#myname").append(response.name);
             });
             $("#myname").show();
             $("#login").hide();

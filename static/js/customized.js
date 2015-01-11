@@ -167,7 +167,7 @@ function load_exchange(event) {
                                 Comment: comment
                             },
                             success: function (response) {
-                                $('#comment_area').append('<li class="list-group-item" style="padding: 5px;">'+response+'</li>');
+                                $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px">' + response + '</li>');
                                 $("#comment").val('');
 
                             },
@@ -189,7 +189,7 @@ function load_exchange(event) {
                     },
                     success: function (response) {
                         for(var i=0; i<response.length;i++){
-                            $('#comment_area').append('<li class="list-group-item" style="padding: 5px;"><img class="owner" data-value="'+response[i]["commenter"]+'" src="' + response[i]["commenterPhoto"] + '" style="width: 30px; height: 30px;"> '+ response[i]["comment"] +'</li>');
+                            $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px"><img class="owner" data-value="' + response[i]["commenter"] + '" src="' + response[i]["commenterPhoto"] + '" style="width: 30px; height: 30px;"> ' + response[i]["comment"] + '</li>');
                         }
                     },
                     error: function (xhr, ajaxOption, thrownError) {

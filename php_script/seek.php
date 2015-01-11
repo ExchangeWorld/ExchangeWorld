@@ -20,6 +20,25 @@
 				AND `goods`.`categories` = '$search' 
 				ORDER BY `gid` DESC";
 	}
+	else if($type == "location"){
+		$px = $_GET["px"];
+		$py = $_GET["py"];
+		$delta;
+		if($search == "500m")  $delta = 0.005;
+		else if($search == "1500m") $delta = 0.015;
+		else if($search == "5000m") $delta = 0.05;
+		else if($search == "10000m")$delta = 0.1;
+		else $delta = 10;
+
+		$sql = "SELECT `goods`. * , `user`.`username` , `user`.`photoPath` AS `owner_photo`
+				FROM `goods` , `user`
+				WHERE `goods`.`ownerID` = `user`.`fb_id`
+				AND `goods`.`posX` >$px - $delta
+				AND `goods`.`posX` <$px + $delta
+				AND `goods`.`posY` >$py - $delta
+				AND `goods`.`posY` <$py + $delta
+				ORDER BY `gid` DESC";
+	}
 	else{
 		$search = '%'.$search.'%';
 		$sql = "SELECT `goods`. * , `user`.`username`, `user`.`photoPath` as `owner_photo`

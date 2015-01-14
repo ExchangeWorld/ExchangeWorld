@@ -1,89 +1,92 @@
-<!--<form class="form-horizontal" id ="new_post"  method="POST" enctype="multipart/form-data">
-<fieldset>-->
-<!-- Form Name -->
-<legend>Post Goods</legend>
-
-<!-- Prepended text-->
-<span class="label label-default" style="margin-bottom: 10px">1 . What do you have?</span>
+<!--<form class="form-horizontal" id ="new_post" method="POST" enctype="multipart/form-data"><fieldset>--><!-- Form Name -->
+<h1>Post Goods</h1><!-- Prepended text-->
+<h3><span class="label label-primary" style="margin-bottom: 10px">● What do you have?</span></h3>
 <div class="row postGroup">
-    <div class="col-md-10">
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon">Name</span>
-                <input id="gName" name="gName" class="form-control" placeholder="What it called" required="" type="text">
+    <div class="col-md-12">
+        <div class="form-group" style="margin:0px">
+            <div class="input-group" style="width:100%">
+                <input id="gName" name="gName" class="form-control" placeholder="Name" required="" type="text" style="width:100%">
             </div>
         </div>
     </div>
-</div>
-
-<!-- Select Basic -->
+</div><!-- Select Basic -->
 <div class="row postGroup">
-    <div class="col-md-10">
-        <div class="form-group">
-            <select id="categories" name="categories" class="form-control">
-                <option value="-1">Categories</option>
-                <option value="1">Books</option>
-                <option value="2">Clothes</option>
-                <option value="3">Arts</option>
-            </select>
+    <div class="col-md-12" style="margin-top: 5px">
+        <div class="btn-group" style="width:100%">
+            <button class="btn btn-default dropdown-toggle" type="button" id="categories" data-toggle="dropdown" aria-expanded="true" style="text-align:left">
+                <span> Choose a category  </span>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width:100%">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Books</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Textbooks</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Magazine</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Movies</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Music CD</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Video Game</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Smart Phone</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Tablet</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Camera</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Audio</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Computer Hardware</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Jewelry</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Clothing</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Shoes</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Watches</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Furniture</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Others</a></li>
+            </ul>
         </div>
     </div>
 </div>
-
-<!-- File Button -->
-<span class="label label-default" style="margin-bottom: 10px">2 . Upload Photo?</span>
+<br /><!-- File Button -->
+<h3><span class="label label-primary" style="margin-bottom: 10px">● Upload Photo</span></h3>
 <div class="row postGroup">
-    <div class="col-md-10">
-      <form id="uploadForm" name="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data">
-        <div id="targetLayer"></div>
-        <div id="uploadFormLayer">
-          <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*">
-          <img id="photo_preview" width="200" src="#" alt="　" />
-          <input id="submit" value="Submit" class="btnSubmit" type="submit">
-        </div>
-      </form>
+    <div class="col-md-12">
+        <form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data">
+            <div id="targetLayer"></div>
+            <div id="uploadFormLayer">
+                <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*">
+                <img id="photo_preview" width="200" src="#" alt=" " style="display: none" />
+                <input id="submit" value="Submit" class="btnSubmit" type="submit">
+            </div>
+        </form>
     </div>
-</div>
-
-<!-- Textarea -->
+</div><!-- Textarea -->
 <div class="row postGroup">
-    <div class="col-md-10">
-        <div class="form-group">
-          <textarea class="form-control" id="description" name="description" placeholder="say more about your goods"></textarea>
-        </div>
+    <div class="col-md-12" style="margin-top: 5px">
+        <div class="form-group"> <textarea class="form-control" id="description" name="description" placeholder="Say more about your good"></textarea> </div>
     </div>
-</div>
-
-<!-- Button -->
+</div><!-- Button --> <!-- Prepended text-->
+<h3>
+    <span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Locate your goods on map!</span>
+</h3>
+<br />
+<h3>
+    <span class="label label-primary" style="margin-bottom: 10px">● What do you want?</span>
+</h3>
 <div class="row postGroup">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="form-group">
-            <button id="mark_location" name="mark_location" class="btn btn-info">Mark Place!</button>
-        </div>
-    </div>
-</div>
-
-<!-- Prepended text-->
-<span class="label label-default" style="margin-bottom: 10px">3 . What do you want?</span>
-<div class="row postGroup">
-    <div class="col-md-10">
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon">Name</span>
-                <input id="want_name" name="want_name" class="form-control" placeholder="What you want" type="text">
+            <div class="input-group" style="width:100%">
+                <input id="want_name" name="want_name" class="form-control" placeholder="Name" type="text">
             </div>
         </div>
     </div>
-</div>
-
-<!-- Button -->
+</div><!-- Button -->
 <div class="row postGroup">
     <div class="form-group">
         <label class="col-md-4 control-label" for="submit"></label>
-        <div class="col-md-4">
-            <button id="submit" name="submit" class="btn btn-primary submit">POST!</button>
+        <div class="col-md-6">
+            <button id="submit" name="submit" class="submit" style="padding:0px; border:none; background-color: silver;">
+                <h1><span class="label label-danger">Post!</span></h1>
+            </button>
         </div>
     </div>
-</div>
-<!--</fieldset>
-</form>-->
+</div><!--</fieldset></form>-->

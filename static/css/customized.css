@@ -110,9 +110,10 @@ body {
     padding: 0px;
     padding-top: 10px;
     padding-bottom: 10px;
-    border: 2px solid #a1a1a1;
+    border: 2px solid #2AABD2;
     background: #dddddd;
     margin: 0px;
+    margin-bottom: 4px;
     cursor: pointer;
     cursor: hand;
 }

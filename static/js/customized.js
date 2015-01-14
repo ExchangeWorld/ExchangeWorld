@@ -3,8 +3,8 @@ var gobackStack = [];
 var gobackSearchResultDataValue = 0;
 var gobackSearchResultDataValueNeedToBeReplaced = false;
 
-var seekInnerHTML = '<div class="input-group" style="margin-top: 15px; margin-bottom: 10px"> <input id="searchName" type="text" class="form-control" placeholder="Seek anything"> <span class="input-group-btn"> <button id="searchString" class="btn btn-default seeking" type="button">Go!</button> </span></div><div id="searchOptions" class="row"> <div class="col-md-12"> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Distance <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">1500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">5000m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">10000m</a></li> </ul> </div> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Books</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Textbooks</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Magazine</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Movies</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Music CD</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Video Game</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Smart Phone</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Tablet</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Camera</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Audio</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Computer Hardware</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Jewelry</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Clothing</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Shoes</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Watches</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Furniture</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Others</a></li></ul> </div> </div></div><hr style="border-color: #6E6E6E; border-width: 2px"><div id="searchResults" class="col-md-12"> </div>';
-var postInnerHTML = '<!--<form class="form-horizontal" id ="new_post" method="POST" enctype="multipart/form-data"><fieldset>--><!-- Form Name --><legend>Post Goods</legend><!-- Prepended text--><span class="label label-default" style="margin-bottom: 10px">1 . What do you have?</span><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px;"> <div class="form-group"> <div class="input-group"> <span class="input-group-addon">Name</span> <input id="gName" name="gName" class="form-control" placeholder="What it called" required="" type="text"> </div> </div> </div></div><!-- Select Basic --><div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="categories" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Books</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Textbooks</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Magazine</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Movies</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Music CD</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Video Game</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Smart Phone</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Tablet</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Camera</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Audio</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Computer Hardware</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Jewelry</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Clothing</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Shoes</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Watches</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Furniture</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Others</a></li></ul> </div><br/><!-- File Button --><span class="label label-default" style="margin-bottom: 10px">2 . Upload Photo?</span><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px;"> <form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data"> <div id="targetLayer"></div> <div id="uploadFormLayer"> <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*" > <img id="photo_preview" width="200" src="#" alt=" " style="display: none"/> <input id="submit" value="Submit" class="btnSubmit" type="submit"> </div> </form> </div></div><!-- Textarea --><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px;"> <div class="form-group"> <textarea class="form-control" id="description" name="description" placeholder="say more about your goods"></textarea> </div> </div></div><!-- Button --> <!-- Prepended text--><span class="label label-default" style="margin-bottom: 10px">3 . Locate your goods on map</span><br/><br/><span class="label label-default" style="margin-bottom: 10px">4 . What do you want?</span><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px;"> <div class="form-group"> <div class="input-group"> <span class="input-group-addon">Name</span> <input id="want_name" name="want_name" class="form-control" placeholder="What you want" type="text"> </div> </div> </div></div><!-- Button --><div class="row postGroup"> <div class="form-group"> <label class="col-md-4 control-label" for="submit"></label> <div class="col-md-4"> <button id="submit" name="submit" class="btn btn-primary submit">POST!</button> </div> </div></div><!--</fieldset></form>-->';
+var seekInnerHTML = '<div class="input-group" style="margin-top: 15px; margin-bottom: 10px"> <input id="searchName" type="text" class="form-control" placeholder="Seek anything"> <span class="input-group-btn"> <button id="searchString" class="btn btn-info seeking" type="button">Seek !</button> </span></div><div id="searchOptions" class="row"> <div class="col-md-12"> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Distance <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">1500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">5000m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">10000m</a></li> </ul> </div> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Books</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Textbooks</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Magazine</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Movies</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Music CD</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Video Game</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Smart Phone</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Tablet</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Camera</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Audio</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Computer Hardware</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Jewelry</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Clothing</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Shoes</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Watches</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Furniture</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Others</a></li></ul> </div> </div></div><hr style="border-color: #6E6E6E; border-width: 2px"><div id="searchResults" class="col-md-12"> </div>';
+var postInnerHTML = '<!--<form class="form-horizontal" id ="new_post" method="POST" enctype="multipart/form-data"><fieldset>--><!-- Form Name --><h1>Post Goods</h1><!-- Prepended text--><h3><span class="label label-primary" style="margin-bottom: 10px">‚óè What do you have?</span></h3><div class="row postGroup"> <div class="col-md-12"> <div class="form-group" style="margin:0px"> <div class="input-group" style="width:100%"> <input id="gName" name="gName" class="form-control" placeholder="Name" required="" type="text" style="width:100%"> </div> </div> </div></div><!-- Select Basic --><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px"> <div class="btn-group" style="width:100%"> <button class="btn btn-default dropdown-toggle" type="button" id="categories" data-toggle="dropdown" aria-expanded="true" style="text-align:left"> <span> Choose a category </span> <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width:100%"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Books</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Textbooks</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Magazine</a></li> <li role="presentation" class="divider"></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Movies</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Music CD</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Video Game</a></li> <li role="presentation" class="divider"></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Smart Phone</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Tablet</a></li> <li role="presentation" class="divider"></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Camera</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Audio</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Computer Hardware</a></li> <li role="presentation" class="divider"></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Jewelry</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Clothing</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Shoes</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Watches</a></li> <li role="presentation" class="divider"></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Furniture</a></li> <li role="presentation" class="divider"></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Others</a></li> </ul> </div> </div></div><br /><!-- File Button --><h3><span class="label label-primary" style="margin-bottom: 10px">‚óè Upload Photo</span></h3><div class="row postGroup"> <div class="col-md-12"> <form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data"> <div id="targetLayer"></div> <div id="uploadFormLayer"> <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*"> <img id="photo_preview" width="200" src="#" alt=" " style="display: none" /> <input id="submit" value="Submit" class="btnSubmit" type="submit"> </div> </form> </div></div><!-- Textarea --><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px"> <div class="form-group"> <textarea class="form-control" id="description" name="description" placeholder="Say more about your good"></textarea> </div> </div></div><!-- Button --> <!-- Prepended text--><h3> <span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Locate your goods on map!</span></h3><br /><h3> <span class="label label-primary" style="margin-bottom: 10px">‚óè What do you want?</span></h3><div class="row postGroup"> <div class="col-md-12"> <div class="form-group"> <div class="input-group" style="width:100%"> <input id="want_name" name="want_name" class="form-control" placeholder="Name" type="text"> </div> </div> </div></div><!-- Button --><div class="row postGroup"> <div class="form-group"> <label class="col-md-4 control-label" for="submit"></label> <div class="col-md-6"> <button id="submit" name="submit" class="submit" style="padding:0px; border:none; background-color: silver;"> <h1><span class="label label-danger">Post!</span></h1> </button> </div> </div></div><!--</fieldset></form>-->';
 
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -481,7 +481,7 @@ function seek_query(search, query_type) {
 $(document).ready(function () {
     $(function () {
         $(".fancybox").fancybox();
-        /// ß‰®Ïclass¶W∫Ÿ¨∞fancybox™∫√˛ßO°A±N•LÆM•Œ fancyboxÆƒ™G
+        /// ¬ß√§¬®√¨class¬¶W¬∫√ô¬¨¬∞fancybox¬™¬∫√É√æ¬ßO¬°A¬±N¬•L¬ÆM¬•√é fancybox¬Æ√Ñ¬™G
     });
 
     $("body").on("click", ".userBtn", function (event) {
@@ -489,16 +489,126 @@ $(document).ready(function () {
         var myID = $("#profile").attr("data-value"); // get my fb id
         var Type = $(this).attr("id");
 
+        //destroy the scroll
+        //and reset the scroll by Noel
+        $('#leftSide').perfectScrollbar('destroy');
+        $("#leftSide").scrollTop(0);
+        $("#leftSide").perfectScrollbar('update');
+        $('#leftSide').perfectScrollbar(({
+                suppressScrollX: true
+            }));
+
         $('#leftSideSwitch').hide().empty();
 
         //basic components like "goback"
-        $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div>')
+        if(Type == "seeker")
+        {
+            $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div>\
+            <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                <div class="col-md-2">\
+                    <h1 style="margin-top: 0px"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color: #04ACD9"></span></h1>\
+                </div>\
+                <div class="col-md-6">\
+                    <h1 style="margin-top: 0px">Following</h1>\
+                </div>\
+                <div class="col-md-4">\
+                    <h1 style="margin-top: 0px; color: #04ACD9">42</h1>\
+                </div>\
+            </div>');
+        }
+        else if(Type == "follower")
+        {
+            $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div>\
+            <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                <div class="col-md-2">\
+                    <h1 style="margin-top: 0px"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="color: #04ACD9"></span></h1>\
+                </div>\
+                <div class="col-md-6">\
+                    <h1 style="margin-top: 0px">Follower</h1>\
+                </div>\
+                <div class="col-md-4">\
+                    <h1 style="margin-top: 0px; color: #04ACD9">42</h1>\
+                </div>\
+            </div>');
+        }
+        
 
         //query part
         $('#leftSideSwitch').append('\
-            <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
-                <div class="col-md-3">\
+            <div id="followingOrErBlocks" class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+            </div>');
 
+        $('#leftSideSwitch').append('\
+            <div id="followingOrErBlocks" class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+            </div>');
+
+        $('#leftSideSwitch').append('\
+            <div id="followingOrErBlocks" class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+            </div>');
+
+        $('#leftSideSwitch').append('\
+            <div id="followingOrErBlocks" class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+            </div>');
+
+        $('#leftSideSwitch').append('\
+            <div id="followingOrErBlocks" class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+            </div>');
+
+        $('#leftSideSwitch').append('\
+            <div id="followingOrErBlocks" class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
+                </div>\
+                <div class="col-md-4">\
+                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
                 </div>\
             </div>');
 
@@ -520,7 +630,7 @@ $(document).ready(function () {
                 message: $("#message").val()
             },
             success: function (response) {
-                alert(response);
+                //alert(response);
             },
             error: function (xhr, ajaxOption, thrownError) {
                 alert(thrownError);

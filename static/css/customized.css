@@ -200,12 +200,76 @@ body {
     height: 90px;
 }
 
+.custom-marker-112
+{
+    width:112px;
+    height:84px;
+}
+
+.custom-marker-104
+{
+    width:104px;
+    height:78px;
+}
+
+.custom-marker-96
+{
+    width:96px;
+    height:72px;
+}
+
+.custom-marker-88
+{
+    width:88px;
+    height:66px;
+}
+
+.custom-marker-80
+{
+    width:80px;
+    height:60px;
+}
+
+.custom-marker-72
+{
+    width:72px;
+    height:54px;
+}
+
+.custom-marker-64
+{
+    width:64px;
+    height:48px;
+}
+
+.custom-marker-56
+{
+    width:56px;
+    height:42px;
+}
+
+.custom-marker-48
+{
+    width:48px;
+    height:36px;
+}
+
+.custom-marker-40
+{
+    width:40px;
+    height:30px;
+}
+
 .normal-item {
     border-color: #f00;
 }
 
 .time-limited-item {
     border-color: #00f;
+}
+
+.selected-item{
+    border-color: #0f0;
 }
 
 .contained-image {
@@ -270,7 +334,7 @@ body {
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
 
-.floatinng {
+.floating {
     z-index: 2000;
 }
 

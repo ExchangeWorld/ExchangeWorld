@@ -446,9 +446,15 @@ function seek_query(search, query_type) {
                     $('.searchResult').hover(
                         function () {
                             $(this).addClass('searchResultSelected');
+
+                            var gid = $(this).attr("data-value");
+                            $("div[data-gid='" + gid + "']").addClass('selected-item');
+                            $("div[data-gid='" + gid + "']").addClass('floating');
                         },
                         function () {
                             $(this).removeClass('searchResultSelected');
+                            var gid = $(this).attr("data-value");
+                            $("div[data-gid='" + gid + "']").removeClass('selected-item');
                         }
                     );
 

@@ -175,7 +175,7 @@ function initialize() {
                 "visibility": "on"
             },
             {
-                "color": "#c9158a"
+                "color": "#222222"
             },
             {
                 "weight": "0.50"

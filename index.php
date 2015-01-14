@@ -157,7 +157,7 @@
         </div>
     </div>
 
-    <div id="myMessageDetailArea">
+    <div id="myMessageDetailArea" style="display:none">
     </div>
 
 </div>

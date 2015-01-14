@@ -34,7 +34,7 @@
 		}
 	}
 	else{
-		echo "Fetch Tables ERROR!";
+		echo "Fetch Tables ERROR! (userBtn.php)";
 	}
 
 ?>

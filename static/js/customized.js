@@ -706,19 +706,21 @@ $(document).ready(function () {
             },
             success: function (response) {
                 $('#myMessageDropdown').empty();
-                $('myMessageDetailArea').empty();
+                $('#myMessageDetailArea').empty();
                 if (response == null) {
                     $("#myMessageDropdown").append("<li>No message!</li>");
                 } else {
                     for (var i = 0; i < response.length; i++) {
                         //Dropdown
                         if (response[i]["readed"] == 0) {
-                            $('#myMessageDropdown').append('<li ><a href="#mid' + response[i]["mid"] + '" class="fancybox messageRow"><span class="glyphicon glyphicon-certificate"></span>' + " " + response[i]["text"].substr(0, 10) + "..." + '</a></li>');
+                            $('#myMessageDropdown').append('<li ><a class="fancybox messageRow" href="#mid' + response[i]["mid"] + '"><span class="glyphicon glyphicon-certificate"></span>' + " " + response[i]["text"].substr(0, 10) + "..." + '</a></li>');
                         }
                         else {
-                            $('#myMessageDropdown').append('<li ><a href="#mid' + response[i]["mid"] + '" class="fancybox messageRow"><span class="glyphicon glyphicon-certificate" style="display:none"></span>' + " " + response[i]["text"].substr(0, 10) + "..." + '</a></li>');
+                            $('#myMessageDropdown').append('<li ><a  class="fancybox messageRow" href="#mid' + response[i]["mid"] + '"><span class="glyphicon glyphicon-certificate" style="display:none"></span>' + " " + response[i]["text"].substr(0, 10) + "..." + '</a></li>');
                         }
-                        $('#myMessageDetailArea').append('<div id="mid' + response[i]["mid"] + '" style="display:none">' + response[i]["text"] + '</div>')
+                        if ($('#mid' + response[i]["mid"] + '').attr("id") == null) {
+                            $('#myMessageDetailArea').append('<div id="mid' + response[i]["mid"] + '" style="display:none" data-value="'+response[i]["sender_id"]+'"><li class="list-group-item" style="padding: 5px; font-size:16px"><img src="' + response[i]["owner_photo"] + '" height="50" width="50"> ' + response[i]["text"] + '</li><textarea class="form-control" id="messageReply' + response[i]["mid"] + '" name="messageReply" placeholder="Relpy......"></textarea> <button name="Reply" data-value="' + response[i]["mid"] + '" class="btn btn-primary Reply">Reply !</button></div>');
+                        }
                     }
                 }
             },
@@ -728,6 +730,38 @@ $(document).ready(function () {
             }
         });
     });
+
+    $("body").on("click", ".Reply", function (event) {
+        var replyMessage = $("#messageReply" + $(this).attr("data-value")).val();
+        var tagetID = $("#mid"+ $(this).attr("data-value")).attr("data-value");  // get others' fb id
+        var myID = $("#profile").attr("data-value"); // get my fb id
+
+        //alert($(target).val());
+        $.ajax({
+            type: "GET",
+            url: "./php_script/myMessage.php",
+            dataType: "text",
+            data: {
+                type: "reply",
+                tID: tagetID,
+                mID: myID,
+                message: replyMessage
+            },
+            success: function (response) {
+                //alert(response);
+                parent.$.fancybox.close();
+                alert("reply success!");
+
+                console.log(response);
+            },
+            error: function (xhr, ajaxOption, thrownError) {
+                alert(thrownError);
+                alert(JSON.stringify(xhr));
+            }
+        });
+    });
+
+
     // Update message status to readed if clicked
     $("#myMessage").on("click", ".messageRow", function (event) {
         $.ajax({
@@ -739,7 +773,7 @@ $(document).ready(function () {
                 mid: $(this).attr("href").replace("#mid", "")
             },
             success: function (response) {
-                console.log(response);
+                console.log("Unread messages = "+response);
             },
             error: function (xhr, ajaxOption, thrownError) {
                 alert(thrownError);
@@ -748,6 +782,7 @@ $(document).ready(function () {
         });
     });
 
+    // JustInTime check unread messages
     $('body').click(function (event) {
         $.ajax({
             type: "GET",

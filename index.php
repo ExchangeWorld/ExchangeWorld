@@ -76,13 +76,10 @@
 
 
                     <li>
-                        <!--<div id="login" class="fb-login-button" data-scope="user_likes,user_photos" onlogin='window.location.reload(true);' data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>-->
-                        <!--<fb:login-button id="login" scope="user_likes,user_photos,email" onlogin="fbLoaded();"></fb:login-button>-->
                         <div id="login" class="fb-login-button" data-scope="user_likes,user_photos" onlogin='fbLoaded();' data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
                     </li>
 
                     <li class="dropdown">
-
                         <a id="myname" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <img id="myhead" src="./static/img/alt.gif" height="20" width="20">
                         </a>
@@ -93,6 +90,10 @@
                             <li role="presentation" class="divider"></li>
                             <li id="logout"><a href="#logout">Logout</a></li>
                         </ul>
+                    </li>
+                    <li id="myMessage" class="dropdown">
+                        <a id="messageIcon" href="#" data-toggle="dropdown" ><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                        <ul id="myMessageDropdown"class="dropdown-menu" role="menu"></ul>
                     </li>
                 </ul>
             </div>
@@ -106,65 +107,6 @@
             <div id="slideSpace" style="width: 25%; height: inherit; position: absolute;"></div>
             <div id="leftSide" class="col-md-4">
                 <div id="leftSideSwitch">
-
-                    <!--                    <div class="input-group" style="margin-top: 15px; margin-bottom: 10px">
-                        <input type="text" class="form-control" placeholder="Seek anything">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
-                    </div>
-                    <div id="searchOptions" class="row">
-                        <div class="col-md-12">
-                            <div class="btn-group">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                                    Distance
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&lt; 500m</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">500 ~ 1500m</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1500 ~ 5000m</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">&gt; 5000m</a></li>
-                                </ul>
-                            </div>
-                            <div class="btn-group">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
-                                    Categories
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Antiques</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Art</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Book</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Clothing</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <hr style="border-color: #6E6E6E; border-width: 2px">
-                    <div id="searchResults" class="col-md-12">
-                        <?php
-                        include("include/connect.php");
-                        $sql = "SELECT * FROM `goods`";
-                        $result=mysql_query($sql) or die(mysql_error());
-                        while ($row = mysql_fetch_array($result)) {
-                            echo '
-                        <div class="row searchResult" data-value="'.trim($row['gid']).'">
-                            <div class="col-md-6">
-                                <img src="'.trim($row['photoPath']).'" alt="..." class="img-rounded">
-                            </div>
-                            <div class="col-md-6 searchResultDescription">
-                                <ul class="list-group">
-                                    <li class="list-group-item">Name: '.trim($row['gname']).'</li>
-                                    <li class="list-group-item">Category: '.trim($row['categories']).'</li>
-                                    <li class="list-group-item">Want for: '.trim($row['want']).'</li>
-                                    <li class="list-group-item">Position: ('.trim($row['posX']).','.trim($row['posY']).')</li>
-                                </ul>
-                            </div>
-                        </div>';
-                        }
-                        ?>
-                    </div>-->
 
                     <!-- Add anything with JS or Backend -->
                 </div>
@@ -215,6 +157,8 @@
         </div>
     </div>
 
+    <div id="myMessageDetailArea">
+    </div>
 
 </div>
 
@@ -240,11 +184,10 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
 
-    <!--------------------------  Google Map Javascript  ---------------------------------------->
+    <!--======================= Google Map Javascript   =======================-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTmx_RgDS6MWl-MdyidKhpCKXMs3pV63Y&signed_in=false&v=3.exp&libraries=places"></script>
     <script src="static/js/richmarker-compiled.js"></script>
     <script src="static/js/map.js"></script>
-    <!----------------------------------------------------------------------------------------->
     <script src="static/js/fb.js"></script>
 </body>
 </html>

@@ -19,6 +19,20 @@
 	else if($type == "follower"){
 		echo "FOLLOWER TABLE PRESSED";		
 	}
+	else if($type == "send"){
+		$message = $_GET['message'];
+		if($message == ""){
+			echo "NO MESSAGE!";
+		}
+		else{
+			$insertSQL = "INSERT INTO `exchangeworld`.`messagetable` (`sender_id`, `reciever_id`, `text`) VALUES ('$my_id', '$target', '$message')";
+			$retval = mysql_query($insertSQL);
+			if(! $retval ){
+			    die('Could not enter data: ' . mysql_error());
+			}
+			echo "Follow Success!!";
+		}
+	}
 	else{
 		echo "Fetch Tables ERROR!";
 	}

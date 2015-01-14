@@ -21,6 +21,7 @@
     <!-- Custom styles for this template -->
     <link href="static/css/customized.css" rel="stylesheet" type="text/css" charset="utf-8">
 
+
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <!--<script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
@@ -214,6 +215,9 @@
         </div>
     </div>
 
+
+</div>
+
     <!-- Junks put here -->
     <div id="exchange"></div>
 
@@ -221,6 +225,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="static/js/ajaxfileupload.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
+
+    <!--fancybox-->
+    <script type="text/javascript" src="static/fancy-box/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+	<!-- Add fancyBox -->
+	<link rel="stylesheet" href="static/fancy-box/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+	<script type="text/javascript" src="static/fancy-box/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
     <!--<script src="static/js/jquery.mousewheel.min.js"></script>-->
     <!--<script src="static/js/jquery.jscrollpane.min.js"></script>-->

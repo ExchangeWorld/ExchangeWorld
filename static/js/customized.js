@@ -144,7 +144,7 @@ function load_exchange(event) {
             success: function (response) {
                 //Left Side
                 $('#leftSideSwitch').hide().empty();
-                $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["gname"] + '<span class="badge">' + response["categories"] + '</span> </li> <li class="list-group-item">Wanted : ' + response["want"] + '</li><li class="list-group-item owner" data-value="' + response["ownerID"] + '"><img src="' + response["owner_photo"] + '" height="20" width="20"> ' + response["username"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading">Description : </div><div class="panel-body"><p>' + response["description"] + '</div></div></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%"> <div class="col-md-12"> <div class="panel panel-default"> <div class="panel-heading" style="font-size: 121%">Comments : </div> <div class="panel-body" style="padding-top:0px;"> <div id=comment_area> <ul class="list-group"></ul> </div> <div class="form-group" style="margin-bottom: 0px; margin-top: 10px;"> <div class="input-group"> <span class="input-group-addon">Say</span> <input id="comment" name="comment" class="form-control" placeholder="leave comment" type="text"> </div> </div> </div> </div> </div></div><div class="searchResults" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
+                $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5 fancybox" href="' + response["photoPath"] + '"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["gname"] + '<span class="badge">' + response["categories"] + '</span> </li> <li class="list-group-item">Wanted : ' + response["want"] + '</li><li class="list-group-item owner" data-value="' + response["ownerID"] + '"><img src="' + response["owner_photo"] + '" height="20" width="20"> ' + response["username"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"><div class="col-md-12"><div class="panel panel-default"><div class="panel-heading">Description : </div><div class="panel-body"><p>' + response["description"] + '</div></div></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%"> <div class="col-md-12"> <div class="panel panel-default"> <div class="panel-heading" style="font-size: 121%">Comments : </div> <div class="panel-body" style="padding-top:0px;"> <div id=comment_area> <ul class="list-group"></ul> </div> <div class="form-group" style="margin-bottom: 0px; margin-top: 10px;"> <div class="input-group"> <span class="input-group-addon">Say</span> <input id="comment" name="comment" class="form-control" placeholder="leave comment" type="text"> </div> </div> </div> </div> </div></div><div class="searchResults" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
 
 
 
@@ -270,9 +270,14 @@ function load_profile() {
                     uid: val
                 },
                 success: function (response) {
-
                     $('#leftSideSwitch').hide().empty();
-                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["username"] + '</li><li class="list-group-item">' + response["email"] + '</li><li class="list-group-item">' + response["nickname"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"><li role="presentation" class="userBtn" data-value="' + response["fb_id"] + '" id="add"><a  href="#">Follow + </a></li><li role="presentation" class="active userBtn" id="seeker"><a href="#">Seekers <span class="badge">42</span></a></li><li role="presentation" class="active userBtn" id="follower"><a href="#">Follower <span class="badge">3</span></a></li><div class="form-group"> <textarea class="form-control" id="message" name="send" placeholder="Send message !"></textarea> </div> </ul></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
+                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5 fancybox" href="' + response["photoPath"] + '"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["username"] + '</li><li class="list-group-item">' + response["email"] + '</li><li class="list-group-item">' + response["nickname"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"><li role="presentation" class="userBtn" data-value="' + response["fb_id"] + '" id="add"><a  href="#">Follow + </a></li><li role="presentation" class="active userBtn" id="seeker"><a href="#">Seekers <span class="badge">42</span></a></li><li role="presentation" class="active userBtn" id="follower"><a href="#">Follower <span class="badge">3</span></a></li> <li role="presentation" class="active fancybox" id="sendMessage" href="#messageTextarea"><a >Send message!</a> </li> </ul></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
+
+                    // popup messagebox
+                    $('#leftSideSwitch').append('<div id="messageTextarea" class="form-group" style="display:none"> <textarea class="form-control" id="message" name="send" placeholder="Send some text...."></textarea> <button id="send" name="send" class="btn btn-primary userBtn">SEND!</button> </div> ');
+
+                    //<div class="form-group"> <textarea class="form-control" id="message" name="send" placeholder="Send message !"></textarea> </div>
+
                     //Handle Exchanging/Exchanged Tables
                     //Get Exchange Table(?) and represent in map
                     $.ajax({
@@ -318,7 +323,7 @@ function load_profile() {
                 },
                 success: function (response) {
                     $('#leftSideSwitch').hide().empty();
-                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["username"] + '</li><li class="list-group-item"> ' + response["email"] + '</li><li class="list-group-item"> ' + response["nickname"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"> <li role="presentation" class="active"><a href="#">Seekers <span class="badge">42</span></a></li><li role="presentation" class="active"><a href="#">Follower <span class="badge">3</span></a></li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
+                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5 fancybox" href="' + response["photoPath"] + '"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["username"] + '</li><li class="list-group-item"> ' + response["email"] + '</li><li class="list-group-item"> ' + response["nickname"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"> <li role="presentation" class="active"><a href="#">Seekers <span class="badge">42</span></a></li><li role="presentation" class="active"><a href="#">Follower <span class="badge">3</span></a></li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
                     //Handle Exchanging/Exchanged Tables
                     //Get Exchange Table(?) and represent in map
                     $.ajax({
@@ -474,10 +479,20 @@ function seek_query(search, query_type) {
 }
 
 $(document).ready(function () {
-    $("#leftSideSwitch").on("click", ".userBtn", function (event) {
-        var tagetID = $("#add").attr("data-value");
+    $(function () {
+        $(".fancybox").fancybox();
+        /// 找到class名稱為fancybox的類別，將他套用 fancybox效果
+    });
+
+    $("body").on("click", ".userBtn", function (event) {
+        var tagetID = $("#add").attr("data-value");  // get others' fb id
+        var myID = $("#profile").attr("data-value"); // get my fb id
         var Type = $(this).attr("id");
-        var myID = $("#profile").attr("data-value");
+
+        //if (Type == "send") {
+        //    alert($("#message").val());
+        // //   $("#sendMessage").fancybox();
+        //}
         $.ajax({
             type: "GET",
             url: "./php_script/userBtn.php",
@@ -485,7 +500,8 @@ $(document).ready(function () {
             data: {
                 tID: tagetID,
                 type: Type,
-                mID: myID
+                mID: myID,
+                message: $("#message").val()
             },
             success: function (response) {
                 alert(response);
@@ -495,7 +511,6 @@ $(document).ready(function () {
                 alert(JSON.stringify(xhr));
             }
         });
-
     });
 
     //load_exchange();
@@ -746,3 +761,4 @@ $(document).ready(function () {
 $(window).load(function () {
     $('#seek').click();
 });
+

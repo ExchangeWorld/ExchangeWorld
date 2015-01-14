@@ -261,7 +261,7 @@ function load_profile() {
 
     if (val != 0) {
       // Other's profiles
-      if (hidegoback == false) {
+      if (hidegoback == false && val != $("#profile").attr("data-value")) {
             $.ajax({
                 type: "GET",
                 url: "./php_script/profile.php",
@@ -272,7 +272,7 @@ function load_profile() {
                 success: function (response) {
 
                     $('#leftSideSwitch').hide().empty();
-                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["username"] + '</li><li class="list-group-item">' + response["email"] + '</li><li class="list-group-item">' + response["nickname"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"><li role="presentation" class="userBtn" data-value="' + response["fb_id"] + '" id="add"><a  href="#">Follow + </a></li><li role="presentation" class="active userBtn" id="seeker"><a href="#">Seekers <span class="badge">42</span></a></li><li role="presentation" class="active userBtn" id="follower"><a href="#">Follower <span class="badge">3</span></a></li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
+                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["username"] + '</li><li class="list-group-item">' + response["email"] + '</li><li class="list-group-item">' + response["nickname"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"><li role="presentation" class="userBtn" data-value="' + response["fb_id"] + '" id="add"><a  href="#">Follow + </a></li><li role="presentation" class="active userBtn" id="seeker"><a href="#">Seekers <span class="badge">42</span></a></li><li role="presentation" class="active userBtn" id="follower"><a href="#">Follower <span class="badge">3</span></a></li><div class="form-group"> <textarea class="form-control" id="message" name="send" placeholder="Send message !"></textarea> </div> </ul></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
                     //Handle Exchanging/Exchanged Tables
                     //Get Exchange Table(?) and represent in map
                     $.ajax({

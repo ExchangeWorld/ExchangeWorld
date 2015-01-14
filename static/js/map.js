@@ -19,10 +19,220 @@ $(document).ready(function () {
 
 function initialize() {
     var centerLocation = new google.maps.LatLng(24.9853919, 121.5865058);
+    var noPOILabels =[
+    {
+        "featureType": "all",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#f3f4f4"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.man_made",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "weight": 0.9
+            },
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.natural.landcover",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#83cead"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#ffffff"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.text",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "saturation": "0"
+            },
+            {
+                "lightness": "0"
+            },
+            {
+                "color": "#515151"
+            },
+            {
+                "weight": "0.40"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#fee379"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "labels.text",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#fee379"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "labels.text",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#c9158a"
+            },
+            {
+                "weight": "0.50"
+            },
+            {
+                "saturation": "0"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "labels.text",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#7fc8ed"
+            }
+        ]
+    }
+];
+        //]
+    //[
+    //    {
+    //        featureType: "poi",
+    //        elementType: "labels",
+    //        stylers: [{ visibility: "off" }]
+    //    }
+    //];
+
+    // Create a new StyledMapType object, passing it the array of styles,
+    // as well as the name to be displayed on the map type control.
+    var noPOIMapType = new google.maps.StyledMapType(noPOILabels,{ name: "NO POI" });
 
     var mapProp = {
         center: new google.maps.LatLng(24.9853919, 121.5865058),
         zoom: 17,
+        mapTypeControlOptions: {mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'no_poi']},
         draggableCursor: 'default',
         draggingCursor: 'default',
         disableDoubleClickZoom: false,
@@ -37,15 +247,22 @@ function initialize() {
         streetViewControl: false,
         scaleControl: false,
         overviewMapControl: false,
-        mapTypeControl: false,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeControl: false
+        //mapTypeId: google.maps.MapTypeId.ROADMAP,
+
+
     };
+    //Associate the styled map with the MapTypeId and set it to display.
+
 
     naigvator();
     map = new google.maps.Map(document.getElementById("mapCanvas"), mapProp);
 
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('mapButton-group'));
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById('autocomplete-group'));
+    map.mapTypes.set('no_poi', noPOIMapType);
+    map.setMapTypeId('no_poi');
+
     autocomplete = new google.maps.places.Autocomplete(
       /** @type {HTMLInputElement} */(document.getElementById('autocomplete')), { bounds: map.getBounds() });
 
@@ -188,12 +405,12 @@ function addMarkers(lat, lng, img, gid) {
 
 
 
-                    document.getElementById("comment").addEventListener("keydown", function(e) {
+                    document.getElementById("comment").addEventListener("keydown", function (e) {
                         if (!e) { var e = window.event; }
                         //e.preventDefault(); // sometimes useful
 
                         // Enter is pressed  Handle comments
-                        if (e.keyCode == 13 && $("#comment").val()!="") { 
+                        if (e.keyCode == 13 && $("#comment").val() != "") {
                             var targetID = $("#profile").attr("data-value");
                             var comment = $("#comment").val();
                             $.ajax({
@@ -201,9 +418,9 @@ function addMarkers(lat, lng, img, gid) {
                                 url: "./php_script/comments.php",
                                 dataType: "text",
                                 data: {
-                                    type:"write",
-                                    gid : val,
-                                    mID :targetID,
+                                    type: "write",
+                                    gid: val,
+                                    mID: targetID,
                                     Comment: comment
                                 },
                                 success: function (response) {
@@ -224,12 +441,12 @@ function addMarkers(lat, lng, img, gid) {
                         url: "./php_script/comments.php",
                         dataType: "json",
                         data: {
-                            type:"fetch",
-                            gid : val
+                            type: "fetch",
+                            gid: val
                         },
                         success: function (response) {
-                            for(var i=0; i<response.length;i++){
-                                $('#comment_area').append('<li class="list-group-item" style="padding: 5px;"><img class="owner" data-value="'+response[i]["commenter"]+'" src="' + response[i]["commenterPhoto"] + '" style="width: 30px; height: 30px;"> '+ response[i]["comment"] +'</li>');
+                            for (var i = 0; i < response.length; i++) {
+                                $('#comment_area').append('<li class="list-group-item" style="padding: 5px;"><img class="owner" data-value="' + response[i]["commenter"] + '" src="' + response[i]["commenterPhoto"] + '" style="width: 30px; height: 30px;"> ' + response[i]["comment"] + '</li>');
                             }
                         },
                         error: function (xhr, ajaxOption, thrownError) {

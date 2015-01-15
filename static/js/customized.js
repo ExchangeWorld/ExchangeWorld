@@ -558,6 +558,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 if (Type == "following") {
+                    var v= $("#bdgfollowing").text() ;
                     $('#leftSideSwitch').hide().empty();
                     $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div>\
                     <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
@@ -568,7 +569,7 @@ $(document).ready(function () {
                             <h1 style="margin-top: 0px">Following</h1>\
                         </div>\
                         <div class="col-md-4">\
-                            <h1 style="margin-top: 0px; color: #04ACD9">'+ $("#bdgfollowing").val() + '</h1>\
+                            <h1 style="margin-top: 0px; color: #04ACD9">'+ v+ '</h1>\
                         </div>\
                     </div>');
                     if (response == null) $("#leftSideSwitch").append('No Result');
@@ -587,6 +588,7 @@ $(document).ready(function () {
                     $('#leftSideSwitch').show('fast');
                 }
                 else if (Type == "follower") {
+                    var v= $("#bdgfollower").text();
                     $('#leftSideSwitch').hide().empty();
                     $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div>\
                     <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
@@ -597,7 +599,7 @@ $(document).ready(function () {
                             <h1 style="margin-top: 0px">Follower</h1>\
                         </div>\
                         <div class="col-md-4">\
-                            <h1 style="margin-top: 0px; color: #04ACD9">' + $("#bdgfollower").val() + '</h1>\
+                            <h1 style="margin-top: 0px; color: #04ACD9">' +  v+ '</h1>\
                         </div>\
                     </div>');
                     if (response == null) $("#leftSideSwitch").append('No Result');

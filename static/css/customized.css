@@ -389,4 +389,18 @@ body {
     max-height:200px;
     border: 6px solid white;
     margin-left:50px;
+    z-index:99999;
+}
+
+.profile-block
+{
+    position:absolute;
+    z-index:-999;
+    background-color:#f0f0f0;
+    margin-top:-50px;
+    margin-left:-6px;
+    padding:5px;
+    border-radius:5px;
+    width:98%;
+    height:80%;
 }

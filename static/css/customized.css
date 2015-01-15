@@ -367,5 +367,11 @@ body {
 
 #messageTextarea
 {
-    padding:8px;
+    padding:6px;
+}
+
+.circular {
+	border-radius: 150px;
+	-webkit-border-radius: 150px;
+	-moz-border-radius: 150px;
 }

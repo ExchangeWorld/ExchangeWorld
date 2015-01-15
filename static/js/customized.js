@@ -2,6 +2,7 @@ var currentStage = "seek";
 var gobackStack = [];
 var gobackSearchResultDataValue = 0;
 var gobackSearchResultDataValueNeedToBeReplaced = false;
+var gobackOwnerDataValue = 0;
 
 var seekInnerHTML = '<div class="input-group" style="margin-top: 15px; margin-bottom: 10px"> <input id="searchName" type="text" class="form-control" placeholder="Seek anything"> <span class="input-group-btn"> <button id="searchString" class="btn btn-info seeking" type="button">Seek !</button> </span></div><div id="searchOptions" class="row"> <div class="col-md-12"> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Distance <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">1500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">5000m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">10000m</a></li> </ul> </div> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Books</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Textbooks</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Magazine</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Movies</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Music CD</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Video Game</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Smart Phone</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Tablet</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Camera</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Audio</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Computer Hardware</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Jewelry</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Clothing</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Shoes</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Watches</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Furniture</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Others</a></li></ul> </div> </div></div><hr style="border-color: #6E6E6E; border-width: 2px"><div id="searchResults" class="col-md-12"> </div>';
 
@@ -270,7 +271,7 @@ function load_profile() {
     var hidegoback = false;
     console.log("owner!");
     //push previous stage to gobackStack
-    gobackStack.push(currentStage);
+    if(currentStage != "userBtn") gobackStack.push(currentStage);
     //set currentStage to next stage, owner
     if (currentStage == "owner") {
         //means that user looked at somebody's profile and check own profile, then this time we want to hide goback and reset the stack
@@ -280,7 +281,18 @@ function load_profile() {
     }
     currentStage = "owner";
 
-    val = $(this).attr('data-value');
+    //if it's come back from following or follower
+    if(gobackOwnerDataValue != 0)
+    {
+        val = gobackOwnerDataValue;
+        gobackOwnerDataValue = 0;
+    }
+    else
+    {
+        val = $(this).attr('data-value');
+        gobackOwnerDataValue = val;
+    }
+     
 
     if (val != 0) {
       // Other's profiles
@@ -511,6 +523,13 @@ $(document).ready(function () {
     });
 
     $("body").on("click", ".userBtn", function (event) {
+        
+        console.log("userBtn!");
+        console.log("previous stage is " + currentStage);
+        gobackStack.push(currentStage);
+        console.log(gobackStack);
+        currentStage = "userBtn";
+
         var tagetID = $("#add").attr("data-value");  // get others' fb id
         var myID = $("#profile").attr("data-value"); // get my fb id
         var Type = $(this).attr("id");
@@ -916,6 +935,11 @@ $(document).ready(function () {
             case "post":
                 gobackStack.pop();
                 load_post();
+                break;
+            case "owner":
+                console.log("case owner");
+                gobackStack.pop();
+                load_profile();
                 break;
         }
 

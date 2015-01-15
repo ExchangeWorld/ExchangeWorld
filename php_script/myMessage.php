@@ -25,7 +25,7 @@
 			echo "NO MESSAGE!";
 		}
 		else{
-			$insertSQL = "INSERT INTO `exchangeworld`.`messagetable` (`sender_id`, `reciever_id`, `text`) VALUES ('$my_id', '$target', '$reply')";
+			$insertSQL = "INSERT INTO `messagetable` (`sender_id`, `reciever_id`, `text`) VALUES ('$my_id', '$target', '$reply')";
 			$retval = mysql_query($insertSQL);
 			if(! $retval ){
 			    die('Could not enter data: ' . mysql_error());

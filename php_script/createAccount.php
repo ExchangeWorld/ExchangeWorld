@@ -31,7 +31,7 @@
 		
 		if($row[0] == 0){//Create new account
 			$Key = get_Key_id();
-			$insertSQL = "INSERT INTO `exchangeworld`.`user` (`uid`, `exchangeTable`, `followerTable`, `seekerTable`, `fb_id`, `username` , `email`, `nickname`, `photoPath`) VALUES ('$Key', '$Key', '$Key', '$Key', '$id', '$name', 'test@gmail.com', 'thisisnickname', '$picture')";
+			$insertSQL = "INSERT INTO `user` (`uid`, `exchangeTable`, `followerTable`, `seekerTable`, `fb_id`, `username` , `email`, `nickname`, `photoPath`) VALUES ('$Key', '$Key', '$Key', '$Key', '$id', '$name', 'test@gmail.com', 'thisisnickname', '$picture')";
 			$retval = mysql_query($insertSQL);
 			if(! $retval ){
 			    die('Could not enter data: ' . mysql_error());

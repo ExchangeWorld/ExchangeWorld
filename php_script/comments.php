@@ -1,6 +1,6 @@
 <?php
 	include("../include/connect.php");
-//	$type   = $_GET['type']; 
+	$type   = $_GET['type']; 
 	$gid = $_GET['gid'];
 	$my_id = $_GET['mID'];
 	$comment = $_GET['Comment'];
@@ -18,7 +18,7 @@
 		echo json_encode($rows);
 	}
 	else if($type == "write"){
-		$insertSQL = "INSERT INTO `exchangeworld`.`comments` (`goods_id`, `commenter`, `comment`) VALUES ('$gid', '$my_id', '$comment')";
+		$insertSQL = "INSERT INTO `comments` (`goods_id`, `commenter`, `comment`) VALUES ('$gid', '$my_id', '$comment')";
 		$retval = mysql_query($insertSQL);
 		if(! $retval ){
 		    die('Could not enter data: ' . mysql_error());
@@ -32,7 +32,7 @@
 		echo '<img src='.$row["commenterPhoto"].' height="30" width="30"> '.$comment;
 	}
 	else{
-		echo "Comment ERROR!!!";
+		echo "Comment ERROR!!!".$type;
 	}
 
 ?>

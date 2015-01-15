@@ -79,7 +79,7 @@
       <div class="collapse navbar-collapse navbar-right navbar-main-collapse" style="margin-right:6%">
         <ul class="nav navbar-nav">
           <li id="nav-signin" style="display: none"><a href="#"><span style="margin-right:5px"><img src="static/img/icon/social-31-facebook.png"></span>Sign In</a></li>
-          <li id="nav-explore" style="display: none"><a href="index.php">Explore</a></li>
+          <li id="nav-explore" style="display: none"><a href="exchangeworld.php">Explore</a></li>
         </ul>
       </div>
       <!-- /.navbar-collapse -->
@@ -259,11 +259,11 @@
 
         FB.getLoginStatus(function (response) {
           if (response.status === 'connected') {
-            //window.location.href = "index.php";
+            //window.location.href = "exchangeworld.php";
             $('#nav-signin').hide();
             $('#nav-explore').show();
             FB.api('/me', function (response) {
-              $('#Login-msg').html('<h2>Welcome back, ' + response.name + '</h2><a href="index.php"><h3>Ready to Explore?</h3></a>');
+              $('#Login-msg').html('<h2>Welcome back, ' + response.name + '</h2><a href="exchangeworld.php"><h3>Ready to Explore?</h3></a>');
             });
 
           } else if (response.status === 'not_authorized') {
@@ -291,7 +291,7 @@
           //  $("#myhead").attr('src', my_picture_url);
           //});
           FB.api('/me', function (response) {
-            $('#Login-msg').html('<h2>Welcome back, ' + response.name + '</h2><a href="index.php"><h3>Ready to Explore?</h3></a>');
+            $('#Login-msg').html('<h2>Welcome back, ' + response.name + '</h2><a href="exchangeworld.php"><h3>Ready to Explore?</h3></a>');
           });
           //$("#myname").show();
 

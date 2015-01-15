@@ -309,7 +309,7 @@ function load_profile() {
 
 
                     // popup (send) messagebox
-                    $('#leftSideSwitch').append('<div id="messageTextarea" class="form-group" style="display:none; width:400px;">To:   <img class="circular" src="' + response["photoPath"] + '" height="30" width="30" >' + '  ' + response["username"] + '<textarea class="form-control" id="message" name="send" rows="16" placeholder="Send some text...." ></textarea> <img class="circular" src="' + $("#myhead").attr('src') + '" style="width:60px;height:60px;margin-top:15px;"> <button id="send" name="send" class="btn btn-danger userBtn btn-send">Send Message</button> </div> ');
+                    $('#leftSideSwitch').append('<div id="messageTextarea" class="form-group" style="display:none; width:400px;">To:   <img class="circular" src="' + response[0]["photoPath"] + '" height="30" width="30" >' + '  ' + response[0]["username"] + '<textarea class="form-control" id="message" name="send" rows="16" placeholder="Send some text...." ></textarea> <img class="circular" src="' + $("#myhead").attr('src') + '" style="width:60px;height:60px;margin-top:15px;"> <button id="send" name="send" class="btn btn-danger userBtn btn-send">Send Message</button> </div> ');
 
 
                     // $("#my-profile-picture").attr('src')

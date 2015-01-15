@@ -49,7 +49,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#" style="font-size: 130%; onclick="refreshBrand" ">
+                <a class="navbar-brand" href="#" style="font-size: 130%;" onclick="refreshBrand()">
                     <img style="max-width:200px; margin-top:-8px;" src="static/img/icon/logotmp.png" alt="">
                     <!--<img style="display: inline;" src="images/exchange-icon" width="25">ExchangeWorld-->
 

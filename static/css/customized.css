@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Roboto',noto;
+    font-family: 'Roboto','Microsoft JhengHei',noto;
     font-size: large;
     height: 100%;
     width: 100%;
@@ -381,4 +381,12 @@ body {
 	border-radius: 150px;
 	-webkit-border-radius: 150px;
 	-moz-border-radius: 150px;
+}
+
+.profile-user-img
+{
+    max-width:200px;
+    max-height:200px;
+    border: 6px solid white;
+    margin-left:50px;
 }

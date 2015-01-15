@@ -16,6 +16,7 @@
     <link href="static/css/bootstrap-theme.min.css" rel="stylesheet">
 
     <link href="static/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
+    <link href="static/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css">
     <!--<link href="static/css/jquery.jscrollpane.css" rel="stylesheet" type="text/css" charset="utf-8" media="all">-->
 
     <!-- Custom styles for this template -->
@@ -177,6 +178,7 @@
     <!--<script src="static/js/jquery.mousewheel.min.js"></script>-->
     <!--<script src="static/js/jquery.jscrollpane.min.js"></script>-->
     <script src="static/js/perfect-scrollbar.min.js"></script>
+    <script src="static/js/bootstrap-switch.min.js"></script>
     <script src="static/js/customized.js"></script>
     <!--<script src="../../assets/js/docs.min.js"></script>-->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

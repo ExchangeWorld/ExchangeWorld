@@ -570,7 +570,7 @@ $(document).ready(function () {
                             <h1 style="margin-top: 0px">Following</h1>\
                         </div>\
                         <div class="col-md-4">\
-                            <h1 style="margin-top: 0px; color: #04ACD9">'+$("#bdgfollowing")+'</h1>\
+                            <h1 style="margin-top: 0px; color: #04ACD9">'+$("#bdgfollowing").val()+'</h1>\
                         </div>\
                     </div>');
                     if (response == null) $("#leftSideSwitch").append('No Result');
@@ -599,7 +599,7 @@ $(document).ready(function () {
                             <h1 style="margin-top: 0px">Follower</h1>\
                         </div>\
                         <div class="col-md-4">\
-                            <h1 style="margin-top: 0px; color: #04ACD9">' + $("#bdgfollower") + '</h1>\
+                            <h1 style="margin-top: 0px; color: #04ACD9">' + $("#bdgfollower").val() + '</h1>\
                         </div>\
                     </div>');
                     if (response == null) $("#leftSideSwitch").append('No Result');

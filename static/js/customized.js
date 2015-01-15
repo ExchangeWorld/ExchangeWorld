@@ -43,8 +43,14 @@ function load_post() {
         //return;
     }
 
-    //destroy the scroll 
+    //destroy the scroll
+    //and reset the scroll by Noel
     $('#leftSide').perfectScrollbar('destroy');
+    $("#leftSide").scrollTop(0);
+	$("#leftSide").perfectScrollbar('update');
+    $('#leftSide').perfectScrollbar(({
+            suppressScrollX: true
+        }));
 
     console.log("post!");
     //reset gobackStack
@@ -194,7 +200,7 @@ function load_exchange(event) {
                     },
                     success: function (response) {
                         for(var i=0; i<response.length;i++){
-                            $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px"><img class="owner" data-value="' + response[i]["commenter"] + '" src="' + response[i]["commenterPhoto"] + '" style="width: 30px; height: 30px;"> ' + response[i]["comment"] + '</li>');
+                            $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px; background-image: linear-gradient(to bottom,#d9edf7 0,#c4e3f3 100%);"><img class="owner" data-value="' + response[i]["commenter"] + '" src="' + response[i]["commenterPhoto"] + '" style="width: 30px; height: 30px;"> ' + response[i]["comment"] + '</li>');
                         }
                     },
                     error: function (xhr, ajaxOption, thrownError) {

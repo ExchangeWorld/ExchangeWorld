@@ -80,7 +80,7 @@ body {
 
 #leftSide {
     height: inherit;
-    background-color: silver;
+    background-color: #f0f0f0;
     overflow: hidden;
     z-index: 168;
     -webkit-box-shadow: 4px 0px 5px 0px rgba(0, 0, 0, 0.59);
@@ -94,14 +94,14 @@ body {
 
 #searchOptions {
     padding-top: 0px;
-    background-color: silver;
+    background-color: #f0f0f0;
 }
 
 #searchResults {
     padding-top: 0px;
     padding-left: 0px;
     padding-right: 0px;
-    background-color: silver;
+    background-color: #f0f0f0;
     /*    height: inherit;
     overflow: auto;*/
 }
@@ -153,7 +153,7 @@ body {
 
 .row .postGroup {
     padding-top: 0px;
-    background-color: silver;
+    background-color: #f0f0f0;
 }
 
 #autocomplete-group {

@@ -59,7 +59,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse" style="background-color: #36474F; border-color: #36474F; border-size: 0px">
                 <ul class="nav navbar-nav" style="margin-left:17%">
-                    <li id="seek" data-step="1" data-intro="Seek page : Type and show you what you want ." class="active seeking">
+                    <li id="seek" data-step="1" data-intro="Seek what you want !" class="active seeking">
                         <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color: #FFFFFD"></span> Seek</a>
 
                     </li>

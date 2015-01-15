@@ -1,6 +1,8 @@
-<!--<form class="form-horizontal" id ="new_post" method="POST" enctype="multipart/form-data"><fieldset>--><!-- Form Name -->
-<h1>Post Goods</h1><!-- Prepended text-->
-<h3><span class="label label-primary" style="margin-bottom: 10px">● What do you have?</span></h3>
+<!--<form class="form-horizontal" id ="new_post" method="POST" enctype="multipart/form-data"><fieldset>-->
+<!-- Form Name -->
+<h1>Post Goods</h1>
+<!-- Prepended text-->
+<h3><span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>  What do you have?</span></h3>
 <div class="row postGroup">
     <div class="col-md-12">
         <div class="form-group" style="margin:0px">
@@ -9,14 +11,12 @@
             </div>
         </div>
     </div>
-</div><!-- Select Basic -->
+</div>
+<!-- Select Basic -->
 <div class="row postGroup">
     <div class="col-md-12" style="margin-top: 5px">
         <div class="btn-group" style="width:100%">
-            <button class="btn btn-default dropdown-toggle" type="button" id="categories" data-toggle="dropdown" aria-expanded="true" style="text-align:left">
-                <span> Choose a category  </span>
-                <span class="caret"></span>
-            </button>
+            <button class="btn btn-default dropdown-toggle" type="button" id="categories" data-toggle="dropdown" aria-expanded="true" style="text-align:left"><span> Choose a category </span><span class="caret"></span></button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width:100%">
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Books</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Textbooks</a></li>
@@ -45,48 +45,50 @@
         </div>
     </div>
 </div>
-<br /><!-- File Button -->
-<h3><span class="label label-primary" style="margin-bottom: 10px">● Upload Photo</span></h3>
+<!-- File Button -->
+<h3><span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>  Upload Photo</span></h3>
 <div class="row postGroup">
     <div class="col-md-12">
         <form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data">
-            <div id="targetLayer"></div>
+            <div id="targetLayer">
+            </div>
             <div id="uploadFormLayer">
-                <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*">
-                <img id="photo_preview" width="200" src="#" alt=" " style="display: none" />
-                <input id="submit" value="Submit" class="btnSubmit" type="submit">
+                <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*"><img id="photo_preview" width="200" src="#" alt=" " style="display: none" /><input id="submit" value="Submit" class="btnSubmit" type="submit">
             </div>
         </form>
     </div>
-</div><!-- Textarea -->
+</div>
+<!-- Textarea -->
 <div class="row postGroup">
     <div class="col-md-12" style="margin-top: 5px">
-        <div class="form-group"> <textarea class="form-control" id="description" name="description" placeholder="Say more about your good"></textarea> </div>
+        <div class="form-group" style="margin-bottom:0px">
+            <textarea class="form-control" id="description" rows="5" name="description" placeholder="Say more about your good" style="resize:none"></textarea>
+        </div>
     </div>
-</div><!-- Button --> <!-- Prepended text-->
-<h3>
-    <span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Locate your goods on map!</span>
-</h3>
-<br />
-<h3>
-    <span class="label label-primary" style="margin-bottom: 10px">● What do you want?</span>
-</h3>
+</div>
+<!-- Button -->
+<!-- Prepended text-->
+<h3><span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  Locate your goods on map!</span></h3>
+<h4>Set your place on the map!</h4>
+<h3><span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>  What do you want?</span></h3>
 <div class="row postGroup">
     <div class="col-md-12">
-        <div class="form-group">
+        <div class="form-group" style="margin-bottom:0px">
             <div class="input-group" style="width:100%">
                 <input id="want_name" name="want_name" class="form-control" placeholder="Name" type="text">
             </div>
         </div>
     </div>
-</div><!-- Button -->
+</div>
+<!-- Button -->
 <div class="row postGroup">
     <div class="form-group">
         <label class="col-md-4 control-label" for="submit"></label>
         <div class="col-md-6">
-            <button id="submit" name="submit" class="submit" style="padding:0px; border:none; background-color: silver;">
-                <h1><span class="label label-danger">Post!</span></h1>
+            <button id="submit" name="submit" class="submit" style="padding:0px; border:none; background-color: silver">
+            <h1><span class="label label-danger">Post!</span></h1>
             </button>
         </div>
     </div>
-</div><!--</fieldset></form>-->
+</div>
+<!--</fieldset></form>-->

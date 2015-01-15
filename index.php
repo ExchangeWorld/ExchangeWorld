@@ -16,6 +16,7 @@
     <link href="static/css/bootstrap-theme.min.css" rel="stylesheet">
 
     <link href="static/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
+    <link href="static/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css">
     <!--<link href="static/css/jquery.jscrollpane.css" rel="stylesheet" type="text/css" charset="utf-8" media="all">-->
 
     <!-- Custom styles for this template -->
@@ -41,7 +42,7 @@
 
     <nav class="navbar navbar-inverse navbar-fixed-top unselectable" role="navigation" style="background-color: #36474F; border-color: #36474F; border-size: 0px">
         <div class="container-fluid" style="background-color: #36474F; border-color: #36474F; border-size: 0px">
-            <div class="navbar-header">
+            <div class="navbar-header" style="width:16.1%;">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -55,7 +56,7 @@
                 </a>
             </div>
             <div id="navbar" class="navbar-collapse collapse" style="background-color: #36474F; border-color: #36474F; border-size: 0px">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" style="margin-left:17%">
                     <li id="seek" class="active seeking">
                         <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color: #FFFFFD"></span> Seek</a>
 
@@ -78,7 +79,6 @@
                     <li>
                         <div id="login" class="fb-login-button" data-scope="user_likes,user_photos" onlogin='fbLoaded();' data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
                     </li>
-
                     <li class="dropdown">
                         <a id="myname" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <img id="myhead" src="./static/img/alt.gif" height="20" width="20">
@@ -177,6 +177,7 @@
     <!--<script src="static/js/jquery.mousewheel.min.js"></script>-->
     <!--<script src="static/js/jquery.jscrollpane.min.js"></script>-->
     <script src="static/js/perfect-scrollbar.min.js"></script>
+    <script src="static/js/bootstrap-switch.min.js"></script>
     <script src="static/js/customized.js"></script>
     <!--<script src="../../assets/js/docs.min.js"></script>-->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

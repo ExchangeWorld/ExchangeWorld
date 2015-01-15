@@ -286,58 +286,58 @@ function initialize() {
     google.maps.event.addListener(map, 'zoom_changed', function () {
         var zoomLevel = map.getZoom();
         if (zoomLevel >= 17 || zoomLevel <= 7) {
-            $('.custom-marker').remove('custom-marker-112');
+            $('.custom-marker').remove('custom-marker-120');
         }
         else if (zoomLevel == 16)
         {
-            $('.custom-marker').removeClass('custom-marker-102');
-            $('.custom-marker').addClass('custom-marker-112');
+            $('.custom-marker').removeClass('custom-marker-112');
+            $('.custom-marker').addClass('custom-marker-120');
         }
         else if(zoomLevel==15)
         {
+            $('.custom-marker').removeClass('custom-marker-120');
+            $('.custom-marker').removeClass('custom-marker-104');
+            $('.custom-marker').addClass('custom-marker-112');
+        }
+        else if (zoomLevel == 14) {
             $('.custom-marker').removeClass('custom-marker-112');
             $('.custom-marker').removeClass('custom-marker-96');
             $('.custom-marker').addClass('custom-marker-104');
         }
-        else if (zoomLevel == 14) {
-            $('.custom-marker').removeClass('custom-marker-104');
-            $('.custom-marker').removeClass('custom-marker-88');
+        else if (zoomLevel == 13) {
+            $('.custom-marker').removeClass('custom-marker-114');
+            $('.custom-marker').removeClass('custom-marker-86');
             $('.custom-marker').addClass('custom-marker-96');
         }
-        else if (zoomLevel == 13) {
+        else if (zoomLevel == 12) {
             $('.custom-marker').removeClass('custom-marker-96');
             $('.custom-marker').removeClass('custom-marker-80');
             $('.custom-marker').addClass('custom-marker-88');
         }
-        else if (zoomLevel == 12) {
+        else if (zoomLevel == 11) {
             $('.custom-marker').removeClass('custom-marker-88');
             $('.custom-marker').removeClass('custom-marker-72');
             $('.custom-marker').addClass('custom-marker-80');
         }
-        else if (zoomLevel == 11) {
+        else if (zoomLevel == 10) {
             $('.custom-marker').removeClass('custom-marker-80');
             $('.custom-marker').removeClass('custom-marker-64');
             $('.custom-marker').addClass('custom-marker-72');
         }
-        else if (zoomLevel == 10) {
-            $('.custom-marker').removeClass('custom-marker-72');
+        else if (zoomLevel == 9) {
+            $('.custom-marker').removeClass('custom-marker-88');
             $('.custom-marker').removeClass('custom-marker-56');
             $('.custom-marker').addClass('custom-marker-64');
         }
-        else if (zoomLevel == 9) {
+        else if (zoomLevel == 8) {
             $('.custom-marker').removeClass('custom-marker-64');
             $('.custom-marker').removeClass('custom-marker-48');
             $('.custom-marker').addClass('custom-marker-56');
         }
-        else if (zoomLevel == 8) {
-            $('.custom-marker').removeClass('custom-marker-56');
-            $('.custom-marker').removeClass('custom-marker-40');
-            $('.custom-marker').addClass('custom-marker-48');
-        }
         else if(zoomLevel==7)
         {
-            $('.custom-marker').removeClass('custom-marker-48');
-            $('.custom-marker').addClass('custom-marker-40');
+            $('.custom-marker').removeClass('custom-marker-56');
+            $('.custom-marker').addClass('custom-marker-48');
         }
      
     });

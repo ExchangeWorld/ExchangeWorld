@@ -24,7 +24,7 @@
 <body role="document">
   <div id="fb-root"></div>
   <!-- Your site -->
-  <nav class="navbar navbar-fixed-top unselectable navbar-material-indigo-500 shadow-z-3" role="navigation">
+  <nav class="navbar navbar-fixed-top unselectable navbar-material-teal-900 shadow-z-3" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">

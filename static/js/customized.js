@@ -548,11 +548,6 @@ $(document).ready(function () {
         }));
 
 
-<<<<<<< HEAD
-        alert($(".badge").val())
-        
-=======
->>>>>>> origin/master
         $.ajax({
             type: "GET",
             url: "./php_script/userBtn.php",

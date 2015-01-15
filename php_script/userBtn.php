@@ -13,7 +13,7 @@
 		echo "Follow Success!!";
 
 	}
-	else if($type == "seeker"){
+	else if($type == "following"){
 		echo "SEEKER TABLE PRESSED";
 	}
 	else if($type == "follower"){

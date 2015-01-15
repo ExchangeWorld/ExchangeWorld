@@ -192,13 +192,20 @@ body {
 .custom-marker {
     background-color: white;
     border-width: 5px;
-    border-style: ridge;
-    /*padding: 1px;*/
+    border-radius: 5px;
+    border-style: solid;
+    padding: 6px;
     -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    width: 120px;
-    height: 90px;
+    width: 128px;
+    height: 96px;
+}
+
+.custom-marker-120
+{
+    width:120px;
+    height:90px;
 }
 
 .custom-marker-112
@@ -213,56 +220,50 @@ body {
     height:78px;
 }
 
-.custom-marker-96
+.custom-marker-86
 {
     width:96px;
     height:72px;
 }
 
-.custom-marker-88
+.custom-marker-80
 {
     width:88px;
     height:66px;
 }
 
-.custom-marker-80
+.custom-marker-72
 {
     width:80px;
     height:60px;
 }
 
-.custom-marker-72
+.custom-marker-64
 {
     width:72px;
     height:54px;
 }
 
-.custom-marker-64
+.custom-marker-56
 {
     width:64px;
     height:48px;
 }
 
-.custom-marker-56
+.custom-marker-48
 {
     width:56px;
     height:42px;
 }
 
-.custom-marker-48
+.custom-marker-40
 {
     width:48px;
     height:36px;
 }
 
-.custom-marker-40
-{
-    width:40px;
-    height:30px;
-}
-
 .normal-item {
-    border-color: #f00;
+    border-color: #4db6ac;
 }
 
 .time-limited-item {

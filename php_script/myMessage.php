@@ -12,6 +12,7 @@
 				ORDER BY `readed` ASC";
 	    $result=mysql_query($sql) or die(mysql_error());
 		while ($row = mysql_fetch_array($result)) {	
+			$row["text"] = nl2br($row["text"]);
 			$rows[] = $row;
 		}
 		echo json_encode($rows);	

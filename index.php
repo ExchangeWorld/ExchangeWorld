@@ -44,7 +44,7 @@
 
     <nav class="navbar navbar-inverse navbar-fixed-top unselectable" role="navigation" style="background-color: #36474F; border-color: #36474F; border-size: 0px">
         <div class="container-fluid" style="background-color: #36474F; border-color: #36474F; border-size: 0px">
-            <div class="navbar-header" data-step="1" data-intro="Get it, use it." style="width:16.1%;">
+            <div class="navbar-header" style="width:16.1%;">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -59,16 +59,16 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse" style="background-color: #36474F; border-color: #36474F; border-size: 0px">
                 <ul class="nav navbar-nav" style="margin-left:17%">
-                    <li id="seek" data-step="2" data-intro="Seek page : Type and show you what you want ." class="active seeking">
+                    <li id="seek" data-step="1" data-intro="Seek page : Type and show you what you want ." class="active seeking">
                         <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color: #FFFFFD"></span> Seek</a>
 
                     </li>
 
-                    <li id="post" data-step="3" data-intro="You want to change something ? Click here ! " >
+                    <li id="post" data-step="2" data-intro="You want to change something ? Click here ! " >
                         <a href="#post"><span class="glyphicon glyphicon-pushpin" aria-hidden="true" style="color: #FFFFFD"></span> Post</a>
                     </li>
 
-                    <li id="about" data-step="4" data-intro="Doesn't know who we are ? Click here ! Let me tell you !" >
+                    <li id="about" data-step="3" data-intro="Doesn't know who we are ? Click here ! Let me tell you !" >
                         <a href="index.html"><span class="glyphicon glyphicon-glass" aria-hidden="true" style="color: #FFFFFD"></span> About</a>
                     </li>
 
@@ -91,7 +91,7 @@
                             <li id="logout"><a href="#logout">Logout</a></li>
                         </ul>
                     </li>
-                    <li id="myMessage" data-step="5" data-intro="If you have any new message , we will remind you !" class="dropdown">
+                    <li id="myMessage" data-step="4" data-intro="If you have any new message , we will remind you !" class="dropdown">
                         <a id="messageIcon" href="#" data-toggle="dropdown" ><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                         <ul id="myMessageDropdown"class="dropdown-menu" role="menu"></ul>
                     </li>

@@ -286,7 +286,9 @@ function load_profile() {
         val = gobackOwnerDataValue;
         gobackOwnerDataValue = 0;
     }
-    else {
+
+    else
+    {
         val = $(this).attr('data-value');
         gobackOwnerDataValue = val;
     }

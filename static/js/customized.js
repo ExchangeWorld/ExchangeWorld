@@ -453,12 +453,12 @@ function seek_query(search, query_type) {
                             $(this).addClass('searchResultSelected');
 
                             var gid = $(this).attr("data-value");
-                            $("div[data-gid='" + gid + "']").addClass('selected-item');
+                            //$("div[data-gid='" + gid + "']").addClass('selected-item');
                         },
                         function () {
                             $(this).removeClass('searchResultSelected');
                             var gid = $(this).attr("data-value");
-                            $("div[data-gid='" + gid + "']").removeClass('selected-item');
+                            //$("div[data-gid='" + gid + "']").removeClass('selected-item');
                         }
                     );
 

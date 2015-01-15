@@ -56,7 +56,7 @@
                 </a>
             </div>
             <div id="navbar" class="navbar-collapse collapse" style="background-color: #36474F; border-color: #36474F; border-size: 0px">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" style="margin-left:17%">
                     <li id="seek" class="active seeking">
                         <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color: #FFFFFD"></span> Seek</a>
 
@@ -79,7 +79,6 @@
                     <li>
                         <div id="login" class="fb-login-button" data-scope="user_likes,user_photos" onlogin='fbLoaded();' data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
                     </li>
-
                     <li class="dropdown">
                         <a id="myname" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <img id="myhead" src="./static/img/alt.gif" height="20" width="20">

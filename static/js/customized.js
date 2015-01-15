@@ -941,10 +941,10 @@ $(document).ready(function () {
 
 });
 
-function refreshBrand()
-{
-	location.reload();
-}
+// function refreshBrand()
+// {
+// 	location.reload();
+// }
 
 $(window).load(function () {
     $('#seek').click();

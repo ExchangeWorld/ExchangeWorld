@@ -39,9 +39,9 @@
 <body role="document">
     <div id="fb-root"></div>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top unselectable" role="navigation">
-        <div class="container">
-            <div class="navbar-header" style="margin-left: 8%">
+    <nav class="navbar navbar-inverse navbar-fixed-top unselectable" role="navigation" style="background-color: #36474F; border-color: #36474F; border-size: 0px">
+        <div class="container-fluid" style="background-color: #36474F; border-color: #36474F; border-size: 0px">
+            <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -49,28 +49,28 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="." style="font-size: 130%;">
-                    <img style="max-width:200px; margin-top:-8px;" src="static/img/icon/logo.png" alt="">
+                    <img style="max-width:200px; margin-top:-8px;" src="static/img/icon/logotmp.png" alt="">
                     <!--<img style="display: inline;" src="images/exchange-icon" width="25">ExchangeWorld-->
 
                 </a>
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
+            <div id="navbar" class="navbar-collapse collapse" style="background-color: #36474F; border-color: #36474F; border-size: 0px">
                 <ul class="nav navbar-nav">
                     <li id="seek" class="active seeking">
-                        <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Seek</a>
+                        <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color: #FFFFFD"></span> Seek</a>
 
                     </li>
 
                     <li id="post">
-                        <a href="#post"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Post</a>
+                        <a href="#post"><span class="glyphicon glyphicon-pushpin" aria-hidden="true" style="color: #FFFFFD"></span> Post</a>
                     </li>
 
                     <li id="about">
-                        <a href="index.html"><span class="glyphicon glyphicon-glass" aria-hidden="true"></span> About</a>
+                        <a href="index.html"><span class="glyphicon glyphicon-glass" aria-hidden="true" style="color: #FFFFFD"></span> About</a>
                     </li>
 
                     <li id="help">
-                        <a href="#help"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Help</a>
+                        <a href="#help"><span class="glyphicon glyphicon-cog" aria-hidden="true" style="color: #FFFFFD"></span> Help</a>
                     </li>
 
 
@@ -85,8 +85,6 @@
                         </a>
                         <ul id="myMenu" class="dropdown-menu" role="menu">
                             <li id="profile" class="owner" data-value="..............."><a href="#">Profile</a></li>
-                            <li id="seekers"><a href="#seekers">Seekers</a></li>
-                            <li id="my_exchanges"><a href="#my_exchanges">My exchanges</a></li>
                             <li role="presentation" class="divider"></li>
                             <li id="logout"><a href="#logout">Logout</a></li>
                         </ul>

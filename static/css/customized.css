@@ -349,20 +349,27 @@ body {
     user-select: none;
 }
 
-.btn-send
+.btn-send,#Reply
 {
     border-radius:2px;
     margin-top: 20px;
     margin-bottom: 10px;
     /*background-color:#ec407a;*/
     float:right;
-
+    width:60%;
+    height:50px;
+    margin-top:20px;
 }
 
 #message
 {
     resize:none;
     margin-top:10px;
+}
+
+#messageReply
+{
+    resize:none;
 }
 
 #messageTextarea

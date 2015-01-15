@@ -497,7 +497,8 @@ $(document).ready(function () {
                 suppressScrollX: true
             }));
 
-        $('#leftSideSwitch').hide().empty();
+        if (Type != "send")
+            $('#leftSideSwitch').hide().empty();
 
         //basic components like "goback"
         if(Type == "following")
@@ -532,92 +533,12 @@ $(document).ready(function () {
         }
         
 
-        //query part
-        $('#leftSideSwitch').append('\
-            <div id="followingOrErBlocks" class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-            </div>');
-
-        $('#leftSideSwitch').append('\
-            <div id="followingOrErBlocks" class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-            </div>');
-
-        $('#leftSideSwitch').append('\
-            <div id="followingOrErBlocks" class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-            </div>');
-
-        $('#leftSideSwitch').append('\
-            <div id="followingOrErBlocks" class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-            </div>');
-
-        $('#leftSideSwitch').append('\
-            <div id="followingOrErBlocks" class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-            </div>');
-
-        $('#leftSideSwitch').append('\
-            <div id="followingOrErBlocks" class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-                <div class="col-md-4">\
-                    <img class="img-thumbnail" alt=".." src="/exchangeworld/images/white.png" style="width: 100%">\
-                </div>\
-            </div>');
-
         //then show
-        $('#leftSideSwitch').show('fast');
+        if (Type != "send") {
+            $('#leftSideSwitch').show('fast');
+            console.log($("#message").val());
+        }
 
-        //if (Type == "send") {
-        //    alert($("#message").val());
-        // //   $("#sendMessage").fancybox();
-        //}
         $.ajax({
             type: "GET",
             url: "./php_script/userBtn.php",
@@ -629,6 +550,7 @@ $(document).ready(function () {
                 message: $("#message").val()
             },
             success: function (response) {
+                parent.$.fancybox.close();
                 //alert(response);
             },
             error: function (xhr, ajaxOption, thrownError) {

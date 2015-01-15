@@ -37,7 +37,7 @@ function initialize() {
                 "visibility": "on"
             },
             {
-                "color": "#f3f4f4"
+                "color": "#eaeaea"
             }
         ]
     },

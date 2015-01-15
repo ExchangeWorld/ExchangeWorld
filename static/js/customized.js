@@ -2,6 +2,7 @@ var currentStage = "seek";
 var gobackStack = [];
 var gobackSearchResultDataValue = 0;
 var gobackSearchResultDataValueNeedToBeReplaced = false;
+var gobackOwnerDataValue = 0;
 
 var seekInnerHTML = '<div class="input-group" style="margin-top: 15px; margin-bottom: 10px"> <input id="searchName" type="text" class="form-control" placeholder="Seek anything"> <span class="input-group-btn"> <button id="searchString" class="btn btn-info seeking" type="button">Seek !</button> </span></div><div id="searchOptions" class="row"> <div class="col-md-12"> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Distance <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">1500m</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">5000m</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">10000m</a></li> </ul> </div> <div class="btn-group"> <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Books</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Textbooks</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Magazine</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Movies</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Music CD</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Video Game</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Smart Phone</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Tablet</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Camera</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Audio</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Computer Hardware</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Jewelry</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Clothing</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Shoes</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Watches</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Furniture</a></li><li role="presentation" class="divider"></li><li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Others</a></li></ul> </div> </div></div><hr style="border-color: #6E6E6E; border-width: 2px"><div id="searchResults" class="col-md-12"> </div>';
 
@@ -257,13 +258,20 @@ function load_exchange(event) {
 }
 
 function load_profile() {
-    //destroy the scroll 
+    //destroy the scroll
+    //and reset the scroll by Noel
     $('#leftSide').perfectScrollbar('destroy');
+    $("#leftSide").scrollTop(0);
+    $("#leftSide").perfectScrollbar('update');
+    $('#leftSide').perfectScrollbar(({
+            suppressScrollX: true
+        }));
+
 
     var hidegoback = false;
     console.log("owner!");
     //push previous stage to gobackStack
-    gobackStack.push(currentStage);
+    if(currentStage != "userBtn") gobackStack.push(currentStage);
     //set currentStage to next stage, owner
     if (currentStage == "owner") {
         //means that user looked at somebody's profile and check own profile, then this time we want to hide goback and reset the stack
@@ -273,7 +281,18 @@ function load_profile() {
     }
     currentStage = "owner";
 
-    val = $(this).attr('data-value');
+    //if it's come back from following or follower
+    if(gobackOwnerDataValue != 0)
+    {
+        val = gobackOwnerDataValue;
+        gobackOwnerDataValue = 0;
+    }
+    else
+    {
+        val = $(this).attr('data-value');
+        gobackOwnerDataValue = val;
+    }
+     
 
     if (val != 0) {
       // Other's profiles
@@ -288,6 +307,7 @@ function load_profile() {
                 success: function (response) {
                     $('#leftSideSwitch').hide().empty();
                     $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5 fancybox" href="' + response[0]["photoPath"] + '"><img src="' + response[0]["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 85%"><li class="list-group-item">' + response[0]["username"] + '</li><li class="list-group-item">' + response["email"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"><li role="presentation" class="userBtn" data-value="' + response[0]["fb_id"] + '" id="add"><a  href="#">Follow + </a></li><li role="presentation" class="active userBtn" id="following"><a href="#">Following <span class="badge">' + response[1]["followingCount"] + '</span></a></li><li role="presentation" class="active userBtn" id="follower"><a href="#">Follower <span class="badge">' + response[2]["followerCount"] + '</span></a></li> <li role="presentation" class="active fancybox" id="sendMessage" href="#messageTextarea"><a >Send message!</a> </li> </ul></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show('fast');
+
 
                     // popup (send) messagebox
                     $('#leftSideSwitch').append('<div id="messageTextarea" class="form-group" style="display:none; width:400px;">To:   <img class="circular" src="' + response["photoPath"] + '" height="30" width="30" >' + '  ' + response["username"] + '<textarea class="form-control" id="message" name="send" rows="16" placeholder="Send some text...." ></textarea> <img class="circular" src="' + $("#myhead").attr('src') + '" style="width:60px;height:60px;margin-top:15px;"> <button id="send" name="send" class="btn btn-danger userBtn btn-send">Send Message</button> </div> ');
@@ -308,7 +328,7 @@ function load_profile() {
                         },
                         success: function (response) {
 
-                            $('#leftSideSwitch').append('<div class="col-md-12" style="padding: 0px"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Exchanging</h3></div><div id="Exchanging" class="panel-body "></div></div><div class="panel panel-default" style="margin-top: 15px"><div class="panel-heading"><h3 class="panel-title">Exchanged</h3></div><div id="Exchanged" class="panel-body"></div></div></div></div>');
+                            $('#leftSideSwitch').append('<div class="col-md-12" style="padding: 0px"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title">Exchanging</h3></div><div id="Exchanging" class="panel-body "></div></div><div class="panel panel-info" style="margin-top: 15px"><div class="panel-heading"><h3 class="panel-title">Exchanged</h3></div><div id="Exchanged" class="panel-body"></div></div></div></div>');
                             for (var i = 0; i < response.length; i++) {
                                 if (response[i]["status"] == 0) { // Exchanging
                                     $('#Exchanging').append('<div class="col-md-3 searchResult" style="padding: 0px; padding-top: 0px; padding-bottom: 0px; border: 0px; background: #fff; margin: 0px;" data-value="' + response[i]["gid"] + '"><img src="' + response[i]["photoPath"] + '"width="100" height="100" style="max-width: 100%; height: auto;" class="img-thumbnail" alt="..."></div>');
@@ -356,7 +376,7 @@ function load_profile() {
                         },
                         success: function (response) {
 
-                            $('#leftSideSwitch').append('<div class="col-md-12" style="padding: 0px"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Exchanging</h3></div><div id="Exchanging" class="panel-body "></div></div><div class="panel panel-default" style="margin-top: 15px"><div class="panel-heading"><h3 class="panel-title">Exchanged</h3></div><div id="Exchanged" class="panel-body"></div></div></div></div>');
+                            $('#leftSideSwitch').append('<div class="col-md-12" style="padding: 0px"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title">Exchanging</h3></div><div id="Exchanging" class="panel-body "></div></div><div class="panel panel-info" style="margin-top: 15px"><div class="panel-heading"><h3 class="panel-title">Exchanged</h3></div><div id="Exchanged" class="panel-body"></div></div></div></div>');
                             for (var i = 0; i < response.length; i++) {
                                 if (response[i]["status"] == 0) { // Exchanging
                                     $('#Exchanging').append('<div class="col-md-3 searchResult" style="padding: 0px; padding-top: 0px; padding-bottom: 0px; border: 0px; background: #fff; margin: 0px;" data-value="' + response[i]["gid"] + '"><img src="' + response[i]["photoPath"] + '" width="100" height="100" style="max-width: 100%; height: auto;" class="img-thumbnail" alt="..."></div>');
@@ -504,6 +524,13 @@ $(document).ready(function () {
     });
 
     $("body").on("click", ".userBtn", function (event) {
+        
+        console.log("userBtn!");
+        console.log("previous stage is " + currentStage);
+        gobackStack.push(currentStage);
+        console.log(gobackStack);
+        currentStage = "userBtn";
+
         var tagetID = $("#add").attr("data-value");  // get others' fb id
         var myID = $("#profile").attr("data-value"); // get my fb id
         var Type = $(this).attr("id");
@@ -910,16 +937,22 @@ $(document).ready(function () {
                 gobackStack.pop();
                 load_post();
                 break;
+            case "owner":
+                console.log("case owner");
+                gobackStack.pop();
+                load_profile();
+                break;
         }
 
     });
 
     $("#help").on("click", function (event) {
-		introJs().start();
-		    document.getElementById("seek").className = "";
-			document.getElementById("post").className = "";
-			document.getElementById("about").className = "";
-			document.getElementById("help").className = "";
+		document.getElementById("seek").className = "";
+		document.getElementById("post").className = "";
+		document.getElementById("about").className = "";
+		document.getElementById("help").className = "";
+	introJs().start();
+
 	});
 
     // Overlay Effect
@@ -941,10 +974,10 @@ $(document).ready(function () {
 
 });
 
-function refreshBrand()
-{
-	location.reload();
-}
+// function refreshBrand()
+// {
+// 	location.reload();
+// }
 
 $(window).load(function () {
     $('#seek').click();

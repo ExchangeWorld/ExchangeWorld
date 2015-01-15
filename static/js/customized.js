@@ -306,7 +306,7 @@ function load_profile() {
                 },
                 success: function (response) {
                     $('#leftSideSwitch').hide().empty();
-                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5 fancybox" href="' + response[0]["photoPath"] + '"><img src="' + response[0]["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 85%"><li class="list-group-item">' + response[0]["username"] + '</li><li class="list-group-item">' + response[0]["email"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"><li role="presentation" class="userBtn" data-value="' + response[0]["fb_id"] + '" id="add"><a  href="#">Follow + </a></li><li role="presentation" class="active userBtn" id="following"><a href="#">Following <span class="badge"  id="bdgfollowing">' + response[1]["followingCount"] + '</span></a></li><li role="presentation" class="active userBtn" id="follower"><a href="#">Follower <span class="badge"  id="bdgfollowing">' + response[2]["followerCount"] + '</span></a></li> <li role="presentation" class="active fancybox" id="sendMessage" href="#messageTextarea"><a >Send message!</a> </li> </ul></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show('fast');
+                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5 fancybox" href="' + response[0]["photoPath"] + '"><img src="' + response[0]["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 85%"><li class="list-group-item">' + response[0]["username"] + '</li><li class="list-group-item">' + response[0]["email"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"><li role="presentation" class="userBtn" data-value="' + response[0]["fb_id"] + '" id="add"><a  href="#">Follow + </a></li><li role="presentation" class="active userBtn" id="following"><a href="#">Following <span class="badge"  id="bdgfollowing">' + response[1]["followingCount"] + '</span></a></li><li role="presentation" class="active userBtn" id="follower"><a href="#">Follower <span class="badge"  id="bdgfollowing">' + response[2]["followerCount"] + '</span></a></li> <li role="presentation" class="active fancybox" id="sendMessage" href="#messageTextarea"><a style="cursor:pointer; cursor:hand">Send message!</a> </li> </ul></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show('fast');
 
 
                     // popup (send) messagebox
@@ -693,6 +693,7 @@ $(document).ready(function () {
         gobackStack = [];
         //set currentStage to post
         currentStage = "seek";
+        gobackOwnerDataValue = 0;
 
         $('#leftSideSwitch').hide();
         $('#leftSideSwitch').html(seekInnerHTML);
@@ -979,6 +980,11 @@ $(document).ready(function () {
 // {
 // 	location.reload();
 // }
+
+$('#profile').on("click", function (event) {
+    gobackOwnerDataValue = 0;
+
+});
 
 $(window).load(function () {
     $('#seek').click();

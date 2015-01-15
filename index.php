@@ -18,10 +18,10 @@
     <link href="static/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
     <link href="static/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css">
     <!--<link href="static/css/jquery.jscrollpane.css" rel="stylesheet" type="text/css" charset="utf-8" media="all">-->
+<link href="static/css/introjs.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="static/css/customized.css" rel="stylesheet" type="text/css" charset="utf-8">
-<link href="static/css/introjs.css" rel="stylesheet">
 
 
 
@@ -91,7 +91,7 @@
                             <li id="logout"><a href="#logout">Logout</a></li>
                         </ul>
                     </li>
-                    <li id="myMessage" data-step="4" data-intro="If you have any new message , we will remind you !" class="dropdown">
+                    <li id="myMessage" data-step="5" data-intro="If you have any new message , we will remind you !" class="dropdown">
                         <a id="messageIcon" href="#" data-toggle="dropdown" ><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                         <ul id="myMessageDropdown"class="dropdown-menu" role="menu"></ul>
                     </li>

@@ -201,7 +201,7 @@ function load_exchange(event) {
                     },
                     success: function (response) {
                         for(var i=0; i<response.length;i++){
-                            $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px; background-color: #F4CDCD; margin-bottom:3px"><img class="owner" data-value="' + response[i]["commenter"] + '" src="' + response[i]["commenterPhoto"] + '" style="width: 30px; height: 30px; box-shadow: 2px 2px 11px 0px rgba(50, 50, 50, 0.36);"><div style="word-wrap: break-word">' + response[i]["comment"] + '</div></li>');
+                            $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px; background-color: #F4CDCD; margin-bottom:3px"><div style="word-wrap: break-word"><img class="owner" data-value="' + response[i]["commenter"] + '" src="' + response[i]["commenterPhoto"] + '" style="margin-right:5px;width: 30px; height: 30px; box-shadow: 2px 2px 11px 0px rgba(50, 50, 50, 0.36);">' + response[i]["comment"] + '</div></li>');
 
                         }
                     },

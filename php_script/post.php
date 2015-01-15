@@ -11,7 +11,7 @@
 
 
 //	$Key = get_Key_id();
-	$insertSQL = "INSERT INTO `exchangeworld`.`goods` (`gname`, `categories`, `want`, `description`, `ownerID`, `photoPath`, `posX`, `posY`) VALUES ('$gname', '$categories', '$want', '$description', '$ownerID', '$photoPath', '$posX','$posY')";
+	$insertSQL = "INSERT INTO `goods` (`gname`, `categories`, `want`, `description`, `ownerID`, `photoPath`, `posX`, `posY`) VALUES ('$gname', '$categories', '$want', '$description', '$ownerID', '$photoPath', '$posX','$posY')";
 	// `catrgories`, `want`, `description`
 //	$insertSQL = "INSERT INTO `exchangeworld`.`user` (`uid`, `exchangeTable`, `followerTable`, `seekerTable`, `fb_id`, `username` , `email`, `nickname`, `photoPath`) VALUES ('$Key', '$Key', '$Key', '$Key', '$id', '$name', 'test@gmail.com', 'thisisnickname', '$picture')";
 	$retval = mysql_query($insertSQL);

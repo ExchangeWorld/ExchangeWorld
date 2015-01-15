@@ -10,15 +10,30 @@
 		if(! $retval ){
 		    die('Could not enter data: ' . mysql_error());
 		}
-		echo "Follow Success!!";
+		echo '{"message":"add success"}';
 
 	}
 	else if($type == "following"){
-		echo "SEEKER TABLE PRESSED";
+		$sql = "SELECT `followertable`.*, `user`.`username`, `user`.`photoPath` as `owner_photo`
+			    FROM `followertable`, `user`
+			    WHERE `myid` = '$target'
+			    AND `follower` = `user`.`fb_id`";
+		$result=mysql_query($sql) or die(mysql_error());
+		while ($row = mysql_fetch_array($result)) {	
+			$rows[] = $row;
+		}
+		echo json_encode($rows);	
 	}
 	else if($type == "follower"){
-		echo "FOLLOWER TABLE PRESSED";		
-	}
+		$sql = "SELECT `followertable`.*, `user`.`username`, `user`.`photoPath` as `owner_photo`
+			    FROM `followertable`, `user`
+			    WHERE  `follower` = '$target'
+			    AND `myid` = `user`.`fb_id`";
+		$result=mysql_query($sql) or die(mysql_error());
+		while ($row = mysql_fetch_array($result)) {	
+			$rows[] = $row;
+		}
+		echo json_encode($rows);		}
 	else if($type == "send"){
 		$message = $_GET['message'];
 		if($message == ""){
@@ -30,11 +45,11 @@
 			if(! $retval ){
 			    die('Could not enter data: ' . mysql_error());
 			}
-			echo "Follow Success!!";
+			echo '{"send":"success"}';
 		}
 	}
 	else{
-		echo "Fetch Tables ERROR! (userBtn.php)";
+		echo '{"error":"Fetch Tables ERROR! (userBtn.php)"}';
 	}
 
 ?>

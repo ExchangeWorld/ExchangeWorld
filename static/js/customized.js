@@ -271,7 +271,7 @@ function load_profile() {
                 },
                 success: function (response) {
                     $('#leftSideSwitch').hide().empty();
-                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5 fancybox" href="' + response["photoPath"] + '"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["username"] + '</li><li class="list-group-item">' + response["email"] + '</li><li class="list-group-item">' + response["nickname"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"><li role="presentation" class="userBtn" data-value="' + response["fb_id"] + '" id="add"><a  href="#">Follow + </a></li><li role="presentation" class="active userBtn" id="seeker"><a href="#">Following <span class="badge">42</span></a></li><li role="presentation" class="active userBtn" id="follower"><a href="#">Follower <span class="badge">3</span></a></li> <li role="presentation" class="active fancybox" id="sendMessage" href="#messageTextarea"><a >Send message!</a> </li> </ul></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
+                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5 fancybox" href="' + response["photoPath"] + '"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["username"] + '</li><li class="list-group-item">' + response["email"] + '</li><li class="list-group-item">' + response["nickname"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"><li role="presentation" class="userBtn" data-value="' + response["fb_id"] + '" id="add"><a  href="#">Follow + </a></li><li role="presentation" class="active userBtn" id="following"><a href="#">Following <span class="badge">42</span></a></li><li role="presentation" class="active userBtn" id="follower"><a href="#">Follower <span class="badge">3</span></a></li> <li role="presentation" class="active fancybox" id="sendMessage" href="#messageTextarea"><a >Send message!</a> </li> </ul></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
 
                     // popup (send) messagebox
                     $('#leftSideSwitch').append('<div id="messageTextarea" class="form-group" style="display:none; width:400px; height:200px">To:   <img src="' + response["photoPath"] + '" height="30" width="30" >' + response["username"] + '<textarea class="form-control" id="message" name="send" placeholder="Send some text...." style="height:130px"></textarea> <button id="send" name="send" class="btn btn-primary userBtn">SEND!</button> </div> ');
@@ -323,7 +323,7 @@ function load_profile() {
                 },
                 success: function (response) {
                     $('#leftSideSwitch').hide().empty();
-                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5 fancybox" href="' + response["photoPath"] + '"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["username"] + '</li><li class="list-group-item"> ' + response["email"] + '</li><li class="list-group-item"> ' + response["nickname"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"> <li role="presentation" class="active"><a href="#">Following <span class="badge">42</span></a></li><li role="presentation" class="active"><a href="#">Follower <span class="badge">3</span></a></li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
+                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5 fancybox" href="' + response["photoPath"] + '"><img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 70%"><li class="list-group-item">' + response["username"] + '</li><li class="list-group-item"> ' + response["email"] + '</li><li class="list-group-item"> ' + response["nickname"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"> <li role="presentation" class="userBtn" data-value="' + response["fb_id"] + '" style="display:none" id="add"><a  href="#">Follow + </a></li><li role="presentation" class="active  userBtn" id="following"><a href="#">Following <span class="badge">42</span></a></li><li role="presentation" class="active  userBtn" id="follower"><a href="#">Follower <span class="badge">3</span></a></li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 70%">').show('fast');
                     //Handle Exchanging/Exchanged Tables
                     //Get Exchange Table(?) and represent in map
                     $.ajax({
@@ -497,52 +497,11 @@ $(document).ready(function () {
                 suppressScrollX: true
             }));
 
-        if (Type != "send")
-            $('#leftSideSwitch').hide().empty();
-
-        //basic components like "goback"
-        if(Type == "following")
-        {
-            $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div>\
-            <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
-                <div class="col-md-2">\
-                    <h1 style="margin-top: 0px"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color: #04ACD9"></span></h1>\
-                </div>\
-                <div class="col-md-6">\
-                    <h1 style="margin-top: 0px">Following</h1>\
-                </div>\
-                <div class="col-md-4">\
-                    <h1 style="margin-top: 0px; color: #04ACD9">42</h1>\
-                </div>\
-            </div>');
-        }
-        else if(Type == "follower")
-        {
-            $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div>\
-            <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
-                <div class="col-md-2">\
-                    <h1 style="margin-top: 0px"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="color: #04ACD9"></span></h1>\
-                </div>\
-                <div class="col-md-6">\
-                    <h1 style="margin-top: 0px">Follower</h1>\
-                </div>\
-                <div class="col-md-4">\
-                    <h1 style="margin-top: 0px; color: #04ACD9">42</h1>\
-                </div>\
-            </div>');
-        }
         
-
-        //then show
-        if (Type != "send") {
-            $('#leftSideSwitch').show('fast');
-            console.log($("#message").val());
-        }
-
         $.ajax({
             type: "GET",
             url: "./php_script/userBtn.php",
-            dataType: "text",
+            dataType: "json",
             data: {
                 tID: tagetID,
                 type: Type,
@@ -550,8 +509,67 @@ $(document).ready(function () {
                 message: $("#message").val()
             },
             success: function (response) {
-                parent.$.fancybox.close();
-                //alert(response);
+                if (Type == "following") {
+                    $('#leftSideSwitch').hide().empty();
+                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div>\
+                    <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                        <div class="col-md-2">\
+                            <h1 style="margin-top: 0px"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color: #04ACD9"></span></h1>\
+                        </div>\
+                        <div class="col-md-6">\
+                            <h1 style="margin-top: 0px">Following</h1>\
+                        </div>\
+                        <div class="col-md-4">\
+                            <h1 style="margin-top: 0px; color: #04ACD9">42</h1>\
+                        </div>\
+                    </div>');
+                    if (response == null) $("#leftSideSwitch").append('No Result');
+                    else {
+                        for (var i = 0; i < response.length; i++) {
+                            if (i == 0 || (i + 1) % 4 == 0)
+                                $('#leftSideSwitch').append('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">');
+                            //<li class="list-group-item owner" ><img src= height="20" width="20"> ' + response["username"] + '</li>
+                            $('#leftSideSwitch').append('<div class="col-md-4 owner" data-value="' + response[i]["follower"] + '"><img class="img-thumbnail" alt=".." src="' + response[i]["owner_photo"] + '" style="width: 100%"></div>');
+
+                            if ((i + 1) % 4 == 0)
+                                $('#leftSideSwitch').append('</div>');
+                        }
+                    }
+                    //if (response == null) $("#leftSideSwitch").html('No Result');
+                    $('#leftSideSwitch').show('fast');
+                }
+                else if (Type == "follower") {
+                    $('#leftSideSwitch').hide().empty();
+                    $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div>\
+                    <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                        <div class="col-md-2">\
+                            <h1 style="margin-top: 0px"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="color: #04ACD9"></span></h1>\
+                        </div>\
+                        <div class="col-md-6">\
+                            <h1 style="margin-top: 0px">Follower</h1>\
+                        </div>\
+                        <div class="col-md-4">\
+                            <h1 style="margin-top: 0px; color: #04ACD9">42</h1>\
+                        </div>\
+                    </div>');
+                    if (response == null) $("#leftSideSwitch").append('No Result');
+                    else {
+                        for (var i = 0; i < response.length; i++) {
+                            if (i == 0 || (i + 1) % 4 == 0)
+                                $('#leftSideSwitch').append('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">');
+                            //<li class="list-group-item owner" ><img src= height="20" width="20"> ' + response["username"] + '</li>
+                            $('#leftSideSwitch').append('<div class="col-md-4 owner" data-value="' + response[i]["myid"] + '"><img class="img-thumbnail" alt=".." src="' + response[i]["owner_photo"] + '" style="width: 100%"></div>');
+
+                            if ((i + 1) % 4 == 0)
+                                $('#leftSideSwitch').append('</div>');
+                        }
+                    }               if (response == null) $("#leftSideSwitch").html('No Result');
+                    $('#leftSideSwitch').show('fast');
+                }
+                if (Type == "send") {
+                    parent.$.fancybox.close();
+
+                }
             },
             error: function (xhr, ajaxOption, thrownError) {
                 alert(thrownError);

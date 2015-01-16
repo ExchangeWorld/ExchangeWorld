@@ -235,7 +235,7 @@ function initialize() {
         mapTypeControlOptions: {mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'no_poi']},
         draggableCursor: 'default',
         draggingCursor: 'default',
-        disableDoubleClickZoom: false,
+        disableDoubleClickZoom: true,
 
         panControl: false,
         mapMaker: false,
@@ -285,8 +285,10 @@ function initialize() {
 
     google.maps.event.addListener(map, 'zoom_changed', function () {
         var zoomLevel = map.getZoom();
-        if (zoomLevel >= 17 || zoomLevel <= 7) {
-            $('.custom-marker').remove('custom-marker-120');
+        console.log('zoom_changed' + zoomLevel);
+
+        if (zoomLevel >= 17) {
+            resetMarkerSize();
         }
         else if (zoomLevel == 16)
         {
@@ -305,8 +307,8 @@ function initialize() {
             $('.custom-marker').addClass('custom-marker-104');
         }
         else if (zoomLevel == 13) {
-            $('.custom-marker').removeClass('custom-marker-114');
-            $('.custom-marker').removeClass('custom-marker-86');
+            $('.custom-marker').removeClass('custom-marker-104');
+            $('.custom-marker').removeClass('custom-marker-88');
             $('.custom-marker').addClass('custom-marker-96');
         }
         else if (zoomLevel == 12) {
@@ -325,7 +327,7 @@ function initialize() {
             $('.custom-marker').addClass('custom-marker-72');
         }
         else if (zoomLevel == 9) {
-            $('.custom-marker').removeClass('custom-marker-88');
+            $('.custom-marker').removeClass('custom-marker-72');
             $('.custom-marker').removeClass('custom-marker-56');
             $('.custom-marker').addClass('custom-marker-64');
         }
@@ -334,7 +336,7 @@ function initialize() {
             $('.custom-marker').removeClass('custom-marker-48');
             $('.custom-marker').addClass('custom-marker-56');
         }
-        else if(zoomLevel==7)
+        else if(zoomLevel<=7)
         {
             $('.custom-marker').removeClass('custom-marker-56');
             $('.custom-marker').addClass('custom-marker-48');
@@ -565,6 +567,19 @@ function clearMarkers() {
     for (var i = 0; i < markers.length; i++)
         markers[i].setMap(null);
     markers = [];
+}
+
+function resetMarkerSize() {
+    $('.custom-marker').removeClass('custom-marker-120');
+    $('.custom-marker').removeClass('custom-marker-112');
+    $('.custom-marker').removeClass('custom-marker-104');
+    $('.custom-marker').removeClass('custom-marker-96');
+    $('.custom-marker').removeClass('custom-marker-88');
+    $('.custom-marker').removeClass('custom-marker-80');
+    $('.custom-marker').removeClass('custom-marker-72');
+    $('.custom-marker').removeClass('custom-marker-64');
+    $('.custom-marker').removeClass('custom-marker-56');
+    $('.custom-marker').removeClass('custom-marker-48');
 }
 
 function markersBounds() {

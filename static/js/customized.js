@@ -140,8 +140,8 @@ function load_exchange(event)
     //set currentStage to next stage, exchange
     currentStage = "exchange";
 
-    //for goback function
-    //dumb replace method ^^ when gobackSearchResultDataValueNeedToBeReplaced is false, going original way
+    //for goback function dumb replace method ^^ 
+    //when gobackSearchResultDataValueNeedToBeReplaced is false, going original way
     //if true, going tmp way
     if (gobackSearchResultDataValueNeedToBeReplaced == false)
     {
@@ -169,7 +169,7 @@ function load_exchange(event)
             {
                 //Left Side
                 $('#leftSideSwitch').hide().empty();
-                $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"> <div class="col-md-5"> <button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button> </div> <div class="col-md-7"> <input id="checkbox" type="checkbox" name="exchangeStatus" checked> </div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"> <div class="col-md-5 fancybox" href="' + response["photoPath"] + '"> <img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."> </div> <div class="col-md-7"> <ul class="list-group" style="font-size: 85%"> <li class="list-group-item">' + response["gname"] + '<span class="badge">' + response["categories"] + '</span></li> <li class="list-group-item">Wanted : ' + response["want"] + '</li> <li class="list-group-item owner" data-value="' + response["ownerID"] + '"><img src="' + response["owner_photo"] + '" height="20" width="20"> ' + response["username"] + '</li> </ul> </div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"> <div class="col-md-12"> <div class="panel panel-info"> <div class="panel-heading"> Description : </div> <div class="panel-body"> <p> ' + response["description"] + ' </div> </div> </div> </div> <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"> <div class="col-md-12"> <div class="panel panel-info"> <div class="panel-heading" style="font-size: 121%"> Comments : </div> <div class="panel-body" style="padding-top:0px;"> <div id="comment_area"> <ul class="list-group"> </ul> </div> <div class="form-group" style="margin-bottom: 0px; margin-top: 3px;"> <div class="input-group"> <span class="input-group-addon">Say</span><input id="comment" name="comment" class="form-control" placeholder="leave comment" type="text"> </div> </div> </div> </div> </div> </div> <div class="searchResults" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show('fast');
+                $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"> <div class="col-md-5"> <button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button> </div> <div class="col-md-7"> <input id="checkbox" type="checkbox" name="exchangeStatus" checked> </div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"> <div class="fancybox" href="' + response["photoPath"] + '" style="padding:15px"> <img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."> </div> <div style="padding:15px"> <ul class="list-group" style="font-size: 85%"> <li class="list-group-item">' + response["gname"] + '<span class="badge">' + response["categories"] + '</span></li> <li class="list-group-item">Wanted : ' + response["want"] + '</li> <li class="list-group-item owner" data-value="' + response["ownerID"] + '"><img src="' + response["owner_photo"] + '" height="20" width="20"> ' + response["username"] + '</li> </ul> </div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"> <div class="col-md-12"> <div class="panel panel-info"> <div class="panel-heading"> Description : </div> <div class="panel-body"> <p> ' + response["description"] + ' </div> </div> </div> </div> <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"> <div class="col-md-12"> <div class="panel panel-info"> <div class="panel-heading" style="font-size: 121%"> Comments : </div> <div class="panel-body" style="padding-top:0px;"> <div id="comment_area"> <ul class="list-group"> </ul> </div> <div class="form-group" style="margin-bottom: 0px; margin-top: 3px;"> <div class="input-group"> <span class="input-group-addon">Say</span><input id="comment" name="comment" class="form-control" placeholder="leave comment" type="text"> </div> </div> </div> </div> </div> </div> <div class="searchResults" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show('fast');
 
                 // Can't leave comment if not loggedin
                 if (loggedInForPost == false) $("#comment").attr("disabled", "disabled");
@@ -587,15 +587,15 @@ function seek_query(search, query_type)
 
 $(document).ready(function ()
 {
+    // attach fancybox on all elements that use it
     $(function ()
     {
-        // attach fancybox on all elements that use it
         $(".fancybox").fancybox();
     });
 
+    // Handle userBtn click: Following, Follower, +Following
     $("body").on("click", ".userBtn", function (event)
     {
-
         console.log("userBtn!");
         console.log("previous stage is " + currentStage);
         gobackStack.push(currentStage);
@@ -606,15 +606,13 @@ $(document).ready(function ()
         var myID = $("#profile").attr("data-value"); // get my fb id
         var Type = $(this).attr("id");
 
-        //destroy the scroll
-        //and reset the scroll by Noel
+        //destroy the scroll and reset the scroll by Noel
         $('#leftSide').perfectScrollbar('destroy');
         $("#leftSide").scrollTop(0);
         $("#leftSide").perfectScrollbar('update');
         $('#leftSide').perfectScrollbar(({
             suppressScrollX: true
         }));
-
 
         $.ajax({
             type: "GET",

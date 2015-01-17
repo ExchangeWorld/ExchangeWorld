@@ -21,6 +21,9 @@ $(document).ready(function () {
         $("#login").show();
 
         loggedInForPost = false;
+
+        // Back to Seek
+        $("#seek").trigger("click");
     });
 });
 
@@ -50,8 +53,10 @@ function fbLoaded() {
 
             loggedInForPost = true;
 
+            // Back to Seek
+            $("#seek").trigger("click");
         } else if (response.status === 'not_authorized') {
-            alert("not_authorized");
+            console.log("not_authorized");
             // the user is logged in to Facebook,
             // but has not authenticated your app
         } else {

@@ -171,6 +171,9 @@ function load_exchange(event)
                 $('#leftSideSwitch').hide().empty();
                 $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"> <div class="col-md-5"> <button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button> </div> <div class="col-md-7"> <input id="checkbox" type="checkbox" name="exchangeStatus" checked> </div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"> <div class="col-md-5 fancybox" href="' + response["photoPath"] + '"> <img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."> </div> <div class="col-md-7"> <ul class="list-group" style="font-size: 85%"> <li class="list-group-item">' + response["gname"] + '<span class="badge">' + response["categories"] + '</span></li> <li class="list-group-item">Wanted : ' + response["want"] + '</li> <li class="list-group-item owner" data-value="' + response["ownerID"] + '"><img src="' + response["owner_photo"] + '" height="20" width="20"> ' + response["username"] + '</li> </ul> </div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"> <div class="col-md-12"> <div class="panel panel-info"> <div class="panel-heading"> Description : </div> <div class="panel-body"> <p> ' + response["description"] + ' </div> </div> </div> </div> <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"> <div class="col-md-12"> <div class="panel panel-info"> <div class="panel-heading" style="font-size: 121%"> Comments : </div> <div class="panel-body" style="padding-top:0px;"> <div id="comment_area"> <ul class="list-group"> </ul> </div> <div class="form-group" style="margin-bottom: 0px; margin-top: 3px;"> <div class="input-group"> <span class="input-group-addon">Say</span><input id="comment" name="comment" class="form-control" placeholder="leave comment" type="text"> </div> </div> </div> </div> </div> </div> <div class="searchResults" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show('fast');
 
+                // Can't leave comment if not loggedin
+                if (loggedInForPost == false) $("#comment").attr("disabled", "disabled");
+
                 $("[name='exchangeStatus']").bootstrapSwitch();
                 $("[name='exchangeStatus']").bootstrapSwitch('onText', 'Exchanging');
                 $("[name='exchangeStatus']").bootstrapSwitch('offText', 'Exchanged');
@@ -179,6 +182,7 @@ function load_exchange(event)
                 {
                     $("[name='exchangeStatus']").bootstrapSwitch('readonly', true);
                 }
+
 
                 document.getElementById("comment").addEventListener("keydown", function (e)
                 {
@@ -233,7 +237,6 @@ function load_exchange(event)
                             for (var i = 0; i < response.length; i++)
                             {
                                 $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px; background-color: #F4CDCD; margin-bottom:3px"><div style="word-wrap: break-word"><img class="owner" data-value="' + response[i]["commenter"] + '" src="' + response[i]["commenterPhoto"] + '" style="margin-right:5px;width: 30px; height: 30px; box-shadow: 2px 2px 11px 0px rgba(50, 50, 50, 0.36);">' + response[i]["comment"] + '</div></li>');
-
                             }
                         }
                     },
@@ -262,7 +265,6 @@ function load_exchange(event)
                             var min = 0;
                             var max = response.length - 1;
                             var xx = Math.floor(Math.random() * (max - min + 1) + min);
-                            //alert(xx);
                             $('#recommandTables').append('<div class="col-md-3 searchResult" style="padding: 0px; padding-top: 0px; padding-bottom: 0px; border: 0px; background: #fff; margin: 0px;" data-value="' + response[xx]["gid"] + '"><img src="' + response[xx]["photoPath"] + '" width="100" height="100" style="max-width: 100%; height: auto;" class="img-thumbnail" alt="..."></div>');
                         }
                     },
@@ -944,6 +946,7 @@ $(document).ready(function ()
         });
     });
 
+    // Handle Replys
     $("body").on("click", ".Reply", function (event)
     {
         var replyMessage = $("#messageReply" + $(this).attr("data-value")).val();

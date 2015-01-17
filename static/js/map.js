@@ -3,21 +3,25 @@ var marker;
 var infowindow;
 var map;
 
-$(document).ready(function () {
+$(document).ready(function ()
+{
 
     /*----------------Input Clear Button-----------------*/
-    $(".autocomplete").keyup(function () {
+    $(".autocomplete").keyup(function ()
+    {
         $(this).next().toggle(Boolean($(this).val()));
     });
     $(".searchclear").toggle(Boolean($(".autocomplete").val()));
-    $(".searchclear").click(function () {
+    $(".searchclear").click(function ()
+    {
         $(this).prev().val('').focus();
         $(this).hide();
     });
     /*-------------------------------------------------*/
 });
 
-function initialize() {
+function initialize()
+{
     var centerLocation = new google.maps.LatLng(24.9853919, 121.5865058);
     var noPOILabels = [
     {
@@ -266,7 +270,8 @@ function initialize() {
     autocomplete = new google.maps.places.Autocomplete(
       /** @type {HTMLInputElement} */(document.getElementById('autocomplete')), { bounds: map.getBounds() });
 
-    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+    google.maps.event.addListener(autocomplete, 'place_changed', function ()
+    {
         console.log("Autocomplete");
 
         var place = autocomplete.getPlace();
@@ -275,7 +280,8 @@ function initialize() {
 
         if (place.geometry.viewport)
             map.fitBounds(place.geometry.viewport);
-        else {
+        else
+        {
             map.setCenter(place.geometry.location);
             map.setZoom(17);
         }
@@ -283,58 +289,70 @@ function initialize() {
 
     google.maps.event.addDomListener(document.getElementById('myLocation'), 'click', naigvator);
 
-    google.maps.event.addListener(map, 'zoom_changed', function () {
+    google.maps.event.addListener(map, 'zoom_changed', function ()
+    {
         var zoomLevel = map.getZoom();
         console.log('zoom_changed' + zoomLevel);
 
-        if (zoomLevel >= 17) {
+        if (zoomLevel >= 17)
+        {
             resetMarkerSize();
         }
-        else if (zoomLevel == 16) {
+        else if (zoomLevel == 16)
+        {
             $('.custom-marker').removeClass('custom-marker-112');
             $('.custom-marker').addClass('custom-marker-120');
         }
-        else if (zoomLevel == 15) {
+        else if (zoomLevel == 15)
+        {
             $('.custom-marker').removeClass('custom-marker-120');
             $('.custom-marker').removeClass('custom-marker-104');
             $('.custom-marker').addClass('custom-marker-112');
         }
-        else if (zoomLevel == 14) {
+        else if (zoomLevel == 14)
+        {
             $('.custom-marker').removeClass('custom-marker-112');
             $('.custom-marker').removeClass('custom-marker-96');
             $('.custom-marker').addClass('custom-marker-104');
         }
-        else if (zoomLevel == 13) {
+        else if (zoomLevel == 13)
+        {
             $('.custom-marker').removeClass('custom-marker-104');
             $('.custom-marker').removeClass('custom-marker-88');
             $('.custom-marker').addClass('custom-marker-96');
         }
-        else if (zoomLevel == 12) {
+        else if (zoomLevel == 12)
+        {
             $('.custom-marker').removeClass('custom-marker-96');
             $('.custom-marker').removeClass('custom-marker-80');
             $('.custom-marker').addClass('custom-marker-88');
         }
-        else if (zoomLevel == 11) {
+        else if (zoomLevel == 11)
+        {
             $('.custom-marker').removeClass('custom-marker-88');
             $('.custom-marker').removeClass('custom-marker-72');
             $('.custom-marker').addClass('custom-marker-80');
         }
-        else if (zoomLevel == 10) {
+        else if (zoomLevel == 10)
+        {
             $('.custom-marker').removeClass('custom-marker-80');
             $('.custom-marker').removeClass('custom-marker-64');
             $('.custom-marker').addClass('custom-marker-72');
         }
-        else if (zoomLevel == 9) {
+        else if (zoomLevel == 9)
+        {
             $('.custom-marker').removeClass('custom-marker-72');
             $('.custom-marker').removeClass('custom-marker-56');
             $('.custom-marker').addClass('custom-marker-64');
         }
-        else if (zoomLevel == 8) {
+        else if (zoomLevel == 8)
+        {
             $('.custom-marker').removeClass('custom-marker-64');
             $('.custom-marker').removeClass('custom-marker-48');
             $('.custom-marker').addClass('custom-marker-56');
         }
-        else if (zoomLevel <= 7) {
+        else if (zoomLevel <= 7)
+        {
             $('.custom-marker').removeClass('custom-marker-56');
             $('.custom-marker').addClass('custom-marker-48');
         }
@@ -344,33 +362,42 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 
-function handleNoGeolocation(errorFlag) {
-    if (errorFlag == true) {
+function handleNoGeolocation(errorFlag)
+{
+    if (errorFlag == true)
+    {
         alert("Geolocation service failed.");
-    } else {
+    } else
+    {
         alert("Your browser doesn't support geolocation.");
     }
 }
 
-function naigvator() {
+function naigvator()
+{
     var browserSupportFlag = new Boolean();
-    if (navigator.geolocation) {
+    if (navigator.geolocation)
+    {
         browserSupportFlag = true;
-        navigator.geolocation.getCurrentPosition(function (position) {
+        navigator.geolocation.getCurrentPosition(function (position)
+        {
             var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             map.setCenter(latlng);
             map.setZoom(17);
-        }, function () {
+        }, function ()
+        {
             handleNoGeolocation(browserSupportFlag);
         });
     }
-    else { // Browser doesn't support Geolocation
+    else
+    { // Browser doesn't support Geolocation
         browserSupportFlag = false;
         handleNoGeolocation(browserSupportFlag);
     }
 }
 
-function postMarker(location, img) {
+function postMarker(location, img)
+{
     if (map == null)
         return;
 
@@ -387,13 +414,15 @@ function postMarker(location, img) {
     });
 };
 
-function moveMarker(location) {
+function moveMarker(location)
+{
     if (marker == null)
         return;
     marker.setPosition(location);
 };
 
-function changeMarkerImage(img) {
+function changeMarkerImage(img)
+{
     if (marker == null)
         return;
     marker.setContent('<div class="custom-marker normal-item">' +
@@ -401,8 +430,10 @@ function changeMarkerImage(img) {
           '</div>')
 }
 
-function addMarkers(lat, lng, img, gid) {
-    if (lat > 90 || lat < -90 || lng > 180 || lng < -180) {
+function addMarkers(lat, lng, img, gid)
+{
+    if (lat > 90 || lat < -90 || lng > 180 || lng < -180)
+    {
         console.log("Uncorrect Latlng");
         return;
     }
@@ -419,7 +450,8 @@ function addMarkers(lat, lng, img, gid) {
           '</div>'
     }));
 
-    google.maps.event.addListener(markers[markers.length - 1], 'click', function () {
+    google.maps.event.addListener(markers[markers.length - 1], 'click', function ()
+    {
         //destroy the scroll and reset the scroll 
         $('#leftSide').perfectScrollbar('destroy');
         $("#leftSide").scrollTop(0);
@@ -437,15 +469,18 @@ function addMarkers(lat, lng, img, gid) {
         //for goback function
         //dumb replace method ^^ when gobackSearchResultDataValueNeedToBeReplaced is false, going original way
         //if true, going tmp way
-        if (gobackSearchResultDataValueNeedToBeReplaced == false) {
+        if (gobackSearchResultDataValueNeedToBeReplaced == false)
+        {
             val = gid;
         }
-        else {
+        else
+        {
             val = gobackSearchResultDataValue;
             gobackSearchResultDataValueNeedToBeReplaced = false;
         }
 
-        if (val != 0) {
+        if (val != 0)
+        {
             //for goback
             gobackSearchResultDataValue = val;
 
@@ -456,7 +491,8 @@ function addMarkers(lat, lng, img, gid) {
                 data: {
                     gid: val
                 },
-                success: function (response) {
+                success: function (response)
+                {
                     //Left Side
                     $('#leftSideSwitch').hide().empty();
                     $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"> <div class="col-md-5"> <button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button> </div> <div class="col-md-7"> <input id="checkbox" type="checkbox" name="exchangeStatus" checked> </div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"> <div class="col-md-5 fancybox" href="' + response["photoPath"] + '"> <img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."> </div> <div class="col-md-7"> <ul class="list-group" style="font-size: 85%"> <li class="list-group-item">' + response["gname"] + '<span class="badge">' + response["categories"] + '</span></li> <li class="list-group-item">Wanted : ' + response["want"] + '</li> <li class="list-group-item owner" data-value="' + response["ownerID"] + '"><img src="' + response["owner_photo"] + '" height="20" width="20"> ' + response["username"] + '</li> </ul> </div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"> <div class="col-md-12"> <div class="panel panel-info"> <div class="panel-heading"> Description : </div> <div class="panel-body"> <p> ' + response["description"] + ' </div> </div> </div> </div> <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"> <div class="col-md-12"> <div class="panel panel-info"> <div class="panel-heading" style="font-size: 121%"> Comments : </div> <div class="panel-body" style="padding-top:0px;"> <div id="comment_area"> <ul class="list-group"> </ul> </div> <div class="form-group" style="margin-bottom: 0px; margin-top: 3px;"> <div class="input-group"> <span class="input-group-addon">Say</span><input id="comment" name="comment" class="form-control" placeholder="leave comment" type="text"> </div> </div> </div> </div> </div> </div> <div class="searchResults" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show('fast');
@@ -465,18 +501,21 @@ function addMarkers(lat, lng, img, gid) {
                     $("[name='exchangeStatus']").bootstrapSwitch('onText', 'Exchanging');
                     $("[name='exchangeStatus']").bootstrapSwitch('offText', 'Exchanged');
                     $("[name='exchangeStatus']").bootstrapSwitch('onColor', 'info');
-                    if (response["ownerID"] != $("#profile").attr("data-value")) {
+                    if (response["ownerID"] != $("#profile").attr("data-value"))
+                    {
                         $("[name='exchangeStatus']").bootstrapSwitch('readonly', true);
                     }
 
 
 
-                    document.getElementById("comment").addEventListener("keydown", function (e) {
+                    document.getElementById("comment").addEventListener("keydown", function (e)
+                    {
                         if (!e) { var e = window.event; }
                         //e.preventDefault(); // sometimes useful
 
                         // Enter is pressed  Handle comments
-                        if (e.keyCode == 13 && $("#comment").val() != "") {
+                        if (e.keyCode == 13 && $("#comment").val() != "")
+                        {
                             var targetID = $("#profile").attr("data-value");
                             var comment = $("#comment").val();
                             $.ajax({
@@ -489,13 +528,16 @@ function addMarkers(lat, lng, img, gid) {
                                     mID: targetID,
                                     Comment: comment
                                 },
-                                success: function (response) {
+                                success: function (response)
+                                {
                                     $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px; background-color: #F4CDCD; margin-bottom:3px"><div style="word-wrap: break-word">' + response + '</div></li>');
 
                                     $("#comment").val('');
 
                                 },
-                                error: function (xhr, ajaxOption, thrownError) {
+                                error: function (xhr, ajaxOption, thrownError)
+                                {
+                                    alert('ERROR SECTION : Enter is pressed  Handle comments (map side)');
                                     alert(thrownError);
                                     alert(JSON.stringify(xhr));
                                 }
@@ -512,15 +554,20 @@ function addMarkers(lat, lng, img, gid) {
                             type: "fetch",
                             gid: val
                         },
-                        success: function (response) {
-                            if (response != null) {
-                                for (var i = 0; i < response.length; i++) {
+                        success: function (response)
+                        {
+                            if (response != null)
+                            {
+                                for (var i = 0; i < response.length; i++)
+                                {
                                     $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px; background-color: #F4CDCD; margin-bottom:3px"><div style="word-wrap: break-word"><img class="owner" data-value="' + response[i]["commenter"] + '" src="' + response[i]["commenterPhoto"] + '" style="margin-right:5px;width: 30px; height: 30px; box-shadow: 2px 2px 11px 0px rgba(50, 50, 50, 0.36);">' + response[i]["comment"] + '</div></li>');
 
                                 }
                             }
                         },
-                        error: function (xhr, ajaxOption, thrownError) {
+                        error: function (xhr, ajaxOption, thrownError)
+                        {
+                            alert('ERROR SECTION : Handle comments (map side)');
                             alert(thrownError);
                             alert(JSON.stringify(xhr));
                         }
@@ -535,9 +582,11 @@ function addMarkers(lat, lng, img, gid) {
                             type: "recommand",
                             uid: val
                         },
-                        success: function (response) {
+                        success: function (response)
+                        {
                             $('#leftSideSwitch').append('<div class="col-md-12" style="padding: 0px"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title">You might also like ...</h3></div><div class="panel-body" id="recommandTables"></div></div></div></div>');
-                            for (var i = 0; i < 5; i++) {
+                            for (var i = 0; i < 5; i++)
+                            {
                                 var min = 0;
                                 var max = response.length - 1;
                                 var xx = Math.floor(Math.random() * (max - min + 1) + min);
@@ -545,7 +594,9 @@ function addMarkers(lat, lng, img, gid) {
                                 $('#recommandTables').append('<div class="col-md-3 searchResult" style="padding: 0px; padding-top: 0px; padding-bottom: 0px; border: 0px; background: #fff; margin: 0px;" data-value="' + response[xx]["gid"] + '"><img src="' + response[xx]["photoPath"] + '" width="100" height="100" style="max-width: 100%; height: auto;" class="img-thumbnail" alt="..."></div>');
                             }
                         },
-                        error: function (xhr, ajaxOption, thrownError) {
+                        error: function (xhr, ajaxOption, thrownError)
+                        {
+                            alert('ERROR SECTION : Random Recommand Tables (map side)');
                             alert(thrownError);
                             alert(JSON.stringify(xhr));
                         }
@@ -555,7 +606,9 @@ function addMarkers(lat, lng, img, gid) {
                     map.panTo(new google.maps.LatLng(response["posY"], response["posX"]));
                     map.setZoom(17);
                 },
-                error: function (xhr, ajaxOption, thrownError) {
+                error: function (xhr, ajaxOption, thrownError)
+                {
+                    alert('ERROR SECTION : Exchanges (map side)');
                     alert(thrownError);
                     alert(JSON.stringify(xhr));
                 }
@@ -566,13 +619,15 @@ function addMarkers(lat, lng, img, gid) {
     });
 }
 
-function clearMarkers() {
+function clearMarkers()
+{
     for (var i = 0; i < markers.length; i++)
         markers[i].setMap(null);
     markers = [];
 }
 
-function resetMarkerSize() {
+function resetMarkerSize()
+{
     $('.custom-marker').removeClass('custom-marker-120');
     $('.custom-marker').removeClass('custom-marker-112');
     $('.custom-marker').removeClass('custom-marker-104');
@@ -585,7 +640,8 @@ function resetMarkerSize() {
     $('.custom-marker').removeClass('custom-marker-48');
 }
 
-function markersBounds() {
+function markersBounds()
+{
     if (map == null)
         return;
 
@@ -594,7 +650,8 @@ function markersBounds() {
     var topBound = -90;
     var bottomBound = 90;
 
-    for (var i = 0; i < markers.length; i++) {
+    for (var i = 0; i < markers.length; i++)
+    {
         var x = markers[i].getPosition().lng();
         var y = markers[i].getPosition().lat();
 
@@ -617,6 +674,7 @@ function markersBounds() {
     //map.getBounds() .getNorthEast() / getSouthWest()
 }
 
-function getPostMarkerPosition() {
+function getPostMarkerPosition()
+{
     return [marker.getPosition().lat(), marker.getPosition().lng()];
 }

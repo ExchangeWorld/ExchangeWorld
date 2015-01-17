@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -18,12 +18,10 @@
     <link href="static/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
     <link href="static/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css">
     <!--<link href="static/css/jquery.jscrollpane.css" rel="stylesheet" type="text/css" charset="utf-8" media="all">-->
-<link href="static/css/introjs.css" rel="stylesheet">
+    <link href="static/css/introjs.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="static/css/customized.css" rel="stylesheet" type="text/css" charset="utf-8">
-
-
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -36,7 +34,6 @@
 
     <script src="./include/FBappID.js"></script>
     <script>var loggedInForPost = false;</script>
-
 </head>
 
 <body role="document">
@@ -53,7 +50,6 @@
                 </button>
                 <a class="navbar-brand" href="#" style="font-size: 130%;">
                     <img style="max-width:200px; margin-top:-8px;" src="static/img/icon/logotmp.png" alt="">
-                    <!--<img style="display: inline;" src="images/exchange-icon" width="25">ExchangeWorld-->
 
                 </a>
             </div>
@@ -64,18 +60,17 @@
 
                     </li>
 
-                    <li id="post" data-step="2" data-intro="You want to change something ? Click here ! " >
+                    <li id="post" data-step="2" data-intro="You want to change something ? Click here ! ">
                         <a href="#post"><span class="glyphicon glyphicon-pushpin" aria-hidden="true" style="color: #FFFFFD"></span> Post</a>
                     </li>
 
-                    <li id="about" data-step="3" data-intro="Doesn't know who we are ? Click here ! Let me tell you !" >
-                        <a href="index.html"><span class="glyphicon glyphicon-glass" aria-hidden="true" style="color: #FFFFFD"></span> About</a>
+                    <li id="about" data-step="3" data-intro="Doesn't know who we are ? Click here ! Let me tell you !">
+                        <a href="./index.html#about"><span class="glyphicon glyphicon-glass" aria-hidden="true" style="color: #FFFFFD"></span> About</a>
                     </li>
 
                     <li id="help">
                         <a href="#help"><span class="glyphicon glyphicon-cog" aria-hidden="true" style="color: #FFFFFD"></span> Help</a>
                     </li>
-
 
 
                     <li>
@@ -92,8 +87,8 @@
                         </ul>
                     </li>
                     <li id="myMessage" data-step="4" data-intro="If you have any new message , we will remind you !" class="dropdown">
-                        <a id="messageIcon" href="#" data-toggle="dropdown" ><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
-                        <ul id="myMessageDropdown"class="dropdown-menu" role="menu"></ul>
+                        <a id="messageIcon" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                        <ul id="myMessageDropdown" class="dropdown-menu" role="menu"></ul>
                     </li>
                 </ul>
             </div>
@@ -122,8 +117,8 @@
                 <div id="mapButton-group" class="btn-group" role="group" aria-label="...">
                     <button id="myLocation" type="button" class="btn btn-default">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="100%"
-                            viewBox="0 0 480 480" style="enable-background: new 0 0 480 480;" xml:space="preserve">
-                            <path style="fill-rule: evenodd; clip-rule: evenodd;" d="M240,159.909c-44.235,0-80.091,35.859-80.091,80.091
+                             viewBox="0 0 480 480" style="enable-background: new 0 0 480 480;" xml:space="preserve">
+                        <path style="fill-rule: evenodd; clip-rule: evenodd;" d="M240,159.909c-44.235,0-80.091,35.859-80.091,80.091
 		                    s35.855,80.091,80.091,80.091c44.231,0,80.091-35.859,80.091-80.091S284.231,159.909,240,159.909z M400,226.667h-25.694
 		                    c-6.267-63.891-57.086-114.701-120.973-120.967V80c0-7.363-5.97-13.333-13.333-13.333S226.667,72.637,226.667,80v25.701
 		                    c-63.889,6.266-114.705,57.075-120.971,120.966H80c-7.363,0-13.333,5.97-13.333,13.333s5.97,13.333,13.333,13.333h25.696
@@ -160,7 +155,6 @@
     <div id="myMessageDetailArea" style="display:none">
     </div>
 
-</div>
 
     <!-- Junks put here -->
     <div id="exchange"></div>
@@ -172,9 +166,9 @@
 
     <!--fancybox-->
     <script type="text/javascript" src="static/fancy-box/lib/jquery.mousewheel-3.0.6.pack.js"></script>
-	<!-- Add fancyBox -->
-	<link rel="stylesheet" href="static/fancy-box/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
-	<script type="text/javascript" src="static/fancy-box/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <!-- Add fancyBox -->
+    <link rel="stylesheet" href="static/fancy-box/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="static/fancy-box/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
     <!--<script src="static/js/jquery.mousewheel.min.js"></script>-->
     <!--<script src="static/js/jquery.jscrollpane.min.js"></script>-->
@@ -184,13 +178,12 @@
     <!--<script src="../../assets/js/docs.min.js"></script>-->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
-
     <!--======================= Google Map Javascript   =======================-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTmx_RgDS6MWl-MdyidKhpCKXMs3pV63Y&signed_in=false&v=3.exp&libraries=places"></script>
     <script src="static/js/richmarker-compiled.js"></script>
     <script src="static/js/map.js"></script>
     <script src="static/js/fb.js"></script>
-	<script type="text/javascript" src="static/js/intro.js"></script>
+    <script type="text/javascript" src="static/js/intro.js"></script>
 
 </body>
 </html>

@@ -8,18 +8,23 @@ var seekInnerHTML = '<div class="input-group" style="margin-top: 15px; margin-bo
 
 var postInnerHTML = '<!--<form class="form-horizontal" id ="new_post" method="POST" enctype="multipart/form-data"><fieldset>--><!-- Form Name --><h1>Post Goods</h1><!-- Prepended text--><h3><span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> What do you have?</span></h3><div class="row postGroup"> <div class="col-md-12"> <div class="form-group" style="margin:0px"> <div class="input-group" style="width:100%"> <input id="gName" name="gName" class="form-control" placeholder="Name" required="" type="text" style="width:100%"> </div> </div> </div></div><!-- Select Basic --><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px"> <div class="btn-group" style="width:100%"> <button class="btn btn-default dropdown-toggle" type="button" id="categories" data-toggle="dropdown" aria-expanded="true" style="text-align:left"><span> Choose a category </span><span class="caret"></span></button> <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width:100%"> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Books</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Textbooks</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Magazine</a></li> <li role="presentation" class="divider"></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Movies</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Music CD</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Video Game</a></li> <li role="presentation" class="divider"></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Smart Phone</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Tablet</a></li> <li role="presentation" class="divider"></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Camera</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Audio</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Computer Hardware</a></li> <li role="presentation" class="divider"></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Jewelry</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Clothing</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Shoes</a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Watches</a></li> <li role="presentation" class="divider"></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Furniture</a></li> <li role="presentation" class="divider"></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Others</a></li> </ul> </div> </div></div><!-- File Button --><h3><span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> Upload Photo</span></h3><div class="row postGroup"> <div class="col-md-12"> <form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data"> <div id="targetLayer"> </div> <div id="uploadFormLayer"> <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*"><img id="photo_preview" width="200" src="#" alt=" " style="display: none" /><input id="submit" value="Submit" class="btnSubmit" type="submit"> </div> </form> </div></div><!-- Textarea --><div class="row postGroup"> <div class="col-md-12" style="margin-top: 5px"> <div class="form-group" style="margin-bottom:0px"> <textarea class="form-control" id="description" rows="5" name="description" placeholder="Say more about your good" style="resize:none"></textarea> </div> </div></div><!-- Button --><!-- Prepended text--><h3><span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Locate your goods on map!</span></h3><h4>Set your place on the map!</h4><h3><span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> What do you want?</span></h3><div class="row postGroup"> <div class="col-md-12"> <div class="form-group" style="margin-bottom:0px"> <div class="input-group" style="width:100%"> <input id="want_name" name="want_name" class="form-control" placeholder="Name" type="text"> </div> </div> </div></div><!-- Button --><div class="row postGroup"> <div class="form-group"> <label class="col-md-4 control-label" for="submit"></label> <div class="col-md-6"> <button id="submit" name="submit" class="submit" style="padding:0px; border:none; background-color: silver"> <h1><span class="label label-danger">Post!</span></h1> </button> </div> </div></div><!--</fieldset></form>-->';
 
-function readURL(input) {
-    if (input.files && input.files[0]) {
+function readURL(input)
+{
+    if (input.files && input.files[0])
+    {
         var reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function (e)
+        {
             $('#photo_preview').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
     }
 }
 
-function load_post() {
-    if (loggedInForPost == false) {
+function load_post()
+{
+    if (loggedInForPost == false)
+    {
 
         // Getting the variable's value from a link
         var loginBox = $('#overlay-login');
@@ -63,13 +68,15 @@ function load_post() {
     $('#submit').hide();
     $("#goods_photo").hide();
 
-    $(document).on('change', '#imgUpload', function () {
+    $(document).on('change', '#imgUpload', function ()
+    {
         $("#uploadForm").submit();
         console.log("photo uploaded!");
         // check FormData and ajax ..
     });
 
-    $("#uploadForm").on("submit", function (e) {
+    $("#uploadForm").on("submit", function (e)
+    {
         e.preventDefault();
         $.ajax({
             url: "./php_script/upload.php",
@@ -78,15 +85,19 @@ function load_post() {
             contentType: false,
             cache: false,
             processData: false,
-            success: function (data) {
+            success: function (data)
+            {
                 $("#targetLayer").html(data);
             },
-            error: function () {
+            error: function ()
+            {
+                alert('"#uploadForm" on "submit" ERROR!');
             }
         });
     });
 
-    $("#imgUpload").change(function () {
+    $("#imgUpload").change(function ()
+    {
         readURL(this);
         $('#photo_preview').show();
         changeMarkerImage($("#goods_photo").attr('data-value'));
@@ -101,7 +112,8 @@ function load_post() {
     //Google Map Setting
     //map.setOptions({draggableCursor: 'default'});
     map.setOptions({ draggableCursor: 'crosshair', draggingCursor: 'crosshair' });
-    google.maps.event.addListener(map, 'click', function (event) {
+    google.maps.event.addListener(map, 'click', function (event)
+    {
         if (marker == null)
             postMarker(event.latLng, $("#goods_photo").attr('data-value'));
         else
@@ -111,7 +123,8 @@ function load_post() {
 
 }
 
-function load_exchange(event) {
+function load_exchange(event)
+{
     //destroy the scroll
     //and reset the scroll by Noel
     $('#leftSide').perfectScrollbar('destroy');
@@ -130,15 +143,18 @@ function load_exchange(event) {
     //for goback function
     //dumb replace method ^^ when gobackSearchResultDataValueNeedToBeReplaced is false, going original way
     //if true, going tmp way
-    if (gobackSearchResultDataValueNeedToBeReplaced == false) {
+    if (gobackSearchResultDataValueNeedToBeReplaced == false)
+    {
         val = $(this).attr('data-value');
     }
-    else {
+    else
+    {
         val = gobackSearchResultDataValue;
         gobackSearchResultDataValueNeedToBeReplaced = false;
     }
 
-    if (val != 0) {
+    if (val != 0)
+    {
         //for goback
         gobackSearchResultDataValue = val;
 
@@ -149,7 +165,8 @@ function load_exchange(event) {
             data: {
                 gid: val
             },
-            success: function (response) {
+            success: function (response)
+            {
                 //Left Side
                 $('#leftSideSwitch').hide().empty();
                 $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"> <div class="col-md-5"> <button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button> </div> <div class="col-md-7"> <input id="checkbox" type="checkbox" name="exchangeStatus" checked> </div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"> <div class="col-md-5 fancybox" href="' + response["photoPath"] + '"> <img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."> </div> <div class="col-md-7"> <ul class="list-group" style="font-size: 85%"> <li class="list-group-item">' + response["gname"] + '<span class="badge">' + response["categories"] + '</span></li> <li class="list-group-item">Wanted : ' + response["want"] + '</li> <li class="list-group-item owner" data-value="' + response["ownerID"] + '"><img src="' + response["owner_photo"] + '" height="20" width="20"> ' + response["username"] + '</li> </ul> </div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"> <div class="col-md-12"> <div class="panel panel-info"> <div class="panel-heading"> Description : </div> <div class="panel-body"> <p> ' + response["description"] + ' </div> </div> </div> </div> <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%"> <div class="col-md-12"> <div class="panel panel-info"> <div class="panel-heading" style="font-size: 121%"> Comments : </div> <div class="panel-body" style="padding-top:0px;"> <div id="comment_area"> <ul class="list-group"> </ul> </div> <div class="form-group" style="margin-bottom: 0px; margin-top: 3px;"> <div class="input-group"> <span class="input-group-addon">Say</span><input id="comment" name="comment" class="form-control" placeholder="leave comment" type="text"> </div> </div> </div> </div> </div> </div> <div class="searchResults" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show('fast');
@@ -158,18 +175,19 @@ function load_exchange(event) {
                 $("[name='exchangeStatus']").bootstrapSwitch('onText', 'Exchanging');
                 $("[name='exchangeStatus']").bootstrapSwitch('offText', 'Exchanged');
                 $("[name='exchangeStatus']").bootstrapSwitch('onColor', 'info');
-                if (response["ownerID"] != $("#profile").attr("data-value")) {
+                if (response["ownerID"] != $("#profile").attr("data-value"))
+                {
                     $("[name='exchangeStatus']").bootstrapSwitch('readonly', true);
                 }
 
-
-
-                document.getElementById("comment").addEventListener("keydown", function (e) {
+                document.getElementById("comment").addEventListener("keydown", function (e)
+                {
                     if (!e) { var e = window.event; }
                     //e.preventDefault(); // sometimes useful
 
                     // Enter is pressed  Handle comments
-                    if (e.keyCode == 13 && $("#comment").val() != "") {
+                    if (e.keyCode == 13 && $("#comment").val() != "")
+                    {
                         var targetID = $("#profile").attr("data-value");
                         var comment = $("#comment").val();
                         $.ajax({
@@ -182,13 +200,16 @@ function load_exchange(event) {
                                 mID: targetID,
                                 Comment: comment
                             },
-                            success: function (response) {
+                            success: function (response)
+                            {
                                 $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px; background-color: #F4CDCD; margin-bottom:3px"><div style="word-wrap: break-word">' + response + '</div></li>');
 
                                 $("#comment").val('');
 
                             },
-                            error: function (xhr, ajaxOption, thrownError) {
+                            error: function (xhr, ajaxOption, thrownError)
+                            {
+                                alert('ERROR SECTION : if (e.keyCode == 13 && $("#comment").val() != "")');
                                 alert(thrownError);
                                 alert(JSON.stringify(xhr));
                             }
@@ -205,15 +226,20 @@ function load_exchange(event) {
                         type: "fetch",
                         gid: val
                     },
-                    success: function (response) {
-                        if (response != null) {
-                            for (var i = 0; i < response.length; i++) {
+                    success: function (response)
+                    {
+                        if (response != null)
+                        {
+                            for (var i = 0; i < response.length; i++)
+                            {
                                 $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px; background-color: #F4CDCD; margin-bottom:3px"><div style="word-wrap: break-word"><img class="owner" data-value="' + response[i]["commenter"] + '" src="' + response[i]["commenterPhoto"] + '" style="margin-right:5px;width: 30px; height: 30px; box-shadow: 2px 2px 11px 0px rgba(50, 50, 50, 0.36);">' + response[i]["comment"] + '</div></li>');
 
                             }
                         }
                     },
-                    error: function (xhr, ajaxOption, thrownError) {
+                    error: function (xhr, ajaxOption, thrownError)
+                    {
+                        alert('ERROR SECTION : Handle Comments');
                         alert(thrownError);
                         alert(JSON.stringify(xhr));
                     }
@@ -228,9 +254,11 @@ function load_exchange(event) {
                         type: "recommand",
                         uid: val
                     },
-                    success: function (response) {
+                    success: function (response)
+                    {
                         $('#leftSideSwitch').append('<div class="col-md-12" style="padding: 0px"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title">You might also like ...</h3></div><div class="panel-body" id="recommandTables"></div></div></div></div>');
-                        for (var i = 0; i < 5; i++) {
+                        for (var i = 0; i < 5; i++)
+                        {
                             var min = 0;
                             var max = response.length - 1;
                             var xx = Math.floor(Math.random() * (max - min + 1) + min);
@@ -238,7 +266,9 @@ function load_exchange(event) {
                             $('#recommandTables').append('<div class="col-md-3 searchResult" style="padding: 0px; padding-top: 0px; padding-bottom: 0px; border: 0px; background: #fff; margin: 0px;" data-value="' + response[xx]["gid"] + '"><img src="' + response[xx]["photoPath"] + '" width="100" height="100" style="max-width: 100%; height: auto;" class="img-thumbnail" alt="..."></div>');
                         }
                     },
-                    error: function (xhr, ajaxOption, thrownError) {
+                    error: function (xhr, ajaxOption, thrownError)
+                    {
+                        alert('ERROR SECTION : Handle Random Recommand Tables');
                         alert(thrownError);
                         alert(JSON.stringify(xhr));
                     }
@@ -248,16 +278,18 @@ function load_exchange(event) {
                 map.panTo(new google.maps.LatLng(response["posY"], response["posX"]));
                 map.setZoom(17);
             },
-            error: function (xhr, ajaxOption, thrownError) {
+            error: function (xhr, ajaxOption, thrownError)
+            {
+                alert('ERROR SECTION : Load Exchange');
                 alert(thrownError);
                 alert(JSON.stringify(xhr));
             }
         });
-
     }
 }
 
-function load_profile() {
+function load_profile()
+{
     //destroy the scroll
     //and reset the scroll by Noel
     $('#leftSide').perfectScrollbar('destroy');
@@ -273,7 +305,8 @@ function load_profile() {
     //push previous stage to gobackStack
     if (currentStage != "userBtn") gobackStack.push(currentStage);
     //set currentStage to next stage, owner
-    if (currentStage == "owner") {
+    if (currentStage == "owner")
+    {
         //means that user looked at somebody's profile and check own profile, then this time we want to hide goback and reset the stack
         console.log("hidegoback!");
         hidegoback = true;
@@ -282,7 +315,8 @@ function load_profile() {
     currentStage = "owner";
 
     //if it's come back from following or follower
-    if (gobackOwnerDataValue != 0) {
+    if (gobackOwnerDataValue != 0)
+    {
         val = gobackOwnerDataValue;
         gobackOwnerDataValue = 0;
     }
@@ -294,9 +328,11 @@ function load_profile() {
     }
 
 
-    if (val != 0) {
+    if (val != 0)
+    {
         // Other's profiles
-        if (hidegoback == false && val != $("#profile").attr("data-value")) {
+        if (hidegoback == false && val != $("#profile").attr("data-value"))
+        {
             $.ajax({
                 type: "GET",
                 url: "./php_script/profile.php",
@@ -304,17 +340,13 @@ function load_profile() {
                 data: {
                     uid: val
                 },
-                success: function (response) {
+                success: function (response)
+                {
                     $('#leftSideSwitch').hide().empty();
                     $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5 fancybox" href="' + response[0]["photoPath"] + '"><img src="' + response[0]["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><ul class="list-group" style="font-size: 85%"><li class="list-group-item">' + response[0]["username"] + '</li><li class="list-group-item">' + response[0]["email"] + '</li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"><li role="presentation" class="userBtn" data-value="' + response[0]["fb_id"] + '" id="add"><a  href="#">Follow + </a></li><li role="presentation" class="active userBtn" id="following"><a href="#">Following <span class="badge"  id="bdgfollowing">' + response[1]["followingCount"] + '</span></a></li><li role="presentation" class="active userBtn" id="follower"><a href="#">Follower <span class="badge"  id="bdgfollowing">' + response[2]["followerCount"] + '</span></a></li> <li role="presentation" class="active fancybox" id="sendMessage" href="#messageTextarea"><a style="cursor:pointer; cursor:hand">Send message!</a> </li> </ul></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show('fast');
 
-
                     // popup (send) messagebox
                     $('#leftSideSwitch').append('<div id="messageTextarea" class="form-group" style="display:none; width:400px;">To:   <img class="circular" src="' + response[0]["photoPath"] + '" height="30" width="30" >' + '  ' + response[0]["username"] + '<textarea class="form-control" id="message" name="send" rows="16" placeholder="Send some text...." ></textarea> <img class="circular" src="' + $("#myhead").attr('src') + '" style="width:60px;height:60px;margin-top:15px;"> <button id="send" name="send" class="btn btn-danger userBtn btn-send">Send Message</button> </div> ');
-
-
-                    // $("#my-profile-picture").attr('src')
-                    //<div class="form-group"> <textarea class="form-control" id="message" name="send" placeholder="Send message !"></textarea> </div>
 
                     //Handle Exchanging/Exchanged Tables
                     //Get Exchange Table(?) and represent in map
@@ -326,11 +358,13 @@ function load_profile() {
                             type: "myTables",
                             uid: val
                         },
-                        success: function (response) {
-
+                        success: function (response)
+                        {
                             $('#leftSideSwitch').append('<div class="col-md-12" style="padding: 0px"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title">Exchanging</h3></div><div id="Exchanging" class="panel-body "></div></div><div class="panel panel-info" style="margin-top: 15px"><div class="panel-heading"><h3 class="panel-title">Exchanged</h3></div><div id="Exchanged" class="panel-body"></div></div></div></div>');
-                            for (var i = 0; i < response.length; i++) {
-                                if (response[i]["status"] == 0) { // Exchanging
+                            for (var i = 0; i < response.length; i++)
+                            {
+                                if (response[i]["status"] == 0)
+                                { // Exchanging
                                     $('#Exchanging').append('<div class="col-md-3 searchResult" style="padding: 0px; padding-top: 0px; padding-bottom: 0px; border: 0px; background: #fff; margin: 0px;" data-value="' + response[i]["gid"] + '"><img src="' + response[i]["photoPath"] + '"width="100" height="100" style="max-width: 100%; height: auto;" class="img-thumbnail" alt="..."></div>');
                                 }
                                 /*  else{
@@ -339,20 +373,25 @@ function load_profile() {
                                     } */
                             }
                         },
-                        error: function (xhr, ajaxOption, thrownError) {
+                        error: function (xhr, ajaxOption, thrownError)
+                        {
+                            alert('ERROR SECTION : Handle Exchanging/Exchanged Tables - other');
                             alert(thrownError);
                             alert(JSON.stringify(xhr));
                         }
                     });
                 },
-                error: function (xhr, ajaxOption, thrownError) {
+                error: function (xhr, ajaxOption, thrownError)
+                {
+                    alert('ERROR SECTION : Profiles - other');
                     alert(thrownError);
                     alert(JSON.stringify(xhr));
                 }
             });
         }
             // my Profile
-        else {
+        else
+        {
             $.ajax({
                 type: "GET",
                 url: "./php_script/profile.php",
@@ -360,7 +399,8 @@ function load_profile() {
                 data: {
                     uid: val
                 },
-                success: function (response) {
+                success: function (response)
+                {
                     $('#leftSideSwitch').hide().empty();
 
                     $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-5 fancybox" href="' + response[0]["photoPath"] + '"><img  src="' + response[0]["photoPath"] + '" class="img-thumbnail" alt="..."></div><div class="col-md-7"><div style="margin-top:50px;"><h2>' + response[0]["username"] + '</h2></div></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 85%"><div class="col-md-12"><ul class="nav nav-pills" role="tablist"> <li role="presentation" class="userBtn" data-value="' + response[0]["fb_id"] + '" style="display:none" id="add"><a  href="#">Follow + </a></li><li role="presentation" class="active  userBtn" id="following"><a href="#">Following <span class="badge" id="bdgfollowing">' + response[1]["followingCount"] + '</span></a></li><li role="presentation" class="active  userBtn" id="follower"><a href="#">Follower <span class="badge"n  id="bdgfollower">' + response[2]["followerCount"] + '</span></a></li></ul></div></div><div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show('fast');
@@ -375,11 +415,14 @@ function load_profile() {
                             type: "myTables",
                             uid: val
                         },
-                        success: function (response) {
+                        success: function (response)
+                        {
 
                             $('#leftSideSwitch').append('<div class="col-md-12" style="padding: 0px"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title">Exchanging</h3></div><div id="Exchanging" class="panel-body "></div></div><div class="panel panel-info" style="margin-top: 15px"><div class="panel-heading"><h3 class="panel-title">Exchanged</h3></div><div id="Exchanged" class="panel-body"></div></div></div></div>');
-                            for (var i = 0; i < response.length; i++) {
-                                if (response[i]["status"] == 0) { // Exchanging
+                            for (var i = 0; i < response.length; i++)
+                            {
+                                if (response[i]["status"] == 0)
+                                { // Exchanging
                                     $('#Exchanging').append('<div class="col-md-3 searchResult" style="padding: 0px; padding-top: 0px; padding-bottom: 0px; border: 0px; background: #fff; margin: 0px;" data-value="' + response[i]["gid"] + '"><img src="' + response[i]["photoPath"] + '" width="100" height="100" style="max-width: 100%; height: auto;" class="img-thumbnail" alt="..."></div>');
                                 }
                                 /*  else{
@@ -388,28 +431,32 @@ function load_profile() {
                                     } */
                             }
                         },
-                        error: function (xhr, ajaxOption, thrownError) {
+                        error: function (xhr, ajaxOption, thrownError)
+                        {
+                            alert('ERROR SECTION : Handle Exchanging/Exchanged Tables - my');
                             alert(thrownError);
                             alert(JSON.stringify(xhr));
                         }
                     });
                 },
-                error: function (xhr, ajaxOption, thrownError) {
+                error: function (xhr, ajaxOption, thrownError)
+                {
+                    alert('ERROR SECTION : Profile - my');
                     alert(thrownError);
                     alert(JSON.stringify(xhr));
                 }
             });
         }
-
-
-
     }
 }
 
-function seek_query(search, query_type) {
+function seek_query(search, query_type)
+{
     var pX, pY;
-    if (query_type == "location") {
-        navigator.geolocation.getCurrentPosition(function (position) {
+    if (query_type == "location")
+    {
+        navigator.geolocation.getCurrentPosition(function (position)
+        {
             var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             map.setCenter(latlng);
             pX = latlng.lng();
@@ -425,11 +472,15 @@ function seek_query(search, query_type) {
                     py: pY,
                     selected: search
                 },
-                success: function (response) {
-                    if (response == null) {
+                success: function (response)
+                {
+                    if (response == null)
+                    {
                         $("#searchResults").append("No Results!");
-                    } else {
-                        for (var i = 0; i < response.length; i++) {
+                    } else
+                    {
+                        for (var i = 0; i < response.length; i++)
+                        {
                             //Left Side
                             $('#searchResults').append('<div class="row searchResult" data-value="' + response[i]["gid"] + '"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div> <div class="col-md-7 searchResultDescription"> <ul class="list-group"> <li class="list-group-item"> ' + response[i]["gname"] + '<span class="badge">' + response[i]["categories"] + '</span></li> <li class="list-group-item">Wanted: ' + response[i]["want"] + '</li> <li class="list-group-item"><img src="' + response[i]["owner_photo"] + '" height="20" width="20"> ' + response[i]["username"] + '</li></ul> </div></div>');
 
@@ -440,10 +491,12 @@ function seek_query(search, query_type) {
                         markersBounds();
 
                         $('.searchResult').hover(
-                            function () {
+                            function ()
+                            {
                                 $(this).addClass('searchResultSelected');
                             },
-                            function () {
+                            function ()
+                            {
                                 $(this).removeClass('searchResultSelected');
                             }
                         );
@@ -454,17 +507,21 @@ function seek_query(search, query_type) {
                         document.getElementById("seek").className = "active";
                     }
                 },
-                error: function (xhr, ajaxOption, thrownError) {
+                error: function (xhr, ajaxOption, thrownError)
+                {
+                    alert('ERROR SECTION : Seek query - location');
                     alert(thrownError);
                     alert(JSON.stringify(xhr));
                 }
 
             });
-        }, function () {
+        }, function ()
+        {
             handleNoGeolocation(browserSupportFlag);
         });
     }
-    else {
+    else
+    {
         $.ajax({
             type: "GET",
             url: "./php_script/seek.php",
@@ -475,11 +532,15 @@ function seek_query(search, query_type) {
                 py: pY,
                 selected: search
             },
-            success: function (response) {
-                if (response == null) {
+            success: function (response)
+            {
+                if (response == null)
+                {
                     $("#searchResults").append("No Results!");
-                } else {
-                    for (var i = 0; i < response.length; i++) {
+                } else
+                {
+                    for (var i = 0; i < response.length; i++)
+                    {
                         //Left Side
                         $('#searchResults').append('<div class="row searchResult" data-value="' + response[i]["gid"] + '"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div> <div class="col-md-7 searchResultDescription"> <ul class="list-group"> <li class="list-group-item"> ' + response[i]["gname"] + '<span class="badge">' + response[i]["categories"] + '</span></li> <li class="list-group-item">Wanted: ' + response[i]["want"] + '</li> <li class="list-group-item"><img src="' + response[i]["owner_photo"] + '" height="20" width="20"> ' + response[i]["username"] + '</li></ul> </div></div>');
 
@@ -490,13 +551,15 @@ function seek_query(search, query_type) {
                     markersBounds();
 
                     $('.searchResult').hover(
-                        function () {
+                        function ()
+                        {
                             $(this).addClass('searchResultSelected');
 
                             var gid = $(this).attr("data-value");
                             //$("div[data-gid='" + gid + "']").addClass('selected-item');
                         },
-                        function () {
+                        function ()
+                        {
                             $(this).removeClass('searchResultSelected');
                             var gid = $(this).attr("data-value");
                             //$("div[data-gid='" + gid + "']").removeClass('selected-item');
@@ -509,7 +572,9 @@ function seek_query(search, query_type) {
                     document.getElementById("seek").className = "active";
                 }
             },
-            error: function (xhr, ajaxOption, thrownError) {
+            error: function (xhr, ajaxOption, thrownError)
+            {
+                alert('ERROR SECTION : Seek query - non_location');
                 alert(thrownError);
                 alert(JSON.stringify(xhr));
             }
@@ -518,13 +583,16 @@ function seek_query(search, query_type) {
     }
 }
 
-$(document).ready(function () {
-    $(function () {
+$(document).ready(function ()
+{
+    $(function ()
+    {
+        // attach fancybox on all elements that use it
         $(".fancybox").fancybox();
-        /// §ä¨ìclass¦Wº?¬°fancyboxªº?þ§O¡A±N¥L®M¥? fancybox®?ªG
     });
 
-    $("body").on("click", ".userBtn", function (event) {
+    $("body").on("click", ".userBtn", function (event)
+    {
 
         console.log("userBtn!");
         console.log("previous stage is " + currentStage);
@@ -556,9 +624,11 @@ $(document).ready(function () {
                 mID: myID,
                 message: $("#message").val()
             },
-            success: function (response) {
-                if (Type == "following") {
-                    var v= $("#bdgfollowing").text() ;
+            success: function (response)
+            {
+                if (Type == "following")
+                {
+                    var v = $("#bdgfollowing").text();
                     $('#leftSideSwitch').hide().empty();
                     $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div>\
                     <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
@@ -569,26 +639,28 @@ $(document).ready(function () {
                             <h1 style="margin-top: 0px">Following</h1>\
                         </div>\
                         <div class="col-md-4">\
-                            <h1 style="margin-top: 0px; color: #04ACD9">'+ v+ '</h1>\
+                            <h1 style="margin-top: 0px; color: #04ACD9">'+ v + '</h1>\
                         </div>\
                     </div>');
                     if (response == null) $("#leftSideSwitch").append('No Result');
-                    else {
-                        for (var i = 0; i < response.length; i++) {
+                    else
+                    {
+                        for (var i = 0; i < response.length; i++)
+                        {
                             if (i == 0 || (i + 1) % 4 == 0)
                                 $('#leftSideSwitch').append('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">');
-                            //<li class="list-group-item owner" ><img src= height="20" width="20"> ' + response["username"] + '</li>
+
                             $('#leftSideSwitch').append('<div class="col-md-4 owner" data-value="' + response[i]["follower"] + '"><img class="img-thumbnail" alt=".." src="' + response[i]["owner_photo"] + '" style="width: 100%"></div>');
 
                             if ((i + 1) % 4 == 0)
                                 $('#leftSideSwitch').append('</div>');
                         }
                     }
-                    //if (response == null) $("#leftSideSwitch").html('No Result');
                     $('#leftSideSwitch').show('fast');
                 }
-                else if (Type == "follower") {
-                    var v= $("#bdgfollower").text();
+                else if (Type == "follower")
+                {
+                    var v = $("#bdgfollower").text();
                     $('#leftSideSwitch').hide().empty();
                     $('#leftSideSwitch').html('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div>\
                     <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
@@ -599,43 +671,45 @@ $(document).ready(function () {
                             <h1 style="margin-top: 0px">Follower</h1>\
                         </div>\
                         <div class="col-md-4">\
-                            <h1 style="margin-top: 0px; color: #04ACD9">' +  v+ '</h1>\
+                            <h1 style="margin-top: 0px; color: #04ACD9">' + v + '</h1>\
                         </div>\
                     </div>');
                     if (response == null) $("#leftSideSwitch").append('No Result');
-                    else {
-                        for (var i = 0; i < response.length; i++) {
-                            if (i == 0 || (i + 1) % 4 == 0)
-                                $('#leftSideSwitch').append('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">');
-                            //<li class="list-group-item owner" ><img src= height="20" width="20"> ' + response["username"] + '</li>
+                    else
+                    {
+                        for (var i = 0; i < response.length; i++)
+                        {
+                            //Warpping line: 4 items a rows 
+                            if (i == 0 || (i + 1) % 4 == 0) $('#leftSideSwitch').append('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">');
+
                             $('#leftSideSwitch').append('<div class="col-md-4 owner" data-value="' + response[i]["myid"] + '"><img class="img-thumbnail" alt=".." src="' + response[i]["owner_photo"] + '" style="width: 100%"></div>');
 
-                            if ((i + 1) % 4 == 0)
-                                $('#leftSideSwitch').append('</div>');
+                            //Warpping line
+                            if ((i + 1) % 4 == 0) $('#leftSideSwitch').append('</div>');
                         }
                     } if (response == null) $("#leftSideSwitch").html('No Result');
                     $('#leftSideSwitch').show('fast');
                 }
-                if (Type == "send") {
+                if (Type == "send")
+                {
                     parent.$.fancybox.close();
-
                 }
             },
-            error: function (xhr, ajaxOption, thrownError) {
+            error: function (xhr, ajaxOption, thrownError)
+            {
+                alert('ERROR SECTION : userBtn');
                 alert(thrownError);
                 alert(JSON.stringify(xhr));
             }
         });
     });
 
-    //load_exchange();
     // Handle User clicking the specific goods.
-    // Move to outside by Noel. To fit goback function QwQ
     $("#leftSideSwitch").on("click", ".searchResult", load_exchange);
 
     // Handle new post
-    $("#leftSideSwitch").on("click", ".submit", function (event) {
-
+    $("#leftSideSwitch").on("click", ".submit", function (event)
+    {
         var post_gname = $("#gName").val();
         var post_want = $("#want_name").val();
         var post_description = $("#description").val();
@@ -650,12 +724,14 @@ $(document).ready(function () {
         var Y;
         if (marker == null)
             alert("Please select a location!");
-        else {
+        else
+        {
             var X = marker.getPosition().lng();
             var Y = marker.getPosition().lat();
         }
 
-        if (marker != null && post_categories != "") {
+        if (marker != null && post_categories != "")
+        {
             $.ajax({
                 type: "GET",
                 url: "./php_script/post.php",
@@ -670,13 +746,16 @@ $(document).ready(function () {
                     posX: X,
                     posY: Y
                 },
-                success: function (response) {
+                success: function (response)
+                {
                     console.log(response);
                     console.log("POST success");
                     marker.setDraggable(false);
                     $('#seek').trigger("click");
                 },
-                error: function (xhr, ajaxOption, thrownError) {
+                error: function (xhr, ajaxOption, thrownError)
+                {
+                    alert('ERROR SECTION : submit post');
                     alert(thrownError);
                     alert(JSON.stringify(xhr));
                 }
@@ -689,7 +768,8 @@ $(document).ready(function () {
     $("body").on("click", ".owner", load_profile);
 
     // Handle User clicking seek on navbar
-    $("#seek").on("click", function (event) {
+    $("#seek").on("click", function (event)
+    {
         console.log("seek!");
         //reset gobackStack
         gobackStack = [];
@@ -714,14 +794,16 @@ $(document).ready(function () {
         if (markers != null)
             clearMarkers();
 
-        if (map != null) {
+        if (map != null)
+        {
             map.setOptions({ draggableCursor: 'default', draggingCursor: 'default' });
             google.maps.event.clearListeners(map, 'click');
         }
     });
 
     // Handle Search by keywords
-    $("#leftSideSwitch").on("click", ".seeking", function (event) {
+    $("#leftSideSwitch").on("click", ".seeking", function (event)
+    {
         var search = $("#searchName").val();
         $('#leftSideSwitch').hide();
         $('#leftSideSwitch').html(seekInnerHTML);
@@ -739,19 +821,22 @@ $(document).ready(function () {
         if (markers != null)
             clearMarkers();
 
-        if (map != null) {
+        if (map != null)
+        {
             map.setOptions({ draggableCursor: 'default', draggingCursor: 'default' });
             google.maps.event.clearListeners(map, 'click');
         }
     });
 
     // Handle Search by Categories
-    $("#leftSideSwitch").on("click", ".dropdown", function (event) {
+    $("#leftSideSwitch").on("click", ".dropdown", function (event)
+    {
         $("#categories").text($(this).text() + ' ');
         $("#categories").append('<span class="caret"></span>');
         $(".btn:first-child").val($(this).text());
 
-        if ($('#seek').attr("class") == "active") {
+        if ($('#seek').attr("class") == "active")
+        {
             var search = $(this).text();
             $('#leftSideSwitch').hide();
             $('#leftSideSwitch').html(seekInnerHTML);
@@ -769,7 +854,8 @@ $(document).ready(function () {
             if (markers != null)
                 clearMarkers();
 
-            if (map != null) {
+            if (map != null)
+            {
                 map.setOptions({ draggableCursor: 'default', draggingCursor: 'default' });
                 google.maps.event.clearListeners(map, 'click');
             }
@@ -780,7 +866,8 @@ $(document).ready(function () {
     });
 
     // Handle Search by my Location
-    $("#leftSideSwitch").on("click", ".dropdownLocation", function (event) {
+    $("#leftSideSwitch").on("click", ".dropdownLocation", function (event)
+    {
         var search = $(this).text();
         $('#leftSideSwitch').hide();
         $('#leftSideSwitch').html(seekInnerHTML);
@@ -798,7 +885,8 @@ $(document).ready(function () {
         if (markers != null)
             clearMarkers();
 
-        if (map != null) {
+        if (map != null)
+        {
             map.setOptions({ draggableCursor: 'default', draggingCursor: 'default' });
             google.maps.event.clearListeners(map, 'click');
         }
@@ -811,7 +899,8 @@ $(document).ready(function () {
     $('#post').click(load_post);
 
     // Handle myMessage
-    $('#myMessage').click(function (event) {
+    $('#myMessage').click(function (event)
+    {
         $.ajax({
             type: "GET",
             url: "./php_script/myMessage.php",
@@ -820,36 +909,43 @@ $(document).ready(function () {
                 type: "fetch",
                 myid: $("#profile").attr("data-value")
             },
-            success: function (response) {
+            success: function (response)
+            {
                 $('#myMessageDropdown').empty();
                 $('#myMessageDetailArea').empty();
-                if (response == null) {
-                    $("#myMessageDropdown").append("<li>No message!</li>");
-                } else {
-                    for (var i = 0; i < response.length; i++) {
-                        //Dropdown
-                        if (response[i]["readed"] == 0) {
+
+                if (response == null) $("#myMessageDropdown").append("<li>No message!</li>");
+                else
+                {
+                    for (var i = 0; i < response.length; i++)
+                    {
+                        // Dropdown
+                        if (response[i]["readed"] == 0)
+                        {
                             $('#myMessageDropdown').append('<li ><a class="fancybox messageRow" href="#mid' + response[i]["mid"] + '"><span class="glyphicon glyphicon-certificate"></span>' + " " + response[i]["text"].substr(0, 10) + "..." + '</a></li>');
                         }
-                        else {
+                        else
+                        {
                             $('#myMessageDropdown').append('<li ><a class="fancybox messageRow" href="#mid' + response[i]["mid"] + '"><span class="glyphicon glyphicon-certificate" style="display:none"></span>' + " " + response[i]["text"].substr(0, 10) + "..." + '</a></li>');
                         }
-                        if ($('#mid' + response[i]["mid"] + '').attr("id") == null) {
-
-
+                        if ($('#mid' + response[i]["mid"] + '').attr("id") == null)
+                        {
                             $('#myMessageDetailArea').append('<div id="mid' + response[i]["mid"] + '" style="display:none" data-value="' + response[i]["sender_id"] + '"><img class="circular" src="' + response[i]["owner_photo"] + '" height="50" width="50" >' + response[i]["username"] + '<li class="list-group-item" style="padding: 5px; font-size:16px ;width:400px;height:150px"> ' + response[i]["text"] + '</li><textarea class="form-control" rows="3" id="messageReply' + response[i]["mid"] + '" name="messageReply" placeholder="Relpy......"></textarea><img class="circular" src="' + $("#myhead").attr('src') + '" style="width:60px;height:60px;margin-top:15px;"> <button name="Reply" data-value="' + response[i]["mid"] + '" class="btn btn-danger Reply">Reply Message</button></div>');
                         }
                     }
                 }
             },
-            error: function (xhr, ajaxOption, thrownError) {
+            error: function (xhr, ajaxOption, thrownError)
+            {
+                alert('ERROR SECTION : Handle myMessage');
                 alert(thrownError);
                 alert(JSON.stringify(xhr));
             }
         });
     });
 
-    $("body").on("click", ".Reply", function (event) {
+    $("body").on("click", ".Reply", function (event)
+    {
         var replyMessage = $("#messageReply" + $(this).attr("data-value")).val();
         var tagetID = $("#mid" + $(this).attr("data-value")).attr("data-value");  // get others' fb id
         var myID = $("#profile").attr("data-value"); // get my fb id
@@ -865,14 +961,17 @@ $(document).ready(function () {
                 mID: myID,
                 message: replyMessage
             },
-            success: function (response) {
+            success: function (response)
+            {
                 //alert(response);
                 parent.$.fancybox.close();
-                alert("reply success!");
+                //alert("reply success!");
 
                 console.log(response);
             },
-            error: function (xhr, ajaxOption, thrownError) {
+            error: function (xhr, ajaxOption, thrownError)
+            {
+                alert('ERROR SECTION : Reply');
                 alert(thrownError);
                 alert(JSON.stringify(xhr));
             }
@@ -880,7 +979,8 @@ $(document).ready(function () {
     });
 
     // Update message status to readed if clicked
-    $("#myMessage").on("click", ".messageRow", function (event) {
+    $("#myMessage").on("click", ".messageRow", function (event)
+    {
         $.ajax({
             type: "GET",
             url: "./php_script/myMessage.php",
@@ -889,10 +989,13 @@ $(document).ready(function () {
                 type: "readmessage",
                 mid: $(this).attr("href").replace("#mid", "")
             },
-            success: function (response) {
+            success: function (response)
+            {
                 console.log("Unread messages = " + response);
             },
-            error: function (xhr, ajaxOption, thrownError) {
+            error: function (xhr, ajaxOption, thrownError)
+            {
+                alert('ERROR SECTION : message box');
                 alert(thrownError);
                 alert(JSON.stringify(xhr));
             }
@@ -900,7 +1003,8 @@ $(document).ready(function () {
     });
 
     // JustInTime check unread messages
-    $('body').click(function (event) {
+    $('body').click(function (event)
+    {
         $.ajax({
             type: "GET",
             url: "./php_script/myMessage.php",
@@ -909,24 +1013,29 @@ $(document).ready(function () {
                 type: "unreadmessage",
                 myid: $("#profile").attr("data-value")
             },
-            success: function (response) {
+            success: function (response)
+            {
                 $("#messageIcon").empty();
                 $("#messageIcon").html('<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><span class="badge">' + response + '</span>');
-                console.log(response);
+                console.log("unread messages = "+response);
             },
-            error: function (xhr, ajaxOption, thrownError) {
-                alert(thrownError);
-                alert(JSON.stringify(xhr));
+            error: function (xhr, ajaxOption, thrownError)
+            {
+                //alert('ERROR SECTION : JIT check Message');
+                //alert(thrownError);
+                //alert(JSON.stringify(xhr));
             }
         });
     });
 
-    $("#leftSideSwitch").on("click", "#goback", function (event) {
+    $("#leftSideSwitch").on("click", "#goback", function (event)
+    {
         console.log("goback!");
         console.log(gobackStack);
 
         //select where to goback
-        switch (gobackStack[gobackStack.length - 1]) {
+        switch (gobackStack[gobackStack.length - 1])
+        {
             case "exchange":
                 console.log("case Exchange");
                 gobackStack.pop();
@@ -947,10 +1056,10 @@ $(document).ready(function () {
                 load_profile();
                 break;
         }
-
     });
 
-    $("#help").on("click", function (event) {
+    $("#help").on("click", function (event)
+    {
         document.getElementById("seek").className = "";
         document.getElementById("post").className = "";
         document.getElementById("about").className = "";
@@ -960,34 +1069,36 @@ $(document).ready(function () {
     });
 
     // Overlay Effect
-    $('body').on('click', '.popup-close, #mask', function () {
-        $('#mask , .popup').fadeOut(300, function () {
+    $('body').on('click', '.popup-close, #mask', function ()
+    {
+        $('#mask , .popup').fadeOut(300, function ()
+        {
             $('#mask').remove();
         });
         return false;
     });
 
     $('.popup-close').hover(
-        function () {
+        function ()
+        {
             $(this).addClass('emphasis');
         },
-        function () {
+        function ()
+        {
             $(this).removeClass('emphasis');
         }
     );
 
 });
 
-// function refreshBrand()
-// {
-// 	location.reload();
-// }
 
-$('#profile').on("click", function (event) {
+$('#profile').on("click", function (event)
+{
     gobackOwnerDataValue = 0;
 
 });
 
-$(window).load(function () {
+$(window).load(function ()
+{
     $('#seek').click();
 });

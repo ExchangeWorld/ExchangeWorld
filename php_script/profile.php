@@ -8,11 +8,11 @@
 	$result=mysql_query($sql) or die(mysql_error());
 	$row = mysql_fetch_array($result);
 
-	$sql2 = "SELECT count(*) as `followingCount` FROM followertable WHERE `myid` = '$search'";//following
+	$sql2 = "SELECT count(*) as `followingCount` FROM `followertable` WHERE `myid` = '$search'";//following
 	$result=mysql_query($sql2) or die(mysql_error());
 	$row2 = mysql_fetch_array($result);
 
-	$sql3 = "SELECT count(*) as `followerCount` FROM followertable WHERE `follower` = '$search'";//follower
+	$sql3 = "SELECT count(*) as `followerCount` FROM `followertable` WHERE `follower` = '$search'";//follower
 	$result=mysql_query($sql3) or die(mysql_error());
 	$row3 = mysql_fetch_array($result);
 

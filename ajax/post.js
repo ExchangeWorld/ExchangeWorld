@@ -55,7 +55,9 @@ var postInnerHTML = '<h1>Post Goods</h1><!-- Prepended text-->\
             </div>\
         </form>\
     </div>\
-</div><!-- Textarea -->\
+</div>\
+<div id="goods_photo" data-value="TestSRC" ></div>\
+<!-- Textarea -->\
 <div class="row postGroup">\
     <div class="col-md-12" style="margin-top: 5px">\
         <div class="form-group" style="margin-bottom:0px"> <textarea class="form-control" id="description" rows="5" name="description" placeholder="Say more about your good" style="resize:none"></textarea> </div>\

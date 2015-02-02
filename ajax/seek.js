@@ -152,7 +152,7 @@ function seek_query(search, query_type)
                                 <ul class="list-group">\
                                     <li class="list-group-item"> ' + response[i]["gname"] + '<span class="badge">' + response[i]["categories"] + '</span></li>\
                                     <li class="list-group-item">Wanted: ' + response[i]["want"] + '</li>\
-                                    <li class="list-group-item"><img src="' + response[i]["owner_photo"] + '" height="20" width="20"> ' + response[i]["username"] + '></li>\
+                                    <li class="list-group-item"><img src="' + response[i]["owner_photo"] + '" height="20" width="20"> ' + response[i]["username"] + '</li>\
                                 </ul>\
                             </div>');
 

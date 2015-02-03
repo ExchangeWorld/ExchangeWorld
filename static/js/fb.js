@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
     $.ajaxSetup({ cache: true });
     $.getScript('//connect.facebook.net/en_UK/all.js', function () {
@@ -16,9 +18,10 @@ $(document).ready(function () {
 
     // define the action when user clicked the login button.
     $("#logout").click(function () {
-        FB.logout();
+        if($("#myname").text().length != 0) $("#myname").text('');
         $("#myname").hide();
         $("#login").show();
+        FB.logout();
 
         loggedInForPost = false;
 
@@ -40,14 +43,14 @@ function fbLoaded() {
             var uid = response.authResponse.userID;
             $("#profile").attr('data-value', uid);
 
-            FB.api('/me/picture?width=250', function (response) {
-                my_picture_url = response.data.url;
-                $("#myhead").attr('src', my_picture_url);
-            });
             FB.api('/me', function (response) {
-                if($("#myname").text().search(response.name) == -1)
-                    $("#myname").append(response.name);
+                var usr_name = response.name;
+                FB.api('/me/picture?width=250', function (response) {
+                    my_picture_url = response.data.url;
+                    $("#myname").html('<img id="myhead" src="'+my_picture_url+'" height="20" width="20">'+usr_name);
+                });
             });
+
             $("#myname").show();
             $("#login").hide();
 

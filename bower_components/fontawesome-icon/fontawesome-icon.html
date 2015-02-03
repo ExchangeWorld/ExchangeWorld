@@ -1,0 +1,40 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+A Polymer element to use FontAwesome icons.
+
+##### Example
+
+    <fontawesome-icon value="fa fa-cloud fa-2x"></fontawesome-icon>
+
+@element fontawesome-icon
+@blurb Element providing solution to no problem in particular.
+@status alpha
+@homepage https://github.com/andressanchez/fontawesome-icon
+-->
+
+<style>
+    @font-face {
+        font-family: 'FontAwesome';
+        src: url('fonts/fontawesome-webfont.eot?v=4.0.3');
+        src: url('fonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'), url('fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'), url('fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'), url('fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+</style>
+
+<!--
+    `value` is an attribute to set the icon
+	
+	A list of values are provided in:
+	http://fortawesome.github.io/Font-Awesome/examples/
+     
+    @attribute value
+    @type string
+-->
+<polymer-element name="fontawesome-icon" attributes="value" noscript>
+    <template>
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <i class="{{value}}"></i>
+    </template>
+</polymer-element>

@@ -70,7 +70,7 @@ Session.vim
 ### customize ###
 /UI
 /include
-/php_script/connect.php
-php_script/connect.php
+/include/connect.php
+include/connect.php
 images/database/*.png
 images/database/*.jpg

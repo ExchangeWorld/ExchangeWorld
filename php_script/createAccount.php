@@ -1,5 +1,5 @@
 <?php
-	include("../include/connect.php");
+	include("./connect.php");
 	$id     = $_GET['facebook_id'];
 	$name   = $_GET['name'];
 	$gender = $_GET['gender'];
@@ -11,13 +11,13 @@
 		$result=mysql_query($selectSQL);
 		$cid = 1;
 		while($row= mysql_fetch_array($result)){
-			if($row['uid']=="" || $row['uid']!=$cid){ 
+			if($row['uid']=="" || $row['uid']!=$cid){
 				break;
 			}
 			else{
-				$cid = $cid + 1;	
+				$cid = $cid + 1;
 			}
-		}                  
+		}
 		return $cid;
 	}
 
@@ -28,7 +28,7 @@
 	if($id != ""){
 		$result = mysql_query($sql);
 		$row = mysql_fetch_array($result);
-		
+
 		if($row[0] == 0){//Create new account
 			$Key = get_Key_id();
 			$insertSQL = "INSERT INTO `user` (`uid`, `exchangeTable`, `followerTable`, `seekerTable`, `fb_id`, `username` , `email`, `nickname`, `photoPath`) VALUES ('$Key', '$Key', '$Key', '$Key', '$id', '$name', 'test@gmail.com', 'thisisnickname', '$picture')";
@@ -38,7 +38,7 @@
 			}
 			echo "create_new_account_success".$insertSQL;
 		}
-		
+
 		else{
 			$updateSQL = "UPDATE `user`
 						  SET `username` = '$name', `email` = 'test@gmail.com', `nickname` = 'thisisnickname', `photoPath` = '$picture'

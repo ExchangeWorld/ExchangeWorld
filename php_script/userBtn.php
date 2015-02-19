@@ -1,6 +1,6 @@
 <?php
-	include("../include/connect.php");
-	$type   = $_GET['type']; 
+	include("./connect.php");
+	$type   = $_GET['type'];
 	$target = $_GET['tID'];
 	$my_id  = $_GET['mID'];
 
@@ -19,10 +19,10 @@
 			    WHERE `myid` = '$target'
 			    AND `follower` = `user`.`fb_id`";
 		$result=mysql_query($sql) or die(mysql_error());
-		while ($row = mysql_fetch_array($result)) {	
+		while ($row = mysql_fetch_array($result)) {
 			$rows[] = $row;
 		}
-		echo json_encode($rows);	
+		echo json_encode($rows);
 	}
 	else if($type == "follower"){
 		$sql = "SELECT `followertable`.*, `user`.`username`, `user`.`photoPath` as `owner_photo`
@@ -30,7 +30,7 @@
 			    WHERE  `follower` = '$target'
 			    AND `myid` = `user`.`fb_id`";
 		$result=mysql_query($sql) or die(mysql_error());
-		while ($row = mysql_fetch_array($result)) {	
+		while ($row = mysql_fetch_array($result)) {
 			$rows[] = $row;
 		}
 		echo json_encode($rows);		}

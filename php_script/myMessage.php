@@ -1,5 +1,5 @@
 <?php
-	include("../include/connect.php");	
+	include("./connect.php");
 	$type = $_GET["type"];
 
 
@@ -7,15 +7,15 @@
 		$myid = $_GET["myid"];
 		$sql = "SELECT `messagetable`.*, `user`.`username`, `user`.`photoPath` as `owner_photo`
 				FROM `messagetable` , `user`
-				WHERE `reciever_id` = '$myid' 
+				WHERE `reciever_id` = '$myid'
 				AND `sender_id` = `user`.`fb_id`
 				ORDER BY `readed` ASC";
 	    $result=mysql_query($sql) or die(mysql_error());
-		while ($row = mysql_fetch_array($result)) {	
+		while ($row = mysql_fetch_array($result)) {
 			$row["text"] = nl2br($row["text"]);
 			$rows[] = $row;
 		}
-		echo json_encode($rows);	
+		echo json_encode($rows);
 	}
 	else if($type == "reply"){
 		$target = $_GET['tID'];
@@ -45,9 +45,9 @@
 	}
 	else if($type == "unreadmessage"){
 		$myid = $_GET["myid"];
-		$sql = "SELECT count(*) as `count`  
-				FROM `messagetable` 
-				WHERE `reciever_id` = '$myid' 
+		$sql = "SELECT count(*) as `count`
+				FROM `messagetable`
+				WHERE `reciever_id` = '$myid'
 				AND `readed` = 0
 				ORDER BY `readed` ASC";
 	    $result=mysql_query($sql) or die(mysql_error());

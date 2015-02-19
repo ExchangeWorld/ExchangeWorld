@@ -1,5 +1,5 @@
 <?php
-	include("../include/connect.php");
+	include("./connect.php");
 	$gname      = $_GET['gname'];
 	$categories = $_GET['categories'];
 	$want		= $_GET['want'];

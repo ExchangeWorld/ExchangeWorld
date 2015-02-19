@@ -1,5 +1,5 @@
 <?php
-	include("../include/connect.php");
+	include("./connect.php");
 	$search = $_GET['uid'];
 	$sql = "SELECT *
 			FROM user

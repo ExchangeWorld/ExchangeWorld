@@ -11,17 +11,17 @@
     <title>ExchangeWorld</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="_src/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap theme -->
-    <link href="static/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="_src/css/bootstrap-theme.min.css" rel="stylesheet">
 
-    <link href="static/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
-    <link href="static/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css">
-    <!--<link href="static/css/jquery.jscrollpane.css" rel="stylesheet" type="text/css" charset="utf-8" media="all">-->
-    <link href="static/css/introjs.css" rel="stylesheet">
+    <link href="_src/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
+    <link href="_src/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css">
+    <!--<link href="_src/css/jquery.jscrollpane.css" rel="stylesheet" type="text/css" charset="utf-8" media="all">-->
+    <link href="_src/css/introjs.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="static/css/customized.css" rel="stylesheet" type="text/css" charset="utf-8">
+    <link href="_src/css/customized.css" rel="stylesheet" type="text/css" charset="utf-8">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -32,7 +32,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="./include/FBappID.js"></script>
+    <script src="./FBappID.js"></script>
     <script>
         var loggedInForPost = false;
     </script>
@@ -51,7 +51,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#" style="font-size: 130%;">
-                    <img style="max-width:200px; margin-top:-8px;" src="static/img/icon/logotmp.png" alt="">
+                    <img style="max-width:200px; margin-top:-8px;" src="_src/img/icon/logotmp.png" alt="">
 
                 </a>
             </div>
@@ -80,7 +80,7 @@
                     </li>
                     <li class="dropdown">
                         <a id="myname" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <img id="myhead" src="./static/img/alt.gif" height="20" width="20">
+                            <img id="myhead" src="./_src/img/alt.gif" height="20" width="20">
                         </a>
                         <ul id="myMenu" class="dropdown-menu" role="menu">
                             <li id="profile" class="owner" data-value="..............."><a href="#">Profile</a></li>
@@ -119,7 +119,7 @@
                 <div id="mapButton-group" class="btn-group" role="group" aria-label="...">
                     <button id="myLocation" type="button" class="btn btn-default">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="100%"
-                             viewBox="0 0 480 480" style="enable-background: new 0 0 480 480;" xml:space="preserve">
+                             viewbox="0 0 480 480" style="enable-background: new 0 0 480 480;" xml:space="preserve">
                         <path style="fill-rule: evenodd; clip-rule: evenodd;" d="M240,159.909c-44.235,0-80.091,35.859-80.091,80.091
 		                    s35.855,80.091,80.091,80.091c44.231,0,80.091-35.859,80.091-80.091S284.231,159.909,240,159.909z M400,226.667h-25.694
 		                    c-6.267-63.891-57.086-114.701-120.973-120.967V80c0-7.363-5.97-13.333-13.333-13.333S226.667,72.637,226.667,80v25.701
@@ -143,7 +143,7 @@
         <div class="overlay-inner">
             <h2>Please Log-in to Post</h2>
             <br />
-            <div class="fb-login-button" data-scope="user_likes,user_photos" onlogin='fbLoaded();' data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
+            <div class="fb-login-button" data-scope="user_likes,user_photos" onlogin="fbLoaded();" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
         </div>
     </div>
 
@@ -163,29 +163,29 @@
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="static/js/ajaxfileupload.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_src/js/ajaxfileupload.js"></script>
+    <script src="_src/js/bootstrap.min.js"></script>
 
     <!--fancybox-->
-    <script type="text/javascript" src="static/fancy-box/source/jquery.mousewheel-3.0.6.pack.js"></script>
+    <script type="text/javascript" src="_src/fancy-box/source/jquery.mousewheel-3.0.6.pack.js"></script>
     <!-- Add fancyBox -->
-    <link rel="stylesheet" href="static/fancy-box/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
-    <script type="text/javascript" src="static/fancy-box/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <link rel="stylesheet" href="_src/fancy-box/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <script type="text/javascript" src="_src/fancy-box/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
-    <!--<script src="static/js/jquery.mousewheel.min.js"></script>-->
-    <!--<script src="static/js/jquery.jscrollpane.min.js"></script>-->
-    <script src="static/js/perfect-scrollbar.min.js"></script>
-    <script src="static/js/bootstrap-switch.min.js"></script>
+    <!--<script src="_src/js/jquery.mousewheel.min.js"></script>-->
+    <!--<script src="_src/js/jquery.jscrollpane.min.js"></script>-->
+    <script src="_src/js/perfect-scrollbar.min.js"></script>
+    <script src="_src/js/bootstrap-switch.min.js"></script>
     <!--<script src="../../assets/js/docs.min.js"></script>-->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
 
     <!--======================= Google Map Javascript   =======================-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTmx_RgDS6MWl-MdyidKhpCKXMs3pV63Y&signed_in=false&v=3.exp&libraries=places"></script>
-    <script type="text/javascript" src="static/js/intro.js"></script>
-    <script src="static/js/richmarker-compiled.js"></script>
-    <script src="static/js/map.js"></script>
-    <script src="static/js/fb.js"></script>
+    <script type="text/javascript" src="_src/js/intro.js"></script>
+    <script src="_src/js/richmarker-compiled.js"></script>
+    <script src="_src/js/map.js"></script>
+    <script src="_src/js/fb.js"></script>
 
     <!--All Core JS files included here-->
     <script src="ajax/seek.js"></script>

@@ -18,7 +18,7 @@ function ajaxFileUpload()
     error: callback function when the ajax failed
   */
     $.ajaxFileUpload({
-        url:'../../php_script/upload_photo.php',
+        url:'.././upload_photo.php',
             secureuri:false,
             fileElementId:'fileToUpload',
             dataType: 'json',

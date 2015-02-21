@@ -1,0 +1,7 @@
+<div id="mid' + response[i][" mid "] + '" style="display:none" data-value="' + response[i][" sender_id "] + '">
+  <img class="circular" src="' + response[i][" owner_photo "] + '" height="50" width="50">' + response[i]["username"] + '
+  <li class="list-group-item" style="padding: 5px; font-size:16px ;width:400px;height:150px"> ' + response[i]["text"] + '</li>
+  <textarea class="form-control" rows="3" id="messageReply' + response[i][" mid "] + '" name="messageReply" placeholder="Relpy......"></textarea>
+  <img class="circular" src="' + $(" #myhead ").attr('src') + '" style="width:60px;height:60px;margin-top:15px;">
+  <button name="Reply" data-value="' + response[i][" mid "] + '" class="btn btn-danger Reply">Reply Message</button>
+</div>');

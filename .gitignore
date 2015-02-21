@@ -74,3 +74,4 @@ include/connect.php
 php_script/connect.php
 images/database/*.png
 images/database/*.jpg
+_src/.sass-cache/*

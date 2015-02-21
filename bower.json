@@ -15,13 +15,15 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.3.11",
-    "bootstrap": "~3.3.2",
-    "fancyBox": "fancyapps/fancyBox#~2.1.5",
-    "fontawesome-icon": "~0.0.2",
+    "angular": "1.3.x",
     "font-awesome": "~4.3.0",
     "intro.js": "~1.0.0",
-    "materialize": "~0.95.1",
-    "perfect-scrollbar": "~0.5.8"
+    "angular-material": "~0.7.1",
+    "angular-intro.js": "~1.2.1",
+    "ng-scrollbar": "~0.0.7",
+    "angular-file-upload": "~1.1.5"
+  },
+  "resolutions": {
+    "angular": "~1.3.x"
   }
 }

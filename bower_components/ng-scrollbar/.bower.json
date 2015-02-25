@@ -20,6 +20,5 @@
   },
   "_source": "git://github.com/asafdav/ng-scrollbar.git",
   "_target": "~0.0.7",
-  "_originalSource": "ng-scrollbar",
-  "_direct": true
+  "_originalSource": "ng-scrollbar"
 }

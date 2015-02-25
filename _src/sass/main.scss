@@ -1,7 +1,10 @@
 // Modules and Variables
-@import "partials/base";
+@import "modules/all";
 
 // Partials
-// ...
+@import "partials/base";
+@import "partials/button";
+@import "partials/bootstrap-reset";
+@import "partials/figures";
 
 // Third-party

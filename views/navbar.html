@@ -1,31 +1,35 @@
 <md-toolbar class="md-primary" ng-controller="NavbarCtrl" >
   <div class="md-toolbar-tools md-medium-tall md-whiteframe-z3 navbar" resize notifier="">
-    <span ng-show="windowWidth>640" flex="20" class="brand"><a href="#">ExchangeWorld</a></span>
+    <span ng-show="windowWidth>640" flex="25" class="brand"><a href="#">ExchangeWorld</a></span>
 
-    <md-button flex="10" aria-label="Seek"><i class="fa fa-search fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
+    <md-button flex="10" ng-click="clickSeek()" ng-class="{'active': contentIs(0)}">
+      <i class="fa fa-search fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
       <span ng-show="windowWidth>960">SEEK</span>
     </md-button>
 
-    <md-button flex="10"><i class="fa fa-plus fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
+    <md-button flex="10" ng-click="clickPost()" ng-class="{'active': contentIs(1)}">
+      <i class="fa fa-plus fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
       <span ng-show="windowWidth>960">POST</span>
     </md-button>
 
-    <md-button flex="10"><i class="fa fa-compass fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
+    <md-button flex="10" >
+      <i class="fa fa-compass fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
       <span ng-show="windowWidth>960">About</span>
     </md-button>
 
-    <md-button flex="10"><i class="fa fa-info-circle fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
+    <md-button flex="10">
+      <i class="fa fa-info-circle fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
       <span ng-show="windowWidth>960">Help</span>
     </md-button>
 
     <span flex="20"></span>
 
-    <div ng-controller="DropdownCtrl" class="btn-group" dropdown is-open="status.isopen">
+    <div flex ng-controller="DropdownCtrl" class="btn-group" dropdown is-open="status.isopen">
       <md-button ng-click="toggleDropdown($event)">Username</md-button>
       <ul class="dropdown-menu" role="menu">
-        <li><a href="#">Profile</a></li>
+        <li><a href ng-click="clickProfile()">Profile</a></li>
         <li class="divider"></li>
-        <li><a href="#">Log Out</a></li>
+        <li><a href>Log Out</a></li>
       </ul>
     </div>
 

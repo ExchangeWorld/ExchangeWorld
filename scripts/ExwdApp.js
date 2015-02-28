@@ -1,6 +1,24 @@
 (function ()
 {
-  var ExwdApp = angular.module('ExwdApp', ['ngMaterial', 'ui.bootstrap', 'navbarController', 'listenerDirective', 'templateUrlDircetive']);
+  var ExwdApp = angular.module('ExwdApp', ['ngMaterial', 'ui.bootstrap', 'navbarController',
+    'listenerDirective', 'templateUrlDircetive', 'commonSevices'
+  ]);
+
+  ExwdApp.service('sharedProperties', function ()
+  {
+    var stringValue = 'seek';
+
+    return {
+      getString: function ()
+      {
+        return stringValue;
+      },
+      setString: function (value)
+      {
+        stringValue = value;
+      }
+    };
+  });
 
   ExwdApp.config(function ($mdThemingProvider)
   {

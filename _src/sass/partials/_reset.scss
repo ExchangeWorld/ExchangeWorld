@@ -5,3 +5,9 @@
     @include border-radius(0px 0px);
   }
 }
+
+#container
+{
+  margin-top: -$navbar-height;
+  padding-top: $navbar-height;
+}

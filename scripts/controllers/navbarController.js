@@ -18,12 +18,20 @@
 
   navbarController.controller('NavbarCtrl', function ($scope, $window)
   {
-    $scope.test = true;
-    $scope.notifyServiceOnChage = function ()
+    var ContentType = ["seek", "post", "profile", "good"];
+    $scope.content = "";
+    $scope.contentHistory = {};
+
+    $scope.setContent = function (contentIndex)
     {
-      console.log($scope.windowHeight);
+      $scope.content = ContentType[contentIndex];
+      $scope.contentHistory.push($scope.content);
     };
 
+    $scope.contentIs = function (contentIndex)
+    {
+      return $scope.content === ContentType[contentIndex];
+    };
   });
 
 })();

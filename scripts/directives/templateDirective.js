@@ -17,13 +17,16 @@
 			templateUrl: 'views/sidenav.html',
 			controller: function ($scope, sharedProperties, $mdSidenav)
 			{
+
 				$scope.template = function ()
 				{
-					return "views/" + sharedProperties.getString() + ".html";
+					$scope.contentType = sharedProperties.getString();
+					console.log($scope.contentType);
+					return "views/" + $scope.contentType + ".html";
 				};
 
-				$scope.openLeftMenu = function() {
-			    $mdSidenav('left').toggle();
+				$scope.closeMenu = function() {
+			    $mdSidenav('left').close();
 			  };
 			}
 		};

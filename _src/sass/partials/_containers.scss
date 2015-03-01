@@ -1,0 +1,12 @@
+body{
+}
+
+#container
+{
+  margin-top: -$navbar-height;
+  padding-top: $navbar-height;
+}
+
+.sidenav-container{
+  overflow-y: hidden;
+}

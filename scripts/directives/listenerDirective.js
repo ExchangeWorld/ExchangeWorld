@@ -18,7 +18,16 @@
       {
         scope.windowHeight = newValue.h;
         scope.windowWidth = newValue.w;
-        scope.$eval(attr.notifier);
+
+        scope.resizeWithOffset = function (offsetH)
+        {
+          scope.$eval(attr.notifier);
+          return {
+            'min-height': (newValue.h - offsetH) + 'px',
+            'height': (newValue.h - offsetH) + 'px',
+            'max-height': (newValue.h - offsetH) + 'px'
+          };
+        };
       }, true);
 
       w.bind('resize', function ()

@@ -1,1 +1,6 @@
-<div flex="25" ng-include="template()"></div>
+<md-sidenav flex class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-md')">
+
+    <md-content flex class="md-padding" ng-include="template()" resize ng-style="resizeWithOffset(64)">
+    </md-content>
+
+</md-sidenav>

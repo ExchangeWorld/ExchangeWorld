@@ -15,12 +15,16 @@
 		return {
 			restrict: 'E',
 			templateUrl: 'views/sidenav.html',
-			controller: function ($scope, sharedProperties)
+			controller: function ($scope, sharedProperties, $mdSidenav)
 			{
 				$scope.template = function ()
 				{
 					return "views/" + sharedProperties.getString() + ".html";
 				};
+
+				$scope.openLeftMenu = function() {
+			    $mdSidenav('left').toggle();
+			  };
 			}
 		};
 	});

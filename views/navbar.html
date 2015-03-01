@@ -1,25 +1,25 @@
 <md-toolbar class="md-primary" ng-controller="NavbarCtrl" >
-  <div class="md-toolbar-tools md-medium-tall md-whiteframe-z3 navbar" resize notifier="">
-    <span ng-show="windowWidth>640" flex="25" class="brand"><a href="#">ExchangeWorld</a></span>
+  <div class="md-toolbar-tools md-medium-tall md-whiteframe-z3 navbar">
+    <span hide-md hide-sm flex="25" class="brand"><a href="#">ExchangeWorld</a></span>
 
     <md-button flex="10" ng-click="clickSeek()" ng-class="{'active': contentIs(0)}">
       <i class="fa fa-search fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
-      <span ng-show="windowWidth>960">SEEK</span>
+      <span hide-md hide-sm>SEEK</span>
     </md-button>
 
     <md-button flex="10" ng-click="clickPost()" ng-class="{'active': contentIs(1)}">
       <i class="fa fa-plus fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
-      <span ng-show="windowWidth>960">POST</span>
+      <span hide-md hide-sm>POST</span>
     </md-button>
 
     <md-button flex="10" >
       <i class="fa fa-compass fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
-      <span ng-show="windowWidth>960">About</span>
+      <span hide-md hide-sm>About</span>
     </md-button>
 
     <md-button flex="10">
       <i class="fa fa-info-circle fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
-      <span ng-show="windowWidth>960">Help</span>
+      <span hide-md hide-sm>Help</span>
     </md-button>
 
     <span flex="20"></span>

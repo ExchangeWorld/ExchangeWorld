@@ -1,4 +1,4 @@
-﻿var markers = [];
+var markers = [];
 var marker;
 var infowindow;
 var map;
@@ -220,14 +220,6 @@ function initialize()
         ]
     }
     ];
-    //]
-    //[
-    //    {
-    //        featureType: "poi",
-    //        elementType: "labels",
-    //        stylers: [{ visibility: "off" }]
-    //    }
-    //];
 
     // Create a new StyledMapType object, passing it the array of styles,
     // as well as the name to be displayed on the map type control.
@@ -253,11 +245,8 @@ function initialize()
         overviewMapControl: false,
         mapTypeControl: false
         //mapTypeId: google.maps.MapTypeId.ROADMAP,
-
-
     };
     //Associate the styled map with the MapTypeId and set it to display.
-
 
     naigvator();
     map = new google.maps.Map(document.getElementById("mapCanvas"), mapProp);
@@ -272,7 +261,6 @@ function initialize()
 
     google.maps.event.addListener(autocomplete, 'place_changed', function ()
     {
-        console.log("Autocomplete");
 
         var place = autocomplete.getPlace();
         if (!place.geometry)
@@ -398,36 +386,38 @@ function naigvator()
 
 function postMarker(location, img)
 {
-    if (map == null)
+    if (map === null)
         return;
 
-    marker = new RichMarker({
-        position: location,
-        map: map,
-        draggable: true,
-        flat: true,
-        anchor: RichMarkerPosition.MIDDLE,
-        zIndex: 10,
-        content: '<div class="custom-marker normal-item">' +
-          '<span><img class="contained-image" src="' + img + '"/></span>' +
-          '</div>'
+    marker = new google.maps.Marker({
+      map: map,
+      draggable: true,
+      animation: google.maps.Animation.DROP,
+      position:  location,
+      zIndex: 50
     });
-};
+}
+
+function getImage(url)
+{
+   var img = new Image();
+   img.src = url;
+
+   return img;
+}
 
 function moveMarker(location)
 {
-    if (marker == null)
+    if (marker === null)
         return;
     marker.setPosition(location);
-};
+}
 
 function changeMarkerImage(img)
 {
-    if (marker == null)
+    if (marker === null)
         return;
-    marker.setContent('<div class="custom-marker normal-item">' +
-          '<span><img class="contained-image" src="' + img + '"/></span>' +
-          '</div>')
+
 }
 
 function addMarkers(lat, lng, img, gid)
@@ -438,21 +428,79 @@ function addMarkers(lat, lng, img, gid)
         return;
     }
 
-    markers.push(new RichMarker({
-        position: new google.maps.LatLng(lat, lng),
-        map: map,
-        draggable: false,
-        flat: true,
-        anchor: RichMarkerPosition.MIDDLE,
-        zIndex: markers.length,
-        content: '<div class="custom-marker normal-item" data-gid="' + gid + '">' +
-          '<span><img class="contained-image" src="' + img + '"/></span>' +
-          '</div>'
-    }));
+    var tmpMarker = new google.maps.Marker({
+      map: map,
+      draggable: false,
+      position:  new google.maps.LatLng(lat, lng),
+      zIndex: markers.length+1
+    });
 
-    google.maps.event.addListener(markers[markers.length - 1], 'click', function ()
+    markers.push(tmpMarker);
+
+    google.maps.event.addListener(tmpMarker, 'mouseover', function ()
     {
-        //destroy the scroll and reset the scroll 
+      var tmpImg = getImage(img);
+      if(tmpImg.height === 0)
+        return;
+
+      var w=200,h=200;
+      if(tmpImg.width >= tmpImg.height)
+      {
+        if(tmpImg.width/tmpImg.height > 1.1 && tmpImg.width/tmpImg.height < 1.4)
+        {//4 : 3
+          w = 240;h = 180;
+        }
+        else if(tmpImg.width/tmpImg.height >= 1.7)
+        {
+          w = 320; h = 180;
+        }
+        else if(tmpImg.width/tmpImg.height >=1.4 && tmpImg.width/tmpImg.height < 1.56 )
+        { //3 : 2
+          w = 240; h = 160;
+        }
+        else if(tmpImg.width/tmpImg.height >=1.56 && tmpImg.width/tmpImg.height < 1.7)
+        {
+          w = 240;h = 150;
+        }
+      }
+      else {
+        if(tmpImg.height/tmpImg.width > 1.1 && tmpImg.height/tmpImg.width < 1.4)
+        {//4 : 3
+          h = 240;w = 180;
+        }
+        else if(tmpImg.height/tmpImg.width >= 1.7)
+        {
+          h = 320; w = 180;
+        }
+        else if(tmpImg.height/tmpImg.width >=1.4 && tmpImg.height/tmpImg.width < 1.56 )
+        { //3 : 2
+          h = 240; w = 160;
+        }
+        else if(tmpImg.height/tmpImg.width >=1.56 && tmpImg.height/tmpImg.width < 1.7)
+        {
+          h = 240; w = 150;
+        }
+      }
+
+      var image = {
+        url: img,
+        scaledSize: new google.maps.Size(w, h),
+        origin: new google.maps.Point(0,0),
+        anchor: new google.maps.Point(w/2, h/2)
+      };
+
+      tmpMarker.setIcon(image);
+    });
+
+    var mouseoutListener = google.maps.event.addListener(tmpMarker, 'mouseout', function ()
+    {
+      tmpMarker.setIcon(null);
+    });
+
+    google.maps.event.addListener(tmpMarker, 'click', function ()
+    {
+        //google.maps.event.removeListener(mouseoutListener);
+        //destroy the scroll and reset the scroll
         $('#leftSide').perfectScrollbar('destroy');
         $("#leftSide").scrollTop(0);
         $("#leftSide").perfectScrollbar('update');
@@ -642,7 +690,7 @@ function resetMarkerSize()
 
 function markersBounds()
 {
-    if (map == null)
+    if (map === null)
         return;
 
     var leftBound = 180;

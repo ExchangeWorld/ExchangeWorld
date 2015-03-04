@@ -2,7 +2,10 @@
 if(is_array($_FILES)) {
 	if(is_uploaded_file($_FILES['userImage']['tmp_name'])) {
 		$sourcePath = $_FILES['userImage']['tmp_name'];
-		$targetPath = "./images/database/".$_FILES['userImage']['name'];
+//		$ext = pathinfo($_FILES['userImage']['tmp_name'], PATHINFO_EXTENSION);
+		$new_file_name = date('Y-m-d_H-i-s');
+		$targetPath = "./images/database/".$new_file_name;
+
 		if(move_uploaded_file($sourcePath, ".".$targetPath)) {
 ?>
 		<script type="text/javascript">

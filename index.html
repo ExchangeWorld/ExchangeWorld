@@ -1,317 +1,558 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="images/favicon.ico">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="images/favicon.ico">
 
-    <title>Exchange your preloved | ExchangeWorld</title>
+  <title>Exchange your preloved | ExchangeWorld</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="static/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Fonts -->
-    <link href="static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="static/css/animate.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
-    <!-- Theme CSS -->
-    <link href="static/css/Homepage/style.css" rel="stylesheet">
-    <link href="static/css/Homepage/default.css" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="static/css/animate.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+  <!-- Theme CSS -->
+  <link href="static/css/Homepage/style.css" rel="stylesheet">
+  <link href="static/css/Homepage/default.css" rel="stylesheet">
 
-    <!-- BLOCK: Loading libraries -->
-    <script src="./include/FBappID.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-    <!-- ENDBLOCK: Loading libraries -->
+  <!-- BLOCK: Loading libraries -->
+  <script src="./include/FBappID.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <!-- ENDBLOCK: Loading libraries -->
 
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-    <!-- BLOCK: FB SDK initialization -->
-    <div id="fb-root"></div>
-    <script>
-        window.fbAsyncInit = function () {
-            // init the FB JS SDK
-            FB.init({
-                appId: FacebookAppId,                        // App ID from the app dashboard
-                cookie: true,                                 // Allowed server-side to fetch fb auth cookie
-                status: true,                                 // Check Facebook Login status
-                xfbml: true,                                  // Look for social plugins on the page
-                version: 'v2.2'
-            });
+  <!-- BLOCK: FB SDK initialization -->
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      // init the FB JS SDK
+      FB.init({
+        appId: FacebookAppId, // App ID from the app dashboard
+        cookie: true, // Allowed server-side to fetch fb auth cookie
+        status: true, // Check Facebook Login status
+        xfbml: true, // Look for social plugins on the page
+        version: 'v2.2'
+      });
 
-            // Additional initialization code such as adding Event Listeners goes here
-            window.fbLoaded();
-        };
+      // Additional initialization code such as adding Event Listeners goes here
+      window.fbLoaded();
+    };
 
-        // Load the SDK asynchronously
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) { return; }
-            js = d.createElement(s); js.id = id;
-            js.src = "http://connect.facebook.net/en_US/all.js";
-            // Debug version of Facebook JS SDK
-            //js.src = "http://connect.facebook.net/en_US/all/debug.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <!-- ENDBLOCK: FB SDK initialization -->
-    <!-- Preloader -->
-    <div id="preloader">
-        <div id="load"></div>
+    // Load the SDK asynchronously
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "http://connect.facebook.net/en_US/all.js";
+      // Debug version of Facebook JS SDK
+      //js.src = "http://connect.facebook.net/en_US/all/debug.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+  <!-- ENDBLOCK: FB SDK initialization -->
+  <!-- Preloader -->
+  <div id="preloader">
+    <div id="load"></div>
+  </div>
+
+  <nav class="navbar navbar-custom navbar-fixed-top unselectable" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header page-scroll" style="margin-left:6%">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+          <i class="fa fa-bars"></i>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          <img style="max-width:200px;" src="static/img/icon/logo.png" alt="">
+        </a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+        <ul class="nav navbar-nav">
+
+          <li class="active"><a href="#intro">Home</a>
+          </li>
+
+          <li><a href="#about">About</a>
+          </li>
+
+          <li><a href="#team">Team</a>
+          </li>
+
+          <li><a href="#policy">Policy</a>
+          </li>
+
+          <li id="nav-signin" style="display: none;margin-left:5vw;">
+            <a href="#">
+              <span style="margin-right:5px">
+                <img src="static/img/icon/social-31-facebook.png">
+              </span>Sign In</a>
+          </li>
+          <li id="nav-explore" style="display: none; margin-left:5vw;"><a href="exchangeworld.html">Explore</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+  </nav>
+
+  <!-- Section: intro -->
+  <section id="intro" class="intro unselectable">
+    <div class="slogan" id="slogan_area">
+
+      <div class="wow bounceInDown" data-wow-delay="0.4s">
+        <h2>Exchange your preloved</h2>
+      </div>
+
+      <div class="wow bounceInUp" data-wow-delay="0.8s">
+        <h3>with people locally and personally</h3>
+      </div>
     </div>
 
-    <nav class="navbar navbar-custom navbar-fixed-top unselectable" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header page-scroll" style="margin-left:6%">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="index.html">
-                    <img style="max-width:200px;" src="static/img/icon/logo.png" alt="">
-                </a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse" style="margin-right:6%">
-                <ul class="nav navbar-nav">
-                    <li id="nav-signin" style="display: none">
-                        <a href="#"><span style="margin-right:5px"><img src="static/img/icon/social-31-facebook.png"></span>Sign In</a>
-                    </li>
-                    <li id="nav-explore" style="display: none"><a href="exchangeworld.html">Explore</a></li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+    <div class="container">
+      <div class="row" style="padding-top: 50px">
+        <div class="wow bounceInUp" data-wow-delay="1.2s">
+          <div id="Login-msg">
+          </div>
         </div>
-        <!-- /.container -->
-    </nav>
+      </div>
+    </div>
 
-    <!-- Section: intro -->
-    <section id="intro" class="intro unselectable">
-        <div class="slogan" id="slogan_area">
+  </section>
+  <!-- /Section: intro -->
 
+  <!-- Section: services -->
+  <section id="about" class="home-section text-center bg-gray">
+
+    <div class="heading-about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2">
             <div class="wow bounceInDown" data-wow-delay="0.4s">
-                <h2>Exchange your preloved</h2>
-            </div>
+              <div class="section-heading">
+                <h2>About ExchangeWorld</h2>
+                <i class="fa fa-2x fa-angle-down"></i>
 
-            <div class="wow bounceInUp" data-wow-delay="0.8s">
-                <h3>with people locally and personally</h3>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2 col-lg-offset-5">
+          <hr class="marginbot-50">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="jumbotron" >
+          <div class="well">
+            <p>
+              <strong>ExchangeWorld</strong> 提供一個每個人都可以進行<strong>物品交換</strong>的平台，
+              讓人們可以將自己用不到但還可以利用的物品與其他人進行交換。
+              在<strong>ExchangeWorld</strong>中，交換本身並不牽涉金錢上的交易，交換的雙方都有可能獲得超乎預期的利益。
+              透過基於<strong>地圖</strong>的搜尋方式，
+              使用者可以更方便尋找擁有交換可能性的物品，並將你想換出的物品貼在你想要交換的地點附近。
+            </p>
+          </div>
+
+
+          <h2><br/><br/>收費與否</h2>
+          <p>
+            由於<strong>ExchangeWorld</strong>目前還處於製作測試階段，你不會在此階段看到任何廣告或是付費會員等等的項目，
+            不排除未來正式上線後除了一般會員外另外會加入付費會員的機制。。
+          </p>
+
+          <h2><br/><br/>交換方式</h2>
+          <p>
+            在構想的初期，<strong>ExchangeWorld</strong> 並沒有限制使用者們一定要使用何種方式去交換，
+            你可以利用快遞物流甚至是跨國運送，中間的協商與確認交由使用者雙方自行負責，
+            <strong>ExchangeWorld</strong> 並不負擔任何法律上的責任，但可提供法律所需的相關協助事項。
+            如果某使用者嚴重蓄意違反使用者條款，<strong>ExchangeWorld</strong> 持有對其帳號進行處分的所有權利。
+            在交換雙方都確定所獲取之物品符合另一方原本描述狀況之前，原使用者都保留對此物品之所有權。
+          </p>
+
+          <h2><br/><br/>瀏覽裝置</h2>
+          <p>
+            目前網站僅針對寬螢幕裝置全力進行優化開發中，故智慧型手機瀏覽會有些許問題，平板裝置瀏覽時請將平板轉為橫向。
+            另外，基於<strong>ExchangeWorld</strong>中使用了大量<strong>Google Map</strong>的部分，
+            不建議使用<strong>Firefox</strong>進行瀏覽。
+            關於<strong>Firefox</strong>的地圖卡頓問題，此為<strong>Google Map</strong>內部問題，
+            <strong>ExchangeWorld</strong>團隊只能對<strong>Firefox</strong>瀏覽器廣大的使用者深感抱歉。
+          </p><br/><br/>
+
+          <div class="well">
+            <p>
+              <strong>ExchangeWorld</strong>鼓勵使用者以實際接觸的方式去進行交換，親自確定交換符合需求，
+              並實際的與他人去進行交流接觸，認識其他原本就在你生活地區的人們。
+
+              如果你有任何關於使用上想知道的問題，或是想給予<strong>ExchangeWorld</strong>
+              團隊任何建議、回饋或是網頁<strong>bug</strong>的回報，歡迎來信到開發者信箱
+              <a href="mailto:seal456ie@gmail.com">
+                <strong>seal456ie@gmail.com</strong>
+              </a>
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- /Section: services -->
+
+  <!-- Section: team -->
+  <section id="team" class="home-section text-center bg-gray">
+    <div class="heading-about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2">
+            <div class="wow bounceInDown" data-wow-delay="0.4s">
+              <div class="section-heading">
+                <h2>Team</h2>
+                <i class="fa fa-2x fa-angle-down"></i>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2 col-lg-offset-5">
+          <hr class="marginbot-50">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 col-sm-3 col-md-3">
+          <div class="wow bounceInUp" data-wow-delay="0.2s">
+            <div class="team boxed-grey">
+              <div class="inner">
+                <h5>Shu Hsuan, Hsu</h5>
+                <p class="subtitle">許書軒</p>
+                <div class="avatar">
+                  <img src="static/img/Homepage/team/1.jpg" alt="" class="img-responsive img-circle" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3">
+          <div class="wow bounceInUp" data-wow-delay="0.5s">
+            <div class="team boxed-grey">
+              <div class="inner">
+                <h5>Pin-Chia, Chen</h5>
+                <p class="subtitle">陳品嘉</p>
+                <div class="avatar">
+                  <img src="static/img/Homepage/team/2.jpg" alt="" class="img-responsive img-circle" />
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3">
+          <div class="wow bounceInUp" data-wow-delay="0.8s">
+            <div class="team boxed-grey">
+              <div class="inner">
+                <h5>Sheng-Wun, Bao</h5>
+                <p class="subtitle">鮑聖文</p>
+                <div class="avatar">
+                  <img src="static/img/Homepage/team/3.jpg" alt="" class="img-responsive img-circle" />
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-3">
+          <div class="wow bounceInUp" data-wow-delay="1s">
+            <div class="team boxed-grey">
+              <div class="inner">
+                <h5>Wen-Kai, Bai</h5>
+                <p class="subtitle">白紋愷</p>
+                <div class="avatar">
+                  <img src="static/img/Homepage/team/4.jpg" alt="" class="img-responsive img-circle" />
+                </div>
+
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="container">
-            <div class="row" style="padding-top: 50px">
-                <div class="wow bounceInUp" data-wow-delay="1.2s">
-                    <div id="Login-msg">
-                    </div>
+        <div class="col-xs-6 col-sm-3 col-md-3">
+          <div class="wow bounceInUp" data-wow-delay="1.2s">
+            <div class="team boxed-grey">
+              <div class="inner">
+                <h5>Ciao-Sin, Chang</h5>
+                <p class="subtitle">張巧心</p>
+                <div class="avatar">
+                  <img src="static/img/Homepage/team/5.jpg" alt="" class="img-responsive img-circle" />
                 </div>
+
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
+  <!-- /Section: team -->
 
-    </section>
-    <!-- /Section: intro -->
-    <!--  Section: service -->
-    <section id="service" class="home-section text-center" style="display:none">
-        <div class="heading-about">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="wow bounceInDown" data-wow-delay="0.4s">
-                            <div class="section-heading">
-                                <h2>Near you</h2>
-                                <i class="fa fa-2x fa-angle-down"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <section id="policy" class="home-section text-center bg-gray">
+    <div class="heading-about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2">
+            <div class="wow bounceInDown" data-wow-delay="0.4s">
+              <div class="section-heading">
+                <h2>Policy</h2>
+                <i class="fa fa-2x fa-angle-down"></i>
+              </div>
             </div>
+          </div>
         </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 col-lg-offset-5">
-                    <hr class="marginbot-50">
-                </div>
-            </div>
-            <div class="row">
-            </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2 col-lg-offset-5">
+          <hr class="marginbot-50">
         </div>
-    </section>
-    <!-- /Section: service -->
-    <!-- Section: about -->
-    <section id="about" class="home-section text-center bg-gray">
-        <div class="heading-about">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="wow bounceInDown" data-wow-delay="0.4s">
-                            <div class="section-heading">
-                                <h2>About us</h2>
-                                <i class="fa fa-2x fa-angle-down"></i>
+      </div>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="row" style="text-align: left;">
+        <span>
+          <h3>一、註冊及會員資料</h3>
+          <p>申請使用本服務時，您應當授權本網站使用您Facebook的資料，目前本網站會取用您的Facebook帳號、大頭貼與姓名。</p>
+        </span><br/><br/>
+
+        <span>
+          <h3>二、使用者表達的言論</h3>
+           <p>ExchangeWorld所提供的網頁、留言以及其他公開發表服務的雲端互動空間，均允許網路使用者主動傳播訊息或發表自己的
+             觀點、言論，這些內容並不代表ExchangeWorld的立場，應由發表者本人自負其責。本公司對於網路使用者的言論不負責任，
+             亦不擔保各使用者署名之真實性。會員須注意遵守相關法律，不得有毀謗、散布不實言論、散布猥褻資訊、
+             侵害他人智慧財產權、隱私權、不符合網路禮儀或令一般人不舒服之言論或資訊，或其他違反法律之行為，
+             亦不得有冒用他人名義、身分等行為。經檢舉查知言論符合上述事項者，本公司可逕自刪除相關言論。</p>
+        </span><br/><br/>
+
+        <span>
+          <h3>三、禁止之內容與行為</h3>
+          <p>就您所提供的物品，您同意並承諾如下:<br/>
+             不包含任何違法、有害、威脅、辱罵、騷擾、侵權、損害名譽、粗鄙、色情、侵犯、猥褻、毀謗、侵犯他人隱私、
+             仇恨、或在種族、族群或其他方面可引起異議之圖像或文字內容。
+          </p>
+        </span><br/><br/>
+
+        <span>
+          <h3>四、禁止事項</h3>
+          <p>會員不得直接或間接利用本公司服務，從事營利行為，包括但不限於: </p>
+          <ul>
+            <li>
+              發布廣告資訊、銷售商品、出租本公司服務等。
+            </li>
+
+            <li>
+              會員不得利用對於本公司其他會員發送垃圾電子郵件或其他廣告訊息。
+            </li>
+
+            <li>
+              會員不得企圖入侵本公司伺服器、資料庫、破解本公司安全機制或其他危害本公司服務提供安全性或穩定性之行為。
+            </li>
+
+            <li>
+              會員不得直接或間接利用本公司服務，為任何違反法律之行為。
+            </li>
+
+            <li>
+              會員不得蓄意利用本公司服務之名義詐取他人之財物
+            </li>
+          </ul>
+        </span><br/><br/>
+
+        <span>
+          <h3>五、服務規範</h3>
+          <ul>
+            <li>
+              本服務所提供之各單元功能，僅供會員作為交換物品或相關服務之意見表達，會員使用本服務時，須注意遵守相關法律，
+              不得有毀謗、散布不實言論、散布猥褻資訊、侵害他人智慧財產權、隱私權、不符合網路禮儀或令一般人不舒服之言論或資訊，
+              或其他違反法律之行為，亦不得有冒用他人名義、身分等行為。
+            </li>
+
+            <li>
+              會員於各服務平台所張貼的觀點、建議和其他所有訊息，僅代表張貼者個人看法，與本公司無關。
+            </li>
+
+            <li>
+              本公司有權依其單方決定，刪除會員於各單元所張貼之任何違反規定之訊息。會員不得因此向本公司請求任何損害賠償。
+            </li>
+
+            <li>
+              會員使用各單元所衍生之法律責任，由會員自行負責，本公司依法將配合檢調單位之偵查，提供相關記錄或資訊。
+            </li>
+          </ul>
+        </span><br/><br/>
+
+        <span>
+          <h3>六、違約處理</h3>
+          <p>
+            會員違反本會員條款或本公司個別服務條款時，本公司得視情節之輕重，
+            依據本會員條款或個別服務條款為暫時或永久停權之處分，或為其他適當處置。
+            除另有規定者外，本公司於下列情形得採取永久停權方式處理
+          </p>
+        </span><br/><br/>
+
+        <span>
+          <h3>七、風險承擔</h3>
+          <ul>
+            <li>
+              會員了解本公司須透過連網提供相關服務，故具有相當程度在穩定性、安全性上的風險，
+              會員同意自行承擔因透過網路使用本公司服務所生之風險。
+            </li>
+
+            <li>
+              本公司會員或其他使用者透過本公司服務機制所張貼或提供之資訊，可能含有病毒或其他惡意程式，
+              會員同意在瀏覽、下載或使用非本公司服務所提供之資訊或程式時，自行承擔因此所生之風險。
+            </li>
+          </ul>
+        </span><br/><br/>
+
+        <span>
+          <h3>八、系統之中斷、故障</h3>
+          <p>
+            本公司服務可能會出現無預警中斷或故障之情形，可能造成會員無法使用、資料喪失、錯誤、或其他經濟上損失等情形，
+            會員同意除因本公司故意或重大過失所致者外，本公司不負任何責任。
+          </p>
+        </span><br/><br/>
+
+        <span>
+          <h3>九、隱私權保護</h3>
+          <p>
+            尊重會員個人隱私是ExchangeWorld的基本政策。所以，ExchangeWorld一定不會在未經會員合法授權時公開、
+            編輯或透露會員的資料，除非有法律許可要求或在誠信的基礎上認為透露這些信息在以下幾種情況是必要的:
+          </p>
+          <ul>
+            <li>
+              遵守有關法律規定，包括在有關執法部門查詢時，
+              提供會員在ExchangeWorld的服務上發佈的訊息內容及其發佈時間、網路地址或者域名。
+            </li>
+
+            <li>
+              遵從ExchangeWorld內容服務程式。
+            </li>
+
+            <li>
+              維護ExchangeWorld的商標所有權。
+            </li>
+
+            <li>
+              在緊急情況下竭力維護會員的個人和社會大眾的隱私安全:
+              會員在此授權ExchangeWorld可以向會員的電子信箱發送本站的商業訊息。
+            </li>
+          </ul>
+        </span><br/><br/>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-12">
+          <div class="wow shake" data-wow-delay="0.4s">
+            <div class="page-scroll marginbot-30">
+              <a href="#intro" id="totop" class="btn btn-circle">
+                <i class="fa fa-angle-double-up animated"></i>
+              </a>
             </div>
+          </div>
+          <p>&copy;Copyright 2015 - ExchangeWorld. All rights reserved.</p>
         </div>
+      </div>
+    </div>
+  </footer>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 col-lg-offset-5">
-                    <hr class="marginbot-50">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6 col-sm-3 col-md-3">
-                    <div class="wow bounceInUp" data-wow-delay="0.2s">
-                        <div class="team boxed-grey">
-                            <div class="inner">
-                                <h5>Shu Hsuan, Hsu</h5>
-                                <p class="subtitle">許書軒</p>
-                                <div class="avatar"><img src="static/img/Homepage/team/1.jpg" alt="" class="img-responsive img-circle" /></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-3 col-md-3">
-                    <div class="wow bounceInUp" data-wow-delay="0.5s">
-                        <div class="team boxed-grey">
-                            <div class="inner">
-                                <h5>Pin-Chia, Chen</h5>
-                                <p class="subtitle">陳品嘉</p>
-                                <div class="avatar"><img src="static/img/Homepage/team/2.jpg" alt="" class="img-responsive img-circle" /></div>
+  <!-- BLOCK: Facebook javascript playground -->
+  <script id="my-script-playground">
+    window.fbLoaded = function() {
+      FB.Event.subscribe('auth.login', function(response) {
+        var msg = "You're logged in.";
+        $("#my-login-message").html(msg);
+        console.log("Your login response:");
+        console.log(response);
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-3 col-md-3">
-                    <div class="wow bounceInUp" data-wow-delay="0.8s">
-                        <div class="team boxed-grey">
-                            <div class="inner">
-                                <h5>Sheng-Wun, Bao</h5>
-                                <p class="subtitle">鮑聖文</p>
-                                <div class="avatar"><img src="static/img/Homepage/team/3.jpg" alt="" class="img-responsive img-circle" /></div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-3 col-md-3">
-                    <div class="wow bounceInUp" data-wow-delay="1s">
-                        <div class="team boxed-grey">
-                            <div class="inner">
-                                <h5>Wen-Kai, Bai</h5>
-                                <p class="subtitle">白紋愷</p>
-                                <div class="avatar"><img src="static/img/Homepage/team/4.jpg" alt="" class="img-responsive img-circle" /></div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-6 col-sm-3 col-md-3">
-                    <div class="wow bounceInUp" data-wow-delay="1.2s">
-                        <div class="team boxed-grey">
-                            <div class="inner">
-                                <h5>Ciao-Sin, Chang</h5>
-                                <p class="subtitle">張巧心</p>
-                                <div class="avatar"><img src="static/img/Homepage/team/5.jpg" alt="" class="img-responsive img-circle" /></div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- /Section: about -->
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-lg-12">
-                    <div class="wow shake" data-wow-delay="0.4s">
-                        <div class="page-scroll marginbot-30">
-                            <a href="#intro" id="totop" class="btn btn-circle">
-                                <i class="fa fa-angle-double-up animated"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <p>&copy;Copyright 2015 - ExchangeWorld. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- BLOCK: Facebook javascript playground -->
-    <script id="my-script-playground">
-        window.fbLoaded = function () {
-            FB.Event.subscribe('auth.login', function (response) {
-                var msg = "You're logged in.";
-                $("#my-login-message").html(msg);
-                console.log("Your login response:");
-                console.log(response);
-
-                FB.getLoginStatus(function (response) {
-                    if (response.status === 'connected') {
-                        $('#nav-signin').hide();
-                        $('#nav-explore').show();
-                        FB.api('/me', function (response) {
-                            $('#Login-msg').html('<h2>Welcome back, ' + response.name + '</h2><a href="exchangeworld.html"><h3>Ready to Explore?</h3></a>');
-                        });
-
-                    } else if (response.status === 'not_authorized') {
-                        console.log("not_authorized");
-                        // the user is logged in to Facebook,
-                        // but has not authenticated your app
-                    } else {
-                        console.log("isn't login");
-                        // the user isn't logged in to Facebook.
-                    }
-                });
+        FB.getLoginStatus(function(response) {
+          if (response.status === 'connected') {
+            $('#nav-signin').hide();
+            $('#nav-explore').show();
+            FB.api('/me', function(response) {
+              $('#Login-msg').html('<h2>Welcome back, ' + response.name + '</h2><a href="exchangeworld.html"><h3>Ready to Explore?</h3></a>');
             });
 
-            $("#nav-signin").click(function () {
-                FB.login();
-            });
+          } else if (response.status === 'not_authorized') {
+            console.log("not_authorized");
+            // the user is logged in to Facebook,
+            // but has not authenticated your app
+          } else {
+            console.log("isn't login");
+            // the user isn't logged in to Facebook.
+          }
+        });
+      });
 
-            FB.getLoginStatus(function (response) {
-                if (response.status === 'connected') {
-                    //$("#LoginStatus").hide();
-                    //$("#slogan_area").append('<h2>HI ~</h2>');
-                    //FB.api('/me/picture?width=250', function (response) {
-                    //  my_picture_url = response.data.url;
-                    //  $("#myhead").attr('src', my_picture_url);
-                    //});
-                    FB.api('/me', function (response) {
-                        $('#Login-msg').html('<h2>Welcome back, ' + response.name + '</h2><a href="exchangeworld.html"><h3>Ready to Explore?</h3></a>');
-                    });
-                    //$("#myname").show();
+      $("#nav-signin").click(function() {
+        FB.login();
+      });
 
-                    $('#nav-explore').show();
-                }
-                else {
-                    $('#nav-signin').show();
-                }
-            });
-        };
+      FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          //$("#LoginStatus").hide();
+          //$("#slogan_area").append('<h2>HI ~</h2>');
+          //FB.api('/me/picture?width=250', function (response) {
+          //  my_picture_url = response.data.url;
+          //  $("#myhead").attr('src', my_picture_url);
+          //});
+          FB.api('/me', function(response) {
+            $('#Login-msg').html('<h2>Welcome back, ' + response.name + '</h2><a href="exchangeworld.html"><h3>Ready to Explore?</h3></a>');
+          });
+          //$("#myname").show();
 
-    </script>
-    <!-- END OF facebook javascript -->
-    <!-- Core JavaScript Files -->
+          $('#nav-explore').show();
+        } else {
+          $('#nav-signin').show();
+        }
+      });
+    };
+  </script>
+  <!-- END OF facebook javascript -->
+  <!-- Core JavaScript Files -->
 
-    <script src="static/js/jquery-1.11.2.min.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
-    <script src="static/js/jquery.easing.min.js"></script>
-    <script src="static/js/jquery.scrollTo.js"></script>
-    <script src="static/js/wow.min.js"></script>
+  <script src="static/js/jquery-1.11.2.min.js"></script>
+  <script src="static/js/bootstrap.min.js"></script>
+  <script src="static/js/jquery.easing.min.js"></script>
+  <script src="static/js/jquery.scrollTo.js"></script>
+  <script src="static/js/wow.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="static/js/custom.js"></script>
+  <!-- Custom Theme JavaScript -->
+  <script src="static/js/custom.js"></script>
 </body>
+
 </html>

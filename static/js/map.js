@@ -432,13 +432,14 @@ function addMarkers(lat, lng, img, gid)
       map: map,
       draggable: false,
       position:  new google.maps.LatLng(lat, lng),
-      zIndex: markers.length+1
+      zIndex: 10
     });
-
     markers.push(tmpMarker);
 
     google.maps.event.addListener(tmpMarker, 'mouseover', function ()
     {
+      tmpMarker.setAnimation(google.maps.Animation.BOUNCE);
+
       var tmpImg = getImage(img);
       if(tmpImg.height === 0)
         return;
@@ -489,12 +490,16 @@ function addMarkers(lat, lng, img, gid)
         anchor: new google.maps.Point(w/2, h/2)
       };
 
+      tmpMarker.setAnimation(null);
+      tmpMarker.setZIndex(markers.length+1);
       tmpMarker.setIcon(image);
     });
 
     var mouseoutListener = google.maps.event.addListener(tmpMarker, 'mouseout', function ()
     {
       tmpMarker.setIcon(null);
+      tmpMarker.setZIndex(10);
+      tmpMarker.setAnimation(null);
     });
 
     google.maps.event.addListener(tmpMarker, 'click', function ()

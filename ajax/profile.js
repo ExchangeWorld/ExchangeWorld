@@ -15,12 +15,16 @@ function load_profile()
     //push previous stage to gobackStack
     if (currentStage != "userBtn") gobackStack.push(currentStage);
     //set currentStage to next stage, owner
-    if (currentStage == "owner")
+    if (currentStage == "owner" && $(this).attr('data-value') == $("#profile").attr("data-value"))
     {
         //means that user looked at somebody's profile and check own profile, then this time we want to hide goback and reset the stack
         console.log("hidegoback!");
         hidegoback = true;
         gobackStack = [];
+    }
+    else if(currentStage == "owner")
+    {
+        gobackStack.pop()
     }
     currentStage = "owner";
 
@@ -28,13 +32,18 @@ function load_profile()
     if (gobackOwnerDataValue != 0)
     {
         val = gobackOwnerDataValue;
-        gobackOwnerDataValue = 0;
+        // gobackOwnerDataValue = 0; <- fuck this fucking bug for f@#!$%@#%@
     }
-
     else
     {
         val = $(this).attr('data-value');
         gobackOwnerDataValue = val;
+    }
+
+    //Specialized for click user monkeys
+    if(gobackOwnerDataValue != $(this).attr('data-value') && $(this).attr('data-value')!= null)
+    {
+        val = $(this).attr('data-value');
     }
 
 
@@ -262,6 +271,9 @@ $(document).ready(function ()
         gobackStack.push(currentStage);
         console.log(gobackStack);
         currentStage = "userBtn";
+        
+        //hidegoback has to be resetted
+        hidegoback = false;
 
         var tagetID = $("#add").attr("data-value");  // get others' fb id
         var myID = $("#profile").attr("data-value"); // get my fb id
@@ -289,10 +301,19 @@ $(document).ready(function ()
             {
                 if (Type == "following")
                 {
+                    console.log('get into following');
                     var v = $("#bdgfollowing").text();
                     $('#leftSideSwitch').hide().empty();
                     $('#leftSideSwitch').html('\
-                    <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div>\
+                    <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                        <div class="col-md-3">\
+                            <button id="goback" type="button" class="btn btn-default">\
+                                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true">\
+                                </span>\
+                                 Go back\
+                            </button>\
+                        </div>\
+                    </div>\
                     <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
                         <div class="col-md-2">\
                             <h1 style="margin-top: 0px"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color: #04ACD9"></span></h1>\
@@ -304,7 +325,7 @@ $(document).ready(function ()
                             <h1 style="margin-top: 0px; color: #04ACD9">'+ v + '</h1>\
                         </div>\
                     </div>').show("fast");
-                    if (response == null) $("#leftSideSwitch").append('No Result');
+                    if (response == null); //$("#leftSideSwitch").append('No Result');
                     else
                     {
                         for (var i = 0; i < response.length; i++)
@@ -322,10 +343,19 @@ $(document).ready(function ()
                 }
                 else if (Type == "follower")
                 {
+                    console.log('get into follower');
                     var v = $("#bdgfollower").text();
                     $('#leftSideSwitch').hide().empty();
                     $('#leftSideSwitch').html('\
-                    <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px"><div class="col-md-3"><button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button></div></div>\
+                    <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                        <div class="col-md-3">\
+                            <button id="goback" type="button" class="btn btn-default">\
+                                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true">\
+                                </span>\
+                                 Go back\
+                            </button>\
+                        </div>\
+                    </div>\
                     <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
                         <div class="col-md-2">\
                             <h1 style="margin-top: 0px"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="color: #04ACD9"></span></h1>\
@@ -337,7 +367,7 @@ $(document).ready(function ()
                             <h1 style="margin-top: 0px; color: #04ACD9">' + v + '</h1>\
                         </div>\
                     </div>').show("fast");
-                    if (response == null) $("#leftSideSwitch").append('No Result');
+                    if (response == null); //$("#leftSideSwitch").append('No Result');
                     else
                     {
                         for (var i = 0; i < response.length; i++)
@@ -350,7 +380,7 @@ $(document).ready(function ()
                             //Warpping line
                             if ((i + 1) % 4 == 0) $('#leftSideSwitch').append('</div>');
                         }
-                    } if (response == null) $("#leftSideSwitch").html('No Result');
+                    }
                     $('#leftSideSwitch').show('fast');
                 }
                 if (Type == "send")

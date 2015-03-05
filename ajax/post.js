@@ -1,18 +1,18 @@
-var postInnerHTML = '<h1>Post Goods</h1><!-- Prepended text-->\
+var postInnerHTML = '\
 <h3>\
     <span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> What do you have?</span>\
 </h3>\
 <div class="row postGroup">\
     <div class="col-md-12">\
-        <div class="form-group" style="margin:0px">\
-            <div class="input-group" style="width:100%"> <input id="gName" name="gName" class="form-control" placeholder="Name" required="" type="text" style="width:100%"> </div>\
+        <div class="form-group" style="width:100%; margin-bottom:0px;">\
+            <input id="gName" name="gName" class="form-control" placeholder="Name" required="" type="text" style="width:100%">\
         </div>\
     </div>\
 </div><!-- Select Basic -->\
 <div class="row postGroup">\
     <div class="col-md-12" style="margin-top: 5px">\
         <div class="btn-group" style="width:100%">\
-            <button class="btn btn-default dropdown-toggle" type="button" id="categories" data-toggle="dropdown" aria-expanded="true" style="text-align:left"><span> Choose a category </span><span class="caret"></span></button>\
+            <button class="btn btn-default dropdown-toggle" type="button" id="categories" data-toggle="dropdown" aria-expanded="true" style="text-align:left"><span> Select category </span><span class="caret"></span></button>\
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width:100%">\
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Books</a></li>\
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Textbooks</a></li>\
@@ -66,25 +66,25 @@ var postInnerHTML = '<h1>Post Goods</h1><!-- Prepended text-->\
 <h3>\
     <span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Locate your goods on map!</span>\
 </h3>\
-<h4>Set your place on the map!</h4>\
+<h4>Mark on the map with your cursor!</h4>\
 <h3>\
     <span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> What do you want?</span>\
 </h3>\
 <div class="row postGroup">\
     <div class="col-md-12">\
-        <div class="form-group" style="margin-bottom:0px">\
-            <div class="input-group" style="width:100%"> <input id="want_name" name="want_name" class="form-control" placeholder="Name" type="text"> </div>\
+        <div class="form-group" style="width:100% margin-bottom:0px;">\
+            <input id="want_name" name="want_name" class="form-control" placeholder="Name" type="text">\
         </div>\
     </div>\
 </div><!-- Button -->\
 <div class="row postGroup">\
     <div class="form-group">\
-        <label class="col-md-4 control-label" for="submit"></label>\
         <div class="col-md-6">\
             <button id="submit" name="submit" class="submit" style="padding:0px; border:none; background-color: silver">\
                 <h1><span class="label label-danger">Post!</span></h1>\
             </button>\
         </div>\
+        <label class="col-md-4 control-label" for="submit"></label>\
     </div>\
 </div>';
 

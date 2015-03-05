@@ -54,10 +54,10 @@ function load_exchange(event)
                 </div>\
                 <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
                     <div class="fancybox" href="' + response["photoPath"] + '" style="padding:15px"> <img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."> </div>\
-                    <div style="padding:15px">\
-                        <ul class="list-group" style="font-size: 85%">\
+                    <div style="padding:15px;padding-bottom:0px">\
+                        <ul class="list-group" style="font-size: 85%;margin-bottom:0px">\
                             <li class="list-group-item">' + response["gname"] + '<span class="badge">' + response["categories"] + '</span></li>\
-                            <li class="list-group-item">Wanted : ' + response["want"] + '</li>\
+                            <li class="list-group-item">' + response["want"] + '</li>\
                             <li class="list-group-item owner" data-value="' + response["ownerID"] + '"><img src="' + response["owner_photo"] + '" height="20" width="20"> ' + response["username"] + '</li>\
                         </ul>\
                     </div>\
@@ -65,7 +65,7 @@ function load_exchange(event)
                 <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">\
                     <div class="col-md-12">\
                         <div class="panel panel-info">\
-                            <div class="panel-heading"> Description : </div>\
+                            <div class="panel-heading"><h3 class="panel-title">Description :</h3></div>\
                             <div class="panel-body">\
                                 <p> ' + response["description"] + '\
                             </div>\
@@ -75,15 +75,15 @@ function load_exchange(event)
                 <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">\
                     <div class="col-md-12">\
                         <div class="panel panel-info">\
-                            <div class="panel-heading" style="font-size: 121%"> Comments : </div>\
+                            <div class="panel-heading"><h3 class="panel-title">Comments :</h3></div>\
                             <div class="panel-body" style="padding-top:0px;">\
                                 <div id="comment_area">\
                                     <ul class="list-group"> </ul>\
                                 </div>\
                                 <div class="form-group" style="margin-bottom: 0px; margin-top: 3px;">\
                                     <div class="input-group">\
-                                        <span class="input-group-addon">Say</span>\
-                                        <input id="comment" name="comment" class="form-control" placeholder="leave comment" type="text">\
+                                        <input id="comment" name="comment" class="form-control" placeholder="..." type="text" style="height:42px">\
+                                        <span class="input-group-addon">Add</span>\
                                     </div>\
                                 </div>\
                             </div>\
@@ -128,7 +128,7 @@ function load_exchange(event)
                             },
                             success: function (response)
                             {
-                                $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px; background-color: #F4CDCD; margin-bottom:3px">\
+                                $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px; background-color: #DAE5EA; margin-bottom:3px">\
                                                                <div style="word-wrap: break-word">' + response + '</div>\
                                                            </li>');
 
@@ -160,9 +160,9 @@ function load_exchange(event)
                         {
                             for (var i = 0; i < response.length; i++)
                             {
-                                $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px; background-color: #F4CDCD; margin-bottom:3px">\
+                                $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px; background-color: #DAE5EA; margin-bottom:3px">\
                                                                 <div style="word-wrap: break-word">\
-                                                                    <img class="owner" data-value="' + response[i]["commenter"] + '" src="' + response[i]["commenterPhoto"] + '" style="margin-right:5px;width: 30px; height: 30px; box-shadow: 2px 2px 11px 0px rgba(50, 50, 50, 0.36);">' + response[i]["comment"] + '>\
+                                                                    <img class="owner" data-value="' + response[i]["commenter"] + '" src="' + response[i]["commenterPhoto"] + '" style="margin-right:5px;width: 30px; height: 30px; box-shadow: 2px 2px 11px 0px rgba(50, 50, 50, 0.36);">' + response[i]["comment"] + '\
                                                                 </div>\
                                                            </li>');
                             }

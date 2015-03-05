@@ -141,6 +141,10 @@ body {
     width: 100%;
 }
 
+.img-thumbnail{
+    cursor: pointer;
+}
+
 .panel{
     margin: 0px;
 }
@@ -403,4 +407,11 @@ body {
     border-radius:5px;
     width:98%;
     height:80%;
+}
+
+.label-primary
+{
+    background-color: #678690;
+    padding-top: 4px;
+    padding-bottom: 3px;
 }

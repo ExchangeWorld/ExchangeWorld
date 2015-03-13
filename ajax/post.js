@@ -144,9 +144,9 @@ function load_post()
     //set currentStage to post
     currentStage = "post";
 
-    $("#leftSideSwitch").hide().html(postInnerHTML).show('fast');
-    $('#submit').hide();
-    $("#goods_photo").hide();
+    $("#leftSideSwitch").hide(0).html(postInnerHTML).show(0);
+    $('#submit').hide(0);
+    $("#goods_photo").hide(0);
 
     $(document).on('change', '#imgUpload', function ()
     {
@@ -179,9 +179,9 @@ function load_post()
     $("#imgUpload").change(function ()
     {
         readURL(this);
-        $('#photo_preview').show();
+        $('#photo_preview').show(0);
         changeMarkerImage($("#goods_photo").attr('data-value'));
-        $("#goods_photo").show();
+        $("#goods_photo").show(0);
     });
 
     document.getElementById("seek").className = "";

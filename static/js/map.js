@@ -15,7 +15,7 @@ $(document).ready(function ()
     $(".searchclear").click(function ()
     {
         $(this).prev().val('').focus();
-        $(this).hide();
+        $(this).hide(0);
     });
     /*-------------------------------------------------*/
 });
@@ -547,7 +547,7 @@ function addMarkers(lat, lng, img, gid)
                 success: function (response)
                 {
                     //Left Side
-                    $('#leftSideSwitch').hide().empty();
+                    $('#leftSideSwitch').hide(0).empty();
                     $('#leftSideSwitch').html('\
 	                <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
 	                    <div class="col-md-5">\
@@ -593,7 +593,7 @@ function addMarkers(lat, lng, img, gid)
 	                    </div>\
 	                </div>\
 	                <div class="searchResults" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">\
-	                ').show('fast');
+	                ').show(0);
 
                     $("[name='exchangeStatus']").bootstrapSwitch();
                     $("[name='exchangeStatus']").bootstrapSwitch('onText', 'Exchanging');

@@ -207,9 +207,9 @@ $(document).ready(function ()
         currentStage = "seek";
         gobackOwnerDataValue = 0;
 
-        $('#leftSideSwitch').hide();
+        $('#leftSideSwitch').hide(0);
         $('#leftSideSwitch').html(seekInnerHTML);
-        $('#leftSideSwitch').show('fast');
+        $('#leftSideSwitch').show(0);
 
         seek_query("");
 
@@ -238,9 +238,9 @@ $(document).ready(function ()
     $("#leftSideSwitch").on("click", ".seeking", function (event)
     {
         var search = $("#searchName").val();
-        $('#leftSideSwitch').hide();
+        $('#leftSideSwitch').hide(0);
         $('#leftSideSwitch').html(seekInnerHTML);
-        $('#leftSideSwitch').show('fast');
+        $('#leftSideSwitch').show(0);
         seek_query(search, "keywords");
 
         //Create the scroll only on Seek
@@ -271,9 +271,9 @@ $(document).ready(function ()
         if ($('#seek').attr("class") == "active")
         {
             var search = $(this).text();
-            $('#leftSideSwitch').hide();
+            $('#leftSideSwitch').hide(0);
             $('#leftSideSwitch').html(seekInnerHTML);
-            $('#leftSideSwitch').show('fast');
+            $('#leftSideSwitch').show(0);
             seek_query(search, "categories");
 
             //Create the scroll only on Seek
@@ -302,9 +302,9 @@ $(document).ready(function ()
     $("#leftSideSwitch").on("click", ".dropdownLocation", function (event)
     {
         var search = $(this).text();
-        $('#leftSideSwitch').hide();
+        $('#leftSideSwitch').hide(0);
         $('#leftSideSwitch').html(seekInnerHTML);
-        $('#leftSideSwitch').show('fast');
+        $('#leftSideSwitch').show(0);
         seek_query(search, "location");
 
         //Create the scroll only on Seek

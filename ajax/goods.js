@@ -45,7 +45,7 @@ function load_exchange(event)
             success: function (response)
             {
                 //Left Side
-                $('#leftSideSwitch').hide().empty();
+                $('#leftSideSwitch').hide(0).empty();
                 $('#leftSideSwitch').html('\
                 <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
                     <div class="col-md-5">\
@@ -94,7 +94,7 @@ function load_exchange(event)
                     </div>\
                 </div>\
                 <div class="searchResults" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">\
-                ').show('fast');
+                ').show(0);
 
                 // Can't leave comment if not loggedin
                 if (loggedInForPost == false) $("#comment").attr("disabled", "disabled");
@@ -108,7 +108,7 @@ function load_exchange(event)
                 if (response["ownerID"] != $("#profile").attr("data-value"))
                 {
                     $("[name='exchangeStatus']").bootstrapSwitch('readonly', true);
-                    $("#removeGood").hide();
+                    $("#removeGood").hide(0);
                 }
 
 

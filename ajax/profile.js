@@ -61,7 +61,7 @@ function load_profile()
                 },
                 success: function (response)
                 {
-                    $('#leftSideSwitch').hide().empty();
+                    $('#leftSideSwitch').hide(0).empty();
                     $('#leftSideSwitch').html('\
                         <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
                             <div class="col-md-3">\
@@ -91,7 +91,7 @@ function load_profile()
                                 </ul></ul>\
                             </div>\
                         </div>\
-                        <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show('fast');
+                        <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show(0);
 
                     // popup (send) messagebox
                     $('#leftSideSwitch').append('\
@@ -173,7 +173,7 @@ function load_profile()
                 success: function (response)
                 {
                     //alert('-'+val+'-');
-                    $('#leftSideSwitch').hide().empty();
+                    $('#leftSideSwitch').hide(0).empty();
                     $('#leftSideSwitch').html('\
                         <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
                             <div class="col-md-5 fancybox" href="' + response[0]["photoPath"] + '"><img  src="' + response[0]["photoPath"] + '" class="img-thumbnail" alt="..."></div>\
@@ -196,7 +196,7 @@ function load_profile()
                                 </ul>\
                             </div>\
                         </div>\
-                        <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show('fast');
+                        <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show(0);
 
                     //Handle Exchanging/Exchanged Tables
                     //Get Exchange Table(?) and represent in map
@@ -303,7 +303,7 @@ $(document).ready(function ()
                 {
                     console.log('get into following');
                     var v = $("#bdgfollowing").text();
-                    $('#leftSideSwitch').hide().empty();
+                    $('#leftSideSwitch').hide(0).empty();
                     $('#leftSideSwitch').html('\
                     <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
                         <div class="col-md-3">\
@@ -324,7 +324,7 @@ $(document).ready(function ()
                         <div class="col-md-4">\
                             <h1 style="margin-top: 0px; color: #04ACD9">'+ v + '</h1>\
                         </div>\
-                    </div>').show("fast");
+                    </div>').show(0);
                     if (response == null); //$("#leftSideSwitch").append('No Result');
                     else
                     {
@@ -339,13 +339,13 @@ $(document).ready(function ()
                                 $('#leftSideSwitch').append('</div>');
                         }
                     }
-                    $('#leftSideSwitch').show('fast');
+                    $('#leftSideSwitch').show(0);
                 }
                 else if (Type == "follower")
                 {
                     console.log('get into follower');
                     var v = $("#bdgfollower").text();
-                    $('#leftSideSwitch').hide().empty();
+                    $('#leftSideSwitch').hide(0).empty();
                     $('#leftSideSwitch').html('\
                     <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
                         <div class="col-md-3">\
@@ -366,7 +366,7 @@ $(document).ready(function ()
                         <div class="col-md-4">\
                             <h1 style="margin-top: 0px; color: #04ACD9">' + v + '</h1>\
                         </div>\
-                    </div>').show("fast");
+                    </div>').show(0);
                     if (response == null); //$("#leftSideSwitch").append('No Result');
                     else
                     {
@@ -381,7 +381,7 @@ $(document).ready(function ()
                             if ((i + 1) % 4 == 0) $('#leftSideSwitch').append('</div>');
                         }
                     }
-                    $('#leftSideSwitch').show('fast');
+                    $('#leftSideSwitch').show(0);
                 }
                 if (Type == "send")
                 {

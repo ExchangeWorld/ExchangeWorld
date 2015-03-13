@@ -1,5 +1,5 @@
 var seekInnerHTML = '\
-<div class="input-group" style="margin-top: 15px; margin-bottom: 10px">\
+<div class="input-group" style="margin-bottom: 10px">\
     <input id="searchName" type="text" class="form-control" placeholder="Seek anything">\
     <span class="input-group-btn"> <button id="searchString" class="btn btn-info seeking" type="button">Seek !</button> </span>\
 </div>\
@@ -206,17 +206,26 @@ $(document).ready(function ()
         //set currentStage to post
         currentStage = "seek";
         gobackOwnerDataValue = 0;
-
-        $('#leftSideSwitch').hide(0);
-        $('#leftSideSwitch').html(seekInnerHTML);
-        $('#leftSideSwitch').show(0);
-
-        seek_query("");
-
-        //Create the scroll only on Seek
-        $('#leftSide').perfectScrollbar(({
-            suppressScrollX: true
-        }));
+        
+        //Loading next leftSide to display
+        $('#leftSideSwitch').slideUp("slow",function()
+        {
+            //destroy the scroll
+            //and reset the scroll by Noel
+            $('#leftSide').perfectScrollbar('destroy');
+            $("#leftSide").scrollTop(0);
+            $("#leftSide").perfectScrollbar('update');
+            $('#leftSide').perfectScrollbar(({
+                suppressScrollX: true
+            }));
+            $('#leftSideSwitch').html(seekInnerHTML);
+            seek_query("");
+        });
+        
+        // //Create the scroll only on Seek
+        // $('#leftSide').perfectScrollbar(({
+        //     suppressScrollX: true
+        // }));
 
         //Google Map Setting
         if (marker != null)
@@ -229,6 +238,11 @@ $(document).ready(function ()
             map.setOptions({ draggableCursor: 'default', draggingCursor: 'default' });
             google.maps.event.clearListeners(map, 'click');
         }
+
+        $('#leftSideSwitch').slideDown("slow", function()
+        {
+            $('#leftSideSwitch').show(0);
+        });
     });
 
     // Handle User clicking the specific goods.

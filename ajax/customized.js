@@ -77,5 +77,5 @@ $('#profile').on("click", function (event)
 
 $(window).load(function ()
 {
-    $('#seek').click();
+    // $('#seek').click();
 });

@@ -29,7 +29,7 @@
 					AND `user`.`fb_id` =`commenter` ORDER BY `cid` DESC";
 		$result = mysql_query($photoSQL) or die(mysql_error()); 
 		$row = mysql_fetch_array($result);
-		echo '<img src='.$row["commenterPhoto"].' height="30" width="30"> '.$comment;
+		echo '<img src='.$row["commenterPhoto"].' height="30" width="30"> : '.$comment;
 	}
 	else{
 		echo "Comment ERROR!!!".$type;

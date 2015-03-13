@@ -584,9 +584,8 @@ function addMarkers(lat, lng, img, gid)
 	                                    <ul class="list-group"> </ul>\
 	                                </div>\
 	                                <div class="form-group" style="margin-bottom: 0px; margin-top: 3px;">\
-	                                    <div class="input-group">\
+	                                    <div class="input-group" style="width:100%">\
 	                                        <input id="comment" name="comment" class="form-control" placeholder="..." type="text" style="height:42px">\
-	                                        <span class="input-group-addon">Add</span>\
 	                                    </div>\
 	                                </div>\
 	                            </div>\
@@ -663,7 +662,7 @@ function addMarkers(lat, lng, img, gid)
 	                            {
 	                                $('#comment_area').append('<li class="list-group-item" style="padding: 5px; font-size:16px; background-color: #DAE5EA; margin-bottom:3px">\
 	                                                                <div style="word-wrap: break-word">\
-	                                                                    <img class="owner" data-value="' + response[i]["commenter"] + '" src="' + response[i]["commenterPhoto"] + '" style="margin-right:5px;width: 30px; height: 30px; box-shadow: 2px 2px 11px 0px rgba(50, 50, 50, 0.36);">' + response[i]["comment"] + '\
+	                                                                    <img class="owner" data-value="' + response[i]["commenter"] + '" src="' + response[i]["commenterPhoto"] + '" style="margin-right:5px;width: 30px; height: 30px; box-shadow: 2px 2px 11px 0px rgba(50, 50, 50, 0.36);">: ' + response[i]["comment"] + '\
 	                                                                </div>\
 	                                                           </li>');
 	                            }

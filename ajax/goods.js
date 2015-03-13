@@ -1,3 +1,4 @@
+var val ; //goodsID
 
 function load_exchange(event)
 {
@@ -16,7 +17,7 @@ function load_exchange(event)
     //set currentStage to next stage, exchange
     currentStage = "exchange";
 
-    //for goback function dumb replace method ^^ 
+    //for goback function dumb replace method ^^
     //when gobackSearchResultDataValueNeedToBeReplaced is false, going original way
     //if true, going tmp way
     if (gobackSearchResultDataValueNeedToBeReplaced == false)
@@ -50,7 +51,10 @@ function load_exchange(event)
                     <div class="col-md-5">\
                         <button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button>\
                     </div>\
-                    <div class="col-md-7"> <input id="checkbox" type="checkbox" name="exchangeStatus" checked> </div>\
+                    <div class="col-md-7">\
+                        <input id="checkbox" type="checkbox" name="exchangeStatus" checked> \
+                        <span id="removeGood" class="glyphicon glyphicon-remove" aria-hidden="true">\
+                    </div>\
                 </div>\
                 <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
                     <div class="fancybox" href="' + response["photoPath"] + '" style="padding:15px"> <img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."> </div>\
@@ -100,9 +104,12 @@ function load_exchange(event)
                 $("[name='exchangeStatus']").bootstrapSwitch('onText', 'Exchanging');
                 $("[name='exchangeStatus']").bootstrapSwitch('offText', 'Exchanged');
                 $("[name='exchangeStatus']").bootstrapSwitch('onColor', 'info');
+
+                //can't change status / delete goods if not owner
                 if (response["ownerID"] != $("#profile").attr("data-value"))
                 {
                     $("[name='exchangeStatus']").bootstrapSwitch('readonly', true);
+                    $("#removeGood").hide();
                 }
 
 
@@ -224,3 +231,33 @@ function load_exchange(event)
         });
     }
 }
+$(document).ready(function ()
+{
+    //Handle delete post
+    $("#leftSideSwitch").on("click", ".glyphicon-remove", function (event)
+    {
+        if (confirm('Are you sure you want to Delete this post?')) {
+            $.ajax({
+                type: "GET",
+                url: "./php_script/removePost.php",
+                dataType: "text",
+                data: {
+                    gid: val
+                },
+                success: function (response)
+                {
+                    $('#seek').click();
+                },
+                error: function (xhr, ajaxOption, thrownError)
+                {
+                    alert('ERROR SECTION : Handle delete');
+                    alert(thrownError);
+                    alert(JSON.stringify(xhr));
+                }
+            });
+        } else {
+            // Do nothing!
+        }
+
+    });
+});

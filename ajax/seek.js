@@ -206,9 +206,9 @@ $(document).ready(function ()
         //set currentStage to post
         currentStage = "seek";
         gobackOwnerDataValue = 0;
-        
+
         //Loading next leftSide to display
-        $('#leftSideSwitch').slideUp("slow",function()
+        $('#leftSideSwitch').fadeOut("slow",function()
         {
             //destroy the scroll
             //and reset the scroll by Noel
@@ -239,10 +239,7 @@ $(document).ready(function ()
             google.maps.event.clearListeners(map, 'click');
         }
 
-        $('#leftSideSwitch').slideDown("slow", function()
-        {
-            $('#leftSideSwitch').show(0);
-        });
+        $('#leftSideSwitch').fadeIn("slow");
     });
 
     // Handle User clicking the specific goods.

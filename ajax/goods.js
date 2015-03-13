@@ -35,8 +35,12 @@ function load_exchange(event)
             },
             success: function (response)
             {
+                //Map Side
+                map.panTo(new google.maps.LatLng(response["posY"], response["posX"]));
+                map.setZoom(17);
+
                 //Loading next leftSide to display
-                $('#leftSideSwitch').slideUp("slow",function()
+                $('#leftSideSwitch').fadeOut("slow",function()
                 {
             	    //destroy the scroll
 				    //and reset the scroll by Noel
@@ -221,14 +225,8 @@ function load_exchange(event)
 	                });
 				});
 
-				$('#leftSideSwitch').slideDown("slow", function()
-                {
-					$('#leftSideSwitch').show(0);
-				});
-
-                //Map Side
-                map.panTo(new google.maps.LatLng(response["posY"], response["posX"]));
-                map.setZoom(17);
+				$('#leftSideSwitch').fadeIn("slow");
+                
             },
             error: function (xhr, ajaxOption, thrownError)
             {

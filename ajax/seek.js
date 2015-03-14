@@ -221,7 +221,7 @@ $(document).ready(function ()
             $('#leftSideSwitch').html(seekInnerHTML);
             seek_query("");
         });
-        
+
         // //Create the scroll only on Seek
         // $('#leftSide').perfectScrollbar(({
         //     suppressScrollX: true

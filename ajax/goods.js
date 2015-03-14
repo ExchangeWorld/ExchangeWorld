@@ -53,14 +53,12 @@ function load_exchange(event)
 
                 	// $('#leftSideSwitch').hide(0);
 	                $('#leftSideSwitch').html('\
-	                <div class="row" style="background-color: silver">\
-	                    <div class="col-md-5">\
-	                        <button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> BACK</button>\
-	                    </div>\
-	                    <div class="col-md-7">\
-	                        <input id="checkbox" type="checkbox" name="exchangeStatus" checked> \
-	                        <span id="removeGood" class="glyphicon glyphicon-remove" aria-hidden="true">\
-	                    </div>\
+	                <div class="col-md-5">\
+	                    <button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> BACK</button>\
+	                </div>\
+	                <div class="col-md-7">\
+	                    <button id="goodsStatus" type="button" class="btn btn-success" goodsStatus="'+response["status"] + '">Exchanging</button> \
+	                    <span id="removeGood" class="glyphicon glyphicon-remove" aria-hidden="true">\
 	                </div>\
 	                <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
 	                    <div class="fancybox" href="' + response["photoPath"] + '" style="padding:15px"> <img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."> </div>\
@@ -101,7 +99,7 @@ function load_exchange(event)
 	                </div>\
 	                <div class="searchResults" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">\
 	                ');
-                
+
 
 	                // Can't leave comment if not loggedin
 	                if (loggedInForPost == false) $("#comment").attr("disabled", "disabled");
@@ -114,9 +112,17 @@ function load_exchange(event)
 	                //can't change status / delete goods if not owner
 	                if (response["ownerID"] != $("#profile").attr("data-value"))
 	                {
-	                    $("[name='exchangeStatus']").bootstrapSwitch('readonly', true);
+	                    //$("[name='exchangeStatus']").bootstrapSwitch('readonly', true);
+                        $("#goodsStatus").prop('disabled', true);
 	                    $("#removeGood").hide(0);
 	                }
+
+                    // Exchanged
+                    if(response["status"] == 1)
+                    {
+                        $("#goodsStatus").attr("class", "btn btn-default");
+                        $("#goodsStatus").text("Exchanged");
+                    }
 
 
 	                document.getElementById("comment").addEventListener("keydown", function (e)
@@ -226,7 +232,7 @@ function load_exchange(event)
 				});
 
 				$('#leftSideSwitch').fadeIn("slow");
-                
+
             },
             error: function (xhr, ajaxOption, thrownError)
             {
@@ -240,7 +246,7 @@ function load_exchange(event)
 $(document).ready(function ()
 {
     //Handle delete post
-    $("#leftSideSwitch").on("click", ".glyphicon-remove", function (event)
+    $("#leftSideSwitch").on("click", "#removeGood", function (event)
     {
         if (confirm('Are you sure you want to Delete this post?')) {
             $.ajax({
@@ -265,6 +271,41 @@ $(document).ready(function ()
         } else {
             // Do nothing!
         }
+    });
 
+    //Handle changing goods status (Exchanging/Exchanged)
+    $("#leftSideSwitch").on("click", "#goodsStatus", function (event)
+    {
+        var gStatus = $("#goodsStatus").attr("goodsStatus");
+
+        $.ajax({
+            type: "GET",
+            url: "./php_script/changeGoodsStatus.php",
+            dataType: "text",
+            data: {
+                gid: val,
+                status: gStatus
+            },
+            success: function (response)
+            {
+                if(response == "1")
+                {
+                    $("#goodsStatus").attr("class", "btn btn-default");
+                    $("#goodsStatus").text("Exchanged");
+                }
+                else
+                {
+                    $("#goodsStatus").attr("class", "btn btn-success");
+                    $("#goodsStatus").text("Exchanging");
+                }
+                $("#goodsStatus").attr("goodsStatus", response);
+            },
+            error: function (xhr, ajaxOption, thrownError)
+            {
+                alert('ERROR SECTION : Handle status change');
+                alert(thrownError);
+                alert(JSON.stringify(xhr));
+            }
+        });
     });
 });

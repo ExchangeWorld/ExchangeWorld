@@ -137,10 +137,10 @@ function load_profile()
                                 { // Exchanging
                                     $('#Exchanging').append('<div class="col-md-3 searchResult" style="padding: 0px; padding-top: 0px; padding-bottom: 0px; border: 0px; background: #fff; margin: 0px;" data-value="' + response[i]["gid"] + '"><img src="' + response[i]["photoPath"] + '"width="100" height="100" style="max-width: 100%; height: auto;" class="img-thumbnail" alt="..."></div>');
                                 }
-                                /*  else{
-                                        If "status" != 0
-                                        Then put into Exchanged Table
-                                    } */
+                                else
+                                { // Exchanged
+                                    $("#Exchanged").append('<div class="col-md-3 searchResult" style="padding: 0px; padding-top: 0px; padding-bottom: 0px; border: 0px; background: #fff; margin: 0px;" data-value="' + response[i]["gid"] + '"><img src="' + response[i]["photoPath"] + '"width="100" height="100" style="max-width: 100%; height: auto;" class="img-thumbnail" alt="..."></div>');
+                                }
                             }
                         },
                         error: function (xhr, ajaxOption, thrownError)
@@ -232,10 +232,10 @@ function load_profile()
                                 { // Exchanging
                                     $('#Exchanging').append('<div class="col-md-3 searchResult" style="padding: 0px; padding-top: 0px; padding-bottom: 0px; border: 0px; background: #fff; margin: 0px;" data-value="' + response[i]["gid"] + '"><img src="' + response[i]["photoPath"] + '" width="100" height="100" style="max-width: 100%; height: auto;" class="img-thumbnail" alt="..."></div>');
                                 }
-                                /*  else{
-                                        If "status" != 0
-                                        Then put into Exchanged Table
-                                    } */
+                                else
+                                { // Exchanged
+                                    $("#Exchanged").append('<div class="col-md-3 searchResult" style="padding: 0px; padding-top: 0px; padding-bottom: 0px; border: 0px; background: #fff; margin: 0px;" data-value="' + response[i]["gid"] + '"><img src="' + response[i]["photoPath"] + '"width="100" height="100" style="max-width: 100%; height: auto;" class="img-thumbnail" alt="..."></div>');
+                                }
                             }
                         },
                         error: function (xhr, ajaxOption, thrownError)
@@ -271,7 +271,7 @@ $(document).ready(function ()
         gobackStack.push(currentStage);
         console.log(gobackStack);
         currentStage = "userBtn";
-        
+
         //hidegoback has to be resetted
         hidegoback = false;
 
@@ -372,7 +372,7 @@ $(document).ready(function ()
                     {
                         for (var i = 0; i < response.length; i++)
                         {
-                            //Warpping line: 4 items a rows 
+                            //Warpping line: 4 items a rows
                             if (i == 0 || (i + 1) % 4 == 0) $('#leftSideSwitch').append('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">');
 
                             $('#leftSideSwitch').append('<div class="col-md-4 owner" data-value="' + response[i]["myid"] + '"><img class="img-thumbnail" alt=".." src="' + response[i]["owner_photo"] + '" style="width: 100%"></div>');

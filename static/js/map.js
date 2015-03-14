@@ -510,14 +510,12 @@ function addMarkers(lat, lng, img, gid)
 
                         // $('#leftSideSwitch').hide(0);
                         $('#leftSideSwitch').html('\
-                        <div class="row" style="background-color: silver">\
-                            <div class="col-md-5">\
-                                <button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> BACK</button>\
-                            </div>\
-                            <div class="col-md-7">\
-                                <input id="checkbox" type="checkbox" name="exchangeStatus" checked> \
-                                <span id="removeGood" class="glyphicon glyphicon-remove" aria-hidden="true">\
-                            </div>\
+                        <div class="col-md-5">\
+                            <button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> BACK</button>\
+                        </div>\
+                        <div class="col-md-7">\
+                            <button id="goodsStatus" type="button" class="btn btn-success" goodsStatus="'+response["status"] + '">Exchanging</button> \
+                            <span id="removeGood" class="glyphicon glyphicon-remove" aria-hidden="true">\
                         </div>\
                         <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
                             <div class="fancybox" href="' + response["photoPath"] + '" style="padding:15px"> <img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."> </div>\
@@ -558,20 +556,16 @@ function addMarkers(lat, lng, img, gid)
                         </div>\
                         <div class="searchResults" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">\
                         ');
-                    
+
 
                         // Can't leave comment if not loggedin
                         if (loggedInForPost == false) $("#comment").attr("disabled", "disabled");
 
-                        $("[name='exchangeStatus']").bootstrapSwitch();
-                        $("[name='exchangeStatus']").bootstrapSwitch('onText', 'Exchanging');
-                        $("[name='exchangeStatus']").bootstrapSwitch('offText', 'Exchanged');
-                        $("[name='exchangeStatus']").bootstrapSwitch('onColor', 'info');
 
                         //can't change status / delete goods if not owner
                         if (response["ownerID"] != $("#profile").attr("data-value"))
                         {
-                            $("[name='exchangeStatus']").bootstrapSwitch('readonly', true);
+                            $("#goodsStatus").prop('disabled', true);
                             $("#removeGood").hide(0);
                         }
 

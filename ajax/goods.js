@@ -104,10 +104,6 @@ function load_exchange(event)
 	                // Can't leave comment if not loggedin
 	                if (loggedInForPost == false) $("#comment").attr("disabled", "disabled");
 
-	                $("[name='exchangeStatus']").bootstrapSwitch();
-	                $("[name='exchangeStatus']").bootstrapSwitch('onText', 'Exchanging');
-	                $("[name='exchangeStatus']").bootstrapSwitch('offText', 'Exchanged');
-	                $("[name='exchangeStatus']").bootstrapSwitch('onColor', 'info');
 
 	                //can't change status / delete goods if not owner
 	                if (response["ownerID"] != $("#profile").attr("data-value"))

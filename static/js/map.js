@@ -352,7 +352,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 function handleNoGeolocation(errorFlag)
 {
-    if (errorFlag == true)
+    if (errorFlag === true)
     {
         alert("Geolocation service failed.");
     } else
@@ -444,55 +444,8 @@ function addMarkers(lat, lng, img, gid)
       if(tmpImg.height === 0)
         return;
 
-      var w=200,h=200;
-      if(tmpImg.width >= tmpImg.height)
-      {
-        if(tmpImg.width/tmpImg.height > 1.1 && tmpImg.width/tmpImg.height < 1.4)
-        {//4 : 3
-          w = 240;h = 180;
-        }
-        else if(tmpImg.width/tmpImg.height >= 1.7)
-        {
-          w = 320; h = 180;
-        }
-        else if(tmpImg.width/tmpImg.height >=1.4 && tmpImg.width/tmpImg.height < 1.56 )
-        { //3 : 2
-          w = 240; h = 160;
-        }
-        else if(tmpImg.width/tmpImg.height >=1.56 && tmpImg.width/tmpImg.height < 1.7)
-        {
-          w = 240;h = 150;
-        }
-      }
-      else {
-        if(tmpImg.height/tmpImg.width > 1.1 && tmpImg.height/tmpImg.width < 1.4)
-        {//4 : 3
-          h = 240;w = 180;
-        }
-        else if(tmpImg.height/tmpImg.width >= 1.7)
-        {
-          h = 320; w = 180;
-        }
-        else if(tmpImg.height/tmpImg.width >=1.4 && tmpImg.height/tmpImg.width < 1.56 )
-        { //3 : 2
-          h = 240; w = 160;
-        }
-        else if(tmpImg.height/tmpImg.width >=1.56 && tmpImg.height/tmpImg.width < 1.7)
-        {
-          h = 240; w = 150;
-        }
-      }
-
-      var image = {
-        url: img,
-        scaledSize: new google.maps.Size(w, h),
-        origin: new google.maps.Point(0,0),
-        anchor: new google.maps.Point(w/2, h/2)
-      };
-
       tmpMarker.setAnimation(null);
-      tmpMarker.setZIndex(markers.length+1);
-      tmpMarker.setIcon(image);
+      var overlay = new markerDetailOverlayview(tmpMarker, img);
     });
 
     var mouseoutListener = google.maps.event.addListener(tmpMarker, 'mouseout', function ()
@@ -515,7 +468,7 @@ function addMarkers(lat, lng, img, gid)
         //for goback function
         //dumb replace method ^^ when gobackSearchResultDataValueNeedToBeReplaced is false, going original way
         //if true, going tmp way
-        if (gobackSearchResultDataValueNeedToBeReplaced == false)
+        if (gobackSearchResultDataValueNeedToBeReplaced === false)
         {
             val = gid;
         }
@@ -525,7 +478,7 @@ function addMarkers(lat, lng, img, gid)
             gobackSearchResultDataValueNeedToBeReplaced = false;
         }
 
-        if (val != 0)
+        if (val !== 0)
         {
             //for goback
             gobackSearchResultDataValue = val;
@@ -802,4 +755,128 @@ function markersBounds()
 function getPostMarkerPosition()
 {
     return [marker.getPosition().lat(), marker.getPosition().lng()];
+}
+
+function markerDetailOverlayview(marker, image)
+{
+  this.marker = marker;
+  this.location = marker.getPosition();;
+
+  if(getImage(image).height!=0)
+    this.img = image;
+  else
+    this.img = null
+
+  // Explicitly call setMap() on this overlay
+  this.setMap(map);
+}
+markerDetailOverlayview.prototype = new google.maps.OverlayView();
+
+markerDetailOverlayview.prototype.onAdd = function()
+{
+  console.log("OverlayView onAdd");
+  if(!this.container)
+  {
+    var div = document.createElement('div');
+    div.style.backgroundColor = "#FFF";
+    div.style.border = "solid";
+    div.style.borderWidth = "5px";
+    div.style.position = "absolute";
+    div.style.borderColor = "#00BFA5";
+    div.style.padding = "3px";
+    this.container = div;
+  }
+
+  if (!this.imageWrapper)
+  {
+    this.imageWrapper = document.createElement('div');
+    this.container.appendChild(this.imageWrapper);
+
+    var it = this;
+    google.maps.event.addDomListener(this.imageWrapper, 'click', function(e) {
+      google.maps.event.trigger(it, 'click');
+      google.maps.event.trigger(it.marker,'click');
+    });
+    google.maps.event.addDomListener(this.imageWrapper, 'mouseover', function(e) {
+      google.maps.event.trigger(it, 'mouseover');
+    });
+    google.maps.event.addDomListener(this.imageWrapper, 'mouseout', function(e) {
+      google.maps.event.trigger(it, 'mouseout');
+      it.onRemove();
+    });
+
+    var tmpImg = getImage(this.img);
+    if(tmpImg.width >= tmpImg.height)
+    {
+      if(tmpImg.width/tmpImg.height > 1.1 && tmpImg.width/tmpImg.height < 1.4)
+      {//4 : 3
+        this.imageWidth = 240;this.imageHeight = 180;
+      }
+      else if(tmpImg.width/tmpImg.height >= 1.7)
+      {
+        this.imageWidth = 320; this.imageHeight = 180;
+      }
+      else if(tmpImg.width/tmpImg.height >=1.4 && tmpImg.width/tmpImg.height < 1.56 )
+      { //3 : 2
+        this.imageWidth = 240; this.imageHeight = 160;
+      }
+      else if(tmpImg.width/tmpImg.height >=1.56 && tmpImg.width/tmpImg.height < 1.7)
+      {
+        this.imageWidth = 240;this.imageHeight = 150;
+      }
+    }
+    else {
+      if(tmpImg.height/tmpImg.width > 1.1 && tmpImg.height/tmpImg.width < 1.4)
+      {//4 : 3
+        this.imageHeight = 240;this.imageWidth = 180;
+      }
+      else if(tmpImg.height/tmpImg.width >= 1.7)
+      {
+        this.imageHeight = 320; this.imageWidth = 180;
+      }
+      else if(tmpImg.height/tmpImg.width >=1.4 && tmpImg.height/tmpImg.width < 1.56 )
+      { //3 : 2
+        this.imageHeight = 240; this.imageWidth = 160;
+      }
+      else if(tmpImg.height/tmpImg.width >=1.56 && tmpImg.height/tmpImg.width < 1.7)
+      {
+        this.imageHeight = 240; this.imageWidth = 150;
+      }
+    }
+    var imgElement = document.createElement("img");
+    imgElement.src = this.img;
+    imgElement.style.maxWidth = this.imageWidth + 'px';
+    imgElement.style.maxHeight = this.imageHeight + 'px';
+    imgElement.style.width = this.imageWidth + 'px';
+    imgElement.style.height = this.imageHeight + 'px';
+    imgElement.style.minWidth = this.imageWidth + 'px';
+    imgElement.style.minHeight = this.imageHeight + 'px';
+    this.imageWrapper.appendChild(imgElement);
+  }
+
+
+  var panes = this.getPanes();
+  if (panes)
+    panes.floatPane.appendChild(this.container);
+}
+
+markerDetailOverlayview.prototype.draw = function()
+{
+   var overlayProjection = this.getProjection();
+   var origin = overlayProjection.fromLatLngToDivPixel(this.location);
+   // Resize the image's DIV to fit the ind icated dimensions.
+   var div = this.container;
+   if(!div)
+    return;
+
+   div.style.left = origin.x - (this.imageWidth/2)-8 + 'px';
+   div.style.top = origin.y - (this.imageHeight/2)-8 + 'px';
+   div.style.width = this.imageWidth + 16+ 'px';
+   div.style.height = this.imageHeight +16+ 'px';
+}
+
+markerDetailOverlayview.prototype.onRemove = function()
+{
+  this.container.parentNode.removeChild(this.container);
+  this.container = null;
 }

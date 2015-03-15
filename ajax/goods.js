@@ -53,12 +53,10 @@ function load_exchange(event)
 
                 	// $('#leftSideSwitch').hide(0);
 	                $('#leftSideSwitch').html('\
+                    <span id="removeGood" class="glyphicon glyphicon-remove" aria-hidden="true" style="float:right"></span>\
+                    <button id="goodsStatus" type="button" class="btn btn-success" goodsStatus="'+response["status"] + '"style="float:right;width:20%">Exchanging</button> \
 	                <div class="col-md-5">\
 	                    <button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> BACK</button>\
-	                </div>\
-	                <div class="col-md-7">\
-	                    <button id="goodsStatus" type="button" class="btn btn-success" goodsStatus="'+response["status"] + '">Exchanging</button> \
-	                    <span id="removeGood" class="glyphicon glyphicon-remove" aria-hidden="true">\
 	                </div>\
 	                <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
 	                    <div class="fancybox" href="' + response["photoPath"] + '" style="padding:15px"> <img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."> </div>\

@@ -1,18 +1,29 @@
 var postInnerHTML = '\
-<h3>\
-    <span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> What do you have?</span>\
-</h3>\
+<div class="panel panel-primary" style="margin-bottom:10px">\
+    <div class="panel-heading" style="padding-top:5px; padding-bottom:5px">\
+        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> What do you have?\
+    </div>\
+</div>\
 <div class="row postGroup">\
-    <div class="col-md-12">\
-        <div class="form-group" style="width:100%; margin-bottom:0px;">\
-            <input id="gName" name="gName" class="form-control" placeholder="Name" required="" type="text" style="width:100%">\
+    <div class="col-md-4" style="text-align: right">\
+        Name\
+    </div>\
+    <div class="col-md-8" style="">\
+        <div class="form-group">\
+            <input id="gName" name="gName" class="form-control" required="" type="text">\
         </div>\
     </div>\
-</div><!-- Select Basic -->\
+</div>\
 <div class="row postGroup">\
-    <div class="col-md-12" style="margin-top: 5px">\
-        <div class="btn-group" style="width:100%">\
-            <button class="btn btn-default dropdown-toggle" type="button" id="categories" data-toggle="dropdown" aria-expanded="true" style="text-align:left"><span> Select category </span><span class="caret"></span></button>\
+    <div class="col-md-4" style="text-align: right">\
+        Categories\
+    </div>\
+    <div class="col-md-8" style="margin-bottom:15px;">\
+        <div class="btn-group" style="min-width:50px">\
+            <button class="btn btn-default dropdown-toggle" type="button" id="categories" data-toggle="dropdown" aria-expanded="true" value="Select..." style="text-align:left;min-width:50px">\
+                <span class="caret">\
+                </span>\
+            </button>\
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width:100%">\
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Books</a></li>\
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Textbooks</a></li>\
@@ -40,12 +51,20 @@ var postInnerHTML = '\
             </ul>\
         </div>\
     </div>\
-</div><!-- File Button -->\
-<h3>\
-    <span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> Upload Photo</span>\
-</h3>\
+</div>\
 <div class="row postGroup">\
-    <div class="col-md-12">\
+    <div class="col-md-4" style="text-align: right">\
+        Description\
+    </div>\
+    <div class="col-md-8" style="margin-bottom:15px">\
+        <div class="form-group" style="margin-bottom:0px"> <textarea class="form-control" id="description" rows="5" name="description" style="resize:none"></textarea> </div>\
+    </div>\
+</div>\
+<div class="row postGroup">\
+    <div class="col-md-4" style="text-align: right">\
+        Upload photo\
+    </div>\
+    <div class="col-md-8" style="margin-bottom:15px">\
         <form id="uploadForm" action="./php_script/upload.php" method="post" enctype="multipart/form-data">\
             <div id="targetLayer"> </div>\
             <div id="uploadFormLayer">\
@@ -57,34 +76,41 @@ var postInnerHTML = '\
     </div>\
 </div>\
 <div id="goods_photo" data-value="TestSRC" ></div>\
-<!-- Textarea -->\
 <div class="row postGroup">\
-    <div class="col-md-12" style="margin-top: 5px">\
-        <div class="form-group" style="margin-bottom:0px"> <textarea class="form-control" id="description" rows="5" name="description" placeholder="Say more about your good" style="resize:none"></textarea> </div>\
+    <div class="col-md-4" style="text-align: right">\
+        Locate\
     </div>\
-</div><!-- Button --><!-- Prepended text-->\
-<h3>\
-    <span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Locate your goods on map!</span>\
-</h3>\
-<h4>Mark on the map with your cursor!</h4>\
-<h3>\
-    <span class="label label-primary" style="margin-bottom: 10px"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> What do you want?</span>\
-</h3>\
+    <div class="col-md-8" style="margin-bottom:15px">\
+        Mark on the map with your cursor!\
+    </div>\
+</div>\
+<div class="panel panel-primary" style="margin-bottom:10px">\
+    <div class="panel-heading" style="padding-top:5px; padding-bottom:5px">\
+        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> What do you want?\
+    </div>\
+</div>\
 <div class="row postGroup">\
-    <div class="col-md-12">\
-        <div class="form-group" style="width:100% margin-bottom:0px;">\
-            <input id="want_name" name="want_name" class="form-control" placeholder="Name" type="text">\
+    <div class="col-md-4" style="text-align: right">\
+        Name\
+    </div>\
+    <div class="col-md-8">\
+        <div class="form-group" style="margin-bottom:15px;">\
+            <input id="want_name" name="want_name" class="form-control" type="text">\
         </div>\
     </div>\
-</div><!-- Button -->\
+</div>\
 <div class="row postGroup">\
     <div class="form-group">\
+        <div class="col-md-4">\
+        </div>\
         <div class="col-md-6">\
             <button id="submit" name="submit" class="submit" style="padding:0px; border:none; background-color: silver">\
-                <h1><span class="label label-danger">Post!</span></h1>\
+                <h2 style="margin:10px; margin-left:0px">\
+                    <span class="label label-danger">Post!</span>\
+                </h2>\
             </button>\
         </div>\
-        <label class="col-md-4 control-label" for="submit"></label>\
+        <label class="col-md-2 control-label" for="submit"></label>\
     </div>\
 </div>';
 
@@ -129,24 +155,28 @@ function load_post()
         //return;
     }
 
-    //destroy the scroll
-    //and reset the scroll by Noel
-    $('#leftSide').perfectScrollbar('destroy');
-    $("#leftSide").scrollTop(0);
-    $("#leftSide").perfectScrollbar('update');
-    $('#leftSide').perfectScrollbar(({
-        suppressScrollX: true
-    }));
+    $('#leftSideSwitch').fadeOut("slow",function()
+    {
+        //destroy the scroll
+        //and reset the scroll by Noel
+        $('#leftSide').perfectScrollbar('destroy');
+        $("#leftSide").scrollTop(0);
+        $("#leftSide").perfectScrollbar('update');
+        $('#leftSide').perfectScrollbar(({
+            suppressScrollX: true
+        }));
+
+        $("#leftSideSwitch").html(postInnerHTML);
+        $('#submit').hide(0);
+        $("#goods_photo").hide(0);
+        $('#leftSideSwitch').fadeIn("slow");
+    });
 
     console.log("post!");
     //reset gobackStack
     gobackStack = [];
     //set currentStage to post
     currentStage = "post";
-
-    $("#leftSideSwitch").hide(0).html(postInnerHTML).show(0);
-    $('#submit').hide(0);
-    $("#goods_photo").hide(0);
 
     $(document).on('change', '#imgUpload', function ()
     {

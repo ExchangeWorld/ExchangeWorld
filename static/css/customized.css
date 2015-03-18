@@ -110,7 +110,7 @@ body {
     padding: 0px;
     padding-top: 10px;
     padding-bottom: 10px;
-    border: 2px solid #2AABD2;
+    border: 2px solid #2E6DA7;
     background: #dddddd;
     margin: 0px;
     margin-bottom: 4px;
@@ -364,6 +364,12 @@ body {
     width:60%;
     height:50px;
     margin-top:20px;
+}
+
+.btn-info
+{
+    background-image: linear-gradient(to bottom,#337ab7 0,#2E6DA7 101%);
+    border-color: #3277B3;
 }
 
 #message

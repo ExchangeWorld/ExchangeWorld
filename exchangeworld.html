@@ -18,7 +18,7 @@
     <link href="static/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
     <link href="static/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css">
     <!--<link href="static/css/jquery.jscrollpane.css" rel="stylesheet" type="text/css" charset="utf-8" media="all">-->
-    <link href="static/css/introjs.css" rel="stylesheet">
+    <!--link href="static/css/introjs.css" rel="stylesheet"-->
 
     <!-- Custom styles for this template -->
     <link href="static/css/customized.css" rel="stylesheet" type="text/css" charset="utf-8">
@@ -57,20 +57,20 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse" style="background-color: #36474F; border-color: #36474F; border-size: 0px">
                 <ul class="nav navbar-nav" style="margin-left:25.5%">
-                    <li id="seek" data-step="1" data-intro="Seek what you want !" class="active seeking">
+                    <li id="seek" class="active seeking">
                         <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color: #FFFFFD"></span> Seek</a>
 
                     </li>
 
-                    <li id="post" data-step="2" data-intro="You want to change something ? Click here ! ">
+                    <li id="post" >
                         <a href="#post"><span class="glyphicon glyphicon-pushpin" aria-hidden="true" style="color: #FFFFFD"></span> Post</a>
                     </li>
 
-                    <li id="about" data-step="3" data-intro="Doesn't know who we are ? Click here ! Let me tell you !">
+                    <li id="about" >
                         <a href="./index.html#about"><span class="glyphicon glyphicon-glass" aria-hidden="true" style="color: #FFFFFD"></span> About</a>
                     </li>
 
-                    <li id="help">
+                    <li id="help" style="display:none">
                         <a href="#help"><span class="glyphicon glyphicon-cog" aria-hidden="true" style="color: #FFFFFD"></span> Help</a>
                     </li>
 
@@ -88,7 +88,7 @@
                             <li id="logout"><a href="#logout">Logout</a></li>
                         </ul>
                     </li>
-                    <li id="myMessage" data-step="4" data-intro="If you have any new message , we will remind you !" class="dropdown">
+                    <li id="myMessage" class="dropdown">
                         <a id="messageIcon" href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                         <ul id="myMessageDropdown" class="dropdown-menu" role="menu"></ul>
                     </li>
@@ -178,19 +178,18 @@
 
     <!--======================= Google Map Javascript   =======================-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTmx_RgDS6MWl-MdyidKhpCKXMs3pV63Y&signed_in=false&v=3.exp&libraries=places"></script>
-    <script type="text/javascript" src="static/js/intro.js"></script>
+    <!--script type="text/javascript" src="static/js/intro.js"></script-->
     <script src="static/js/map.js"></script>
     <script src="static/js/fb.js"></script>
 
     <!--All Core JS files included here-->
-    <script src="static/js/ajaxFileUpload.js"></script>
     <script src="ajax/seek.js"></script>
     <script src="ajax/goods.js"></script>
     <script src="ajax/profile.js"></script>
     <script src="ajax/post.js"></script>
     <script src="ajax/message.js"></script>
     <script src="ajax/customized.js"></script>
-    <script src="ajax/help.js"></script>
+    <!--script src="ajax/help.js"></script-->
     <!--All Core JS files included here-->
 
 </body>

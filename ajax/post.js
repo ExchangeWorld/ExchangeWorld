@@ -103,14 +103,14 @@ var postInnerHTML = '\
     <div class="form-group">\
         <div class="col-md-4">\
         </div>\
-        <div class="col-md-6">\
-            <button id="submit" name="submit" class="submit" style="padding:0px; border:none; background-color: silver">\
-                <h2 style="margin:10px; margin-left:0px">\
-                    <span class="label label-danger">Post!</span>\
-                </h2>\
+        <div class="col-md-8">\
+            <button id="submit" name="submit" class="submit btn btn-danger" style="width: 100%; font-family: noto; font-size: larger; padding-top: 1px; padding-bottom: 2px;">\
+                <!--<h4 style="margin-top: 0px; margin-bottom: 0px;">-->\
+                    Post!\
+                <!--</h4>-->\
             </button>\
         </div>\
-        <label class="col-md-2 control-label" for="submit"></label>\
+        <label class="control-label" for="submit"></label>\
     </div>\
 </div>';
 
@@ -155,7 +155,7 @@ function load_post()
         //return;
     }
 
-    $('#leftSideSwitch').fadeOut("slow",function()
+    $('#leftSideSwitch').fadeOut("fast", function()
     {
         //destroy the scroll
         //and reset the scroll by Noel
@@ -169,7 +169,7 @@ function load_post()
         $("#leftSideSwitch").html(postInnerHTML);
         $('#submit').hide(0);
         $("#goods_photo").hide(0);
-        $('#leftSideSwitch').fadeIn("slow");
+        $('#leftSideSwitch').fadeIn("fast");
     });
 
     console.log("post!");

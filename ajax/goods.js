@@ -40,7 +40,7 @@ function load_exchange(event)
                 map.setZoom(17);
 
                 //Loading next leftSide to display
-                $('#leftSideSwitch').fadeOut("slow",function()
+                $('#leftSideSwitch').fadeOut("fast",function()
                 {
             	    //destroy the scroll
 				    //and reset the scroll by Noel
@@ -231,7 +231,7 @@ function load_exchange(event)
 	                });
 				});
 
-				$('#leftSideSwitch').fadeIn("slow");
+				$('#leftSideSwitch').fadeIn("fast");
 
             },
             error: function (xhr, ajaxOption, thrownError)

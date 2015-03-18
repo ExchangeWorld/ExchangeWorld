@@ -124,7 +124,7 @@ body {
     margin-bottom:5px;
     -webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
-    box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75); 
+    box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
 }
 
 .searchResultDescription .list-group-item {
@@ -152,6 +152,7 @@ body {
 #mapSide {
     height: inherit;
     background-color: gray;
+    padding-top: 53px;
     /*cursor: inherit;*/
 }
 

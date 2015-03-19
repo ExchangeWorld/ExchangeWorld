@@ -438,21 +438,21 @@ function addMarkers(lat, lng, img, gid)
 
     google.maps.event.addListener(tmpMarker, 'mouseover', function ()
     {
-      tmpMarker.setAnimation(google.maps.Animation.BOUNCE);
+      //tmpMarker.setAnimation(google.maps.Animation.BOUNCE);
 
       var tmpImg = getImage(img);
       if(tmpImg.height === 0)
-        return;
+        img = null;
 
-      tmpMarker.setAnimation(null);
+      //tmpMarker.setAnimation(null);
       var overlay = new markerDetailOverlayview(tmpMarker, img);
     });
 
     var mouseoutListener = google.maps.event.addListener(tmpMarker, 'mouseout', function ()
     {
-      tmpMarker.setIcon(null);
+      //tmpMarker.setIcon(null);
       tmpMarker.setZIndex(10);
-      tmpMarker.setAnimation(null);
+      //tmpMarker.setAnimation(null);
     });
 
     google.maps.event.addListener(tmpMarker, 'click', function ()
@@ -478,7 +478,7 @@ function addMarkers(lat, lng, img, gid)
             gobackSearchResultDataValueNeedToBeReplaced = false;
         }
 
-        if (val != 0)
+        if (val !== 0)
     {
         //for goback
         gobackSearchResultDataValue = val;
@@ -760,12 +760,11 @@ function getPostMarkerPosition()
 function markerDetailOverlayview(marker, image)
 {
   this.marker = marker;
-  this.location = marker.getPosition();;
+  this.location = marker.getPosition();
+  this.img = image;
+  this.imageHeight = 200;
+  this.imageWidth = 200;
 
-  if(getImage(image).height!=0)
-    this.img = image;
-  else
-    this.img = null
 
   // Explicitly call setMap() on this overlay
   this.setMap(map);
@@ -774,7 +773,8 @@ markerDetailOverlayview.prototype = new google.maps.OverlayView();
 
 markerDetailOverlayview.prototype.onAdd = function()
 {
-  console.log("OverlayView onAdd");
+  if(this.img === null)
+    return;
   if(!this.container)
   {
     var div = document.createElement('div');
@@ -858,7 +858,6 @@ markerDetailOverlayview.prototype.onAdd = function()
     a.appendChild(imgElement);
   }
 
-
   var panes = this.getPanes();
   if (panes)
     panes.floatPane.appendChild(this.container);
@@ -875,7 +874,7 @@ markerDetailOverlayview.prototype.draw = function()
 
    div.style.left = origin.x - (this.imageWidth/2)-8 + 'px';
    div.style.top = origin.y - (this.imageHeight/2)-8 + 'px';
-   div.style.width = this.imageWidth + 16+ 'px';
+   div.style.width = this.imageWidth +16+ 'px';
    div.style.height = this.imageHeight +16+ 'px';
 }
 

@@ -7,7 +7,7 @@ function ajaxFileUpload()
     .ajaxComplete(function(){
         $(this).hide();
     });
-     
+
   /*
     prepareing ajax file upload
     url: the url of script file handling the uploaded files
@@ -37,5 +37,5 @@ function ajaxFileUpload()
             alert(e);
         }
     })
-    return false; 
+    return false;
 }

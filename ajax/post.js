@@ -103,14 +103,14 @@ var postInnerHTML = '\
     <div class="form-group">\
         <div class="col-md-4">\
         </div>\
-        <div class="col-md-8">\
-            <button id="submit" name="submit" class="submit btn btn-danger" style="width: 100%; font-family: noto; font-size: larger; padding-top: 1px; padding-bottom: 2px;">\
-                <!--<h4 style="margin-top: 0px; margin-bottom: 0px;">-->\
-                    Post!\
-                <!--</h4>-->\
+        <div class="col-md-6">\
+            <button id="submit2" name="submit" class="submit" style="padding:0px; border:none; background-color: silver">\
+                <h2 style="margin:10px; margin-left:0px">\
+                    <span class="label label-danger">Post!</span>\
+                </h2>\
             </button>\
         </div>\
-        <label class="control-label" for="submit"></label>\
+        <label class="col-md-2 control-label" for="submit"></label>\
     </div>\
 </div>';
 
@@ -155,7 +155,7 @@ function load_post()
         //return;
     }
 
-    $('#leftSideSwitch').fadeOut("fast", function()
+    $('#leftSideSwitch').fadeOut("slow",function()
     {
         //destroy the scroll
         //and reset the scroll by Noel
@@ -167,9 +167,9 @@ function load_post()
         }));
 
         $("#leftSideSwitch").html(postInnerHTML);
-        $('#submit').hide(0);
+    //    $('#submit').hide(0);
         $("#goods_photo").hide(0);
-        $('#leftSideSwitch').fadeIn("fast");
+        $('#leftSideSwitch').fadeIn("slow");
     });
 
     console.log("post!");
@@ -180,6 +180,11 @@ function load_post()
 
     $(document).on('change', '#imgUpload', function ()
     {
+        readURL(this);
+        $('#photo_preview').show(0);
+        changeMarkerImage($("#goods_photo").attr('data-value'));
+        $("#goods_photo").show(0);
+
         $("#uploadForm").submit();
         console.log("photo uploaded!");
         // check FormData and ajax ..
@@ -206,13 +211,9 @@ function load_post()
         });
     });
 
-    $("#imgUpload").change(function ()
-    {
-        readURL(this);
-        $('#photo_preview').show(0);
-        changeMarkerImage($("#goods_photo").attr('data-value'));
-        $("#goods_photo").show(0);
-    });
+//    $("#imgUpload").change(function ()
+//    {
+//    });
 
     document.getElementById("seek").className = "";
     document.getElementById("post").className = "active";

@@ -446,6 +446,7 @@ function addMarkers(lat, lng, img, gid)
 
       //tmpMarker.setAnimation(null);
       var overlay = new markerDetailOverlayview(tmpMarker, img);
+      tmpMarker.setMap(null);
     });
 
     var mouseoutListener = google.maps.event.addListener(tmpMarker, 'mouseout', function ()
@@ -802,6 +803,7 @@ markerDetailOverlayview.prototype.onAdd = function()
     });
     google.maps.event.addDomListener(this.imageWrapper, 'mouseout', function(e) {
       google.maps.event.trigger(it, 'mouseout');
+      it.marker.setMap(map);
       it.onRemove();
     });
 

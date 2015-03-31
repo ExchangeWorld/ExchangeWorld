@@ -258,7 +258,7 @@ $(document).ready(function ()
                 },
                 success: function (response)
                 {
-                    alert(response);
+                    //alert(response);
                     $('#seek').click();
                 },
                 error: function (xhr, ajaxOption, thrownError)

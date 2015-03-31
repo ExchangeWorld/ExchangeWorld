@@ -70,7 +70,7 @@ var postInnerHTML = '\
             <div id="uploadFormLayer">\
                 <input id="imgUpload" name="userImage" class="inputFile" type="file" accept="image/*">\
                 <img id="photo_preview" width="200" src="#" alt=" " style="display: none" />\
-                <input id="submit" value="Submit" class="btnSubmit" type="submit">\
+                <input id="submit" value="Submit" class="btnSubmit" type="submit" style="display: none">\
             </div>\
         </form>\
     </div>\
@@ -153,22 +153,14 @@ function load_post()
         //return;
     }
 
-    $('#leftSideSwitch').fadeOut("fast",function()
-    {
-        //destroy the scroll
-        //and reset the scroll by Noel
-        $('#leftSide').perfectScrollbar('destroy');
-        $("#leftSide").scrollTop(0);
-        $("#leftSide").perfectScrollbar('update');
-        $('#leftSide').perfectScrollbar(({
-            suppressScrollX: true
-        }));
-
-        $("#leftSideSwitch").html(postInnerHTML);
-    //    $('#submit').hide(0);
-        $("#goods_photo").hide(0);
-        $('#leftSideSwitch').fadeIn("fast");
-    });
+    //destroy the scroll
+    //and reset the scroll by Noel
+    $('#leftSide').perfectScrollbar('destroy');
+    $("#leftSide").scrollTop(0);
+    $("#leftSide").perfectScrollbar('update');
+    $('#leftSide').perfectScrollbar(({
+        suppressScrollX: true
+    }));
 
     console.log("post!");
     //reset gobackStack
@@ -176,13 +168,12 @@ function load_post()
     //set currentStage to post
     currentStage = "post";
 
+    $("#leftSideSwitch").hide().html(postInnerHTML).show('fast');
+    $('#submit').hide();
+    $("#goods_photo").hide();
+
     $(document).on('change', '#imgUpload', function ()
     {
-        readURL(this);
-        $('#photo_preview').show(0);
-        changeMarkerImage($("#goods_photo").attr('data-value'));
-        $("#goods_photo").show(0);
-
         $("#uploadForm").submit();
         console.log("photo uploaded!");
         // check FormData and ajax ..
@@ -209,9 +200,13 @@ function load_post()
         });
     });
 
-//    $("#imgUpload").change(function ()
-//    {
-//    });
+    $("#imgUpload").change(function ()
+    {
+        readURL(this);
+        $('#photo_preview').show();
+        changeMarkerImage($("#goods_photo").attr('data-value'));
+        $("#goods_photo").show();
+    });
 
     document.getElementById("seek").className = "";
     document.getElementById("post").className = "active";

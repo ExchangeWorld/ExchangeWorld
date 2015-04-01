@@ -8,6 +8,7 @@ var seekInnerHTML = '\
         <div class="btn-group">\
             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Distance <span class="caret"></span> </button>\
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">\
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">Unlimited</a></li>\
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">500m</a></li>\
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">1500m</a></li>\
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdownLocation">5000m</a></li>\
@@ -17,6 +18,8 @@ var seekInnerHTML = '\
         <div class="btn-group">\
             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </button>\
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">\
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">All</a></li>\
+                <li role="presentation" class="divider"></li>\
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Books</a></li>\
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Textbooks</a></li>\
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Magazine</a></li>\
@@ -42,138 +45,70 @@ var seekInnerHTML = '\
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Others</a></li>\
             </ul>\
         </div>\
+        <div id="resultStats"></div>\
     </div>\
 </div><hr style="border-color: #6E6E6E; border-width: 2px">\
 <div id="searchResults" class="col-md-12"> </div>';
 
-function seek_query(search, query_type)
+function seek_query(keywords, area, cate)
 {
     var pX, pY;
-    if (query_type == "location")
+    navigator.geolocation.getCurrentPosition(function (position)
     {
-        navigator.geolocation.getCurrentPosition(function (position)
-        {
-            var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            map.setCenter(latlng);
-            pX = latlng.lng();
-            pY = latlng.lat();
-            console.log("myLocation: " + pX + ',' + pY);
-            $.ajax({
-                type: "GET",
-                url: "./php_script/seek.php",
-                dataType: "json",
-                data: {
-                    type: query_type,
-                    px: pX,
-                    py: pY,
-                    selected: search
-                },
-                success: function (response)
-                {
-                    if (response == null)
-                    {
-                        $("#searchResults").append("No Results!");
-                    } else
-                    {
-                        for (var i = 0; i < response.length; i++)
-                        {
-                            //Left Side
-                            $('#searchResults').append('\
-                                <div class="row searchResult" data-value="' + response[i]["gid"] + '" data-order="'+i+'"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div>\
-                                <div class="col-md-7 searchResultDescription">\
-                                    <ul class="list-group">\
-                                        <li class="list-group-item"> ' + response[i]["gname"] + '<span class="badge">' + response[i]["categories"] + '</span></li>\
-                                        <li class="list-group-item">Wanted: ' + response[i]["want"] + '</li>\
-                                        <li class="list-group-item"><img src="' + response[i]["owner_photo"] + '" height="20" width="20"> ' + response[i]["username"] + '></li>\
-                                    </ul>\
-                                </div>');
-
-                            //Map Side
-                            addMarkers(response[i]["posY"], response[i]["posX"], response[i]["photoPath"], response[i]["gid"]);
-                        }
-                        //fit the map bounds with search results
-                        markersBounds();
-
-                        $('.searchResult').hover(
-                            function ()
-                            {
-                                $(this).addClass('searchResultSelected');
-
-                                var tmpMarker = markers[$(this).data("order")];
-                                console.log($(this).data("order"));
-                                mapOverlay = new markerDetailOverlayview(tmpMarker,tmpMarker.img);
-                            },
-                            function ()
-                            {
-                                $(this).removeClass('searchResultSelected');
-                                if(mapOverlay!==null)
-                                  mapOverlay.onRemove();
-                            }
-                        );
-
-                        document.getElementById("post").className = "";
-                        document.getElementById("about").className = "";
-                        document.getElementById("help").className = "";
-                        document.getElementById("seek").className = "active";
-                    }
-                },
-                error: function (xhr, ajaxOption, thrownError)
-                {
-                    alert('ERROR SECTION : Seek query - location');
-                    alert(thrownError);
-                    alert(JSON.stringify(xhr));
-                }
-
-            });
-        }, function ()
-        {
-            handleNoGeolocation(browserSupportFlag);
-        });
-    }
-    else
-    {
+        var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        map.setCenter(latlng);
+        pX = latlng.lng();
+        pY = latlng.lat();
+        console.log("myLocation: " + pX + ',' + pY);
         $.ajax({
             type: "GET",
             url: "./php_script/seek.php",
             dataType: "json",
             data: {
-                type: query_type,
                 px: pX,
                 py: pY,
-                selected: search
+                Keyword: keywords,
+                range:area,
+                categories:cate
             },
             success: function (response)
             {
+                $("#resultStats").empty();
+                var stats1='', stats2='', stats3='';
+                if(keywords != "")                       stats1 = "\""+keywords+"\"";
+                if(cate != " Categories " && cate != "") stats2 = "\""+cate+"\"";
+                if(area != " Distance " && area != "")   stats3 = "\""+area+"\"";
+                $("#resultStats").append(stats1+' '+stats2+' '+stats3);
+
                 if (response == null)
                 {
                     $("#searchResults").append("No Results!");
-                } else
+                }
+                else
                 {
                     for (var i = 0; i < response.length; i++)
                     {
                         //Left Side
                         $('#searchResults').append('\
-                        <div class="row searchResult" data-value="' + response[i]["gid"] + '" data-order="'+i+'"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div>\
+                            <div class="row searchResult" data-value="' + response[i]["gid"] + '" data-order="'+i+'"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div>\
                             <div class="col-md-7 searchResultDescription">\
                                 <ul class="list-group">\
-                                    <li class="list-group-item"> <span class="glyphicon glyphicon-arrow-right"> </span> ' + response[i]["gname"] + '<span class="badge">' + response[i]["categories"] + '</span></li>\
-                                    <li class="list-group-item"> <span class="glyphicon glyphicon-arrow-left"> </span> ' + response[i]["want"] + '</li>\
-                                    <li class="list-group-item"><img src="' + response[i]["owner_photo"] + '" height="20" width="20"> ' + response[i]["username"] + '</li>\
+                                    <li class="list-group-item"> ' + response[i]["gname"] + '<span class="badge">' + response[i]["categories"] + '</span></li>\
+                                    <li class="list-group-item">Wanted: ' + response[i]["want"] + '</li>\
+                                    <li class="list-group-item"><img src="' + response[i]["owner_photo"] + '" height="20" width="20"> ' + response[i]["username"] + '></li>\
                                 </ul>\
                             </div>');
-
                         //Map Side
                         addMarkers(response[i]["posY"], response[i]["posX"], response[i]["photoPath"], response[i]["gid"]);
                     }
                     //fit the map bounds with search results
                     markersBounds();
-
-
                     $('.searchResult').hover(
                         function ()
                         {
                             $(this).addClass('searchResultSelected');
                             var tmpMarker = markers[$(this).data("order")];
+                            console.log($(this).data("order"));
                             mapOverlay = new markerDetailOverlayview(tmpMarker,tmpMarker.img);
                         },
                         function ()
@@ -183,7 +118,6 @@ function seek_query(search, query_type)
                               mapOverlay.onRemove();
                         }
                     );
-
                     document.getElementById("post").className = "";
                     document.getElementById("about").className = "";
                     document.getElementById("help").className = "";
@@ -192,12 +126,15 @@ function seek_query(search, query_type)
             },
             error: function (xhr, ajaxOption, thrownError)
             {
-                alert('ERROR SECTION : Seek query - non_location');
+                alert('ERROR SECTION : Seek query - location');
                 alert(thrownError);
                 alert(JSON.stringify(xhr));
             }
         });
-    }
+    }, function ()
+    {
+        handleNoGeolocation(browserSupportFlag);
+    });
 }
 
 
@@ -233,24 +170,18 @@ $(document).ready(function ()
             document.getElementById("searchName").addEventListener("keydown", function (e)
             {
                 if (!e) { var e = window.event; }
-                //e.preventDefault(); // sometimes useful
 
                 // Enter is pressed
                 if (e.keyCode == 13 && $("#searchName").val() != "")
                 {
-                //    e.preventDefault();
                     $("#searchString").click();
                 }
             }, false);
 
 
-            seek_query("");
+            seek_query("","","");
         });
 
-        // //Create the scroll only on Seek
-        // $('#leftSide').perfectScrollbar(({
-        //     suppressScrollX: true
-        // }));
 
         //Google Map Setting
         if (marker != null)
@@ -274,11 +205,13 @@ $(document).ready(function ()
     // Handle Search by keywords
     $("#leftSideSwitch").on("click", "#searchString", function (event)
     {
-        var search = $("#searchName").val();
+        var keywords = $("#searchName").val();
+        var range = $("#dropdownMenu1").text();
+        var cat = $("#dropdownMenu2").text();
+        cat = cat.substring(0, cat.length - 1);
+
         $('#searchResults').empty();
-//        $('#leftSideSwitch').html(seekInnerHTML);
-        seek_query(search, "keywords");
-//        $('#searchResults').show(0);
+        seek_query(keywords, range, cat);
 
         //Create the scroll only on Seek
         $('#leftSide').perfectScrollbar(({
@@ -301,18 +234,18 @@ $(document).ready(function ()
     // Handle Search by Categories
     $("#leftSideSwitch").on("click", ".dropdown", function (event)
     {
+        var keywords = $("#searchName").val();
+        var range = $("#dropdownMenu1").text();
+        var cat = $(this).text();
+
         $("#categories").text($(this).text() + ' ');
         $("#categories").append('<span class="caret"></span>');
         $(".btn:first-child").val($(this).text());
 
         if ($('#seek').attr("class") == "active")
         {
-            var search = $(this).text();
-            //$('#leftSideSwitch').hide(0);
-            //$('#leftSideSwitch').html(seekInnerHTML);
-            //$('#leftSideSwitch').show(0);
             $('#searchResults').empty();
-            seek_query(search, "categories");
+            seek_query(keywords, range, cat);
 
             //Create the scroll only on Seek
             $('#leftSide').perfectScrollbar(({
@@ -339,12 +272,14 @@ $(document).ready(function ()
     // Handle Search by my Location
     $("#leftSideSwitch").on("click", ".dropdownLocation", function (event)
     {
-        var search = $(this).text();
-//        $('#leftSideSwitch').hide(0);
-//        $('#leftSideSwitch').html(seekInnerHTML);
-//        $('#leftSideSwitch').show(0);
+        var keywords = $("#searchName").val();
+        var range = $(this).text();
+        var cat = $("#dropdownMenu2").text();
+        cat = cat.substring(0, cat.length - 1);
+
+        //alert(range+"mmmmmmmmm"+'---CCCC'+cat+'sssss---'+keywords+'---');
         $('#searchResults').empty();
-        seek_query(search, "location");
+        seek_query(keywords, range, cat);
 
         //Create the scroll only on Seek
         $('#leftSide').perfectScrollbar(({

@@ -1,11 +1,45 @@
 <?php
 	include("../include/connect.php");
-	$search = $_GET["selected"];
-	$type = $_GET["type"];
+	$keywords = $_GET["Keyword"];
+	$area = $_GET["range"];
+	$cat = $_GET["categories"];
+
+	$area = str_replace(' ', '', $area);
+	if($cat =="All" || $cat == " Categories " || $cat == "") $cat = "";
+//	else $cat = str_replace(' ', '%', $cat);
+
+	$px;
+	$py;
+	$delta;
+
+	$px = $_GET["px"];
+	$py = $_GET["py"];
+	if($area == "500m")  $delta = 0.005;
+	else if($area == "1500m") $delta = 0.015;
+	else if($area == "5000m") $delta = 0.05;
+	else if($area == "10000m")$delta = 0.1;
+	else $delta = 10;
+
+
+	$keywords = '%'.$keywords.'%';
+	$cat = '%'.$cat.'%';
+	$sql = "SELECT `goods`. * , `user`.`username`, `user`.`photoPath` as `owner_photo`
+			FROM `goods`, `user`
+			WHERE `goods`.`ownerID` = `user`.`fb_id`
+			AND `goods`.`gname` LIKE '$keywords'
+			AND `goods`.`categories` LIKE '$cat'
+			AND `goods`.`posX` >$px - $delta
+			AND `goods`.`posX` <$px + $delta
+			AND `goods`.`posY` >$py - $delta
+			AND `goods`.`posY` <$py + $delta
+			AND `goods`.`status` = 0
+			ORDER BY `gid` DESC";
+
+//	$type = $_GET["type"];
 	//if($search == "") $search='%';
 
 
-	if($type=="keywords"){
+/*	if($type=="keywords"){
 		$search = '%'.$search.'%';
 		$sql = "SELECT `goods`. * , `user`.`username`, `user`.`photoPath` as `owner_photo`
 				FROM `goods`, `user`
@@ -51,7 +85,7 @@
 				AND `goods`.`status` = 0
 				ORDER BY `gid` DESC";
 	}
-
+*/
     $result=mysql_query($sql) or die(mysql_error());
 	while ($row = mysql_fetch_array($result)) {
 		$rows[] = $row;

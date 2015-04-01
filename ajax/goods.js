@@ -120,7 +120,7 @@ function load_exchange(event)
                     // Exchanged
                     if(response["status"] == 1)
                     {
-                        $("#goodsStatus").attr("class", "btn btn-default");
+                        $("#goodsStatus").attr("class", "btn btn-danger");
                         $("#goodsStatus").text("Exchanged");
                     }
 
@@ -290,7 +290,7 @@ $(document).ready(function ()
             {
                 if(response == "1")
                 {
-                    $("#goodsStatus").attr("class", "btn btn-default");
+                    $("#goodsStatus").attr("class", "btn btn-danger");
                     $("#goodsStatus").text("Exchanged");
                 }
                 else

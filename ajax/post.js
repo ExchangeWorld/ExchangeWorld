@@ -105,7 +105,7 @@ var postInnerHTML = '\
         </div>\
         <div class="col-md-8">\
             <button id="submit" name="submit" class="submit btn btn-danger" style="width: 100%; font-family: noto; font-size: larger; padding-top: 1px; padding-bottom: 2px;">\
-                Post!\
+                Post\
             </button>\
         </div>\
         <label class="control-label" for="submit"></label>\

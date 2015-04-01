@@ -17,6 +17,7 @@
 
     <link href="static/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
     <link href="static/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css">
+    <link href="static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!--<link href="static/css/jquery.jscrollpane.css" rel="stylesheet" type="text/css" charset="utf-8" media="all">-->
     <!--link href="static/css/introjs.css" rel="stylesheet"-->
 
@@ -41,9 +42,9 @@
 <body role="document">
     <div id="fb-root"></div>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top unselectable" role="navigation" style="background-color: #36474F; border-color: #36474F; border-size: 0px">
-        <div class="container-fluid" style="background-color: #36474F; border-color: #36474F; border-size: 0px">
-            <div class="navbar-header" style="width:16.1%;">
+    <nav class="navbar navbar-custom navbar-fixed-top unselectable" role="navigation" style="background-color: #5ddb6e; border-color: #5ddb6e; border-size: 0px">
+        <div class="container-fluid" style="background-color: #5ddb6e; border-color: #5ddb6e; border-size: 0px">
+            <div class="navbar-brand">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -52,39 +53,39 @@
                 </button>
                 <a class="navbar-brand" href="#" style="font-size: 130%;">
                     <img style="max-width:200px; margin-top:-8px;" src="static/img/icon/logo.png" alt="">
-
                 </a>
             </div>
-            <div id="navbar" class="navbar-collapse collapse" style="background-color: #36474F; border-color: #36474F; border-size: 0px">
-                <ul class="nav navbar-nav" style="margin-left:25.5%">
+            <div id="navbar" class="navbar-collapse collapse" style="background-color: #5ddb6e; border-color: #5ddb6e; border-size: 0px; margin-left:33.05%">
+                <ul class="nav navbar-nav">
                     <li id="seek" class="active seeking">
-                        <a href="#seek"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color: #FFFFFD"></span> Seek</a>
-
+                        <a href="#seek" style="color:#FFF">
+                          <i class="fa fa-search fa-lg"></i> Seek</a>
                     </li>
 
                     <li id="post" >
-                        <a href="#post"><span class="glyphicon glyphicon-pushpin" aria-hidden="true" style="color: #FFFFFD"></span> Post</a>
+                        <a href="#post" style="color:#FFF">
+                          <i class="fa fa-map-marker fa-lg"></i> Post</a>
                     </li>
 
                     <li id="about" >
-                        <a href="./index.html#about"><span class="glyphicon glyphicon-glass" aria-hidden="true" style="color: #FFFFFD"></span> About</a>
+                        <a href="./index.html#about" style="color:#FFF">
+                          <i class="fa fa-info-circle fa-lg"></i> About</a>
                     </li>
 
                     <li id="help" style="display:none">
-                        <a href="#help"><span class="glyphicon glyphicon-cog" aria-hidden="true" style="color: #FFFFFD"></span> Help</a>
+                        <a href="#help"> Help</a>
                     </li>
 
 
                     <li>
-                        <div id="login" class="fb-login-button" data-scope="user_likes,user_photos" onlogin='fbLoaded();' data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
+                        <div id="login" class="fb-login-button" data-scope="user_likes,user_photos" onlogin='fbLoaded();' data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false" ></div>
                     </li>
                     <li class="dropdown">
-                        <a id="myname" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <a id="myname" style="color:#FFF; font-weight: bold; height:50px;" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <!-- <img id="myhead" src="./static/img/alt.gif" height="20" width="20"> -->
                         </a>
                         <ul id="myMenu" class="dropdown-menu" role="menu">
                             <li id="profile" class="owner" data-value="..............."><a href="#">Profile</a></li>
-                            <li role="presentation" class="divider"></li>
                             <li id="logout"><a href="#logout">Logout</a></li>
                         </ul>
                     </li>
@@ -100,13 +101,13 @@
 
     <div id="mainContainer" class="container-fluid">
         <div id="mainRow" class="row">
-            <div id="leftSide" class="col-md-5">
+            <div id="leftSide" class="col-md-4">
                 <div id="leftSideSwitch" style="padding-top:60px">
                     <!-- Add anything with JS or Backend -->
                 </div>
             </div>
 
-            <div id="mapSide" class="col-md-7">
+            <div id="mapSide" class="col-md-8">
                 <!-- /input-group -->
                 <div id="autocomplete-group" class="input-group">
                     <input id="autocomplete" type="search" class="autocomplete form-control" placeholder="Search for..." value="">
@@ -129,7 +130,7 @@
                     </button>
                 </div>
 
-                <div id="mapCanvas" style="height: inherit; margin-left: -15px; margin-right: -15px;"></div>
+                <div id="mapCanvas" style="height: inherit; margin-left: -15px; margin-right: -15px; margin-top:-2px;"></div>
             </div>
         </div>
     </div>

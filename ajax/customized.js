@@ -19,6 +19,9 @@ $(document).ready(function ()
         console.log("goback!");
         console.log(gobackStack);
 
+        if(mapOverlay!==null)
+          mapOverlay.onRemove();
+
         //select where to goback
         switch (gobackStack[gobackStack.length - 1])
         {

@@ -79,7 +79,7 @@ function seek_query(search, query_type)
                         {
                             //Left Side
                             $('#searchResults').append('\
-                                <div class="row searchResult" data-value="' + response[i]["gid"] + '"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div>\
+                                <div class="row searchResult" data-value="' + response[i]["gid"] + '" data-order="'+i+'"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div>\
                                 <div class="col-md-7 searchResultDescription">\
                                     <ul class="list-group">\
                                         <li class="list-group-item"> ' + response[i]["gname"] + '<span class="badge">' + response[i]["categories"] + '</span></li>\
@@ -98,10 +98,16 @@ function seek_query(search, query_type)
                             function ()
                             {
                                 $(this).addClass('searchResultSelected');
+
+                                var tmpMarker = markers[$(this).data("order")];
+                                console.log($(this).data("order"));
+                                mapOverlay = new markerDetailOverlayview(tmpMarker,tmpMarker.img);
                             },
                             function ()
                             {
                                 $(this).removeClass('searchResultSelected');
+                                if(mapOverlay!==null)
+                                  mapOverlay.onRemove();
                             }
                         );
 
@@ -147,7 +153,7 @@ function seek_query(search, query_type)
                     {
                         //Left Side
                         $('#searchResults').append('\
-                            <div class="row searchResult" data-value="' + response[i]["gid"] + '"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div>\
+                        <div class="row searchResult" data-value="' + response[i]["gid"] + '" data-order="'+i+'"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div>\
                             <div class="col-md-7 searchResultDescription">\
                                 <ul class="list-group">\
                                     <li class="list-group-item"> <span class="glyphicon glyphicon-arrow-right"> </span> ' + response[i]["gname"] + '<span class="badge">' + response[i]["categories"] + '</span></li>\
@@ -162,19 +168,19 @@ function seek_query(search, query_type)
                     //fit the map bounds with search results
                     markersBounds();
 
+
                     $('.searchResult').hover(
                         function ()
                         {
                             $(this).addClass('searchResultSelected');
-
-                            var gid = $(this).attr("data-value");
-                            //$("div[data-gid='" + gid + "']").addClass('selected-item');
+                            var tmpMarker = markers[$(this).data("order")];
+                            mapOverlay = new markerDetailOverlayview(tmpMarker,tmpMarker.img);
                         },
                         function ()
                         {
                             $(this).removeClass('searchResultSelected');
-                            var gid = $(this).attr("data-value");
-                            //$("div[data-gid='" + gid + "']").removeClass('selected-item');
+                            if(mapOverlay!==null)
+                              mapOverlay.onRemove();
                         }
                     );
 
@@ -206,6 +212,9 @@ $(document).ready(function ()
         //set currentStage to post
         currentStage = "seek";
         gobackOwnerDataValue = 0;
+
+        if(mapOverlay!==null)
+          mapOverlay.onRemove();
 
         //Loading next leftSide to display
         $('#leftSideSwitch').fadeOut("fast",function()

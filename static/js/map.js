@@ -2,6 +2,7 @@ var markers = [];
 var marker;
 var infowindow;
 var map;
+var mapOverlay=null;
 
 $(document).ready(function ()
 {
@@ -434,19 +435,21 @@ function addMarkers(lat, lng, img, gid)
       position:  new google.maps.LatLng(lat, lng),
       zIndex: 10
     });
+    tmpMarker.img=img;
     markers.push(tmpMarker);
 
     google.maps.event.addListener(tmpMarker, 'mouseover', function ()
     {
       //tmpMarker.setAnimation(google.maps.Animation.BOUNCE);
+      console.log(tmpMarker.img);
 
       var tmpImg = getImage(img);
       if(tmpImg.height === 0)
         img = null;
-
       //tmpMarker.setAnimation(null);
-      var overlay = new markerDetailOverlayview(tmpMarker, img);
-      tmpMarker.setMap(null);
+      mapOverlay = new markerDetailOverlayview(tmpMarker, img);
+      if(mapOverlay.img !== null)
+        tmpMarker.setMap(null);
     });
 
     var mouseoutListener = google.maps.event.addListener(tmpMarker, 'mouseout', function ()
@@ -884,4 +887,5 @@ markerDetailOverlayview.prototype.onRemove = function()
 {
   this.container.parentNode.removeChild(this.container);
   this.container = null;
+  mapOverlay= null;
 }

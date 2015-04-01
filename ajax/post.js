@@ -162,6 +162,8 @@ function load_post()
         suppressScrollX: true
     }));
 
+    if(mapOverlay!==null)
+      mapOverlay.onRemove();
     console.log("post!");
     //reset gobackStack
     gobackStack = [];

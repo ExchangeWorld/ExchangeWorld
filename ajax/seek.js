@@ -228,6 +228,22 @@ $(document).ready(function ()
                 suppressScrollX: true
             }));
             $('#leftSideSwitch').html(seekInnerHTML);
+
+            //handle search bar ENTER pressed.
+            document.getElementById("searchName").addEventListener("keydown", function (e)
+            {
+                if (!e) { var e = window.event; }
+                //e.preventDefault(); // sometimes useful
+
+                // Enter is pressed
+                if (e.keyCode == 13 && $("#searchName").val() != "")
+                {
+                //    e.preventDefault();
+                    $("#searchString").click();
+                }
+            }, false);
+
+
             seek_query("");
         });
 
@@ -249,19 +265,20 @@ $(document).ready(function ()
         }
 
         $('#leftSideSwitch').fadeIn("fast");
+
     });
 
     // Handle User clicking the specific goods.
     $("#leftSideSwitch").on("click", ".searchResult", load_exchange);
 
     // Handle Search by keywords
-    $("#leftSideSwitch").on("click", ".seeking", function (event)
+    $("#leftSideSwitch").on("click", "#searchString", function (event)
     {
         var search = $("#searchName").val();
-        $('#leftSideSwitch').hide(0);
-        $('#leftSideSwitch').html(seekInnerHTML);
-        $('#leftSideSwitch').show(0);
+        $('#searchResults').empty();
+//        $('#leftSideSwitch').html(seekInnerHTML);
         seek_query(search, "keywords");
+//        $('#searchResults').show(0);
 
         //Create the scroll only on Seek
         $('#leftSide').perfectScrollbar(({
@@ -291,9 +308,10 @@ $(document).ready(function ()
         if ($('#seek').attr("class") == "active")
         {
             var search = $(this).text();
-            $('#leftSideSwitch').hide(0);
-            $('#leftSideSwitch').html(seekInnerHTML);
-            $('#leftSideSwitch').show(0);
+            //$('#leftSideSwitch').hide(0);
+            //$('#leftSideSwitch').html(seekInnerHTML);
+            //$('#leftSideSwitch').show(0);
+            $('#searchResults').empty();
             seek_query(search, "categories");
 
             //Create the scroll only on Seek
@@ -322,9 +340,10 @@ $(document).ready(function ()
     $("#leftSideSwitch").on("click", ".dropdownLocation", function (event)
     {
         var search = $(this).text();
-        $('#leftSideSwitch').hide(0);
-        $('#leftSideSwitch').html(seekInnerHTML);
-        $('#leftSideSwitch').show(0);
+//        $('#leftSideSwitch').hide(0);
+//        $('#leftSideSwitch').html(seekInnerHTML);
+//        $('#leftSideSwitch').show(0);
+        $('#searchResults').empty();
         seek_query(search, "location");
 
         //Create the scroll only on Seek

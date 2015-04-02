@@ -103,8 +103,8 @@ function seek_query(keywords, area, cate)
                             <div class="row searchResult" data-value="' + response[i]["gid"] + '" data-order="'+i+'"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div>\
                             <div class="col-md-7 searchResultDescription">\
                                 <ul class="list-group">\
-                                    <li class="list-group-item"> ' + gname + '<span class="badge">' + response[i]["categories"] + '</span></li>\
-                                    <li class="list-group-item">Wanted: ' + response[i]["want"] + '</li>\
+                                    <li class="list-group-item">​<span class="glyphicon glyphicon-arrow-left"> </span> ' + gname + '<span class="badge">' + response[i]["categories"] + '</span></li>\
+                                    <li class="list-group-item">​<span class="glyphicon glyphicon-arrow-right"> </span> ' + response[i]["want"] + '</li>\
                                     <li class="list-group-item"><img src="' + response[i]["owner_photo"] + '" height="20" width="20"> ' + response[i]["username"] + '</li>\
                                 </ul>\
                             </div>');

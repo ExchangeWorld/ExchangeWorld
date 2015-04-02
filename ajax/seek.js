@@ -45,7 +45,7 @@ var seekInnerHTML = '\
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="dropdown">Others</a></li>\
             </ul>\
         </div>\
-        <div id="resultStats"></div>\
+        <div id="resultStats" style="font-size: small"></div>\
     </div>\
 </div><hr style="border-color: #6E6E6E; border-width: 2px">\
 <div id="searchResults" class="col-md-12"> </div>';
@@ -76,8 +76,8 @@ function seek_query(keywords, area, cate)
                 $("#resultStats").empty();
                 var stats1='', stats2='', stats3='';
                 if(keywords != "")                       stats1 = "\""+keywords+"\"";
-                if(cate != " Categories " && cate != "") stats2 = "\""+cate+"\"";
-                if(area != " Distance " && area != "")   stats3 = "\""+area+"\"";
+                if(cate.search("Categories") == -1 && cate != "") stats2 = "\""+cate+"\"";
+                if(area.search("Distance") == -1 && area != "")   stats3 = "\""+area+"\"";
                 $("#resultStats").append(stats1+' '+stats2+' '+stats3);
 
                 if (response == null)
@@ -122,6 +122,19 @@ function seek_query(keywords, area, cate)
                     document.getElementById("about").className = "";
                     document.getElementById("help").className = "";
                     document.getElementById("seek").className = "active";
+                }
+
+                // Highlight Keywords in results
+                if(keywords != ""){
+                    var src_str = $("#searchResults").html();
+                    //var term = "my text";
+                    keywords = keywords.replace(/(\s+)/,"(<[^>]+>)*$1(<[^>]+>)*");
+                    var pattern = new RegExp("("+keywords+")", "gi");
+
+                    src_str = src_str.replace(pattern, "<mark>$1</mark>");
+                    src_str = src_str.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,"$1</mark>$2<mark>$4");
+
+                    $("#searchResults").html(src_str);
                 }
             },
             error: function (xhr, ajaxOption, thrownError)

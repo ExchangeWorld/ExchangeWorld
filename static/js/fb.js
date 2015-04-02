@@ -47,7 +47,7 @@ function fbLoaded() {
                 var usr_name = response.name;
                 FB.api('/me/picture?width=250', function (response) {
                     my_picture_url = response.data.url;
-                    $("#myname").html('<img id="myhead" src="'+my_picture_url+'" height="25" width="25">'+"  "+usr_name);
+                    $("#myname").html('<img id="myhead" src="'+my_picture_url+'" height="27" width="27" style="border-radius:6px;border:1px solid #444;">'+"  "+usr_name);
                 });
             });
 

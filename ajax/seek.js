@@ -88,14 +88,24 @@ function seek_query(keywords, area, cate)
                 {
                     for (var i = 0; i < response.length; i++)
                     {
+                        // Highlight Keywords in results
+                        var gname = response[i]["gname"];
+                        if(keywords != ""){
+                            keywords = keywords.replace(/(\s+)/,"(<[^>]+>)*$1(<[^>]+>)*");
+                            var pattern = new RegExp("("+keywords+")", "gi");
+
+                            gname = gname.replace(pattern, "<mark>$1</mark>");
+                            gname = gname.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,"$1</mark>$2<mark>$4");
+                        }
+
                         //Left Side
                         $('#searchResults').append('\
                             <div class="row searchResult" data-value="' + response[i]["gid"] + '" data-order="'+i+'"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div>\
                             <div class="col-md-7 searchResultDescription">\
                                 <ul class="list-group">\
-                                    <li class="list-group-item"> ' + response[i]["gname"] + '<span class="badge">' + response[i]["categories"] + '</span></li>\
+                                    <li class="list-group-item"> ' + gname + '<span class="badge">' + response[i]["categories"] + '</span></li>\
                                     <li class="list-group-item">Wanted: ' + response[i]["want"] + '</li>\
-                                    <li class="list-group-item"><img src="' + response[i]["owner_photo"] + '" height="20" width="20"> ' + response[i]["username"] + '></li>\
+                                    <li class="list-group-item"><img src="' + response[i]["owner_photo"] + '" height="20" width="20"> ' + response[i]["username"] + '</li>\
                                 </ul>\
                             </div>');
                         //Map Side
@@ -124,18 +134,6 @@ function seek_query(keywords, area, cate)
                     document.getElementById("seek").className = "active";
                 }
 
-                // Highlight Keywords in results
-                if(keywords != ""){
-                    var src_str = $("#searchResults").html();
-                    //var term = "my text";
-                    keywords = keywords.replace(/(\s+)/,"(<[^>]+>)*$1(<[^>]+>)*");
-                    var pattern = new RegExp("("+keywords+")", "gi");
-
-                    src_str = src_str.replace(pattern, "<mark>$1</mark>");
-                    src_str = src_str.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,"$1</mark>$2<mark>$4");
-
-                    $("#searchResults").html(src_str);
-                }
             },
             error: function (xhr, ajaxOption, thrownError)
             {

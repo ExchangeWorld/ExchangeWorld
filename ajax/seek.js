@@ -105,23 +105,31 @@ function seek_query(keywords, area, cate)
                 else
                 {
                     var keyword_strings;
-                    if(keywords != "") keyword_strings = keywords.split(" ");
+                    var json = { };
+                    
+                    if(keywords != "")
+                    {
+                        keyword_strings = keywords.split(" ");
+
+                        // remove all empty keywords set
+                        while (keyword_strings.indexOf("") > -1) { keyword_strings.splice(keyword_strings.indexOf(""), 1); }
+                        for(var i = 0; i < keyword_strings.length; i++)
+                        {   
+                            // Create json for multi-keywords search at same times
+                            json[keyword_strings[i].toLowerCase()] = "<mark>"+keyword_strings[i].toUpperCase()+"</mark>";
+                        }
+                    }
+
                     for (var i = 0; i < response.length; i++)
                     {
                         // Highlight Keywords in results
                         var gname = response[i]["gname"];
                         if(keywords != "")
                         {
-                            //var keyword_strings = keywords.split(" ");
-                            for(var j=0; j<keyword_strings.length; j++)
-                            {
-                                if(keyword_strings[j]==="") continue;
-                                keyword_strings[j] = keyword_strings[j].replace(/(\s+)/,"(<[^>]+>)*$1(<[^>]+>)*");
-                                var pattern = new RegExp("("+keyword_strings[j]+")", "gi");
-
-                                gname = gname.replace(pattern, "<mark>$1</mark>");
-                               // gname = gname.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,"$1</mark>$2<mark>$4");
-                            }
+                            var re = new RegExp(Object.keys(json).join("|"),"gi");
+                            gname = gname.replace(re, function(matched){
+                                return json[matched.toLowerCase()];
+                            });
                         }
 
                         //Left Side

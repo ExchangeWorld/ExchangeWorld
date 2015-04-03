@@ -108,12 +108,18 @@ function seek_query(keywords, area, cate)
                     {
                         // Highlight Keywords in results
                         var gname = response[i]["gname"];
-                        if(keywords != ""){
-                            keywords = keywords.replace(/(\s+)/,"(<[^>]+>)*$1(<[^>]+>)*");
-                            var pattern = new RegExp("("+keywords+")", "gi");
+                        if(keywords != "")
+                        {
+                            var keyword_strings = keywords.split(" ");
+                            for(var i=0; i<keyword_strings.length; i++)
+                            {
+                                if(keyword_strings[i]==="") continue;
+                                keyword_strings[i] = keyword_strings[i].replace(/(\s+)/,"(<[^>]+>)*$1(<[^>]+>)*");
+                                var pattern = new RegExp("("+keyword_strings[i]+")", "gi");
 
-                            gname = gname.replace(pattern, "<mark>$1</mark>");
-                            gname = gname.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,"$1</mark>$2<mark>$4");
+                                gname = gname.replace(pattern, "<mark>$1</mark>");
+                                gname = gname.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,"$1</mark>$2<mark>$4");
+                            }
                         }
 
                         //Left Side

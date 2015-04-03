@@ -21,20 +21,28 @@
 	else $delta = 10;
 
 
-	$keywords = '%'.$keywords.'%';
+
 	$cat = '%'.$cat.'%';
 	$sql = "SELECT `goods`. * , `user`.`username`, `user`.`photoPath` as `owner_photo`
 			FROM `goods`, `user`
 			WHERE `goods`.`ownerID` = `user`.`fb_id`
-			AND `goods`.`gname` LIKE '$keywords'
 			AND `goods`.`categories` LIKE '$cat'
 			AND `goods`.`posX` >$px - $delta
 			AND `goods`.`posX` <$px + $delta
 			AND `goods`.`posY` >$py - $delta
 			AND `goods`.`posY` <$py + $delta
-			AND `goods`.`status` = 0
-			ORDER BY `gid` DESC";
+			AND `goods`.`status` = 0 ";
 
+	if($keywords != "")
+	{
+		$keywords_arr = explode(" ", $keywords);
+		$keywords_len = count($keywords_arr);
+		for ($i=0; $i< $keywords_len; $i++){
+			$sql = $sql."AND `goods`.`gname` LIKE '%$keywords_arr[$i]%' ";
+		}
+	}
+	$sql = $sql." ORDER BY `gid` DESC";
+//	echo $sql;
 //	$type = $_GET["type"];
 	//if($search == "") $search='%';
 

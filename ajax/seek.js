@@ -201,7 +201,7 @@ $(document).ready(function ()
                 if (!e) { var e = window.event; }
 
                 // Enter is pressed
-                if (e.keyCode == 13 && $("#searchName").val() != "")
+                if (e.keyCode == 13)
                 {
                     $("#searchString").click();
                 }

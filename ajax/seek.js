@@ -75,10 +75,28 @@ function seek_query(keywords, area, cate)
             {
                 $("#resultStats").empty();
                 var stats1='', stats2='', stats3='';
-                if(keywords != "")                       stats1 = "\""+keywords+"\"";
-                if(cate.search("Categories") == -1 && cate != "") stats2 = "\""+cate+"\"";
-                if(area.search("Distance") == -1 && area != "")   stats3 = "\""+area+"\"";
-                $("#resultStats").append(stats1+' '+stats2+' '+stats3);
+                if(keywords != "")
+                {
+                  stats1 = "\""+keywords+"\"";
+                  var strings = keywords.split(" ");
+                  for(var i=0;i<strings.length;i++)
+                  {
+                    if(strings[i]==="")
+                      continue;
+                    $("#resultStats").append('<span class="label label-primary label-tag unselectable">'+strings[i]+'</span>');
+                  }
+
+                }
+                if(cate.search("Categories") == -1 && cate != "")
+                {
+                  stats2 = "\""+cate+"\"";
+                  $("#resultStats").append('<span class="label label-danger label-tag unselectable">'+cate+'</span>');
+                }
+                if(area.search("Distance") == -1 && area != "")
+                {
+                  stats3 = "\""+area+"\"";
+                  $("#resultStats").append('<span class="label label-success label-tag unselectable">'+area+'</span>');
+                }
 
                 if (response == null)
                 {
@@ -219,7 +237,7 @@ $(document).ready(function ()
         var keywords = $("#searchName").val();
         var range = $("#dropdownMenu1").text();
         var cat = $("#dropdownMenu2").text();
-        cat = cat.substring(0, cat.length - 1);
+        cat = cat.substring(0, cat.length - 1)
 
         $('#searchResults').empty();
         seek_query(keywords, range, cat);

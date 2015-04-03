@@ -4,10 +4,10 @@
 if(is_array($_FILES)) {
 	if(is_uploaded_file($_FILES['userImage']['tmp_name'])) {
 		$sourcePath = $_FILES['userImage']['tmp_name'];
-//		$ext = pathinfo($_FILES['userImage']['tmp_name'], PATHINFO_EXTENSION);
+		$ext = pathinfo($_FILES['userImage']['name'], PATHINFO_EXTENSION);
 		date_default_timezone_set("Asia/Taipei");
 		$new_file_name = date('Y-m-d_H-i-s');
-		$targetPath = "./images/database/".$new_file_name;
+		$targetPath = "./images/database/".$new_file_name.'.'.$ext;
 
 		if(move_uploaded_file($sourcePath, ".".$targetPath)) {
 ?>

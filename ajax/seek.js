@@ -104,40 +104,18 @@ function seek_query(keywords, area, cate)
                 }
                 else
                 {
-                    var keyword_strings;
-                    var json = { };
-                    
-                    if(keywords != "")
-                    {
-                        keyword_strings = keywords.split(" ");
-
-                        // remove all empty keywords set
-                        while (keyword_strings.indexOf("") > -1) { keyword_strings.splice(keyword_strings.indexOf(""), 1); }
-                        for(var i = 0; i < keyword_strings.length; i++)
-                        {   
-                            // Create json for multi-keywords search at same times
-                            json[keyword_strings[i].toLowerCase()] = "<mark>"+keyword_strings[i].toUpperCase()+"</mark>";
-                        }
-                    }
+                    // split keyword into array(if is multi-keyword)
+                    var keyword_strings;                  
+                    if(keywords != "") { keyword_strings = keywords.split(" "); }
 
                     for (var i = 0; i < response.length; i++)
                     {
-                        // Highlight Keywords in results
-                        var gname = response[i]["gname"];
-                        if(keywords != "")
-                        {
-                            var re = new RegExp(Object.keys(json).join("|"),"gi");
-                            gname = gname.replace(re, function(matched){
-                                return json[matched.toLowerCase()];
-                            });
-                        }
-
                         //Left Side
                         $('#searchResults').append('\
                             <div class="row searchResult" data-value="' + response[i]["gid"] + '" data-order="'+i+'"> <div class="col-md-5"><img src="' + response[i]["photoPath"] + '" alt="..." class="img-rounded"></div>\
                             <div class="col-md-7 searchResultDescription">\
                                 <ul class="list-group">\
-                                    <li class="list-group-item">​<span class="glyphicon glyphicon-arrow-left"> </span> ' + gname + '<span class="badge">' + response[i]["categories"] + '</span></li>\
+                                    <li class="list-group-item gname">​<span class="glyphicon glyphicon-arrow-left"> </span> ' + response[i]["gname"] + '<span class="badge">' + response[i]["categories"] + '</span></li>\
                                     <li class="list-group-item">​<span class="glyphicon glyphicon-arrow-right"> </span> ' + response[i]["want"] + '</li>\
                                     <li class="list-group-item"><img src="' + response[i]["owner_photo"] + '" height="20" width="20"> ' + response[i]["username"] + '</li>\
                                 </ul>\
@@ -145,6 +123,18 @@ function seek_query(keywords, area, cate)
                         //Map Side
                         addMarkers(response[i]["posY"], response[i]["posX"], response[i]["photoPath"], response[i]["gid"]);
                     }
+        
+                    // Highlight Keywords in results
+                    if(keywords != "")
+                    {
+                        for(var index=0; index<keyword_strings.length; index++)
+                        {
+                            if(keyword_strings[index]==="") continue;
+                            $(".gname").highlight(keyword_strings[index]);
+                            $(".badge").removeHighlight();               
+                        }
+                    }
+
                     //fit the map bounds with search results
                     markersBounds();
                     $('.searchResult').hover(

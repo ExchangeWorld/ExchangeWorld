@@ -13,7 +13,9 @@ body {
     overflow: hidden;
 }
 
-
+.highlight{
+	background-color: #FEE379;
+}
 .dropdown-submenu {
     position:relative;
 }

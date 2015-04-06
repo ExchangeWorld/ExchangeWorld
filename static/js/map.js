@@ -514,7 +514,7 @@ function addMarkers(lat, lng, img, gid)
 
                     	// $('#leftSideSwitch').hide(0);
                         $('#leftSideSwitch').html('\
-                        <div class="row" style="background-color: silver;">\
+                        <div class="row" style="background-color: rgb(226, 226, 226);">\
                             <div class="col-md-5">\
                                 <button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> BACK</button>\
                             </div>\
@@ -525,7 +525,7 @@ function addMarkers(lat, lng, img, gid)
                                 <span id="removeGood" class="glyphicon glyphicon-remove" aria-hidden="true" style="float:right"></span>\
                             </div>\
                         </div>\
-                        <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                        <div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 15px">\
                             <div class="fancybox" href="' + response["photoPath"] + '" style="padding:15px"> <img src="' + response["photoPath"] + '" class="img-thumbnail" alt="..."> </div>\
                             <div style="padding:15px;padding-bottom:0px">\
                                 <ul class="list-group" style="font-size: 85%;margin-bottom:0px">\
@@ -535,7 +535,7 @@ function addMarkers(lat, lng, img, gid)
                                 </ul>\
                             </div>\
                         </div>\
-                        <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">\
+                        <div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 15px; font-size: 85%">\
                             <div class="col-md-12">\
                                 <div class="panel panel-info">\
                                     <div class="panel-heading"><h3 class="panel-title">Description :</h3></div>\
@@ -545,7 +545,7 @@ function addMarkers(lat, lng, img, gid)
                                 </div>\
                             </div>\
                         </div>\
-                        <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">\
+                        <div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 15px; font-size: 85%">\
                             <div class="col-md-12">\
                                 <div class="panel panel-info">\
                                     <div class="panel-heading"><h3 class="panel-title">Comments :</h3></div>\
@@ -562,7 +562,7 @@ function addMarkers(lat, lng, img, gid)
                                 </div>\
                             </div>\
                         </div>\
-                        <div class="searchResults" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">\
+                        <div class="searchResults" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 15px; font-size: 85%">\
                         ');
 
 

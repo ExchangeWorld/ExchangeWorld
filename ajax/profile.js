@@ -63,12 +63,12 @@ function load_profile()
                 {
                     $('#leftSideSwitch').hide(0).empty();
                     $('#leftSideSwitch').html('\
-                        <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                        <div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 15px">\
                             <div class="col-md-3">\
                                 <button id="goback" type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go back</button>\
                             </div>\
                         </div>\
-                        <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                        <div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 15px">\
                             <div class="col-md-5 fancybox" href="' + response[0]["photoPath"] + '"><img src="' + response[0]["photoPath"] + '" class="img-thumbnail" alt="..."></div>\
                             <div class="col-md-7">\
                                 <ul class="list-group" style="font-size: 85%">\
@@ -77,7 +77,7 @@ function load_profile()
                                 </ul>\
                             </div>\
                         </div>\
-                        <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 70%">\
+                        <div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 10px; font-size: 70%">\
                             <div class="col-md-12">\
                                 <ul class="nav nav-pills" role="tablist">\
                                     <li role="presentation" class="userBtn" data-value="' + response[0]["fb_id"] + '" id="add"><a href="#">Follow + </a></li>\
@@ -91,7 +91,7 @@ function load_profile()
                                 </ul></ul>\
                             </div>\
                         </div>\
-                        <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show(0);
+                        <div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 15px; font-size: 85%">').show(0);
 
                     // popup (send) messagebox
                     $('#leftSideSwitch').append('\
@@ -175,7 +175,7 @@ function load_profile()
                     //alert('-'+val+'-');
                     $('#leftSideSwitch').hide(0).empty();
                     $('#leftSideSwitch').html('\
-                        <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                        <div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 15px">\
                             <div class="col-md-5 fancybox" href="' + response[0]["photoPath"] + '"><img  src="' + response[0]["photoPath"] + '" class="img-thumbnail" alt="..."></div>\
                             <div class="col-md-7">\
                                 <div style="margin-top:50px;">\
@@ -183,7 +183,7 @@ function load_profile()
                                 </div>\
                             </div>\
                         </div>\
-                        <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 10px; font-size: 85%">\
+                        <div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 10px; font-size: 85%">\
                             <div class="col-md-12">\
                                 <ul class="nav nav-pills" role="tablist">\
                                     <li role="presentation" class="userBtn" data-value="' + response[0]["fb_id"] + '" style="display:none" id="add"><a href="#">Follow + </a></li>\
@@ -196,7 +196,7 @@ function load_profile()
                                 </ul>\
                             </div>\
                         </div>\
-                        <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px; font-size: 85%">').show(0);
+                        <div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 15px; font-size: 85%">').show(0);
 
                     //Handle Exchanging/Exchanged Tables
                     //Get Exchange Table(?) and represent in map
@@ -305,7 +305,7 @@ $(document).ready(function ()
                     var v = $("#bdgfollowing").text();
                     $('#leftSideSwitch').hide(0).empty();
                     $('#leftSideSwitch').html('\
-                    <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                    <div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 15px">\
                         <div class="col-md-3">\
                             <button id="goback" type="button" class="btn btn-default">\
                                 <span class="glyphicon glyphicon-arrow-left" aria-hidden="true">\
@@ -314,7 +314,7 @@ $(document).ready(function ()
                             </button>\
                         </div>\
                     </div>\
-                    <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                    <div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 15px">\
                         <div class="col-md-2">\
                             <h1 style="margin-top: 0px"><span class="glyphicon glyphicon-eye-open" aria-hidden="true" style="color: #04ACD9"></span></h1>\
                         </div>\
@@ -331,7 +331,7 @@ $(document).ready(function ()
                         for (var i = 0; i < response.length; i++)
                         {
                             if (i == 0 || (i + 1) % 4 == 0)
-                                $('#leftSideSwitch').append('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">');
+                                $('#leftSideSwitch').append('<div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 15px">');
 
                             $('#leftSideSwitch').append('<div class="col-md-4 owner" data-value="' + response[i]["follower"] + '"><img class="img-thumbnail" alt=".." src="' + response[i]["owner_photo"] + '" style="width: 100%"></div>');
 
@@ -347,7 +347,7 @@ $(document).ready(function ()
                     var v = $("#bdgfollower").text();
                     $('#leftSideSwitch').hide(0).empty();
                     $('#leftSideSwitch').html('\
-                    <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                    <div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 15px">\
                         <div class="col-md-3">\
                             <button id="goback" type="button" class="btn btn-default">\
                                 <span class="glyphicon glyphicon-arrow-left" aria-hidden="true">\
@@ -356,7 +356,7 @@ $(document).ready(function ()
                             </button>\
                         </div>\
                     </div>\
-                    <div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">\
+                    <div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 15px">\
                         <div class="col-md-2">\
                             <h1 style="margin-top: 0px"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="color: #04ACD9"></span></h1>\
                         </div>\
@@ -373,7 +373,7 @@ $(document).ready(function ()
                         for (var i = 0; i < response.length; i++)
                         {
                             //Warpping line: 4 items a rows
-                            if (i == 0 || (i + 1) % 4 == 0) $('#leftSideSwitch').append('<div class="row" style="background-color: silver; padding-top: 0px; margin-top: 15px">');
+                            if (i == 0 || (i + 1) % 4 == 0) $('#leftSideSwitch').append('<div class="row" style="background-color: rgb(226, 226, 226); padding-top: 0px; margin-top: 15px">');
 
                             $('#leftSideSwitch').append('<div class="col-md-4 owner" data-value="' + response[i]["myid"] + '"><img class="img-thumbnail" alt=".." src="' + response[i]["owner_photo"] + '" style="width: 100%"></div>');
 

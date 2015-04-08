@@ -1,6 +1,6 @@
 (function ()
 {
-	var common = angular.module('commonSevices', []);
+	var common = angular.module('commonServices', []);
 
 	common.service('sharedProperties', function ()
 	{

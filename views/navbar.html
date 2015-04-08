@@ -2,32 +2,34 @@
   <div class="md-toolbar-tools md-medium-tall md-whiteframe-z3 navbar">
     <span hide-md hide-sm flex="25" class="brand"><a href="#">ExchangeWorld</a></span>
 
-    <md-button flex="10" ng-click="clickSeek()" ng-class="{'active': contentIs(0)}">
+    <md-button flex="10" href="#/seek" ng-click="clickSeek()" ng-class="{'active': contentIs(0)}">
       <i class="fa fa-search fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
       <span hide-md hide-sm>SEEK</span>
     </md-button>
 
-    <md-button flex="10" ng-click="clickPost()" ng-class="{'active': contentIs(1)}">
+    <md-button flex="10" href="#/post" ng-click="clickPost()" ng-class="{'active': contentIs(1)}">
       <i class="fa fa-plus fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
       <span hide-md hide-sm>POST</span>
     </md-button>
 
-    <md-button flex="10" >
+    <md-button flex="10">
       <i class="fa fa-compass fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
       <span hide-md hide-sm>About</span>
     </md-button>
 
+<!--
     <md-button flex="10">
       <i class="fa fa-info-circle fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
       <span hide-md hide-sm>Help</span>
     </md-button>
+-->
 
     <span flex="20"></span>
 
     <div flex ng-controller="DropdownCtrl" class="btn-group" dropdown is-open="status.isopen">
       <md-button ng-click="toggleDropdown($event)">Username</md-button>
       <ul class="dropdown-menu" role="menu">
-        <li><a href ng-click="clickProfile()">Profile</a></li>
+        <li><a href="#/profile" ng-click="clickProfile()">Profile</a></li>
         <li class="divider"></li>
         <li><a href>Log Out</a></li>
       </ul>

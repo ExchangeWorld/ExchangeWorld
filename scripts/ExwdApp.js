@@ -1,7 +1,7 @@
 (function ()
 {
-	var ExwdApp = angular.module('ExwdApp', ['ngMaterial', 'ui.bootstrap', 'navbarController',
-		'listenerDirective', 'templateUrlDircetive', 'commonSevices'
+	var ExwdApp = angular.module('ExwdApp', ['ngMaterial', 'ui.bootstrap', 'ngRoute', 'navbarController',
+		'listenerDirective', 'templateUrlDircetive', 'commonServices'
 	]);
 
 	ExwdApp.config(function ($mdThemingProvider)
@@ -21,5 +21,32 @@
 				'default': '700'
 			});
 	});
+
+	 ExwdApp.config(['$routeProvider',
+	   function ($routeProvider)
+	   {
+	     $routeProvider.
+	     when('/seek',
+	     {
+	       templateUrl: 'views/seek.html'
+	     }).
+	     when('/seek/:gid',
+	     {
+	       templateUrl: 'views/good.html'
+	     }).
+	 	 when('/post',
+	 	 {
+            templateUrl: 'views/post.html'
+	 	 }).
+         when('/profile',
+         {
+	 		templateUrl: 'views/profile.html'
+         }).
+	     otherwise(
+	     {
+	       redirectTo: '/seek'
+	     });
+	   }
+	 ]);
 
 })();

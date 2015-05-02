@@ -1,0 +1,16 @@
+{
+  "name": "ExchangeWorld",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "postinstall": "node ./node_modules/protractor/bin/webdriver-manager update",
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "bluebird": "^2.9.25",
+    "express": "^4.12.3",
+    "spdy": "^1.32.0"
+  },
+  "devDependencies": {}
+}

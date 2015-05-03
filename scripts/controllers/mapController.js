@@ -1,5 +1,5 @@
 (function(){
-  var mapController = angular.controller('mapController',['uiGmapgoogle-maps']);
-
+  var mapController = angular.module('mapController',['ngMap']);
+    
 
 })();

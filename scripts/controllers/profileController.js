@@ -1,5 +1,5 @@
 (function(){
-  var profileController = angular.controller('profileController',[]);
+  var profileController = angular.module('profileController',[]);
 
 
 })();

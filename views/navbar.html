@@ -1,5 +1,5 @@
 <md-toolbar class="md-primary" ng-controller="NavbarCtrl" >
-  <div class="md-toolbar-tools md-medium-tall md-whiteframe-z3 navbar">
+  <div class="md-toolbar-tools md-medium-tall navbar">
     <span hide-md hide-sm flex="25" class="brand"><a href="#">ExchangeWorld</a></span>
 
     <md-button flex="10" href="#/seek" ng-click="clickSeek()" ng-class="{'active': contentIs(0)}">
@@ -24,7 +24,7 @@
     </md-button>
 -->
 
-    <span flex="20"></span>
+    <span flex="30"></span>
 
     <div flex ng-controller="DropdownCtrl" class="btn-group" dropdown is-open="status.isopen">
       <md-button ng-click="toggleDropdown($event)">Username</md-button>

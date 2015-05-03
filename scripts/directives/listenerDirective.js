@@ -8,7 +8,7 @@
     {
 
       var w = angular.element($window);
-      scope.$watch(function ()
+      scope.$watchCollection(function ()
       {
         return {
           'h': window.innerHeight,
@@ -28,7 +28,7 @@
             'max-height': (newValue.h - offsetH) + 'px'
           };
         };
-      }, true);
+      });
 
       w.bind('resize', function ()
       {

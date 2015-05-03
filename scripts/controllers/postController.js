@@ -1,5 +1,5 @@
 (function(){
-  var postController = angular.controller('postController',[]);
+  var postController = angular.module('postController',[]);
 
 
 })();

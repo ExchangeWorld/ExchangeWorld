@@ -6,16 +6,21 @@
   }
 }
 
-
-  .md-locked-open
-  {
-    min-width: 300px !important;
-    width: 25.5vw !important;
-    max-width: 80vw !important;
-    md-sidenav &{
-      min-width: 300px !important;
-      width: 25.5vw !important;
-      max-width: 80vw !important;
+@media (min-width: 959px) {
+    md-sidenav, 
+    md-sidenav.md-locked-open, 
+    md-sidenav.md-closed.md-locked-open-add-active {
+        min-width: 470px !important;
+        width: 38.1966011vw !important;
+        max-width: none !important;
     }
+}
 
-  }
+@media (max-width: 959px) {
+    md-sidenav, 
+    md-sidenav.md-locked-open, 
+    md-sidenav.md-closed.md-locked-open-add-active {
+        min-width: 80vw !important;
+        max-width: none !important;
+    }
+}

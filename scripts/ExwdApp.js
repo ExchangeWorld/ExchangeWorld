@@ -1,6 +1,6 @@
 (function ()
 {
-	var ExwdApp = angular.module('ExwdApp', ['ngMaterial', 'ui.bootstrap', 'ngRoute', 'navbarController',
+	var ExwdApp = angular.module('ExwdApp', ['ngMaterial', 'ui.bootstrap', 'ngRoute', 'navbarController','mapController',
 		'listenerDirective', 'templateUrlDircetive', 'commonServices'
 	]);
 

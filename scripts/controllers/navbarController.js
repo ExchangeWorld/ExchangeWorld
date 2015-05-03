@@ -16,7 +16,7 @@
     };
   });
 
-  navbarController.controller('NavbarCtrl', function ($scope, $mdSidenav, sharedProperties)
+  navbarController.controller('NavbarCtrl', function ($scope, $mdSidenav)
   {
     var ContentType = ["seek", "post", "profile", "good"];
     $scope.content = "seek";
@@ -35,34 +35,35 @@
 
     $scope.clickSeek = function ()
     {
-      sharedProperties.setString(ContentType[0]);
-
+      //sharedProperties.setString(ContentType[0]);
       $scope.content = ContentType[0];
+      $scope.$emit('sidenavChanged',ContentType[0]);
       $mdSidenav('left').toggle();
     };
 
     $scope.clickPost = function ()
     {
-      sharedProperties.setString(ContentType[1]);
-
+      //sharedProperties.setString(ContentType[1]);
+      $scope.$emit('sidenavChanged',ContentType[1]);
       $scope.content = ContentType[1];
       $mdSidenav('left').toggle();
     };
 
     $scope.clickProfile = function ()
     {
-      sharedProperties.setString(ContentType[2]);
+      //sharedProperties.setString(ContentType[2]);
       if($scope.content === ContentType[2])
         return;
+      $scope.$emit('sidenavChanged',ContentType[2]);
       $scope.content = ContentType[2];
-
     };
 
     $scope.clickGood = function ()
     {
-      sharedProperties.setString(ContentType[3]);
+      //sharedProperties.setString(ContentType[3]);
       if($scope.content === ContentType[3])
         return;
+      $scope.$emit('sidenavChanged',ContentType[3]);
       $scope.content = ContentType[3];
 
     };

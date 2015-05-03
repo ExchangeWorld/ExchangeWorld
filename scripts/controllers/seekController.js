@@ -1,5 +1,5 @@
 (function(){
-  var seekController = angular.controller('seekController',[]);
+  var seekController = angular.module('seekController',[]);
 
 
 })();

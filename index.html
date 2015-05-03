@@ -1,317 +1,62 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html ng-app="ExwdApp">
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="images/favicon.ico">
 
-    <title>Exchange your preloved | ExchangeWorld</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="_src/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Fonts -->
-    <link href="_src/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="_src/css/animate.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
-    <!-- Theme CSS -->
-    <link href="_src/css/Homepage/style.css" rel="stylesheet">
-    <link href="_src/css/Homepage/default.css" rel="stylesheet">
-
-    <!-- BLOCK: Loading libraries -->
-    <script src="./FBappID.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-    <!-- ENDBLOCK: Loading libraries -->
-
+    <title>ExchangeWorld</title>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="styles/ng-scrollable.min.css">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-    <!-- BLOCK: FB SDK initialization -->
-    <div id="fb-root"></div>
-    <script>
-        window.fbAsyncInit = function () {
-            // init the FB JS SDK
-            FB.init({
-                appId: FacebookAppId,                        // App ID from the app dashboard
-                cookie: true,                                 // Allowed server-side to fetch fb auth cookie
-                status: true,                                 // Check Facebook Login status
-                xfbml: true,                                  // Look for social plugins on the page
-                version: 'v2.2'
-            });
+<body>
+    <!-- See views/navbar.html -->
+    <navbar flex="35"></navbar>
 
-            // Additional initialization code such as adding Event Listeners goes here
-            window.fbLoaded();
-        };
+    <div id="container" layout="row">
+        <!-- See scripts/directives/templateDirective.js -->
+        <sidenav class="md-whiteframe-z2" style="z-index:100;"></sidenav>
 
-        // Load the SDK asynchronously
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) { return; }
-            js = d.createElement(s); js.id = id;
-            js.src = "http://connect.facebook.net/en_US/all.js";
-            // Debug version of Facebook JS SDK
-            //js.src = "http://connect.facebook.net/en_US/all/debug.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <!-- ENDBLOCK: FB SDK initialization -->
-    <!-- Preloader -->
-    <div id="preloader">
-        <div id="load"></div>
+        <div flex>
+            <map center="-34.397, 150.644" zoom="8" resize ng-style="resizeWithOffset(64)"></map>
+        </div>
     </div>
 
-    <nav class="navbar navbar-custom navbar-fixed-top unselectable" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header page-scroll" style="margin-left:6%">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="index.html">
-                    <img style="max-width:200px;" src="_src/img/icon/logo.png" alt="">
-                </a>
-            </div>
+    <!-- AngularJs  -->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+    <!--
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.7.0/angular-material.min.js"></script>
+    -->
+    <script src="scripts/vendor/ng-scrollable.min.js"></script>
+    <script src="scripts/vendor/ui-bootstrap-custom-0.12.1.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?&sensor=TRUE&signed_in=false&v=3.exp&libraries=places"></script>
+    <script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse" style="margin-right:6%">
-                <ul class="nav navbar-nav">
-                    <li id="nav-signin" style="display: none">
-                        <a href="#"><span style="margin-right:5px"><img src="_src/img/icon/social-31-facebook.png"></span>Sign In</a>
-                    </li>
-                    <li id="nav-explore" style="display: none"><a href="exchangeworld.html">Explore</a></li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+    <script src="scripts/ExwdApp.js"></script>
+    <!-- Controllers -->
+    <script src="scripts/controllers/navbarController.js"></script>
+    <script src="scripts/controllers/mapController.js"></script>
+    <!-- Directives -->
+    <script src="scripts/directives/listenerDirective.js"></script>
+    <script src="scripts/directives/templateDirective.js"></script>
+    <!-- Filters -->
+    <!-- Services -->
+    <script src="scripts/services/commonServices.js"></script>
 
-    <!-- Section: intro -->
-    <section id="intro" class="intro unselectable">
-        <div class="slogan" id="slogan_area">
-
-            <div class="wow bounceInDown" data-wow-delay="0.4s">
-                <h2>Exchange your preloved</h2>
-            </div>
-
-            <div class="wow bounceInUp" data-wow-delay="0.8s">
-                <h3>with people locally and personally</h3>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row" style="padding-top: 50px">
-                <div class="wow bounceInUp" data-wow-delay="1.2s">
-                    <div id="Login-msg">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </section>
-    <!-- /Section: intro -->
-    <!--  Section: service -->
-    <section id="service" class="home-section text-center" style="display:none">
-        <div class="heading-about">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="wow bounceInDown" data-wow-delay="0.4s">
-                            <div class="section-heading">
-                                <h2>Near you</h2>
-                                <i class="fa fa-2x fa-angle-down"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 col-lg-offset-5">
-                    <hr class="marginbot-50">
-                </div>
-            </div>
-            <div class="row">
-            </div>
-        </div>
-    </section>
-    <!-- /Section: service -->
-    <!-- Section: about -->
-    <section id="about" class="home-section text-center bg-gray">
-        <div class="heading-about">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="wow bounceInDown" data-wow-delay="0.4s">
-                            <div class="section-heading">
-                                <h2>About us</h2>
-                                <i class="fa fa-2x fa-angle-down"></i>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 col-lg-offset-5">
-                    <hr class="marginbot-50">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6 col-sm-3 col-md-3">
-                    <div class="wow bounceInUp" data-wow-delay="0.2s">
-                        <div class="team boxed-grey">
-                            <div class="inner">
-                                <h5>Shu Hsuan, Hsu</h5>
-                                <p class="subtitle">許書軒</p>
-                                <div class="avatar"><img src="_src/img/Homepage/team/1.jpg" alt="" class="img-responsive img-circle" /></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-3 col-md-3">
-                    <div class="wow bounceInUp" data-wow-delay="0.5s">
-                        <div class="team boxed-grey">
-                            <div class="inner">
-                                <h5>Pin-Chia, Chen</h5>
-                                <p class="subtitle">陳品嘉</p>
-                                <div class="avatar"><img src="_src/img/Homepage/team/2.jpg" alt="" class="img-responsive img-circle" /></div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-3 col-md-3">
-                    <div class="wow bounceInUp" data-wow-delay="0.8s">
-                        <div class="team boxed-grey">
-                            <div class="inner">
-                                <h5>Sheng-Wun, Bao</h5>
-                                <p class="subtitle">鮑聖文</p>
-                                <div class="avatar"><img src="_src/img/Homepage/team/3.jpg" alt="" class="img-responsive img-circle" /></div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-3 col-md-3">
-                    <div class="wow bounceInUp" data-wow-delay="1s">
-                        <div class="team boxed-grey">
-                            <div class="inner">
-                                <h5>Wen-Kai, Bai</h5>
-                                <p class="subtitle">白紋愷</p>
-                                <div class="avatar"><img src="_src/img/Homepage/team/4.jpg" alt="" class="img-responsive img-circle" /></div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-6 col-sm-3 col-md-3">
-                    <div class="wow bounceInUp" data-wow-delay="1.2s">
-                        <div class="team boxed-grey">
-                            <div class="inner">
-                                <h5>Ciao-Sin, Chang</h5>
-                                <p class="subtitle">張巧心</p>
-                                <div class="avatar"><img src="_src/img/Homepage/team/5.jpg" alt="" class="img-responsive img-circle" /></div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- /Section: about -->
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-lg-12">
-                    <div class="wow shake" data-wow-delay="0.4s">
-                        <div class="page-scroll marginbot-30">
-                            <a href="#intro" id="totop" class="btn btn-circle">
-                                <i class="fa fa-angle-double-up animated"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <p>&copy;Copyright 2015 - ExchangeWorld. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- BLOCK: Facebook javascript playground -->
-    <script id="my-script-playground">
-        window.fbLoaded = function () {
-            FB.Event.subscribe('auth.login', function (response) {
-                var msg = "You're logged in.";
-                $("#my-login-message").html(msg);
-                console.log("Your login response:");
-                console.log(response);
-
-                FB.getLoginStatus(function (response) {
-                    if (response.status === 'connected') {
-                        $('#nav-signin').hide();
-                        $('#nav-explore').show();
-                        FB.api('/me', function (response) {
-                            $('#Login-msg').html('<h2>Welcome back, ' + response.name + '</h2><a href="exchangeworld.html"><h3>Ready to Explore?</h3></a>');
-                        });
-
-                    } else if (response.status === 'not_authorized') {
-                        console.log("not_authorized");
-                        // the user is logged in to Facebook,
-                        // but has not authenticated your app
-                    } else {
-                        console.log("isn't login");
-                        // the user isn't logged in to Facebook.
-                    }
-                });
-            });
-
-            $("#nav-signin").click(function () {
-                FB.login();
-            });
-
-            FB.getLoginStatus(function (response) {
-                if (response.status === 'connected') {
-                    //$("#LoginStatus").hide();
-                    //$("#slogan_area").append('<h2>HI ~</h2>');
-                    //FB.api('/me/picture?width=250', function (response) {
-                    //  my_picture_url = response.data.url;
-                    //  $("#myhead").attr('src', my_picture_url);
-                    //});
-                    FB.api('/me', function (response) {
-                        $('#Login-msg').html('<h2>Welcome back, ' + response.name + '</h2><a href="exchangeworld.html"><h3>Ready to Explore?</h3></a>');
-                    });
-                    //$("#myname").show();
-
-                    $('#nav-explore').show();
-                }
-                else {
-                    $('#nav-signin').show();
-                }
-            });
-        };
-
-    </script>
-    <!-- END OF facebook javascript -->
-    <!-- Core JavaScript Files -->
-
-    <script src="_src/js/jquery-1.11.2.min.js"></script>
-    <script src="_src/js/bootstrap.min.js"></script>
-    <script src="_src/js/jquery.easing.min.js"></script>
-    <script src="_src/js/jquery.scrollTo.js"></script>
-    <script src="_src/js/wow.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="_src/js/custom.js"></script>
 </body>
+
 </html>

@@ -13,6 +13,11 @@
      styles="{{mapStyle}}" 
      resize ng-style="resizeWithOffset(64)">
     
+    <custom-control id="autocomplete" position="TOP_LEFT" index="1">
+          <input places-auto-complete size="50" 
+              
+              on-place-changed="placeChanged(place)" />
+    </custom-control>
 <!--
      <input places-auto-complete size="80" 
       ng-model="address" 

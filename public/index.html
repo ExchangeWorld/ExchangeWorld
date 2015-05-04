@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="ExwdApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ExchangeWorld</title>
+    <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/angular-material.min.css">
+    <link rel="stylesheet" href="stylesheets/ng-scrollable.min.css">
+    <link rel="stylesheet" href="stylesheets/main.css">
+</head>
+
+<body>
+    <!-- See views/navbar.html -->
+    <navbar flex="35"></navbar>
+
+    <div id="container" layout="row">
+        <!-- See scripts/directives/templateDirective.js -->
+        <sidenav class="md-whiteframe-z2" style="z-index:100;"></sidenav>
+
+        <map-block flex></map-block>
+    </div>
+
+    <!-- AngularJs  -->
+    <script src="javascripts/vendor/angular.min.js"></script>
+    <script src="javascripts/vendor/angular-route.min.js"></script>
+    <script src="javascripts/vendor/angular-aria.min.js"></script>
+    <script src="javascripts/vendor/angular-animate.min.js"></script>
+    <script src="javascripts/vendor/angular-material.min.js"></script>
+    <!--
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.7.0/angular-material.min.js"></script>
+    -->
+    <script src="javascripts/vendor/ng-scrollable.min.js"></script>
+    <script src="javascripts/vendor/ui-bootstrap-custom-0.12.1.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?&sensor=TRUE&signed_in=false&v=3.exp&libraries=places"></script>
+    <script src="javascripts/vendor/angularjs-geolocation.min.js"></script>
+    <script src="javascripts/vendor/ng-map.min.js"></script>
+
+    <script src="javascripts/ExwdApp.js"></script>
+    <!-- Controllers -->
+    <script src="javascripts/controllers/navbarController.js"></script>
+    <script src="javascripts/controllers/mapController.js"></script>
+    <!-- Directives -->
+    <script src="javascripts/directives/listenerDirective.js"></script>
+    <script src="javascripts/directives/templateDirective.js"></script>
+    <!-- Filters -->
+    <!-- Services -->
+    <script src="javascripts/services/commonServices.js"></script>
+
+</body>
+
+</html>

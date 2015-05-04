@@ -1,15 +1,38 @@
-/app
-    /scripts
-            /controllers
-            /directives
-            /services
-            /filters
-            app.js
+/public                      ---- minified and public files
+    /javascripts
+        /controllers
+        /directives
+        /services
+        /filters
+        /vendors
+        app.js
     /views
-    /styles
-    /img
-    /bower_components
-    /node_moudles
-    index.html
+    /stylesheets
+    /font
+    /images
+    favicon.ico
+
+/src                        ---- source files
+    /(bower)compontents
+        .
+        .
+        .
+    /views
+    /sass
+    /javascripts
+        /controllers
+        /directives
+        /services
+        /filters
+        app.js
+
+/bin
+/node_modules
+/server
+  /render
+  /routes
+app.js
+
+.bowerrc
 bower.json
 package.json

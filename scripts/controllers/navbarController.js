@@ -2,7 +2,7 @@
 {
   var navbarController = angular.module('navbarController', []);
 
-  navbarController.controller('DropdownCtrl', function ($scope)
+  navbarController.controller('DropdownCtrl', ['$scope',function ($scope)
   {
     $scope.status = {
       isopen: false
@@ -14,9 +14,9 @@
       $event.stopPropagation();
       $scope.status.isopen = !$scope.status.isopen;
     };
-  });
+  }]);
 
-  navbarController.controller('NavbarCtrl', function ($scope, $mdSidenav)
+  navbarController.controller('NavbarCtrl', ['$scope','$mdSidenav',function ($scope, $mdSidenav)
   {
     var ContentType = ["seek", "post", "profile", "good"];
     $scope.content = "seek";
@@ -68,6 +68,6 @@
 
     };
 
-  });
+  }]);
 
 })();

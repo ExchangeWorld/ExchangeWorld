@@ -12,7 +12,7 @@
         return {
             restrict: 'E',
             templateUrl: 'views/sidenav.html',
-            controller: function ($scope, sharedProperties, $mdSidenav) {
+            controller: ['$scope','sharedProperties','$mdSidenav',function ($scope, sharedProperties, $mdSidenav) {
 
                 $scope.contentType = sharedProperties.getString();
                 $scope.$on('sidenavChanged', function (event, message) {
@@ -22,7 +22,7 @@
                 $scope.closeMenu = function () {
                     $mdSidenav('left').close();
                 };
-            }
+            }]
         };
     });
 })();

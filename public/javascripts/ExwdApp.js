@@ -22,8 +22,8 @@
 			});
 	});
 
-	 ExwdApp.config(['$routeProvider',
-	   function ($routeProvider)
+	 ExwdApp.config(['$routeProvider','$locationProvider',
+	   function ($routeProvider,$locationProvider)
 	   {
 	     $routeProvider.
 	     when('/seek',
@@ -46,6 +46,11 @@
 	     {
 	       redirectTo: '/seek'
 	     });
+        
+        $locationProvider.html5Mode({
+  enabled: true,
+  requireBase: false
+});
 	   }
 	 ]);
 

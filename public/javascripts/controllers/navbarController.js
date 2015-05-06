@@ -8,7 +8,7 @@
           templateUrl: "views/navbar.html"
       };
   });
-    
+
   navbarController.controller('DropdownCtrl', ['$scope',function ($scope)
   {
     $scope.status = {
@@ -26,11 +26,10 @@
   navbarController.controller('NavbarCtrl', ['$scope','$mdSidenav','$route',function ($scope, $mdSidenav, $route)
   {
     var ContentType = ["seek", "post", "profile", "good"];
-    
-    $scope.$on('$routeChangeSuccess', function() 
+
+    $scope.$on('$routeChangeSuccess', function()
     {
         $scope.content = $route.current.templateUrl.split('/')[1].split('.')[0];
-        console.log($route.current.templateUrl.split('/'));
     });
     $scope.contentHistory = {};
 

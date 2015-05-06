@@ -1,7 +1,9 @@
 (function ()
 {
-	var ExwdApp = angular.module('ExwdApp', ['ngMaterial', 'ui.bootstrap', 'ngRoute', 'navbarController','mapController',
-		'listenerDirective', 'templateUrlDircetive', 'commonServices'
+	var ExwdApp = angular.module('ExwdApp', ['ngMaterial', 'ui.bootstrap', 'ngRoute', 
+	'navbarController','mapController', 'seekController', 
+	'listenerDirective', 'templateUrlDircetive', 
+	'commonServices', 'seekServices'
 	]);
 
 	ExwdApp.config(function ($mdThemingProvider)

@@ -1,7 +1,7 @@
 (function ()
 {
 	var ExwdApp = angular.module('ExwdApp', ['ngMaterial', 'ui.bootstrap', 'ngRoute', 'navbarController','mapController',
-		'listenerDirective', 'templateUrlDircetive', 'commonServices'
+		'seekController','listenerDirective', 'templateUrlDircetive', 'commonServices'
 	]);
 
 	ExwdApp.config(function ($mdThemingProvider)
@@ -26,9 +26,14 @@
 	   function ($routeProvider,$locationProvider)
 	   {
 	     $routeProvider.
+         when('/',
+         {
+            templateUrl: 'views/index.html',
+         }).
 	     when('/seek',
 	     {
-	       templateUrl: 'views/seek.html'
+	       templateUrl: 'views/seek.html',
+           controller: 'seekCtrl'
 	     }).
 	     when('/seek/:gid',
 	     {
@@ -47,10 +52,10 @@
 	       redirectTo: '/seek'
 	     });
         
-        $locationProvider.html5Mode({
-  enabled: true,
-  requireBase: false
-});
+//        $locationProvider.html5Mode({
+//          enabled: true,
+//          requireBase: false
+//        });
 	   }
 	 ]);
 

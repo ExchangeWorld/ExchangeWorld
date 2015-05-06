@@ -12,9 +12,6 @@
     mapController.controller('mapCtrl',['$scope','geolocation',function($scope,geolocation){
         
         var marker, map;
-        $scope.$on('mapInitialized', function(evt, evtMap) {
-          map = evtMap;
-        });
         
         $scope.mapStyle = [
         {
@@ -216,8 +213,14 @@
         
         $scope.coords = [0, 0];
         geolocation.getLocation().then(function(data){
-          $scope.coords = [data.coords.latitude, data.coords.longitude];
+           $scope.coords = [data.coords.latitude, data.coords.longitude];
         });
+        
+        $scope.$on('mapInitialized', function(evt, evtMap) {
+          map = evtMap;
+        });
+        
+        
         
         $scope.$on('sidenavChanged', function (event, message) {
             $scope.contentType = message;

@@ -13,12 +13,20 @@
      styles="{{mapStyle}}" 
      resize ng-style="resizeWithOffset(64)">
     
-    <custom-control id="autocomplete" position="TOP_LEFT" index="1">
-          <input places-auto-complete size="50" 
-              
-              on-place-changed="placeChanged(place)" />
+    <custom-control id="autocomplete" position="LEFT_TOP" index="1">   
+        <md-input-container md-no-float class="md-warn">
+          <md-icon md-svg-src="./images/icons/pin56.svg" style="display:inline-block;"></md-icon>
+          <input places-auto-complete size="50" type="text" placeholder="Address" >
+        </md-input-container>
+    </custom-control>
+    
+    <custom-control id="myLocation" position="RIGHT_BOTTOM" index="1">
+        <button aria-label="myLocation">
+            <md-icon md-svg-src="./images/icons/gps13.svg" style="display:inline-block;"></md-icon>
+        </button>
     </custom-control>
 <!--
+style="border-radius:100%;height:56px;width:56px;box-shadow:0 2px 5px 0 rgba(0,0,0,.26);"
      <input places-auto-complete size="80" 
       ng-model="address" 
       component-restrictions="{country:'us'}"

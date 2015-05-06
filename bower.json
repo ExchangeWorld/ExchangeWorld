@@ -14,7 +14,7 @@
     "test",
     "tests"
   ],
-  "directory" : "src/bower_components",
+  "directory": "src/bower_components",
   "dependencies": {
     "angular": "1.3.x",
     "angular-route": "~1.3.0",
@@ -23,7 +23,8 @@
     "ngmap": "~1.7.9",
     "lodash": "~3.8.0",
     "restangular": "~1.5.1",
-    "font-awesome": "~4.3.0"
+    "font-awesome": "~4.3.0",
+    "angular-resource": "~1.3.15"
   },
   "resolutions": {
     "angular": "~1.3.x"

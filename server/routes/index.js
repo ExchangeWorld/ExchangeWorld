@@ -6,8 +6,4 @@ router.get('/', function(req, res, next) {
     res.render('index', { title: 'ExchangWorld' });
 });
 
-router.get('/seek', function(req, res, nex) {
-    res.send("bghnmk");
-});
-
 module.exports = router;

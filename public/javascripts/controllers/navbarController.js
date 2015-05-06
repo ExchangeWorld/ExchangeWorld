@@ -1,6 +1,6 @@
 (function ()
 {
-  var navbarController = angular.module('navbarController', []);
+  var navbarController = angular.module('navbarController', ['ngRoute']);
 
   navbarController.directive('navbar', function () {
       return {
@@ -23,10 +23,15 @@
     };
   }]);
 
-  navbarController.controller('NavbarCtrl', ['$scope','$mdSidenav',function ($scope, $mdSidenav)
+  navbarController.controller('NavbarCtrl', ['$scope','$mdSidenav','$route',function ($scope, $mdSidenav, $route)
   {
     var ContentType = ["seek", "post", "profile", "good"];
-    $scope.content = "seek";
+    
+    $scope.$on('$routeChangeSuccess', function() 
+    {
+        $scope.content = $route.current.templateUrl.split('/')[1].split('.')[0];
+        console.log($route.current.templateUrl.split('/'));
+    });
     $scope.contentHistory = {};
 
     $scope.setContent = function (contentIndex)

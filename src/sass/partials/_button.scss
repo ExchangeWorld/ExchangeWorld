@@ -1,15 +1,20 @@
-.navbar
-{
-  .md-button{
-      height: $navbar-height;
-      font-size: 1em;
+.navbar {
+  .md-button {
+    height: $navbar-height;
+    font-size: 1em;
   }
-
-  .active{
+  .active {
     background-color: $ripple-color;
   }
-    
-  a{
+  a {
     padding-top: 20px;
+  }
+}
+map {
+  .radius-button {
+    border-radius: 100%;
+    height: 56px;
+    width: 56px;
+    @include single-box-shadow(0 2px,5px 0,0,rgba(0,0,0,.26),false);
   }
 }

@@ -6,9 +6,9 @@
   }
 }
 
-@media (min-width: 959px) {
-    md-sidenav, 
-    md-sidenav.md-locked-open, 
+@media (min-width: $md) {
+    md-sidenav,
+    md-sidenav.md-locked-open,
     md-sidenav.md-closed.md-locked-open-add-active {
         min-width: 470px !important;
         width: 38.1966011vw !important;
@@ -16,9 +16,9 @@
     }
 }
 
-@media (max-width: 959px) {
-    md-sidenav, 
-    md-sidenav.md-locked-open, 
+@media (max-width: $md) {
+    md-sidenav,
+    md-sidenav.md-locked-open,
     md-sidenav.md-closed.md-locked-open-add-active {
         min-width: 80vw !important;
         max-width: none !important;

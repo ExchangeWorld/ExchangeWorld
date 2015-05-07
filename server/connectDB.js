@@ -8,4 +8,6 @@ var connection = mysql.createConnection({
     database: 'exchangeworld'
 });
 
+connection.connect();
+
 module.exports = connection;

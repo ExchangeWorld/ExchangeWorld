@@ -29,7 +29,10 @@
 
     $scope.$on('$routeChangeSuccess', function()
     {
-        $scope.content = $route.current.templateUrl.split('/')[1].split('.')[0];
+        var url = $route.current.templateUrl;
+        //console.log(url);
+        if(url !== undefined)
+            $scope.content = url.split('/')[1].split('.')[0];
     });
     $scope.contentHistory = {};
 

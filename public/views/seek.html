@@ -1,5 +1,5 @@
 
-<div class="input-group" style="margin-bottom: 10px" ng-controller="seekCtrl">
+<div class="input-group" style="margin-bottom: 10px" >
     <input id="searchName" type="text" class="form-control" placeholder="Seek anything">
     <span class="input-group-btn"> <button id="searchString" class="btn btn-info seeking" type="button">Seek !</button> </span>
 </div>
@@ -20,14 +20,14 @@
         <div id="resultStats" style="font-size: small"></div>
     </div>
 </div><hr style="border-color: #6E6E6E; border-width: 2px">
-<div class="col-md-12" ng-repeat="good in goods"> 
-	<div class="row searchResult" > 
+<div class="col-md-12" ng-repeat="good in goods">
+	<div class="row searchResult" >
 		<div class="col-md-5"><img ng-src="{{ good.photoPath }}" alt="..." class="img-rounded">
 	</div>
   	<div class="col-md-7 searchResultDescription">
       	<ul class="list-group">
-           	<li class="list-group-item gname">​<span class="glyphicon glyphicon-arrow-left"> </span> {{ good.gname }} <span class="badge">{{ good.categories }}</span></li>
-            <li class="list-group-item">​<span class="glyphicon glyphicon-arrow-right"> </span> {{ good.want }}</li>
+           	<li class="list-group-item gname"> {{ good.gname }} <span class="badge">{{ good.categories }}</span></li>
+            <li class="list-group-item">​{{ good.want }}</li>
             <li class="list-group-item"><img ng-src="{{good.owner_photo}}" height="20" width="20"> {{ good.username }}</li>
         </ul>
 	</div>

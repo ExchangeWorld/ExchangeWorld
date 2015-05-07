@@ -1,5 +1,11 @@
-<div>
+<div ng-controller="seekCtrl">
 SEEK<br>
-{{ ttttt.a }}
+	<div ng-repeat="good in goods">
+		<br>{{ good.gid }}</br>
+		<br>{{ good.gname }}</br>
+		<br>{{ good.categories }}</br>
+		<br>{{ good.description }}</br>
 
+	</div>
+	<br>{{test}}</br>
 </div>

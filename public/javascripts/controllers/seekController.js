@@ -4,7 +4,9 @@
 
   seekController.controller('seekCtrl', ['$scope', 'seekServ', function($scope, seekServ) {
       seekServ.get(function(data) {
-        $scope.ttttt = data;
+        $scope.goods = data;
       });
+      
+      $scope.test = 5;
   }]);
 })();

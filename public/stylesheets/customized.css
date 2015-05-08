@@ -16,7 +16,7 @@
 	border: 1px dotted #4F4F4F;
 	padding: 10px;
 	margin: 5px 5px 5px 0;
-	overflow:hidden;
+	/*overflow:hidden;*/
 	font-size:15px;
 	line-height: 1.5em;
 	letter-spacing: 1pt;

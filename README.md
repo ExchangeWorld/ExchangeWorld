@@ -2,13 +2,20 @@
 
 **Install Node modules**
 
-`\ExchangeWorld> npm install`
+```bash
+ExchangeWorld~$ npm install
+```
 
 ## start
 
 **Start this api**
 
-`\ExchangeWorld> npm start`
+```bash
+ExchangeWorld~$ npm start
+> ExchangeWorld@0.1.0 start C:/AppServ/www/ExchangeWorld
+> node ./bin/www
+```
+
 
 ## See result
 
@@ -16,12 +23,10 @@
 
 `http://127.0.0.1:3000/`
 
----
 
 ## Structure
 
-
-	```
+```
 	ExchangeWorld/
 	|-- node_modules/
 	|-- public/                 --- minified and public files
@@ -56,4 +61,4 @@
 	|-- .bowerrc
 	|-- bower.json
 	`--package.json
-	```
+```

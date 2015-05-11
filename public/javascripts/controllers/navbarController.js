@@ -25,7 +25,7 @@
 
   navbarController.controller('NavbarCtrl', ['$scope','$mdSidenav','$route',function ($scope, $mdSidenav, $route)
   {
-    var ContentType = ["seek", "post", "profile", "good"];
+    var ContentType = ["home", "seek", "post", "manage", "profile", "good"];
 
     $scope.$on('$routeChangeSuccess', function()
     {
@@ -47,40 +47,12 @@
       return $scope.content === ContentType[contentIndex];
     };
 
-    $scope.clickSeek = function ()
+    $scope.onClick = function (contentIndex)
     {
-      //sharedProperties.setString(ContentType[0]);
-      $scope.content = ContentType[0];
-      $scope.$emit('sidenavChanged',ContentType[0]);
+      $scope.content = ContentType[contentIndex];
+      $scope.$emit('sidenavChanged',ContentType[contentIndex]);
       $mdSidenav('left').toggle();
-    };
-
-    $scope.clickPost = function ()
-    {
-      //sharedProperties.setString(ContentType[1]);
-      $scope.$emit('sidenavChanged',ContentType[1]);
-      $scope.content = ContentType[1];
-      $mdSidenav('left').toggle();
-    };
-
-    $scope.clickProfile = function ()
-    {
-      //sharedProperties.setString(ContentType[2]);
-      if($scope.content === ContentType[2])
-        return;
-      $scope.$emit('sidenavChanged',ContentType[2]);
-      $scope.content = ContentType[2];
-    };
-
-    $scope.clickGood = function ()
-    {
-      //sharedProperties.setString(ContentType[3]);
-      if($scope.content === ContentType[3])
-        return;
-      $scope.$emit('sidenavChanged',ContentType[3]);
-      $scope.content = ContentType[3];
-
-    };
+    }
 
   }]);
 

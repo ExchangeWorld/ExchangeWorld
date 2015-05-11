@@ -37,6 +37,9 @@
       when('/post', {
         templateUrl: 'views/post.html'
       }).
+      when('/manage', {
+        templateUrl: 'views/manage.html'
+      }).
       when('/profile', {
         templateUrl: 'views/profile.html'
       }).

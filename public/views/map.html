@@ -11,6 +11,7 @@
       overview-map-control="false"
       map-type-control="false"
       styles="{{mapStyle}}"
+      on-center-changed="centerChanged()"
       resize ng-style="resizeWithOffset(64)">
 
     <custom-control position="LEFT_TOP" index="1">
@@ -21,7 +22,7 @@
     </custom-control>
 
     <custom-control id="myLocation" position="RIGHT_BOTTOM" index="1">
-        <button aria-label="myLocation">
+        <button aria-label="myLocation" ng-click="findMyLocation()">
             <md-icon md-svg-src="./images/icons/gps13.svg" style="display:inline-block;"></md-icon>
         </button>
     </custom-control>

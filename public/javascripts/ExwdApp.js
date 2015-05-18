@@ -32,7 +32,7 @@
         controller: 'seekCtrl'
       }).
       when('/seek/:gid', {
-        templateUrl: 'views/good.html'
+        templateUrl: 'views/goods.html'
       }).
       when('/post', {
         templateUrl: 'views/post.html'

@@ -23,10 +23,11 @@
     };
   }]);
 
-  navbarController.controller('NavbarCtrl', ['$scope','$mdSidenav','$route',function ($scope, $mdSidenav, $route)
+  navbarController.controller('NavbarCtrl', [
+    '$scope','$mdSidenav','$route',
+    function ($scope, $mdSidenav, $route)
   {
     var ContentType = ["home", "seek", "post", "manage", "profile", "good"];
-
     $scope.$on('$routeChangeSuccess', function()
     {
         var url = $route.current.templateUrl;

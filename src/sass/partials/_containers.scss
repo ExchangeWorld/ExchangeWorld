@@ -5,9 +5,11 @@ body {
   margin-top: -$navbar-height;
   padding-top: $navbar-height;
 }
-//.unselectable {
-//    @include user-select(none);
-//}
+
+md-toolbar{
+  z-index: 1000;
+}
+
 #autocomplete {
   margin-left: 20px;
   margin-top: 5px;

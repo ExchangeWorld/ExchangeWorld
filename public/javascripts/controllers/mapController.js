@@ -217,7 +217,9 @@
         $timeout(function() {
           if (!centerChanging) {
             var center = map.getCenter();
-            $location.path('/seek').search('@' + center.lat()+','+center.lng() + ',' + map.getZoom() + 'z');
+
+            if($location.path()==='/seek')
+              $location.path('/seek').search('@' + center.lat()+','+center.lng() + ',' + map.getZoom() + 'z');
           }
         }, 600);
       };
@@ -251,7 +253,8 @@
     $scope.coords = [0, 0];
     geolocation.getLocation().then(function(data) {
       $scope.coords = [data.coords.latitude, data.coords.longitude];
-      $location.path('/seek').search('@' + $scope.coords[0] + ',' + $scope.coords[1] + ',' + '17z');
+      if($location.path()==='/seek')
+        $location.path('/seek').search('@' + $scope.coords[0] + ',' + $scope.coords[1] + ',' + '17z');
     });
 
     $scope.findMyLocation = function() {

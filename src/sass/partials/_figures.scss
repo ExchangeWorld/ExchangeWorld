@@ -1,7 +1,11 @@
-.navbar
-{
-  .brand{
+.navbar {
+  .brand {
     height: $navbar-height;
     padding: 20px 0;
+  }
+}
+#autocomplete {
+  md-icon {
+    fill: $warn-color;
   }
 }

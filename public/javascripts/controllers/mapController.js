@@ -12,7 +12,6 @@
   mapController.controller('mapCtrl', ['$scope', 'geolocation', function($scope, geolocation) {
 
     var marker, map;
-
     $scope.mapStyle = [{
       "featureType": "all",
       "elementType": "labels",
@@ -42,6 +41,7 @@
         "visibility": "on"
       }]
     }, {
+
       "featureType": "poi",
       "elementType": "all",
       "stylers": [{
@@ -145,16 +145,27 @@
       }]
     }];
 
+    //-----------Location-----------
     $scope.coords = [0, 0];
     geolocation.getLocation().then(function(data) {
       $scope.coords = [data.coords.latitude, data.coords.longitude];
     });
+    $scope.placeChanged = function() {
+      var place = this.getPlace().geometry;
+      if (place.viewport)
+        map.panToBounds(place.viewport);
+      else
+        map.panTo(place.location);
+
+      $scope.coords = [place.location.A, place.location.F];
+      console.log($scope.coords);
+    };
+    //---------------------
+
 
     $scope.$on('mapInitialized', function(evt, evtMap) {
       map = evtMap;
     });
-
-
 
     $scope.$on('sidenavChanged', function(event, message) {
       $scope.contentType = message;
@@ -174,6 +185,10 @@
           draggingCursor: 'default'
         });
       }
+    });
+
+    $scope.$on('goodsReceived', function(evt, data) {
+
     });
   }]);
 })();

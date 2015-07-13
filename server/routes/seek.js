@@ -1,6 +1,6 @@
-var express = require('express');
+var express    = require('express');
 var connection = require('../connectDB');
-var router = express.Router();
+var router     = express.Router();
 
 router.get('/', function(req, res, nex) {
     var queryS = 'SELECT `goods`. * , `user`.`username`, `user`.`photoPath` as `owner_photo` FROM `goods`, `user` WHERE `goods`.`ownerID` = `user`.`fb_id`';

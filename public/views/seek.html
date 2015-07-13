@@ -23,9 +23,9 @@
 <div id="outbox">
     <div class="content_box" ng-repeat="good in goods">
     	<img ng-src="{{ good.photoPath }}" alt="..." class="img-rounded" style="width:100%"></img>
-      	<ul class="list-group">
-           	<li class="list-group-item">{{ good.gname }}<span class="badge">{{ good.categories }}</span></li>
-            <li class="list-group-item">​{{ good.want }}</li>
+      	<ul class="list-group" ng-click = "action( good.gid )">
+           	<li class="list-group-item">{{ good.gid }}<span class="badge">{{ good.categories }}</span></li>
+            <li class="list-group-item">{{ good.want }}</li>
             <li class="list-group-item"><img ng-src="{{ good.owner_photo }}" height="20" width="20">{{ good.username }}</li>
         </ul>
     </div>    

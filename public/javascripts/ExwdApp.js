@@ -1,7 +1,7 @@
 (function() {
 
   var ExwdApp = angular.module('ExwdApp', ['ngMaterial', 'ui.bootstrap', 'ngRoute',
-    'navbarController', 'mapController', 'seekController',
+    'navbarController', 'mapController', 'seekController', 'goodsController',
     'listenerDirective', 'templateUrlDircetive',
     'commonServices'
   ]);
@@ -32,7 +32,8 @@
         controller: 'seekCtrl'
       }).
       when('/seek/:gid', {
-        templateUrl: 'views/goods.html'
+        templateUrl: 'views/goods.html',
+        controller: 'goodsCtrl'
       }).
       when('/post', {
         templateUrl: 'views/post.html'

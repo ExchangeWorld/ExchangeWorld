@@ -78,3 +78,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 *.js
+
+pubic/images/
+

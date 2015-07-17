@@ -1,5 +1,5 @@
 var express = require('express');
-var connection = require('../connectDB');
+var connection = require('../connectDBPool');
 var router = express.Router();
 
 router.get('/', function(req, res, nex) {

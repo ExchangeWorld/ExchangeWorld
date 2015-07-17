@@ -1,6 +1,6 @@
 'use strict';
 
-var angular = require('angular');
+const angular = require('angular');
 
 // angular modules
 require('angular-ui-router');
@@ -12,7 +12,7 @@ require('./directives/_index');
 // create and bootstrap application
 angular.element(document).ready(function() {
 
-  var requires = [
+  const requires = [
     'ui.router',
     'templates',
     'app.controllers',

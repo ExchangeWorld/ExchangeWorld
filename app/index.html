@@ -1,19 +1,32 @@
 <!doctype html>
 <html class="no-js">
-  <head>
-      <base href="/">
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title ng-bind="pageTitle"></title>
-      <meta name="description" content="">
-      <meta name="viewport" content="width=device-width">
+	<head>
+			<base href="/">
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+			<meta name="viewport" content="width=device-width">
+			<meta name="description" content="">
+			<meta name="author" content="">
+			<title ng-bind="pageTitle"></title>
+			<!-- <title><%= title %></title> -->
 
-      <link rel="stylesheet" href="css/main.css">
-  </head>
-  <body>
+      <link rel="stylesheet" href="../node_modules/angular-material/angular-material.min.css">
+			<link rel="stylesheet" href="css/main.css">
+	</head>
+	<body>
+		
+			<!-- <navbar flex="35"></navbar>
 
-      <div ui-view></div>
+			<div id="container" layout="row">
+					<sidenav class="md-whiteframe-z2" style="z-index:100;"></sidenav>
 
-      <script src="js/main.js"></script>
-  </body>
+					<map-block flex></map-block>
+			</div> -->
+
+			<div ui-view></div>
+
+			<script src="https://maps.googleapis.com/maps/api/js?&sensor=TRUE&signed_in=false&v=3.exp&libraries=places"></script>
+			<script src="js/main.js"></script>
+
+	</body>
 </html>

@@ -1,8 +1,7 @@
 {
-  "name": "ExchangeWorld",
-  "version": "0.0.1",
-  "dependencies": {
-    "angular-material": "~0.10.0",
-    "font-awesome": "~4.3.0"
-  }
+	"name": "ExchangeWorld",
+	"version": "0.0.1",
+	"dependencies": {
+		"font-awesome": "~4.3.0"
+	}
 }

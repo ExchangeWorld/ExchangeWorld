@@ -6,12 +6,12 @@ var gulp        = require('gulp');
 
 gulp.task('browserSync', function() {
 
-  browserSync({
-  	port: config.browserPort,
-  	ui: {
-    	port: config.UIPort
-    },
-    proxy: 'localhost:' + config.serverPort
-  });
+	browserSync({
+		port: config.browserPort,
+		ui: {
+			port: config.UIPort
+		},
+		proxy: 'localhost:' + config.serverPort
+	});
 
 });

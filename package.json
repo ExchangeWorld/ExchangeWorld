@@ -1,12 +1,20 @@
 {
-  "name": "angularjs-gulp-browserify-boilerplate",
-  "version": "0.1.0",
-  "author": "Jake Marsh <jakemmarsh@gmail.com>",
-  "description": "Boilerplate using AngularJS, SASS, Gulp, and Browserify while also utilizing best practices.",
+  "name": "ExchangeWorld",
+  "version": "0.0.1",
+  "author": "Zack Chen <seal789ie@gmail.com>",
+  "description": "Exchange your preloved with people locally and personally http://clip.csie.org/~exwd/",
+  "homepage": "https://github.com/SSARCandy/ExchangeWorld",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jakemmarsh/angularjs-gulp-browserify-boilerplate.git"
+    "url": "https://github.com/SSARCandy/ExchangeWorld.git"
   },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
   "keywords": [
     "express",
     "gulp",
@@ -79,5 +87,16 @@
     "test": "karma start test/karma.conf.js",
     "preprotractor": "npm run update-webdriver",
     "protractor": "npm run protractor test/protractor.conf.js"
+  },
+  "dependencies": {
+    "angular-animate": "^1.4.3",
+    "angular-aria": "^1.4.3",
+    "angular-material": "^0.10.0",
+    "angular-resource": "^1.4.3",
+    "angular-route": "^1.4.3",
+    "bower": "^1.4.1",
+    "lodash": "^3.10.0",
+    "ngmap": "^1.7.9",
+    "ngreact": "^0.1.7"
   }
 }

@@ -1,8 +1,8 @@
 'use strict';
 
 var AppSettings = {
-  appTitle: 'Example Application',
-  apiUrl: '/api/v1'
+	appTitle: 'ExchangeWorld',
+	apiUrl: '/api/v1/'
 };
 
 module.exports = AppSettings;

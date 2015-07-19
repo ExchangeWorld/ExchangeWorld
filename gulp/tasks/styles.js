@@ -7,16 +7,37 @@ var gulpif       = require('gulp-if');
 var handleErrors = require('../util/handleErrors');
 var browserSync  = require('browser-sync');
 var autoprefixer = require('gulp-autoprefixer');
+var streamqueue  = require('streamqueue');
+var concat       = require('gulp-concat');
 
 gulp.task('styles', function () {
 
-	return gulp.src(config.styles.src)
-		.pipe(sass({
-			sourceComments: global.isProd ? 'none' : 'map',
-			sourceMap: 'sass',
-			outputStyle: global.isProd ? 'compressed' : 'nested'
-		}))
-		.pipe(autoprefixer("last 2 versions", "> 1%", "ie 8"))
+	// var mainStyle = gulp.src(config.styles.src)
+	// 	.pipe(sass({
+	// 		sourceComments: global.isProd ? 'none' : 'map',
+	// 		sourceMap: 'sass',
+	// 		outputStyle: global.isProd ? 'compressed' : 'nested'
+	// 	}))
+	// 	.pipe(autoprefixer("last 2 versions", "> 1%", "ie 8"))
+	// 	.on('error', handleErrors)
+	// 	.pipe(gulp.dest(config.styles.dest))
+	//
+	// var fontAwesome =
+	//
+	// 	.pipe(gulpif(browserSync.active, browserSync.reload({ stream: true })));
+
+	return streamqueue({ objectMode: true },
+		gulp.src(
+			['node_modules/angular-material/'+ (global.isProd ?'angular-material.min.css':'angular-material.css')]),
+			gulp.src(config.styles.src)
+				.pipe(sass({
+					sourceComments: global.isProd ? 'none' : 'map',
+					sourceMap: 'sass',
+					outputStyle: global.isProd ? 'compressed' : 'nested',
+				}))
+				.pipe(autoprefixer("last 2 versions", "> 1%", "ie 8"))
+		)
+		.pipe(concat('main.css'))
 		.on('error', handleErrors)
 		.pipe(gulp.dest(config.styles.dest))
 		.pipe(gulpif(browserSync.active, browserSync.reload({ stream: true })));

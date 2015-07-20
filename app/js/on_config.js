@@ -25,8 +25,7 @@ function OnConfig($stateProvider,$urlRouterProvider, $locationProvider, $mdThemi
 			'hue-2': '900', // use shade 900 for the <code>md-hue-2</code> class
 			'hue-3': 'A100' // use shade A100 for the <code>md-hue-3</code> class
 		})
-		// If you specify less than all of the keys, it will inherit from the
-		// default shades
+		// If you specify less than all of the keys, it will inherit from the default shades
 		.accentPalette('amber', {
 			'default': '700'
 		});

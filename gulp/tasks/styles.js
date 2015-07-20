@@ -12,20 +12,6 @@ var concat       = require('gulp-concat');
 
 gulp.task('styles', function () {
 
-	// var mainStyle = gulp.src(config.styles.src)
-	// 	.pipe(sass({
-	// 		sourceComments: global.isProd ? 'none' : 'map',
-	// 		sourceMap: 'sass',
-	// 		outputStyle: global.isProd ? 'compressed' : 'nested'
-	// 	}))
-	// 	.pipe(autoprefixer("last 2 versions", "> 1%", "ie 8"))
-	// 	.on('error', handleErrors)
-	// 	.pipe(gulp.dest(config.styles.dest))
-	//
-	// var fontAwesome =
-	//
-	// 	.pipe(gulpif(browserSync.active, browserSync.reload({ stream: true })));
-
 	return streamqueue({ objectMode: true },
 		gulp.src(
 			['node_modules/angular-material/'+ (global.isProd ?'angular-material.min.css':'angular-material.css')]),

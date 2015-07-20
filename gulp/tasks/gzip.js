@@ -1,13 +1,15 @@
 'use strict';
 
-var gulp   = require('gulp');
-var gzip   = require('gulp-gzip');
-var config = require('../config');
+var gulp   	= require('gulp');
+var config 	= require('../config');
+var tar 	 	= require('tar-fs');
+var zlib 		= require('zlib');
+var fs 			= require('fs');
 
-gulp.task('gzip', function() {
+gulp.task('zlib', function() {
 
-	return gulp.src(config.gzip.src)
-		.pipe(gzip(config.gzip.options))
-		.pipe(gulp.dest(config.gzip.dest));
+	return tar.pack('./', { entries: ['express', 'build'] })
+	.pipe(zlib.Gzip()) /* Compress the .tar file */
+	.pipe(fs.createWriteStream('build.tar.gz'));
 
 });

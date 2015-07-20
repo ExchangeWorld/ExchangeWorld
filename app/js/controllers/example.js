@@ -2,9 +2,7 @@
 
 var controllersModule = require('./_index');
 
-/**
- * @ngInject
- */
+/*@ngInject*/
 function ExampleCtrl() {
 
   // ViewModel

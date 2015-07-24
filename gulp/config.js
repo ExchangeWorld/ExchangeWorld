@@ -52,7 +52,7 @@ module.exports = {
   },
 
   'test': {
-    'karma': '/test/karma.conf.js',
+    'karma': 'test/karma.conf.js',
     'protractor': 'test/protractor.conf.js'
   }
 

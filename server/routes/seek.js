@@ -2,9 +2,20 @@ var express = require('express');
 var goods = require('../ormModel/Goods');
 var router = express.Router();
 
-router.get('/', function(req, res, nex) {
+router.get('/', function(req, res, next) {
 
-    // Get property:name in ?x=y&z=w....
+    // Available params:
+    // 
+    // title
+    // wishlist
+    // category
+    // px
+    // py
+    // from
+    // to
+    //
+
+    // Get property:value in ?x=y&z=w....
     var title = req.query.title;
     var wishlist = req.query.wishlist;
     var category = req.query.category;
@@ -26,7 +37,6 @@ router.get('/', function(req, res, nex) {
             }
         });
     }).then(function(result) {
-        // console.log(result);
         res.json(result);
     });
 });

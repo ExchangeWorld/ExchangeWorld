@@ -9,7 +9,7 @@ var routeIndex   = require('./server/routes/index');
 var routeSeek    = require('./server/routes/seek');
 var routeGood    = require('./server/routes/goods');
 var routeProfile = require('./server/routes/profile');
-//var users      = require('./server/routes/users');
+var routeUser    = require('./server/routes/user');
 
 var app = express();
 
@@ -31,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Routers
 app.use('/', routeIndex);
 app.use('/seekkk', routeSeek);
+app.use('/user', routeUser);
 app.use('/goods', routeGood);
 app.use('/profile', routeProfile);
 

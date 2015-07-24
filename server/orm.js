@@ -13,6 +13,8 @@ var sequelize = new Sequelize('exchangeworld', 'root', '12241224', {
 
     define: {
         timestamps: false,
+        charset: 'utf8',
+        collate: 'utf8_general_ci'
     }
 });
 

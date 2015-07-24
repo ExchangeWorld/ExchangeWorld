@@ -2,7 +2,7 @@
 
 var AppSettings = {
 	appTitle: 'ExchangeWorld',
-	apiUrl: '/api/v1/'
+	apiUrl: '/api/'
 };
 
 module.exports = AppSettings;

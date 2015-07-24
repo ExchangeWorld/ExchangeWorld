@@ -29,6 +29,6 @@ templates.js
 
 #webstorm
 .idea
-js/**/*.html
+app/js/**/*.html
 
 #test

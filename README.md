@@ -1,6 +1,6 @@
 ## Install
 
-**Install Node modules**
+**Install Node modules (Or if there are some dependencies issues, run this too)**
 
 ```bash
 ExchangeWorld~$ npm install
@@ -56,7 +56,10 @@ ExchangeWorld~$ npm start
 	|-- server/       			--- Nodejs source file
 	|	|-- render/
 	|	|-- routes/				--- Routes handler
-	|	`-- connectDB.js		--- connect to Data Base
+	|       |-- ormModel/                           --- The models of ORM definition are here
+	|	`-- connectDB.js		--- connect to Database (Deprecated)
+	|       `-- connectDBPool.js            --- connect to Datebase in pool connections (Deprecated)
+	|       `-- orm.js                      --- connect to Database in ORM
 	|-- app.js 					--- Main (Starting point)
 	|-- .bowerrc
 	|-- bower.json

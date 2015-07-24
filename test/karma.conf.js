@@ -13,7 +13,7 @@ module.exports = function(config) {
       'app/js/**/*.js': ['browserify', 'babel', 'coverage']
     },
     browsers: ['Chrome'],
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress'],
 
     autoWatch: true,
 

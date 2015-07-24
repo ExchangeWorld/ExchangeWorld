@@ -26,7 +26,7 @@ router.get('/', function(req, res, nex) {
             }
         });
     }).then(function(result) {
-        console.log(result);
+        // console.log(result);
         res.json(result);
     });
 });

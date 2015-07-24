@@ -24,7 +24,7 @@ function runKarma(configFilePath, options, cb) {
 		cb();
 		process.exit(exitCode);
 	});
-};
+}
 
 gulp.task('unit', ['views'], function(cb) {
 	runKarma(config.test.karma, {

@@ -129,6 +129,11 @@ All of the tests can be run at once with the command `gulp test`. However, the t
 
 ##### End-to-End (e2e) Tests
 
+**Notes:**
+
+- before running the Protractor tests, the application server must be running (start it with `gulp`)
+- the Protractor library used for the end-to-end tests may require installing the [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html) beforehand.
+
 e2e tests, as hinted at by the name, consist of tests that involve multiple modules or require interaction between modules, similar to integration tests. These tests are carried out using the Angular library [Protractor](https://github.com/angular/protractor), which also utilizes Jasmine. The goal is to ensure that the flow of your application is performing as designed from start to finish.
 
 In this boilerplate, two end-to-end test examples are provided:
@@ -139,11 +144,6 @@ In this boilerplate, two end-to-end test examples are provided:
 More examples can be seen at the above link for Protractor.
 
 All e2e tests are run with `gulp protractor`. The command `npm run-script preprotractor` should be run once before running any Protractor tests (in order to update the webdrivers used by Selenium).
-
-**Notes:**
-
-- before running the Protractor tests, the application server must be running (start it with `gulp dev`)
-- the Protractor library used for the end-to-end tests may require installing the [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html) beforehand.
 
 ##### Unit Tests
 

@@ -18,21 +18,10 @@ gulp.task('deploy', [], function() {
 		client.sftp(function(err, sftp) {
 			var readStream = fs.createReadStream('build.tar.gz');
 			var writeStream = sftp.createWriteStream('ExchangeWorld/build.tar.gz');
-			writeStream.on('close',function() {
-				console.log( "- file transferred" );
-				client.exec('bash ~/ExchangeWorld/unzip.sh', function(err, stream) {
-					if (err) throw err;
-					stream.on('close', function(code, signal) {
-						client.end();
-					}).on('data', function(data) {
-						console.log('STDOUT: ' + data);
-					}).stderr.on('data', function(data) {
-						console.log('STDERR: ' + data);
-					});
-				});
+			writeStream.on('close', function() {
+				console.log( "file transferred" );
 				sftp.end();
 			});
-
 			readStream.pipe( writeStream );
 		});
 	})

@@ -14,12 +14,26 @@
     <link rel="stylesheet" href="/stylesheets/ng-scrollable.min.css">
     <link rel="stylesheet" href="/stylesheets/main.css">
     <link rel="stylesheet" href="/stylesheets/customized.css">
+
+  <script type="text/javascript">
+        /** 
+         * We need to add this because a race condition can make the library to call fbAsyncInit before its
+         * defined, so we postpone it
+         */
+        window.fbAsyncInit = function() {
+            setTimeout(function(){
+                fbAsyncInit();
+            }, 50);
+        }
+    </script>
 </head>
 
 <body>
 <div id="fb-root"></div>
-<div ng-controller="appCtrl">
-    <button id="login" ng-click="login()">Login</button>
+<div ng-controller="fbCtrl">
+    <button ng-click="IntentLogin()" data-ng-disabled="!facebookReady || logged">Login</button>
+    <button ng-click="logout()" data-ng-disabled="!facebookReady || !logged">Logout</button>
+    <div data-ng-show="logged">You are loggin</div>
 </div>
 
     <!-- See views/navbar.html -->
@@ -78,7 +92,7 @@
     <script src="/javascripts/services/seekServices.js"></script>
     <script src="/javascripts/services/goodsServices.js"></script>
 
-    <script src="/javascripts/vendor/angular-fblogin.js"></script>
+    <script src="http://rawgithub.com/Ciul/angular-facebook/master/lib/angular-facebook.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 (function() {
 
-    var ExwdApp = angular.module('ExwdApp', ['ngMaterial', 'ui.bootstrap', 'ngRoute', 'angularFblogin',
+    var ExwdApp = angular.module('ExwdApp', ['ngMaterial', 'ui.bootstrap', 'ngRoute', 'facebook',
         'navbarController', 'mapController', 'seekController', 'goodsController',
         'listenerDirective', 'templateUrlDircetive',
         'commonServices'
@@ -55,76 +55,117 @@
         }
     ]);
 
-    ExwdApp.controller('appCtrl', function($scope, $fblogin) {
-        $scope.login = function() {
-            $fblogin({
-                fbId: '398517123645939',
-                permissions: 'email',
-                fields: 'first_name, last_name, email',
-                success: function(data) {
-                    console.log('User birthday' + data.birthday + 'and email ' + data.email);
-                },
-                error: function(error) {
-                    console.log('An error occurred.', error);
-                }
-            })
-//.then(
-                //onSuccess,
-                //onError,
-                //onProgress
-            //);
-        };
+
+    ExwdApp.config(function(FacebookProvider) {
+        // Set your appId through the setAppId method or
+        // use the shortcut in the initialize method directly.
+        FacebookProvider.init('398517123645939');
     });
-    // Facebook SDK initialization
-    //ExwdApp.run(['$rootScope', '$window', 'srvAuth',
-    //function($rootScope, $window, sAuth) {
-    //$rootScope.user = {};
-    //$window.fbAsyncInit = function() {
-    //// Executed when the SDK is loaded
-    //FB.init({
-    //appId: '398517123645939', // fb appId
 
-    //[> 
-    //Adding a Channel File improves the performance 
-    //of the javascript SDK, by addressing issues 
-    //with cross-domain communication in certain browsers. 
-    //*/
-    //channelUrl: '../channel.html',
+    ExwdApp.controller('fbCtrl',
+        ['$scope',
+        '$timeout',
+        'Facebook',
+        function($scope, $timeout, Facebook) {
 
-    //[> 
-    //Set if you want to check the authentication status
-    //at the start up of the app 
-    //*/
-    //status: true,
+            // Define user empty data :/
+            $scope.user = {};
 
-    //[> 
-    //Enable cookies to allow the server to access 
-    //the session 
-    //*/
-    //cookie: true,
-    //[> Parse XFBML <]
-    //xfbml: true
-    //});
-    //sAuth.watchAuthenticationStatusChange();
-    //};
+            // Defining user logged status
+            $scope.logged = false;
 
-    //// Are you familiar to IIFE ( http://bit.ly/iifewdb ) ?
-    //(function(d) {
-    //// load the Facebook javascript SDK
-    //var js,
-    //id = 'facebook-jssdk',
-    //ref = d.getElementsByTagName('script')[0];
+            /**
+             * Watch for Facebook to be ready.
+             * There's also the event that could be used
+             */
+            $scope.$watch(
+                function() {
+                    return Facebook.isReady();
+                },
+                function(newVal) {
+                    if (newVal)
+                        $scope.facebookReady = true;
+                }
+            );
 
-    //if (d.getElementById(id)) {
-    //return;
-    //}
+            Facebook.getLoginStatus(function(response) {
+                if (response.status == 'connected') {
+                    $scope.logged = true;
+                }
+            });
 
-    //js = d.createElement('script');
-    //js.id = id;
-    //js.async = true;
-    //js.src = "//connect.facebook.net/en_US/all.js";
-    //ref.parentNode.insertBefore(js, ref);
-    //}(document));
-    //}
-    //]);
+            /**
+             * IntentLogin
+             * if already loggin, do nothings.
+             */
+            $scope.IntentLogin = function() {
+                if (!$scope.logged) {
+                    $scope.login();
+                }
+            };
+
+            /**
+             * Login
+             */
+            $scope.login = function() {
+                Facebook.login(function(response) {
+                    if (response.status == 'connected') {
+                        $scope.logged = true;
+                        $scope.me();
+                    }
+                });
+            };
+
+            /**
+             * me 
+             */
+            $scope.me = function() {
+                Facebook.api('/me', function(response) {
+                    /**
+                     * Using $scope.$apply since this happens outside angular framework.
+                     */
+                    $scope.$apply(function() {
+                        $scope.user = response;
+                    });
+
+                });
+            };
+
+            /**
+             * Logout
+             */
+            $scope.logout = function() {
+                Facebook.logout(function() {
+                    $scope.$apply(function() {
+                        $scope.user = {};
+                        $scope.logged = false;
+                    });
+                });
+            };
+
+            /**
+             * Taking approach of Events :D
+            $scope.$on('Facebook:statusChange', function(ev, data) {
+                console.log('Status: ', data);
+                if (data.status == 'connected') {
+                    $scope.$apply(function() {
+                        $scope.salutation = true;
+                        $scope.byebye = false;
+                    });
+                } else {
+                    $scope.$apply(function() {
+                        $scope.salutation = false;
+                        $scope.byebye = true;
+
+                        // Dismiss byebye message after two seconds
+                        $timeout(function() {
+                            $scope.byebye = false;
+                        }, 2000);
+                    });
+                }
+            });
+             */
+        }
+]);
+
 })();

@@ -79,4 +79,5 @@ $RECYCLE.BIN/
 *.lnk
 
 pubic/images/
+server/DBLogin.js
 

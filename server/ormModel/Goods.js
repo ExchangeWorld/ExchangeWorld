@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 var sequelize = require('../orm');
 
-// Define the schema for table `goods`
+// Define the schema of table `goods`
 var Goods = sequelize.define('goods', {
     gid: {
         type: Sequelize.INTEGER.UNSIGNED,

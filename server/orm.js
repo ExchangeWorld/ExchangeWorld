@@ -1,7 +1,8 @@
 var Sequelize = require('sequelize');
+var DBLogin = require('./DBLogin');
 
 // Export a orm model with some config
-var sequelize = new Sequelize('exchangeworld', 'root', '12241224', {
+var sequelize = new Sequelize('exchangeworld', DBLogin.ID, DBLogin.password, {
     host: 'localhost',
     dialect: 'mysql',
 

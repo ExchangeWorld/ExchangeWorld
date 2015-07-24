@@ -1,5 +1,4 @@
 var express = require('express');
-var connection = require('../connectDBPool');
 var goods = require('../ormModel/Goods');
 var router = express.Router();
 

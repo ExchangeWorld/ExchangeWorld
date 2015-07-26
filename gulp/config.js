@@ -12,7 +12,7 @@ module.exports = {
 	},
 
 	'scripts': {
-		'src' : 'app/js/**/*.js',
+		'src' : 'app/angular/**/*.js',
 		'dest': 'build/js'
 	},
 
@@ -29,10 +29,10 @@ module.exports = {
 	'views': {
 		'watch': [
 			'app/index.html',
-			'app/views/**/*.html'
+			'app/angular/**/*.html'
 		],
-		'src': 'app/views/**/*.html',
-		'dest': 'app/js'
+		'src': 'app/angular/**/*.html',
+		'dest': 'app/angular'
 	},
 
 	'gzip': {
@@ -46,7 +46,7 @@ module.exports = {
 	},
 
 	'browserify': {
-		'entries'   : ['./app/js/main.js'],
+		'entries'   : ['./app/angular/main.js'],
 		'bundleName': 'main.js',
 		'sourcemap' : true
 	},

@@ -10,9 +10,9 @@ module.exports = function(config) {
 		basePath: '../',
 		frameworks: ['jasmine', 'browserify'],
 		preprocessors: {
-			'app/js/**/*.js': ['browserify', 'babel', 'coverage']
+			'app/angular/**/*.js': ['browserify', 'babel', 'coverage']
 		},
-		browsers: ['Chrome'],
+		browsers: ['PhantomJS'],
 		reporters: ['progress'],
 		autoWatch: true,
 
@@ -39,10 +39,10 @@ module.exports = function(config) {
 			'node_modules/angular-mocks/angular-mocks.js',
 
 			// app-specific code
-			'app/js/main.js',
+			'app/angular/main.js',
 
 			// test files
-			'test/unit/**/*.js'
+			'app/angular/**/*.spec.js'
 		]
 
 	});

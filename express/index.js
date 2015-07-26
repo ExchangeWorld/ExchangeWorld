@@ -27,7 +27,7 @@ module.exports = function() {
 	server.use(express.static(config.dist.root));
 
 	// Serve index.html for all routes to leave routing up to Angular
-	server.all('/', function(req, res, next) {
+	server.all('/*', function(req, res, next) {
 		res.sendFile('index.html', { root: 'build' });
 		//next();
 	});
@@ -52,7 +52,7 @@ module.exports = function() {
 		err.statusCode = 500;
 		if (process.env.NODE_ENV !== 'production' && req.xhr) {
 			res.send(err);
-		} else if(req.xhr) {
+		} else if (req.xhr) {
 			res.send(err.message);
 		}
 

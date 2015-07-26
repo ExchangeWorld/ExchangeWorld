@@ -2,97 +2,98 @@
 <html ng-app="ExwdApp">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
-    <link rel="stylesheet" href="/stylesheets/font-awesome.min.css">
-    <link rel="stylesheet" href="/stylesheets/angular-material.min.css">
-    <link rel="stylesheet" href="/stylesheets/ng-scrollable.min.css">
-    <link rel="stylesheet" href="/stylesheets/main.css">
-    <link rel="stylesheet" href="/stylesheets/customized.css">
+	<title><%= title %></title>
+	<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+	<link rel="stylesheet" href="/stylesheets/font-awesome.min.css">
+	<link rel="stylesheet" href="/stylesheets/angular-material.min.css">
+	<link rel="stylesheet" href="/stylesheets/ng-scrollable.min.css">
+	<link rel="stylesheet" href="/stylesheets/main.css">
+	<link rel="stylesheet" href="/stylesheets/customized.css">
 
   <script type="text/javascript">
-        /** 
-         * We need to add this because a race condition can make the library to call fbAsyncInit before its
-         * defined, so we postpone it
-         */
-        window.fbAsyncInit = function() {
-            setTimeout(function(){
-                fbAsyncInit();
-            }, 50);
-        }
-    </script>
+		/** 
+		 * We need to add this because a race condition can make the library to call fbAsyncInit before its
+		 * defined, so we postpone it
+		 */
+		window.fbAsyncInit = function() {
+			setTimeout(function(){
+				fbAsyncInit();
+			}, 50);
+		}
+	</script>
 </head>
 
 <body>
 <div id="fb-root"></div>
 <div ng-controller="fbCtrl">
-    <button ng-click="IntentLogin()" data-ng-disabled="!facebookReady || logged">Login</button>
-    <button ng-click="logout()" data-ng-disabled="!facebookReady || !logged">Logout</button>
-    <div data-ng-show="logged">You are loggin</div>
+	<button ng-click="IntentLogin()" data-ng-disabled="!facebookReady || logged">Login</button>
+	<button ng-click="logout()" data-ng-disabled="!facebookReady || !logged">Logout</button>
+	<div data-ng-show="logged">You are loggin</div>
 </div>
 
-    <!-- See views/navbar.html -->
-    <navbar flex="35"></navbar>
+	<!-- See views/navbar.html -->
+	<navbar flex="35"></navbar>
 
-    <div id="container" layout="row">
-        <!-- See scripts/directives/templateDirective.js -->
-        <sidenav class="md-whiteframe-z2" style="z-index:100;"></sidenav>
+	<div id="container" layout="row">
+		<!-- See scripts/directives/templateDirective.js -->
+		<sidenav class="md-whiteframe-z2" style="z-index:100;"></sidenav>
 
-        <map-block flex></map-block>
-    </div>
+		<map-block flex></map-block>
+	</div>
 
-    <!-- AngularJs  -->
-    <script src="/javascripts/vendor/angular.min.js"></script>
-    <script src="/javascripts/vendor/angular-route.min.js"></script>
-    <script src="/javascripts/vendor/angular-aria.min.js"></script>
-    <script src="/javascripts/vendor/angular-animate.min.js"></script>
-    <script src="/javascripts/vendor/angular-material.min.js"></script>
-    <!--
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.7.0/angular-material.min.js"></script>
-    -->
+	<!-- AngularJs  -->
+	<script src="/javascripts/vendor/angular.min.js"></script>
+	<script src="/javascripts/vendor/angular-route.min.js"></script>
+	<script src="/javascripts/vendor/angular-aria.min.js"></script>
+	<script src="/javascripts/vendor/angular-animate.min.js"></script>
+	<script src="/javascripts/vendor/angular-material.min.js"></script>
+	<!--
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-aria.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.7.0/angular-material.min.js"></script>
+	-->
 
-    <!--FB api-->
-    <script src="http://connect.facebook.net/en_US/all.js"></script>
+	<!--FB api-->
+	<script src="http://connect.facebook.net/en_US/all.js"></script>
 
-    <!-- React.js -->
-    <script src="/javascripts/vendor/react.min.js"></script>
-    <script src="/javascripts/vendor/ngReact.min.js"></script>
+	<!-- React.js -->
+	<script src="/javascripts/vendor/react.min.js"></script>
+	<script src="/javascripts/vendor/ngReact.min.js"></script>
 
-    <!-- scroller -->
-    <script src="/javascripts/vendor/ng-scrollable.min.js"></script>
-    <!-- bootstrap -->
-    <script src="/javascripts/vendor/ui-bootstrap-custom-0.12.1.min.js"></script>
+	<!-- scroller -->
+	<script src="/javascripts/vendor/ng-scrollable.min.js"></script>
+	<!-- bootstrap -->
+	<script src="/javascripts/vendor/ui-bootstrap-custom-0.12.1.min.js"></script>
 
-    <!-- google map -->
-    <script src="https://maps.googleapis.com/maps/api/js?&sensor=TRUE&signed_in=false&v=3.exp&libraries=places"></script>
-    <script src="/javascripts/vendor/angularjs-geolocation.min.js"></script>
-    <script src="/javascripts/vendor/ng-map.min.js"></script>
+	<!-- google map -->
+	<script src="https://maps.googleapis.com/maps/api/js?&sensor=TRUE&signed_in=false&v=3.exp&libraries=places"></script>
+	<script src="/javascripts/vendor/angularjs-geolocation.min.js"></script>
+	<script src="/javascripts/vendor/ng-map.min.js"></script>
 
-    <!-- angularjs module -->
-    <script src="/javascripts/ExwdApp.js"></script>
-      <!-- Controllers -->
-    <script src="/javascripts/controllers/navbarController.js"></script>
-    <script src="/javascripts/controllers/mapController.js"></script>
-    <script src="/javascripts/controllers/seekController.js"></script>
-    <script src="/javascripts/controllers/goodsController.js"></script>
-      <!-- Directives -->
-    <script src="/javascripts/directives/listenerDirective.js"></script>
-    <script src="/javascripts/directives/templateDirective.js"></script>
-      <!-- Filters -->
-      <!-- Services -->
-    <script src="/javascripts/services/commonServices.js"></script>
-    <script src="/javascripts/services/seekServices.js"></script>
-    <script src="/javascripts/services/goodsServices.js"></script>
+	<!-- angularjs module -->
+	<script src="/javascripts/ExwdApp.js"></script>
+	  <!-- Controllers -->
+	<script src="/javascripts/controllers/navbarController.js"></script>
+	<script src="/javascripts/controllers/mapController.js"></script>
+	<script src="/javascripts/controllers/seekController.js"></script>
+	<script src="/javascripts/controllers/goodsController.js"></script>
+	<!-- Directives -->
+	<script src="/javascripts/directives/listenerDirective.js"></script>
+	<script src="/javascripts/directives/templateDirective.js"></script>
+	<!-- Filters -->
+	<!-- Services -->
+	<script src="/javascripts/services/commonServices.js"></script>
+	<script src="/javascripts/services/seekServices.js"></script>
+	<script src="/javascripts/services/goodsServices.js"></script>
 
-    <script src="http://rawgithub.com/Ciul/angular-facebook/master/lib/angular-facebook.js"></script>
+	<!--facebook-api module-->
+	<script src="http://rawgithub.com/Ciul/angular-facebook/master/lib/angular-facebook.js"></script>
 </body>
 
 </html>

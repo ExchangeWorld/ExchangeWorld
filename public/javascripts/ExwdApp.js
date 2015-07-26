@@ -107,6 +107,7 @@
 
 			/**
 			 * Login
+			 */
 			$scope.login = function() {
 				Facebook.login(function(response) {
 					if (response.status == 'connected') {
@@ -115,7 +116,6 @@
 					}
 				});
 			};
-			 */
 
 			/**
 			 * me

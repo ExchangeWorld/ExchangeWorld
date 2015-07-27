@@ -2,8 +2,8 @@
 
 const angular = require('angular');
 const bulk    = require('bulk-require');
-console.log('example.module.js');
 
-module.exports = angular.module('app.example', []);
+require('../map/map.module');
+module.exports = angular.module('app.example', ['app.core']);
 
 bulk(__dirname, ['./**/!(*.module|*.spec).js']);

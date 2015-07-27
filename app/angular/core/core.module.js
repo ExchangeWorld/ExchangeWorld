@@ -2,7 +2,7 @@
 
 const angular  = require('angular');
 const bulk     = require('bulk-require');
-console.log('core.module.js');
+
 require('angular-ui-router');
 require('angular-material');
 require('../utils/logger/logger.module');

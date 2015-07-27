@@ -3,8 +3,12 @@
 const angular  = require('angular');
 const bulk     = require('bulk-require');
 
-
-require('../logger/logger.module');
-module.exports = angular.module('utils.exception', ['utils.logger']);
+require('ngmap');
+module.exports = angular.module('app.map',
+	[
+		'app.core',
+		'ngMap',
+	]
+);
 
 bulk(__dirname, ['./**/!(*.module|*.spec).js']);

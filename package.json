@@ -105,7 +105,6 @@
     "angular-resource": "^1.4.3",
     "angular-toastr": "^1.4.1",
     "bower": "^1.4.1",
-    "google-maps": "^3.1.0",
     "lodash": "^3.10.0",
     "ng-infinite-scroll": "^1.2.0",
     "ngmap": "^1.7.9"

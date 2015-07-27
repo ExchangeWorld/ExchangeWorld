@@ -2,7 +2,6 @@
 
 const exampleModule = require('./example.module');
 exampleModule.run(appRun);
-//console.log('dsad');
 
 /** @ngInject */
 function appRun(routerHelper) {
@@ -15,7 +14,9 @@ function getStates() {
 			state : 'Home',
 			config : {
 				url : '/',
-				controller : 'ExampleCtrl as vm',
+				bindToController: true,
+				controller : 'ExampleCtrl',
+				controllerAs: 'vm',
 				templateUrl : 'example/example.html',
 				title : 'Home'
 			}

@@ -8,8 +8,8 @@ routerModule.provider('routerHelper', routerHelperProvider);
 function routerHelperProvider($locationProvider, $stateProvider, $urlRouterProvider) {
 
 	$locationProvider.html5Mode({
-		enabled: true,
-		requireBase: false
+		enabled : true,
+		requireBase : false
 	});
 
 	var config = {
@@ -73,14 +73,17 @@ function routerHelperProvider($locationProvider, $stateProvider, $urlRouterProvi
 					if (handlingStateChangeError) {
 						return;
 					}
+
 					stateCounts.errors++;
 					handlingStateChangeError = true;
-					var destination          = (toState &&
+
+					var destination = (toState &&
 						(toState.title || toState.name || toState.loadedTemplateUrl)) ||
 						'unknown target';
-					var msg                  = 'Error routing to ' + destination + '. ' +
-						(error.data || '') + '. <br/>' + (error.statusText || '') +
-						': ' + (error.status || '');
+
+					var msg = 'Error routing to ' + destination + '. ' + (error.data || '') +
+						'. <br/>' + (error.statusText || '') + ': ' + (error.status || '');
+
 					logger.warning(msg, [toState]);
 					$location.path('/');
 				}
@@ -88,12 +91,10 @@ function routerHelperProvider($locationProvider, $stateProvider, $urlRouterProvi
 		}
 
 		function updateDocTitle() {
-			$rootScope.$on('$stateChangeSuccess',
-				function(event, toState, toParams, fromState, fromParams) {
+			$rootScope.$on('$stateChangeSuccess', function(event, toState) {
 					stateCounts.changes++;
 					handlingStateChangeError = false;
-					var title                = config.docTitle + ' ' + (toState.title || '');
-					$rootScope.title         = title; // data bind to <title>
+
 				}
 			);
 		}

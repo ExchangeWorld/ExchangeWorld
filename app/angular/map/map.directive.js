@@ -6,8 +6,9 @@ mapModule.directive('mapBlock', mapBlock);
 function mapBlock() {
 	var directive = {
 		restrict: 'E',
+		scope: {},
 		bindToController: true,
-		controller: 'MapCtrl as am',
+		controller: 'MapCtrl as vm',
 		templateUrl: 'map/map.html'
 	};
 

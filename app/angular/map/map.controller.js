@@ -6,8 +6,8 @@ mapModule.controller('MapCtrl', MapController);
 /** @ngInject */
 function MapController($scope, geolocation) {
 	var map;
-	const am    = this;
-	am.mapStyle = [
+	const vm    = this;
+	vm.mapStyle = [
 		{
 			"featureType" : "all",
 			"elementType" : "labels",
@@ -26,7 +26,7 @@ function MapController($scope, geolocation) {
 				}, {
 					"weight" : "0.7"
 				}, {
-					"gamma" : "1"
+					"gvmma" : "1"
 				}
 			]
 		}, {
@@ -250,8 +250,8 @@ function MapController($scope, geolocation) {
 		}
 	];
 
-	am.findMyLocation = getCurrentPosition;
-	am.placeChanged   = placeChanged;
+	vm.findMyLocation = getCurrentPosition;
+	vm.placeChanged   = placeChanged;
 	$scope.$on('mapInitialized', mapInitialized);
 	$scope.$on('sidenavChanged', sidenavChanged);
 
@@ -286,11 +286,11 @@ function MapController($scope, geolocation) {
 	};
 
 	function activate() {
-		am.coords = [0, 0];
+		vm.coords = [0, 0];
 		geolocation
 			.getLocation()
 			.then(function(data) {
-				am.coords = [data.coords.latitude, data.coords.longitude];
+				vm.coords = [data.coords.latitude, data.coords.longitude];
 			});
 	}
 };

@@ -1,6 +1,9 @@
 var express = require('express');
-var goods = require('../ormModel/Goods');
-var router = express.Router();
+var router  = express.Router();
+
+// including tables 
+var goods   = require('../ormModel/Goods');
+var user    = require('../ormModel/User.js');
 
 router.get('/', function(req, res, next) {
 
@@ -16,25 +19,35 @@ router.get('/', function(req, res, next) {
     //
 
     // Get property:value in ?x=y&z=w....
-    var title = req.query.title;
+    var title    = req.query.title;
     var wishlist = req.query.wishlist;
     var category = req.query.category;
-    var px = parseFloat(req.query.px);
-    var py = parseFloat(req.query.py);
-    var from = parseInt(req.query.from);
-    var to = parseInt(req.query.to);
+    var px       = parseFloat(req.query.px);
+    var py       = parseFloat(req.query.py);
+    var from     = parseInt(req.query.from);
+    var to       = parseInt(req.query.to);
+
+	// Set association between tables (user, goods)
+	user.hasMany(goods, {foreignKey:'ownerID'});
+	goods.belongsTo(user, {foreignKey: 'ownerID'});
 
     // Emit a find operation with orm model in table `goods`
     goods.sync({
         force: false
     }).then(function() {
-        return goods.findAll({
+		/**
+		 * SELECT `goods`.*, `user`.* 
+		 * FROM `goods`, `user`
+		 * WHERE `goods`.ownerID = `user`.fb_id AND `goods`.name = %title% 
+         */
+		return goods.findAll({
             where: {
                 gname: {
                     $like: '%' + title + '%'
                 },
                 status: 0
-            }
+            },
+			include: [user]
         });
     }).then(function(result) {
         res.json(result);

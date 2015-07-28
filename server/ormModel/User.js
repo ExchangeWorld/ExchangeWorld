@@ -3,16 +3,16 @@ var sequelize = require('../orm');
 
 // Define the schema of table `user`
 var User = sequelize.define('user', {
-    uid: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
-    },
     fb_id: {
         type: Sequelize.STRING(128),
         allowNull: true,
-        unique: true
+        unique: true,
+        primaryKey: true
+    },
+    uid: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
+        autoIncrement: true
     },
     username: {
         type: Sequelize.STRING,

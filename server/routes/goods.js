@@ -1,6 +1,9 @@
 var express = require('express');
-var goods = require('../ormModel/Goods');
-var router = express.Router();
+var router  = express.Router();
+
+// including tables
+var goods   = require('../ormModel/Goods');
+var user    = require('../ormModel/User.js');
 
 router.get('/', function(req, res, next) {
 
@@ -11,7 +14,7 @@ router.get('/', function(req, res, next) {
     // 
 
     // Get property:value in ?x=y&z=w....
-    var _gid = parseInt(req.query.gid);
+    var _gid     = parseInt(req.query.gid);
     var _ownerID = req.query.ownerID;
 
     // If gid or ownerID in query are not defined, then set them to zero or emptyString
@@ -19,8 +22,8 @@ router.get('/', function(req, res, next) {
         _gid = 0;
     }
 
-    if (_ownerID == undefined) {
-        _ownerID = ""
+    if (_ownerID === undefined) {
+        _ownerID = "";
     }
 
     if (!_ownerID.length > 0) {
@@ -29,14 +32,23 @@ router.get('/', function(req, res, next) {
 
     // If gid or ownerID appear together, then return undefined
     // Because we want RESTful looking for either the gid of one good or one owner's goods
-    if (_gid > 0 && _ownerID != "") {
+    if (_gid > 0 && _ownerID !== "") {
         res.json(undefined);
     }
+
+	// Set association between tables (user, goods)
+	user.hasMany(goods, {foreignKey:'ownerID'});
+	goods.belongsTo(user, {foreignKey: 'ownerID'});
 
     // Emit a find operation with orm model in table `goods`
     goods.sync({
         force: false
     }).then(function() {
+		/**
+ 		 * SELECT `goods`. * , `user`.*
+		 * FROM `goods`, `user`
+		 * WHERE `goods`.`gid` = '_gid' AND `goods`.`ownerID` = `user`.`fb_id`
+		 */
         return goods.findAll({
             where: {
                 $or: [{
@@ -44,7 +56,8 @@ router.get('/', function(req, res, next) {
                 }, {
                     ownerID: _ownerID
                 }]
-            }
+            },
+			include: [user]
         });
     }).then(function(result) {
         res.json(result);

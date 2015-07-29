@@ -3,7 +3,7 @@ angular.module('profileServices', []).factory('profileServ', ['$http', function(
         get: function(callback, id) {
             $http.get('/profile?fb_id=' + id).success(function(data) {
                 // prepare data here
-                //console.log(data);
+				console.log(data);
                 callback(data);
             });
         }

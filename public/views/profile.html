@@ -10,4 +10,12 @@
 	<div ng-repeat="users_goods in proData.goods">
 		<h4>gname = {{ users_goods.gname }}</h4>
 	</div>
+	<p>---以下為他的FOLLOWER---</p>
+	<div ng-repeat="follower in proData.followertables">
+		<h4>fb_id = {{ follower.follower }}</h4>
+	</div>
+	<p>---以下為他的FOLLOWING---</p>
+	<div ng-repeat="following in proData.seekers">
+		<h4>fb_id = {{ following.seeker }}</h4>
+	</div>
 </div>

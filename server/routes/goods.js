@@ -48,9 +48,11 @@ router.get('/', function(req, res, next) {
         force: false
     }).then(function() {
 		/**
- 		 * SELECT `goods`. * , `user`.*
-		 * FROM `goods`, `user`
-		 * WHERE `goods`.`gid` = '_gid' AND `goods`.`ownerID` = `user`.`fb_id`
+ 		 * SELECT `goods`. * , `user`.*, `comments`.*
+		 * FROM `goods`, `user`, `comments`
+		 * WHERE `goods`.`gid` = '_gid' 
+		 *   AND `goods`.`ownerID` = `user`.`fb_id` 
+		 *   AND `goods`.`ownerID` = `comments`.`commenter`
 		 */
         return goods.findAll({
             where: {

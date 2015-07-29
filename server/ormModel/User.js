@@ -11,8 +11,8 @@ var User = sequelize.define('user', {
 	},
 	uid: {
 		type: Sequelize.INTEGER.UNSIGNED,
-		allowNull: false,
-		autoIncrement: true
+		allowNull: false
+		//autoIncrement: true
 	},
 	username: {
 		type: Sequelize.STRING,
@@ -44,6 +44,7 @@ var User = sequelize.define('user', {
 		allowNull: false
 	}
 }, {
+	// prevent sequelize auto-append 's' after tablename
 	freezeTableName: true
 });
 

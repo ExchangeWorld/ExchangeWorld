@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 var sequelize = require('../orm');
 
-// Define the schema of table `user`
+// Define the schema of table `comments`
 var Comments = sequelize.define('comments', {
 	cid: {
 		type: Sequelize.INTEGER.UNSIGNED,
@@ -21,7 +21,7 @@ var Comments = sequelize.define('comments', {
 	comment: {
 		type: Sequelize.STRING,
 		allowNull: false
-	},
+	}
 });
 
 module.exports = Comments;

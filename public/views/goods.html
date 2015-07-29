@@ -9,4 +9,8 @@
     <h4>Categories = {{ prop.categories }}</h4>
     <h4>description = {{ prop.description}}</h4>
     <h4 ng-click="action( prop.user.fb_id )">owner = <a>{{ prop.user.username }}</a></h4>
+	<p>----------以下為留言區-----------</p>
+	<div ng-repeat="comments in prop.comments">
+		<h4><a ng-click="action( comments.commenter )">{{ comments.commenter }}</a> say: {{ comments.comment }}</h4>
+	</div>
 </div>

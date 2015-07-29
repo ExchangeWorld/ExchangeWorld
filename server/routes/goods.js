@@ -2,8 +2,9 @@ var express = require('express');
 var router  = express.Router();
 
 // including tables
-var goods   = require('../ormModel/Goods');
-var user    = require('../ormModel/User.js');
+var goods    = require('../ormModel/Goods');
+var user     = require('../ormModel/User.js');
+var comments = require('../ormModel/Comments.js');
 
 router.get('/', function(req, res, next) {
 
@@ -39,6 +40,8 @@ router.get('/', function(req, res, next) {
 	// Set association between tables (user, goods)
 	user.hasMany(goods, {foreignKey:'ownerID'});
 	goods.belongsTo(user, {foreignKey: 'ownerID'});
+	goods.hasMany(comments, {foreignKey:'goods_id'});
+	comments.belongsTo(goods, {foreignKey:'goods_id'});
 
     // Emit a find operation with orm model in table `goods`
     goods.sync({
@@ -57,7 +60,7 @@ router.get('/', function(req, res, next) {
                     ownerID: _ownerID
                 }]
             },
-			include: [user]
+			include: [user, comments]
         });
     }).then(function(result) {
         res.json(result);

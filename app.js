@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Routers
 app.use('/', routeIndex);
-app.use('/seekkk', routeSeek);
+app.use('/seek', routeSeek);
 app.use('/user', routeUser);
 app.use('/goods', routeGood);
 app.use('/profile', routeProfile);

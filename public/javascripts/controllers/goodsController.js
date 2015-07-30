@@ -1,11 +1,11 @@
 "use strict";
 
 angular
-	.module('goodsController', ['goodsServices'])
-	.controller('goodsCtrl', goodsCtrl); //['$scope', 'goodsServ', '$routeParams',
+	.module('GoodsController', ['goodsServices'])
+	.controller('GoodsCtrl', goodsCtrl); 
 
 function goodsCtrl($scope, goodsServ, $routeParams) {
-	const vm       = this;
+	var vm         = this;
 	vm.goodsData   = [];
 	vm.onClickUser = onClickUser;
 
@@ -15,5 +15,5 @@ function goodsCtrl($scope, goodsServ, $routeParams) {
 	// define onClick event on goods owner
 	function onClickUser(fb_id) {
 		window.location.href = "#/profile/" + fb_id;
-	};
+	}
 }

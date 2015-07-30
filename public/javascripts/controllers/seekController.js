@@ -1,11 +1,11 @@
 "use strict";
 
 angular
-	.module('seekController', ['seekServices'])
-	.controller('seekCtrl', seekCtrl);
+	.module('SeekController', ['seekServices'])
+	.controller('SeekCtrl', seekCtrl);
 
 function seekCtrl($scope, seekServ) {
-	const vm        = this;
+	var vm          = this;
 	vm.goods        = [];
 	vm.onClickGoods = onClickGoods;
 

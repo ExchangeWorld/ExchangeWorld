@@ -1,7 +1,7 @@
 (function() {
 
 	var ExwdApp = angular.module('ExwdApp', ['ngMaterial', 'ui.bootstrap', 'ngRoute', 'facebook',
-		'navbarController', 'mapController', 'seekController', 'goodsController', 'profileController',
+		'navbarController', 'mapController', 'SeekController', 'GoodsController', 'profileController',
 		'listenerDirective', 'templateUrlDircetive',
 		'commonServices'
 	]);
@@ -29,11 +29,13 @@
 			}).
 			when('/seek', {
 				templateUrl: 'views/seek.html',
-				controller: 'seekCtrl as seekctrl'
+				controller: 'SeekCtrl',
+				controllerAs: 'vm'
 			}).
 			when('/seek/:gid', {
 				templateUrl: 'views/goods.html',
-				controller: 'goodsCtrl as goodsctrl'
+				controller: 'GoodsCtrl',
+				controllerAs: 'vm'
 			}).
 			when('/post', {
 				templateUrl: 'views/post.html'

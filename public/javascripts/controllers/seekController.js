@@ -1,17 +1,19 @@
-(function() {
-    var seekController = angular.module('seekController', ['seekServices']);
+"use strict";
 
-    seekController.controller('seekCtrl', ['$scope', 'seekServ', 
-	function($scope, seekServ) {
+angular
+	.module('seekController', ['seekServices'])
+	.controller('seekCtrl', seekCtrl);
 
-		// Use seekServices.js to get data from backend
-        seekServ.get(function(data) {
-            $scope.goods = data;
-        });
+function seekCtrl($scope, seekServ) {
+	const vm        = this;
+	vm.goods        = [];
+	vm.onClickGoods = onClickGoods;
 
-		// goods onClick event: change route to corrsponding gid
-        $scope.action = function(gid) {
-            window.location.href = "#/seek/" + gid;
-        };
-    }]);
-})();
+	// Use seekServices.js to get data from backend
+	seekServ.get(function(data){ vm.goods = data; });
+
+	// goods onClick event: change route to corrsponding gid
+	function onClickGoods(gid) {
+		window.location.href = "#/seek/" + gid;
+	}
+}

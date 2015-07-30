@@ -1,18 +1,19 @@
-(function() {
-    var goodsController = angular.module('goodsController', ['goodsServices']);
+"use strict";
 
-    goodsController.controller('goodsCtrl', ['$scope', 'goodsServ', '$routeParams',
-    function($scope, goodsServ, $routeParams) {
+angular
+	.module('goodsController', ['goodsServices'])
+	.controller('goodsCtrl', goodsCtrl); //['$scope', 'goodsServ', '$routeParams',
 
-		// get data from goodsServices.js
-        goodsServ.get(function(data) {
-            $scope.goodsProps = data;
-        }, $routeParams.gid);
+function goodsCtrl($scope, goodsServ, $routeParams) {
+	const vm       = this;
+	vm.goodsData   = [];
+	vm.onClickUser = onClickUser;
 
-		// define onClick event on goods owner
-        $scope.action = function(fb_id){
-            window.location.href = "#/profile/" + fb_id;
-		};
+	// get data from goodsServices.js
+	goodsServ.get(function(data) { vm.goodsData = data; }, $routeParams.gid);
 
-    }]);
-})();
+	// define onClick event on goods owner
+	function onClickUser(fb_id) {
+		window.location.href = "#/profile/" + fb_id;
+	};
+}

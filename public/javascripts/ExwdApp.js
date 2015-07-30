@@ -29,11 +29,11 @@
 			}).
 			when('/seek', {
 				templateUrl: 'views/seek.html',
-				controller: 'seekCtrl'
+				controller: 'seekCtrl as seekctrl'
 			}).
 			when('/seek/:gid', {
 				templateUrl: 'views/goods.html',
-				controller: 'goodsCtrl'
+				controller: 'goodsCtrl as goodsctrl'
 			}).
 			when('/post', {
 				templateUrl: 'views/post.html'

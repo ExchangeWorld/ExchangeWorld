@@ -1,13 +1,13 @@
 <h3>GOODS</h3>
-<div ng-repeat="prop in goodsProps">
-    <img ng-src="{{ prop.photoPath }}" alt="..." class="img-rounded" style="width:100%"></img>
-    <h4>gid = {{ prop.gid }}</h4>
-    <h4>gname = {{ prop.gname }}</h4>
-    <h4>Categories = {{ prop.categories }}</h4>
-    <h4>description = {{ prop.description}}</h4>
-    <h4 ng-click="action( prop.user.fb_id )">owner = <a>{{ prop.user.username }}</a></h4>
+<div ng-repeat="goods in goodsctrl.goodsData">
+    <img ng-src="{{ goods.photoPath }}" alt="..." class="img-rounded" style="width:100%"></img>
+    <h4>gid = {{ goods.gid }}</h4>
+    <h4>gname = {{ goods.gname }}</h4>
+    <h4>Categories = {{ goods.categories }}</h4>
+    <h4>description = {{ goods.description}}</h4>
+    <h4 ng-click="goodsctrl.onClickUser( goods.user.fb_id )">owner = <a>{{ goods.user.username }}</a></h4>
 	<p>----------以下為留言區-----------</p>
-	<div ng-repeat="comments in prop.comments">
-		<h4><a ng-click="action( comments.commenter )">{{ comments.commenter }}</a> say: {{ comments.comment }}</h4>
+	<div ng-repeat="comments in goods.comments">
+		<h4><a ng-click="goodsctrl.onClickUser( comments.commenter )">{{ comments.commenter }}</a> say: {{ comments.comment }}</h4>
 	</div>
 </div>

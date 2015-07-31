@@ -1,22 +1,23 @@
-(function () {
-    var templateUrlDircetive = angular.module('templateUrlDircetive', ['ngScrollable']);
+"use strict";
 
-    templateUrlDircetive.directive('sidenav', function () {
-        return {
-            restrict: 'E',
-            templateUrl: 'views/sidenav.html',
-            controller: ['$scope','sharedProperties','$mdSidenav',function ($scope, sharedProperties, $mdSidenav) {
+angular
+	.module('templateUrlDircetive', ['ngScrollable'])
+	.directive('sidenav', sidenav);
 
-                $scope.contentType = sharedProperties.getString();
-                $scope.$on('sidenavChanged', function (event, message) {
-                    $scope.contentType = message;
-                });
+function sidenav() {
+	return {
+		restrict: 'E',
+		templateUrl: 'views/sidenav.html',
+		controller: ['$scope', 'sharedProperties', '$mdSidenav', function($scope, sharedProperties, $mdSidenav) {
 
-                $scope.closeMenu = function () {
-                    $mdSidenav('left').close();
-                };
-            }]
-        };
-    });
-    
-})();
+			$scope.contentType = sharedProperties.getString();
+			$scope.$on('sidenavChanged', function(event, message) {
+				$scope.contentType = message;
+			});
+
+			$scope.closeMenu = function() {
+				$mdSidenav('left').close();
+			};
+		}]
+	};
+}

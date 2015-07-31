@@ -5,16 +5,16 @@ angular
 	.factory('sharedProperties', shareproperties);
 
 function shareproperties() {
+	var stringValue = 'seek';
 	var service = {
 		getString: getstring,
 		setString: setstring
 	};
 
-	var stringValue = 'seek';
-
 	return service;
 
 	///////////////
+
 
 	function getstring() {
 		return stringValue;

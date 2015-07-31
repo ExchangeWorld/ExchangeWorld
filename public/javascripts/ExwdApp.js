@@ -9,10 +9,10 @@
 	ExwdApp.config(function($mdThemingProvider) {
 		$mdThemingProvider.theme('default')
 			.primaryPalette('teal', {
-				'default' : '600', // by default use shade 600 from the teal palette for primary intentions
-				'hue-1'   : '400', // use shade 400 for the <code>md-hue-1</code> class
-				'hue-2'   : '900', // use shade 900 for the <code>md-hue-2</code> class
-				'hue-3'   : 'A100' // use shade A100 for the <code>md-hue-3</code> class
+				'default': '600', // by default use shade 600 from the teal palette for primary intentions
+				'hue-1': '400', // use shade 400 for the <code>md-hue-1</code> class
+				'hue-2': '900', // use shade 900 for the <code>md-hue-2</code> class
+				'hue-3': 'A100' // use shade A100 for the <code>md-hue-3</code> class
 			})
 			// If you specify less than all of the keys, it will inherit from the
 			// default shades
@@ -66,17 +66,18 @@
 		FacebookProvider.init('398517123645939');
 	});
 
-	ExwdApp.controller('fbCtrl',
-		['$scope',
+	ExwdApp.controller('fbCtrl', ['$scope',
 		'$timeout',
 		'Facebook',
 		function($scope, $timeout, Facebook) {
 
-			// Define user empty data :/
-			$scope.user = {};
-
-			// Defining user logged status
-			$scope.logged = false;
+			var vm         = $scope;
+			vm.user        = {}; // Define user empty data :/
+			vm.logged      = false; // Defining user logged status
+			vm.IntentLogin = intentlogin;
+			vm.login       = login;
+			vm.me          = me;
+			vm.logout      = logout;
 
 			/**
 			 * Watch for Facebook to be ready.
@@ -88,13 +89,13 @@
 				},
 				function(newVal) {
 					if (newVal)
-						$scope.facebookReady = true;
+						vm.facebookReady = true;
 				}
 			);
 
 			Facebook.getLoginStatus(function(response) {
 				if (response.status == 'connected') {
-					$scope.logged = true;
+					vm.logged = true;
 				}
 			});
 
@@ -102,50 +103,50 @@
 			 * IntentLogin, check if is loggin.
 			 * if already loggin, do nothings.
 			 */
-			$scope.IntentLogin = function() {
-				if (!$scope.logged) {
-					$scope.login();
-					$scope.me();
+			function intentlogin() {
+				if (!vm.logged) {
+					vm.login();
+					vm.me();
 				}
-			};
+			}
 
 			/**
 			 * Login
 			 */
-			$scope.login = function() {
+			function login() {
 				Facebook.login(function(response) {
 					if (response.status == 'connected') {
-						$scope.logged = true;
-						$scope.me();
+						vm.logged = true;
+						vm.me();
 					}
 				});
-			};
+			}
 
 			/**
 			 * me
 			 * get user's facebook basic infomations 
 			 */
-			$scope.me = function() {
+			function me() {
 				Facebook.api('/me', function(response) {
-					/** Using $scope.$apply since this happens outside angular framework.  */
-					$scope.$apply(function() {
-						$scope.user = response;
+					/** Using vm.$apply since this happens outside angular framework.  */
+					vm.$apply(function() {
+						vm.user = response;
 					});
 					console.log(response);
 				});
-			};
+			}
 
 			/**
 			 * Logout
 			 */
-			$scope.logout = function() {
+			function logout() {
 				Facebook.logout(function() {
-					$scope.$apply(function() {
-						$scope.user = {};
-						$scope.logged = false;
+					vm.$apply(function() {
+						vm.user = {};
+						vm.logged = false;
 					});
 				});
-			};
+			}
 
 			/**
 			 * Taking approach of Events :D
@@ -170,6 +171,6 @@
 			});
 			 */
 		}
-]);
+	]);
 
 })();

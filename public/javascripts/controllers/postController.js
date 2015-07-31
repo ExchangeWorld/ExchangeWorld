@@ -1,5 +1,7 @@
-(function(){
-  var postController = angular.module('postController',[]);
+"use strict";
+
+angular
+	.module('postController',[]);
 
 
-})();
+

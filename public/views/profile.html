@@ -1,11 +1,11 @@
 
 <h2>PROFILE</h2>
-<div ng-repeat = "proData in profileData">
-    <img ng-src = "{{ proData.photoPath }}" alt = "..." class = "img-rounded" style = "width:100%"></img>
-    <h4>fb_id    = {{ proData.fb_id }}</h4>
-    <h4>name     = {{ proData.username }}</h4>
-    <h4>nickname = {{ proData.nickname}}</h4>
-    <h4>email    = {{ proData.email }}</h4>
+<div ng-repeat   = "proData in vm.profileData">
+	<img ng-src  = "{{ proData.photoPath }}" alt = "..." class = "img-rounded" style = "width:100%"></img>
+	<h4>fb_id    = {{ proData.fb_id }}</h4>
+	<h4>name     = {{ proData.username }}</h4>
+	<h4>nickname = {{ proData.nickname}}</h4>
+	<h4>email    = {{ proData.email }}</h4>
 	<p>---以下為他ＰＯ的物品名稱---</p>
 	<div ng-repeat="users_goods in proData.goods">
 		<h4>gname = {{ users_goods.gname }}</h4>

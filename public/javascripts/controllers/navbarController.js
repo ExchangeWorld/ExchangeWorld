@@ -1,52 +1,63 @@
-(function() {
-    var navbarController = angular.module('navbarController', ['ngRoute']);
+"use strict";
 
-    navbarController.directive('navbar', function() {
-        return {
-            restrict: 'E',
-            templateUrl: "views/navbar.html"
-        };
-    });
+angular
+	.module('NavbarController', ['ngRoute'])
+	.directive('navbar', navbar)
+	.controller('DropdownCtrl', dropdownctrl)
+	.controller('NavbarCtrl', navbarctrl);
 
-    navbarController.controller('DropdownCtrl', ['$scope', function($scope) {
-        $scope.status = {
-            isopen: false
-        };
 
-        $scope.toggleDropdown = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            $scope.status.isopen = !$scope.status.isopen;
-        };
-    }]);
+function navbar() {
+	return {
+		restrict: 'E',
+		templateUrl: "views/navbar.html"
+	};
+}
 
-    navbarController.controller('NavbarCtrl', ['$scope', '$mdSidenav', '$route',
-        function($scope, $mdSidenav, $route) {
-            var ContentType = ["home", "seek", "post", "manage", "profile", "good"];
-            $scope.$on('$routeChangeSuccess', function() {
-                var url = $route.current.templateUrl;
-                //console.log(url);
-                if (url !== undefined)
-                    $scope.content = url.split('/')[1].split('.')[0];
-            });
-            $scope.contentHistory = {};
+function dropdownctrl($scope) {
+	var vm            = this;
+	vm.status         = { isopen: false };
+	vm.toggleDropdown = toggledropdown;
 
-            $scope.setContent = function(contentIndex) {
-                $scope.content = ContentType[contentIndex];
-                $scope.contentHistory.push($scope.content);
-            };
+	/////////////////
+	
+	function toggledropdown($event) {
+		$event.preventDefault();
+		$event.stopPropagation();
+		vm.status.isopen = !vm.status.isopen;
+	}
+}
 
-            $scope.contentIs = function(contentIndex) {
-                return $scope.content === ContentType[contentIndex];
-            };
+function navbarctrl($scope, $mdSidenav, $route) {
+	var vm            = this;
+	vm.contentHistory = {};
+	vm.setContent     = setcontent;
+	vm.contentIs      = contentis;
+	vm.onClick        = onclick;
 
-            $scope.onClick = function(contentIndex) {
-                $scope.content = ContentType[contentIndex];
-                $scope.$emit('sidenavChanged', ContentType[contentIndex]);
-                $mdSidenav('left').toggle();
-            }
+	/////////////////
+	
+	var ContentType = ["home", "seek", "post", "manage", "profile", "good"];
+	$scope.$on('$routeChangeSuccess', function() {
+		var url = $route.current.templateUrl;
+		if (url !== undefined)
+			vm.content = url.split('/')[1].split('.')[0];
+	});
 
-        }
-    ]);
+	function setcontent (contentIndex) {
+		vm.content = ContentType[contentIndex];
+		vm.contentHistory.push(vm.content);
+	}
 
-})();
+	function contentis (contentIndex) {
+		return vm.content === ContentType[contentIndex];
+	}
+
+	function onclick (contentIndex) {
+		vm.content = ContentType[contentIndex];
+		$scope.$emit('sidenavChanged', ContentType[contentIndex]);
+		$mdSidenav('left').toggle();
+	}
+
+}
+

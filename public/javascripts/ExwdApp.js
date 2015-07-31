@@ -1,7 +1,7 @@
 (function() {
 
 	var ExwdApp = angular.module('ExwdApp', ['ngMaterial', 'ui.bootstrap', 'ngRoute', 'facebook',
-		'navbarController', 'mapController', 'SeekController', 'GoodsController', 'profileController',
+		'NavbarController', 'mapController', 'SeekController', 'GoodsController', 'ProfileController',
 		'listenerDirective', 'templateUrlDircetive',
 		'commonServices'
 	]);
@@ -45,7 +45,8 @@
 			}).
 			when('/profile/:fb_id', {
 				templateUrl: 'views/profile.html',
-				controller: 'profileCtrl'
+				controller: 'ProfileCtrl',
+				controllerAs: 'vm'
 			}).
 			otherwise({
 				redirectTo: '/seek'

@@ -1,16 +1,15 @@
-(function() {
-	var profileController = angular.module('profileController', ['profileServices']);
+//(function() {
+"use strict";
 
-	profileController.controller('profileCtrl', ['$scope', 'profileServ', '$routeParams',
-		function($scope, profileServ, $routeParams) {
+angular
+	.module('ProfileController', ['profileServices'])
+	.controller('ProfileCtrl', profileCtrl);
 
-			// get data from profileServices.js
-			profileServ.get(function(data) {
-				$scope.profileData = data;
-				//console.log(data);
-			}, $routeParams.fb_id);
+function profileCtrl($scope, profileServ, $routeParams) {
+	var vm            = this;
+	vm.profileData    = [];
+	//vm.onClickGoods = onClickGoods;
 
-		}
-	]);
-
-})();
+	// get data from profileServices.js
+	profileServ.get(function(data) { vm.profileData = data; }, $routeParams.fb_id);
+}

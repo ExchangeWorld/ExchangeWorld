@@ -1,21 +1,27 @@
-(function ()
-{
-	var common = angular.module('commonServices', []);
+"use strict";
 
-	common.service('sharedProperties', function ()
-	{
-		var stringValue = 'seek';
+angular
+	.module('commonServices', [])
+	.factory('sharedProperties', shareproperties);
 
-		return {
-			getString: function ()
-			{
-				return stringValue;
-			},
-			setString: function (value)
-			{
-				stringValue = value;
-			}
-		};
-	});
+function shareproperties() {
+	var service = {
+		getString: getstring,
+		setString: setstring
+	};
 
-})();
+	var stringValue = 'seek';
+
+	return service;
+
+	///////////////
+
+	function getstring() {
+		return stringValue;
+	}
+
+	function setstring(value) {
+		stringValue = value;
+	}
+}
+

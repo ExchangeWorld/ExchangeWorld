@@ -15,9 +15,9 @@ function goodsCtrl($scope, goodsServ, $routeParams) {
 
 	function activate() {
 		// get data from goodsServices.js
-		goodsServ.get(callback, $routeParams.gid);
+		goodsServ.get(collectGoodsData, $routeParams.gid);
 
-		function callback(data) {
+		function collectGoodsData(data) {
 			vm.goodsData = data;
 		}
 	}

@@ -14,9 +14,9 @@ function profileCtrl($scope, profileServ, $routeParams) {
 
 	function activate() {
 		// get data from profileServices.js
-		profileServ.get(callback, $routeParams.fb_id);
+		profileServ.get(collectProfileData, $routeParams.fb_id);
 
-		function callback(data) {
+		function collectProfileData(data) {
 			vm.profileData = data;
 		}
 	}

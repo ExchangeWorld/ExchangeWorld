@@ -15,9 +15,9 @@ function seekCtrl($scope, seekServ) {
 
 	function activate(){
 		// Use seekServices.js to get data from backend
-		seekServ.get(callback);
+		seekServ.get(collectAllGoodsData);
 
-		function callback(data) {
+		function collectAllGoodsData(data) {
 			vm.goods = data;
 		}
 	}

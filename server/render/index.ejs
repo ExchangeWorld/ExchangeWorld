@@ -30,10 +30,10 @@
 
 <body>
 <div id="fb-root"></div>
-<div ng-controller="fbCtrl">
-	<button ng-click="IntentLogin()" data-ng-disabled="!facebookReady || logged">Login</button>
-	<button ng-click="logout()" data-ng-disabled="!facebookReady || !logged">Logout</button>
-	<div data-ng-show="logged">You are loggin</div>
+<div ng-controller="FacebookController as vm">
+	<button ng-click="vm.IntentLogin()" data-ng-disabled="!vm.facebookReady || vm.logged">Login</button>
+	<button ng-click="vm.logout()" data-ng-disabled="!vm.facebookReady || !vm.logged">Logout</button>
+	<div data-ng-show="vm.logged">You are loggin</div>
 </div>
 
 	<!-- See views/navbar.html -->

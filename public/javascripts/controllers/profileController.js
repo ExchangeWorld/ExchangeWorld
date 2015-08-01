@@ -1,4 +1,3 @@
-//(function() {
 "use strict";
 
 angular
@@ -6,10 +5,19 @@ angular
 	.controller('ProfileCtrl', profileCtrl);
 
 function profileCtrl($scope, profileServ, $routeParams) {
-	var vm            = this;
-	vm.profileData    = [];
-	//vm.onClickGoods = onClickGoods;
+	var vm         = this;
+	vm.profileData = [];
 
-	// get data from profileServices.js
-	profileServ.get(function(data) { vm.profileData = data; }, $routeParams.fb_id);
+	activate();
+
+	/////////////
+
+	function activate() {
+		// get data from profileServices.js
+		profileServ.get(callback, $routeParams.fb_id);
+
+		function callback(data) {
+			vm.profileData = data;
+		}
+	}
 }

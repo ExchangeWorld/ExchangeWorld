@@ -9,8 +9,18 @@ function seekCtrl($scope, seekServ) {
 	vm.goods        = [];
 	vm.onClickGoods = onClickGoods;
 
-	// Use seekServices.js to get data from backend
-	seekServ.get(function(data){ vm.goods = data; });
+	activate();
+
+	/////////////
+
+	function activate(){
+		// Use seekServices.js to get data from backend
+		seekServ.get(callback);
+
+		function callback(data) {
+			vm.goods = data;
+		}
+	}
 
 	// goods onClick event: change route to corrsponding gid
 	function onClickGoods(gid) {

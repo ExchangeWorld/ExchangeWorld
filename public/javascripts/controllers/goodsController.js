@@ -15,11 +15,14 @@ function goodsCtrl($scope, goodsServ, $routeParams) {
 
 	function activate() {
 		// get data from goodsServices.js
-		goodsServ.get(collectGoodsData, $routeParams.gid);
-
-		function collectGoodsData(data) {
-			vm.goodsData = data;
-		}
+		goodsServ.getGoodsData($routeParams.gid)
+			.then(function(data){
+				//promise fulfilled (successed)
+				vm.goodsData = data;
+			}, function(error){
+				//promise rejected (failed)
+				console.log('error', error);
+			});
 	}
 
 	// define onClick event on goods owner

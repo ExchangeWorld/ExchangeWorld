@@ -14,10 +14,11 @@ function profileCtrl($scope, profileServ, $routeParams) {
 
 	function activate() {
 		// get data from profileServices.js
-		profileServ.get(collectProfileData, $routeParams.fb_id);
-
-		function collectProfileData(data) {
-			vm.profileData = data;
-		}
+		profileServ.getProfileData($routeParams.fb_id)
+			.then(function(data) {
+				vm.profileData = data;
+			}, function(error) {
+				console.log('error', error);
+			});
 	}
 }

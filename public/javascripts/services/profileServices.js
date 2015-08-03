@@ -6,18 +6,25 @@ angular
 
 function profileserv($http) {
 	var service = {
-		get: getProfileData
+		getProfileData: getProfileData
 	};
 
 	return service;
 
 	////////////
 
-	function getProfileData(callback, id) {
-		$http.get('/profile?fb_id=' + id).success(function(data) {
-			// prepare data here
-			//console.log(data);
-			callback(data);
-		});
+	function getProfileData(id) {
+		return $http.get('/profile?fb_id=' + id)
+			.then(function(response) {
+				if (typeof response.data === 'object') {
+					return response.data;
+				} else {
+					// invalid response
+					return $q.reject(response.data);
+				}
+			}, function(response) {
+				// something went wrong
+				return $q.reject(response.data);
+			});
 	}
 }

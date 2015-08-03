@@ -6,7 +6,7 @@ angular
 
 function goodsserv($http) {
 	var service = {
-		get: getGoodsData
+		getGoodsData: getGoodsData
 	};
 
 
@@ -14,11 +14,19 @@ function goodsserv($http) {
 
 	//////////////
 
-	function getGoodsData(callback, id) {
-		$http.get('/goods?gid=' + id).success(function(data) {
-			// prepare data here
-			//console.log(data);
-			callback(data);
-		});
+	function getGoodsData(id) {
+		return $http.get('/goods?gid=' + id)
+			.then(function(response) {
+				if (typeof response.data === 'object') {
+					return response.data;
+				} else {
+					// invalid response
+					return $q.reject(response.data);
+				}
+
+			}, function(response) {
+				// something went wrong
+				return $q.reject(response.data);
+			});
 	}
 }

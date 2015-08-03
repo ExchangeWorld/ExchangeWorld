@@ -13,13 +13,16 @@ function seekCtrl($scope, seekServ) {
 
 	/////////////
 
-	function activate(){
+	function activate() {
 		// Use seekServices.js to get data from backend
-		seekServ.get(collectAllGoodsData);
-
-		function collectAllGoodsData(data) {
-			vm.goods = data;
-		}
+		seekServ.getSeekData()
+			.then(function(data) {
+				// promise fulfilled, collect all goods datas
+				vm.goods = data;
+			}, function(error) {
+				// promise rejected 
+				console.log('error', error);
+			});
 	}
 
 	// goods onClick event: change route to corrsponding gid

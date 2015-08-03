@@ -6,6 +6,7 @@ angular
 		'ui.bootstrap',
 		'ngRoute',
 		'facebook',
+		'restangular',
 
 		'NavbarController',
 		'mapController',
@@ -18,9 +19,9 @@ angular
 		'commonServices'
 	])
 	.config(themeprovider)
-	.config(routeprovider) //['$routeProvider', '$locationProvider',
+	.config(routeprovider) 
 	.config(facebookprovider)
-	.controller('FacebookController', fbctrl);//'fbCtrl', ['$scope',
+	.controller('FacebookController', fbctrl);
 
 function themeprovider($mdThemingProvider) {
 	$mdThemingProvider.theme('default')

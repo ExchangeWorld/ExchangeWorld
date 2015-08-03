@@ -4,7 +4,7 @@ angular
 	.module('goodsServices', [])
 	.factory('goodsServ', goodsserv);
 
-function goodsserv($http) {
+function goodsserv(Restangular) {
 	var service = {
 		getGoodsData: getGoodsData
 	};
@@ -15,18 +15,13 @@ function goodsserv($http) {
 	//////////////
 
 	function getGoodsData(id) {
-		return $http.get('/goods?gid=' + id)
-			.then(function(response) {
-				if (typeof response.data === 'object') {
-					return response.data;
-				} else {
-					// invalid response
-					return $q.reject(response.data);
-				}
+		var goods = Restangular.all('goods');
 
-			}, function(response) {
-				// something went wrong
-				return $q.reject(response.data);
-			});
+		// GET /goods?gid=id
+		return goods.getList({ 'gid':id }).then(function(data) {
+			return data;
+		}, function(error) {
+			console.log('error', error);
+		});
 	}
 }

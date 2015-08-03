@@ -4,7 +4,7 @@ angular
 	.module('seekServices', [])
 	.factory('seekServ', seekserv);
 
-function seekserv($http, $q) {
+function seekserv(Restangular) {
 	var service = {
 		getSeekData: getSeekData
 	};
@@ -15,24 +15,16 @@ function seekserv($http, $q) {
 
 
 	function getSeekData() {
+		var seek = Restangular.all('seek');
+
 		/**
 		 *  here should get search condition
-		 *
+		 *  i.e. title, category, and so on
 		 */
-		// the $http API is based on the deferred/promise APIs exposed by the $q service
-		// it returns a promise by default
-		return $http.get('/seek?title=')
-			.then(function(response) {
-				if (typeof response.data === 'object') {
-					return response.data;
-				} else {
-					// invalid response
-					return $q.reject(response.data);
-				}
-
-			}, function(response) {
-				// something went wrong
-				return $q.reject(response.data);
-			});
+		return seek.getList({'title':''}).then(function(data) {
+			return data;
+		}, function(error) {
+			console.log('error', error);
+		});
 	}
 }

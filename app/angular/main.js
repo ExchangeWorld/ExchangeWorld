@@ -7,6 +7,8 @@ require('./templates');
 require('./core/core.module');
 require('./example/example.module');
 require('./map/map.module');
+require('./goods/goods.module');
+require('./seek/seek.module');
 
 // create and bootstrap application
 angular.element(document).ready(function() {
@@ -15,7 +17,9 @@ angular.element(document).ready(function() {
 		'templates', //gulp-angular-templatecache
 		'app.core',
 		'app.example',
-	    'app.map',
+		'app.map',
+	    'app.goods',
+	    'app.seek',
 	];
 
 	// mount on window for testing

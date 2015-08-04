@@ -4,6 +4,7 @@ const mapModule = require('./map.module');
 mapModule.directive('mapBlock', mapBlock);
 
 function mapBlock() {
+
 	var directive = {
 		restrict: 'E',
 		scope: {},

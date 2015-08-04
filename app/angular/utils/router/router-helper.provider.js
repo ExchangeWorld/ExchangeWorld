@@ -13,7 +13,6 @@ function routerHelperProvider($locationProvider, $stateProvider, $urlRouterProvi
 	});
 
 	var config = {
-		docTitle : undefined,
 		resolveAlways : {}
 	};
 
@@ -61,7 +60,7 @@ function routerHelperProvider($locationProvider, $stateProvider, $urlRouterProvi
 
 		function init() {
 			handleRoutingErrors();
-			updateDocTitle();
+			stateChanged();
 		}
 
 		function handleRoutingErrors() {
@@ -90,7 +89,7 @@ function routerHelperProvider($locationProvider, $stateProvider, $urlRouterProvi
 			);
 		}
 
-		function updateDocTitle() {
+		function stateChanged() {
 			$rootScope.$on('$stateChangeSuccess', function(event, toState) {
 					stateCounts.changes++;
 					handlingStateChangeError = false;

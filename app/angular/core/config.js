@@ -27,5 +27,5 @@ function configure($logProvider, routerHelperProvider, exceptionHandlerProvider)
 		$logProvider.debugEnabled(true);
 	}
 	exceptionHandlerProvider.configure('[<%= appName %> Error]');
-	routerHelperProvider.configure({ docTitle : config.appTitle + ': ' });
+	//routerHelperProvider.configure({ docTitle : config.appTitle + ': ' });
 }

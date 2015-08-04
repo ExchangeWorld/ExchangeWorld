@@ -1,6 +1,8 @@
 "use strict";
 
 const mapModule = require('./map.module');
+
+// Controller name 'MapController' has been used by ng-map
 mapModule.controller('MapCtrl', MapController);
 
 /** @ngInject */

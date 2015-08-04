@@ -1,0 +1,42 @@
+<md-toolbar class="md-primary" ng-controller="NavbarCtrl">
+
+	<div class="md-toolbar-tools md-medium-tall navbar">
+
+        <span hide-md hide-sm flex="30" >
+        <a ui-sref="/" ng-click="onClick(0)" style="font-size: 20px"><md-icon md-svg-src="./images/icons/men14.svg"
+																			style="display:inline-block;"></md-icon> ExchangeWorld</a></span>
+
+		<div flex="33">
+			<md-button flex="33" ui-sref="seek" ng-click="onClick(1)" ng-class="{'active': contentIs(1)}" class="navbutton-down">
+				<i class="fa fa-search fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
+				<span hide-md hide-sm>SEEK</span>
+			</md-button>
+			<md-button flex="33" ui-sref="post" ng-click="onClick(2)" ng-class="{'active': contentIs(2)}" class="navbutton-down">
+				<i class="fa fa-plus fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
+				<span hide-md hide-sm>POST</span>
+			</md-button>
+			<md-button flex="33" ui-sref="manage" ng-click="onClick(3)" ng-class="{'active': contentIs(3)}" class="navbutton-down">
+				<i class="fa fa-compass fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
+				<span hide-md hide-sm>Manage</span>
+			</md-button>
+		</div>
+		<!--
+			<md-button flex="10">
+			  <i class="fa fa-info-circle fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
+			  <span hide-md hide-sm>Help</span>
+			</md-button>
+		-->
+		<span flex="20"></span>
+		<!--
+		<div flex ng-controller="DropdownCtrl" class="btn-group" dropdown is-open="status.isopen">
+			<md-button ng-click="toggleDropdown($event)" >Username</md-button>
+			<ul class="dropdown-menu" role="menu">
+				<li><a href="#/profile" ng-click="onClick(4)">Profile</a></li>
+				<li class="divider"></li>
+				<li><a href>Log Out</a></li>
+			</ul>
+		</div>
+		-->
+		<span flex="5"></span>
+	</div>
+</md-toolbar>

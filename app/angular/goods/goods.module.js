@@ -3,11 +3,9 @@
 const angular = require('angular');
 const bulk    = require('bulk-require');
 
-require('ngmap');
-module.exports = angular.module('app.map',
+module.exports = angular.module('app.goods',
 	[
 		'app.core',
-		'ngMap',
 	]
 );
 

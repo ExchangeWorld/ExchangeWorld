@@ -107,7 +107,8 @@
     "bower": "^1.4.1",
     "lodash": "^3.10.0",
     "ng-infinite-scroll": "^1.2.0",
-    "ngmap": "^1.7.9"
+    "ngmap": "^1.7.9",
+    "restangular": "^1.5.1"
   },
   "jshintConfig": {
     "node": true,

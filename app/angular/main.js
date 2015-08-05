@@ -9,7 +9,7 @@ require('./core/core.module');
 require('./map/map.module');
 require('./goods/goods.module');
 require('./seek/seek.module');
-require('./layout/layout.module')
+require('./layout/layout.module');
 
 // create and bootstrap application
 angular.element(document).ready(function() {

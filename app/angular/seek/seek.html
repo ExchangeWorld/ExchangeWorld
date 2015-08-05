@@ -1,0 +1,33 @@
+
+<div class="input-group" style="margin-bottom: 10px" >
+	<input id="searchName" type="text" class="form-control" placeholder="Seek anything">
+	<span class="input-group-btn"> <button id="searchString" class="btn btn-info seeking" type="button">Seek !</button> </span>
+</div>
+<div id="searchOptions" class="row">
+	<div class="col-md-12">
+		<div class="btn-group">
+			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Distance <span class="caret"></span> </button>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+
+			</ul>
+		</div>
+		<div class="btn-group">
+			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </button>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+
+			</ul>
+		</div>
+		<div id="resultStats" style="font-size: small"></div>
+	</div>
+</div><hr style="border-color: #6E6E6E; border-width: 2px">
+<div id="outbox">
+	<div class="content_box" ng-repeat="good in vm.goods">
+		<img ng-src="{{ good.photoPath }}" alt="..." class="img-rounded" style="width:100%"></img>
+	  	<ul class="list-group" ng-click = "vm.onClickGoods( good.gid )">
+		   	<li class="list-group-item">{{ good.gname }}<span class="badge">{{ good.categories }}</span></li>
+			<li class="list-group-item">{{ good.want }}</li>
+			<li class="list-group-item"><img ng-src="{{ good.user.photoPath }}" height="20" width="20">{{ good.user.username }}</li>
+		</ul>
+	</div>	
+</div>
+

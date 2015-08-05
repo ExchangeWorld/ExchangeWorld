@@ -18,7 +18,6 @@ function getStates() {
 			config: {
 				url: '/404',
 				templateUrl: 'core/404.html',
-				title: '404'
 			}
 		}
 	];

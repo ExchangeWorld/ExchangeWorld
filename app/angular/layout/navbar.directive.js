@@ -11,8 +11,7 @@ function navbarDirective() {
 		bindToController: true,
 		controller: 'NavbarController',
 		controllerAs: 'vm',
-		scope: {},
-	}
+	};
 
 	return directive;
 }

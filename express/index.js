@@ -27,10 +27,11 @@ module.exports = function() {
 	server.use(express.static(config.dist.root));
 
 	// Serve index.html for all routes to leave routing up to Angular
-	server.all('/*', function(req, res, next) {
+	server.all(/^(?!\/api\/)\w*/, function(req, res, next) {
 		res.sendFile('index.html', { root: 'build' });
-		//next();
 	});
+
+	server.use('/api/seek', require('./routers/seek'));
 
 	//server.use('/', routeIndex);
 	server.use('/api/seek', require('./routers/seek'));

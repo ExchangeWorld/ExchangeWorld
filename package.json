@@ -76,6 +76,7 @@
     "morgan": "^1.2.2",
     "multer": "^1.0.1",
     "mysql": "^2.8.0",
+    "nodemon": "^1.4.0",
     "phantomjs": "^1.9.17",
     "pretty-hrtime": "^0.2.2",
     "protractor": "^1.2.0",

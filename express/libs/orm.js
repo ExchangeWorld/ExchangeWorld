@@ -1,7 +1,8 @@
 var Sequelize = require('sequelize');
+var DBLogin   = require('./DBLogin');
 
 // Export a orm model with some config
-var sequelize = new Sequelize('exchangeworld', 'root', require('./authenication'), {
+var sequelize = new Sequelize('exchangeworld', DBLogin.ID, DBLogin.password, {
 	host: 'localhost',
 	dialect: 'mysql',
 
@@ -13,6 +14,8 @@ var sequelize = new Sequelize('exchangeworld', 'root', require('./authenication'
 
 	define: {
 		timestamps: false,
+		charset: 'utf8',
+		collate: 'utf8_general_ci'
 	}
 });
 

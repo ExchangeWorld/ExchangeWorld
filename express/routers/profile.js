@@ -1,25 +1,61 @@
-'use strict';
-
 var express = require('express');
-var connection = require('../libs/connectDBPool.js');
-var router = express.Router();
+var router  = express.Router();
 
-/**
- * GET /api/profile?pid=xx&token=xxxxxxxxx
- *
- *
- */
+// including tables 
+var user      = require('../ORM/User.js');
+var goods     = require('../ORM/Goods');
+var follower  = require('../ORM/Follower.js');
+var following = require('../ORM/Following.js');
+
 router.get('/', function(req, res, nex) {
 
-	var queryS = 'SELECT * FROM user WHERE fb_id LIKE ' + req.query.pid;
-	connection.query(queryS, function(error, rows, fields){
+	// Available params:
+	// 
+	// fb_id 
+	// 
 
-		if(error) throw error;
-		else {
-			res.json(rows);
-		}
+	// Get property:value in ?x=y&z=w....
+	var _fb_id = req.query.fb_id;
+
+	/** 
+	 * Set association between tables (user, goods, follower, following)
+	 * 
+	 * USER 
+	 *  |---(1:M)--- GOODS
+	 *  |---(1:M)--- FOLLOWING
+	 *  `---(1:M)--- FOLLOWER
+	 */
+	user.hasMany(goods, {foreignKey: 'ownerID'});
+	user.hasMany(follower, {foreignKey: 'myid'});
+	user.hasMany(following, {foreignKey: 'myid'});
+	goods.belongsTo(user, {foreignKey: 'ownerID'});
+	follower.belongsTo(user, {foreignKey: 'myid'});
+	following.belongsTo(user, {foreignKey: 'myid'});
+//console.log("kfkkkf");
+
+	// Emit a find operation with orm model in table `user`
+	user.sync({
+		force: false
+	}).then(function() {
+		/**
+		 * SELECT `goods`. * , `user`.*
+		 * FROM `goods`, `user`
+		 * WHERE `user`.`fb_id` = '_fb_id' 
+		 *   AND `user`.`fb_id` = `goods`.`ownerID`
+		 *   AND `user`.`fb_id` = `followertable`.`myid`
+		 *   AND `user`.`fb_id` = `seeker`.`myid`
+		 */
+		return user.findAll({
+			where: {
+				fb_id : _fb_id
+			},
+			include: [goods, follower, following]
+		});
+	}).then(function(result) {
+		res.json(result);
 	});
-
+	
 });
+
 
 module.exports = router;

@@ -1,40 +1,59 @@
 'use strict';
 
 var express = require('express');
-var goods = require('../models/goods');
-var router = express.Router();
+var router  = express.Router();
 
-/**
- * GET /api/seek?
- *		tilte=xx&wishlist=xxx&category=xxxx&px=xxx&py=xxxx&py=xxxx&from=xxxx&to=xxx
- *
- *
- */
+// including tables 
+var goods   = require('../ORM/Goods.js');
+var user    = require('../ORM/User.js');
+
 router.get('/', function(req, res, next) {
 
-		// Get property:name in ?x=y&z=w....
-	var title = req.query.title;
-	var wishlist = req.query.wishlist;
-	var category = req.query.category;
-	var px = parseFloat(req.query.px);
-	var py = parseFloat(req.query.py);
-	var from = parseInt(req.query.from);
-	var to = parseInt(req.query.to);
+    // Available params:
+    // 
+    // title
+    // wishlist
+    // category
+    // px
+    // py
+    // from
+    // to
+    //
 
-	// Emit a find operation with orm model in table `goods`
-	goods
-		.sync({force: false})
-		.then(function() {
-			return goods.findAll({
-				where: {
-					gname: {$like: '%' + title + '%',},
-					status: 0,
-				},
-			});
-		})
-		.then(function(result) {
-			res.json(result);
-		});
+    // Get property:value in ?x=y&z=w....
+    var title    = req.query.title;
+    var wishlist = req.query.wishlist;
+    var category = req.query.category;
+    var px       = parseFloat(req.query.px);
+    var py       = parseFloat(req.query.py);
+    var from     = parseInt(req.query.from);
+    var to       = parseInt(req.query.to);
+
+	// Set association between tables (user, goods)
+	user.hasMany(goods, {foreignKey:'ownerID'});
+	goods.belongsTo(user, {foreignKey: 'ownerID'});
+
+    // Emit a find operation with orm model in table `goods`
+    goods.sync({
+        force: false
+    }).then(function() {
+		/**
+		 * SELECT `goods`.*, `user`.* 
+		 * FROM `goods`, `user`
+		 * WHERE `goods`.ownerID = `user`.fb_id AND `goods`.name = %title% 
+         */
+		return goods.findAll({
+            where: {
+                gname: {
+                    $like: '%' + title + '%'
+                },
+                status: 0
+            },
+			include: [user]
+        });
+    }).then(function(result) {
+        res.json(result);
+    });
 });
 
 module.exports = router;

@@ -1,19 +1,20 @@
 'use strict';
 
-const angular = require('angular');
-const bulk    = require('bulk-require');
+const angular  = require('angular');
+const bulk     = require('bulk-require');
+global._       = require("lodash"); //fix restangular dependency on lodash issue
 
 require('angular-ui-router');
-require('angular-material');
 require('restangular');
+require('angular-material');
 require('../utils/logger/logger.module');
 require('../utils/exception/exception.module');
 require('../utils/router/router.module');
 
 const requires = [
 	'ui.router',
-	'ngMaterial',
 	'restangular',
+	'ngMaterial',
 	'utils.logger',
 	'utils.exception',
 	'utils.router',

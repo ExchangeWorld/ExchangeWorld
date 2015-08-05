@@ -1,10 +1,10 @@
 'use strict';
 
 const seekModule = require('./seek.module');
-seekModule.controller('SeekCtrl', SeekCtrl);
+seekModule.controller('SeekController', SeekCtrl);
 
 /** @ngInject */
-function SeekCtrl($scope, seekServ) {
+function SeekCtrl($scope, seekService) {
 	var vm          = this;
 	vm.goods        = [];
 	vm.onClickGoods = onClickGoods;
@@ -14,12 +14,12 @@ function SeekCtrl($scope, seekServ) {
 	/////////////
 
 	function activate() {
-		// Use seekServices.js to get data from backend
-		seekServ.getSeekData()
+		// Use seek.service.js to get data from backend
+		seekService.getSeekData()
 			.then(function(data) {
 				// promise fulfilled, collect all goods datas
 				vm.goods = data;
-			}, function(error) {
+			}).catch(function(error) {
 				// promise rejected 
 				console.log('error', error);
 			});

@@ -1,17 +1,32 @@
 'use strict';
 
+const _ = require('lodash');
 const seekModule = require('./seek.module');
-seekModule.service('seekServ', seekService);
+seekModule.service('seekService', seekService);
 
 /** @ngInject */
-function seekService(Restangular) {
+function seekService(Restangular, $q) {
 	var service = {
-		getSeekData: getSeekData
+		getSeekData: asyncGetData 
 	};
 
 	return service;
 
 	//////////
+
+	function asyncGetData(data) {
+		var deferred = $q.defer();
+
+		setTimeout(function() {
+			/** 
+			 * code for reject condictions 
+			 */
+
+			deferred.resolve(getSeekData());
+		}, 1000);
+
+		return deferred.promise;
+	}
 
 	function getSeekData() {
 		var seek = Restangular.all('api/seek');
@@ -20,9 +35,9 @@ function seekService(Restangular) {
 		 *  here should get search condition
 		 *  i.e. title, category, and so on
 		 */
-		return seek.getList({'title': ''}).then(function(data) {
+		return seek.getList({ 'title': '' }).then(function(data) {
 			return data;
-		}, function(error) {
+		}).catch(function(error) {
 			console.log('error', error);
 		});
 	}

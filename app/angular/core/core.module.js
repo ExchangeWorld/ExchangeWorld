@@ -1,10 +1,11 @@
 'use strict';
 
-const angular  = require('angular');
-const bulk     = require('bulk-require');
+const angular = require('angular');
+const bulk    = require('bulk-require');
 
 require('angular-ui-router');
 require('angular-material');
+require('restangular');
 require('../utils/logger/logger.module');
 require('../utils/exception/exception.module');
 require('../utils/router/router.module');
@@ -12,6 +13,7 @@ require('../utils/router/router.module');
 const requires = [
 	'ui.router',
 	'ngMaterial',
+	'restangular',
 	'utils.logger',
 	'utils.exception',
 	'utils.router',

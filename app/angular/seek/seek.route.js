@@ -12,14 +12,14 @@ function appRun(routerHelper) {
 function getStates() {
 	return [
 		{
-			state : 'SEEK',
+			state : 'Seek',
 			config : {
 				url : '/seek',
 				bindToController: true,
-				controller : 'SeekCtrl',
+				controller : 'SeekController',
 				controllerAs: 'vm',
 				templateUrl : 'seek/seek.html',
-				title : 'seeeeeeeeeeeeek'
+				title : 'seek'
 			}
 		}
 	];

@@ -1,5 +1,4 @@
-
-"use strict";
+'use strict';
 
 const seekModule = require('./seek.module');
 seekModule.run(appRun);

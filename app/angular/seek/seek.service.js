@@ -1,6 +1,5 @@
 'use strict';
 
-const _ = require('lodash');
 const seekModule = require('./seek.module');
 seekModule.service('seekService', seekService);
 

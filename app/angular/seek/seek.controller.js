@@ -7,7 +7,7 @@ seekModule.controller('SeekController', SeekCtrl);
 function SeekCtrl($scope, seekService) {
 	var vm          = this;
 	vm.goods        = [];
-	vm.onClickGoods = onClickGoods;
+	//vm.onClickGoods = onClickGoods;
 
 	activate();
 
@@ -26,7 +26,7 @@ function SeekCtrl($scope, seekService) {
 	}
 
 	// goods onClick event: change route to corrsponding gid
-	function onClickGoods(gid) {
-		window.location.href = "#/seek/" + gid;
-	}
+	//function onClickGoods(gid) {
+		//window.location.href = "#/seek/" + gid;
+	//}
 }

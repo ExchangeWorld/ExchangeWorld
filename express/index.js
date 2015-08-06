@@ -31,12 +31,11 @@ module.exports = function() {
 		res.sendFile('index.html', { root: 'build' });
 	});
 
-	server.use('/api/seek', require('./routers/seek'));
-
 	//server.use('/', routeIndex);
 	server.use('/api/seek', require('./routers/seek'));
 	server.use('/api/goods', require('./routers/goods'));
 	server.use('/api/profile', require('./routers/profile'));
+	server.use('/api/exchange', require('./routers/exchange'));
 
 	// catch 404 and forward to error handler
 	server.use(function(req, res, next) {

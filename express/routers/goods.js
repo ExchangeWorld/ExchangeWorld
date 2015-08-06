@@ -3,8 +3,8 @@ var router  = express.Router();
 
 // including tables
 var goods    = require('../ORM/Goods');
-var user     = require('../ORM/User.js');
-var comments = require('../ORM/Comments.js');
+var user     = require('../ORM/User');
+var comments = require('../ORM/Comments');
 
 router.get('/', function(req, res, next) {
 

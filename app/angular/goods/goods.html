@@ -22,17 +22,20 @@
 </md-content>
 
 
-<md-content layout-padding>
+<md-content layout-padding ng-repeat="goods in vm.goodsData">
 <img style="width:100%; height:auto" src="http://i.imgur.com/7RoLGdp.jpg" title="source: imgur.com" />
     <md-tabs md-dynamic-height md-border-bottom>
 
             <md-tab label="ItemName">
+			gname = {{ goods.gname }}
                 
             </md-tab>
             <md-tab label="Catogories">
+			Categories = {{ goods.categories }}
                 
             </md-tab>
             <md-tab label="Description">
+			description = {{ goods.description}}
                
             </md-tab>
     </md-tabs>

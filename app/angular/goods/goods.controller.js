@@ -28,7 +28,5 @@ function GoodsCtrl($scope, goodsService, $stateParams, $state) {
 	// define onClick event on goods owner
 	function onClickUser(fb_id) {
 		$state.go('Profile', {fid: fb_id});
-		
-		//window.location.href = "profile/" + fb_id;
 	}
 }

@@ -10,7 +10,7 @@ function navbarDirective() {
 		templateUrl: 'layout/navbar.html',
 		bindToController: true,
 		controller: 'NavbarController',
-		controllerAs: 'vm',
+		controllerAs: 'vm'
 	};
 
 	return directive;

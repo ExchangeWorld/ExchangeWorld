@@ -1,1 +1,39 @@
-GOODS
+<!--<div ng-repeat="goods in vm.goodsData">-->
+    <!--<img ng-src="{{ goods.photoPath }}" alt="..." class="img-rounded" style="width:100%"></img>-->
+    <!--<h4>gid = {{ goods.gid }}</h4>-->
+    <!--<h4>gname = {{ goods.gname }}</h4>-->
+    <!--<h4>Categories = {{ goods.categories }}</h4>-->
+    <!--<h4>description = {{ goods.description}}</h4>-->
+    <!--<h4 ng-click="vm.onClickUser( goods.user.fb_id )">owner = <a>{{ goods.user.username }}</a></h4>-->
+	<!--<p>----------以下為留言區-----------</p>-->
+	<!--<div ng-repeat="comments in goods.comments">-->
+		<!--<h4><a ng-click="vm.onClickUser( comments.commenter )">{{ comments.commenter }}</a> say: {{ comments.comment }}</h4>-->
+	<!--</div>-->
+<!--</div>-->
+
+<md-content layout-padding>
+    
+    <md-toolbar class="md-accent rounded-corners md-hue-1">
+        <div layout="row" layout-align="center center" class="md-toolbar-tools">
+            <h2>Goods</h2>
+        </div>
+    </md-toolbar>
+
+</md-content>
+
+
+<md-content layout-padding>
+<img style="width:100%; height:auto" src="http://i.imgur.com/7RoLGdp.jpg" title="source: imgur.com" />
+    <md-tabs md-dynamic-height md-border-bottom>
+
+            <md-tab label="ItemName">
+                
+            </md-tab>
+            <md-tab label="Catogories">
+                
+            </md-tab>
+            <md-tab label="Description">
+               
+            </md-tab>
+        </md-tabs>
+</md-content>

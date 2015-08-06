@@ -1,0 +1,56 @@
+<form ng-submit="vm.onSubmit()">
+
+    <div layout="column" layout-fill>
+        <md-content layout-padding="row">
+            <md-toolbar class="rounded-corners md-primary md-hue-1">
+                <div class="md-toolbar-tools" layout="row" layout-align="center center">
+                    <div>
+                        <span><h2 class="md-headline">Things you have</h2></span>
+                        <!-- fill up the space between left and right area -->
+                        <span flex></span>
+                    </div>
+                </div>
+            </md-toolbar>
+            <md-input-container flex>
+                <label>Name</label>
+                <input type="text" ng-model="vm.goodsName">
+            </md-input-container>
+            <md-input-container flex>
+                <label>Description</label>
+                <textarea type="string" ng-model="vm.goodsDescriptions" columns="1" md-maxlength="100"></textarea>
+            </md-input-container>
+            <h4>Locate your your location on right side!</h4>
+			<select placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" required>
+				<!--<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>-->
+            </select>
+            <hr>
+            <div layout="column">
+                <md-toolbar class="rounded-corners md-primary md-hue-1">
+                    <div class="md-toolbar-tools layout=" row " layout-align="center center "">
+                        <div>
+                            <span><h2 class="md-headline">Things you want</h2></span>
+                            <!-- fill up the space between left and right area -->
+                            <span flex></span>
+                        </div>
+                    </div>
+                </md-toolbar>
+                <md-input-container flex>
+                    <label>Name</label>
+                    <input ng-model="SomeModel3">
+                </md-input-container>
+                <div layout="row">
+                    <span flex="75"></span>
+                    <div flex="25">
+                        <!--<md-button class="md-accent shadowed md-raised md-hue-1">-->
+						<input type="submit" id="submit" value="Submit"></input>
+                            <!--<div layout="row" layout-align="center center">-->
+                                <!--<i class="material-icons md-24">reply</i> <span>Submit</span>-->
+                            <!--</div>-->
+                        <!--</md-button>-->
+                    </div>
+                </div>
+            </div>
+        </md-content>
+    </div>
+
+</form>

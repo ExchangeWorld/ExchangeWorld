@@ -4,11 +4,10 @@ const goodsModule = require('./goods.module');
 goodsModule.controller('GoodsController', GoodsCtrl);
 
 /** @ngInject */
-function GoodsCtrl($scope, goodsService, $stateParams) {
+function GoodsCtrl($scope, goodsService, $stateParams, $state) {
 	var vm         = this;
 	vm.goodsData   = [];
-	//vm.onClickUser = onClickUser;
-	//console.log($routeParams.gid);
+	vm.onClickUser = onClickUser;
 
 	activate();
 
@@ -27,7 +26,9 @@ function GoodsCtrl($scope, goodsService, $stateParams) {
 	}
 
 	// define onClick event on goods owner
-	//function onClickUser(fb_id) {
-		//window.location.href = "#/profile/" + fb_id;
-	//}
+	function onClickUser(fb_id) {
+		$state.go('Profile', {fid: fb_id});
+		
+		//window.location.href = "profile/" + fb_id;
+	}
 }

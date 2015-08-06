@@ -28,15 +28,18 @@
 
             <md-tab label="ItemName">
 			gname = {{ goods.gname }}
-                
             </md-tab>
+
+			<md-tab label="Owner">
+			<a ng-click="vm.onClickUser( goods.user.fb_id )">{{ goods.user.username }}</a>   
+            </md-tab>
+
             <md-tab label="Catogories">
 			Categories = {{ goods.categories }}
-                
             </md-tab>
-            <md-tab label="Description">
-			description = {{ goods.description}}
-               
+            
+			<md-tab label="Description">
+			description = {{ goods.description}}   
             </md-tab>
     </md-tabs>
 </md-content>

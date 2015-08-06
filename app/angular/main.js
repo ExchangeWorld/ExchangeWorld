@@ -7,6 +7,7 @@ require('./templates');
 require('./core/core.module');
 //require('./example/example.module');
 require('./map/map.module');
+require('./profile/profile.module');
 require('./goods/goods.module');
 require('./seek/seek.module');
 require('./layout/layout.module');
@@ -21,6 +22,7 @@ angular.element(document).ready(function() {
 		'app.map',
 		'app.goods',
 		'app.seek',
+		'app.profile',
 		'app.layout'
 	];
 

@@ -4,10 +4,10 @@ const seekModule = require('./seek.module');
 seekModule.controller('SeekController', SeekCtrl);
 
 /** @ngInject */
-function SeekCtrl($scope, seekService) {
+function SeekCtrl($scope, seekService, $state) {
 	var vm          = this;
 	vm.goods        = [];
-	//vm.onClickGoods = onClickGoods;
+	vm.onClickGoods = onClickGoods;
 
 	activate();
 
@@ -25,8 +25,8 @@ function SeekCtrl($scope, seekService) {
 			});
 	}
 
-	// goods onClick event: change route to corrsponding gid
-	//function onClickGoods(gid) {
-		//window.location.href = "#/seek/" + gid;
-	//}
+	//goods onClick event: change route to corrsponding gid
+	function onClickGoods(gid) {
+		$state.go('Goods', {gid:gid});
+	}
 }

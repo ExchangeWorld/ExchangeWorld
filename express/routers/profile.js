@@ -2,10 +2,10 @@ var express = require('express');
 var router  = express.Router();
 
 // including tables 
-var user      = require('../ORM/User.js');
+var user      = require('../ORM/User');
 var goods     = require('../ORM/Goods');
-var follower  = require('../ORM/Follower.js');
-var following = require('../ORM/Following.js');
+var follower  = require('../ORM/Follower');
+var following = require('../ORM/Following');
 
 router.get('/', function(req, res, nex) {
 

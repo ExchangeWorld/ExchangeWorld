@@ -4,8 +4,8 @@ var express = require('express');
 var router  = express.Router();
 
 // including tables 
-var goods   = require('../ORM/Goods.js');
-var user    = require('../ORM/User.js');
+var goods   = require('../ORM/Goods');
+var user    = require('../ORM/User');
 
 router.get('/', function(req, res, next) {
 

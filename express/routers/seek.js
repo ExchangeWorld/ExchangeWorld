@@ -34,26 +34,27 @@ router.get('/', function(req, res, next) {
 	goods.belongsTo(user, {foreignKey: 'ownerID'});
 
     // Emit a find operation with orm model in table `goods`
-    goods.sync({
-        force: false
-    }).then(function() {
-		/**
-		 * SELECT `goods`.*, `user`.* 
-		 * FROM `goods`, `user`
-		 * WHERE `goods`.ownerID = `user`.fb_id AND `goods`.name = %title% 
-         */
-		return goods.findAll({
-            where: {
-                gname: {
-                    $like: '%' + title + '%'
+    goods
+        .sync({force: false})
+        .then(function() {
+    		/**
+    		 * SELECT `goods`.*, `user`.* 
+    		 * FROM `goods`, `user`
+    		 * WHERE `goods`.ownerID = `user`.fb_id AND `goods`.name = %title% 
+             */
+    		return goods.findAll({
+                where: {
+                    gname: {
+                        $like: '%' + title + '%'
+                    },
+                    status: 0
                 },
-                status: 0
-            },
-			include: [user]
+    			include: [user]
+            });
+        })
+        .then(function(result) {
+            res.json(result);
         });
-    }).then(function(result) {
-        res.json(result);
-    });
 });
 
 module.exports = router;

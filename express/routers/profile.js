@@ -34,27 +34,29 @@ router.get('/', function(req, res, nex) {
     //console.log("kfkkkf");
 
 	// Emit a find operation with orm model in table `user`
-	user.sync({
-		force: false
-	}).then(function() {
-		/**
-		 * SELECT `goods`. * , `user`.*
-		 * FROM `goods`, `user`
-		 * WHERE `user`.`fb_id` = '_fb_id' 
-		 *   AND `user`.`fb_id` = `goods`.`ownerID`
-		 *   AND `user`.`fb_id` = `followertable`.`myid`
-		 *   AND `user`.`fb_id` = `seeker`.`myid`
-		 */
-		return user.findAll({
-			where: {
-				fb_id : _fb_id
-			},
-			include: [goods, follower, following]
+	user
+		.sync({force: false})
+		.then(function() {
+
+			/**
+			 * SELECT `goods`. * , `user`.*
+			 * FROM `goods`, `user`
+			 * WHERE `user`.`fb_id` = '_fb_id' 
+			 *   AND `user`.`fb_id` = `goods`.`ownerID`
+			 *   AND `user`.`fb_id` = `followertable`.`myid`
+			 *   AND `user`.`fb_id` = `seeker`.`myid`
+			 */
+			 
+			return user.findAll({
+				where: {
+					fb_id : _fb_id
+				},
+				include: [goods, follower, following]
+			});
+		})
+		.then(function(result) {
+			res.json(result);
 		});
-	}).then(function(result) {
-		res.json(result);
-	});
-	
 });
 
 

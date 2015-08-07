@@ -8,6 +8,12 @@ var goods = require('../ORM/Goods');
 // Handle posting image
 router.post('/image', function(req, res, next) {
 
+	/*
+	 * POST body looks like:
+	 * imgData=/9j/2wCEAAgGBgcGBQgHBwcJC...
+	 * imgFormat=png
+	 */
+
     // Get base64 encoded imgData from request body
     var imgData = req.body.imgData;
 

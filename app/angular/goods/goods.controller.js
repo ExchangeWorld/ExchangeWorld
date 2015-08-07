@@ -1,10 +1,10 @@
 'use strict';
 
 const goodsModule = require('./goods.module');
-goodsModule.controller('GoodsController', GoodsCtrl);
+goodsModule.controller('GoodsController', GoodsController);
 
 /** @ngInject */
-function GoodsCtrl($scope, goodsService, $stateParams, $state) {
+function GoodsController(goodsService, $stateParams, $state) {
 	var vm         = this;
 	vm.goodsData   = [];
 	vm.onClickUser = onClickUser;
@@ -27,6 +27,6 @@ function GoodsCtrl($scope, goodsService, $stateParams, $state) {
 
 	// define onClick event on goods owner
 	function onClickUser(fb_id) {
-		$state.go('Profile', {fid: fb_id});
+		$state.go('root.profile', {fid: fb_id});
 	}
 }

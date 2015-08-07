@@ -1,10 +1,10 @@
 'use strict';
 
 const seekModule = require('./seek.module');
-seekModule.controller('SeekController', SeekCtrl);
+seekModule.controller('SeekController', SeekController);
 
 /** @ngInject */
-function SeekCtrl($scope, seekService, $state) {
+function SeekController($scope, seekService, $state) {
 	var vm          = this;
 	vm.goods        = [];
 	vm.onClickGoods = onClickGoods;
@@ -27,6 +27,6 @@ function SeekCtrl($scope, seekService, $state) {
 
 	//goods onClick event: change route to corrsponding gid
 	function onClickGoods(gid) {
-		$state.go('Goods', {gid:gid});
+		$state.go('root.goods', {gid:gid});
 	}
 }

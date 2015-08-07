@@ -1,14 +1,13 @@
 'use strict';
 
 const profileModule = require('./profile.module');
-profileModule.controller('ProfileController', ProfileCtrl);
+profileModule.controller('ProfileController', ProfileController);
 
 /** @ngInject */
-function ProfileCtrl($scope, profileService, $stateParams) {
-	var vm           = this;
-	vm.profileData   = [];
-	//vm.onClickUser = onClickUser;
-	//console.log($routeParams.gid);
+function ProfileController(profileService, $stateParams, $state) {
+	var vm         = this;
+	vm.profileData = [];
+	vm.onClickUser = onClickUser;
 
 	activate();
 
@@ -25,9 +24,9 @@ function ProfileCtrl($scope, profileService, $stateParams) {
 				console.log('error', error);
 			});
 	}
-//10202592687218268
+
 	// define onClick event on goods owner
 	function onClickUser(fb_id) {
-		window.location.href = "#/profile/" + fb_id;
+		$state.go('root.profile', {fid: fb_id});
 	}
 }

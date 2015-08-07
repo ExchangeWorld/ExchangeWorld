@@ -19,8 +19,8 @@ module.exports = function() {
 	if (process.env.NODE_ENV !== 'production') server.use(morgan('dev'));
 
 	//server.use(favicon(__dirname + '/' + config.images.dest + '/favicon.ico'));
-	server.use(bodyParser.json()); // for parsing application/json
-	server.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+	server.use(bodyParser.json({limit: '64mb'})); // for parsing application/json
+	server.use(bodyParser.urlencoded({limit: '64mb', extended: true })); // for parsing application/x-www-form-urlencoded
 	// server.use(multer()); // for parsing multipart/form-data
 	server.use(cookieParser());
 	server.use(compression());
@@ -35,6 +35,7 @@ module.exports = function() {
 	server.use('/api/seek', require('./routers/seek'));
 	server.use('/api/goods', require('./routers/goods'));
 	server.use('/api/post', require('./routers/post'));
+	server.use('/api/upload', require('./routers/upload'));
 	server.use('/api/profile', require('./routers/profile'));
 	server.use('/api/exchange', require('./routers/exchange'));
 

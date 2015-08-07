@@ -6,14 +6,19 @@ postModule.service('postService', postService);
 /** @ngInject */
 function postService(Restangular, $q) {
 	var service = {
-		sendNewPost: sendNewPost 
+		sendNewPostInfo : sendNewPostInfo,
+		uploadImg       : uploadImg,
 	};
 
 	return service;
 
 	//////////
 
-	function sendNewPost(newpost){
+	function sendNewPostInfo(newpost){
 		Restangular.all('api/post').post(newpost);
+	}
+
+	function uploadImg(img){
+		Restangular.all('api/upload/image').post(img);
 	}
 }

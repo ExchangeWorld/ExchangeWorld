@@ -4,11 +4,12 @@ const postModule = require('./post.module');
 postModule.controller('PostController', PostCtrl);
 
 /** @ngInject */
-function PostCtrl(postService, $stateParams, $state) {
+function PostCtrl(postService, $state ) {
 	var vm               = this;
 	vm.goodsName         = '';
 	vm.goodsDescriptions = '';
 	vm.goodsCategory     = '';
+	vm.imgEncoded        = [];
 	vm.onSubmit          = onsubmit;
 	/**
 	 * Need to get more info,
@@ -28,9 +29,11 @@ function PostCtrl(postService, $stateParams, $state) {
 			posY        : 23.5,
 			ownerID     : '88776654'
 		};
-		console.log(newPost);
+		
 
-		postService.sendNewPost(newPost);
+		postService.sendNewPostInfo(newPost);
+		postService.uploadImg(vm.imgEncoded);
+
 		$state.go('Seek');
 	}
 

@@ -3,7 +3,12 @@
 	<div class="md-toolbar-tools md-medium-tall navbar">
 
 		<span hide-md hide-sm flex="30" >
-		<a ui-sref="Home" ng-click="onClick(0)" style="font-size: 20px"><md-icon md-svg-src="#" style="display:inline-block;"></md-icon> ExchangeWorld</a></span>
+			<a ui-sref="Home" ng-click="onClick(0)" style="font-size: 20px">
+				<span>
+					<md-icon md-svg-src="#" style="display:inline-block;" /> ExchangeWorld
+				</span>
+			</a>
+		</span>
 
 		<div flex="33">
 			<md-button flex="33" ui-sref="Seek" ng-click="onClick(1)" ng-class="{'active': contentIs(1)}" class="navbutton-down">

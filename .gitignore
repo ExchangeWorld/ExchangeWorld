@@ -1,6 +1,5 @@
-.DS_Store
-
 # Temp file
+.DS_Store
 *.swp
 
 # Logs
@@ -35,6 +34,3 @@ templates.js
 
 # Database Authenication
 express/libs/DBLogin.js
-express/libs/authenication.js
-express/libs/connectDBPool.js
-express/libs/connectDB.js

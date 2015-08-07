@@ -30,21 +30,22 @@ router.get('/', function(req, res, next) {
     }
 
     // Emit a find operation with orm model in table `user`
-    user.sync({
-        force: false
-    }).then(function() {
-        return user.findAll({
-            where: {
-                $or: [{
-                    uid: _uid
-                }, {
-                    fb_id: _fb_id
-                }]
-            }
+    user
+        .sync({force: false})
+        .then(function() {
+            return user.findAll({
+                where: {
+                    $or: [{
+                     uid: _uid
+                    }, {
+                     fb_id: _fb_id
+                    }]
+                }
+            });
+        })
+        .then(function(result) {
+            res.json(result);
         });
-    }).then(function(result) {
-        res.json(result);
-    });
 });
 
 module.exports = router;

@@ -28,9 +28,7 @@ router.post('/', function(req, res, next) {
 
     // Create instance
     goods
-    	.sync({
-        	force: false
-    	})
+    	.sync({force: false})
     	.then(function() {
 	        return goods.create({
 	            gname       : _gname,
@@ -42,9 +40,9 @@ router.post('/', function(req, res, next) {
 	            ownerID     : _ownerID
 	        });
     	})
-	.then(function(result) {
-	    res.json(result);
-	});
+	    .then(function(result) {
+	       res.json(result);
+	   });
 
 });
 

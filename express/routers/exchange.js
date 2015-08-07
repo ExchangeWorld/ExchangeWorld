@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router();
+var router  = express.Router();
 
 // including tables
 var exchanges = require('../ORM/Exchanges');
@@ -28,10 +28,25 @@ router.get('/create', function(req, res, next) {
     exchanges
         .sync({force: false})
         .then(function() {
-            return exchanges.create({
-                gid1: _gid1,
-                gid2: _gid2
+            return exchanges.findOne({
+                where: {
+                    $and: [{
+                        gid1: _gid1
+                    }, {
+                        gid2: _gid2
+                    }]
+                }
             });
+        })
+        .then(function(isThereAlready) {
+            if (isThereAlready != null) {
+                return isThereAlready;
+            } else {
+                return exchanges.create({
+                    gid1: _gid1,
+                    gid2: _gid2
+                });
+            }
         })
         .then(function(result) {
             res.json(result);

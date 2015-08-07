@@ -18,7 +18,7 @@ router.post('/image', function(req, res, next) {
     var imgData = req.body.imgData;
 
     // Get image format type, like jpg or png
-    var imgFormat = req.body.format;
+    var imgFormat = req.body.imgFormat;
 
     // Remove annotations and fix space to +
     // And become pure base64 string

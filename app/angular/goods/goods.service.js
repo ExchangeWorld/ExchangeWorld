@@ -6,7 +6,7 @@ goodsModule.service('goodsService', goodsService);
 /** @ngInject */
 function goodsService(Restangular, $q) {
 	var service = {
-		getGoodsData: asyncGetData 
+		getGoodsData : asyncGetData
 	};
 
 	return service;
@@ -17,8 +17,8 @@ function goodsService(Restangular, $q) {
 		var deferred = $q.defer();
 
 		setTimeout(function() {
-			/** 
-			 * code for reject condictions 
+			/**
+			 * code for reject condictions
 			 */
 
 			deferred.resolve(getGoodsData(gid));
@@ -31,10 +31,13 @@ function goodsService(Restangular, $q) {
 		var goods = Restangular.all('api/goods');
 
 		// GET /goods?gid=id
-		return goods.getList({ 'gid':id }).then(function(data) {
-			return data;
-		}).catch(function(error) {
-			console.log('error', error);
-		});
+		return goods
+			.getList({ 'gid' : id })
+			.then(function(data) {
+				return data;
+			})
+			.catch(function(error) {
+				console.log('error', error);
+			});
 	}
 }

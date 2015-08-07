@@ -4,24 +4,26 @@ const layoutModule = require('./layout.module');
 layoutModule.controller('NavbarController', NavbarController);
 
 /** @ngInject */
-function NavbarController($mdSidenav) {
-	const vm = this;
+function NavbarController($mdSidenav, $state) {
+	const vm     = this;
+	const state  = ['home', 'seek', 'post', 'manage', 'profile'];
 	vm.contentIs = contentIs;
-	vm.onClick = onClick;
+	vm.onClick   = onClick;
 
 	function setContent(contentIndex) {
-		//	vm.content = ContentType[contentIndex];
+		//	vm.content = state[contentIndex];
 		//	vm.contentHistory.push(vm.content);
 	}
 
 	function contentIs(contentIndex) {
-		return vm.content === ContentType[contentIndex];
+		return vm.content === state[contentIndex];
 	}
 
 	function onClick(contentIndex) {
 		//$scope.content = ContentType[contentIndex];
 		//$scope.$emit('sidenavChanged', ContentType[contentIndex]);
-		console.log('Click');
+		//console.log('Click');
+		$state.go('root.' + state[contentIndex]);
 		$mdSidenav('left').toggle();
 	}
 }

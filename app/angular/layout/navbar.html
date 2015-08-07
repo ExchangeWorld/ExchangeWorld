@@ -4,33 +4,61 @@
 
 		<span hide-md hide-sm flex="25">
 			<a ui-sref="root.home" ng-click="vm.onClick(0)" style="font-size: 20px">
-				<md-icon md-font-set="material-icons"> build</md-icon>
+				<md-icon md-font-set="material-icons">build</md-icon>
 				ExchangeWorld
 			</a>
 		</span>
 
 		<div flex="33" layout="row" layout-align="center center">
 			<md-button
-					flex="33"
-					ui-sref="root.seek"
+					flex
+					class="navbutton-down"
 					ng-click="vm.onClick(1)"
-					ng-class="{'active': contentIs(1)}"
-					class="navbutton-down">
-				<md-icon md-font-set="material-icons"> dashboard</md-icon>
+					ng-class="{'active': contentIs(1)}">
+				<md-icon md-font-set="material-icons">dashboard</md-icon>
 				<span hide-md hide-sm>SEEK</span>
 			</md-button>
 
 			<md-button
-					flex="33"
-					ui-sref="root.post"
+					flex
+					class="navbutton-down"
 					ng-click="vm.onClick(2)"
-					ng-class="{'active': contentIs(2)}"
-					class="navbutton-down">
-				<md-icon ui-sref="root.home" md-font-set="material-icons"> add box</md-icon>
+					ng-class="{'active': contentIs(2)}">
+				<md-icon md-font-set="material-icons">add box</md-icon>
 				<span hide-md hide-sm>POST</span>
+			</md-button>
+
+			<md-button
+					flex
+					class="navbutton-down"
+					ng-click="vm.onClick(3)"
+					ng-class="{'active': vm.contentIs(3)}">
+				<md-icon md-font-set="material-icons">store</md-icon>
+				<span hide-md hide-sm>Manage</span>
 			</md-button>
 		</div>
 
-		<span flex="5"></span>
+		<span flex="20"></span>
+		<div layout="row" layout-align="center center">
+			<md-button flex="30">
+				<md-icon class="material-icons">notifications</md-icon>
+			</md-button>
+
+			<md-menu flex md-offset="8 75">
+				<md-button ng-click="$mdOpenMenu()">
+					USERNAME
+				</md-button>
+				<md-menu-content width="3">
+					<md-menu-item>
+						<md-button ng-click="vm.onClick(4)">Profile</md-button>
+					</md-menu-item>
+					<md-menu-divider></md-menu-divider>
+					<md-menu-item>
+						<md-button ng-click="">Log Out</md-button>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
+		</div>
+
 	</div>
 </md-toolbar>

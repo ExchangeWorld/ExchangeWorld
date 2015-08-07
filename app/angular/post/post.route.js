@@ -11,7 +11,7 @@ function appRun(routerHelper) {
 function getStates() {
 	return [
 		{
-			state : 'Post',
+			state : 'root.post',
 			config : {
 				url : '/post',
 				bindToController: true,

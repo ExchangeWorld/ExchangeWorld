@@ -2,21 +2,31 @@
 
 	<div class="md-toolbar-tools md-medium-tall navbar">
 
-		<span hide-md hide-sm flex="25" >
-			<a ui-sref="Seek" ng-click="vm.onClick(0)" style="font-size: 20px">
-				<md-icon md-font-set="material-icons"> build </md-icon>
+		<span hide-md hide-sm flex="25">
+			<a ui-sref="root.home" ng-click="vm.onClick(0)" style="font-size: 20px">
+				<md-icon md-font-set="material-icons"> build</md-icon>
 				ExchangeWorld
 			</a>
 		</span>
 
 		<div flex="33" layout="row" layout-align="center center">
-			<md-button flex="33" ng-click="vm.onClick(1)" ng-class="{'active': contentIs(1)}" class="navbutton-down">
-				<md-icon md-font-set="material-icons"> dashboard </md-icon>
+			<md-button
+					flex="33"
+					ui-sref="root.seek"
+					ng-click="vm.onClick(1)"
+					ng-class="{'active': contentIs(1)}"
+					class="navbutton-down">
+				<md-icon md-font-set="material-icons"> dashboard</md-icon>
 				<span hide-md hide-sm>SEEK</span>
 			</md-button>
 
-			<md-button flex="33" ng-click="vm.onClick(2)" ng-class="{'active': contentIs(2)}" class="navbutton-down">
-				<md-icon md-font-set="material-icons"> add box </md-icon>
+			<md-button
+					flex="33"
+					ui-sref="root.post"
+					ng-click="vm.onClick(2)"
+					ng-class="{'active': contentIs(2)}"
+					class="navbutton-down">
+				<md-icon ui-sref="root.home" md-font-set="material-icons"> add box</md-icon>
 				<span hide-md hide-sm>POST</span>
 			</md-button>
 		</div>

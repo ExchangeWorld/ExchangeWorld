@@ -11,7 +11,7 @@ function appRun(routerHelper) {
 function getStates() {
 	return [
 		{
-			state : 'Profile',
+			state : 'root.profile',
 			config : {
 				url : '/profile/:fid',
 				bindToController: true,

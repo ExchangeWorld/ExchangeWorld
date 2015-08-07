@@ -19,8 +19,8 @@ module.exports = function() {
 	if (process.env.NODE_ENV !== 'production') server.use(morgan('dev'));
 
 	//server.use(favicon(__dirname + '/' + config.images.dest + '/favicon.ico'));
-	server.use(bodyParser.json({limit: '64mb'})); // for parsing application/json
-	server.use(bodyParser.urlencoded({limit: '64mb', extended: true })); // for parsing application/x-www-form-urlencoded
+	server.use(bodyParser.json({ limit : '64mb' })); // for parsing application/json
+	server.use(bodyParser.urlencoded({ limit : '64mb', extended : true })); // for parsing application/x-www-form-urlencoded
 	// server.use(multer()); // for parsing multipart/form-data
 	server.use(cookieParser());
 	server.use(compression());
@@ -28,7 +28,7 @@ module.exports = function() {
 
 	// Serve index.html for all routes to leave routing up to Angular
 	server.all(/^(?!\/api\/)\w*/, function(req, res, next) {
-		res.sendFile('index.html', { root: 'build' });
+		res.sendFile('index.html', { root : 'build' });
 	});
 
 	//server.use('/', routeIndex);
@@ -41,7 +41,7 @@ module.exports = function() {
 
 	// catch 404 and forward to error handler
 	server.use(function(req, res, next) {
-		var err = new Error('Not Found');
+		var err    = new Error('Not Found');
 		err.status = 404;
 		next(err);
 	});

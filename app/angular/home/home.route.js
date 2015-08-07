@@ -1,7 +1,7 @@
 "use strict";
 
-const layoutModule = require('./layout.module');
-layoutModule.run(appRun);
+const homeModule = require('./home.module');
+homeModule.run(appRun);
 
 /** @ngInject */
 function appRun(routerHelper) {
@@ -11,10 +11,10 @@ function appRun(routerHelper) {
 function getStates() {
 	return [
 		{
-			state : 'root',
+			state : 'root.home',
 			config : {
-				abstract : true,
-				templateUrl : 'layout/layout.html',
+				url : '/',
+				templateUrl : 'home/home.html',
 			}
 		}
 	];

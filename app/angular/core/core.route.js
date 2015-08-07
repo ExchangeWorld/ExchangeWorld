@@ -14,7 +14,7 @@ function appRun(routerHelper, $rootScope, AppSettings) {
 function getStates() {
 	return [
 		{
-			state: '404',
+			state: 'root.404',
 			config: {
 				url: '/404',
 				templateUrl: 'core/404.html',

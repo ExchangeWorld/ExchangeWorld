@@ -11,17 +11,14 @@ function appRun(routerHelper) {
 function getStates() {
 	return [
 		{
-			state : 'Seek',
+			state : 'root.seek',
 			config : {
 				url : '/seek',
 				bindToController: true,
 				controller : 'SeekController',
 				controllerAs: 'vm',
-				views: {
-					"sideView": { templateUrl: "seek/seek.html" },
-				}
+				templateUrl: 'seek/seek.html',
 			},
-
 		}
 	];
 }

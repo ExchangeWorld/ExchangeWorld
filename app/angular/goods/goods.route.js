@@ -11,7 +11,7 @@ function appRun(routerHelper) {
 function getStates() {
 	return [
 		{
-			state : 'Goods',
+			state : 'root.goods',
 			config : {
 				url : '/seek/:gid',
 				bindToController: true,

@@ -4,7 +4,7 @@ const postModule = require('./post.module');
 postModule.controller('PostController', PostCtrl);
 
 /** @ngInject */
-function PostCtrl($scope, postService, $stateParams) {
+function PostCtrl(postService, $stateParams, $state) {
 	var vm               = this;
 	vm.goodsName         = '';
 	vm.goodsDescriptions = '';
@@ -20,12 +20,18 @@ function PostCtrl($scope, postService, $stateParams) {
 
 	function onsubmit() {
 		var newPost = {
-			goodsName         : vm.goodsName,
-			goodsDescriptions : vm.goodsDescriptions,
-			goodsCategory     : vm.goodsCategory.label
+			gname       : vm.goodsName,
+			description : vm.goodsDescriptions,
+			categories  : vm.goodsCategory.label,
+			want        : '',
+			posX        : 123.4,
+			posY        : 23.5,
+			ownerID     : '88776654'
 		};
 		console.log(newPost);
-		//alert('submitted!');
+
+		postService.sendNewPost(newPost);
+		$state.go('Seek');
 	}
 
 

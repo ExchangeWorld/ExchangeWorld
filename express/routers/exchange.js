@@ -105,9 +105,13 @@ router.get('/status', function(req, res, next) {
             }
         });
     }).then(function(result) {
-        result.status = 1;
-        result.save().then(function() {});
-        return result;
+        if (result == null) {
+            return {};
+        } else {
+            result.status = 1;
+            result.save().then(function() {});
+            return result;
+        }
     }).then(function(result) {
         res.json(result);
     });

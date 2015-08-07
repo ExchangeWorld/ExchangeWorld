@@ -72,9 +72,7 @@ router.get('/delete', function(req, res, next) {
 
     // Delete instance where gid1 and gid2 matched
     exchanges
-        .sync({
-            force: false
-        })
+        .sync({force: false})
         .then(function() {
             return exchanges.destroy({
                 where: {
@@ -112,9 +110,7 @@ router.get('/status', function(req, res, next) {
 
     // Find instance and update status to 1(complete) then save
     exchanges
-        .sync({
-            force: false
-        })
+        .sync({force: false})
         .then(function() {
             return exchanges.findOne({
                 where: {

@@ -3,19 +3,18 @@
 	<div class="md-toolbar-tools md-medium-tall navbar">
 
 		<span hide-md hide-sm flex="30" >
-			<a ui-sref="Home" ng-click="onClick(0)" style="font-size: 20px">
-				<span>
-					<md-icon md-svg-src="#" style="display:inline-block;" /> ExchangeWorld
-				</span>
+			<a ui-sref="Home" ng-click="vm.onClick(0)" style="font-size: 20px">
+				<md-icon style="display:inline-block;"></md-icon> ExchangeWorld
 			</a>
 		</span>
 
 		<div flex="33">
-			<md-button flex="33" ui-sref="Seek" ng-click="onClick(1)" ng-class="{'active': contentIs(1)}" class="navbutton-down">
+			<md-button flex="33" ng-click="vm.onClick(1)" ng-class="{'active': contentIs(1)}" class="navbutton-down">
 				<i class="fa fa-search fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
 				<span hide-md hide-sm>SEEK</span>
 			</md-button>
-			<md-button flex="33" ui-sref="Post" ng-click="onClick(2)" ng-class="{'active': contentIs(2)}" class="navbutton-down">
+
+			<md-button flex="33" ng-click="vm.onClick(2)" ng-class="{'active': contentIs(2)}" class="navbutton-down">
 				<i class="fa fa-plus fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i>
 				<span hide-md hide-sm>POST</span>
 			</md-button>

@@ -1,1 +1,18 @@
-<div>sidenav</div>
+<md-sidenav flex="35"
+			class="md-sidenav-left md-whiteframe-z2"
+			md-component-id="left"
+			md-is-locked-open="$mdMedia('gt-md')">
+
+	<md-toolbar hide-lg hide-gt-lg>
+		<div class="md-toolbar-tools md-medium-tall navbar">
+			<a href ng-click="closeMenu()">ExchangeWorld > {{contentType|uppercase}}</a>
+		</div>
+	</md-toolbar>
+
+	<!--<div ng-scrollable="{scrollX:'none',scrollY:'right',updateOnResize:true}" resize ng-style="resizeWithOffset(64)">-->
+		<!--<md-content ng-view flex class="md-padding" >-->
+			<!--<div ui-view />-->
+		<!--</md-content>-->
+	<!--</div>-->
+
+</md-sidenav>

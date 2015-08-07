@@ -5,36 +5,15 @@ postModule.service('postService', postService);
 
 /** @ngInject */
 function postService(Restangular, $q) {
-	//var service = {
-		//getPostData: asyncGetData 
-	//};
+	var service = {
+		sendNewPost: sendNewPost 
+	};
 
-	//return service;
+	return service;
 
 	//////////
 
-	//function asyncGetData(fid) {
-		//var deferred = $q.defer();
-
-		//setTimeout(function() {
-			/** 
-			 * code for reject condictions 
-			 */
-
-			//deferred.resolve(getPostData(fid));
-		//}, 1000);
-
-		//return deferred.promise;
-	//}
-
-	//function getPostData(id) {
-		//var post = Restangular.all('api/post');
-
-		//// GET /post?fid=id
-		//return post.getList({ 'fid':id }).then(function(data) {
-			//return data;
-		//}).catch(function(error) {
-			//console.log('error', error);
-		//});
-	//}
+	function sendNewPost(newpost){
+		Restangular.all('api/post').post(newpost);
+	}
 }

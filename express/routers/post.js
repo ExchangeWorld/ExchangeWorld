@@ -27,21 +27,24 @@ router.post('/', function(req, res, next) {
     var _ownerID     = req.body.ownerID;
 
     // Create instance
-    goods.sync({
-        force: false
-    }).then(function() {
-        return goods.create({
-            gname       : _gname,
-            categories  : _categories,
-            description : _description,
-            want        : _want,
-            posX        : _posX,
-            posY        : _posY,
-            ownerID     : _ownerID
-        });
-    }).then(function(result) {
-        res.json(result);
-    });
+    goods
+    	.sync({
+        	force: false
+    	})
+    	.then(function() {
+	        return goods.create({
+	            gname       : _gname,
+	            categories  : _categories,
+	            description : _description,
+	            want        : _want,
+	            posX        : _posX,
+	            posY        : _posY,
+	            ownerID     : _ownerID
+	        });
+    	})
+	.then(function(result) {
+	    res.json(result);
+	});
 
 });
 

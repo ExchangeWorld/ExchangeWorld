@@ -10,6 +10,7 @@ require('angular-material');
 require('../utils/logger/logger.module');
 require('../utils/exception/exception.module');
 require('../utils/router/router.module');
+require('../utils/resize/resize.module');
 
 const requires = [
 	'ui.router',
@@ -18,6 +19,7 @@ const requires = [
 	'utils.logger',
 	'utils.exception',
 	'utils.router',
+	'utils.resize',
 ];
 
 module.exports = angular.module('app.core', requires);

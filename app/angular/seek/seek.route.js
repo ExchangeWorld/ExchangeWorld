@@ -17,9 +17,11 @@ function getStates() {
 				bindToController: true,
 				controller : 'SeekController',
 				controllerAs: 'vm',
-				templateUrl : 'seek/seek.html',
-				title : 'seek'
-			}
+				views: {
+					"sideView": { templateUrl: "seek/seek.html" },
+				}
+			},
+
 		}
 	];
 }

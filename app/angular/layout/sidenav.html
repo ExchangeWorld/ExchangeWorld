@@ -1,8 +1,9 @@
-<md-sidenav flex="35"
-			class="md-sidenav-left md-whiteframe-z2"
-			md-component-id="left"
-			md-is-locked-open="$mdMedia('gt-md')"
-			resize ng-style="resizeWithOffset(64)">
+<md-sidenav
+	flex="35"
+	class="md-sidenav-left md-whiteframe-z2"
+	md-component-id="left"
+	md-is-locked-open="$mdMedia('gt-md')"
+	>
 
 	<md-toolbar hide-lg hide-gt-lg>
 		<div class="md-toolbar-tools md-medium-tall navbar">
@@ -11,7 +12,7 @@
 	</md-toolbar>
 
 	<!--<div ng-scrollable="{scrollX:'none',scrollY:'right',updateOnResize:true}" resize ng-style="resizeWithOffset(64)">-->
-	<md-content flex class="md-padding">
+	<md-content flex class="md-padding" resize ng-style="resizeWithOffset(64)">
 		TEST
 		<!--<div ui-view="sideView"></div>-->
 	</md-content>

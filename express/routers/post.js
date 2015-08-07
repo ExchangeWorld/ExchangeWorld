@@ -40,7 +40,7 @@ router.post('/', function(req, res, next) {
 	            ownerID     : _ownerID
 	        });
     	})
-	   .then(function(result) {
+	    .then(function(result) {
 	       res.json(result);
 	   });
 

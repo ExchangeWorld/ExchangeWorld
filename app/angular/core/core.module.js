@@ -7,6 +7,7 @@ global._       = require("lodash"); //fix restangular dependency on lodash issue
 require('angular-ui-router');
 require('restangular');
 require('angular-material');
+require('angular-base64-upload');
 require('../utils/logger/logger.module');
 require('../utils/exception/exception.module');
 require('../utils/router/router.module');
@@ -16,6 +17,7 @@ const requires = [
 	'ui.router',
 	'restangular',
 	'ngMaterial',
+	'naif.base64',
 	'utils.logger',
 	'utils.exception',
 	'utils.router',

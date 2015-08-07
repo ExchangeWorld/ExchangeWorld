@@ -19,6 +19,7 @@
                 <label>Description</label>
                 <textarea type="string" ng-model="vm.goodsDescriptions" columns="1" md-maxlength="100"></textarea>
             </md-input-container>
+			<input type='file' ng-model='vm.imgEncoded' base-sixty-four-input required accept="image/*"/>
             <h4>Locate your your location on right side!</h4>
 			<select placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" required>
 				<!--<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>-->

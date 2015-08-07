@@ -1,15 +1,16 @@
 'use strict';
 
 const postModule = require('./post.module');
-postModule.controller('PostController', PostCtrl);
+postModule.controller('PostController', PostController);
 
 /** @ngInject */
-function PostCtrl(postService, $stateParams, $state) {
+function PostController(postService, $state) {
 	var vm               = this;
 	vm.goodsName         = '';
 	vm.goodsDescriptions = '';
 	vm.goodsCategory     = '';
-	vm.onSubmit          = onsubmit;
+	vm.imgEncoded        = [];
+	vm.onSubmit          = onSubmit;
 	/**
 	 * Need to get more info,
 	 * goods position X & Y
@@ -18,7 +19,7 @@ function PostCtrl(postService, $stateParams, $state) {
 
 	////////////////
 
-	function onsubmit() {
+	function onSubmit() {
 		var newPost = {
 			gname       : vm.goodsName,
 			description : vm.goodsDescriptions,
@@ -28,18 +29,19 @@ function PostCtrl(postService, $stateParams, $state) {
 			posY        : 23.5,
 			ownerID     : '88776654'
 		};
-		console.log(newPost);
+		
 
-		postService.sendNewPost(newPost);
-		$state.go('Seek');
+		postService.sendNewPostInfo(newPost);
+		postService.uploadImg(vm.imgEncoded);
+
+		$state.go('root.seek');
 	}
 
 
 	/**
 	 * define all avalible categories 
 	 */
-	vm.availableCategory = 
-		[
+	vm.availableCategory = [
 			{label : "Books"},
 			{label : "Textbooks"},
 			{label : "Magazine"},

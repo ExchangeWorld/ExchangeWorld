@@ -25,16 +25,17 @@ router.get('/create', function(req, res, next) {
     var _gid2 = (__gid2 > __gid1 ? __gid2 : __gid1);
 
     // Create instance
-    exchanges.sync({
-        force: false
-    }).then(function() {
-        return exchanges.create({
-            gid1: _gid1,
-            gid2: _gid2
+    exchanges
+        .sync({force: false})
+        .then(function() {
+            return exchanges.create({
+                gid1: _gid1,
+                gid2: _gid2
+            });
+        })
+        .then(function(result) {
+            res.json(result);
         });
-    }).then(function(result) {
-        res.json(result);
-    });
 });
 
 // Delete a exchange
@@ -55,23 +56,24 @@ router.get('/delete', function(req, res, next) {
     var _gid2 = (__gid2 > __gid1 ? __gid2 : __gid1);
 
     // Delete instance where gid1 and gid2 matched
-    exchanges.sync({
-        force: false
-    }).then(function() {
-        return exchanges.destroy({
-            where: {
-                $and: [{
-                    gid1: _gid1
-                }, {
-                    gid2: _gid2
-                }]
-            }
+    exchanges
+        .sync({force: false})
+        .then(function() {
+            return exchanges.destroy({
+                where: {
+                    $and: [{
+                        gid1: _gid1
+                    }, {
+                        gid2: _gid2
+                    }]
+                }
+            });
+        })
+        .then(function(result) {
+            res.json([{
+                deletedNum: result
+            }]);
         });
-    }).then(function(result) {
-        res.json([{
-            deletedNum: result
-        }]);
-    });
 });
 
 // Set the status of a exchange
@@ -92,29 +94,31 @@ router.get('/status', function(req, res, next) {
     var _gid2 = (__gid2 > __gid1 ? __gid2 : __gid1);
 
     // Find instance and update status to 1(complete) then save
-    exchanges.sync({
-        force: false
-    }).then(function() {
-        return exchanges.findOne({
-            where: {
-                $and: [{
-                    gid1: _gid1
-                }, {
-                    gid2: _gid2
-                }]
+    exchanges
+        .sync({force: false})
+        .then(function() {
+            return exchanges.findOne({
+                where: {
+                    $and: [{
+                        gid1: _gid1
+                    }, {
+                        gid2: _gid2
+                    }]
+                }
+            });
+        })
+        .then(function(result) {
+            if (result == null) {
+                return {};
+            } else {
+                result.status = 1;
+                result.save().then(function() {});
+                return result;
             }
+        })
+        .then(function(result) {
+            res.json(result);
         });
-    }).then(function(result) {
-        if (result == null) {
-            return {};
-        } else {
-            result.status = 1;
-            result.save().then(function() {});
-            return result;
-        }
-    }).then(function(result) {
-        res.json(result);
-    });
 });
 
 module.exports = router;

@@ -18,13 +18,13 @@ router.post('/', function(req, res, next) {
     //
 
     // Get property:value in ?x=y&z=w....
-    var _gname = req.query.gname;
-    var _categories = req.query.categories;
-    var _description = req.query.description;
+    var _gname = req.body.gname;
+    var _categories = req.body.categories;
+    var _description = req.body.description;
     var _want = ''; // But will be deprecated soon
-    var _posX = parseFloat(req.query.posX);
-    var _posY = parseFloat(req.query.posY);
-    var _ownerID = req.query.ownerID;
+    var _posX = parseFloat(req.body.posX);
+    var _posY = parseFloat(req.body.posY);
+    var _ownerID = req.body.ownerID;
 
     // Create instance
     goods.sync({

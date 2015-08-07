@@ -34,6 +34,7 @@ module.exports = function() {
 	//server.use('/', routeIndex);
 	server.use('/api/seek', require('./routers/seek'));
 	server.use('/api/goods', require('./routers/goods'));
+	server.use('/api/post', require('./routers/post'));
 	server.use('/api/profile', require('./routers/profile'));
 	server.use('/api/exchange', require('./routers/exchange'));
 

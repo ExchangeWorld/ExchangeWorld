@@ -38,6 +38,7 @@ module.exports = function() {
 	server.use('/api/upload', require('./routers/upload'));
 	server.use('/api/profile', require('./routers/profile'));
 	server.use('/api/exchange', require('./routers/exchange'));
+	server.use('/api/authenticate', require('./routers/authenticate'));
 
 	// catch 404 and forward to error handler
 	server.use(function(req, res, next) {

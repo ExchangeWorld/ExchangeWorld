@@ -5,7 +5,7 @@ var router = express.Router();
 var goods = require('../ORM/Goods');
 
 // Create a good
-router.get('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
 
 	// Available params:
     // 

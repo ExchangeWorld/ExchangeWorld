@@ -9,10 +9,20 @@ function sidenavDirective() {
 		restrict : 'E',
 		transclude : true,
 		templateUrl : 'layout/sidenav.html',
-		bindToController : true,
-		controller : 'NavbarController',
-		controllerAs : 'vm'
+		scope : {},
+		controller : sidenavController,
+		controllerAs : 'vm',
+		bindToController: true,
 	};
 
 	return directive;
+}
+
+function sidenavController($mdSidenav) {
+	const vm = this;
+	vm.closeMenu = closeMenu;
+
+	function closeMenu() {
+		$mdSidenav('left').close();
+	}
 }

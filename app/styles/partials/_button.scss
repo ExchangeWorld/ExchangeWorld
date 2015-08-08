@@ -2,6 +2,9 @@
   .md-button {
     height: $navbar-height;
     font-size: 1em;
+    md-icon {
+      vertical-align: text-bottom;
+    }
   }
   .active {
     background-color: $ripple-color;

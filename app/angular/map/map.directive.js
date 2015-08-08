@@ -9,7 +9,8 @@ function mapBlock() {
 		restrict: 'E',
 		scope: {},
 		bindToController: true,
-		controller: 'MapCtrl as vm',
+		controller: 'MapCtrl',
+		controllerAs: 'vm',
 		templateUrl: 'map/map.html'
 	};
 

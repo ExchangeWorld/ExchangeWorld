@@ -1,10 +1,27 @@
 <navbar flex="35"></navbar>
 
 <div id="container" layout="row">
-	<sidenav class="md-whiteframe-z2" style="z-index:100;">
+	<!-- <leftnav class="md-whiteframe-z2" style="z-index:100;">
 		<div ui-view></div>
-	</sidenav>
+	</leftnav> -->
+
+	<md-sidenav
+			flex="35"
+			class="md-sidenav-left md-whiteframe-z2"
+			style="z-index:100;"
+			md-component-id="left"
+			md-is-locked-open="$mdMedia('gt-md')"
+			>
+		<md-toolbar hide-lg hide-gt-lg>
+			<div class="md-toolbar-tools md-medium-tall navbar">
+				<!-- <a href ng-click="closeMenu()">ExchangeWorld > {{contentType|uppercase}}</a> -->
+				ExchangeWorld
+			</div>
+		</md-toolbar>
+		<md-content flex class="md-padding" resize ng-style="resizeWithOffset(64)">
+			<div ui-view></div>
+		</md-content>
+	</md-sidenav>
 
 	<map-block flex></map-block>
 </div>
-

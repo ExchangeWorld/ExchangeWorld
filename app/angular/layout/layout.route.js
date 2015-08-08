@@ -16,6 +16,20 @@ function getStates() {
 				abstract : true,
 				templateUrl : 'layout/layout.html',
 			}
+		},
+		{
+			state : 'root.withSidenav',
+			config : {
+				abstract : true,
+				templateUrl: 'layout/withSidenav.html',
+			},
+		},
+		{
+			state : 'root.oneCol',
+			config : {
+				abstract : true,
+				templateUrl: 'layout/oneColumn.html',
+			},
 		}
 	];
 }

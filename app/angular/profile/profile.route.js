@@ -11,7 +11,7 @@ function appRun(routerHelper) {
 function getStates() {
 	return [
 		{
-			state : 'root.profile',
+			state : 'root.withSidenav.profile',
 			config : {
 				url : '/profile/:fid',
 				bindToController: true,

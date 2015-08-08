@@ -11,7 +11,7 @@ function appRun(routerHelper) {
 function getStates() {
 	return [
 		{
-			state : 'root.home',
+			state : 'root.oneCol.home',
 			config : {
 				url : '/',
 				templateUrl : 'home/home.html',

@@ -22,8 +22,11 @@ function NavbarController($mdSidenav, $state) {
 	function onClick(contentIndex) {
 		//$scope.content = ContentType[contentIndex];
 		//$scope.$emit('sidenavChanged', ContentType[contentIndex]);
-		//console.log('Click');
-		$state.go('root.' + state[contentIndex]);
-		$mdSidenav('left').toggle();
+		if (contentIndex === 0) {
+			$state.go('root.oneCol.' + state[contentIndex]);
+		} else {
+			$state.go('root.withSidenav.' + state[contentIndex]);
+			$mdSidenav('left').toggle();
+		}
 	}
 }

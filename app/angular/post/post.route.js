@@ -11,7 +11,7 @@ function appRun(routerHelper) {
 function getStates() {
 	return [
 		{
-			state : 'root.post',
+			state : 'root.withSidenav.post',
 			config : {
 				url : '/post',
 				bindToController: true,

@@ -1,7 +1,7 @@
 ## POST
 
 Use to **create** new post of goods.  
-A post of goods including must following informations:
+A post of goods must including following informations:
 
 | parameters     | type  | descriptions                                 |
 |:---------------|-------|:---------------------------------------------|
@@ -15,6 +15,6 @@ A post of goods including must following informations:
 
 #### API routes
 | Method |Request URL         | Params          | Descriptions   |Returns|
-|--------|:-------------------|:----------------|:---------------||
-| `GET`  |`/api/post?{Params}`         | as above table, ~~the info of `photoPath` will auto-gen when upload the photo(s).~~  | create new post||
-| `POST` |`/api/upload/image` | an object have following attribute:<br/>`filename`, `filetype`, `filesize`, `base64`  | create new post||
+|--------|:-------------------|:----------------|:---------------|-------|
+| `GET`  |`/api/post?{Params}` | as above table, ~~the info of `photoPath` will auto-gen when upload the photo(s).~~  | create new post|   |
+| `POST` |`/api/upload/image` | an object have following attribute:<br/>`filename`, `filetype`, `filesize`, `base64`  | upload image(s)|  |

@@ -10,7 +10,7 @@
     - upload photo to server
 - [profile](./profile.md) :
     - get specify user data
-    - ~~get specify user follower/following list~~
+    - get specify user follower/following list
 - [exchange](./exchange.md) :
     - create a **exchange**
     - change the status of a **exchange** to exchanged

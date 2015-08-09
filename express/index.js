@@ -31,14 +31,22 @@ module.exports = function() {
 		res.sendFile('index.html', { root : 'build' });
 	});
 
-	//server.use('/', routeIndex);
+	/* ref: doc/seek.md */
 	server.use('/api/seek', require('./routers/seek'));
 	server.use('/api/goods', require('./routers/goods'));
+
+	/* ref: doc/post.md */
 	server.use('/api/post', require('./routers/post'));
 	server.use('/api/upload', require('./routers/upload'));
+	
+	/* ref: doc/profile.md */
 	server.use('/api/profile', require('./routers/profile'));
+	server.use('/api/profile/follower', require('./routers/follower'));
+	server.use('/api/profile/following', require('./routers/following'));
+
 	server.use('/api/exchange', require('./routers/exchange'));
 	server.use('/api/authenticate', require('./routers/authenticate'));
+
 
 	// catch 404 and forward to error handler
 	server.use(function(req, res, next) {

@@ -18,7 +18,8 @@ function ProfileController(profileService, $stateParams, $state) {
 		profileService.getProfileData($stateParams.fid)
 			.then(function(data){
 				//promise fulfilled (successed)
-				vm.profileData = data;
+				vm.profileData = data[0];
+
 			}).catch(function(error){
 				//promise rejected (failed)
 				console.log('error', error);
@@ -27,6 +28,6 @@ function ProfileController(profileService, $stateParams, $state) {
 
 	// define onClick event on goods owner
 	function onClickUser(fb_id) {
-		$state.go('root.profile', {fid: fb_id});
+		$state.go('root.withSidenav.profile', {fid: fb_id});
 	}
 }

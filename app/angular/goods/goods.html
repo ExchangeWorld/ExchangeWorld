@@ -9,24 +9,24 @@
 </md-content>
 
 
-<md-content layout-padding ng-repeat="goods in vm.goodsData">
+<md-content layout-padding >
 <img style="width:100%; height:auto" src="http://i.imgur.com/7RoLGdp.jpg" title="source: imgur.com" />
     <md-tabs md-dynamic-height md-border-bottom>
 
             <md-tab label="ItemName">
-			gname = {{ goods.gname }}
+			gname = {{ vm.goodsData.gname }}
             </md-tab>
 
 			<md-tab label="Owner">
-			<a ng-click="vm.onClickUser( goods.user.fb_id )">{{ goods.user.username }}</a>   
+			<a ng-click="vm.onClickUser( vm.goodsData.user.fb_id )">{{ vm.goodsData.user.username }}</a>   
             </md-tab>
 
             <md-tab label="Catogories">
-			Categories = {{ goods.categories }}
+			Categories = {{ vm.goodsData.categories }}
             </md-tab>
             
 			<md-tab label="Description">
-			description = {{ goods.description}}   
+			description = {{ vm.goodsData.description}}   
             </md-tab>
     </md-tabs>
 </md-content>

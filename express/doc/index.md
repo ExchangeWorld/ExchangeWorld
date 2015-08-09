@@ -1,6 +1,6 @@
 # Exchange World API doc
 
-~~delete line~~ mean not implement yet.
+~~DELETE LINE~~ mean not implement yet.
 
 - [seek](./seek.md) :
     - search **goods** in constrains

@@ -5,7 +5,7 @@
 - Request:  
 `/api/seek?title=紅`  
 - Returns:  
-*Array of **goods** object*
+<i>Array of **goods** object</i>
 
 ```
 [
@@ -63,7 +63,7 @@
 - Request:  
 `api/goods?gid=34`
 - Returns:  
-*Array that contains only one **goods** object and its **comments** *
+<i>Array that contains only one **goods** object and its **comments** </i>
 
 ```
 [
@@ -103,6 +103,43 @@
         "comment": "XDDDDDD  什麼啦"
       }
     ]
+  }
+]
+```
+
+####`/api/profile?{fb_id}`
+
+- Request:  
+`/api/profile?fb_id=611870928958311`
+- Returns:  
+<i>A object of user, including **follower/following** list</i>
+
+```
+[
+  {
+    "fb_id": "611870928958311",
+    "uid": 3,
+    "username": "AA-Hsu Shu-shuan",
+    "email": "test@gmail.com",
+    "nickname": "thisisnickname",
+    "photoPath": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpa1/v/t1.0-1/p320x320/10940474_627386274073443_4320423387530794528_n.jpg?oh=e66eb22c0a74a267fc954f39614f3517&oe=554FE303&__gda__=1433322686_6f2ceb8d3188394d5737912b1b790933",
+    "exchangeTable": 3,
+    "followerTable": 3,
+    "seekerTable": 3,
+    "goods": [],
+    "followertables": [
+      {
+        "fid": 14,
+        "myid": "611870928958311",
+        "follower": "882490865134944"
+      },
+      {
+        "fid": 13,
+        "myid": "611870928958311",
+        "follower": "866554610033093"
+      }
+    ],
+    "seekers": []
   }
 ]
 ```

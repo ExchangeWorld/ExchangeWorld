@@ -19,6 +19,12 @@ router.get('/', function(req, res, nex) {
 		.sync({force: false})
 		.then(function() {
 
+			/**
+			 * SELECT * 
+			 * FROM `following`
+			 * WHERE `following`.`myid` = _fb_id
+			 */
+
 			return following.findAll({
 				where: {
 					myid : _fb_id

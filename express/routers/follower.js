@@ -4,7 +4,7 @@ var router  = express.Router();
 // including tables 
 var follower = require('../ORM/Follower');
 
-router.get('/', function(req, res, nex) {
+router.get('/', function(req, res, next) {
 
 	// Available params:
 	// 

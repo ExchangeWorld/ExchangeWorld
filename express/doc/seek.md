@@ -1,7 +1,7 @@
 ## SEEK
 
-Use to **find** goods.
-you can use this API to find goods in some constrains.
+Used to **find** goods.
+you can use this API to find goods in some constraints.
 
 
 | parameters     | type  | descriptions                                 |
@@ -15,5 +15,5 @@ you can use this API to find goods in some constrains.
 #### API routes
 | Method |Request URL         | Params          | Descriptions   | Return|
 |--------|:-------------------|:----------------|:---------------|-------|
-| `GET`  |`/api/seek?{Params}`| as above table  | search goods in some constrains.| [example](./returns_example#apiseekparams)|
+| `GET`  |`/api/seek?{Params}`| as table above  | search goods in some constrains.| [example](./returns_example#apiseekparams)|
 | `GET` |`/api/goods?{gid}` | a specify `gid`  | get specify goods info. including **comments**| [example](./returns_example.md#apigoodsgid) |

@@ -49,6 +49,7 @@ router.get('/getToken', function(req, res, next) {
 	// 	foreignKey: 'uid'
 	// });
 
+	// Make sure there is a user's uid is available
 	// Find one and update the token
 	// If not found, create one
 	tokens
@@ -56,7 +57,7 @@ router.get('/getToken', function(req, res, next) {
 			force: false
 		})
 		.then(function() {
-			return tokens.findOne({
+			return user.findOne({
 				where: {
 					uid: _uid
 				}
@@ -64,10 +65,23 @@ router.get('/getToken', function(req, res, next) {
 		})
 		.then(function(result) {
 			if (result == null) {
+				return 'not a user';
+			} else {
+				return tokens.findOne({
+					where: {
+						uid: _uid
+					}
+				});
+			}
+		})
+		.then(function(result) {
+			if (result == null) {
 				return tokens.create({
 					uid: _uid,
 					token: getSHA256(_uid + '_atTime_' + _timeStamp)
 				});
+			} else if (result == 'not a user') {
+				return {};
 			} else {
 				result.token = getSHA256(_uid + '_atTime_' + _timeStamp);
 				result.save().then(function() {});

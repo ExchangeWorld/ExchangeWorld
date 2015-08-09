@@ -143,3 +143,47 @@
   }
 ]
 ```
+
+####`/api/profile/follower?{fb_id}`
+
+- Request:  
+`/api/profile/follower?fb_id=866554610033093`
+- Returns:  
+<i>Array of specify users' **follower** object.</i>
+
+```
+[
+  {
+    "fid": 12,
+    "myid": "866554610033093",
+    "follower": "1006851545998566"
+  },
+  {
+    "fid": 17,
+    "myid": "866554610033093",
+    "follower": "882490865134944"
+  },
+  {
+    "fid": 20,
+    "myid": "866554610033093",
+    "follower": "10206299669437693"
+  }
+]
+```
+
+####`/api/profile/following?{fb_id}`
+
+- Request:  
+`/api/profile/following?fb_id=866554610033093`
+- Returns:  
+<i>Array of specify users' **following** object.</i>
+
+```
+[
+  {
+    "sid": 1,
+    "myid": "866554610033093",
+    "seeker": "1006851545998566"
+  }
+]
+```

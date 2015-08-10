@@ -2,6 +2,8 @@
   .md-button {
     height: $navbar-height;
     font-size: 1em;
+    padding: 0px;
+    margin: 0px;
     md-icon {
       vertical-align: text-bottom;
     }
@@ -21,4 +23,18 @@ map {
     width: 56px;
     box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.26);
   }
+}
+
+.btn-remove:not([disabled]):hover {
+  background-color: rgba(158, 158, 158, 0.2);
+}
+
+.md-raised:not([disabled]) {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+.md-button{
+	&.mdbtn-border{
+		border: 1px solid grey;
+	}
 }

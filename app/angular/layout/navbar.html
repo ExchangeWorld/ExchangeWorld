@@ -8,11 +8,11 @@
 				ExchangeWorld
 			</a>
 		</span>
-
+		<span flex="5">
+		</span>
 		<div flex="33" layout="row" layout-align="center center">
-			<md-button
-					flex
-					class="navbutton-down"
+			<md-button style="margin-right:-20px"
+					flex	
 					ng-click="vm.onClick(1)"
 					ng-class="{'active': contentIs(1)}">
 				<md-icon md-font-set="material-icons">dashboard</md-icon>
@@ -21,7 +21,6 @@
 
 			<md-button
 					flex
-					class="navbutton-down"
 					ng-click="vm.onClick(2)"
 					ng-class="{'active': contentIs(2)}">
 				<md-icon md-font-set="material-icons">add box</md-icon>
@@ -30,7 +29,6 @@
 
 			<md-button
 					flex
-					class="navbutton-down"
 					ng-click="vm.onClick(3)"
 					ng-class="{'active': vm.contentIs(3)}">
 				<md-icon md-font-set="material-icons">store</md-icon>
@@ -38,9 +36,9 @@
 			</md-button>
 		</div>
 
-		<span flex="20"></span>
+		<span flex="15"></span>
 		<div layout="row" layout-align="center center">
-			<md-button flex="30">
+			<md-button flex="20">
 				<md-icon class="material-icons">notifications</md-icon>
 			</md-button>
 

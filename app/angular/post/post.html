@@ -1,5 +1,4 @@
 <form ng-submit="vm.onSubmit()">
-
     <div layout="column" layout-fill>
         <md-content layout-padding="row">
             <md-toolbar class="rounded-corners md-primary md-hue-1">
@@ -13,29 +12,34 @@
             </md-toolbar>
             <md-input-container flex>
                 <label>Name</label>
-                <input type="text" ng-model="vm.goodsName">
+                <input type="text" ng-model="vm.goodsName" required>
             </md-input-container>
-            <md-input-container flex>
+            <md-input-container flex style="margin-bottom: 10px">
                 <label>Description</label>
-                <textarea type="string" ng-model="vm.goodsDescriptions" columns="1" md-maxlength="100"></textarea>
+                <textarea type="string" ng-model="vm.goodsDescriptions" columns="10" md-maxlength="100" required></textarea>
             </md-input-container>
-			<input type='file' ng-model='vm.imgEncoded' base-sixty-four-input required accept="image/*"/>
-            <h4>Locate your your location on right side!</h4>
-			<select placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" required>
-				<!--<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>-->
+            <div layout="row">
+            <md-icon md-font-set="material-icons">insert_photo</md-icon>
+            <input class="btn-remove" flex="50" type='file' ng-model='vm.imgEncoded' base-sixty-four-input required accept="image/*" />
+            <span flex></span>
+            </div>
+            <h4><md-icon md-font-set="material-icons"><i class="material-icons">location_searching</i></md-icon>Locate your location on right side!</h4>
+            <md-icon md-font-set="material-icons">list</md-icon>
+            <select class="md-button mdbtn-border" placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" required>
+                <!--<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>-->
             </select>
             <hr>
             <div layout="column">
-                <md-toolbar class="rounded-corners md-primary md-hue-1">
-                    <div class="md-toolbar-tools layout=" row " layout-align="center center "">
-                        <div>
-                            <span><h2 class="md-headline">Things you want</h2></span>
-                            <!-- fill up the space between left and right area -->
-                            <span flex></span>
-                        </div>
+                <md-toolbar class="rounded-corners md-primary md-hue-1" style="margin-bottom: 10px">
+                    <div class="md-toolbar-tools" layout="row" layout-align="center center">
+                    <div>
+                        <span><h2 class="md-headline">Things you want</h2></span>
+                        <!-- fill up the space between left and right area -->
+                        <span flex></span>
                     </div>
+                </div>
                 </md-toolbar>
-                <md-input-container flex>
+                <md-input-container flex >
                     <label>Name</label>
                     <input ng-model="SomeModel3">
                 </md-input-container>
@@ -43,15 +47,14 @@
                     <span flex="75"></span>
                     <div flex="25">
                         <!--<md-button class="md-accent shadowed md-raised md-hue-1">-->
-						<input type="submit" id="submit" value="Submit"></input>
-                            <!--<div layout="row" layout-align="center center">-->
-                                <!--<i class="material-icons md-24">reply</i> <span>Submit</span>-->
-                            <!--</div>-->
+                        <input class="md-button md-primary"type="submit" id="submit" value="Submit"></input>
+                        <!--<div layout="row" layout-align="center center">-->
+                        <!--<i class="material-icons md-24">reply</i> <span>Submit</span>-->
+                        <!--</div>-->
                         <!--</md-button>-->
                     </div>
                 </div>
             </div>
         </md-content>
     </div>
-
 </form>

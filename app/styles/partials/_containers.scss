@@ -22,3 +22,14 @@ md-toolbar{
     }
   }
 }
+
+.circular {
+    background-position: center;
+    max-width: 150px;
+    max-height: 150px;
+    background-size: cover;
+    display: block;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+}

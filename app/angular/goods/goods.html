@@ -1,32 +1,32 @@
 <md-content layout-padding>
-    
-    <md-toolbar class="md-accent rounded-corners md-hue-1">
-        <div layout="row" layout-align="center center" class="md-toolbar-tools">
-            <h2>Goods</h2>
-        </div>
-    </md-toolbar>
+
+	<md-toolbar class="md-accent rounded-corners md-hue-1">
+		<div layout="row" layout-align="center center" class="md-toolbar-tools">
+			<h2>Goods</h2>
+		</div>
+	</md-toolbar>
 
 </md-content>
 
 
-<md-content layout-padding ng-repeat="goods in vm.goodsData">
-<img style="width:100%; height:auto" src="http://i.imgur.com/7RoLGdp.jpg" title="source: imgur.com" />
-    <md-tabs md-dynamic-height md-border-bottom>
+<md-content layout-padding>
+	<img style="width:100%; height:auto" src="http://i.imgur.com/7RoLGdp.jpg" title="source: imgur.com"/>
+	<md-tabs md-dynamic-height md-border-bottom>
 
-            <md-tab label="ItemName">
-			gname = {{ goods.gname }}
-            </md-tab>
+		<md-tab label="ItemName">
+			gname = {{ vm.goodData.gname }}
+		</md-tab>
 
-			<md-tab label="Owner">
-			<a ng-click="vm.onClickUser( goods.user.fb_id )">{{ goods.user.username }}</a>   
-            </md-tab>
+		<md-tab label="Owner">
+			<a ng-click="vm.onClickUser( vm.goodData.user.fb_id )">{{ vm.goodData.user.username }}</a>
+		</md-tab>
 
-            <md-tab label="Catogories">
-			Categories = {{ goods.categories }}
-            </md-tab>
-            
-			<md-tab label="Description">
-			description = {{ goods.description}}   
-            </md-tab>
-    </md-tabs>
+		<md-tab label="Catogories">
+			Categories = {{ vm.goodData.categories }}
+		</md-tab>
+
+		<md-tab label="Description">
+			description = {{ vm.goodData.description}}
+		</md-tab>
+	</md-tabs>
 </md-content>

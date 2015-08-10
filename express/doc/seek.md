@@ -15,5 +15,4 @@ you can use this API to find goods in some constraints.
 #### API routes
 | Method |Request URL         | Params          | Descriptions   | Return|
 |--------|:-------------------|:----------------|:---------------|-------|
-| `GET`  |`/api/seek?{Params}`| as table above  | search goods in some constrains.| [example](./returns_example#apiseekparams)|
-| `GET` |`/api/goods?{gid}` | a specify `gid`  | get specify goods info. including **comments**| [example](./returns_example.md#apigoodsgid) |
+| `GET`  |`/api/seek?{Params}`| as table above, if no params, find all.  | search goods in some constrains.| [example](./returns_example#apiseekparams)|

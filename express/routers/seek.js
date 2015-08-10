@@ -29,8 +29,6 @@ router.get('/', function(req, res, next) {
     var from     = parseInt(req.query.from) || -1;
     var to       = parseInt(req.query.to) || -1;
 
-    console.log([px, py, from, to]);
-
 	// Set association between tables (user, goods)
 	user.hasMany(goods, {foreignKey:'ownerID'});
 	goods.belongsTo(user, {foreignKey: 'ownerID'});

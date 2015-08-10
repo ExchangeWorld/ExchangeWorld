@@ -1,40 +1,42 @@
 'use strict';
 
 const profileModule = require('./profile.module');
+const _             = require('lodash');
+
 profileModule.service('profileService', profileService);
 
 /** @ngInject */
 function profileService(Restangular, $q) {
 	var service = {
-		getProfileData: asyncGetData 
+		getProfile  : getProfile,
+		editProfile : updateProfile,
 	};
 
 	return service;
 
 	//////////
+	function getProfile(fid) {
+		const defer = $q.defer();
 
-	function asyncGetData(fid) {
-		var deferred = $q.defer();
-
-		setTimeout(function() {
-			/** 
-			 * code for reject condictions 
-			 */
-
-			deferred.resolve(getProfileData(fid));
-		}, 1000);
-
-		return deferred.promise;
+		Restangular
+			.all('profile')
+			.getList({ fb_id : fid })
+			.then(function(data) {
+				if (_.isArray(data)) {
+					defer.resolve(data[0]);
+				} else if (_.isObject(data)) {
+					defer.resolve(data);
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[Profiles Service] getProfile error: ')(error);
+			});
+		return defer.promise;
 	}
 
-	function getProfileData(id) {
-		var profile = Restangular.all('api/profile');
+	function updateProfile() {
 
-		// GET /profile?fid=id
-		return profile.getList({ 'fid':id }).then(function(data) {
-			return data;
-		}).catch(function(error) {
-			console.log('error', error);
-		});
+		return ;
 	}
+
 }

@@ -22,7 +22,6 @@ router.get('/', function(req, res, next) {
 
     // Get property:value in ?x=y&z=w....
     var title    = req.query.title || '';
-	console.log(title);
     var wishlist = req.query.wishlist || '';
     var category = req.query.category || '';
     var px       = parseFloat(req.query.px) || '';

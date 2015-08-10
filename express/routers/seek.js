@@ -21,13 +21,14 @@ router.get('/', function(req, res, next) {
     //
 
     // Get property:value in ?x=y&z=w....
-    var title    = req.query.title;
-    var wishlist = req.query.wishlist;
-    var category = req.query.category;
-    var px       = parseFloat(req.query.px);
-    var py       = parseFloat(req.query.py);
-    var from     = parseInt(req.query.from);
-    var to       = parseInt(req.query.to);
+    var title    = req.query.title || '';
+	console.log(title);
+    var wishlist = req.query.wishlist || '';
+    var category = req.query.category || '';
+    var px       = parseFloat(req.query.px) || '';
+    var py       = parseFloat(req.query.py) || '';
+    var from     = parseInt(req.query.from) || '';
+    var to       = parseInt(req.query.to) || '';
 
 	// Set association between tables (user, goods)
 	user.hasMany(goods, {foreignKey:'ownerID'});

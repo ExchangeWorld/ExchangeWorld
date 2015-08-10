@@ -24,13 +24,11 @@ function seekService(Restangular, $q, exception) {
 			 *  here should have search condition
 			 *  i.e. title, category, and so on
 			 */
-			.getList({ title : '' })
+			.getList()
 			.then(function(data) {
-				//if (_.isArray(data)) {
+				if (_.isArray(data)) {
 					defer.resolve(data);
-				//} else if (_.isObject(data)) {
-					//defer.resolve(data);
-				//}
+				} 
 			})
 			.catch(function(error) {
 				return exception.catcher('[Seek Service] getSeek error: ')(error);

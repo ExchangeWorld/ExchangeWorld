@@ -25,8 +25,12 @@ function NavbarController($mdSidenav, $state) {
 		if (contentIndex === 0) {
 			$state.go('root.oneCol.' + state[contentIndex]);
 		} else {
+			const isFromOneCol = $state.includes("root.oneCol");
 			$state.go('root.withSidenav.' + state[contentIndex]);
-			$mdSidenav('left').toggle();
+
+			if (!isFromOneCol) {
+				$mdSidenav('left').toggle();
+			}
 		}
 	}
 }

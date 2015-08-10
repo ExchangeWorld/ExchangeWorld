@@ -1,43 +1,44 @@
 'use strict';
 
 const goodsModule = require('./goods.module');
-goodsModule.service('goodsService', goodsService);
+const _           = require('lodash');
+//goodsModule.service('goodsService', goodsService);
+
+goodsModule.factory('goodsService', goodsService);
 
 /** @ngInject */
-function goodsService(Restangular, $q) {
-	var service = {
-		getGoodsData : asyncGetData
-	};
+function goodsService(Restangular, $q, exception) {
 
+	const service = {
+		getGood : getGood,
+		editGood : updateGood,
+	};
 	return service;
 
-	//////////
 
-	function asyncGetData(gid) {
-		var deferred = $q.defer();
+	function getGood(gid) {
+		const defer = $q.defer();
 
-		setTimeout(function() {
-			/**
-			 * code for reject condictions
-			 */
-
-			deferred.resolve(getGoodsData(gid));
-		}, 1000);
-
-		return deferred.promise;
-	}
-
-	function getGoodsData(id) {
-		var goods = Restangular.all('api/goods');
-
-		// GET /goods?gid=id
-		return goods
-			.getList({ 'gid' : id })
+		Restangular
+			.all('goods')
+			.getList({ gid : gid })
+			//.one('goods', gid)
 			.then(function(data) {
-				return data;
+				if (_.isArray(data)) {
+					defer.resolve(data[0]);
+				} else if (_.isObject(data)) {
+					defer.resolve(data);
+				}
 			})
 			.catch(function(error) {
-				console.log('error', error);
+				return exception.catcher('[Goods Service] getGood error: ')(error);
 			});
+		//.finally();
+		return defer.promise;
+	}
+
+	function updateGood() {
+
+		return ;
 	}
 }

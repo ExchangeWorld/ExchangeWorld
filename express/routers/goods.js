@@ -9,10 +9,10 @@ var comments = require('../ORM/Comments');
 router.get('/', function(req, res, next) {
 
     // Available params:
-    // 
+    //
     // gid
     // ownerID
-    // 
+    //
 
     // Get property:value in ?x=y&z=w....
     var _gid     = parseInt(req.query.gid);
@@ -50,8 +50,8 @@ router.get('/', function(req, res, next) {
     		/**
      		 * SELECT `goods`. * , `user`.*, `comments`.*
     		 * FROM `goods`, `user`, `comments`
-    		 * WHERE `goods`.`gid` = '_gid' 
-    		 *   AND `goods`.`ownerID` = `user`.`fb_id` 
+    		 * WHERE `goods`.`gid` = '_gid'
+    		 *   AND `goods`.`ownerID` = `user`.`fb_id`
     		 *   AND `goods`.`ownerID` = `comments`.`commenter`
     		 */
             return goods.findAll({

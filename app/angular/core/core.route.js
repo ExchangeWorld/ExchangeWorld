@@ -14,7 +14,7 @@ function appRun(routerHelper, $rootScope, AppSettings) {
 function getStates() {
 	return [
 		{
-			state: 'root.404',
+			state: 'root.withSidenav.404',
 			config: {
 				url: '/404',
 				templateUrl: 'core/404.html',

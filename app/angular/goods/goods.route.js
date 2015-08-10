@@ -18,7 +18,15 @@ function getStates() {
 				controller : 'GoodsController',
 				controllerAs: 'vm',
 				templateUrl : 'goods/goods.html',
-				title : 'goods'
+				// title : 'goods'
+				resolve : {
+					goodData : function (goodsService, $stateParams) {
+						return goodsService
+							.getGood($stateParams.gid)
+							.then(function(data) { return data; })
+							.catch(function() { return undefined; });
+					},
+				},
 			}
 		}
 	];

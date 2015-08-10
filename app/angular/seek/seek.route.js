@@ -18,6 +18,14 @@ function getStates() {
 				controller : 'SeekController',
 				controllerAs: 'vm',
 				templateUrl: 'seek/seek.html',
+				resolve : {
+					goods : function (seekService) {
+						return seekService
+							.getSeek()
+							.then(function(data) { return data; })
+							.catch(function() { return undefined; });
+					},
+				},
 			},
 		}
 	];

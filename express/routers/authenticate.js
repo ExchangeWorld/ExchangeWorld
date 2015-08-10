@@ -3,28 +3,92 @@ var router = express.Router();
 
 // including tables
 var user = require('../ORM/User');
+var tokens = require('../ORM/Tokens');
 
-// Validate a user
-router.get('/user', function(req, res, next) {
+// Validate a token
+// If not available, block
+router.get('/validate', function(req, res, next) {
 
-    var userID = req.query.uid;
-    var timeStamp = (new Date()).toLocaleString();
+	var _token = req.query.token;
 
-    res.json({
-        hashcode: getSHA256(userID + '_atTime_' + timeStamp)
-    });
+	tokens
+		.sync({
+			force: false
+		})
+		.then(function() {
+			return tokens.findOne({
+				where: {
+					token: _token
+				}
+			})
+		})
+		.then(function(result) {
+			if (result == null) {
+				res.json({
+					authentication: 'fail',
+					token: {}
+				});
+			} else {
+				res.json({
+					authentication: 'success',
+					token: result
+				});
+			}
+		});
 
 });
 
-// Hash function
+// Get a token for the user
+router.get('/getToken', function(req, res, next) {
+
+	var _uid = req.query.uid;
+	var _timeStamp = (new Date()).toLocaleString();
+
+	// Set association between tables (user, tokens)
+	// tokens.belongsTo(user, {
+	// 	foreignKey: 'uid'
+	// });
+
+	// Find one and update the token
+	// If not found, create one
+	tokens
+		.sync({
+			force: false
+		})
+		.then(function() {
+			return tokens.findOne({
+				where: {
+					uid: _uid
+				}
+			});
+		})
+		.then(function(result) {
+			if (result == null) {
+				return tokens.create({
+					uid: _uid,
+					token: getSHA256(_uid + '_atTime_' + _timeStamp)
+				});
+			} else {
+				result.token = getSHA256(_uid + '_atTime_' + _timeStamp);
+				result.save().then(function() {});
+				return result;
+			}
+		})
+		.then(function(result) {
+			res.json(result);
+		});
+
+});
+
+// Hashcode generation function
 var getSHA256 = (function(strToEncrypt) {
 
-    var crypto = require('crypto');
-    var sha256 = crypto.createHash('sha256');
+	var crypto = require('crypto');
+	var sha256 = crypto.createHash('sha256');
 
-    sha256.update(strToEncrypt, 'utf8');
+	sha256.update(strToEncrypt, 'utf8');
 
-    return sha256.digest('hex');
+	return sha256.digest('hex');
 });
 
 module.exports = router;

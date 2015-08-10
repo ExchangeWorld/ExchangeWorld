@@ -1,10 +1,12 @@
 <md-content layout-padding layout-margin>
-    <div layout="row" style="margin-top:10px">
+    <div layout="row">
         <div flex="40">
             <a href="/#/profile"><img class="circular" src="http://i.imgur.com/BYu27mM.jpg" /></a>
         </div>
         <div flex="60" layout="column">
-            <p class="md-body-2">I'm so smart and handsome.</p>
+        	<div layout="row" layout-align="center center">
+        		<h4>張伯新(SilentSky)</h4>
+        	</div>
             <div layout="row">
                 <md-button flex class="md-raised md-primary">
                     <div layout="row" layout-align="center center">
@@ -18,7 +20,7 @@
     <md-divider ng-if="!$last" style="margin:10px 0px 10px 0px"></md-divider>
     <md-tabs md-dynamic-height md-border-bottom>
         <md-tab label="Profile">
-            <md-content class="md-padding">
+            <md-content layout-padding>
                 <md-toolbar class="md-primary rounded-corners">
                     <div class="md-toolbar-tools">
                         <h2 class="md-flex">Information</h2>
@@ -32,7 +34,7 @@
             </md-content>
         </md-tab>
         <md-tab label="Exchanging">
-            <md-content class="md-padding">
+            <md-content layout-padding>
                 <md-toolbar class="md-primary rounded-corners">
                     <div class="md-toolbar-tools">
                         <h2 class="md-flex">Exchanging Items</h2>

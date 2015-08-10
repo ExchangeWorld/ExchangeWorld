@@ -1,5 +1,5 @@
 body {
-  overflow: hidden;
+  overflow: auto;
 }
 
 #container {
@@ -25,11 +25,18 @@ md-toolbar{
 
 .circular {
     background-position: center;
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 160px;
+    max-height: 160px;
     background-size: cover;
     display: block;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
+}
+
+.circular{
+	&.home_img{
+		max-width:500px;
+		max-height:500px;
+	}
 }

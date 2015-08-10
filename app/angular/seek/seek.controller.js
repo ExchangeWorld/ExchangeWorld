@@ -27,6 +27,6 @@ function SeekController($scope, seekService, $state) {
 
 	//goods onClick event: change route to corrsponding gid
 	function onClickGoods(gid) {
-		$state.go('root.goods', {gid:gid});
+		$state.go('root.withSidenav.goods', {gid:gid});
 	}
 }

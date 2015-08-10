@@ -34,7 +34,7 @@ function PostController(postService, $state) {
 		postService.sendNewPostInfo(newPost);
 		postService.uploadImg(vm.imgEncoded);
 
-		$state.go('root.seek');
+		$state.go('root.withSidenav.seek');
 	}
 
 

@@ -33,8 +33,8 @@ router.post('/image', function(req, res, next) {
 	// Open a buffer stream
 	var dataBuffer = new Buffer(base64Data, 'base64');
 
-	// Write to file and its name will be prepend with timestamp
-	fs.writeFile((new Date().getTime()) + '.' + imgFormat.replace(/image\//, ''), dataBuffer, function(err) {
+	// Write to file and its name will be prepend with timestamp and filename
+	fs.writeFile((new Date().getTime()) + '_' + imgName + '.' + imgFormat.replace(/image\//, ''), dataBuffer, function(err) {
 		if (err) {
 			res.send(err);
 		} else {

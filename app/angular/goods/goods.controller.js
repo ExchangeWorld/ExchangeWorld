@@ -6,7 +6,7 @@ goodsModule.controller('GoodsController', GoodsController);
 /** @ngInject */
 function GoodsController(goodData, $state) {
 	const vm       = this;
-	vm.goodData   = goodData;
+	vm.goodData    = goodData;
 	vm.onClickUser = onClickUser;
 
 	// define onClick event on goods owner

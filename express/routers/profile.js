@@ -31,7 +31,6 @@ router.get('/', function(req, res, nex) {
 	goods.belongsTo(user, {foreignKey: 'ownerID'});
 	follower.belongsTo(user, {foreignKey: 'myid'});
 	following.belongsTo(user, {foreignKey: 'myid'});
-    //console.log("kfkkkf");
 
 	// Emit a find operation with orm model in table `user`
 	user

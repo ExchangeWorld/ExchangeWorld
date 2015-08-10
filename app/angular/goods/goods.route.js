@@ -18,8 +18,6 @@ function getStates() {
 				controller : 'GoodsController',
 				controllerAs: 'vm',
 				templateUrl : 'goods/goods.html',
-				//scope : {},
-				// title : 'goods'
 				resolve : {
 					goodData : function (goodsService, $stateParams) {
 						return goodsService

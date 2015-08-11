@@ -6,6 +6,7 @@ var goods    = require('../ORM/Goods');
 var user     = require('../ORM/User');
 var comments = require('../ORM/Comments');
 
+// Get a good
 router.get('/', function(req, res, next) {
 
 	// Available params:
@@ -72,7 +73,50 @@ router.get('/', function(req, res, next) {
 		});
 });
 
-router.get('/edit', function(req, res, next) {
+// Post a good
+router.post('/post', function(req, res, next) {
+
+	// Available params:
+    // 
+    // gname
+    // categories
+    // description
+    // posX
+    // posY
+    // ownerID
+    //
+
+    // Get property:value in ?x=y&z=w....
+    var _gname       = req.body.gname;
+    var _categories  = req.body.categories;
+    var _description = req.body.description;
+    var _want        = ''; // But will be deprecated soon
+    var _posX        = parseFloat(req.body.posX);
+    var _posY        = parseFloat(req.body.posY);
+    var _ownerID     = req.body.ownerID;
+
+    // Create instance
+    goods
+    	.sync({force: false})
+    	.then(function() {
+	        return goods.create({
+	            gname       : _gname,
+	            categories  : _categories,
+	            description : _description,
+	            want        : _want,
+	            posX        : _posX,
+	            posY        : _posY,
+	            ownerID     : _ownerID
+	        });
+    	})
+	    .then(function(result) {
+	       res.json(result);
+	   });
+
+});
+
+// Edit a good
+router.put('/edit', function(req, res, next) {
 
 	// Necessary params:
 	//
@@ -84,13 +128,13 @@ router.get('/edit', function(req, res, next) {
 	// posY
 	// 
 
-	var _gid = parseInt(req.query.gid);
-	var _gname = req.query.gname;
-	var _categories = req.query.categories;
-	var _description = req.query.description;
+	var _gid = parseInt(req.body.gid);
+	var _gname = req.body.gname;
+	var _categories = req.body.categories;
+	var _description = req.body.description;
 	var _want = ''; // But will be deprecated soon
-	var _posX = parseFloat(req.query.posX);
-	var _posY = parseFloat(req.query.posY);
+	var _posX = parseFloat(req.body.posX);
+	var _posY = parseFloat(req.body.posY);
 
 	goods
 		.sync({
@@ -122,7 +166,8 @@ router.get('/edit', function(req, res, next) {
 		});
 });
 
-router.get('/delete', function(req, res, next) {
+// Delete a good (but not really delete it)
+router.put('/delete', function(req, res, next) {
 
 	// Necessary params:
 	//

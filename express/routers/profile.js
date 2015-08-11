@@ -84,8 +84,8 @@ router.get('/edit', function(req, res, next) {
 				result.email = _email;
 				result.nickname = _nickname;
 				result.wishlist = _wishlist;
-				result.introduction = _ introduction;
-				result.save().then(function () {});
+				result.introduction = _introduction;
+				result.save().then(function() {});
 				return result;
 			}
 		})

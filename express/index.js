@@ -36,10 +36,12 @@ module.exports = function() {
 	server.use('/api/goods', require('./routers/goods'));
 
 	/* ref: doc/post.md */
-	server.use('/api/post', require('./routers/post'));
+	// server.use('/api/post', require('./routers/post'));
+	// changed to /api/goods/post
 	server.use('/api/upload', require('./routers/upload'));
 	
 	/* ref: doc/profile.md */
+	server.use('/api/user', require('./routers/user'));
 	server.use('/api/profile', require('./routers/profile'));
 	server.use('/api/profile/follower', require('./routers/follower'));
 	server.use('/api/profile/following', require('./routers/following'));

@@ -9,7 +9,7 @@ var Tokens = sequelize.define('tokens', {
 		autoIncrement: true,
 		primaryKey: true
 	},
-	uid: {
+	user_uid: {
 		type: Sequelize.INTEGER.UNSIGNED,
 		allowNull: false
 	},

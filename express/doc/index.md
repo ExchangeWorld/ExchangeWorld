@@ -17,8 +17,7 @@
     - get specified user follower/following list.
 - [exchange](./exchange.md) :
     - create an **exchange**.
-    - change the status of a **exchange** to exchanged.
-    - delete an **exchange**.
+    - change the status of a **exchange** to exchanged (completed).
 - [authenticate](./authenticate.md) :
     - validate a token.
     - get a token for a user.

@@ -53,46 +53,8 @@ router.get('/create', function(req, res, next) {
         });
 });
 
-// Delete a exchange
-router.get('/delete', function(req, res, next) {
-
-    // Available params:
-    // 
-    // gid1 (smaller gid)
-    // gid2 (larger gid)
-    //
-
-    // Get property:value in ?x=y&z=w....
-    var __gid1 = parseInt(req.query.gid1);
-    var __gid2 = parseInt(req.query.gid2);
-
-    // And make sure gid1 <= gid2
-    var _gid1 = (__gid1 <= __gid2 ? __gid1 : __gid2);
-    var _gid2 = (__gid2 > __gid1 ? __gid2 : __gid1);
-
-    // Delete instance where gid1 and gid2 matched
-    exchanges
-        .sync({force: false})
-        .then(function() {
-            return exchanges.destroy({
-                where: {
-                    $and: [{
-                        gid1: _gid1
-                    }, {
-                        gid2: _gid2
-                    }]
-                }
-            });
-        })
-        .then(function(result) {
-            res.json([{
-                deletedNum: result
-            }]);
-        });
-});
-
 // Set the status of a exchange
-router.get('/status', function(req, res, next) {
+router.get('/complete', function(req, res, next) {
 
     // Available params:
     // 

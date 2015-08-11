@@ -1,40 +1,41 @@
 var express = require('express');
 var router  = express.Router();
 
-// including tables 
-var following = require('../ORM/Following');
+// Including tables
+var followings = require('../ORM/Followings');
 
 router.get('/', function(req, res, next) {
 
-	// Available params:
-	// 
-	// fb_id 
-	// 
+	// Available query params:
+	//
+	// uid
+	//
 
-	var _fb_id = req.query.fb_id;
+	var _my_uid = parseInt(req.query.uid);
 
-
-	// Emit a find operation with orm model in table `following`
-	following
+	// Emit a find operation with orm in table `followings`
+	followings
 		.sync({force: false})
 		.then(function() {
 
-			/**
-			 * SELECT * 
-			 * FROM `following`
-			 * WHERE `following`.`myid` = _fb_id
+			/*
+			 * SELECT *
+			 * FROM `followings`
+			 * WHERE `followings`.`my_uid` = _my_uid
 			 */
 
-			return following.findAll({
+			return followings.findAll({
 				where: {
-					myid : _fb_id
+					my_uid : _my_uid
 				},
 			});
 		})
 		.then(function(result) {
 			res.json(result);
+		})
+		.catch(function(err) {
+			res.json({});
 		});
 });
-
 
 module.exports = router;

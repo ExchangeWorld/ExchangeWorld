@@ -1,13 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
-// including tables
-var user = require('../ORM/User');
+// Including tables
+var users = require('../ORM/Users');
 var tokens = require('../ORM/Tokens');
 
 // Validate a token
-// If not available, block
+// If not available, return failure
 router.get('/validate', function(req, res, next) {
+
+	// Available query params:
+    //
+    // token
+    //
 
 	var _token = req.query.token;
 
@@ -39,15 +44,16 @@ router.get('/validate', function(req, res, next) {
 });
 
 // Get a token for the user
+// Or update a token for the user
 router.get('/getToken', function(req, res, next) {
 
-	var _uid = req.query.uid;
-	var _timeStamp = (new Date()).toLocaleString();
+	// Available query params:
+    //
+    // uid
+    //
 
-	// Set association between tables (user, tokens)
-	// tokens.belongsTo(user, {
-	// 	foreignKey: 'uid'
-	// });
+	var _uid       = parseInt(req.query.uid);
+	var _timeStamp = (new Date()).toLocaleString();
 
 	// Make sure there is a user's uid is available
 	// Find one and update the token
@@ -57,7 +63,7 @@ router.get('/getToken', function(req, res, next) {
 			force: false
 		})
 		.then(function() {
-			return user.findOne({
+			return users.findOne({
 				where: {
 					uid: _uid
 				}
@@ -69,7 +75,7 @@ router.get('/getToken', function(req, res, next) {
 			} else {
 				return tokens.findOne({
 					where: {
-						uid: _uid
+						user_uid: _uid
 					}
 				});
 			}
@@ -77,7 +83,7 @@ router.get('/getToken', function(req, res, next) {
 		.then(function(result) {
 			if (result == null) {
 				return tokens.create({
-					uid: _uid,
+					user_uid: _uid,
 					token: getSHA256(_uid + '_atTime_' + _timeStamp)
 				});
 			} else if (result == 'not a user') {
@@ -90,6 +96,9 @@ router.get('/getToken', function(req, res, next) {
 		})
 		.then(function(result) {
 			res.json(result);
+		})
+		.catch(function(err) {
+			res.json({});
 		});
 
 });

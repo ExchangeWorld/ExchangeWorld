@@ -1,39 +1,40 @@
 var express = require('express');
 var router  = express.Router();
 
-// including tables
+// Including tables
 var exchanges = require('../ORM/Exchanges');
 
 // These routes are really dangerous
 // Only use them when you know what are you doing
 
 // Create a new exchange
-router.get('/create', function(req, res, next) {
+router.post('/create', function(req, res, next) {
 
-    // Available params:
-    // 
-    // gid1 (smaller gid)
-    // gid2 (larger gid)
+    // Available POST body params:
+    //
+    // goods1_gid (smaller goods_gid)
+    // goods2_gid (larger goods_gid)
     //
 
-    // Get property:value in ?x=y&z=w....
-    var __gid1 = parseInt(req.query.gid1);
-    var __gid2 = parseInt(req.query.gid2);
+    // Get property:value in POST body
+    var __goods1_gid = parseInt(req.body.goods1_gid);
+    var __goods2_gid = parseInt(req.body.goods2_gid);
 
-    // And make sure gid1 <= gid2
-    var _gid1 = (__gid1 <= __gid2 ? __gid1 : __gid2);
-    var _gid2 = (__gid2 > __gid1 ? __gid2 : __gid1);
+    // And make sure goods1_gid < goods2_gid
+    var _goods1_gid = (__goods1_gid < __goods2_gid ? __goods1_gid : __goods2_gid);
+    var _goods2_gid = (__goods2_gid > __goods1_gid ? __goods2_gid : __goods1_gid);
 
     // Create instance
+    // If there is already a pair (goods1_gid, goods2_gid) then do nothing
     exchanges
         .sync({force: false})
         .then(function() {
             return exchanges.findOne({
                 where: {
                     $and: [{
-                        gid1: _gid1
+                        goods1_gid: _goods1_gid
                     }, {
-                        gid2: _gid2
+                        goods2_gid: _goods2_gid
                     }]
                 }
             });
@@ -43,8 +44,8 @@ router.get('/create', function(req, res, next) {
                 return isThereAlready;
             } else {
                 return exchanges.create({
-                    gid1: _gid1,
-                    gid2: _gid2
+                    goods1_gid: _goods1_gid,
+                    goods2_gid: _goods2_gid
                 });
             }
         })
@@ -53,33 +54,33 @@ router.get('/create', function(req, res, next) {
         });
 });
 
-// Set the status of a exchange
-router.get('/complete', function(req, res, next) {
+// Set the status of a exchange to completed
+router.put('/complete', function(req, res, next) {
 
-    // Available params:
-    // 
-    // gid1 (smaller gid)
-    // gid2 (larger gid)
+    // Available PUT body params:
+    //
+    // goods1_gid (smaller goods_gid)
+    // goods2_gid (larger goods_gid)
     //
 
-    // Get property:value in ?x=y&z=w....
-    var __gid1 = parseInt(req.query.gid1);
-    var __gid2 = parseInt(req.query.gid2);
+    // Get property:value in PUT body
+    var __goods1_gid = parseInt(req.body.goods1_gid);
+    var __goods2_gid = parseInt(req.body.goods2_gid);
 
-    // And make sure gid1 <= gid2
-    var _gid1 = (__gid1 <= __gid2 ? __gid1 : __gid2);
-    var _gid2 = (__gid2 > __gid1 ? __gid2 : __gid1);
+    // And make sure goods1_gid < goods2_gid
+    var _goods1_gid = (__goods1_gid < __goods2_gid ? __goods1_gid : __goods2_gid);
+    var _goods2_gid = (__goods2_gid > __goods1_gid ? __goods2_gid : __goods1_gid);
 
-    // Find instance and update status to 1(complete) then save
+    // Find instance and update its status to 'completed' then save
     exchanges
         .sync({force: false})
         .then(function() {
             return exchanges.findOne({
                 where: {
                     $and: [{
-                        gid1: _gid1
+                        goods1_gid: _goods1_gid
                     }, {
-                        gid2: _gid2
+                        goods2_gid: _goods2_gid
                     }]
                 }
             });
@@ -88,7 +89,7 @@ router.get('/complete', function(req, res, next) {
             if (result == null) {
                 return {};
             } else {
-                result.status = 1;
+                result.status = 'completed';
                 result.save().then(function() {});
                 return result;
             }

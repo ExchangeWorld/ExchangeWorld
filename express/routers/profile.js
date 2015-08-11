@@ -1,78 +1,91 @@
 var express = require('express');
 var router  = express.Router();
 
-// including tables 
-var user      = require('../ORM/User');
-var goods     = require('../ORM/Goods');
-var follower  = require('../ORM/Follower');
-var following = require('../ORM/Following');
+// Including tables
+var users      = require('../ORM/Users');
+var goods      = require('../ORM/Goods');
+var followers  = require('../ORM/Followers');
+var followings = require('../ORM/Followings');
 
+// Get a profile
 router.get('/', function(req, res, next) {
 
-	// Available params:
-	// 
-	// fb_id 
-	// 
+	// Available query params:
+	//
+	// uid
+	//
 
 	// Get property:value in ?x=y&z=w....
-	var _fb_id = req.query.fb_id;
+	var _uid = parseInt(req.query.uid);
 
-	/** 
-	 * Set association between tables (user, goods, follower, following)
-	 * 
-	 * USER 
+	/*
+	 * Set association between tables (users, goods, followers, followings)
+	 *
+	 * USER
 	 *  |---(1:M)--- GOODS
 	 *  |---(1:M)--- FOLLOWING
 	 *  `---(1:M)--- FOLLOWER
 	 */
-	user.hasMany(goods, {foreignKey: 'ownerID'});
-	user.hasMany(follower, {foreignKey: 'myid'});
-	user.hasMany(following, {foreignKey: 'myid'});
-	goods.belongsTo(user, {foreignKey: 'ownerID'});
-	follower.belongsTo(user, {foreignKey: 'myid'});
-	following.belongsTo(user, {foreignKey: 'myid'});
+	users.hasMany(goods, {foreignKey: 'owner_uid'});
+	users.hasMany(followers, {foreignKey: 'my_uid'});
+	users.hasMany(followings, {foreignKey: 'my_uid'});
+	goods.belongsTo(users, {foreignKey: 'owner_uid'});
+	followers.belongsTo(users, {foreignKey: 'my_uid'});
+	followings.belongsTo(users, {foreignKey: 'my_uid'});
 
-	// Emit a find operation with orm model in table `user`
-	user
+	// Emit a find operation with orm model in table `users`
+	users
 		.sync({force: false})
 		.then(function() {
 
-			/**
-			 * SELECT `goods`. * , `user`.*
-			 * FROM `goods`, `user`
-			 * WHERE `user`.`fb_id` = '_fb_id' 
-			 *   AND `user`.`fb_id` = `goods`.`ownerID`
-			 *   AND `user`.`fb_id` = `followertable`.`myid`
-			 *   AND `user`.`fb_id` = `seeker`.`myid`
+			/*
+			 * SELECT `goods`. * , `users`.*
+			 *   FROM `goods`, `users`
+			 *  WHERE `users`.`uid` = '_uid'
+			 *    AND `users`.`uid` = `goods`.`owner_uid`
+			 *    AND `users`.`uid` = `followers`.`my_uid`
+			 *    AND `users`.`uid` = `follwings`.`my_uid`
 			 */
-			 
-			return user.findAll({
+
+			return users.findAll({
 				where: {
-					fb_id : _fb_id
+					uid : _uid
 				},
-				include: [goods, follower, following]
+				include: [goods, followers, followings]
 			});
 		})
 		.then(function(result) {
 			res.json(result);
+		})
+		.catch(function(err) {
+			res.json({});
 		});
 });
 
-router.get('/edit', function(req, res, next) {
+// Edit a profile
+router.put('/edit', function(req, res, next) {
 
-	var _fb_id = req.query.fb_id;
-	var _username = req.query.username;
-	var _email = req.query.email;
-	var _nickname = req.query.nickname;
-	var _wishlist = req.query.wishlist;
-	var _introduction = req.query.introduction;
+	// Available PUT body params:
+    //
+    // uid
+    // name
+    // email
+	// introduction
+	// wishlist
+	//
 
-	user
+	var _uid          = parseInt(req.body.uid);
+	var _name         = req.body.name;
+	var _email        = req.body.email;
+	var _introduction = req.body.introduction;
+	var _wishlist     = req.body.wishlist;
+
+	users
 		.sync({force: false})
 		.then(function () {
-			return user.findOne({
+			return users.findOne({
 				where: {
-					fb_id: _fb_id
+					uid: _uid
 				}
 			});
 		})
@@ -80,20 +93,21 @@ router.get('/edit', function(req, res, next) {
 			if (result == null) {
 				return {};
 			} else {
-				result.username = _username;
-				result.email = _email;
-				result.nickname = _nickname;
-				result.wishlist = _wishlist;
+				result.name         = _name;
+				result.email        = _email;
 				result.introduction = _introduction;
+				result.wishlist     = _wishlist;
 				result.save().then(function() {});
 				return result;
 			}
 		})
 		.then(function(result) {
 			res.json(result);
+		})
+		.catch(function(err) {
+			res.json({});
 		});
 
 });
-
 
 module.exports = router;

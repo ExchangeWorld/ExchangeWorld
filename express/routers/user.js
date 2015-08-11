@@ -1,19 +1,20 @@
 var express = require('express');
 var router = express.Router();
 
-// including tables 
-var user = require('../ORM/User');
+// Including tables
+var users = require('../ORM/Users');
 
+// Get a user
 router.get('/', function(req, res, next) {
 
-	// Available params:
-	// 
+	// Available query params:
+	//
 	// uid
 	// fb_id
-	// 
+	//
 
 	// Get property:value in ?x=y&z=w....
-	var _uid = parseInt(req.query.uid);
+	var _uid   = parseInt(req.query.uid);
 	var _fb_id = req.query.fb_id;
 
 	// If uid or fb_id in query are not defined, then set them to zero or emptyString
@@ -29,13 +30,13 @@ router.get('/', function(req, res, next) {
 		_fb_id = "";
 	}
 
-	// Emit a find operation with orm model in table `user`
-	user
+	// Emit a find operation with orm in table `users`
+	users
 		.sync({
 			force: false
 		})
 		.then(function() {
-			return user.findAll({
+			return users.findAll({
 				where: {
 					$or: [{
 						uid: _uid
@@ -50,44 +51,33 @@ router.get('/', function(req, res, next) {
 		});
 });
 
+// Register a user
 router.post('/register', function(req, res, next) {
 
 	// Necessary params
 	//
 	// fb_id
-	// username
+	// name
 	// email
 	// nickname
 	// photoPath
 	//
 
-	var _fb_id = req.body.fb_id;
-	var _username = req.body.username;
-	var _email = req.body.email;
-	var _nickname = req.body.nickname;
+	var _fb_id     = req.body.fb_id;
+	var _name      = req.body.name;
+	var _email     = req.body.email;
 	var _photoPath = req.body.photoPath;
-	// var _exchangeTable = req.body.exchangeTable;
-	// var _followerTable = req.body.followerTable;
-	// var _seekerTable = req.body.seekerTable;
 
 	// Create instance
-	user
+	users
 		.sync({force: false})
 		.then(function() {
-			return user.create({
+			return users.create({
 				fb_id:     _fb_id,
-				username:  _username,
+				name:      _name,
 				email:     _email,
-				nickname:  _nickname,
 				photoPath: _photoPath
 			});
-		})
-		.then(function(result) {
-			result.exchangeTable = result.uid;
-			result.followerTable = result.uid;
-			result.seekerTable   = result.uid;
-			result.save().then(function() {});
-			return result;
 		})
 		.then(function(result) {
 			res.json(result);

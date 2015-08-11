@@ -25,8 +25,8 @@ md-toolbar{
 
 .circular {
     background-position: center;
-    max-width: 160px;
-    max-height: 160px;
+    max-width:100%;
+	max-height:100%;
     background-size: cover;
     display: block;
     border-radius: 50%;
@@ -34,9 +34,3 @@ md-toolbar{
     -moz-border-radius: 50%;
 }
 
-.circular{
-	&.home_img{
-		max-width:500px;
-		max-height:500px;
-	}
-}

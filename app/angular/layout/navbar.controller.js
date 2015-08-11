@@ -4,7 +4,7 @@ const layoutModule = require('./layout.module');
 layoutModule.controller('NavbarController', NavbarController);
 
 /** @ngInject */
-function NavbarController($mdSidenav, $state, facebook ) {
+function NavbarController($mdSidenav, $state, facebookService) {
 	const vm     = this;
 	const state  = ['home', 'seek', 'post', 'manage', 'profile'];
 	vm.contentIs = contentIs;
@@ -37,13 +37,13 @@ function NavbarController($mdSidenav, $state, facebook ) {
 	}
 
 	function onLogin() {
-		console.log(facebook.intentLogin());
-		console.log(facebook.getLoginStatus());
+		console.log(facebookService.intentLogin());
+		console.log(facebookService.getLoginStatus());
 		//return ;
 	}
 
 	function onLogout() {
-		console.log(facebook.logout());
+		console.log(facebookService.logout());
 		//return ;
 	}
 

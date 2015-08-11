@@ -1,7 +1,7 @@
 'use strict';
 
 const facebookModule = require('./facebook.module');
-facebookModule.factory('facebook', facebook);
+facebookModule.factory('facebookService', facebook);
 
 /** @ngInject */
 function facebook(Facebook) {

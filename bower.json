@@ -2,7 +2,6 @@
   "name": "ExchangeWorld",
   "version": "0.0.1",
   "dependencies": {
-    "font-awesome": "~4.3.0",
-    "angular-facebook": "~0.2.3"
+    "font-awesome": "~4.3.0"
   }
 }

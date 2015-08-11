@@ -106,6 +106,7 @@
     "angular-material": "^0.10.0",
     "angular-resource": "^1.4.3",
     "angular-toastr": "^1.4.1",
+    "angularjs-facebook": "^0.2.3",
     "bower": "^1.4.1",
     "lodash": "^3.10.0",
     "ng-infinite-scroll": "^1.2.0",

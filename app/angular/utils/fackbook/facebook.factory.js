@@ -6,14 +6,48 @@ facebookModule.factory('facebookService', facebook);
 /** @ngInject */
 function facebook(Facebook) {
 	const service = {
-		intentLogin    : intentLogin,
 		login          : login,
 		logout         : logout,
-		getLoginStatus : getLoginStatus,
 		me             : me,
+		//intentLogin    : intentLogin,
+		//getLoginStatus : getLoginStatus,
 	};
 
 	return service;
+
+	////////////////
+
+	/**
+	 * Login
+	 */
+	function login() {
+		//var user = {};
+		return Facebook.login(function(response) {
+			if (response.status === 'connected') {
+				return me();
+			} else {
+				console.error('FB login ERROR.');
+				return {};
+			}
+		});
+	}
+
+	/**
+	 * Logout
+	 */
+	function logout() {
+		return Facebook.logout();
+	}
+
+	/**
+	 * me
+	 * get user's facebook basic infomations 
+	 */
+	function me() {
+		return Facebook.api('/me', function(response) {
+			return response;
+		})
+	}
 
 	/**
 	 * Watch for Facebook to be ready.
@@ -29,21 +63,23 @@ function facebook(Facebook) {
 	);
 	 */
 
-
-	function getLoginStatus(){
-		return Facebook.getLoginStatus(function(response) {
-			if (response.status === 'connected') {
-				return true;
-			} else {
-				return false;
-			}
+	/**
+	function getLoginStatus() {
+		var FBstatus = false;
+		Facebook.getLoginStatus(function(response) {
+			if (response.status == 'connected') {
+				//resolve.data()
+				FBstatus = true;
+			} else { 
+				FBstatus = false;
+			} 
 		});
 	}
+	*/
 
 	/**
 	 * IntentLogin, check if is loggin.
 	 * if already loggin, do nothings.
-	 */
 	function intentLogin() {
 		if (getLoginStatus()) {
 			return me();
@@ -51,35 +87,6 @@ function facebook(Facebook) {
 			return login(); 
 		}
 	}
-
-	/**
-	 * Login
 	 */
-	function login() {
-		return Facebook.login(function(response) {
-			if (response.status === 'connected') {
-				return me();
-			}
-		});
-	}
-
-	/**
-	 * me
-	 * get user's facebook basic infomations 
-	 */
-	function me() {
-		return Facebook.api('/me', function(response) {
-			return response;
-		});
-	}
-
-	/**
-	 * Logout
-	 */
-	function logout() {
-		return Facebook.logout(function() {
-			return {};
-		});
-	}
 
 }

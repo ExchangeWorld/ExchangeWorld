@@ -37,13 +37,21 @@ function NavbarController($mdSidenav, $state, facebookService) {
 	}
 
 	function onLogin() {
-		console.log(facebookService.intentLogin());
-		console.log(facebookService.getLoginStatus());
+		facebookService
+			.login()
+			.then(function(data){
+				console.log(data);
+			});
 		//return ;
 	}
 
 	function onLogout() {
-		console.log(facebookService.logout());
+		facebookService
+			.me()
+			.then(function(data){
+				console.log(data);
+			});
+		facebookService.logout();
 		//return ;
 	}
 

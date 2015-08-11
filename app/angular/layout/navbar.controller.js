@@ -4,11 +4,13 @@ const layoutModule = require('./layout.module');
 layoutModule.controller('NavbarController', NavbarController);
 
 /** @ngInject */
-function NavbarController($mdSidenav, $state) {
+function NavbarController($mdSidenav, $state, facebookService) {
 	const vm     = this;
 	const state  = ['home', 'seek', 'post', 'manage', 'profile'];
 	vm.contentIs = contentIs;
 	vm.onClick   = onClick;
+	vm.onLogin   = onLogin;
+	vm.onLogout  = onLogout;
 
 	function setContent(contentIndex) {
 		//	vm.content = state[contentIndex];
@@ -33,4 +35,28 @@ function NavbarController($mdSidenav, $state) {
 			}
 		}
 	}
+
+	function onLogin() {
+		facebookService
+			.login() // login to facebook.
+			.then(function(data) {
+				console.log(data);
+
+				facebookService
+					.me() // get user facebook data.
+					.then(function(data) {
+						console.log(data);
+					});
+			});
+		/**
+		 * Here should call API for create new user.
+		 *
+		 */
+
+	}
+
+	function onLogout() {
+		facebookService.logout();
+	}
+
 }

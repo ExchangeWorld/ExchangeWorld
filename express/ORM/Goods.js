@@ -46,6 +46,11 @@ var Goods = sequelize.define('goods', {
 	    type: Sequelize.INTEGER,
 	    allowNull: false,
 	    defaultValue: 0
+	},
+	deleted: {
+	    type: Sequelize.INTEGER,
+	    allowNull: false,
+	    defaultValue: 0
 	}
 });
 

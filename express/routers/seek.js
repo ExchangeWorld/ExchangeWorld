@@ -47,7 +47,8 @@ router.get('/', function(req, res, next) {
                     gname: {
                         $like: '%' + title + '%'
                     },
-                    status: 0
+                    status: 0,
+                    deleted: 0
                 },
     			include: [users]
             });

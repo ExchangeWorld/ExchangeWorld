@@ -25,17 +25,13 @@ router.get('/', function(req, res, next) {
 		_gid = 0;
 	}
 
-	if (_owner_uid === undefined) {
-		_owner_uid = "";
-	}
-
-	if (!_owner_uid.length > 0) {
-		_owner_uid = "";
+	if (!_owner_uid > 0) {
+		_owner_uid = 0;
 	}
 
 	// If gid or owner_uid appear together, then return empty json
 	// Because we want RESTful looking for either the gid of one good or one owner's goods
-	if (_gid > 0 && _owner_uid !== "") {
+	if (_gid > 0 && _owner_uid > 0) {
 		res.json({});
 	}
 
@@ -184,7 +180,7 @@ router.put('/delete', function(req, res, next) {
 	//
 
 	// Get property:value in PUT body
-	var _gid = parseInt(req.query.gid);
+	var _gid = parseInt(req.body.gid);
 
 	goods
 		.sync({force: false})

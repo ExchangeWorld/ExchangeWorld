@@ -5,7 +5,7 @@ var router  = express.Router();
 
 // Including tables
 var goods   = require('../ORM/Goods');
-var users    = require('../ORM/Users');
+var users   = require('../ORM/Users');
 
 router.get('/', function(req, res, next) {
 

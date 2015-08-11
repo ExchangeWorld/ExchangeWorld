@@ -39,12 +39,16 @@ module.exports = function() {
 	// server.use('/api/post', require('./routers/post'));
 	// changed to /api/goods/post
 	server.use('/api/upload', require('./routers/upload'));
-	
+
 	/* ref: doc/profile.md */
 	server.use('/api/user', require('./routers/user'));
-	server.use('/api/profile', require('./routers/profile'));
 	server.use('/api/profile/follower', require('./routers/follower'));
 	server.use('/api/profile/following', require('./routers/following'));
+	server.use('/api/profile', require('./routers/profile'));
+
+	server.use('/api/comment', require('./routers/comment'));
+	server.use('/api/star', require('./routers/star'));
+	server.use('/api/queue', require('./routers/queue'));
 
 	server.use('/api/exchange', require('./routers/exchange'));
 	server.use('/api/authenticate', require('./routers/authenticate'));

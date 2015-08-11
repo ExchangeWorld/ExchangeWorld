@@ -3,14 +3,14 @@
 var express = require('express');
 var router  = express.Router();
 
-// including tables 
+// including tables
 var goods   = require('../ORM/Goods');
 var user    = require('../ORM/User');
 
 router.get('/', function(req, res, next) {
 
     // Available params:
-    // 
+    //
     // title
     // wishlist
     // category
@@ -21,13 +21,13 @@ router.get('/', function(req, res, next) {
     //
 
     // Get property:value in ?x=y&z=w....
-    var title    = req.query.title;
-    var wishlist = req.query.wishlist;
-    var category = req.query.category;
-    var px       = parseFloat(req.query.px);
-    var py       = parseFloat(req.query.py);
-    var from     = parseInt(req.query.from);
-    var to       = parseInt(req.query.to);
+    var title    = req.query.title || '';
+    var wishlist = req.query.wishlist || '';
+    var category = req.query.category || '';
+    var px       = parseFloat(req.query.px) || -1.0;
+    var py       = parseFloat(req.query.py) || -1.0;
+    var from     = parseInt(req.query.from) || -1;
+    var to       = parseInt(req.query.to) || -1;
 
 	// Set association between tables (user, goods)
 	user.hasMany(goods, {foreignKey:'ownerID'});
@@ -38,9 +38,9 @@ router.get('/', function(req, res, next) {
         .sync({force: false})
         .then(function() {
     		/**
-    		 * SELECT `goods`.*, `user`.* 
+    		 * SELECT `goods`.*, `user`.*
     		 * FROM `goods`, `user`
-    		 * WHERE `goods`.ownerID = `user`.fb_id AND `goods`.name = %title% 
+    		 * WHERE `goods`.ownerID = `user`.fb_id AND `goods`.name = %title%
              */
     		return goods.findAll({
                 where: {

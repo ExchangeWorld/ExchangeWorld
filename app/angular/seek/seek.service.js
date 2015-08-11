@@ -1,43 +1,38 @@
 'use strict';
 
 const seekModule = require('./seek.module');
-seekModule.service('seekService', seekService);
+const _          = require('lodash');
+
+seekModule.factory('seekService', seekService);
 
 /** @ngInject */
-function seekService(Restangular, $q) {
+function seekService(Restangular, $q, exception) {
 	var service = {
-		getSeekData: asyncGetData 
+		getSeek: getSeek,
 	};
 
 	return service;
 
 	//////////
 
-	function asyncGetData(data) {
-		var deferred = $q.defer();
+	function getSeek() {
+		const defer = $q.defer();
 
-		setTimeout(function() {
-			/** 
-			 * code for reject condictions 
+		Restangular
+			.all('seek')
+			/**
+			 *  here should have search condition
+			 *  i.e. title, category, and so on
 			 */
-
-			deferred.resolve(getSeekData());
-		}, 1000);
-
-		return deferred.promise;
-	}
-
-	function getSeekData() {
-		var seek = Restangular.all('api/seek');
-
-		/**
-		 *  here should get search condition
-		 *  i.e. title, category, and so on
-		 */
-		return seek.getList({ 'title': '' }).then(function(data) {
-			return data;
-		}).catch(function(error) {
-			console.log('error', error);
-		});
+			.getList()
+			.then(function(data) {
+				if (_.isArray(data)) {
+					defer.resolve(data);
+				} 
+			})
+			.catch(function(error) {
+				return exception.catcher('[Seek Service] getSeek error: ')(error);
+			});
+		return defer.promise;
 	}
 }

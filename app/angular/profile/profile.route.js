@@ -18,7 +18,14 @@ function getStates() {
 				controller : 'ProfileController',
 				controllerAs: 'vm',
 				templateUrl : 'profile/profile.html',
-				title : 'profile'
+				resolve : {
+					profile : function (profileService, $stateParams) {
+						return profileService
+							.getProfile($stateParams.fid)
+							.then(function(data) { return data; })
+							.catch(function() { return undefined; });
+					},
+				},
 			}
 		}
 	];

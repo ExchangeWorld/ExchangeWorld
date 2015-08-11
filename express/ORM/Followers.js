@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 var sequelize = require('../libs/orm');
 
-// Define the schema of table `followertable`
+// Define the schema of table `followers`
 // 'Follower' is following me
 var Followers = sequelize.define('followers', {
 	fid: {

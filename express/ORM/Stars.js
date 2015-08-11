@@ -1,22 +1,21 @@
 var Sequelize = require('sequelize');
 var sequelize = require('../libs/orm');
 
-// Define the schema of table `followings`
-// I am following 'following'
-var Followings = sequelize.define('followings', {
-	fid: {
+// Define the schema of table `stars`
+var Stars = sequelize.define('stars', {
+	sid: {
 		type: Sequelize.INTEGER.UNSIGNED,
 		allowNull: false,
 		unique: true,
 		autoIncrement: true,
 		primaryKey: true
 	},
-	my_uid: {
-		type: Sequelize.INTEGER.UNSIGNED, // my uid
+	goods_gid: {
+		type: Sequelize.INTEGER.UNSIGNED, // which goods is starred
 		allowNull: false
 	},
-	following_uid: {
-		type: Sequelize.INTEGER.UNSIGNED, // following's uid 
+	starring_user_uid: {
+		type: Sequelize.INTEGER.UNSIGNED, // who stars the goods
 		allowNull: false
 	}
 }, {
@@ -24,4 +23,4 @@ var Followings = sequelize.define('followings', {
 	freezeTableName: true
 });
 
-module.exports = Followings;
+module.exports = Stars;

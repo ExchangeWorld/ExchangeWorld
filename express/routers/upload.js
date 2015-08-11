@@ -33,14 +33,34 @@ router.post('/image', function(req, res, next) {
 	// Open a buffer stream
 	var dataBuffer = new Buffer(base64Data, 'base64');
 
-	// Write to file and its name will be prepend with timestamp and filename
-	fs.writeFile((new Date().getTime()) + '_' + imgName + '.' + imgFormat.replace(/image\//, ''), dataBuffer, function(err) {
+	// Get a sha256 hash from its base64data
+	var hashData = getSHA256(base64Data);
+
+	// The file path pointing to the image file
+	var filePath = './build/' + hashData + '.' + imgFormat.replace(/image\//, '');
+
+	// Write to file with the filePath
+	// And if there is another person who uploaded a same base64 image, 
+	// The things are still going right because that means same image, why not treat them same?
+	// Finally, send the "static file path" back
+	fs.writeFile(filePath, dataBuffer, function(err) {
 		if (err) {
-			res.send(err);
+			res.send(undefined);
 		} else {
-			res.send("upload success");
+			res.send(hashData + '.' + imgFormat.replace(/image\//, ''));
 		}
 	});
+});
+
+// Hashcode generation function
+var getSHA256 = (function(strToEncrypt) {
+
+	var crypto = require('crypto');
+	var sha256 = crypto.createHash('sha256');
+
+	sha256.update(strToEncrypt, 'utf8');
+
+	return sha256.digest('hex');
 });
 
 module.exports = router;

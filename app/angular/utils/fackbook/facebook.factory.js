@@ -9,8 +9,6 @@ function facebook(Facebook) {
 		login          : login,
 		logout         : logout,
 		me             : me,
-		//intentLogin    : intentLogin,
-		//getLoginStatus : getLoginStatus,
 	};
 
 	return service;
@@ -46,47 +44,7 @@ function facebook(Facebook) {
 	function me() {
 		return Facebook.api('/me', function(response) {
 			return response;
-		})
-	}
-
-	/**
-	 * Watch for Facebook to be ready.
-	 * Thereks also the event that could be used
-	$scope.watch(
-		function() {
-			return Facebook.isReady();
-		},
-		function(newVal) {
-			if (newVal)
-				vm.facebookReady = true;
-		}
-	);
-	 */
-
-	/**
-	function getLoginStatus() {
-		var FBstatus = false;
-		Facebook.getLoginStatus(function(response) {
-			if (response.status == 'connected') {
-				//resolve.data()
-				FBstatus = true;
-			} else { 
-				FBstatus = false;
-			} 
 		});
 	}
-	*/
-
-	/**
-	 * IntentLogin, check if is loggin.
-	 * if already loggin, do nothings.
-	function intentLogin() {
-		if (getLoginStatus()) {
-			return me();
-		} else {
-			return login(); 
-		}
-	}
-	 */
 
 }

@@ -38,21 +38,25 @@ function NavbarController($mdSidenav, $state, facebookService) {
 
 	function onLogin() {
 		facebookService
-			.login()
-			.then(function(data){
+			.login() // login to facebook.
+			.then(function(data) {
 				console.log(data);
+
+				facebookService
+					.me() // get user facebook data.
+					.then(function(data) {
+						console.log(data);
+					});
 			});
-		//return ;
+		/**
+		 * Here should call API for create new user.
+		 *
+		 */
+
 	}
 
 	function onLogout() {
-		facebookService
-			.me()
-			.then(function(data){
-				console.log(data);
-			});
 		facebookService.logout();
-		//return ;
 	}
 
 }

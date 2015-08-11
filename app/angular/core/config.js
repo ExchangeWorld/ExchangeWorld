@@ -3,6 +3,7 @@
 const coreModule = require('./core.module');
 const angular    = require('angular');
 coreModule.config(toastConfig);
+coreModule.config(facebookprovider);
 
 
 /** @ngInject */
@@ -28,4 +29,10 @@ function configure($logProvider, routerHelperProvider, exceptionHandlerProvider)
 	}
 	exceptionHandlerProvider.configure('[<%= appName %> Error]');
 	//routerHelperProvider.configure({ docTitle : config.appTitle + ': ' });
+}
+
+
+function facebookprovider(FacebookProvider) {
+	// Set your appId through the setAppId method or use the shortcut in the initialize method directly.
+	FacebookProvider.init('398517123645939'); // exwd Dev_appID
 }

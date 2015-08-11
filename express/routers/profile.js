@@ -7,7 +7,7 @@ var goods     = require('../ORM/Goods');
 var follower  = require('../ORM/Follower');
 var following = require('../ORM/Following');
 
-router.get('/', function(req, res, nex) {
+router.get('/', function(req, res, next) {
 
 	// Available params:
 	// 
@@ -56,6 +56,43 @@ router.get('/', function(req, res, nex) {
 		.then(function(result) {
 			res.json(result);
 		});
+});
+
+router.get('/edit', function(req, res, next) {
+
+	var _fb_id = req.query.fb_id;
+	var _username = req.query.username;
+	var _email = req.query.email;
+	var _nickname = req.query.nickname;
+	var _wishlist = req.query.wishlist;
+	var _introduction = req.query.introduction;
+
+	user
+		.sync({force: false})
+		.then(function () {
+			return user.findOne({
+				where: {
+					fb_id: _fb_id
+				}
+			});
+		})
+		.then(function(result) {
+			if (result == null) {
+				return {};
+			} else {
+				result.username = _username;
+				result.email = _email;
+				result.nickname = _nickname;
+				result.wishlist = _wishlist;
+				result.introduction = _ introduction;
+				result.save().then(function () {});
+				return result;
+			}
+		})
+		.then(function(result) {
+			res.json(result);
+		});
+
 });
 
 

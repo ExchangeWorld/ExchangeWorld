@@ -19,7 +19,7 @@ function profileService(Restangular, $q) {
 		const defer = $q.defer();
 
 		Restangular
-			.all('profile')
+			.all('user')
 			.getList({ uid : _uid })
 			.then(function(data) {
 				if (_.isArray(data)) {

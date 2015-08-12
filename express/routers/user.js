@@ -73,10 +73,10 @@ router.post('/register', function(req, res, next) {
 		.sync({force: false})
 		.then(function() {
 			return users.create({
-				fb_id:     _fb_id,
-				name:      _name,
-				email:     _email,
-				photoPath: _photoPath
+				fb_id     : _fb_id,
+				name      : _name,
+				email     : _email,
+				photoPath : _photoPath
 			});
 		})
 		.then(function(result) {

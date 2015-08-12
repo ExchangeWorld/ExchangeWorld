@@ -26,7 +26,7 @@ function PostController(postService, $state) {
 			category    : vm.goodsCategory.label,
 			position_x  : 123.4,
 			position_y  : 23.4,
-			owner_uid   : '88776654',
+			owner_uid   : '12345',
 			photo_path  : '',
 		};
 		

@@ -18,13 +18,13 @@ function seekService(Restangular, $q, exception) {
 	function getSeek() {
 		const defer = $q.defer();
 
+		/**
+		 *  Here should have search condition
+		 *  i.e. title, category, and so on
+		 */
 		Restangular
-			.all('seek')
-			/**
-			 *  here should have search condition
-			 *  i.e. title, category, and so on
-			 */
-			.getList()
+			.all('goods/search')
+			.getList(/*{name: xxx}*/)
 			.then(function(data) {
 				if (_.isArray(data)) {
 					defer.resolve(data);

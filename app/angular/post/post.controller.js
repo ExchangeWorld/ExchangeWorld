@@ -4,13 +4,14 @@ const postModule = require('./post.module');
 postModule.controller('PostController', PostController);
 
 /** @ngInject */
-function PostController(postService, $state) {
+function PostController(postService, $state, AvailableCategory) {
 	var vm               = this;
 	vm.goodsName         = '';
 	vm.goodsDescriptions = '';
 	vm.goodsCategory     = '';
 	vm.imgEncoded        = [];
 	vm.onSubmit          = onSubmit;
+	vm.availableCategory = AvailableCategory;
 	/**
 	 * Need to get more info,
 	 * goods position X & Y
@@ -21,44 +22,30 @@ function PostController(postService, $state) {
 
 	function onSubmit() {
 		var newPost = {
-			gname       : vm.goodsName,
+			name        : vm.goodsName,
 			description : vm.goodsDescriptions,
-			categories  : vm.goodsCategory.label,
-			want        : '',
-			posX        : 123.4,
-			posY        : 23.5,
-			ownerID     : '88776654',
+			category    : vm.goodsCategory.label,
+			position_x  : 123.4,
+			position_y  : 23.4,
+			owner_uid   : '12345',
 			photo_path  : '',
 		};
 		
 
-		newPost.photo_path = postService.uploadImg(vm.imgEncoded);
-		postService.sendNewPostInfo(newPost);
+		/**
+		 * First, upload the photo and get photo_path,
+		 * then send new post data to backend
+		 */
+		postService
+			.uploadImg(vm.imgEncoded)
+			.then(function(data){
+				newPost.photo_path = data;
+
+				postService.sendNewPostInfo(newPost);
+			});
 
 		$state.go('root.withSidenav.seek');
 	}
 
 
-	/**
-	 * define all avalible categories 
-	 */
-	vm.availableCategory = [
-			{label : "Books"},
-			{label : "Textbooks"},
-			{label : "Magazine"},
-			{label : "Movies"},
-			{label : "Music CD"},
-			{label : "Video Game"},
-			{label : "Smart Phone"},
-			{label : "Tablet"},
-			{label : "Camera"},
-			{label : "Audio"},
-			{label : "Computer Hardware"},
-			{label : "Jewelry"},
-			{label : "Clothing"},
-			{label : "Shoes"},
-			{label : "Watches"},
-			{label : "Furniture"},
-			{label : "Others"}
-		];
 }

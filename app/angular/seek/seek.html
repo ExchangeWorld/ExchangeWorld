@@ -1,34 +1,36 @@
 <div layout="row" layout-sm="row">
-    <md-input-container flex="80" class="md-default-theme">
-        <label for="input_162">Seek anything</label>
-        <input ng-model="SomeModel" class="ng-pristine ng-valid md-input ng-touched" id="input_162" tabindex="0" aria-invalid="false">
-    </md-input-container>
-    <button flex class="md-raised md-accent md-button md-default-theme md-hue-1" style="height:50% ;top:20px"><i class="fa fa-search fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i><span class="ng-scope">Seek!</span>
-        <div class="md-ripple-container"></div>
-    </button>
+	<md-input-container flex="80" class="md-default-theme">
+	    <label for="input_162">Seek anything</label>
+	    <input ng-model="vm.searchGoodsName" class="ng-pristine ng-valid md-input ng-touched" id="input_162" tabindex="0" aria-invalid="false">
+	</md-input-container>
+	<button ng-click='vm.onSearch()' flex class="md-raised md-accent md-button md-default-theme md-hue-1" style="height:50% ;top:20px"><i class="fa fa-search fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i><span class="ng-scope">Seek!</span>
+	    <div class="md-ripple-container"></div>
+	</button>
 </div>
 
 <md-content layout-padding="row">
-    <md-button class="md-raised md-cornered" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Distance <span class="caret"></span> </md-button>
-    <md-button class="md-raised md-cornered" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </md-button>   
+	<md-button class="md-raised md-cornered" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Distance <span class="caret"></span> </md-button>
+	<!--<md-button class="md-raised md-cornered" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </md-button>   -->
+	<select placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" >
+	</select>
 </md-content>
 
 <md-divider ng-if="!$last"></md-divider>
 
 <md-subheader class="md-no-sticky">Item List</md-subheader>
 
-<md-list layout="row" layout-margin layout-fill layout-padding>    
+<md-list layout="row" layout-margin layout-fill layout-padding>	
 	
-    <md-list-item class="md-4-line" flex ng-repeat="good in vm.goods">
-        <div class="md-list-item-text" ng-click="vm.onClickGoods( good.gid )">
-        <img style="max-height:200px; max-width:200px" src="http://i.imgur.com/7RoLGdp.jpg" title="source: imgur.com" />
-          <h3>{{ good.name }}<span class="badge">   {{ good.category }}</span></h3>
-          <!--<h4>want</h4>-->
-          <p><img ng-src="#" height="20" width="20">{{ good.user.name }}</p>
-        </div>
-         
-    </md-list-item>
+	<md-list-item class="md-4-line" flex ng-repeat="good in vm.goods">
+	    <div class="md-list-item-text" ng-click="vm.onClickGoods( good.gid )">
+			<img style="max-height:200px; max-width:200px" ng-src="{{ good.photo_path }}" title="source: imgur.com" />
+	      <h3>{{ good.name }}<span class="badge">   {{ good.category }}</span></h3>
+	      <!--<h4>want</h4>-->
+	      <p><img ng-src="#" height="20" width="20">{{ good.user.name }}</p>
+	    </div>
+	     
+	</md-list-item>
 
-    <md-divider></md-divider>
+	<md-divider></md-divider>
 </md-list>
 

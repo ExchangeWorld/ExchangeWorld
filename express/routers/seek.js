@@ -21,17 +21,17 @@ router.get('/', function(req, res, next) {
     //
 
     // Get property:value in ?x=y&z=w....
-    var _title      = req.query.title;
-    var _wishlist   = req.query.wishlist;
-    var _category   = req.query.category;
-    var _position_x = parseFloat(req.query.position_x);
-    var _position_y = parseFloat(req.query.position_y);
-    var _from       = parseInt(req.query.from);
-    var _to         = parseInt(req.query.to);
+    var title    = req.query.title || '';
+    var wishlist = req.query.wishlist || '';
+    var category = req.query.category || '';
+    var px       = parseFloat(req.query.px) || -1.0;
+    var py       = parseFloat(req.query.py) || -1.0;
+    var from     = parseInt(req.query.from) || -1;
+    var to       = parseInt(req.query.to) || -1;
 
-	// Set association between tables (users, goods)
-	users.hasMany(goods, {foreignKey:'owner_uid'});
-	goods.belongsTo(users, {foreignKey: 'uid'});
+	// Set association between tables (user, goods)
+	user.hasMany(goods, {foreignKey:'owner_uid'});
+	goods.belongsTo(user, {foreignKey: 'owner_uid'});
 
     // Emit a find operation with orm model in table `goods`
     goods

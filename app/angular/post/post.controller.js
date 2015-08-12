@@ -4,13 +4,14 @@ const postModule = require('./post.module');
 postModule.controller('PostController', PostController);
 
 /** @ngInject */
-function PostController(postService, $state) {
+function PostController(postService, $state, AvailableCategory) {
 	var vm               = this;
 	vm.goodsName         = '';
 	vm.goodsDescriptions = '';
 	vm.goodsCategory     = '';
 	vm.imgEncoded        = [];
 	vm.onSubmit          = onSubmit;
+	vm.availableCategory = AvailableCategory;
 	/**
 	 * Need to get more info,
 	 * goods position X & Y
@@ -47,26 +48,4 @@ function PostController(postService, $state) {
 	}
 
 
-	/**
-	 * define all avalible categories 
-	 */
-	vm.availableCategory = [
-			{label : "Books"},
-			{label : "Textbooks"},
-			{label : "Magazine"},
-			{label : "Movies"},
-			{label : "Music CD"},
-			{label : "Video Game"},
-			{label : "Smart Phone"},
-			{label : "Tablet"},
-			{label : "Camera"},
-			{label : "Audio"},
-			{label : "Computer Hardware"},
-			{label : "Jewelry"},
-			{label : "Clothing"},
-			{label : "Shoes"},
-			{label : "Watches"},
-			{label : "Furniture"},
-			{label : "Others"}
-		];
 }

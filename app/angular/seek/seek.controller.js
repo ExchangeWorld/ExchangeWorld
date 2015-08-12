@@ -4,13 +4,14 @@ const seekModule = require('./seek.module');
 seekModule.controller('SeekController', SeekController);
 
 /** @ngInject */
-function SeekController(seekService, $state) {
+function SeekController(seekService, $state, AvailableCategory) {
 	var vm                 = this;
 	vm.goods               = [];
 	vm.searchGoodsName     = '';
 	vm.searchGoodsCategory = '';
 	vm.onClickGoods        = onClickGoods;
 	vm.onSearch            = onSearch;
+	vm.availableCategory = AvailableCategory;
 
 	activate();
 

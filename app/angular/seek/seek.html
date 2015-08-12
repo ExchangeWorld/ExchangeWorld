@@ -10,7 +10,9 @@
 
 <md-content layout-padding="row">
 	<md-button class="md-raised md-cornered" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Distance <span class="caret"></span> </md-button>
-	<md-button class="md-raised md-cornered" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </md-button>   
+	<!--<md-button class="md-raised md-cornered" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </md-button>   -->
+	<select placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" >
+	</select>
 </md-content>
 
 <md-divider ng-if="!$last"></md-divider>

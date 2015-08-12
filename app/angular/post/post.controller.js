@@ -21,19 +21,27 @@ function PostController(postService, $state) {
 
 	function onSubmit() {
 		var newPost = {
-			gname       : vm.goodsName,
+			name        : vm.goodsName,
 			description : vm.goodsDescriptions,
-			categories  : vm.goodsCategory.label,
-			want        : '',
-			posX        : 123.4,
-			posY        : 23.5,
-			ownerID     : '88776654',
+			category    : vm.goodsCategory.label,
+			position_x  : 123.4,
+			position_y  : 23.4,
+			owner_uid   : '88776654',
 			photo_path  : '',
 		};
 		
 
-		newPost.photo_path = postService.uploadImg(vm.imgEncoded);
-		postService.sendNewPostInfo(newPost);
+		/**
+		 * First, upload the photo and get photo_path,
+		 * then send new post data to backend
+		 */
+		postService
+			.uploadImg(vm.imgEncoded)
+			.then(function(data){
+				newPost.photo_path = data;
+
+				postService.sendNewPostInfo(newPost);
+			});
 
 		$state.go('root.withSidenav.seek');
 	}

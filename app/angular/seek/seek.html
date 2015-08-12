@@ -7,14 +7,16 @@
     </md-button>
 </div>
 
-<md-content layout-padding="row">
+<md-content layout="row" style="margin-bottom: 10px">
     <md-button class="md-raised md-cornered" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> Distance <span class="caret"></span> </md-button>
     <md-button class="md-raised md-cornered" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true"> Categories <span class="caret"></span> </md-button>   
 </md-content>
 
-<md-divider ng-if="!$last"></md-divider>
+<md-divider class="info_container for_input"></md-divider>
 
-<md-subheader class="md-primary">Item List</md-subheader>
+<div layout layout-align="center center">
+<md-subheader class="md-primary" >Item List</md-subheader>
+</div>
 
 <md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
 

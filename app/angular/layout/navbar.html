@@ -1,17 +1,17 @@
 <md-toolbar class="md-primary">
 
 	<div class="md-toolbar-tools md-medium-tall navbar">
-
-		<span hide-md hide-sm flex="25">
+		<span flex="5"></span>
+		<span flex="20">
 			<md-button ng-click="vm.onClick(0)" style="text-transform: none;">
 				<md-icon md-font-set="material-icons">group</md-icon>
-				ExchangeWorld
+				<span hide-md hide-sm>ExchangeWorld</span>
 			</md-button>
 		</span>
-		<span flex="5">
+		<span flex="10">
 		</span>
-		<div flex="33" layout="row" layout-align="center center">
-			<md-button style="margin-right:-20px"
+		<div flex="20" layout="row" layout-align="center center">
+			<md-button
 					flex	
 					ng-click="vm.onClick(1)"
 					ng-class="{'active': contentIs(1)}">
@@ -26,7 +26,7 @@
 				<md-icon md-font-set="material-icons">add box</md-icon>
 				<span hide-md hide-sm>POST</span>
 			</md-button>
-
+			<!--
 			<md-button
 					flex
 					ng-click="vm.onClick(3)"
@@ -34,11 +34,12 @@
 				<md-icon md-font-set="material-icons">store</md-icon>
 				<span hide-md hide-sm>Manage</span>
 			</md-button>
+			-->
 		</div>
 
-		<span flex="15"></span>
+		<span flex="20"></span>
 		<div flex layout="row" layout-align="center center">
-			<md-button flex="10">
+			<md-button flex="20">
 				<md-icon class="material-icons">notifications</md-icon>
 			</md-button>
 
@@ -49,6 +50,9 @@
 				<md-menu-content width="3">
 					<md-menu-item>
 						<md-button ng-click="vm.onClick(4)">Profile</md-button>
+					</md-menu-item>
+					<md-menu-item>
+						<md-button ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">Manage</md-button>
 					</md-menu-item>
 					<md-menu-divider></md-menu-divider>
 					<md-menu-item>

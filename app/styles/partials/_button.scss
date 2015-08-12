@@ -25,13 +25,17 @@ map {
     }
 }
 
-
 .md-button:not([disabled]):hover {
     background-color: rgba(158, 158, 158, 0.2);
-    color: #9FA8DA;
-    transition: 0.5s;
+    color: #293D66;
+    transition: 0.6s;
 }
 
+.trans:not([disabled]):hover{
+	background-color: rgba(158, 158, 158, 0.2);
+    color: #293D66;
+    transition: 0.6s;
+}
 
 
 .md-button {
@@ -40,10 +44,9 @@ map {
     }
 }
 
-.md-button{
-	&.home_btn{
-		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-	}
+.md-button {
+    &.home_btn {
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+        background-color: #FFF;
+    }
 }
-
-

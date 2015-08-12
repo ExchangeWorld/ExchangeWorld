@@ -1,32 +1,31 @@
 body {
-  overflow: auto;
+    overflow: auto;
 }
 
 #container {
-  margin-top: -$navbar-height;
-  padding-top: $navbar-height;
+    margin-top: -$navbar-height;
+    padding-top: $navbar-height;
 }
 
-md-toolbar{
-  z-index: 1000;
+md-toolbar {
+    z-index: 1000;
 }
 
 #autocomplete {
-  margin-left: 20px;
-  margin-top: 5px;
-
-  input {
-    margin-left: 25px;
-    ::placeholder {
-      color: #fff;
+    margin-left: 20px;
+    margin-top: 5px;
+    input {
+        margin-left: 25px;
+        ::placeholder {
+            color: #fff;
+        }
     }
-  }
 }
 
 .circular {
     background-position: center;
-    max-width:100%;
-	max-height:100%;
+    max-width: 100%;
+    max-height: 100%;
     background-size: cover;
     display: block;
     border-radius: 50%;
@@ -34,3 +33,22 @@ md-toolbar{
     -moz-border-radius: 50%;
 }
 
+.home_container1 {
+    background-color: #ECEFF1;
+    padding: 30px 0px;
+}
+
+.home_container2 {
+    background-color: #E5E5ED;
+    padding: 30px 0px;
+}
+
+.info_container {
+    margin: 30px 0px;
+}
+
+.info_container {
+    &.for_input {
+        margin: 10px 0px;
+    }
+}

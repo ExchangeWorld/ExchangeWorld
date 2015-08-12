@@ -108,13 +108,13 @@ router.post('/post', function(req, res, next) {
 	            position_y  : _position_y,
 	            owner_uid   : _owner_uid
 	        });
-    	})
+		})
 	    .then(function(result) {
 	       res.json(result);
-	   })
-	   .catch(function(err) {
+		})
+	    .catch(function(err) {
 		   res.json({});
-	   });
+	    });
 
 });
 

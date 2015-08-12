@@ -15,12 +15,12 @@ function profileService(Restangular, $q) {
 	return service;
 
 	//////////
-	function getProfile(fid) {
+	function getProfile(_uid) {
 		const defer = $q.defer();
 
 		Restangular
 			.all('profile')
-			.getList({ fb_id : fid })
+			.getList({ uid : _uid })
 			.then(function(data) {
 				if (_.isArray(data)) {
 					defer.resolve(data[0]);

@@ -12,7 +12,7 @@ function ProfileController(profile, $state) {
 	/////////////
 
 	// define onClick event on goods owner
-	function onClickUser(fb_id) {
-		$state.go('root.withSidenav.profile', { fid : fb_id });
+	function onClickUser(_uid) {
+		$state.go('root.withSidenav.profile', { uid : _uid });
 	}
 }

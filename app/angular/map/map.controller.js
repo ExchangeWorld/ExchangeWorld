@@ -285,7 +285,7 @@ function MapController($scope, geolocation) {
 		} else {
 			map.panTo(place.location);
 		}
-	};
+	}
 
 	function activate() {
 		vm.coords = [0, 0];

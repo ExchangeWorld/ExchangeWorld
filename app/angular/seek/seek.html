@@ -1,9 +1,9 @@
 <div layout="row" layout-sm="row">
 	<md-input-container flex="80" class="md-default-theme">
 	    <label for="input_162">Seek anything</label>
-	    <input ng-model="SomeModel" class="ng-pristine ng-valid md-input ng-touched" id="input_162" tabindex="0" aria-invalid="false">
+	    <input ng-model="vm.searchGoodsName" class="ng-pristine ng-valid md-input ng-touched" id="input_162" tabindex="0" aria-invalid="false">
 	</md-input-container>
-	<button flex class="md-raised md-accent md-button md-default-theme md-hue-1" style="height:50% ;top:20px"><i class="fa fa-search fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i><span class="ng-scope">Seek!</span>
+	<button ng-click='vm.onSearch()' flex class="md-raised md-accent md-button md-default-theme md-hue-1" style="height:50% ;top:20px"><i class="fa fa-search fa-fw" ng-class="{'fa-lg': windowWidth>400}"></i><span class="ng-scope">Seek!</span>
 	    <div class="md-ripple-container"></div>
 	</button>
 </div>

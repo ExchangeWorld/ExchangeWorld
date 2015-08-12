@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 
 	// Available query params:
 	//
-	// title
+	// name
 	// wishlist
 	// category
 	// position_x
@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
 	//
 
 	// Get property:value in ?x=y&z=w....
-	var title    = req.query.title || '';
+	var name     = req.query.name || '';
 	var wishlist = req.query.wishlist || '';
 	var category = req.query.category || '';
 	var px       = parseFloat(req.query.px) || -1.0;
@@ -40,12 +40,12 @@ router.get('/', function(req, res, next) {
 			/*
 			 * SELECT `goods`.*, `users`.*
 			 *   FROM `goods`, `users`
-			 *  WHERE `goods`.owner_uid = `users`.uid AND `goods`.name = %title%
+			 *  WHERE `goods`.owner_uid = `users`.uid AND `goods`.name = %name%
 	         */
 			return goods.findAll({
 	            where: {
 	                name: {
-	                    $like: '%' + title + '%'
+	                    $like: '%' + name + '%'
 	                },
 	                status: 0,
 	                deleted: 0

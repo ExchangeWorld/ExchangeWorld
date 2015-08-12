@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router();
+var router  = express.Router();
 
 // Including tables
 var users = require('../ORM/Users');

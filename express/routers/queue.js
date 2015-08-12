@@ -1,22 +1,132 @@
 var express = require('express');
-var router = express.Router();
+var router  = express.Router();
 
 // Including tables
 var queues = require('../ORM/Queues');
 
 // Get queues of a goods
-router.get('/', function(res, req, next) {
+router.get('/of', function(req, res, next) {
 
+	// Available query params:
+	// 
+	// host_goods_gid
+	//
+
+	var _host_goods_gid = req.query.host_goods_gid;
+
+	queues
+		.sync({force: false})
+		.then(function() {
+			return queues.findAll({
+				where: {
+					host_goods_gid: _host_goods_gid
+				}
+			});
+		})
+		.then(function(result) {
+			if (result == null) {
+				res.json({});
+			}
+			else {
+				res.json(result);
+			}
+		})
+		.catch(function(err) {
+			res.json({});
+		});
+});
+
+// Get queues queued by a goods
+// It means you take one thing to queue many other things
+// And you want to get those many other things
+router.get('/by', function(req, res, next) {
+
+	// Available query params:
+	// 
+	// queuer_goods_gid
+	//
+
+	var _queuer_goods_gid = req.query.queuer_goods_gid;
+
+	queues
+		.sync({force: false})
+		.then(function() {
+			return queues.findAll({
+				where: {
+					queuer_goods_gid: _queuer_goods_gid
+				}
+			});
+		})
+		.then(function(result) {
+			if (result == null) {
+				res.json({});
+			}
+			else {
+				res.json(result);
+			}
+		})
+		.catch(function(err) {
+			res.json({});
+		});
 });
 
 // Post a queue (queuer_goods_gid -> host_goods_gid)
-router.post('/post', function(res, req, next) {
+router.post('/post', function(req, res, next) {
+
+	// Necessary POST body params
+	// 
+	// host_goods_gid
+	// queuer_goods_gid 
+	//
+
+	var _host_goods_gid   = req.body.host_goods_gid;
+	var _queuer_goods_gid = req.body.queuer_goods_gid;
+
+	queues
+		.sync({force: false})
+		.then(function() {
+			return queues.create({
+				host_goods_gid  : _host_goods_gid,
+				queuer_goods_gid: _queuer_goods_gid
+			});
+		})
+		.then(function(result) {
+			res.json(result);
+		})
+		.catch(function(err) {
+			res.json({});
+		});
 
 });
 
 // Delete a queue
-router.delete('/delete', function(res, req, next) {
+router.put('/delete', function(req, res, next) {
 
+	// Necessary DELETE body params
+	// 
+	// host_goods_gid
+	// queuer_goods_gid 
+	//
+	
+	var _host_goods_gid   = req.body.host_goods_gid;
+	var _queuer_goods_gid = req.body.queuer_goods_gid;
+
+	queues
+		.sync({force: false})
+		.then(function() {
+			return queues.destroy({
+				where: {
+					host_goods_gid  : _host_goods_gid,
+					queuer_goods_gid: _queuer_goods_gid
+				}
+			});
+		})
+		.then(function(result) {
+			res.json(result);
+		})
+		.catch(function(err) {
+			res.json({});
+		});
 });
 
 module.exports = router;

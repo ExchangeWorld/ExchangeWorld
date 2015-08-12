@@ -25,7 +25,7 @@ router.get('/validate', function(req, res, next) {
 				where: {
 					token: _token
 				}
-			})
+			});
 		})
 		.then(function(result) {
 			if (result == null) {

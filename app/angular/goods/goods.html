@@ -14,15 +14,15 @@
 	<md-tabs md-dynamic-height md-border-bottom>
 
 		<md-tab label="ItemName">
-			gname = {{ vm.goodData.gname }}
+			gname = {{ vm.goodData.name }}
 		</md-tab>
 
 		<md-tab label="Owner">
-			<a ng-click="vm.onClickUser( vm.goodData.user.fb_id )">{{ vm.goodData.user.username }}</a>
+			<a ng-click="vm.onClickUser( vm.goodData.user.uid )">{{ vm.goodData.user.name }}</a>
 		</md-tab>
 
 		<md-tab label="Catogories">
-			Categories = {{ vm.goodData.categories }}
+			Categories = {{ vm.goodData.category }}
 		</md-tab>
 
 		<md-tab label="Description">

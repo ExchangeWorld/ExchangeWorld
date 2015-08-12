@@ -27,12 +27,13 @@ function PostController(postService, $state) {
 			want        : '',
 			posX        : 123.4,
 			posY        : 23.5,
-			ownerID     : '88776654'
+			ownerID     : '88776654',
+			photo_path  : '',
 		};
 		
 
+		newPost.photo_path = postService.uploadImg(vm.imgEncoded);
 		postService.sendNewPostInfo(newPost);
-		postService.uploadImg(vm.imgEncoded);
 
 		$state.go('root.withSidenav.seek');
 	}

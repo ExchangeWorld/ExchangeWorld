@@ -35,27 +35,31 @@ router.get('/', function(req, res, next) {
 
 	// Emit a find operation with orm model in table `goods`
 	goods
-	    .sync({force: false})
-	    .then(function() {
-			/*
-			 * SELECT `goods`.*, `users`.*
-			 *   FROM `goods`, `users`
-			 *  WHERE `goods`.owner_uid = `users`.uid AND `goods`.name = %title%
-	         */
+		.sync({force: false})
+		.then(function() {
+
 			return goods.findAll({
-	            where: {
-	                name: {
-	                    $like: '%' + title + '%'
-	                },
-	                status: 0,
-	                deleted: 0
-	            },
+				where: {
+					$and: [{
+						name: {
+							$like: '%' + title + '%'
+						}
+					}, {
+						category: (category == '' ? {$like: '%'} : category)
+					}],
+					status: 0,
+					deleted: 0
+				},
 				include: [users]
-	        });
-	    })
-	    .then(function(result) {
-	        res.json(result);
-	    });
+			});
+		})
+		.then(function(result) {
+			if (result.length == 0) {
+				res.json({});
+			} else {
+				res.json(result);
+			}
+		});
 });
 
 module.exports = router;

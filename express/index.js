@@ -35,9 +35,6 @@ module.exports = function() {
 	server.use('/api/goods/search', require('./routers/goods.search'));
 	server.use('/api/goods', require('./routers/goods'));
 
-	/* ref: doc/post.md */
-	// server.use('/api/post', require('./routers/post'));
-	// changed to /api/goods/post
 	server.use('/api/upload', require('./routers/upload'));
 
 	/* ref: doc/profile.md */

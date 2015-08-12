@@ -47,7 +47,11 @@ router.get('/', function(req, res, next) {
 			});
 		})
 		.then(function(result) {
-			res.json(result);
+			if (result.length == 0) {
+				res.json({});
+			} else {
+				res.json(result);
+			}
 		});
 });
 
@@ -59,14 +63,13 @@ router.post('/register', function(req, res, next) {
 	// fb_id
 	// name
 	// email
-	// nickname
-	// photoPath
+	// photo_path
 	//
 
 	var _fb_id     = req.body.fb_id;
 	var _name      = req.body.name;
 	var _email     = req.body.email;
-	var _photoPath = req.body.photoPath;
+	var _photo_path = req.body.photo_path;
 
 	// Create instance
 	users
@@ -76,7 +79,7 @@ router.post('/register', function(req, res, next) {
 				fb_id:     _fb_id,
 				name:      _name,
 				email:     _email,
-				photoPath: _photoPath
+				photo_path: _photo_path
 			});
 		})
 		.then(function(result) {

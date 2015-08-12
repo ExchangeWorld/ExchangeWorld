@@ -47,7 +47,7 @@ router.get('/', function(req, res, next) {
 			 *    AND `users`.`uid` = `follwings`.`my_uid`
 			 */
 
-			return users.findAll({
+			return users.findOne({
 				where: {
 					uid : _uid
 				},
@@ -55,7 +55,11 @@ router.get('/', function(req, res, next) {
 			});
 		})
 		.then(function(result) {
-			res.json(result);
+			if (result == null) {
+				res.json({});
+			} else {
+				res.json(result);
+			}
 		})
 		.catch(function(err) {
 			res.json({});

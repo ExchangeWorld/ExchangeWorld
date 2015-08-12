@@ -66,7 +66,11 @@ router.get('/', function(req, res, next) {
 			});
 		})
 		.then(function(result) {
-			res.json(result);
+			if (result.length == 0) {
+				res.json({});
+			} else {
+				res.json(result);
+			}
 		})
 		.catch(function(err) {
 			res.json({});
@@ -77,44 +81,45 @@ router.get('/', function(req, res, next) {
 router.post('/post', function(req, res, next) {
 
 	// Necessary POST body params:
-    //
-    // name
-    // category
-    // description
-    // position_x
-    // position_y
-    // owner_uid
-    //
+	//
+	// name
+	// category
+	// description
+	// photo_path
+	// position_x
+	// position_y
+	// owner_uid
+	//
 
-    // Get property:value in POST body
-    var _name        = req.body.name;
-    var _category    = req.body.category;
-    var _description = req.body.description || '';
-    var _photo_path  = req.body.photo_path || '';
-    var _position_x  = parseFloat(req.body.position_x);
-    var _position_y  = parseFloat(req.body.position_y);
-    var _owner_uid   = parseInt(req.body.owner_uid);
+	// Get property:value in POST body
+	var _name        = req.body.name;
+	var _category    = req.body.category;
+	var _description = req.body.description || '';
+	var _photo_path  = req.body.photo_path || '';
+	var _position_x  = parseFloat(req.body.position_x);
+	var _position_y  = parseFloat(req.body.position_y);
+	var _owner_uid   = parseInt(req.body.owner_uid);
 
-    // Create instance
-    goods
-    	.sync({force: false})
-    	.then(function() {
-	        return goods.create({
-	            name        : _name,
-	            category    : _category,
-	            description : _description,
+	// Create instance
+	goods
+		.sync({force: false})
+		.then(function() {
+			return goods.create({
+				name        : _name,
+				category    : _category,
+				description : _description,
 				photo_path  : _photo_path,
-	            position_x  : _position_x,
-	            position_y  : _position_y,
-	            owner_uid   : _owner_uid
-	        });
+				position_x  : _position_x,
+				position_y  : _position_y,
+				owner_uid   : _owner_uid
+			});
 		})
-	    .then(function(result) {
-	       res.json(result);
+		.then(function(result) {
+		   res.json(result);
 		})
-	    .catch(function(err) {
+		.catch(function(err) {
 		   res.json({});
-	    });
+		});
 
 });
 
@@ -127,6 +132,7 @@ router.put('/edit', function(req, res, next) {
 	// name
 	// category
 	// description
+	// photo_path
 	// position_x
 	// position_y
 	//
@@ -136,6 +142,7 @@ router.put('/edit', function(req, res, next) {
 	var _name        = req.body.name;
 	var _category    = req.body.category;
 	var _description = req.body.description || '';
+	var _photo_path  = req.body.photo_path || '';
 	var _position_x  = parseFloat(req.body.position_x);
 	var _position_y  = parseFloat(req.body.position_y);
 
@@ -159,6 +166,7 @@ router.put('/edit', function(req, res, next) {
 				result.name        = _name;
 				result.category    = _category;
 				result.description = _description;
+				result.photo_path  = _photo_path;
 				result.position_x  = _position_x;
 				result.position_y  = _position_y;
 				result.save().then(function() {});
@@ -170,7 +178,7 @@ router.put('/edit', function(req, res, next) {
 		})
 		.catch(function(err) {
 			res.json({});
- 	    });
+		});
 });
 
 // Delete a good (but not really delete it)

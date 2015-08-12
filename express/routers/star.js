@@ -24,7 +24,7 @@ router.get('/to', function(req, res, next) {
 			});
 		})
 		.then(function(result) {
-			if (result == null) {
+			if (result.length == 0) {
 				res.json({});
 			}
 			else {
@@ -57,7 +57,7 @@ router.get('/by', function(req, res, next) {
 			});
 		})
 		.then(function(result) {
-			if (result == null) {
+			if (result.length == 0) {
 				res.json({});
 			}
 			else {

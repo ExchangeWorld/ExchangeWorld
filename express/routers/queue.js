@@ -24,10 +24,9 @@ router.get('/of', function(req, res, next) {
 			});
 		})
 		.then(function(result) {
-			if (result == null) {
+			if (result.length == 0) {
 				res.json({});
-			}
-			else {
+			} else {
 				res.json(result);
 			}
 		})
@@ -58,7 +57,7 @@ router.get('/by', function(req, res, next) {
 			});
 		})
 		.then(function(result) {
-			if (result == null) {
+			if (result.length == 0) {
 				res.json({});
 			}
 			else {

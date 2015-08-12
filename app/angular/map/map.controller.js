@@ -6,7 +6,7 @@ const mapModule = require('./map.module');
 mapModule.controller('MapCtrl', MapController);
 
 /** @ngInject */
-function MapController($scope, geolocation) {
+function MapController($scope, geolocation, $timeout) {
 	var map;
 	const vm          = this;
 	vm.mapStyle       = [
@@ -261,8 +261,14 @@ function MapController($scope, geolocation) {
 
 	function mapInitialized(evt, evtMap) {
 		map = evtMap;
+		vm.onResize = onResize;
 
+		function onResize() {
+			google.maps.event.trigger(map, 'resize');
+		}
 	}
+
+
 
 	//function sidenavChanged(event, message) {
 	//	vm.contentType = message;

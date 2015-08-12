@@ -1,36 +1,38 @@
-<map center="{{vm.coords}}"
-	 zoom="17"
-	 draggable-cursor="default"
-	 dragging-cursor="default"
-	 disable-double-click-zoom="true"
-	 pan-control="false"
-	 zoom-control-options="{position:'TOP_RIGHT'}"
-	 map-maker="false"
-	 street-view-control="false"
-	 scale-control="false"
-	 overview-map-control="false"
-	 map-type-control="false"
-	 styles="{{vm.mapStyle}}"
-	 resize ng-style="resizeWithOffset(64)">
+<div map-lazy-load="https://maps.googleapis.com/maps/api/js?&sensor=TRUE&signed_in=false&v=3.exp&libraries=places">
+	<map center="{{vm.coords}}"
+		 zoom="17"
+		 draggable-cursor="default"
+		 dragging-cursor="default"
+		 disable-double-click-zoom="true"
+		 pan-control="false"
+		 zoom-control-options="{position:'TOP_RIGHT'}"
+		 map-maker="false"
+		 street-view-control="false"
+		 scale-control="false"
+		 overview-map-control="false"
+		 map-type-control="false"
+		 styles="{{vm.mapStyle}}"
+		 resize ng-style="resizeWithOffset(64)" notifier="vm.onResize()">
 
-	<!--<custom-control position="LEFT_TOP" index="1">-->
-	<!--<md-input-container class="md-warn" id="autocomplete">-->
-	<!--<md-icon md-svg-src="./images/icons/pin56.svg"></md-icon>-->
-	<!--<input places-auto-complete size="50" type="text" on-place-changed="placeChanged()">-->
-	<!--</md-input-container>-->
-	<!--</custom-control>-->
+		<!--<custom-control position="LEFT_TOP" index="1">-->
+		<!--<md-input-container class="md-warn" id="autocomplete">-->
+		<!--<md-icon md-svg-src="./images/icons/pin56.svg"></md-icon>-->
+		<!--<input places-auto-complete size="50" type="text" on-place-changed="placeChanged()">-->
+		<!--</md-input-container>-->
+		<!--</custom-control>-->
 
-	<!--<custom-control id="myLocation" position="RIGHT_BOTTOM" index="1">-->
-	<!--<button aria-label="myLocation" ng-click="findMyLocation()">-->
-	<!--<md-icon md-svg-src="./images/icons/gps13.svg" style="display:inline-block;"></md-icon>-->
-	<!--</button>-->
-	<!--</custom-control>-->
-	<!--
-style="border-radius:100%;height:56px;width:56px;box-shadow:0 2px 5px 0 rgba(0,0,0,.26);"
-	 <input places-auto-complete size="80"
-	  ng-model="address"
-	  component-restrictions="{country:'us'}"
-	  types="{{types}}"
-	  on-place-changed="placeChanged(place)" />
--->
-</map>
+		<!--<custom-control id="myLocation" position="RIGHT_BOTTOM" index="1">-->
+		<!--<button aria-label="myLocation" ng-click="findMyLocation()">-->
+		<!--<md-icon md-svg-src="./images/icons/gps13.svg" style="display:inline-block;"></md-icon>-->
+		<!--</button>-->
+		<!--</custom-control>-->
+		<!--
+	style="border-radius:100%;height:56px;width:56px;box-shadow:0 2px 5px 0 rgba(0,0,0,.26);"
+		 <input places-auto-complete size="80"
+		  ng-model="address"
+		  component-restrictions="{country:'us'}"
+		  types="{{types}}"
+		  on-place-changed="placeChanged(place)" />
+	-->
+	</map>
+</div>

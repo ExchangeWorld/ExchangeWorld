@@ -22,9 +22,9 @@
     <md-list-item class="md-4-line" flex ng-repeat="good in vm.goods">
         <div class="md-list-item-text" ng-click="vm.onClickGoods( good.gid )">
         <img style="max-height:200px; max-width:200px" src="http://i.imgur.com/7RoLGdp.jpg" title="source: imgur.com" />
-          <h3>{{ good.gname }}<span class="badge">{{ good.categories }}</span></h3>
-          <h4>want</h4>
-          <p><img ng-src="#" height="20" width="20">{{ good.user.username }}</p>
+          <h3>{{ good.name }}<span class="badge">   {{ good.category }}</span></h3>
+          <!--<h4>want</h4>-->
+          <p><img ng-src="#" height="20" width="20">{{ good.user.name }}</p>
         </div>
          
     </md-list-item>

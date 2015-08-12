@@ -13,7 +13,7 @@ function getStates() {
 		{
 			state : 'root.withSidenav.profile',
 			config : {
-				url : '/profile/:fid',
+				url : '/profile/:uid',
 				bindToController: true,
 				controller : 'ProfileController',
 				controllerAs: 'vm',
@@ -21,7 +21,7 @@ function getStates() {
 				resolve : {
 					profile : function (profileService, $stateParams) {
 						return profileService
-							.getProfile($stateParams.fid)
+							.getProfile($stateParams.uid)
 							.then(function(data) { return data; })
 							.catch(function() { return undefined; });
 					},

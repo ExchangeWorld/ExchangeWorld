@@ -90,6 +90,7 @@ router.post('/post', function(req, res, next) {
     var _name        = req.body.name;
     var _category    = req.body.category;
     var _description = req.body.description || '';
+    var _photo_path  = req.body.photo_path || '';
     var _position_x  = parseFloat(req.body.position_x);
     var _position_y  = parseFloat(req.body.position_y);
     var _owner_uid   = parseInt(req.body.owner_uid);
@@ -99,20 +100,21 @@ router.post('/post', function(req, res, next) {
     	.sync({force: false})
     	.then(function() {
 	        return goods.create({
-	            name       : _name,
-	            category   : _category,
-	            description: _description,
-	            position_x : _position_x,
-	            position_y : _position_y,
-	            owner_uid  : _owner_uid
+	            name        : _name,
+	            category    : _category,
+	            description : _description,
+				photo_path  : _photo_path,
+	            position_x  : _position_x,
+	            position_y  : _position_y,
+	            owner_uid   : _owner_uid
 	        });
-    	})
+		})
 	    .then(function(result) {
 	       res.json(result);
-	   })
-	   .catch(function(err) {
+		})
+	    .catch(function(err) {
 		   res.json({});
-	   });
+	    });
 
 });
 

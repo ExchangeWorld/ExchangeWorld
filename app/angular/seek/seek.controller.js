@@ -25,7 +25,7 @@ function SeekController(seekService, $state) {
 	}
 
 	//goods onClick event: change route to corrsponding gid
-	function onClickGoods(gid) {
-		$state.go('root.withSidenav.goods', { gid: gid });
+	function onClickGoods(_gid) {
+		$state.go('root.withSidenav.goods', { gid: _gid });
 	}
 }

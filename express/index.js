@@ -31,6 +31,9 @@ module.exports = function() {
 		res.sendFile('index.html', { root : 'build' });
 	});
 
+	/*USE TO CREATE NEW DATABASE*/
+	//server.use('/api/CreateAllTables', require('./libs/CreateAllTable.js'));
+
 	/* ref: doc/seek.md */
 	server.use('/api/goods/search', require('./routers/goods.search'));
 	server.use('/api/goods', require('./routers/goods'));

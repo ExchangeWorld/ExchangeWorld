@@ -81,9 +81,9 @@ router.put('/complete', function(req, res, next) {
 	exchanges
 		.sync({force: false})
 		.then(function() {
-			return exchanges.update({
-				status: 'dropped'}, {
-				where: {
+			return exchanges.update(
+			{status: 'dropped'}, 
+			{where: {
 					$or: [{
 						goods1_gid: _goods1_gid
 					}, {

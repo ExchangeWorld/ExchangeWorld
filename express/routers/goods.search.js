@@ -21,13 +21,13 @@ router.get('/', function(req, res, next) {
 	//
 
 	// Get property:value in ?x=y&z=w....
-	var name     = req.query.name || '';
-	var wishlist = req.query.wishlist || '';
-	var category = req.query.category || '';
-	var px       = parseFloat(req.query.px) || -1.0;
-	var py       = parseFloat(req.query.py) || -1.0;
-	var from     = parseInt(req.query.from) || -1;
-	var to       = parseInt(req.query.to) || -1;
+	var name       = req.query.name || '';
+	var wishlist   = req.query.wishlist || '';
+	var category   = req.query.category || '';
+	var position_x = parseFloat(req.query.position_x) || -1.0;
+	var position_y = parseFloat(req.query.position_y) || -1.0;
+	var from       = parseInt(req.query.from) || -1;
+	var to         = parseInt(req.query.to) || -1;
 
 	// Set association between tables (users, goods)
 	users.hasMany(goods, {foreignKey:'owner_uid'});
@@ -41,10 +41,7 @@ router.get('/', function(req, res, next) {
 			return goods.findAll({
 				where: {
 					$and: [{
-						name: {
-							$like: '%' + title + '%'
-						}
-					}, {
+						name:     (name     == '' ? {$like: '%'} : name),
 						category: (category == '' ? {$like: '%'} : category)
 					}],
 					status: 0,

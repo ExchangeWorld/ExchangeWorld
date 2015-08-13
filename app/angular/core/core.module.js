@@ -9,6 +9,7 @@ require('angularjs-facebook');
 require('angular-material');
 require('angular-ui-router');
 require('restangular');
+require('ngstorage');
 require('../utils/exception/exception.module');
 require('../utils/fackbook/facebook.module');
 require('../utils/logger/logger.module');
@@ -17,6 +18,7 @@ require('../utils/resize/resize.module');
 
 const requires = [
 	'ui.router',
+	'ngStorage',
 	'restangular',
 	'ngMaterial',
 	'naif.base64',

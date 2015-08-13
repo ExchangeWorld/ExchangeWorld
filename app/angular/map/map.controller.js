@@ -6,7 +6,7 @@ const mapModule = require('./map.module');
 mapModule.controller('MapCtrl', MapController);
 
 /** @ngInject */
-function MapController($scope, geolocation, $timeout) {
+function MapController($scope, geolocation) {
 	var map;
 	const vm          = this;
 	vm.mapStyle       = [
@@ -268,19 +268,13 @@ function MapController($scope, geolocation, $timeout) {
 		}
 	}
 
-
-
-	//function sidenavChanged(event, message) {
-	//	vm.contentType = message;
-	//}
-
 	function getCurrentPosition() {
 		geolocation
 			.getLocation()
 			.then(function(data) {
 				map.panTo({
-					lat : data.coords.latitude,
-					lng : data.coords.longitude
+					lat : data.latitude,
+					lng : data.longitude
 				});
 			});
 	}
@@ -298,8 +292,7 @@ function MapController($scope, geolocation, $timeout) {
 		geolocation
 			.getLocation()
 			.then(function(data) {
-				console.log(data);
-				vm.coords = [data.coords.latitude, data.coords.longitude];
+				vm.coords = [data.latitude, data.longitude];
 			});
 	}
 };

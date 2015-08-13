@@ -6,7 +6,7 @@
 .angular-ripple {
   display: block;
   position: absolute;
-  background-color: rgba(0,0,0,0.1);
+  background-color: $ripple-color;
   border-radius: 50%;
   transform: scale(0);
 }

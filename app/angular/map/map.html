@@ -14,19 +14,17 @@
 		 styles="{{vm.mapStyle}}"
 		 resize ng-style="resizeWithOffset(64)" notifier="vm.onResize()">
 
-		<!--<custom-control position="LEFT_TOP" index="1">-->
-		<!--<md-input-container class="md-warn" id="autocomplete">-->
-		<!--<md-icon md-svg-src="./images/icons/pin56.svg"></md-icon>-->
-		<!--<input places-auto-complete size="50" type="text" on-place-changed="placeChanged()">-->
-		<!--</md-input-container>-->
-		<!--</custom-control>-->
+		<custom-control position="LEFT_TOP" index="1">
+			<md-input-container class="md-warn" id="autocomplete">
+				<md-icon md-font-set="material-icons">room</md-icon>
+				<input places-auto-complete size="50" type="text" on-place-changed="vm.placeChanged()" aria-label="autocomplete">
+			</md-input-container>
+		</custom-control>
 
-		<custom-control id="myLocation" position="RIGHT_BOTTOM" index="1">
-			<button ripple class="md-fab md-button md-default-theme" aria-label="findLocation">
-				<md-icon class="md-48" md-font-set="material-icons">gps_fixed</md-icon>
-				<div class="md-ripple-container"></div>
+		<custom-control id="myLocation" position="RIGHT_BOTTOM" index="2" ng-click="vm.findMyLocation()">
+			<button ripple class="md-fab md-button md-default-theme" aria-label="findLocation" >
+				<md-icon md-font-set="material-icons">gps_fixed</md-icon>
 			</button>
-
 		</custom-control>
 	</map>
 </div>

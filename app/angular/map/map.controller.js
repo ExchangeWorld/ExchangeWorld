@@ -8,8 +8,8 @@ mapModule.controller('MapCtrl', MapController);
 /** @ngInject */
 function MapController($scope, geolocation) {
 	var map;
-	const vm          = this;
-	vm.mapStyle       = [
+	const vm    = this;
+	vm.mapStyle = [
 		{
 			"featureType" : "all",
 			"elementType" : "labels",
@@ -251,21 +251,30 @@ function MapController($scope, geolocation) {
 			]
 		}
 	];
-	vm.coords         = [0, 0];
-	vm.findMyLocation = getCurrentPosition;
-	vm.placeChanged   = placeChanged;
+	vm.coords   = [0, 0];
+
 	$scope.$on('mapInitialized', mapInitialized);
 	//$scope.$on('sidenavChanged', sidenavChanged);
 
 	activate();
 
-	function mapInitialized(evt, evtMap) {
+	function activate() {
+		geolocation
+			.getLocation()
+			.then(function(data) {
+				vm.coords = [data.latitude, data.longitude];
+			});
+	}
+
+	function mapInitialized(e, evtMap) {
 		map = evtMap;
 		vm.onResize = onResize;
+		vm.findMyLocation = getCurrentPosition;
+		vm.placeChanged   = placeChanged;
+	}
 
-		function onResize() {
-			google.maps.event.trigger(map, 'resize');
-		}
+	function onResize() {
+		google.maps.event.trigger(map, 'resize');
 	}
 
 	function getCurrentPosition() {
@@ -280,7 +289,7 @@ function MapController($scope, geolocation) {
 	}
 
 	function placeChanged() {
-		var place = this.getPlace().geometry;
+		const place = this.getPlace().geometry;
 		if (place.viewport) {
 			map.panToBounds(place.viewport);
 		} else {
@@ -288,11 +297,5 @@ function MapController($scope, geolocation) {
 		}
 	}
 
-	function activate() {
-		geolocation
-			.getLocation()
-			.then(function(data) {
-				vm.coords = [data.latitude, data.longitude];
-			});
-	}
+
 };

@@ -1,16 +1,15 @@
 <md-toolbar class="md-primary">
 
 	<div class="md-toolbar-tools md-medium-tall navbar">
-		<span flex="5"></span>
-		<span flex="20">
+		
+		<span flex="20" offset="5">
 			<md-button ng-click="vm.onClick(0)" style="text-transform: none;">
 				<md-icon md-font-set="material-icons">group</md-icon>
 				<span hide-md hide-sm>ExchangeWorld</span>
 			</md-button>
 		</span>
-		<span flex="10">
-		</span>
-		<div flex="20" layout="row" layout-align="center center">
+		
+		<div flex="20" offset="10" layout="row" layout-align="center center">
 			<md-button
 					flex	
 					ng-click="vm.onClick(1)"
@@ -37,9 +36,9 @@
 			-->
 		</div>
 
-		<span flex="20"></span>
-		<div flex layout="row" layout-align="center center">
-			<md-button flex="20">
+		
+		<div flex offset="20" layout="row" layout-align="center center">
+			<md-button>
 				<md-icon class="material-icons">notifications</md-icon>
 			</md-button>
 

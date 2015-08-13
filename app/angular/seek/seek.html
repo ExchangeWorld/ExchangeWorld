@@ -2,8 +2,9 @@
     <md-input-container flex="80" class="md-primary">
         <label>Search</label>
         <input ng-model="SomeModel">
+        <md-tooltip md-direction="left">搜尋</md-tooltip>
     </md-input-container>
-    <md-button flex class="md-accent md-raised md-hue-1" style="height:50% ;top:12px"><md-icon md-font-set="material-icons">search</md-icon><span class="ng-scope">Seek!</span>
+    <md-button flex class="md-accent md-raised md-hue-1 seek_btn"><md-icon md-font-set="material-icons">search</md-icon><span class="ng-scope">Seek!</span>
     </md-button>
 </div>
 
@@ -18,11 +19,15 @@
 <md-subheader class="md-primary" >Item List</md-subheader>
 </div>
 
-<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
 
-<md-list layout="row" layout-margin layout-fill layout-padding>    
-	
+
+<md-list layout="row" layout-margin layout-fill layout-padding> 
+	<div ng-show="loading">  
+		<md-progress-circular class="md-hue-2"  md-mode="indeterminate"></md-progress-circular>
+	</div>
+	<div ng-show="!loading">
     <md-list-item class="md-4-line" flex ng-repeat="good in vm.goods">
+
         <div class="md-list-item-text" ng-click="vm.onClickGoods( good.gid )">
         <img style="max-height:200px; max-width:200px" src="http://i.imgur.com/7RoLGdp.jpg" title="source: imgur.com" />
           <h3>{{ good.gname }}<span class="badge">{{ good.categories }}</span></h3>
@@ -31,7 +36,7 @@
         </div>
          
     </md-list-item>
-
+	</div>
     <md-divider></md-divider>
 </md-list>
 

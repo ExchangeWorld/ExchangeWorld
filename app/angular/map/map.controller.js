@@ -6,7 +6,7 @@ const mapModule = require('./map.module');
 mapModule.controller('MapCtrl', MapController);
 
 /** @ngInject */
-function MapController($scope, geolocation) {
+function MapController($scope, geolocation, OpenLocationCode) {
 	var map;
 	const vm    = this;
 	vm.mapStyle = [
@@ -263,6 +263,7 @@ function MapController($scope, geolocation) {
 			.getLocation()
 			.then(function(data) {
 				vm.coords = [data.latitude, data.longitude];
+				console.log(OpenLocationCode.encode(data.latitude, data.longitude));
 			});
 	}
 

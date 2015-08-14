@@ -48,3 +48,39 @@ md-toolbar {
         margin: 10px 0px;
     }
 }
+
+.centered{
+	 margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.wrapper {
+    width: 95%;
+    margin: 3em auto;
+}
+
+.waterfall_container {
+    margin: 1.5em 0;
+    padding: 0;
+    -moz-column-gap: 1.5em;
+    -webkit-column-gap: 1.5em;
+    column-gap: 1.5em;
+    font-size: .85em;
+    column-count: 2;
+}
+
+.item {
+    display: inline-block;
+    background: #fff;
+    padding: 1em;
+    margin: 0 0 1.5em;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-shadow: 2px 2px 4px 2px #ccc;
+}
+
+.item img{
+	max-width:50%;
+}

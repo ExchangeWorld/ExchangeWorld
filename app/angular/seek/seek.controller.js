@@ -13,7 +13,7 @@ function SeekController($scope, seekService, $state, $timeout) {
     activate();
     $timeout(function() {
         $scope.loading = false;
-    }, 1500);
+    }, 1000);
     $scope.loading = true;
     /////////////
 

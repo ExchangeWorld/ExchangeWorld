@@ -4,14 +4,20 @@ const layoutModule = require('./layout.module');
 layoutModule.controller('NavbarController', NavbarController);
 
 /** @ngInject */
-function NavbarController($mdSidenav, $state, facebookService) {
+function NavbarController($scope, $mdSidenav, $state, auth) {
 	const vm     = this;
 	const state  = ['home', 'seek', 'post', 'manage', 'profile'];
-	vm.username  = 'USER NAME';
 	vm.contentIs = contentIs;
 	vm.onClick   = onClick;
 	vm.onLogin   = onLogin;
 	vm.onLogout  = onLogout;
+	vm.username  = 'hi';
+
+	$scope.$watch(auth.isLoggedIn, function(logined) {
+		var user = auth.currentUser();
+		//console.log(user);
+		vm.username = user.name;
+	});
 
 	function setContent(contentIndex) {
 		//	vm.content = state[contentIndex];
@@ -38,31 +44,11 @@ function NavbarController($mdSidenav, $state, facebookService) {
 	}
 
 	function onLogin() {
-		facebookService
-			.login() // login to facebook.
-			.then(function(loginStatus) {
-				//console.log(loginStatus);
-
-				facebookService
-					.me() // get user facebook data.
-					.then(function(response) {
-						//console.log(data);
-						/** Call API for create new EXWD user. */
-						facebookService
-							.register(response)
-							.then(function(userdata) {
-								console.log(userdata);
-								vm.username = userdata.name;
-
-							});
-					});
-			});
-
+		auth.login();
 	}
 
 	function onLogout() {
-		facebookService.logout();
-		vm.username = 'not login.';
+		auth.logout();
 	}
 
 }

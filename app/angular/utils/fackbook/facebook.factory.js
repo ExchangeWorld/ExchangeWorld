@@ -1,28 +1,37 @@
 'use strict';
 
 const facebookModule = require('./facebook.module');
-const _          = require('lodash');
+const _              = require('lodash');
 
 facebookModule.factory('facebookService', facebook);
 
 /** @ngInject */
 function facebook(Facebook, Restangular, $q, exception) {
 	const service = {
-		login    : login,
-		logout   : logout,
-		me       : me,
-		register : register,
+		getLoginStatus : getLoginStatus,
+		login          : login,
+		logout         : logout,
+		me             : me,
+		register       : register,
 	};
 
 	return service;
 
 	////////////////
 
-	/**
-	 * Login
-	 */
+	/** get facebook login status */
+	function getLoginStatus(){
+		return Facebook.getLoginStatus(function(response) {
+			if (response.status === 'connected') {
+				return true;
+			} else {
+				return false;
+			}
+		});
+	}
+
+	/** Login */
 	function login() {
-		//var user = {};
 		return Facebook.login(function(response) {
 			if (response.status === 'connected') {
 				return me();
@@ -33,9 +42,7 @@ function facebook(Facebook, Restangular, $q, exception) {
 		});
 	}
 
-	/**
-	 * Logout
-	 */
+	/** Logout */
 	function logout() {
 		return Facebook.logout();
 	}
@@ -83,7 +90,6 @@ function facebook(Facebook, Restangular, $q, exception) {
 					}
 				}
 			});
-
 		return defer.promise;
 	}
 

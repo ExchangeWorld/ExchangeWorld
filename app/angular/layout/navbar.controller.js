@@ -27,6 +27,7 @@ function NavbarController($mdSidenav, $state, facebookService) {
 			});
 	}
 
+
 	function setContent(contentIndex) {
 		//	vm.content = state[contentIndex];
 		//	vm.contentHistory.push(vm.content);
@@ -51,11 +52,23 @@ function NavbarController($mdSidenav, $state, facebookService) {
 			 * 2. sidenav is close
 			 * 3. click the current content again
 			 */
+<<<<<<< HEAD
 			if (
 				!isFromOneCol &&
 				(!$mdSidenav('left').isOpen() || (
 				$mdSidenav('left').isOpen() &&
 				vm.stateIndex === contentIndex))
+=======
+
+			if (
+				//!$mdSidenav('left').isLockedOpen() &&
+				!isFromOneCol &&
+				(!$mdSidenav('left').isOpen() || (
+				$mdSidenav('left').isOpen() &&
+				vm.stateIndex === contentIndex
+				))
+
+>>>>>>> 89d562fce338f3dca5322c31ec23c161430c6ab0
 			) {
 				$mdSidenav('left').toggle();
 			}

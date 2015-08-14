@@ -92,7 +92,7 @@ router.post('/post', function(req, res, next) {
 });
 
 // Delete a star
-router.put('/delete', function(req, res, next) {
+router.delete('/delete', function(req, res, next) {
 
 	// Necessary DELETE body params
 	// 
@@ -100,8 +100,8 @@ router.put('/delete', function(req, res, next) {
 	// starring_user_uid
 	// 
 
-	var _goods_gid         = req.body.goods_gid;
-	var _starring_user_uid = req.body.starring_user_uid;
+	var _goods_gid         = req.query.goods_gid;
+	var _starring_user_uid = req.query.starring_user_uid;
 
 	stars
 		.sync({force: false})

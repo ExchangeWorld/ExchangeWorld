@@ -22,8 +22,8 @@ router.post('/create', function(req, res, next) {
 	var __goods2_gid = parseInt(req.body.goods2_gid, 10);
 
 	// And make sure goods1_gid < goods2_gid
-	var _goods1_gid = (__goods1_gid < __goods2_gid ? __goods1_gid : __goods2_gid);
-	var _goods2_gid = (__goods2_gid > __goods1_gid ? __goods2_gid : __goods1_gid);
+	var _goods1_gid = Math.min(__goods1_gid, __goods2_gid);
+	var _goods2_gid = Math.max(__goods1_gid, __goods2_gid);
 
 	// Create instance
 	// If there is already a pair (goods1_gid, goods2_gid) then do nothing
@@ -72,8 +72,8 @@ router.put('/complete', function(req, res, next) {
 	var __goods2_gid = parseInt(req.body.goods2_gid, 10);
 
 	// And make sure goods1_gid < goods2_gid
-	var _goods1_gid = (__goods1_gid < __goods2_gid ? __goods1_gid : __goods2_gid);
-	var _goods2_gid = (__goods2_gid > __goods1_gid ? __goods2_gid : __goods1_gid);
+	var _goods1_gid = Math.min(__goods1_gid, __goods2_gid);
+	var _goods2_gid = Math.max(__goods1_gid, __goods1_gid);
 
 	// First, any exchanges with goods1_gid and goods2_gid, \
 	// their status will be set to 'dropped'.
@@ -136,8 +136,8 @@ router.put('/drop', function(req, res, next) {
 	var __goods2_gid = parseInt(req.body.goods2_gid, 10);
 
 	// And make sure goods1_gid < goods2_gid
-	var _goods1_gid = (__goods1_gid < __goods2_gid ? __goods1_gid : __goods2_gid);
-	var _goods2_gid = (__goods2_gid > __goods1_gid ? __goods2_gid : __goods1_gid);
+	var _goods1_gid = Math.min(__goods1_gid, __goods2_gid);
+	var _goods2_gid = Math.max(__goods1_gid, __goods2_gid);
 
 	// Find instance and update its status to 'dropped' then save
 	exchanges

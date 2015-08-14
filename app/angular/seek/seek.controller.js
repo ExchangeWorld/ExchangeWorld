@@ -13,19 +13,21 @@ function SeekController(seekService, $state, AvailableCategory) {
 	vm.onSearch            = onSearch;
 	vm.availableCategory   = AvailableCategory;
 
-	onSearch();
+	activate();
 
 	/////////
+	
+	function activate() {
+		onSearch();
+	}
 
-	function onSearch(){
-		var constrain = {
-			name     : vm.searchGoodsName,
-			category : vm.searchGoodsCategory.label,
-		};
-		//console.log(constrain);
+	function onSearch() {
 
 		seekService
-			.getSeek(constrain)
+			.getSeek({
+				name     : vm.searchGoodsName,
+				category : vm.searchGoodsCategory.label,
+			})
 			.then(function(data) {
 				console.log(data);
 				vm.goods = data;

@@ -258,7 +258,7 @@ function MapController($scope, geolocation) {
 	$scope.$on('sidenavChanged', sidenavChanged);
 
 	activate();
-	
+
 	function mapInitialized(evt, evtMap) {
 		map = evtMap;
 	}
@@ -285,7 +285,7 @@ function MapController($scope, geolocation) {
 		} else {
 			map.panTo(place.location);
 		}
-	};
+	}
 
 	function activate() {
 		vm.coords = [0, 0];

@@ -4,11 +4,10 @@ const seekModule = require('./seek.module');
 seekModule.controller('SeekController', SeekController);
 
 /** @ngInject */
-function SeekController(seekService, $state) {
+function SeekController(seekService, $state, $stateParams) {
 	var vm          = this;
-	vm.goods        = []; 
+	vm.goods        = [];
 	vm.onClickGoods = onClickGoods;
-
 	activate();
 
 	/////////

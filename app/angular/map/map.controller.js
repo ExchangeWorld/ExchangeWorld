@@ -6,9 +6,9 @@ const mapModule = require('./map.module');
 mapModule.controller('MapCtrl', MapController);
 
 /** @ngInject */
-function MapController($scope, geolocation, OpenLocationCode) {
-	var map;
+function MapController($scope, geolocation, OpenLocationCode, $stateParams) {
 	const vm    = this;
+	vm.map      = undefined;
 	vm.mapStyle = [
 		{
 			"featureType" : "all",
@@ -252,37 +252,49 @@ function MapController($scope, geolocation, OpenLocationCode) {
 		}
 	];
 	vm.coords   = [0, 0];
+	vm.zoom     = 17;
 
 	$scope.$on('mapInitialized', mapInitialized);
 	//$scope.$on('sidenavChanged', sidenavChanged);
 
 	activate();
 
-	function activate() {
-		geolocation
-			.getLocation()
-			.then(function(data) {
-				vm.coords = [data.latitude, data.longitude];
-				console.log(OpenLocationCode.encode(data.latitude, data.longitude));
-			});
-	}
-
 	function mapInitialized(e, evtMap) {
-		map = evtMap;
-		vm.onResize = onResize;
+		vm.map            = evtMap;
+		vm.onResize       = onResize;
 		vm.findMyLocation = getCurrentPosition;
 		vm.placeChanged   = placeChanged;
+		vm.centerChanged  = centerChanged;
+	}
+
+	function activate() {
+		if ($stateParams.olc) {
+			const coord = OpenLocationCode.decode($stateParams.olc.replace(' ','+'));
+			vm.coords = [coord.latitudeCenter, coord.longitudeCenter];
+		}
+		else {
+			geolocation
+				.getLocation()
+				.then(function(data) {
+					vm.coords = [data.latitude, data.longitude];
+					console.log(OpenLocationCode.encode(data.latitude, data.longitude, 6));
+				});
+		}
+
+		if (!isNaN($stateParams.z)) {
+			vm.zoom = parseInt($stateParams.z, 10);
+		}
 	}
 
 	function onResize() {
-		google.maps.event.trigger(map, 'resize');
+		google.maps.event.trigger(vm.map, 'resize');
 	}
 
 	function getCurrentPosition() {
 		geolocation
 			.getLocation()
 			.then(function(data) {
-				map.panTo({
+				vm.map.panTo({
 					lat : data.latitude,
 					lng : data.longitude
 				});
@@ -292,11 +304,14 @@ function MapController($scope, geolocation, OpenLocationCode) {
 	function placeChanged() {
 		const place = this.getPlace().geometry;
 		if (place.viewport) {
-			map.panToBounds(place.viewport);
+			vm.map.panToBounds(place.viewport);
 		} else {
-			map.panTo(place.location);
+			vm.map.panTo(place.location);
 		}
 	}
 
-
+	function centerChanged() {
+		// console.log(vm.map.getCenter().toUrlValue());
+		console.log(OpenLocationCode.encode(vm.map.getCenter().lat(), vm.map.getCenter().lng()));
+	}
 };

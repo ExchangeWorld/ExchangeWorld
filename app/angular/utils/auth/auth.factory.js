@@ -6,9 +6,9 @@ const _          = require('lodash');
 authModule.factory('auth', auth);
 
 /** @ngInject */
-function auth(facebookService) {
+function auth(facebookService, $q) {
 	var token       = '';
-	var currentUser = {};
+	var currentUser = {name : 'kkk'};
 
 	const service = {
 		login       : login, 
@@ -22,10 +22,12 @@ function auth(facebookService) {
 
 
 	function login() {
+		const defer = $q.defer();
+
 		facebookService
 			.getLoginStatus()
 			.then(function(state) {
-				console.log(state.status);
+				//console.log(state.status);
 				if(state.status == 'connected') {
 					facebookService
 						.me() // get user facebook data.
@@ -34,30 +36,31 @@ function auth(facebookService) {
 							facebookService
 								.register(response)
 								.then(function(userdata) {
-									console.log(userdata);
+									//console.log(userdata);
 									currentUser = userdata;
+									defer.resolve(currentUser);
 								});
 						});
 				} else {
 					facebookService
 						.login() // login to facebook.
 						.then(function(loginStatus) {
-							//console.log(loginStatus);
 							facebookService
 								.me() // get user facebook data.
 								.then(function(response) {
-									//console.log(data);
-									/** Call API for create new EXWD user. */
+									/** Call API for create/get new EXWD user. */
 									facebookService
 										.register(response)
 										.then(function(userdata) {
 											console.log(userdata);
 											currentUser = userdata;
+											defer.resolve(currentUser);
 										});
 								});
 						});
 				}
 			});
+		return defer.promise;
 	}
 
 	function logout() {

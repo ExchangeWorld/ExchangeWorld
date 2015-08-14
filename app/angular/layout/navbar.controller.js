@@ -11,13 +11,7 @@ function NavbarController($scope, $mdSidenav, $state, auth) {
 	vm.onClick   = onClick;
 	vm.onLogin   = onLogin;
 	vm.onLogout  = onLogout;
-	vm.username  = 'hi';
-
-	$scope.$watch(auth.isLoggedIn, function(logined) {
-		var user = auth.currentUser();
-		//console.log(user);
-		vm.username = user.name;
-	});
+	vm.user      = {};
 
 	function setContent(contentIndex) {
 		//	vm.content = state[contentIndex];
@@ -44,11 +38,15 @@ function NavbarController($scope, $mdSidenav, $state, auth) {
 	}
 
 	function onLogin() {
-		auth.login();
+		auth.login()
+			.then(function(user) {
+				vm.user = user;
+			});
 	}
 
 	function onLogout() {
 		auth.logout();
+		vm.user = {};
 	}
 
 }

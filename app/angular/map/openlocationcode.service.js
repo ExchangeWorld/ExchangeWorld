@@ -63,7 +63,6 @@ function OpenLocationCode() {
 	this.shorten        = shorten;
 	this.CodeArea       = CodeArea;
 
-
 	var SEPARATOR_ = '+';
 
 	// The number of characters to place before the separator.

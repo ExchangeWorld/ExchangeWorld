@@ -6,9 +6,9 @@ const mapModule = require('./map.module');
 mapModule.controller('MapCtrl', MapController);
 
 /** @ngInject */
-function MapController($scope, geolocation, OpenLocationCode, $stateParams) {
+function MapController($scope, geolocation, OpenLocationCode, $state, $stateParams) {
+	let map     = undefined;
 	const vm    = this;
-	vm.map      = undefined;
 	vm.mapStyle = [
 		{
 			"featureType" : "all",
@@ -253,18 +253,18 @@ function MapController($scope, geolocation, OpenLocationCode, $stateParams) {
 	];
 	vm.coords   = [0, 0];
 	vm.zoom     = 17;
-
 	$scope.$on('mapInitialized', mapInitialized);
 	//$scope.$on('sidenavChanged', sidenavChanged);
-
+	console.log($state.current);
 	activate();
 
 	function mapInitialized(e, evtMap) {
-		vm.map            = evtMap;
+		map               = evtMap;
 		vm.onResize       = onResize;
 		vm.findMyLocation = getCurrentPosition;
 		vm.placeChanged   = placeChanged;
 		vm.centerChanged  = centerChanged;
+		vm.zoomChanged    = zoomChanged;
 	}
 
 	function activate() {
@@ -287,14 +287,14 @@ function MapController($scope, geolocation, OpenLocationCode, $stateParams) {
 	}
 
 	function onResize() {
-		google.maps.event.trigger(vm.map, 'resize');
+		google.maps.event.trigger(map, 'resize');
 	}
 
 	function getCurrentPosition() {
 		geolocation
 			.getLocation()
 			.then(function(data) {
-				vm.map.panTo({
+				map.panTo({
 					lat : data.latitude,
 					lng : data.longitude
 				});
@@ -304,14 +304,23 @@ function MapController($scope, geolocation, OpenLocationCode, $stateParams) {
 	function placeChanged() {
 		const place = this.getPlace().geometry;
 		if (place.viewport) {
-			vm.map.panToBounds(place.viewport);
+			map.panToBounds(place.viewport);
 		} else {
-			vm.map.panTo(place.location);
+			map.panTo(place.location);
 		}
 	}
 
 	function centerChanged() {
-		// console.log(vm.map.getCenter().toUrlValue());
-		console.log(OpenLocationCode.encode(vm.map.getCenter().lat(), vm.map.getCenter().lng()));
+		$state.go($state.current.name, {
+			olc: OpenLocationCode.encode(map.getCenter().lat(), map.getCenter().lng()),
+		} , {
+			location : 'replace'
+		});
+	}
+
+	function zoomChanged() {
+		$state.go($state.current.name, {z: map.getZoom()} , {
+			location : 'replace'
+		});
 	}
 };

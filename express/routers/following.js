@@ -81,7 +81,7 @@ router.post('/post', function(req, res, next) {
 });
 
 // Delete a following by given my_uid and the uid which my_uid follow
-router.put('/delete', function(req, res, next) {
+router.delete('/delete', function(req, res, next) {
 
 	// Necessay POST body params:
 	//
@@ -89,8 +89,8 @@ router.put('/delete', function(req, res, next) {
 	// following_uid
 	//
 
-	var _my_uid        = parseInt(req.body.my_uid, 10);
-	var _following_uid = parseInt(req.body.following_uid, 10);
+	var _my_uid        = parseInt(req.query.my_uid, 10);
+	var _following_uid = parseInt(req.query.following_uid, 10);
 
 	followings
 		.sync({force: false})

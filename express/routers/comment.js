@@ -134,14 +134,14 @@ router.put('/edit', function(req, res, next) {
 });
 
 // Delete a comment
-router.put('/delete', function(req, res, next) {
+router.delete('/delete', function(req, res, next) {
 
 	// Necessary DELETE body params
 	// 
 	// cid
 	//
 
-	var _cid = parseInt(req.body.cid, 10);
+	var _cid = parseInt(req.query.cid, 10);
 
 	comments
 		.sync({force: false})

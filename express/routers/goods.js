@@ -178,7 +178,7 @@ router.put('/edit', function(req, res, next) {
 });
 
 // Delete a good (but not really delete it)
-router.put('/delete', function(req, res, next) {
+router.delete('/delete', function(req, res, next) {
 
 	// Necessary PUT body params:
 	//
@@ -186,7 +186,7 @@ router.put('/delete', function(req, res, next) {
 	//
 
 	// Get property:value in PUT body
-	var _gid = parseInt(req.body.gid, 10);
+	var _gid = parseInt(req.query.gid, 10);
 
 	goods
 		.sync({force: false})

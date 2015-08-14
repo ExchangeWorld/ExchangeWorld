@@ -93,7 +93,7 @@ router.post('/post', function(req, res, next) {
 });
 
 // Delete a queue
-router.put('/delete', function(req, res, next) {
+router.delete('/delete', function(req, res, next) {
 
 	// Necessary DELETE body params
 	// 
@@ -101,8 +101,8 @@ router.put('/delete', function(req, res, next) {
 	// queuer_goods_gid 
 	//
 	
-	var _host_goods_gid   = req.body.host_goods_gid;
-	var _queuer_goods_gid = req.body.queuer_goods_gid;
+	var _host_goods_gid   = req.query.host_goods_gid;
+	var _queuer_goods_gid = req.query.queuer_goods_gid;
 
 	queues
 		.sync({force: false})

@@ -27,7 +27,7 @@ router.get('/to', function(req, res, next) {
 			res.json(result);
 		})
 		.catch(function(err) {
-			res.json({});
+			res.send({error: err});
 		});
 
 });
@@ -55,7 +55,8 @@ router.get('/by', function(req, res, next) {
 			res.json(result);
 		})
 		.catch(function(err) {
-			res.json({});
+			res.send({error: err});
+			//res.json({error: err});
 		});
 
 });
@@ -84,7 +85,8 @@ router.post('/post', function(req, res, next) {
 			res.json(result);
 		})
 		.catch(function(err) {
-			res.json({});
+			res.send({error: err});
+			//res.json({error: err});
 		});
 
 });
@@ -115,7 +117,8 @@ router.put('/delete', function(req, res, next) {
 			res.json(result);
 		})
 		.catch(function(err) {
-			res.json({});
+			//res.json({error: err});
+			res.send({error: err});
 		});
 });
 

@@ -45,7 +45,7 @@ router.post('/image', function(req, res, next) {
 	// Finally, send the "static file path" back
 	fs.writeFile(filePath, dataBuffer, function(err) {
 		if (err) {
-			res.send(undefined);
+			res.send({error: err});
 		} else {
 			res.send(hashData + '.' + imgFormat.replace(/image\//, ''));
 		}

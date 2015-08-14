@@ -62,7 +62,9 @@ router.get('/', function(req, res, next) {
 			}
 		})
 		.catch(function(err) {
-			res.json({});
+			res.send({error: err});
+			//console.log
+			//res.json({});
 		});
 });
 
@@ -109,7 +111,7 @@ router.put('/edit', function(req, res, next) {
 			res.json(result);
 		})
 		.catch(function(err) {
-			res.json({});
+			res.send({error: err});
 		});
 
 });

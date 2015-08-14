@@ -117,7 +117,7 @@ router.put('/complete', function(req, res, next) {
 			res.json(result);
 		})
 		.catch(function(err) {
-			res.json({});
+			res.send({error: err});
 		});
 });
 

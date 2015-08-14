@@ -82,7 +82,8 @@ router.post('/register', function(req, res, next) {
 			res.json(result);
 		})
 		.catch(function(err) {
-			res.json({});
+			res.send({error: err});
+			//res.json({});
 		});
 });
 

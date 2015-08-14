@@ -48,7 +48,6 @@
 
 "use strict";
 
-const _         = require('lodash');
 const mapModule = require('./map.module');
 mapModule.service('OpenLocationCode', OpenLocationCode);
 
@@ -63,6 +62,7 @@ function OpenLocationCode() {
 	this.recoverNearest = recoverNearest;
 	this.shorten        = shorten;
 	this.CodeArea       = CodeArea;
+
 
 	var SEPARATOR_ = '+';
 
@@ -658,8 +658,7 @@ function OpenLocationCode() {
           This excludes the separator.
    */
   function CodeArea(latitudeLo, longitudeLo, latitudeHi, longitudeHi, codeLength) {
-    return new OpenLocationCode.CodeArea.fn.init(
-        latitudeLo, longitudeLo, latitudeHi, longitudeHi, codeLength);
+    return new CodeArea.fn.init(latitudeLo, longitudeLo, latitudeHi, longitudeHi, codeLength);
   };
   CodeArea.fn = CodeArea.prototype = {
     init: function(
@@ -676,4 +675,5 @@ function OpenLocationCode() {
     }
   };
   CodeArea.fn.init.prototype = CodeArea.fn;
+
 }

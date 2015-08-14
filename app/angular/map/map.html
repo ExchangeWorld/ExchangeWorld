@@ -1,18 +1,20 @@
 <div map-lazy-load="https://maps.googleapis.com/maps/api/js?&sensor=TRUE&signed_in=false&v=3.exp&libraries=places">
-	<map center="{{vm.coords}}"
-		 zoom="17"
-		 draggable-cursor="default"
-		 dragging-cursor="default"
-		 disable-double-click-zoom="true"
-		 pan-control="false"
-		 zoom-control-options="{position:'TOP_RIGHT'}"
-		 map-maker="false"
-		 street-view-control="false"
-		 scale-control="false"
-		 overview-map-control="false"
-		 map-type-control="false"
-		 styles="{{vm.mapStyle}}"
-		 resize ng-style="resizeWithOffset(64)" notifier="vm.onResize()">
+	<map
+		center="{{vm.coords}}"
+		on-center-changed="vm.centerChanged()"
+		zoom="{{vm.zoom}}"
+		draggable-cursor="default"
+		dragging-cursor="default"
+		disable-double-click-zoom="true"
+		pan-control="false"
+		zoom-control-options="{position:'TOP_RIGHT'}"
+		map-maker="false"
+		street-view-control="false"
+		scale-control="false"
+		overview-map-control="false"
+		map-type-control="false"
+		styles="{{vm.mapStyle}}"
+		resize ng-style="resizeWithOffset(64)" notifier="vm.onResize()">
 
 		<custom-control position="LEFT_TOP" index="1">
 			<md-input-container class="md-warn" id="autocomplete">

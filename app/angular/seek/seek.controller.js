@@ -16,7 +16,7 @@ function SeekController(seekService, $state, AvailableCategory) {
 	activate();
 
 	/////////
-	
+
 	function activate() {
 		onSearch();
 	}
@@ -36,7 +36,7 @@ function SeekController(seekService, $state, AvailableCategory) {
 				vm.goods = undefined;
 			});
 	}
-	
+
 
 	//goods onClick event: change route to corrsponding gid
 	function onClickGoods(_gid) {

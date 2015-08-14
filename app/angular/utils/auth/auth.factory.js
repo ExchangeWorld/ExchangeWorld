@@ -22,6 +22,8 @@ function auth(facebookService, $q) {
 	};
 	return service;
 
+	/////////////
+
 	function init() {
 		const defer = $q.defer();
 		facebookService
@@ -59,7 +61,6 @@ function auth(facebookService, $q) {
 	}
 
 	function isLoggedIn() {
-		//console.log(currentUser);
 		return !(_.isEmpty(currentUser));
 	}
 
@@ -72,7 +73,6 @@ function auth(facebookService, $q) {
 				facebookService
 					.register(response)
 					.then(function(userdata) {
-						//console.log(userdata);
 						currentUser = userdata;
 						defer.resolve(currentUser);
 					});

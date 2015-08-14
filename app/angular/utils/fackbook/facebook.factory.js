@@ -53,7 +53,6 @@ function facebook(Facebook, Restangular, $q, exception) {
 	 */
 	function me() {
 		return Facebook.api('me?fields=about,picture,email,name', function(response) {
-			//console.log(response);
 			return response;
 		});
 	}
@@ -67,10 +66,9 @@ function facebook(Facebook, Restangular, $q, exception) {
 			photo_path : user_data.picture.data.url,
 			email      : user_data.email,
 		};
-		//console.log(newUser);
 
 		Restangular
-			.all('user/')
+			.all('user')
 			.getList({fb_id: newUser.fb_id})
 			.then(function(data) {
 				if(_.isArray(data)){
@@ -87,7 +85,6 @@ function facebook(Facebook, Restangular, $q, exception) {
 								return exception.catcher('[Facebook Service] register error: ')(error);
 							});
 					} else {
-						//console.log(data[0]);
 						defer.resolve(data[0]);
 					}
 				}

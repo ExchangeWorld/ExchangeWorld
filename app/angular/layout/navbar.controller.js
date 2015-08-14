@@ -4,7 +4,7 @@ const layoutModule = require('./layout.module');
 layoutModule.controller('NavbarController', NavbarController);
 
 /** @ngInject */
-function NavbarController($scope, $mdSidenav, $state, auth) {
+function NavbarController($mdSidenav, $state, auth) {
 	const vm      = this;
 	const state   = ['home', 'seek', 'post', 'manage', 'profile'];
 	vm.contentIs  = contentIs;
@@ -20,7 +20,6 @@ function NavbarController($scope, $mdSidenav, $state, auth) {
 		.then(function(data) {
 			vm.user = data;
 			getLoginState();
-			console.log(data);
 		});
 
 	function setContent(contentIndex) {
@@ -49,7 +48,6 @@ function NavbarController($scope, $mdSidenav, $state, auth) {
 
 	function getLoginState(){
 		vm.isLoggedIn = auth.isLoggedIn();
-		//console.log(vm.isLoggedIn);
 	}
 
 	function onLogin() {

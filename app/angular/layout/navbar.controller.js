@@ -15,12 +15,16 @@ function NavbarController($mdSidenav, $state, auth) {
 	vm.isLoggedIn = false;
 
 	//////////////
-	//activate();
-	auth.init()
-		.then(function(data) {
-			vm.user = data;
-			getLoginState();
-		});
+	activate();
+	
+	function activate() {
+		auth
+			.init()
+			.then(function(data) {
+				vm.user = data;
+				getLoginState();
+			});
+	}
 
 	function setContent(contentIndex) {
 		//	vm.content = state[contentIndex];
@@ -51,7 +55,8 @@ function NavbarController($mdSidenav, $state, auth) {
 	}
 
 	function onLogin() {
-		auth.login()
+		auth
+			.login()
 			.then(function(user) {
 				vm.user = user;
 				getLoginState();

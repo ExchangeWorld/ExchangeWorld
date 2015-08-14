@@ -4,14 +4,27 @@ const layoutModule = require('./layout.module');
 layoutModule.controller('NavbarController', NavbarController);
 
 /** @ngInject */
-function NavbarController($mdSidenav, $state, facebookService) {
-	const vm     = this;
-	const state  = ['home', 'seek', 'post', 'manage', 'profile'];
-	vm.username  = 'USER NAME';
-	vm.contentIs = contentIs;
-	vm.onClick   = onClick;
-	vm.onLogin   = onLogin;
-	vm.onLogout  = onLogout;
+function NavbarController($mdSidenav, $state, auth) {
+	const vm      = this;
+	const state   = ['home', 'seek', 'post', 'manage', 'profile'];
+	vm.contentIs  = contentIs;
+	vm.onClick    = onClick;
+	vm.onLogin    = onLogin;
+	vm.onLogout   = onLogout;
+	vm.user       = {};
+	vm.isLoggedIn = false;
+
+	//////////////
+	activate();
+	
+	function activate() {
+		auth
+			.init()
+			.then(function(data) {
+				vm.user = data;
+				getLoginState();
+			});
+	}
 
 	function setContent(contentIndex) {
 		//	vm.content = state[contentIndex];
@@ -37,32 +50,23 @@ function NavbarController($mdSidenav, $state, facebookService) {
 		}
 	}
 
+	function getLoginState(){
+		vm.isLoggedIn = auth.isLoggedIn();
+	}
+
 	function onLogin() {
-		facebookService
-			.login() // login to facebook.
-			.then(function(loginStatus) {
-				//console.log(loginStatus);
-
-				facebookService
-					.me() // get user facebook data.
-					.then(function(response) {
-						//console.log(data);
-						/** Call API for create new EXWD user. */
-						facebookService
-							.register(response)
-							.then(function(userdata) {
-								console.log(userdata);
-								vm.username = userdata.name;
-
-							});
-					});
+		auth
+			.login()
+			.then(function(user) {
+				vm.user = user;
+				getLoginState();
 			});
-
 	}
 
 	function onLogout() {
-		facebookService.logout();
-		vm.username = 'not login.';
+		auth.logout();
+		vm.user = {};
+		getLoginState();
 	}
 
 }

@@ -1,28 +1,37 @@
 'use strict';
 
 const facebookModule = require('./facebook.module');
-const _          = require('lodash');
+const _              = require('lodash');
 
 facebookModule.factory('facebookService', facebook);
 
 /** @ngInject */
 function facebook(Facebook, Restangular, $q, exception) {
 	const service = {
-		login    : login,
-		logout   : logout,
-		me       : me,
-		register : register,
+		getLoginStatus : getLoginStatus,
+		login          : login,
+		logout         : logout,
+		me             : me,
+		register       : register,
 	};
 
 	return service;
 
 	////////////////
 
-	/**
-	 * Login
-	 */
+	/** get facebook login status */
+	function getLoginStatus(){
+		return Facebook.getLoginStatus(function(response) {
+			if (response.status === 'connected') {
+				return true;
+			} else {
+				return false;
+			}
+		});
+	}
+
+	/** Login */
 	function login() {
-		//var user = {};
 		return Facebook.login(function(response) {
 			if (response.status === 'connected') {
 				return me();
@@ -33,9 +42,7 @@ function facebook(Facebook, Restangular, $q, exception) {
 		});
 	}
 
-	/**
-	 * Logout
-	 */
+	/** Logout */
 	function logout() {
 		return Facebook.logout();
 	}
@@ -45,7 +52,7 @@ function facebook(Facebook, Restangular, $q, exception) {
 	 * get user's facebook basic infomations 
 	 */
 	function me() {
-		return Facebook.api('/me', function(response) {
+		return Facebook.api('me?fields=about,picture,email,name', function(response) {
 			return response;
 		});
 	}
@@ -55,8 +62,8 @@ function facebook(Facebook, Restangular, $q, exception) {
 
 		var newUser = {
 			fb_id      : user_data.id,
-			name       : user_data.first_name,
-			photo_path : '',
+			name       : user_data.name,
+			photo_path : user_data.picture.data.url,
 			email      : user_data.email,
 		};
 
@@ -78,12 +85,10 @@ function facebook(Facebook, Restangular, $q, exception) {
 								return exception.catcher('[Facebook Service] register error: ')(error);
 							});
 					} else {
-						//console.log(data[0]);
 						defer.resolve(data[0]);
 					}
 				}
 			});
-
 		return defer.promise;
 	}
 

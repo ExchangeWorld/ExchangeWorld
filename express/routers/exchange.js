@@ -1,101 +1,170 @@
 var express = require('express');
 var router  = express.Router();
 
-// including tables
+// Including tables
 var exchanges = require('../ORM/Exchanges');
 
 // These routes are really dangerous
 // Only use them when you know what are you doing
 
 // Create a new exchange
-router.get('/create', function(req, res, next) {
+// Default status of an exchange is 'initiated'
+router.post('/create', function(req, res, next) {
 
-    // Available params:
-    // 
-    // gid1 (smaller gid)
-    // gid2 (larger gid)
-    //
+	// Available POST body params:
+	//
+	// goods1_gid (smaller goods_gid)
+	// goods2_gid (larger goods_gid)
+	//
 
-    // Get property:value in ?x=y&z=w....
-    var __gid1 = parseInt(req.query.gid1);
-    var __gid2 = parseInt(req.query.gid2);
+	// Get property:value in POST body
+	var __goods1_gid = parseInt(req.body.goods1_gid, 10);
+	var __goods2_gid = parseInt(req.body.goods2_gid, 10);
 
-    // And make sure gid1 <= gid2
-    var _gid1 = (__gid1 <= __gid2 ? __gid1 : __gid2);
-    var _gid2 = (__gid2 > __gid1 ? __gid2 : __gid1);
+	// And make sure goods1_gid < goods2_gid
+	var _goods1_gid = Math.min(__goods1_gid, __goods2_gid);
+	var _goods2_gid = Math.max(__goods1_gid, __goods2_gid);
 
-    // Create instance
-    exchanges
-        .sync({force: false})
-        .then(function() {
-            return exchanges.findOne({
-                where: {
-                    $and: [{
-                        gid1: _gid1
-                    }, {
-                        gid2: _gid2
-                    }]
-                }
-            });
-        })
-        .then(function(isThereAlready) {
-            if (isThereAlready != null) {
-                return isThereAlready;
-            } else {
-                return exchanges.create({
-                    gid1: _gid1,
-                    gid2: _gid2
-                });
-            }
-        })
-        .then(function(result) {
-            res.json(result);
-        });
+	// Create instance
+	// If there is already a pair (goods1_gid, goods2_gid) then do nothing
+	exchanges
+		.sync({force: false})
+		.then(function() {
+			return exchanges.findOne({
+				where: {
+					$and: [{
+						goods1_gid: _goods1_gid
+					}, {
+						goods2_gid: _goods2_gid
+					}]
+				}
+			});
+		})
+		.then(function(isThereAlready) {
+			if (isThereAlready != null) {
+				return isThereAlready;
+			} else {
+				return exchanges.create({
+					goods1_gid: _goods1_gid,
+					goods2_gid: _goods2_gid
+				});
+			}
+		})
+		.then(function(result) {
+			res.json(result);
+		});
 });
 
-// Set the status of a exchange
-router.get('/complete', function(req, res, next) {
+// Complete an exchagne
+// Set the status of an exchange to completed
+// And **WHEN COMPLETED** any other exchanges contain either goods1_gid or goods2_gid \
+// Must become 'dropped'
+router.put('/complete', function(req, res, next) {
 
-    // Available params:
-    // 
-    // gid1 (smaller gid)
-    // gid2 (larger gid)
-    //
+	// Available PUT body params:
+	//
+	// goods1_gid (smaller goods_gid)
+	// goods2_gid (larger goods_gid)
+	//
 
-    // Get property:value in ?x=y&z=w....
-    var __gid1 = parseInt(req.query.gid1);
-    var __gid2 = parseInt(req.query.gid2);
+	// Get property:value in PUT body
+	var __goods1_gid = parseInt(req.body.goods1_gid, 10);
+	var __goods2_gid = parseInt(req.body.goods2_gid, 10);
 
-    // And make sure gid1 <= gid2
-    var _gid1 = (__gid1 <= __gid2 ? __gid1 : __gid2);
-    var _gid2 = (__gid2 > __gid1 ? __gid2 : __gid1);
+	// And make sure goods1_gid < goods2_gid
+	var _goods1_gid = Math.min(__goods1_gid, __goods2_gid);
+	var _goods2_gid = Math.max(__goods1_gid, __goods1_gid);
 
-    // Find instance and update status to 1(complete) then save
-    exchanges
-        .sync({force: false})
-        .then(function() {
-            return exchanges.findOne({
-                where: {
-                    $and: [{
-                        gid1: _gid1
-                    }, {
-                        gid2: _gid2
-                    }]
-                }
-            });
-        })
-        .then(function(result) {
-            if (result == null) {
-                return {};
-            } else {
-                result.status = 1;
-                result.save().then(function() {});
-                return result;
-            }
-        })
-        .then(function(result) {
-            res.json(result);
-        });
+	// First, any exchanges with goods1_gid and goods2_gid, \
+	// their status will be set to 'dropped'.
+	// Find instance and update its status to 'completed' then save
+	exchanges
+		.sync({force: false})
+		.then(function() {
+			return exchanges.update(
+			{status: 'dropped'}, 
+			{where: {
+					$or: [{
+						goods1_gid: _goods1_gid
+					}, {
+						goods2_gid: _goods2_gid
+					}]
+				}
+			})
+			.then(function() {});
+		})
+		.then(function(tmp) {
+			return exchanges.findOne({
+				where: {
+					$and: [{
+						goods1_gid: _goods1_gid
+					}, {
+						goods2_gid: _goods2_gid
+					}]
+				}
+			});
+		})
+		.then(function(result) {
+			if (result == null) {
+				return {};
+			} else {
+				result.status = 'completed';
+				result.save().then(function() {});
+				return result;
+			}
+		})
+		.then(function(result) {
+			res.json(result);
+		})
+		.catch(function(err) {
+			res.send({error: err});
+		});
+});
+
+// Drop an exchange
+// Set the status of an exchange to dropped
+router.put('/drop', function(req, res, next) {
+
+	// Available PUT body params:
+	//
+	// goods1_gid (smaller goods_gid)
+	// goods2_gid (larger goods_gid)
+	//
+
+	// Get property:value in PUT body
+	var __goods1_gid = parseInt(req.body.goods1_gid, 10);
+	var __goods2_gid = parseInt(req.body.goods2_gid, 10);
+
+	// And make sure goods1_gid < goods2_gid
+	var _goods1_gid = Math.min(__goods1_gid, __goods2_gid);
+	var _goods2_gid = Math.max(__goods1_gid, __goods2_gid);
+
+	// Find instance and update its status to 'dropped' then save
+	exchanges
+		.sync({force: false})
+		.then(function() {
+			return exchanges.findOne({
+				where: {
+					$and: [{
+						goods1_gid: _goods1_gid
+					}, {
+						goods2_gid: _goods2_gid
+					}]
+				}
+			});
+		})
+		.then(function(result) {
+			if (result == null) {
+				return {};
+			} else {
+				result.status = 'dropped';
+				result.save().then(function() {});
+				return result;
+			}
+		})
+		.then(function(result) {
+			res.json(result);
+		});
 });
 
 module.exports = router;

@@ -7,6 +7,7 @@ layoutModule.controller('NavbarController', NavbarController);
 function NavbarController($mdSidenav, $state, facebookService) {
 	const vm     = this;
 	const state  = ['home', 'seek', 'post', 'manage', 'profile'];
+	vm.username  = 'USER NAME';
 	vm.contentIs = contentIs;
 	vm.onClick   = onClick;
 	vm.onLogin   = onLogin;
@@ -39,24 +40,29 @@ function NavbarController($mdSidenav, $state, facebookService) {
 	function onLogin() {
 		facebookService
 			.login() // login to facebook.
-			.then(function(data) {
-				console.log(data);
+			.then(function(loginStatus) {
+				//console.log(loginStatus);
 
 				facebookService
 					.me() // get user facebook data.
-					.then(function(data) {
-						console.log(data);
+					.then(function(response) {
+						//console.log(data);
+						/** Call API for create new EXWD user. */
+						facebookService
+							.register(response)
+							.then(function(userdata) {
+								console.log(userdata);
+								vm.username = userdata.name;
+
+							});
 					});
 			});
-		/**
-		 * Here should call API for create new user.
-		 *
-		 */
 
 	}
 
 	function onLogout() {
 		facebookService.logout();
+		vm.username = 'not login.';
 	}
 
 }

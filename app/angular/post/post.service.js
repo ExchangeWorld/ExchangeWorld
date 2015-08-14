@@ -15,10 +15,22 @@ function postService(Restangular, $q) {
 	//////////
 
 	function sendNewPostInfo(newpost){
-		Restangular.all('api/post').post(newpost);
+		Restangular.all('/goods/post').post(newpost);
 	}
 
 	function uploadImg(img){
-		Restangular.all('api/upload/image').post(img);
+		const defer = $q.defer();
+
+		Restangular.all('/upload/image').post(img)
+			.then(function(data) {
+				if (data !== undefined ) {
+					defer.resolve(data);
+				} 
+			})
+			.catch(function(error) {
+				return exception.catcher('[Post Service] uploadImg error: ')(error);
+			});
+
+		return defer.promise;
 	}
 }

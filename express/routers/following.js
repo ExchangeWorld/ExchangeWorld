@@ -1,40 +1,113 @@
 var express = require('express');
 var router  = express.Router();
 
-// including tables 
-var following = require('../ORM/Following');
+// Including tables
+var followings = require('../ORM/Followings');
 
+// Get ther followings by given my_uid
 router.get('/', function(req, res, next) {
 
-	// Available params:
-	// 
-	// fb_id 
-	// 
+	// Available query params:
+	//
+	// my_uid
+	//
 
-	var _fb_id = req.query.fb_id;
+	var _my_uid = parseInt(req.query.my_uid, 10);
 
-
-	// Emit a find operation with orm model in table `following`
-	following
+	// Emit a find operation with orm in table `followings`
+	followings
 		.sync({force: false})
 		.then(function() {
 
-			/**
-			 * SELECT * 
-			 * FROM `following`
-			 * WHERE `following`.`myid` = _fb_id
+			/*
+			 * SELECT *
+			 * FROM `followings`
+			 * WHERE `followings`.`my_uid` = _my_uid
 			 */
 
-			return following.findAll({
+			return followings.findAll({
 				where: {
-					myid : _fb_id
+					my_uid : _my_uid
 				},
 			});
 		})
 		.then(function(result) {
 			res.json(result);
+		})
+		.catch(function(err) {
+			res.send({error: err});
 		});
 });
 
+// Post a following by given my_uid and the uid which my_uid follow
+router.post('/post', function(req, res, next) {
+
+	// Necessay POST body params:
+	//
+	// my_uid
+	// following_uid
+	//
+
+	var _my_uid        = parseInt(req.body.my_uid, 10);
+	var _following_uid = parseInt(req.body.following_uid, 10);
+
+	followings
+		.sync({force: false})
+		.then(function() {
+			return followings.findOne({
+				where: {
+					my_uid: _my_uid,
+					following_uid: _following_uid
+				}
+			});
+		})
+		.then(function(isThereAlready) {
+			if (isThereAlready != null) {
+				return isThereAlready;
+			} else {
+				return followings.create({
+					my_uid: _my_uid,
+					following_uid: _following_uid
+				});
+			}
+		})
+		.then(function(result) {
+			res.json(result);
+		})
+		.catch(function(err) {
+			res.send({error: err});
+		});
+
+});
+
+// Delete a following by given my_uid and the uid which my_uid follow
+router.put('/delete', function(req, res, next) {
+
+	// Necessay POST body params:
+	//
+	// my_uid
+	// following_uid
+	//
+
+	var _my_uid        = parseInt(req.body.my_uid, 10);
+	var _following_uid = parseInt(req.body.following_uid, 10);
+
+	followings
+		.sync({force: false})
+		.then(function() {
+			return followings.destroy({
+				where:{
+					my_uid: _my_uid,
+					following_uid: _following_uid
+				}
+			});
+		})
+		.then(function(result) {
+			res.json(result);
+		})
+		.catch(function(err) {
+			res.send({error: err});
+		});
+});
 
 module.exports = router;

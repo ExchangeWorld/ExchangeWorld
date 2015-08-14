@@ -10,16 +10,16 @@ var Comments = sequelize.define('comments', {
 		autoIncrement: true,
 		primaryKey: true
 	},
-	goods_id: {
+	goods_gid: {
 		type: Sequelize.INTEGER.UNSIGNED,
 		allowNull: false
 	},
-	commenter: {
-		type: Sequelize.STRING(128),
+	commenter_uid: {
+		type: Sequelize.INTEGER.UNSIGNED,
 		allowNull: false
 	},
-	comment: {
-		type: Sequelize.STRING,
+	content: {
+		type: Sequelize.TEXT,
 		allowNull: false
 	}
 });

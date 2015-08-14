@@ -2,7 +2,7 @@ var express = require('express');
 var fs      = require('fs');
 var router  = express.Router();
 
-// including tables for photoPath
+// Including tables for photoPath
 var goods = require('../ORM/Goods');
 
 // Handle posting image
@@ -14,10 +14,10 @@ router.post('/image', function(req, res, next) {
 	 * imgFormat = png
 	 */
 
-	// Get file size 
+	// Get file size
 	var imgSize = req.body.filesize;
 
-	// Get filename 
+	// Get filename
 	var imgName = req.body.filename;
 
 	// Get base64 encoded imgData from request body
@@ -40,12 +40,12 @@ router.post('/image', function(req, res, next) {
 	var filePath = './build/' + hashData + '.' + imgFormat.replace(/image\//, '');
 
 	// Write to file with the filePath
-	// And if there is another person who uploaded a same base64 image, 
+	// And if there is another person who uploaded a same base64 image,
 	// The things are still going right because that means same image, why not treat them same?
 	// Finally, send the "static file path" back
 	fs.writeFile(filePath, dataBuffer, function(err) {
 		if (err) {
-			res.send(undefined);
+			res.send({error: err});
 		} else {
 			res.send(hashData + '.' + imgFormat.replace(/image\//, ''));
 		}

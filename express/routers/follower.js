@@ -1,40 +1,115 @@
 var express = require('express');
 var router  = express.Router();
 
-// including tables 
-var follower = require('../ORM/Follower');
+// Including tables
+var followers = require('../ORM/Followers');
 
+// Get ther followers by given my_uid
 router.get('/', function(req, res, next) {
 
-	// Available params:
-	// 
-	// fb_id 
-	// 
+	// Available query params:
+	//
+	// my_uid
+	//
 
-	var _fb_id = req.query.fb_id;
+	var _my_uid = parseInt(req.query.my_uid, 10);
 
-
-	// Emit a find operation with orm model in table `follower`
-	follower
+	// Emit a find operation with orm in table `followers`
+	followers
 		.sync({force: false})
 		.then(function() {
 
-			/**
-			 * SELECT * 
-			 * FROM `follower`
-			 * WHERE `follower`.`myid` = _fb_id
+			/*
+			 * SELECT *
+			 * FROM `followers`
+			 * WHERE `followers`.`my_uid` = _my_uid
 			 */
 
-			return follower.findAll({
+			return followers.findAll({
 				where: {
-					myid : _fb_id
+					my_uid : _my_uid
 				},
 			});
 		})
 		.then(function(result) {
 			res.json(result);
+		})
+		.catch(function(err) {
+			res.send({error: err});
 		});
 });
 
+// Post a follower by given my_uid and the uid who follows my_uid
+router.post('/post', function(req, res, next) {
+
+	// Necessay POST body params:
+	//
+	// my_uid
+	// follower_uid
+	//
+
+	var _my_uid       = parseInt(req.body.my_uid, 10);
+	var _follower_uid = parseInt(req.body.follower_uid, 10);
+
+	// Create instance
+	// But if there is already the pair(my_uid, follower_uid)
+	// Then don't create another
+	followers
+		.sync({force: false})
+		.then(function() {
+			return followers.findOne({
+				where: {
+					my_uid: _my_uid,
+					follower_uid: _follower_uid
+				}
+			});
+		})
+		.then(function(isThereAlready) {
+			if (isThereAlready != null) {
+				return isThereAlready;
+			} else {
+				return followers.create({
+					my_uid: _my_uid,
+					follower_uid: _follower_uid
+				});
+			}
+		})
+		.then(function(result) {
+			res.json(result);
+		})
+		.catch(function(err) {
+			res.send({error: err});
+		});
+});
+
+// Delete a follower by given my_uid and the uid who follows my_uid
+router.put('/delete', function(req, res, next) {
+
+	// Necessay POST body params:
+	//
+	// my_uid
+	// follower_uid
+	//
+
+	var _my_uid       = parseInt(req.body.my_uid, 10);
+	var _follower_uid = parseInt(req.body.follower_uid, 10);
+
+	followers
+		.sync({force: false})
+		.then(function() {
+			return followers.destroy({
+				where:{
+					my_uid: _my_uid,
+					follower_uid: _follower_uid
+				}
+			});
+		})
+		.then(function(result) {
+			res.json(result);
+		})
+		.catch(function(err) {
+			res.send({error: err});
+		});
+});
 
 module.exports = router;

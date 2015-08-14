@@ -3,29 +3,28 @@ var sequelize = require('../libs/orm');
 
 // Define the schema of table `exchanges`
 var Exchanges = sequelize.define('exchanges', {
-    eid: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    // Smaller gid puts here
-    gid1: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false
-    },
-    // Larger gid puts here
-    gid2: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false
-    },
-    // Same as status in `Goods`
-    // 1 means completed, and 0 means not
-    status: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: 0
-    }
+	eid: {
+		type: Sequelize.INTEGER.UNSIGNED,
+		allowNull: false,
+		autoIncrement: true,
+		primaryKey: true
+	},
+	// Smaller goods_gid puts here
+	goods1_gid: {
+		type: Sequelize.INTEGER.UNSIGNED,
+		allowNull: false
+	},
+	// Larger goods_gid puts here
+	goods2_gid: {
+		type: Sequelize.INTEGER.UNSIGNED,
+		allowNull: false
+	},
+	// 'initiated', 'dropped', 'completed'
+	status: {
+		type: Sequelize.STRING,
+		allowNull: false,
+		defaultValue: 'initiated'
+	}
 });
 
 module.exports = Exchanges;

@@ -31,24 +31,27 @@ module.exports = function() {
 		res.sendFile('index.html', { root : 'build' });
 	});
 
+	/*USE TO CREATE NEW DATABASE*/
+	//server.use('/api/CreateAllTables', require('./libs/CreateAllTable.js'));
+
 	/* ref: doc/seek.md */
-	server.use('/api/seek', require('./routers/seek'));
+	server.use('/api/goods/search', require('./routers/goods.search'));
 	server.use('/api/goods', require('./routers/goods'));
 
-	/* ref: doc/post.md */
-	// server.use('/api/post', require('./routers/post'));
-	// changed to /api/goods/post
 	server.use('/api/upload', require('./routers/upload'));
-	
+
 	/* ref: doc/profile.md */
+	server.use('/api/user/profile/follower', require('./routers/follower'));
+	server.use('/api/user/profile/following', require('./routers/following'));
+	server.use('/api/user/profile', require('./routers/user.profile'));
 	server.use('/api/user', require('./routers/user'));
-	server.use('/api/profile', require('./routers/profile'));
-	server.use('/api/profile/follower', require('./routers/follower'));
-	server.use('/api/profile/following', require('./routers/following'));
+
+	server.use('/api/comment', require('./routers/comment'));
+	server.use('/api/star', require('./routers/star'));
+	server.use('/api/queue', require('./routers/queue'));
 
 	server.use('/api/exchange', require('./routers/exchange'));
 	server.use('/api/authenticate', require('./routers/authenticate'));
-
 
 	// catch 404 and forward to error handler
 	server.use(function(req, res, next) {

@@ -1,8 +1,10 @@
 <div map-lazy-load="https://maps.googleapis.com/maps/api/js?&sensor=TRUE&signed_in=false&v=3.exp&libraries=places">
 	<map
 		center="{{vm.coords}}"
-		on-center-changed="vm.centerChanged()"
 		zoom="{{vm.zoom}}"
+		on-center-changed="vm.centerChanged()"
+		on-zoom_changed="vm.zoomChanged()"
+		styles="{{vm.mapStyle}}"
 		draggable-cursor="default"
 		dragging-cursor="default"
 		disable-double-click-zoom="true"
@@ -13,7 +15,6 @@
 		scale-control="false"
 		overview-map-control="false"
 		map-type-control="false"
-		styles="{{vm.mapStyle}}"
 		resize ng-style="resizeWithOffset(64)" notifier="vm.onResize()">
 
 		<custom-control position="LEFT_TOP" index="1">
@@ -25,7 +26,7 @@
 
 		<custom-control id="myLocation" position="RIGHT_BOTTOM" index="2" ng-click="vm.findMyLocation()">
 			<button ripple class="md-fab md-button md-default-theme" aria-label="findLocation" >
-				<md-icon md-font-set="material-icons">gps_fixed</md-icon>
+				<md-icon md-font-set="material-icons" style="width: 32px; height: 32px; font-size: 32px;">gps_fixed</md-icon>
 			</button>
 		</custom-control>
 	</map>

@@ -52,12 +52,7 @@ router.get('/of/user', function(req, res, next) {
 			});
 		})
 		.then(function(result) {
-			if (result.length == 0) {
-				res.json({});
-			}
-			else {
-				res.json(result);
-			}
+			res.json(result);
 		})
 		.catch(function(err) {
 			res.send({error: err});
@@ -89,8 +84,7 @@ router.post('/post', function(req, res, next) {
 		.then(function(result) {
 			if (result == null) {
 				res.json({});
-			}
-			else {
+			} else {
 				res.json(result);
 			}
 		})
@@ -129,8 +123,7 @@ router.put('/edit', function(req, res, next) {
 		.then(function(result) {
 			if (result == null) {
 				res.json(null);
-			}
-			else {
+			} else {
 				res.json(result);
 			}
 		})

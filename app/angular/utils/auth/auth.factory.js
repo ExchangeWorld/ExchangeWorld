@@ -59,7 +59,7 @@ function auth(facebookService, $q) {
 	}
 
 	function isLoggedIn() {
-		console.log(currentUser);
+		//console.log(currentUser);
 		return !(_.isEmpty(currentUser));
 	}
 

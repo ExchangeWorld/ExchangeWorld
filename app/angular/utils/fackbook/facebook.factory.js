@@ -52,7 +52,8 @@ function facebook(Facebook, Restangular, $q, exception) {
 	 * get user's facebook basic infomations 
 	 */
 	function me() {
-		return Facebook.api('/me', function(response) {
+		return Facebook.api('me?fields=about,picture,email,name', function(response) {
+			//console.log(response);
 			return response;
 		});
 	}
@@ -62,10 +63,11 @@ function facebook(Facebook, Restangular, $q, exception) {
 
 		var newUser = {
 			fb_id      : user_data.id,
-			name       : user_data.first_name,
-			photo_path : '',
+			name       : user_data.name,
+			photo_path : user_data.picture.data.url,
 			email      : user_data.email,
 		};
+		//console.log(newUser);
 
 		Restangular
 			.all('user/')

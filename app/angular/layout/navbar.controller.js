@@ -20,6 +20,7 @@ function NavbarController($scope, $mdSidenav, $state, auth) {
 		.then(function(data) {
 			vm.user = data;
 			getLoginState();
+			console.log(data);
 		});
 
 	function setContent(contentIndex) {
@@ -48,7 +49,7 @@ function NavbarController($scope, $mdSidenav, $state, auth) {
 
 	function getLoginState(){
 		vm.isLoggedIn = auth.isLoggedIn();
-		console.log(vm.isLoggedIn);
+		//console.log(vm.isLoggedIn);
 	}
 
 	function onLogin() {

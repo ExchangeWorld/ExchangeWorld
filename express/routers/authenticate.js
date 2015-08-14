@@ -52,7 +52,7 @@ router.get('/getToken', function(req, res, next) {
     // uid
     //
 
-	var _uid       = parseInt(req.query.uid);
+	var _uid       = parseInt(req.query.uid, 10);
 	var _timeStamp = (new Date()).toLocaleString();
 
 	// Make sure there is a user's uid is available

@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 	// my_uid
 	//
 
-	var _my_uid = parseInt(req.query.my_uid);
+	var _my_uid = parseInt(req.query.my_uid, 10);
 
 	// Emit a find operation with orm in table `followings`
 	followings
@@ -52,8 +52,8 @@ router.post('/post', function(req, res, next) {
 	// following_uid
 	//
 
-	var _my_uid        = parseInt(req.body.my_uid);
-	var _following_uid = parseInt(req.body.following_uid);
+	var _my_uid        = parseInt(req.body.my_uid, 10);
+	var _following_uid = parseInt(req.body.following_uid, 10);
 
 	followings
 		.sync({force: false})
@@ -93,8 +93,8 @@ router.put('/delete', function(req, res, next) {
 	// following_uid
 	//
 
-	var _my_uid       = parseInt(req.body.my_uid);
-	var _following_uid = parseInt(req.body.following_uid);
+	var _my_uid        = parseInt(req.body.my_uid, 10);
+	var _following_uid = parseInt(req.body.following_uid, 10);
 
 	followings
 		.sync({force: false})

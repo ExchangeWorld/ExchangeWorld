@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 	//
 
 	// Get property:value in ?x=y&z=w....
-	var _uid = parseInt(req.query.uid);
+	var _uid = parseInt(req.query.uid, 10);
 
 	/*
 	 * Set association between tables (users, goods, followers, followings)
@@ -78,7 +78,7 @@ router.put('/edit', function(req, res, next) {
 	// wishlist
 	//
 
-	var _uid          = parseInt(req.body.uid);
+	var _uid          = parseInt(req.body.uid, 10);
 	var _name         = req.body.name;
 	var _email        = req.body.email;
 	var _introduction = req.body.introduction;

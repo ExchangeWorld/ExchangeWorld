@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 	//
 
 	// Get property:value in ?x=y&z=w....
-	var _uid   = parseInt(req.query.uid);
+	var _uid   = parseInt(req.query.uid, 10);
 	var _fb_id = req.query.fb_id;
 
 	// If uid or fb_id in query are not defined, then set them to zero or emptyString

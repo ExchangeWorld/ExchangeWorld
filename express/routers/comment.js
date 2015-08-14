@@ -12,7 +12,7 @@ router.get('/of/goods', function(req, res, next) {
 	// goods_gid
 	// 
 
-	var _goods_gid = parseInt(req.query.goods_gid);
+	var _goods_gid = parseInt(req.query.goods_gid, 10);
 
 	comments
 		.sync({force: false})
@@ -45,7 +45,7 @@ router.get('/of/user', function(req, res, next) {
 	// commenter_uid
 	// 
 
-	var _commenter_uid = parseInt(req.query.commenter_uid);
+	var _commenter_uid = parseInt(req.query.commenter_uid, 10);
 
 	comments
 		.sync({force: false})
@@ -78,8 +78,8 @@ router.post('/post', function(req, res, next) {
 	// commenter_uid
 	// 
 
-	var _goods_gid     = parseInt(req.body.goods_gid);
-	var _commenter_uid = parseInt(req.body.commenter_uid);
+	var _goods_gid     = parseInt(req.body.goods_gid, 10);
+	var _commenter_uid = parseInt(req.body.commenter_uid, 10);
 	var _content       = req.body.content;
 
 	comments
@@ -114,7 +114,7 @@ router.put('/edit', function(req, res, next) {
 	// content
 	// 
 
-	var _cid     = parseInt(req.body.cid);
+	var _cid     = parseInt(req.body.cid, 10);
 	var _content = req.body.content;
 
 	comments
@@ -152,7 +152,7 @@ router.put('/delete', function(req, res, next) {
 	// cid
 	//
 
-	var _cid = parseInt(req.body.cid);
+	var _cid = parseInt(req.body.cid, 10);
 
 	comments
 		.sync({force: false})

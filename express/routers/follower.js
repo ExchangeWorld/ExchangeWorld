@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 	// my_uid
 	//
 
-	var _my_uid = parseInt(req.query.my_uid);
+	var _my_uid = parseInt(req.query.my_uid, 10);
 
 	// Emit a find operation with orm in table `followers`
 	followers
@@ -52,8 +52,8 @@ router.post('/post', function(req, res, next) {
 	// follower_uid
 	//
 
-	var _my_uid       = parseInt(req.body.my_uid);
-	var _follower_uid = parseInt(req.body.follower_uid);
+	var _my_uid       = parseInt(req.body.my_uid, 10);
+	var _follower_uid = parseInt(req.body.follower_uid, 10);
 
 	// Create instance
 	// But if there is already the pair(my_uid, follower_uid)
@@ -95,8 +95,8 @@ router.put('/delete', function(req, res, next) {
 	// follower_uid
 	//
 
-	var _my_uid       = parseInt(req.body.my_uid);
-	var _follower_uid = parseInt(req.body.follower_uid);
+	var _my_uid       = parseInt(req.body.my_uid, 10);
+	var _follower_uid = parseInt(req.body.follower_uid, 10);
 
 	followers
 		.sync({force: false})

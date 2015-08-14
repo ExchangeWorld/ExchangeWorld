@@ -26,8 +26,8 @@ router.get('/', function(req, res, next) {
 	var category   = req.query.category || '';
 	var position_x = parseFloat(req.query.position_x) || -1.0;
 	var position_y = parseFloat(req.query.position_y) || -1.0;
-	var from       = parseInt(req.query.from) || -1;
-	var to         = parseInt(req.query.to) || -1;
+	var from       = parseInt(req.query.from, 10) || -1;
+	var to         = parseInt(req.query.to, 10) || -1;
 
 	// Set association between tables (users, goods)
 	users.hasMany(goods, {foreignKey:'owner_uid'});

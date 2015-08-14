@@ -17,8 +17,8 @@ router.get('/', function(req, res, next) {
 	//
 
 	// Get property:value in ?x=y&z=w....
-	var _gid       = parseInt(req.query.gid);
-	var _owner_uid = parseInt(req.query.owner_uid);
+	var _gid       = parseInt(req.query.gid, 10);
+	var _owner_uid = parseInt(req.query.owner_uid, 10);
 
 	// If gid or owner_uid in query are not defined, then set them to zero or emptyString
 	if (!_gid > 0) {
@@ -98,7 +98,7 @@ router.post('/post', function(req, res, next) {
 	var _photo_path  = req.body.photo_path || '';
 	var _position_x  = parseFloat(req.body.position_x);
 	var _position_y  = parseFloat(req.body.position_y);
-	var _owner_uid   = parseInt(req.body.owner_uid);
+	var _owner_uid   = parseInt(req.body.owner_uid, 10);
 
 	// Create instance
 	goods
@@ -138,7 +138,7 @@ router.put('/edit', function(req, res, next) {
 	//
 
 	// Get property:value in PUT body
-	var _gid         = parseInt(req.body.gid);
+	var _gid         = parseInt(req.body.gid, 10);
 	var _name        = req.body.name;
 	var _category    = req.body.category;
 	var _description = req.body.description || '';
@@ -190,7 +190,7 @@ router.put('/delete', function(req, res, next) {
 	//
 
 	// Get property:value in PUT body
-	var _gid = parseInt(req.body.gid);
+	var _gid = parseInt(req.body.gid, 10);
 
 	goods
 		.sync({force: false})

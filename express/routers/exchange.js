@@ -18,8 +18,8 @@ router.post('/create', function(req, res, next) {
 	//
 
 	// Get property:value in POST body
-	var __goods1_gid = parseInt(req.body.goods1_gid);
-	var __goods2_gid = parseInt(req.body.goods2_gid);
+	var __goods1_gid = parseInt(req.body.goods1_gid, 10);
+	var __goods2_gid = parseInt(req.body.goods2_gid, 10);
 
 	// And make sure goods1_gid < goods2_gid
 	var _goods1_gid = (__goods1_gid < __goods2_gid ? __goods1_gid : __goods2_gid);
@@ -68,8 +68,8 @@ router.put('/complete', function(req, res, next) {
 	//
 
 	// Get property:value in PUT body
-	var __goods1_gid = parseInt(req.body.goods1_gid);
-	var __goods2_gid = parseInt(req.body.goods2_gid);
+	var __goods1_gid = parseInt(req.body.goods1_gid, 10);
+	var __goods2_gid = parseInt(req.body.goods2_gid, 10);
 
 	// And make sure goods1_gid < goods2_gid
 	var _goods1_gid = (__goods1_gid < __goods2_gid ? __goods1_gid : __goods2_gid);
@@ -132,8 +132,8 @@ router.put('/drop', function(req, res, next) {
 	//
 
 	// Get property:value in PUT body
-	var __goods1_gid = parseInt(req.body.goods1_gid);
-	var __goods2_gid = parseInt(req.body.goods2_gid);
+	var __goods1_gid = parseInt(req.body.goods1_gid, 10);
+	var __goods2_gid = parseInt(req.body.goods2_gid, 10);
 
 	// And make sure goods1_gid < goods2_gid
 	var _goods1_gid = (__goods1_gid < __goods2_gid ? __goods1_gid : __goods2_gid);

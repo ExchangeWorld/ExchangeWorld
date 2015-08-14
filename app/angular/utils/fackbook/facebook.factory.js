@@ -61,7 +61,7 @@ function facebook(Facebook, Restangular, $q, exception) {
 		};
 
 		Restangular
-			.all('user/')
+			.all('user')
 			.getList({fb_id: newUser.fb_id})
 			.then(function(data) {
 				if(_.isArray(data)){

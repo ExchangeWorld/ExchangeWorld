@@ -5,13 +5,22 @@ layoutModule.controller('NavbarController', NavbarController);
 
 /** @ngInject */
 function NavbarController($scope, $mdSidenav, $state, auth) {
-	const vm     = this;
-	const state  = ['home', 'seek', 'post', 'manage', 'profile'];
-	vm.contentIs = contentIs;
-	vm.onClick   = onClick;
-	vm.onLogin   = onLogin;
-	vm.onLogout  = onLogout;
-	vm.user      = {};
+	const vm      = this;
+	const state   = ['home', 'seek', 'post', 'manage', 'profile'];
+	vm.contentIs  = contentIs;
+	vm.onClick    = onClick;
+	vm.onLogin    = onLogin;
+	vm.onLogout   = onLogout;
+	vm.user       = {};
+	vm.isLoggedIn = false;
+
+	//////////////
+	//activate();
+	auth.init()
+		.then(function(data) {
+			vm.user = data;
+			getLoginState();
+		});
 
 	function setContent(contentIndex) {
 		//	vm.content = state[contentIndex];
@@ -37,16 +46,23 @@ function NavbarController($scope, $mdSidenav, $state, auth) {
 		}
 	}
 
+	function getLoginState(){
+		vm.isLoggedIn = auth.isLoggedIn();
+		console.log(vm.isLoggedIn);
+	}
+
 	function onLogin() {
 		auth.login()
 			.then(function(user) {
 				vm.user = user;
+				getLoginState();
 			});
 	}
 
 	function onLogout() {
 		auth.logout();
 		vm.user = {};
+		getLoginState();
 	}
 
 }

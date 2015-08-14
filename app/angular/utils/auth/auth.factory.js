@@ -8,57 +8,47 @@ authModule.factory('auth', auth);
 /** @ngInject */
 function auth(facebookService, $q) {
 	var token       = '';
-	var currentUser = {name : 'kkk'};
+	var currentUser = {};
 
 	const service = {
-		login       : login, 
+		init        : init,
+		login       : login,
 		logout      : logout,
 		isLoggedIn  : isLoggedIn,
 		currentUser : function() { return currentUser; },
+		fetchMe     : fetchMe,
 		getToken    : getAccessToken,
 		updateToken : generateAccessToken,
 	};
 	return service;
 
+	function init() {
+		const defer = $q.defer();
+		facebookService
+			.getLoginStatus()
+			.then(function(state) {
+				if(state.status == 'connected') {
+					fetchMe()
+						.then(function(data) { 
+							currentUser = data;
+							defer.resolve(data);
+						});
+				}
+			});
+		return defer.promise;
+	}
 
 	function login() {
 		const defer = $q.defer();
 
 		facebookService
-			.getLoginStatus()
-			.then(function(state) {
-				//console.log(state.status);
-				if(state.status == 'connected') {
-					facebookService
-						.me() // get user facebook data.
-						.then(function(response) {
-							/** Call API for create/get new EXWD user. */
-							facebookService
-								.register(response)
-								.then(function(userdata) {
-									//console.log(userdata);
-									currentUser = userdata;
-									defer.resolve(currentUser);
-								});
-						});
-				} else {
-					facebookService
-						.login() // login to facebook.
-						.then(function(loginStatus) {
-							facebookService
-								.me() // get user facebook data.
-								.then(function(response) {
-									/** Call API for create/get new EXWD user. */
-									facebookService
-										.register(response)
-										.then(function(userdata) {
-											console.log(userdata);
-											currentUser = userdata;
-											defer.resolve(currentUser);
-										});
-								});
-						});
-				}
+			.login() // login to facebook.
+			.then(function(loginStatus) {
+				fetchMe()
+					.then(function(data) {
+						currentUser = data;
+						defer.resolve(data);
+					});
 			});
 		return defer.promise;
 	}
@@ -69,8 +59,25 @@ function auth(facebookService, $q) {
 	}
 
 	function isLoggedIn() {
-		//console.log(!(_.isEmpty(currentUser)));
+		console.log(currentUser);
 		return !(_.isEmpty(currentUser));
+	}
+
+	function fetchMe() {
+		const defer = $q.defer();
+		facebookService
+			.me() // get user facebook data.
+			.then(function(response) {
+				/** Call API for create/get new EXWD user. */
+				facebookService
+					.register(response)
+					.then(function(userdata) {
+						//console.log(userdata);
+						currentUser = userdata;
+						defer.resolve(currentUser);
+					});
+			});
+		return defer.promise;
 	}
 
 	function generateAccessToken() {

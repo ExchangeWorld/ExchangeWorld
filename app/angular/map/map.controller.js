@@ -276,27 +276,18 @@ function MapController(
 		vm.centerChanged  = centerChanged;
 		vm.zoomChanged    = zoomChanged;
 
-		$scope.$on('$viewContentLoaded', function(event) {
-			console.log('$viewContentLoaded');
-		});
-
-		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-			console.log('$stateChangeStart');
-		})
+		google.maps.event.addListener(map, 'idle', olcChanged);
 	}
 
 	function activate() {
 		if ($stateParams.olc) {
-			console.log($stateParams.olc);
 			const coord = OpenLocationCode.decode($stateParams.olc.replace(' ','+'));
 			vm.coords = [coord.latitudeCenter, coord.longitudeCenter];
-		}
-		else {
+		} else {
 			geolocation
 				.getLocation()
 				.then(function(data) {
 					vm.coords = [data.latitude, data.longitude];
-					console.log(OpenLocationCode.encode(data.latitude, data.longitude));
 				});
 		}
 
@@ -329,30 +320,18 @@ function MapController(
 		}
 	}
 
-	var isIdle = true;
-	var idleTimer;
 	function centerChanged() {
+		/**
+		 * TODO: Search goods here
+		 */
+	}
 
-		if(idleTimer) {
-			$timeout.cancel(idleTimer);
-			idleTimer = undefined;
-		}
-
-		$timeout(function() {
-			if (isIdle) {
-				$state.go($state.current.name, {
-					olc : OpenLocationCode.encode(map.getCenter().lat(), map.getCenter().lng()),
-				}, {
-					location : 'replace'
-				});
-			}
-		}, 50);
-
-
-		isIdle = false;
-		idleTimer = $timeout(function() {
-			isIdle = true;
-		}, 49);
+	function olcChanged() {
+		$state.go($state.current.name, {
+			olc : OpenLocationCode.encode(map.getCenter().lat(), map.getCenter().lng()),
+		}, {
+			location : 'replace'
+		});
 	}
 
 	function zoomChanged() {

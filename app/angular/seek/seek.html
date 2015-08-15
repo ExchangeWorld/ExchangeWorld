@@ -45,18 +45,20 @@
         -->
         <!-- waterfall container and its children item -->
         <div class="waterfall_container" ng-show="!loading">
-            <div class="item"><img style="height:200px;" src="http://i.imgur.com/7RoLGdp.jpg" />
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <div ng-repeat="good in vm.goods" class="item">
+				<img ng-src="{{ good.photo_path }}" ng-click="vm.onClickGoods( good.gid )"/>
+				<p>{{ good.name }}</p>
+				<!--<p>{{ good.photo_path }}</p>-->
             </div>
-            <div class="item"><img style="height:300px;" src="http://i.imgur.com/7RoLGdp.jpg" />
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            </div>
-            <div class="item"><img style="height:400px;" src="http://i.imgur.com/7RoLGdp.jpg" />
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            </div>
-            <div class="item"><img style="height:500px;" src="http://i.imgur.com/7RoLGdp.jpg" />
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            </div>
+            <!--<div class="item"><img style="height:300px;" src="http://i.imgur.com/7RoLGdp.jpg" />-->
+                <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
+            <!--</div>-->
+            <!--<div class="item"><img style="height:400px;" src="http://i.imgur.com/7RoLGdp.jpg" />-->
+                <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
+            <!--</div>-->
+            <!--<div class="item"><img style="height:500px;" src="http://i.imgur.com/7RoLGdp.jpg" />-->
+                <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
+            <!--</div>-->
         </div>
         <md-divider></md-divider>
     </md-list>

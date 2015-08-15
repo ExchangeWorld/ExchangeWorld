@@ -15,7 +15,7 @@ function SeekController(seekService, $state, AvailableCategory) {
 //>>>>>>> feature/dev_UI
 
     //$scope.loading = false;
-    //activate();
+	activate();
     //$timeout(function() {
         //$scope.loading = false;
     //}, 1000);
@@ -36,7 +36,7 @@ function SeekController(seekService, $state, AvailableCategory) {
 				category : vm.searchGoodsCategory.label,
 			})
 			.then(function(data) {
-				console.log(data);
+				//console.log(data);
 				vm.goods = data;
 			})
 			.catch(function() {

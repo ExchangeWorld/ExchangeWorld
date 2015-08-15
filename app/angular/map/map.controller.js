@@ -262,11 +262,7 @@ function MapController(
 	vm.coords   = [0, 0];
 	vm.zoom     = 17;
 	$scope.$on('mapInitialized', mapInitialized);
-	//$scope.$on('sidenavChanged', sidenavChanged);
 	activate();
-	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-		//console.log('$stateChangeStart');
-	})
 
 	function mapInitialized(e, evtMap) {
 		map               = evtMap;

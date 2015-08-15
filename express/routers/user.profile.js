@@ -51,7 +51,10 @@ router.get('/', function(req, res, next) {
 				where: {
 					uid : _uid
 				},
-				include: [goods, followers, followings]
+				include:
+					[{model: goods},
+					{model: followers},
+					{model: followings}]
 			});
 		})
 		.then(function(result) {

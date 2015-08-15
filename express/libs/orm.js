@@ -6,9 +6,18 @@ var sequelize = new Sequelize('exchangeworld', DBLogin.ID, DBLogin.password, {
 	host: 'localhost',
 	dialect: 'mysql',
 
+	// We will use another async-logger soon
+	logging: false,
+
+	maxConcurrentQueries: 200,
+
+	// When server fired, check all the schema
+	// BUT NOT while every visit
+	// sync: { force: true },
+
 	pool: {
-		max: 1688,
-		min: 0,
+		max: 20,
+		min: 5,
 		idle: 3000
 	},
 

@@ -111,6 +111,8 @@
     "lodash": "^3.10.0",
     "ng-infinite-scroll": "^1.2.0",
     "ngmap": "^1.7.9",
+    "pg": "^4.4.1",
+    "pg-hstore": "^2.3.2",
     "restangular": "^1.5.1"
   },
   "jshintConfig": {

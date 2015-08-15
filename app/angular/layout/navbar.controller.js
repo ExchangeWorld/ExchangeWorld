@@ -4,7 +4,7 @@ const layoutModule = require('./layout.module');
 layoutModule.controller('NavbarController', NavbarController);
 
 /** @ngInject */
-function NavbarController($mdSidenav, $state, facebookService) {
+function NavbarController($mdSidenav, $state, auth) {
 	const vm      = this;
 	const state   = ['home', 'seek', 'post', 'manage', 'profile'];
 	vm.stateIndex = 0;
@@ -52,23 +52,11 @@ function NavbarController($mdSidenav, $state, facebookService) {
 			 * 2. sidenav is close
 			 * 3. click the current content again
 			 */
-<<<<<<< HEAD
 			if (
 				!isFromOneCol &&
 				(!$mdSidenav('left').isOpen() || (
 				$mdSidenav('left').isOpen() &&
 				vm.stateIndex === contentIndex))
-=======
-
-			if (
-				//!$mdSidenav('left').isLockedOpen() &&
-				!isFromOneCol &&
-				(!$mdSidenav('left').isOpen() || (
-				$mdSidenav('left').isOpen() &&
-				vm.stateIndex === contentIndex
-				))
-
->>>>>>> 89d562fce338f3dca5322c31ec23c161430c6ab0
 			) {
 				$mdSidenav('left').toggle();
 			}

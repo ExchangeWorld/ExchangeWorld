@@ -6,8 +6,16 @@ const mapModule = require('./map.module');
 mapModule.controller('MapCtrl', MapController);
 
 /** @ngInject */
-function MapController($scope, geolocation, OpenLocationCode, $state, $stateParams) {
-	let map     = undefined;
+function MapController(
+		$scope,
+		geolocation,
+		OpenLocationCode,
+		$state,
+		$stateParams,
+		$rootScope,
+		$timeout
+) {
+	var map     = undefined;
 	const vm    = this;
 	vm.mapStyle = [
 		{
@@ -255,8 +263,10 @@ function MapController($scope, geolocation, OpenLocationCode, $state, $statePara
 	vm.zoom     = 17;
 	$scope.$on('mapInitialized', mapInitialized);
 	//$scope.$on('sidenavChanged', sidenavChanged);
-	console.log($state.current);
 	activate();
+	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+		//console.log('$stateChangeStart');
+	})
 
 	function mapInitialized(e, evtMap) {
 		map               = evtMap;
@@ -265,10 +275,19 @@ function MapController($scope, geolocation, OpenLocationCode, $state, $statePara
 		vm.placeChanged   = placeChanged;
 		vm.centerChanged  = centerChanged;
 		vm.zoomChanged    = zoomChanged;
+
+		$scope.$on('$viewContentLoaded', function(event) {
+			console.log('$viewContentLoaded');
+		});
+
+		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+			console.log('$stateChangeStart');
+		})
 	}
 
 	function activate() {
 		if ($stateParams.olc) {
+			console.log($stateParams.olc);
 			const coord = OpenLocationCode.decode($stateParams.olc.replace(' ','+'));
 			vm.coords = [coord.latitudeCenter, coord.longitudeCenter];
 		}
@@ -277,7 +296,7 @@ function MapController($scope, geolocation, OpenLocationCode, $state, $statePara
 				.getLocation()
 				.then(function(data) {
 					vm.coords = [data.latitude, data.longitude];
-					console.log(OpenLocationCode.encode(data.latitude, data.longitude, 6));
+					console.log(OpenLocationCode.encode(data.latitude, data.longitude));
 				});
 		}
 
@@ -310,12 +329,30 @@ function MapController($scope, geolocation, OpenLocationCode, $state, $statePara
 		}
 	}
 
+	var isIdle = true;
+	var idleTimer;
 	function centerChanged() {
-		$state.go($state.current.name, {
-			olc: OpenLocationCode.encode(map.getCenter().lat(), map.getCenter().lng()),
-		} , {
-			location : 'replace'
-		});
+
+		if(idleTimer) {
+			$timeout.cancel(idleTimer);
+			idleTimer = undefined;
+		}
+
+		$timeout(function() {
+			if (isIdle) {
+				$state.go($state.current.name, {
+					olc : OpenLocationCode.encode(map.getCenter().lat(), map.getCenter().lng()),
+				}, {
+					location : 'replace'
+				});
+			}
+		}, 50);
+
+
+		isIdle = false;
+		idleTimer = $timeout(function() {
+			isIdle = true;
+		}, 49);
 	}
 
 	function zoomChanged() {

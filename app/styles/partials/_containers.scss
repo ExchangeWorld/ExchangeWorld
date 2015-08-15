@@ -1,24 +1,69 @@
-body {
-  overflow: hidden;
-}
-
 #container {
-  margin-top: -$navbar-height;
-  padding-top: $navbar-height;
+    margin-top: -$navbar-height;
+    padding-top: $navbar-height;
 }
 
-md-toolbar{
-  z-index: 1000;
+md-toolbar {
+    z-index: 1000;
 }
 
 #autocomplete {
-  margin-left: 20px;
-  margin-top: 5px;
-
-  input {
-    margin-left: 25px;
-    ::placeholder {
-      color: #fff;
+    margin-left: 20px;
+    margin-top: 5px;
+    input {
+        margin-left: 25px;
+        ::placeholder {
+            color: #fff;
+        }
     }
-  }
+}
+
+.circular {
+    background-position: center;
+    max-width: 100%;
+    max-height: 100%;
+    background-size: cover;
+    display: block;
+    border-radius: 50%;
+}
+
+.home_container1 {
+    background-color: #ECEFF1;
+    padding: 30px 0px;
+}
+
+.home_container2 {
+    background-color: #E5E5ED;
+    padding: 30px 0px;
+}
+
+.info_container {
+    margin: 30px 0px;
+}
+
+.info_container {
+    &.for_input {
+        margin: 10px 0px;
+    }
+}
+
+.waterfall_container {
+    margin: 1.5em 0;
+    padding: 0;
+    column-gap: 1.5em;
+    font-size: .85em;
+    column-count: 2;
+}
+
+.item {
+    display: inline-block;
+    background: #fff;
+    padding: 1em;
+    margin: 0 0 1.5em;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 4px 2px #ccc;
+}
+
+.item img {
+    max-width: 100%;
 }

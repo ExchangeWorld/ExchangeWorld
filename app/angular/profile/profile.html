@@ -1,32 +1,34 @@
-<md-content layout-padding layout-margin>
-    <md-toolbar class="md-accent rounded-corners md-hue-1">
-        <div layout-align="center center" class="md-toolbar-tools">
-            <h2>Profile</h2>
-        </div>
-    </md-toolbar>
-    <div layout="row" style="margin-top:10px">
+<md-content>
+    <div layout="row" class="info_container for_input">
+        <!-- user avatar -->
         <div flex="40">
             <a href="/#/profile"><img class="circular" src="http://i.imgur.com/BYu27mM.jpg" /></a>
         </div>
+        <!-- user name & follow button -->
         <div flex="60" layout="column">
-            <p class="md-body-2">I'm so smart and handsome.</p>
-            <div layout="row">
+            <div layout="row" layout-align="center center">
+                <h4 class="md-subhead">張伯新(SilentSky)</h4>
+            </div>
+            <div layout="row" layout-align="center center">
                 <md-button flex class="md-raised md-primary">
-                    <div layout="row" layout-align="center center">
-                        <i class="material-icons md-24">add_circle</i>
-                        <span>&nbsp;Follow</span>
-                    </div>
+                    <md-icon md-font-set="material-icons">add_circle</md-icon>
+                    <span>&nbsp;Follow</span>
                 </md-button>
             </div>
         </div>
     </div>
-    <md-divider ng-if="!$last" style="margin:10px 0px 10px 0px"></md-divider>
-    <md-tabs md-dynamic-height md-border-bottom>
+    <div layout="row">
+        <p flex layout="row" layout-align="center center" class="md-body-2 trans">追隨人數：&nbsp;<a href='#'>28</a></p>
+        <p flex layout="row" layout-align="center center" class="md-body-2 trans"><a href='#'>20</a>&nbsp;人在追蹤</p>
+    </div>
+    <md-divider class="info_container for_input" style="margin-bottom: 5px"></md-divider>
+    <!-- tabs for user -->
+    <md-tabs md-dynamic-height md-border-bottom md-center-tabs>
         <md-tab label="Profile">
-            <md-content class="md-padding">
-                <md-toolbar class="md-primary rounded-corners">
+            <md-content layout-padding style="margin-top: 10px">
+                <md-toolbar class="md-primary md-hue-1">
                     <div class="md-toolbar-tools">
-                        <h2 class="md-flex">Information</h2>
+                        <h2 flex>Information</h2>
                     </div>
                 </md-toolbar>
                 <p>Age</p>
@@ -37,10 +39,10 @@
             </md-content>
         </md-tab>
         <md-tab label="Exchanging">
-            <md-content class="md-padding">
-                <md-toolbar class="md-primary rounded-corners">
+            <md-content layout-padding>
+                <md-toolbar class="md-primary md-hue-1">
                     <div class="md-toolbar-tools">
-                        <h2 class="md-flex">Exchanging Items</h2>
+                        <h2 flex>Exchanging Items</h2>
                     </div>
                 </md-toolbar>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
@@ -49,10 +51,10 @@
             </md-content>
         </md-tab>
         <md-tab label="Exchanged">
-            <md-content class="md-padding">
-                <md-toolbar class="md-primary rounded-corners">
+            <md-content layout-padding>
+                <md-toolbar class="md-primary md-hue-1">
                     <div class="md-toolbar-tools">
-                        <h2 class="md-flex">Exchanged Items</h2>
+                        <h2 flex>Exchanged Items</h2>
                     </div>
                 </md-toolbar>
                 <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
@@ -60,3 +62,4 @@
         </md-tab>
     </md-tabs>
 </md-content>
+

@@ -1,57 +1,76 @@
 <form ng-submit="vm.onSubmit()">
-
-    <div layout="column" layout-fill>
-        <md-content layout-padding="row">
-            <md-toolbar class="rounded-corners md-primary md-hue-1">
-                <div class="md-toolbar-tools" layout="row" layout-align="center center">
-                    <div>
-                        <span><h2 class="md-headline">Things you have</h2></span>
-                        <!-- fill up the space between left and right area -->
-                        <span flex></span>
-                    </div>
-                </div>
-            </md-toolbar>
-            <md-input-container flex>
-                <label>Name</label>
-                <input type="text" ng-model="vm.goodsName">
-            </md-input-container>
-            <md-input-container flex>
-                <label>Description</label>
-                <textarea type="string" ng-model="vm.goodsDescriptions" columns="1" md-maxlength="100"></textarea>
-            </md-input-container>
-			<input type='file' ng-model='vm.imgEncoded' base-sixty-four-input required accept="image/*"/>
-            <h4>Locate your your location on right side!</h4>
-			<select placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" required>
-				<!--<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>-->
-            </select>
-            <hr>
-            <div layout="column">
-                <md-toolbar class="rounded-corners md-primary md-hue-1">
-                    <div class="md-toolbar-tools layout=" row " layout-align="center center "">
-                        <div>
-                            <span><h2 class="md-headline">Things you want</h2></span>
-                            <!-- fill up the space between left and right area -->
-                            <span flex></span>
-                        </div>
-                    </div>
-                </md-toolbar>
-                <md-input-container flex>
-                    <label>Name</label>
-                    <input ng-model="SomeModel3">
-                </md-input-container>
-                <div layout="row">
-                    <span flex="75"></span>
-                    <div flex="25">
-                        <!--<md-button class="md-accent shadowed md-raised md-hue-1">-->
-						<input type="submit" id="submit" value="Submit"></input>
-                            <!--<div layout="row" layout-align="center center">-->
-                                <!--<i class="material-icons md-24">reply</i> <span>Submit</span>-->
-                            <!--</div>-->
-                        <!--</md-button>-->
-                    </div>
+    <md-content layout-padding>
+        <!-- toolbar -->
+        <md-toolbar class="rounded-corners md-primary md-hue-3">
+            <div flex class="md-toolbar-tools" layout="row" layout-align="center center">
+                <div>
+                    <span><h2 class="md-headline">Things you have</h2></span>
+                    <!-- fill up the space between left and right area -->
+                    <span flex></span>
                 </div>
             </div>
-        </md-content>
-    </div>
-
+        </md-toolbar>
+        <!-- Item Name Input  -->
+        <md-input-container flex class="info_container for_input">
+            <label>Item Name</label>
+            <input type="text" ng-model="vm.goodsName" required>
+            <md-tooltip md-direction="left">物品名稱</md-tooltip>
+        </md-input-container>
+        <!-- Description Input -->
+        <md-input-container flex class="info_container for_input">
+            <label>Description</label>
+            <textarea type="string" ng-model="vm.goodsDescriptions" columns="10" md-maxlength="100" required></textarea>
+            <md-tooltip md-direction="left">物品敘述</md-tooltip>
+        </md-input-container>
+        <!-- Insert Photo -->
+        <div layout="row" class="info_container">
+            <md-icon md-font-set="material-icons">insert_photo</md-icon>
+            <input class="trans" flex="50" type='file' ng-model='vm.imgEncoded' base-sixty-four-input required accept="image/*" />
+            <md-tooltip md-direction="left">加入相片</md-tooltip>
+            <span flex></span>
+        </div>
+        <!-- Location -->
+        <div class="info_container">
+            <h4><md-icon md-font-set="material-icons">location_searching</md-icon>Locate your location on right side!</h4>
+		<md-tooltip>在右邊的地圖定位你的物品吧！</md-tooltip>
+        </div>
+        <!-- Catogories Select -->
+        <div class="info_container">
+            <md-icon md-font-set="material-icons">list</md-icon>
+            <select class="md-button mdbtn-border" placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" required>
+                <!--<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>-->
+            </select>
+            <md-tooltip md-direction="left">物品類別</md-tooltip>
+        </div>
+        <hr>
+        <!-- Toolbar -->
+        <md-toolbar class="md-primary md-hue-3" style="margin-bottom: 10px">
+            <div class="md-toolbar-tools" layout="row" layout-align="center center">
+                <div>
+                    <span><h2 class="md-headline">Things you want</h2></span>
+                    <!-- fill up the space between left and right area -->
+                    <span flex></span>
+                </div>
+            </div>
+        </md-toolbar>
+        <!-- Item Name for wanted -->
+        <md-input-container flex class="info_container for_input">
+            <label>Item Name</label>
+            <input ng-model="SomeModel3">
+            <md-tooltip md-direction="left">你想要的物品</md-tooltip>
+        </md-input-container>
+        <!-- Submit button -->
+        <div layout="row">
+            <span flex="75"></span>
+            <div flex="25">
+                <!--<md-button class="md-accent shadowed md-raised md-hue-1">-->
+                <input class="md-button md-primary md-raised" type="submit" id="submit" value="Submit"></input>
+                <!--<div layout="row" layout-align="center center">-->
+                <!--<i class="material-icons md-24">reply</i> <span>Submit</span>-->
+                <!--</div>-->
+                <!--</md-button>-->
+            </div>
+        </div>
+    </md-content>
 </form>
+

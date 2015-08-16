@@ -273,6 +273,19 @@ function MapController(
 		vm.zoomChanged    = zoomChanged;
 
 		google.maps.event.addListener(map, 'idle', olcChanged);
+
+		$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+			if(toParams.olc) {
+				const coord = OpenLocationCode.decode(toParams.olc.replace(' ','+'));
+				map.panTo({
+					lat : coord.latitudeCenter,
+					lng : coord.longitudeCenter
+				})
+			}
+			if (!isNaN($stateParams.z)) {
+				map.setZoom(parseInt($stateParams.z, 10))
+			}
+		});
 	}
 
 	function activate() {
@@ -292,9 +305,6 @@ function MapController(
 		}
 	}
 
-	function onResize() {
-		google.maps.event.trigger(map, 'resize');
-	}
 
 	function getCurrentPosition() {
 		geolocation
@@ -307,6 +317,7 @@ function MapController(
 			});
 	}
 
+	/* Autocomplete address Search */
 	function placeChanged() {
 		const place = this.getPlace().geometry;
 		if (place.viewport) {
@@ -322,6 +333,7 @@ function MapController(
 		 */
 	}
 
+	/* idle event */
 	function olcChanged() {
 		$state.go($state.current.name, {
 			olc : OpenLocationCode.encode(map.getCenter().lat(), map.getCenter().lng()),
@@ -335,4 +347,9 @@ function MapController(
 			location : 'replace'
 		});
 	}
+
+	function onResize() {
+		google.maps.event.trigger(map, 'resize');
+	}
+
 };

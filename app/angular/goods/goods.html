@@ -2,7 +2,7 @@
 
 	<md-toolbar class="md-accent rounded-corners md-hue-1">
 		<div layout="row" layout-align="center center" class="md-toolbar-tools">
-			<h2>Goods</h2>
+			<h2>{{ vm.goodData.name }}</h2>
 		</div>
 	</md-toolbar>
 
@@ -10,13 +10,8 @@
 
 
 <md-content layout-padding>
-	<img style="width:100%; height:auto" src="http://i.imgur.com/7RoLGdp.jpg" title="source: imgur.com"/>
+	<img style="width:100%; height:auto" ng-src="{{ vm.goodData.photo_path }}" title="source: imgur.com"/>
 	<md-tabs md-dynamic-height md-border-bottom>
-
-		<md-tab label="ItemName">
-			gname = {{ vm.goodData.name }}
-		</md-tab>
-
 		<md-tab label="Owner">
 			<a ng-click="vm.onClickUser( vm.goodData.user.uid )">{{ vm.goodData.user.name }}</a>
 		</md-tab>

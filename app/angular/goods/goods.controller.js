@@ -10,7 +10,7 @@ function GoodsController(goodData, $state) {
 	vm.onClickUser = onClickUser;
 
 	// define onClick event on goods owner
-	function onClickUser(_uid) {
-		$state.go('root.withSidenav.profile', { uid : _uid });
+	function onClickUser(uid) {
+		$state.go('root.withSidenav.profile', { uid : uid });
 	}
 }

@@ -4,7 +4,7 @@ const seekModule = require('./seek.module');
 seekModule.controller('SeekController', SeekController);
 
 /** @ngInject */
-function SeekController(seekService, $state, AvailableCategory) {
+function SeekController(seekService, $state, AvailableCategory, $scope) {
 	var vm                 = this;
 	vm.goods               = [];
 	vm.searchGoodsName     = '';
@@ -12,6 +12,10 @@ function SeekController(seekService, $state, AvailableCategory) {
 	vm.onClickGoods        = onClickGoods;
 	vm.onSearch            = onSearch;
 	vm.availableCategory   = AvailableCategory;
+
+	$scope.$on('boundChanged', function(e, bound) {
+		console.log(bound);
+	})
 
 	activate();
 

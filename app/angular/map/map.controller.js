@@ -15,7 +15,9 @@ function MapController(
 		$rootScope,
 		$timeout
 ) {
+
 	var map     = undefined;
+	var goods   = [];
 	const vm    = this;
 	vm.mapStyle = [
 		{
@@ -262,6 +264,7 @@ function MapController(
 	vm.coords   = [0, 0];
 	vm.zoom     = 17;
 	$scope.$on('mapInitialized', mapInitialized);
+
 	activate();
 
 	function mapInitialized(e, evtMap) {
@@ -269,23 +272,13 @@ function MapController(
 		vm.onResize       = onResize;
 		vm.findMyLocation = getCurrentPosition;
 		vm.placeChanged   = placeChanged;
-		vm.centerChanged  = centerChanged;
 		vm.zoomChanged    = zoomChanged;
 
+		boundChanged();
+		$scope.$on('goodsChanged', goodsChanged);
+		$rootScope.$on('$stateChangeSuccess', urlChanged);
 		google.maps.event.addListener(map, 'idle', olcChanged);
-
-		$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-			if(toParams.olc) {
-				const coord = OpenLocationCode.decode(toParams.olc.replace(' ','+'));
-				map.panTo({
-					lat : coord.latitudeCenter,
-					lng : coord.longitudeCenter
-				})
-			}
-			if (!isNaN($stateParams.z)) {
-				map.setZoom(parseInt($stateParams.z, 10))
-			}
-		});
+		google.maps.event.addListener(map, 'bounds_changed', boundChanged);
 	}
 
 	function activate() {
@@ -305,7 +298,6 @@ function MapController(
 		}
 	}
 
-
 	function getCurrentPosition() {
 		geolocation
 			.getLocation()
@@ -315,6 +307,40 @@ function MapController(
 					lng : data.longitude
 				});
 			});
+	}
+
+	/**
+	 * TODO: Search goods when bound of map changed;
+	 * Send the bound of map to seek.controller
+	 */
+	function boundChanged() {
+		const bound = map.getBounds();
+		$rootScope.$broadcast('boundChanged', bound)
+	}
+
+	/**
+	 * TODO : Receive the goods from seek controller
+	 * Draw maker and overlay here.
+	 */
+	function goodsChanged(e, goods) {
+
+	}
+
+	/**
+	 * When state go to new olc or zoom, move map to proper position.
+	 * (This event will not trigger after reloading page)
+	 */
+	function urlChanged(event, toState, toParams, fromState, fromParams) {
+		if(toParams.olc) {
+			const coord = OpenLocationCode.decode(toParams.olc.replace(' ','+'));
+			map.panTo({
+				lat : coord.latitudeCenter,
+				lng : coord.longitudeCenter
+			})
+		}
+		if (!isNaN($stateParams.z)) {
+			map.setZoom(parseInt($stateParams.z, 10))
+		}
 	}
 
 	/* Autocomplete address Search */
@@ -327,24 +353,21 @@ function MapController(
 		}
 	}
 
-	function centerChanged() {
-		/**
-		 * TODO: Search goods here
-		 */
-	}
-
 	/* idle event */
 	function olcChanged() {
 		$state.go($state.current.name, {
 			olc : OpenLocationCode.encode(map.getCenter().lat(), map.getCenter().lng()),
 		}, {
-			location : 'replace'
+			location : 'replace',
+			notify : false,
 		});
 	}
 
+	/* on-zoom_changed event */
 	function zoomChanged() {
 		$state.go($state.current.name, {z: map.getZoom()} , {
-			location : 'replace'
+			location : 'replace',
+			notify : false,
 		});
 	}
 

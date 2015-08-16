@@ -1,6 +1,7 @@
 "use strict";
 
 const mapModule = require('./map.module');
+var GoodsOverlay = require('./GoodsOverlay.js');
 
 // Controller name 'MapController' has been used by ng-map
 mapModule.controller('MapCtrl', MapController);
@@ -18,6 +19,7 @@ function MapController(
 
 	var map     = undefined;
 	var goods   = [];
+	var overlay = undefined;
 	const vm    = this;
 	vm.mapStyle = [
 		{
@@ -269,19 +271,20 @@ function MapController(
 
 	/* After map is loaded */
 	function mapInitialized(e, evtMap) {
-		console.log(evtMap);
-		console.log(google.maps);
-		map               = evtMap;
-		vm.onResize       = onResize;
-		vm.findMyLocation = getCurrentPosition;
-		vm.placeChanged   = placeChanged;
-		vm.zoomChanged    = zoomChanged;
+		map                    = evtMap;
+		vm.onResize            = onResize;
+		vm.findMyLocation      = getCurrentPosition;
+		vm.placeChanged        = placeChanged;
+		vm.zoomChanged         = zoomChanged;
+		GoodsOverlay.prototype = new google.maps.OverlayView();
 
 		boundChanged();
 		$scope.$on('goodsChanged', goodsChanged);
 		$rootScope.$on('$stateChangeSuccess', urlChanged);
 		google.maps.event.addListener(map, 'idle', olcChanged);
 		google.maps.event.addListener(map, 'bounds_changed', boundChanged);
+
+		overlay = new GoodsOverlay(map);
 	}
 
 	/* Before map is loaded */
@@ -353,14 +356,24 @@ function MapController(
 		/* 4. Delete the overlay when the mouse is out of the marker */
 
 		goods = goods.forEach(function(good) {
+			const marker = new google.maps.Marker({
+				position: new google.maps.LatLng(good.position_y, good.position_x),
+				map: map
+			});
+
+			marker.addListener('click', function() {
+				console.log('marker '+ good.gid + ' is clicked');
+			});
+
+			marker.addListener('mouseover', function() {
+				console.log('marker '+ good.gid + ' is mouseover');
+			});
+
 			return {
 				id : good.gid,
 				img : good.photo_path,
 				category : good.category,
-				marker : new google.maps.Marker({
-					position: new google.maps.LatLng(good.position_y, good.position_x),
-					map: map
-				}),
+				marker : marker,
 			};
 		});
 

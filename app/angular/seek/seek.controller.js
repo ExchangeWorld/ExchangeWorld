@@ -4,7 +4,7 @@ const seekModule = require('./seek.module');
 seekModule.controller('SeekController', SeekController);
 
 /** @ngInject */
-function SeekController(seekService, $state, AvailableCategory, $scope) {
+function SeekController(seekService, $state, AvailableCategory, $scope, $rootScope) {
 	var vm                 = this;
 	vm.goods               = [];
 	vm.searchGoodsName     = '';
@@ -15,29 +15,21 @@ function SeekController(seekService, $state, AvailableCategory, $scope) {
 
 	$scope.$on('boundChanged', function(e, bound) {
 		console.log(bound);
+		onSearch({
+			name     : vm.searchGoodsName,
+			category : vm.searchGoodsCategory.label,
+		});
 	})
 
-	activate();
-
-	/////////
-
-	function activate() {
-		onSearch();
-	}
-
-	function onSearch() {
-
+	function onSearch(filter) {
 		seekService
-			.getSeek({
-				name     : vm.searchGoodsName,
-				category : vm.searchGoodsCategory.label,
-			})
+			.getSeek(filter)
 			.then(function(data) {
-				console.log(data);
+				$rootScope.$broadcast('goodsChanged', data);
 				vm.goods = data;
 			})
 			.catch(function() {
-				vm.goods = undefined;
+				vm.goods = [];
 			});
 	}
 

@@ -72,7 +72,7 @@
     "nodemon": "^1.4.0",
     "phantomjs": "^1.9.17",
     "pretty-hrtime": "^1.0.0",
-    "protractor": "^2.1.0",
+    "protractor": "^1.0.0",
     "run-sequence": "^1.1.0",
     "ssh2": "^0.4.10",
     "streamqueue": "^1.1.0",

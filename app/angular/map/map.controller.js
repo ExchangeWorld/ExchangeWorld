@@ -267,7 +267,10 @@ function MapController(
 
 	activate();
 
+	/* After map is loaded */
 	function mapInitialized(e, evtMap) {
+		console.log(evtMap);
+		console.log(google.maps);
 		map               = evtMap;
 		vm.onResize       = onResize;
 		vm.findMyLocation = getCurrentPosition;
@@ -281,6 +284,7 @@ function MapController(
 		google.maps.event.addListener(map, 'bounds_changed', boundChanged);
 	}
 
+	/* Before map is loaded */
 	function activate() {
 		if ($stateParams.olc) {
 			const coord = OpenLocationCode.decode($stateParams.olc.replace(' ','+'));
@@ -310,12 +314,30 @@ function MapController(
 	}
 
 	/**
-	 * TODO: Search goods when bound of map changed;
+	 * Search goods when bound of map changed;
 	 * Send the bound of map to seek.controller
 	 */
+	var isMoving = false;
+	var timer    = undefined;
 	function boundChanged() {
-		const bound = map.getBounds();
-		$rootScope.$broadcast('boundChanged', bound)
+
+		if(timer) {
+			$timeout.cancel(timer);
+			timer = undefined;
+		}
+
+		$timeout(function() {
+			if (!isMoving) {
+				/* TODO: transform the bound into the foramt that service need */
+				const bound = map.getBounds();
+				$rootScope.$broadcast('boundChanged', bound)
+			}
+		}, 50);
+
+		isMoving = true;
+		timer = $timeout(function() {
+			isMoving = false;
+		}, 49);
 	}
 
 	/**
@@ -323,6 +345,24 @@ function MapController(
 	 * Draw maker and overlay here.
 	 */
 	function goodsChanged(e, goods) {
+
+		/* 1. Clean unused marker */
+		/* 2. Draw new Maker on map */
+		/* 3. Click Event that transistTo seek/:gid */
+		/* 4. Generate a overlay when the mouse is on a marker */
+		/* 4. Delete the overlay when the mouse is out of the marker */
+
+		goods = goods.forEach(function(good) {
+			return {
+				id : good.gid,
+				img : good.photo_path,
+				category : good.category,
+				marker : new google.maps.Marker({
+					position: new google.maps.LatLng(good.position_y, good.position_x),
+					map: map
+				}),
+			};
+		});
 
 	}
 
@@ -341,6 +381,7 @@ function MapController(
 		if (!isNaN($stateParams.z)) {
 			map.setZoom(parseInt($stateParams.z, 10))
 		}
+		boundChanged();
 	}
 
 	/* Autocomplete address Search */
@@ -371,6 +412,7 @@ function MapController(
 		});
 	}
 
+	/* Manually trigger map resize event due to resize directive*/
 	function onResize() {
 		google.maps.event.trigger(map, 'resize');
 	}

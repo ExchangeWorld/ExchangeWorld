@@ -26,10 +26,9 @@ function seekService(Restangular, $q, exception) {
 			.all('goods/search')
 			.getList(constrains/*{name: xxx}*/)
 			.then(function(data) {
-				//console.log(data);
 				if (_.isArray(data)) {
 					defer.resolve(data);
-				} 
+				}
 			})
 			.catch(function(error) {
 				return exception.catcher('[Seek Service] getSeek error: ')(error);

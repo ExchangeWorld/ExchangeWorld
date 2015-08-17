@@ -26,7 +26,7 @@
         <div layout="row" class="info_container">
             <md-icon md-font-set="material-icons" class="hide">insert_photo</md-icon>
             <input class="trans" flex="50" type='file' ng-model='vm.imgEncoded' base-sixty-four-input required accept="image/*" />
-            <md-tooltip md-direction="left">加入相片</md-tooltip>
+            <md-tooltip>加入相片</md-tooltip>
             <span flex></span>
         </div>
         <!-- Location -->
@@ -40,7 +40,7 @@
             <select class="md-button mdbtn-border" placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" required>
                 <!--<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>-->
             </select>
-            <md-tooltip md-direction="left">物品類別</md-tooltip>
+            <md-tooltip>物品類別</md-tooltip>
         </div>
         <hr>
         <!-- Submit button -->

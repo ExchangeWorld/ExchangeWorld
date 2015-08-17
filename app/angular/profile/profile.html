@@ -27,6 +27,7 @@
         <md-tab label="Profile">
             <md-content layout-padding style="margin-top: 10px">
                 <div layout="row">
+                    <!-- user information -->
                     <div flex="60">
                         <div layout="row" class="profile_text">
                             <p class="md-body-2">
@@ -52,6 +53,7 @@
                                 a25204641@gmail.com</p>
                         </div>
                     </div>
+                    <!-- edit fab button -->
                     <div flex offset="15" layout layout-align="center start">
                         <md-button class="md-fab md-primary md-hue-3">
                             <md-icon md-font-set="material-icons">edit</md-icon>
@@ -65,6 +67,7 @@
             <md-content layout-padding>
                 <div layout="column">
                     <div layout="row" class="info_container for_input">
+                        <!-- first user item -->
                         <div layout="column" flex="40" class="item profile">
                             <img src="http://i.imgur.com/7RoLGdp.jpg" />
                             <div layout="column" layout-align="center center">
@@ -72,9 +75,11 @@
                                 <p class="md-body-1">SilentSky</p>
                             </div>
                         </div>
+                        <!-- exchange icon -->
                         <div flex="20" layout layout-align="center center">
                             <md-icon md-font-set="material-icons" class="hide">autorenew</md-icon>
                         </div>
+                        <!-- second user item -->
                         <div flex="40" class="item profile">
                             <img src="http://i.imgur.com/7RoLGdp.jpg" />
                             <div layout="column" layout-align="center center">
@@ -83,6 +88,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- second exchange event test -->
                     <div layout="row">
                         <div layout="column" flex="40" class="item profile">
                             <img src="http://i.imgur.com/7RoLGdp.jpg" />
@@ -107,16 +113,31 @@
         </md-tab>
         <md-tab label="Exchanged">
             <md-content layout-padding>
-                <div layout="column" class="info_container for_input">
-                    <div layout="row">
-                        <div flex="40" class="item profile">
-                            <img src="http://i.imgur.com/7RoLGdp.jpg" />
+                <div layout="row" class="info_container for_input">
+                    <!-- item photo that user has exchanged -->
+                    <div flex="40" class="item profile">
+                        <img src="http://i.imgur.com/7RoLGdp.jpg" />
+                    </div>
+                    <!-- exchange information -->
+                    <div offset="15" flex layout-align="center center">
+                        <div layout="row" class="profile_text">
+                            <p class="md-body-2">
+                                <md-icon md-font-set="material-icons" class="hide">people_outline</md-icon>
+                                with: LonSilent</p>
                         </div>
-                        <div offset="15" flex layout="column" layout-align="start start">
-                            <p class="md-body-2">with: LonSilent</p>
-                            <p class="md-body-2">Date: 2015/8/30</p>
-                            <p class="md-body-2">Rating: Good</p>
+                        <md-divider></md-divider>
+                        <div layout="row" class="profile_text">
+                            <p class="md-body-2">
+                                <md-icon md-font-set="material-icons" class="hide">event_note</md-icon>
+                                Date: 2015/8/30</p>
                         </div>
+                        <md-divider></md-divider>
+                        <div layout="row" class="profile_text">
+                            <p class="md-body-2">
+                                <md-icon md-font-set="material-icons" class="hide">thumbs_up_down</md-icon>
+                                Rating: Good</p>
+                        </div>
+                        <md-divider></md-divider>
                     </div>
                 </div>
             </md-content>

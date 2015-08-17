@@ -17,13 +17,13 @@ var Notifications = sequelize.define('notifications', {
 	trigger_reason: {
 		type: Sequelize.STRING,
 		allowNull: false
-	}
+	},
 	content: {
 		type: Sequelize.TEXT,
 		allowNull: false
 	}
 }, {
-	timestamp: true,
+	timestamps: true,
 	createdAt: 'timestamp',
 	updatedAt: false,
 });

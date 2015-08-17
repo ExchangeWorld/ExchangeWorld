@@ -351,13 +351,24 @@ function MapController(
 	function goodsChanged(e, data) {
 
 		/* 1. Clean unused marker */
-		// goods = _.chain(data).merge()
-		/* 2. Draw new Maker on map */
-		/* 3. Click Event that transistTo seek/:gid */
-		/* 4. Generate a overlay when the mouse is on a marker */
-		/* 4. Delete the overlay when the mouse is out of the marker */
+		var hashTable = {};
+		data.forEach(function(obj) { hashTable[obj.gid] = obj; });
+		var oldGoods = goods.filter(function(good, index) {
+			if (!(good.gid in hashTable)) return true;
 
-		goods = data.forEach(function(good) {
+			console.log(good.gid + ' is already rendered.');
+			data[index] = good;
+			return false;
+		});
+		oldGoods.forEach(function(oldGood) { oldGood.marker.setMap(null); });
+
+		/* 2. Draw new Maker on map */
+
+		goods = data.map(function(good) {
+			if (good.marker) {
+				return good;
+			};
+
 			const marker = new google.maps.Marker({
 				position: new google.maps.LatLng(good.position_y, good.position_x),
 				map: map
@@ -372,12 +383,19 @@ function MapController(
 			});
 
 			return {
-				id : good.gid,
+				gid : good.gid,
 				img : good.photo_path,
 				category : good.category,
 				marker : marker,
 			};
+
 		});
+
+		/* 3. Click Event that transistTo seek/:gid */
+		/* 4. Generate a overlay when the mouse is on a marker */
+		/* 4. Delete the overlay when the mouse is out of the marker */
+
+
 
 	}
 

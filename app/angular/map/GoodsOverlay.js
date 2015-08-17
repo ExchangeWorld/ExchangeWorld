@@ -15,10 +15,12 @@ function onAdd() {
 	div.style.backgroundColor = 'red';
 
 	this.element = div;
+	google.maps.event.addDomListener(div, 'click', function(e) {
+		console.log('OverlayView click');
+	}.bind(this));
 
 	// Add the element to the "overlayLayer" pane.
-	var panes = this.getPanes();
-	panes.overlayLayer.appendChild(div);
+	this.getPanes().overlayMouseTarget.appendChild(div);
 }
 
 function draw() {

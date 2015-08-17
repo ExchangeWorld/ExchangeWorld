@@ -1,6 +1,7 @@
 "use strict";
 
-const mapModule = require('./map.module');
+const mapModule  = require('./map.module');
+const _          = require('lodash');
 var GoodsOverlay = require('./GoodsOverlay.js');
 
 // Controller name 'MapController' has been used by ng-map
@@ -347,15 +348,16 @@ function MapController(
 	 * TODO : Receive the goods from seek controller
 	 * Draw maker and overlay here.
 	 */
-	function goodsChanged(e, goods) {
+	function goodsChanged(e, data) {
 
 		/* 1. Clean unused marker */
+		// goods = _.chain(data).merge()
 		/* 2. Draw new Maker on map */
 		/* 3. Click Event that transistTo seek/:gid */
 		/* 4. Generate a overlay when the mouse is on a marker */
 		/* 4. Delete the overlay when the mouse is out of the marker */
 
-		goods = goods.forEach(function(good) {
+		goods = data.forEach(function(good) {
 			const marker = new google.maps.Marker({
 				position: new google.maps.LatLng(good.position_y, good.position_x),
 				map: map

@@ -53,6 +53,7 @@ module.exports = function() {
 	server.use('/api/exchange', require('./routers/exchange'));
 	server.use('/api/authenticate', require('./routers/authenticate'));
 	server.use('/api/notification', require('./routers/notification'));
+	server.use('/api/message', require('./routers/message'));
 
 	// catch 404 and forward to error handler
 	server.use(function(req, res, next) {

@@ -4,6 +4,7 @@
 		zoom="{{vm.zoom}}"
 		on-center-changed="vm.centerChanged()"
 		on-zoom_changed="vm.zoomChanged()"
+		on-click="vm.onClick()"
 		styles="{{vm.mapStyle}}"
 		draggable-cursor="default"
 		dragging-cursor="default"
@@ -15,7 +16,7 @@
 		scale-control="false"
 		overview-map-control="false"
 		map-type-control="false"
-		resize ng-style="resizeWithOffset(64)" notifier="vm.onResize()">
+		resize ng-style="resizeWithOffset(64)">
 
 		<custom-control position="LEFT_TOP" index="1">
 			<md-input-container class="md-warn" id="autocomplete">

@@ -273,10 +273,10 @@ function MapController(
 	/* After map is loaded */
 	function mapInitialized(e, evtMap) {
 		map                    = evtMap;
-		vm.onResize            = onResize;
 		vm.findMyLocation      = getCurrentPosition;
 		vm.placeChanged        = placeChanged;
 		vm.zoomChanged         = zoomChanged;
+		vm.onClick             = onClick;
 		GoodsOverlay.prototype = new google.maps.OverlayView();
 
 		boundChanged();
@@ -284,8 +284,6 @@ function MapController(
 		$rootScope.$on('$stateChangeSuccess', urlChanged);
 		google.maps.event.addListener(map, 'idle', olcChanged);
 		google.maps.event.addListener(map, 'bounds_changed', boundChanged);
-
-		overlay = new GoodsOverlay(map);
 	}
 
 	/* Before map is loaded */
@@ -325,6 +323,9 @@ function MapController(
 	var timer    = undefined;
 	function boundChanged() {
 
+		/* Manually trigger map resize event due to resize directive*/
+		google.maps.event.trigger(map, 'resize');
+
 		if(timer) {
 			$timeout.cancel(timer);
 			timer = undefined;
@@ -342,6 +343,7 @@ function MapController(
 		timer = $timeout(function() {
 			isMoving = false;
 		}, 49);
+
 	}
 
 	/**
@@ -352,22 +354,25 @@ function MapController(
 
 		/* 1. Clean unused marker */
 		var hashTable = {};
-		data.forEach(function(obj) { hashTable[obj.gid] = obj; });
-		var oldGoods = goods.filter(function(good, index) {
-			if (!(good.gid in hashTable)) return true;
+		data.forEach(function(obj) { hashTable[obj.gid] = true; });
+		goods
+			.filter(function(good, index) {
+				if (!(good.gid in hashTable)) return true;
 
-			console.log(good.gid + ' is already rendered.');
-			data[index] = good;
-			return false;
-		});
-		oldGoods.forEach(function(oldGood) { oldGood.marker.setMap(null); });
+				console.log(good.gid + ' is already rendered.');
+				data[index] = good;
+				return false;
+			})
+			.forEach(function(oldGood) {
+					oldGood.marker.setMap(null);
+			});
 
 		/* 2. Draw new Maker on map */
 
 		goods = data.map(function(good) {
 			if (good.marker) {
 				return good;
-			};
+			}
 
 			const marker = new google.maps.Marker({
 				position: new google.maps.LatLng(good.position_y, good.position_x),
@@ -375,12 +380,22 @@ function MapController(
 			});
 
 			marker.addListener('click', function() {
-				console.log('marker '+ good.gid + ' is clicked');
+				//console.log('marker '+ good.gid + ' is clicked');
+				if (overlay) {
+					overlay.onRemove();
+					overlay = undefined;
+				}
+				overlay = new GoodsOverlay(map, good);
 			});
 
-			marker.addListener('mouseover', function() {
-				console.log('marker '+ good.gid + ' is mouseover');
-			});
+			//marker.addListener('mouseover', function() {
+			//	//console.log('marker '+ good.gid + ' is mouseover');
+			//	if (overlay) {
+			//		overlay.onRemove();
+			//		overlay = undefined;
+			//	}
+			//	overlay = new GoodsOverlay(map, good);
+			//});
 
 			return {
 				gid : good.gid,
@@ -388,15 +403,11 @@ function MapController(
 				category : good.category,
 				marker : marker,
 			};
-
 		});
 
 		/* 3. Click Event that transistTo seek/:gid */
 		/* 4. Generate a overlay when the mouse is on a marker */
 		/* 4. Delete the overlay when the mouse is out of the marker */
-
-
-
 	}
 
 	/**
@@ -419,6 +430,11 @@ function MapController(
 
 	/* Autocomplete address Search */
 	function placeChanged() {
+		if(overlay) {
+			overlay.onRemove();
+			overlay = undefined;
+		}
+
 		const place = this.getPlace().geometry;
 		if (place.viewport) {
 			map.panToBounds(place.viewport);
@@ -445,9 +461,11 @@ function MapController(
 		});
 	}
 
-	/* Manually trigger map resize event due to resize directive*/
-	function onResize() {
-		google.maps.event.trigger(map, 'resize');
+	function onClick() {
+		if (overlay) {
+			overlay.onRemove();
+			overlay = undefined;
+		}
 	}
 
-};
+}

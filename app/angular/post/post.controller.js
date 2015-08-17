@@ -4,7 +4,7 @@ const postModule = require('./post.module');
 postModule.controller('PostController', PostController);
 
 /** @ngInject */
-function PostController(postService, $state, AvailableCategory) {
+function PostController(postService, $state,auth, AvailableCategory) {
 	var vm               = this;
 	vm.goodsName         = '';
 	vm.goodsDescriptions = '';
@@ -27,8 +27,8 @@ function PostController(postService, $state, AvailableCategory) {
 			category    : vm.goodsCategory.label,
 			position_x  : 123.4,
 			position_y  : 23.4,
-			owner_uid   : '12345',
 			photo_path  : '',
+			owner_uid   : auth.currentUser().uid,
 		};
 		
 

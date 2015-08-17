@@ -24,19 +24,19 @@
         </md-input-container>
         <!-- Insert Photo -->
         <div layout="row" class="info_container">
-            <md-icon md-font-set="material-icons">insert_photo</md-icon>
+            <md-icon md-font-set="material-icons" class="hide">insert_photo</md-icon>
             <input class="trans" flex="50" type='file' ng-model='vm.imgEncoded' base-sixty-four-input required accept="image/*" />
             <md-tooltip md-direction="left">加入相片</md-tooltip>
             <span flex></span>
         </div>
         <!-- Location -->
         <div class="info_container">
-            <h4><md-icon md-font-set="material-icons">location_searching</md-icon>Locate your location on right side!</h4>
-		<md-tooltip>在右邊的地圖定位你的物品吧！</md-tooltip>
+            <h4><md-icon md-font-set="material-icons" class="hide">location_searching</md-icon>Locate your location on right side!</h4>
+            <md-tooltip>在右邊的地圖定位你的物品吧！</md-tooltip>
         </div>
         <!-- Catogories Select -->
         <div class="info_container">
-            <md-icon md-font-set="material-icons">list</md-icon>
+            <md-icon md-font-set="material-icons" class="hide">list</md-icon>
             <select class="md-button mdbtn-border" placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" required>
                 <!--<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>-->
             </select>

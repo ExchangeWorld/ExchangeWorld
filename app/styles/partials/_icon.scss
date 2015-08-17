@@ -58,3 +58,9 @@
         }
     }
 }
+
+.material-icons {
+    &.hide {
+        cursor: default;
+    }
+}

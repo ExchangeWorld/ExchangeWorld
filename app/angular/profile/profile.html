@@ -30,25 +30,25 @@
                     <div flex="60">
                         <div layout="row" class="profile_text">
                             <p class="md-body-2">
-                                <md-icon md-font-set="material-icons">person</md-icon>
+                                <md-icon md-font-set="material-icons" class="hide">person</md-icon>
                                 Male</p>
                         </div>
                         <md-divider md-inset></md-divider>
                         <div layout="row" class="profile_text">
                             <p class="md-body-2">
-                                <md-icon md-font-set="material-icons">today</md-icon>
+                                <md-icon md-font-set="material-icons" class="hide">today</md-icon>
                                 Born in February, 15, 1994</p>
                         </div>
                         <md-divider md-inset></md-divider>
                         <div layout="row">
                             <p class="md-body-2 profile_text">
-                                <md-icon md-font-set="material-icons">terrain</md-icon>
+                                <md-icon md-font-set="material-icons" class="hide">terrain</md-icon>
                                 Taichung, Taiwan</p>
                         </div>
                         <md-divider md-inset></md-divider>
                         <div layout="row">
                             <p class="md-body-2 profile_text">
-                                <md-icon md-font-set="material-icons">email</md-icon>
+                                <md-icon md-font-set="material-icons" class="hide">email</md-icon>
                                 a25204641@gmail.com</p>
                         </div>
                     </div>
@@ -64,17 +64,42 @@
         <md-tab label="Exchanging">
             <md-content layout-padding>
                 <div layout="column">
+                    <div layout="row" class="info_container for_input">
+                        <div layout="column" flex="40" class="item profile">
+                            <img src="http://i.imgur.com/7RoLGdp.jpg" />
+                            <div layout="column" layout-align="center center">
+                                <p class="md-body-2">BestItem_TW</p>
+                                <p class="md-body-1">SilentSky</p>
+                            </div>
+                        </div>
+                        <div flex="20" layout layout-align="center center">
+                            <md-icon md-font-set="material-icons" class="hide">autorenew</md-icon>
+                        </div>
+                        <div flex="40" class="item profile">
+                            <img src="http://i.imgur.com/7RoLGdp.jpg" />
+                            <div layout="column" layout-align="center center">
+                                <p class="md-body-2">BestItem_US</p>
+                                <p class="md-body-1">LonSilent</p>
+                            </div>
+                        </div>
+                    </div>
                     <div layout="row">
                         <div layout="column" flex="40" class="item profile">
                             <img src="http://i.imgur.com/7RoLGdp.jpg" />
-                            <p class="md-body-2">SilentSky</p>
+                            <div layout="column" layout-align="center center">
+                                <p class="md-body-2">BestItem_TW</p>
+                                <p class="md-body-1">SilentSky</p>
+                            </div>
                         </div>
                         <div flex="20" layout layout-align="center center">
-                            <md-icon md-font-set="material-icons" style="cursor: default;">autorenew</md-icon>
+                            <md-icon md-font-set="material-icons" class="hide">autorenew</md-icon>
                         </div>
                         <div flex="40" class="item profile">
-                            <img class="circular" src="http://i.imgur.com/7RoLGdp.jpg" />
-                            <p class="md-body-2">LonSilent</p>
+                            <img src="http://i.imgur.com/7RoLGdp.jpg" />
+                            <div layout="column" layout-align="center center">
+                                <p class="md-body-2">BestItem_US</p>
+                                <p class="md-body-1">LonSilent</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,6 +107,18 @@
         </md-tab>
         <md-tab label="Exchanged">
             <md-content layout-padding>
+                <div layout="column" class="info_container for_input">
+                    <div layout="row">
+                        <div flex="40" class="item profile">
+                            <img src="http://i.imgur.com/7RoLGdp.jpg" />
+                        </div>
+                        <div offset="15" flex layout="column" layout-align="start start">
+                            <p class="md-body-2">with: LonSilent</p>
+                            <p class="md-body-2">Date: 2015/8/30</p>
+                            <p class="md-body-2">Rating: Good</p>
+                        </div>
+                    </div>
+                </div>
             </md-content>
         </md-tab>
     </md-tabs>

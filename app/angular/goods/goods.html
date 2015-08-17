@@ -1,27 +1,28 @@
 <md-content layout-padding>
-
-	<md-toolbar class="md-accent rounded-corners md-hue-1">
-		<div layout="row" layout-align="center center" class="md-toolbar-tools">
-			<h2>{{ vm.goodData.name }}</h2>
-		</div>
-	</md-toolbar>
-
+    <div flex="80" layout layout-align="center center">
+		<img style="max-width: 75%;" src="{{ vm.goodData.photo_path }}" title="source: imgur.com" />
+    </div>
+    <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="ItemName">
+            <div class="goods_text">
+                <p class="md-headline">{{ vm.goodData.name }}</p>
+            </div>
+        </md-tab>
+        <md-tab label="Owner">
+            <div>
+                <a ng-click="vm.onClickUser( vm.goodData.user.uid )">{{ vm.goodData.user.name }}</a>
+            </div>
+        </md-tab>
+        <md-tab label="Catogories">
+            <div class="goods_text">
+                <p class="md-headline">{{ vm.goodData.category }}</p>
+            </div>
+        </md-tab>
+        <md-tab label="Description">
+            <div class="goods_text">
+                <p class="md-headline">{{ vm.goodData.description }}</p>
+            </div>
+        </md-tab>
+    </md-tabs>
 </md-content>
 
-
-<md-content layout-padding>
-	<img style="width:100%; height:auto" ng-src="{{ vm.goodData.photo_path }}" title="source: imgur.com"/>
-	<md-tabs md-dynamic-height md-border-bottom>
-		<md-tab label="Owner">
-			<a ng-click="vm.onClickUser( vm.goodData.user.uid )">{{ vm.goodData.user.name }}</a>
-		</md-tab>
-
-		<md-tab label="Catogories">
-			Categories = {{ vm.goodData.category }}
-		</md-tab>
-
-		<md-tab label="Description">
-			description = {{ vm.goodData.description}}
-		</md-tab>
-	</md-tabs>
-</md-content>

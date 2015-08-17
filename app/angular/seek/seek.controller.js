@@ -12,7 +12,6 @@ function SeekController(seekService, $state, AvailableCategory) {
 	vm.onClickGoods        = onClickGoods;
 	vm.onSearch            = onSearch;
 	vm.availableCategory   = AvailableCategory;
-//>>>>>>> feature/dev_UI
 
     //$scope.loading = false;
 	activate();

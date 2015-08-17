@@ -41,8 +41,8 @@ router.get('/', function(req, res, next) {
 			return goods.findAll({
 				where: {
 					$and: [{
-						name:     {$like: '%'+name+'%' }
-						//category: (category ? {$like: '%'} : category)
+						category: (category ? {$like: '%'} : category),
+						name: (name ? {$like: '%'} : {$like: '%'+name+'%'})
 					}],
 					status: 0,
 					deleted: 0

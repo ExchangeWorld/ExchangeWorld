@@ -2,10 +2,10 @@
 <div layout="row" layout-sm="row">
     <md-input-container flex="80" class="md-primary">
         <label>Search</label>
-        <input ng-model="SomeModel">
+        <input ng-model="vm.searchGoodsName">
         <md-tooltip md-direction="left">搜尋</md-tooltip>
     </md-input-container>
-    <md-button flex class="md-accent md-raised md-hue-1 seek_btn">
+    <md-button flex class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch()">
         <md-icon md-font-set="material-icons">search</md-icon><span class="ng-scope">Seek!</span>
     </md-button>
 </div>

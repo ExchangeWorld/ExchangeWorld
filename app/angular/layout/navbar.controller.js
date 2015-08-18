@@ -19,14 +19,15 @@ function NavbarController($mdSidenav, $state, auth) {
 	activate();
 
 	function activate() {
-		auth
-			.init()
-			.then(function(data) {
-				vm.user = data;
-				getLoginState();
-			});
+		if(!vm.isLoggedIn) {
+			auth
+				.init()
+				.then(function(data) {
+					vm.user = data;
+					getLoginState();
+				});
+		}
 	}
-
 
 	function setContent(contentIndex) {
 		//	vm.content = state[contentIndex];

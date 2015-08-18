@@ -20,7 +20,7 @@ function facebook(Facebook, Restangular, $q, exception) {
 	////////////////
 
 	/** get facebook login status */
-	function getLoginStatus(){
+	function getLoginStatus() {
 		return Facebook.getLoginStatus(function(response) {
 			if (response.status === 'connected') {
 				return true;
@@ -48,42 +48,49 @@ function facebook(Facebook, Restangular, $q, exception) {
 	}
 
 	/**
-	 * me
+	 * me()
 	 * get user's facebook basic infomations 
+	 * fields is an object like this:
+	 * { fields: 'id, name, email, pictures' }
 	 */
-	function me() {
-		return Facebook.api('me?fields=about,picture,email,name', function(response) {
+	function me(fields) {
+		return Facebook.api('/me?', fields, function(response) {
 			return response;
 		});
 	}
 
-	function register(user_data) {
+	function register(user) {
+		console.log(user);
 		const defer = $q.defer();
-
-		var newUser = {
-			fb_id      : user_data.id,
-			name       : user_data.name,
-			photo_path : user_data.picture.data.url,
-			email      : user_data.email,
-		};
 
 		Restangular
 			.all('user')
-			.getList({fb_id: newUser.fb_id})
+			.getList({ fb_id: user.id })
 			.then(function(data) {
-				if(_.isArray(data)){
-					if(data.length === 0) {
-						Restangular
-							.all('user/register')
-							.post(newUser)
-							.then(function(data){
-								if (data !== undefined ) {
-									defer.resolve(data);
-								} 
-							})
-							.catch(function(error) {
-								return exception.catcher('[Facebook Service] register error: ')(error);
+				if (_.isArray(data)) {
+					if (data.length === 0) {
+
+						me({ fields: 'id, name, email, picture' })
+							.then(function(user_data) {
+								Restangular
+									.all('user/register')
+									.post({
+										fb_id        : user_data.id,
+										name         : user_data.name,
+										photo_path   : user_data.picture.data.url,
+										email        : user_data.email,
+										//introduction : user_data.bio,
+									})
+									.then(function(data) {
+										if (data !== undefined) {
+											defer.resolve(data);
+										}
+									})
+									.catch(function(error) {
+										return exception.catcher('[Facebook Service] register error: ')(error);
+									});
 							});
+
 					} else {
 						defer.resolve(data[0]);
 					}

@@ -67,7 +67,7 @@ function auth(facebookService, $q) {
 	function fetchMe() {
 		const defer = $q.defer();
 		facebookService
-			.me() // get user facebook data.
+			.me({ fields: 'id' }) // get user facebook id.
 			.then(function(response) {
 				/** Call API for create/get new EXWD user. */
 				facebookService

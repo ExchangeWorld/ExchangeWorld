@@ -55,3 +55,14 @@ map {
     top: 8px;
     right: 10px;
 }
+
+.notification {
+    position: absolute;
+    right: 18px;
+    top: -2px;
+    background-color: #FF8F00;
+    line-height: 20px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}

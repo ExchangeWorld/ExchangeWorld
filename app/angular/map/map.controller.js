@@ -10,11 +10,11 @@ mapModule.controller('MapCtrl', MapController);
 /** @ngInject */
 function MapController(
 		$scope,
+		$rootScope,
 		geolocation,
 		OpenLocationCode,
 		$state,
 		$stateParams,
-		$rootScope,
 		$timeout
 ) {
 
@@ -268,6 +268,7 @@ function MapController(
 	vm.zoom     = 17;
 	$scope.$on('mapInitialized', mapInitialized);
 
+
 	activate();
 
 	/* After map is loaded */
@@ -280,7 +281,11 @@ function MapController(
 		GoodsOverlay.prototype = new google.maps.OverlayView();
 
 		boundChanged();
+		//$rootScope.$broadcast('mapReady', evtMap);
 		$scope.$on('goodsChanged', goodsChanged);
+		$scope.$on('mapMoveTo', mapMoveTo)
+		$scope.$on('openGoodsOverlay', openGoodsOverlay);
+		$scope.$on('closeGoodsOverlay', closeGoodsOverlay);
 		$rootScope.$on('$stateChangeSuccess', urlChanged);
 		google.maps.event.addListener(map, 'idle', olcChanged);
 		google.maps.event.addListener(map, 'bounds_changed', boundChanged);
@@ -335,7 +340,7 @@ function MapController(
 			if (!isMoving) {
 				/* TODO: transform the bound into the foramt that service need */
 				const bound = map.getBounds();
-				$rootScope.$broadcast('boundChanged', bound)
+				$rootScope.$broadcast('boundChanged', bound);
 			}
 		}, 50);
 
@@ -368,7 +373,6 @@ function MapController(
 			});
 
 		/* 2. Draw new Maker on map */
-
 		goods = data.map(function(good) {
 			if (good.marker) {
 				return good;
@@ -379,35 +383,25 @@ function MapController(
 				map: map
 			});
 
-			marker.addListener('click', function() {
-				//console.log('marker '+ good.gid + ' is clicked');
-				if (overlay) {
-					overlay.onRemove();
-					overlay = undefined;
-				}
-				overlay = new GoodsOverlay(map, good);
-			});
-
-			//marker.addListener('mouseover', function() {
-			//	//console.log('marker '+ good.gid + ' is mouseover');
-			//	if (overlay) {
-			//		overlay.onRemove();
-			//		overlay = undefined;
-			//	}
-			//	overlay = new GoodsOverlay(map, good);
-			//});
-
-			return {
+			good = {
 				gid : good.gid,
 				img : good.photo_path,
 				category : good.category,
 				marker : marker,
 			};
-		});
 
-		/* 3. Click Event that transistTo seek/:gid */
-		/* 4. Generate a overlay when the mouse is on a marker */
-		/* 4. Delete the overlay when the mouse is out of the marker */
+			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
+			marker.addListener('click', function() {
+				if (overlay) {
+					overlay.onRemove();
+					overlay = undefined;
+				}
+
+				overlay = new GoodsOverlay(map, good, $state);
+			});
+
+			return good;
+		});
 	}
 
 	/**
@@ -461,6 +455,25 @@ function MapController(
 		});
 	}
 
+	function mapMoveTo(e, gid) {
+		map.panTo(_findGood(gid).marker.getPosition());
+	}
+
+	function openGoodsOverlay(e, gid) {
+		if (overlay) {
+			overlay.onRemove();
+			overlay = undefined;
+		}
+		overlay = new GoodsOverlay(map, _findGood(gid), $state);
+	}
+
+	function closeGoodsOverlay() {
+		if (overlay) {
+			overlay.onRemove();
+			overlay = undefined;
+		}
+	}
+
 	function onClick() {
 		if (overlay) {
 			overlay.onRemove();
@@ -468,4 +481,7 @@ function MapController(
 		}
 	}
 
+	function _findGood(gid) {
+		return _.where(goods, {gid : gid})[0];
+	}
 }

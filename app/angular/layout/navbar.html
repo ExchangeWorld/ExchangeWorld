@@ -6,7 +6,8 @@
 				<span hide-md hide-sm>ExchangeWorld</span>
         </md-button>
         </span>
-        <div flex="20" flex-sm flex-sm="30" offset="15" offset-sm="5" layout="row" layout-align="center center">
+        <span flex="15" hide-sm></span>
+        <div flex="20" flex-sm flex-sm="25" layout="row" layout-align="center center">
             <md-button flex ng-click="vm.onClick(1)" ng-class="{'active': contentIs(1)}">
                 <md-icon md-font-set="material-icons">dashboard</md-icon>
                 <span hide-md hide-sm>SEEK</span>
@@ -26,16 +27,56 @@
 			-->
         </div>
         <div flex flex-sm offset="20" offset-sm="5" layout="row" layout-align="center center">
-            <md-button>
-                <md-icon class="material-icons">notifications</md-icon>
-                <p class="notification md-caption">3</p>
-            </md-button>
-            <img style="max-height:20px; max-width:20px" ng-src="{{ vm.user.photo_path }}"></img>
-            <md-menu flex md-offset="8 75">
+            <md-menu flex="30" md-offset="-233 75">
                 <md-button ng-click="$mdOpenMenu()">
-                    {{ vm.user.name }}
-                    <span ng-show="!vm.isLoggedIn" style="text-transform: none;">
-					登入</span>
+                    <md-icon class="material-icons">notifications</md-icon>
+                    <p class="notification md-caption">3</p>
+                </md-button>
+                <md-menu-content width="5" style="padding-bottom: 0px">
+                    <md-menu-item style="min-height: 30px; height:30px">
+                        <p class="md-body-1">Notification</p>
+                    </md-menu-item>
+                    <md-divider></md-divider>
+                    <!-- unread notification -->
+                    <md-menu-item style="min-height: 80px; background-color: #E9F3FF;">
+                        <div layout="row" layout-align="start center">
+                            <!-- user avatar -->
+                            <img flex style="max-height:50px; max-width:50px;" ng-show="vm.isLoggedIn" ng-src="{{ vm.user.photo_path }}"></img>
+                            <!-- notification text -->
+                            <div offset="5" flex="70">
+                                <p class="md-body-2 note">You like SilentSky's comment:"睡不著發個廢文豪爽窩".</p>
+                                <p class="md-caption note" style="color: #BCBCBC;">36分前</p>
+                            </div>
+                        </div>
+                    </md-menu-item>
+                    <md-divider></md-divider>
+                    <!-- read notification -->
+                    <md-menu-item style="min-height: 80px;">
+                        <div layout="row" layout-algin="start center">
+                            <!-- user avatar -->
+                            <img flex style="max-height:50px; max-width:50px;" ng-show="vm.isLoggedIn" ng-src="{{ vm.user.photo_path }}"></img>
+                            <!-- notification text -->
+                            <div offset="5" flex="70">
+                                <p class="md-body-2 note">從SilentSky接受一個交換要求</p>
+                                <p class="md-caption note" style="color: #BCBCBC;">51分前</p>
+                            </div>
+                        </div>
+                    </md-menu-item>
+                    <md-divider></md-divider>
+                    <!-- See All text -->
+                    <md-menu-item style="min-height: 30px; height:30px">
+                        <p class="md-body-2">See All</p>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+            <img style="max-height:20px; max-width:20px" ng-show="vm.isLoggedIn" ng-src="{{ vm.user.photo_path }}"></img>
+            <md-menu flex md-offset="-10 75">
+                <md-button ng-click="$mdOpenMenu()">
+                    <span ng-show="!vm.isLoggedIn">登入</span>
+                    <div ng-show="vm.isLoggedIn">
+                        {{ vm.user.name }}
+                        <md-icon md-font-set="material-icons">menu</md-icon>
+                    </div>
                 </md-button>
                 <md-menu-content width="3">
                     <md-menu-item ng-show="vm.isLoggedIn">

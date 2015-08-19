@@ -7,7 +7,8 @@
         </md-button>
         </span>
         <span flex="15" hide-sm></span>
-        <div flex="20" flex-sm flex-sm="25" layout="row" layout-align="center center">
+        <!-- seek and post button -->
+        <div flex="20" flex-sm="40" layout="row" layout-align="center center">
             <md-button flex ng-click="vm.onClick(1)" ng-class="{'active': contentIs(1)}">
                 <md-icon md-font-set="material-icons">dashboard</md-icon>
                 <span hide-md hide-sm>SEEK</span>
@@ -26,9 +27,10 @@
 			</md-button>
 			-->
         </div>
-        <div flex flex-sm offset="20" offset-sm="5" layout="row" layout-align="center center">
-            <md-menu flex="30" md-offset="-233 75">
-                <md-button ng-click="$mdOpenMenu()">
+        <!-- notification div -->
+        <div flex="10" flex-sm offset="20" offset-sm="5" layout="row" layout-align="center center">
+            <md-menu flex="30" flex-sm md-offset="-233 75">
+                <md-button ng-click="$mdOpenMenu()" style="min-width: 70px;">
                     <md-icon class="material-icons">notifications</md-icon>
                     <p class="notification md-caption">3</p>
                 </md-button>
@@ -69,11 +71,14 @@
                     </md-menu-item>
                 </md-menu-content>
             </md-menu>
-            <img style="max-height:20px; max-width:20px" ng-show="vm.isLoggedIn" ng-src="{{ vm.user.photo_path }}"></img>
-            <md-menu flex md-offset="-10 75">
+        </div>
+        <!-- user menu div -->
+        <div flex="35" flex-sm layout="row" layout-align="center center">
+            <md-menu flex flex-sm="70" md-offset="-10 75">
                 <md-button ng-click="$mdOpenMenu()">
                     <span ng-show="!vm.isLoggedIn">登入</span>
                     <div ng-show="vm.isLoggedIn">
+                        <img style="max-height:20px; max-width:20px" ng-src="{{ vm.user.photo_path }}"></img>
                         {{ vm.user.name }}
                         <md-icon md-font-set="material-icons">menu</md-icon>
                     </div>
@@ -95,6 +100,7 @@
                 </md-menu-content>
             </md-menu>
         </div>
+    </div>
     </div>
 </md-toolbar>
 

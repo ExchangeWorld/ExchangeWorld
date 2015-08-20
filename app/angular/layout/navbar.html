@@ -1,14 +1,14 @@
 <md-toolbar class="md-primary">
     <div class="md-toolbar-tools md-medium-tall navbar">
-        <span flex="20" hide-sm>
+        <span flex="20" flex-md="15" hide-sm>
 			<md-button ng-click="vm.onClick(0)" style="text-transform: none;">
 				<md-icon md-font-set="material-icons">group</md-icon>
 				<span hide-md hide-sm>ExchangeWorld</span>
         </md-button>
         </span>
-        <span flex="15" hide-sm></span>
+        <span flex="20" hide-md hide-sm></span>
         <!-- seek and post button -->
-        <div flex="20" flex-sm="40" layout="row" layout-align="center center">
+        <div flex="20" flex-md="30" flex-sm="40" layout="row" layout-align="center center">
             <md-button flex ng-click="vm.onClick(1)" ng-class="{'active': contentIs(1)}">
                 <md-icon md-font-set="material-icons">dashboard</md-icon>
                 <span hide-md hide-sm>SEEK</span>
@@ -28,7 +28,7 @@
 			-->
         </div>
         <!-- notification div -->
-        <div flex="10" flex-sm offset="20" offset-sm="5" layout="row" layout-align="center center">
+        <div flex="10" flex-md="15" flex-sm offset="15" offset-md="20" offset-sm="5" layout="row" layout-align="center center">
             <md-menu flex="30" flex-sm md-offset="-233 75">
                 <md-button ng-click="$mdOpenMenu()" style="min-width: 70px;">
                     <md-icon class="material-icons">notifications</md-icon>
@@ -73,14 +73,14 @@
             </md-menu>
         </div>
         <!-- user menu div -->
-        <div flex="35" flex-sm layout="row" layout-align="center center">
+        <div flex="35" flex-md flex-sm layout="row" layout-align="center center">
             <md-menu flex flex-sm="70" md-offset="-10 75">
                 <md-button ng-click="$mdOpenMenu()">
                     <span ng-show="!vm.isLoggedIn">登入</span>
                     <div ng-show="vm.isLoggedIn">
                         <img style="max-height:20px; max-width:20px" ng-src="{{ vm.user.photo_path }}"></img>
                         {{ vm.user.name }}
-                        <md-icon md-font-set="material-icons">menu</md-icon>
+                        <md-icon md-font-set="material-icons" hide-sm>menu</md-icon>
                     </div>
                 </md-button>
                 <md-menu-content width="3">

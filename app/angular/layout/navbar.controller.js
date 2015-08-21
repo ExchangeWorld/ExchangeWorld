@@ -7,6 +7,7 @@ layoutModule.controller('NavbarController', NavbarController);
 function NavbarController($mdSidenav, $state, auth) {
 	const vm      = this;
 	const state   = ['home', 'seek', 'post', 'manage', 'profile'];
+	vm.stateIndex = 0;
 	vm.contentIs  = contentIs;
 	vm.onClick    = onClick;
 	vm.onLogin    = onLogin;
@@ -16,14 +17,26 @@ function NavbarController($mdSidenav, $state, auth) {
 
 	//////////////
 	activate();
-	
+
 	function activate() {
-		auth
-			.init()
-			.then(function(data) {
-				vm.user = data;
-				getLoginState();
-			});
+		if(!vm.isLoggedIn) {
+			auth
+				.init()
+				.then(function(data) {
+					// using cache data
+					vm.user = data;
+					getLoginState();
+				})
+			    .then(function(){
+					// check fb login state
+					auth
+						.getLoginState()
+						.then(function(data) {
+							vm.user = data;
+							getLoginState();
+						});
+				});
+		}
 	}
 
 	function setContent(contentIndex) {
@@ -32,7 +45,7 @@ function NavbarController($mdSidenav, $state, auth) {
 	}
 
 	function contentIs(contentIndex) {
-		return vm.content === state[contentIndex];
+		return vm.stateIndex === state[contentIndex];
 	}
 
 	function onClick(contentIndex) {
@@ -44,10 +57,22 @@ function NavbarController($mdSidenav, $state, auth) {
 			const isFromOneCol = $state.includes("root.oneCol");
 			$state.go('root.withSidenav.' + state[contentIndex]);
 
-			if (!isFromOneCol) {
+			/**
+			 * When need to toggle the sidenav
+			 * 1. iff sidenav exists
+			 * 2. sidenav is close
+			 * 3. click the current content again
+			 */
+			if (
+				!isFromOneCol &&
+				(!$mdSidenav('left').isOpen() || (
+				$mdSidenav('left').isOpen() &&
+				vm.stateIndex === contentIndex))
+			) {
 				$mdSidenav('left').toggle();
 			}
 		}
+		vm.stateIndex = contentIndex;
 	}
 
 	function getLoginState(){

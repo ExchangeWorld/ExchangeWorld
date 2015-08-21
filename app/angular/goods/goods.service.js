@@ -2,8 +2,6 @@
 
 const goodsModule = require('./goods.module');
 const _           = require('lodash');
-//goodsModule.service('goodsService', goodsService);
-
 goodsModule.factory('goodsService', goodsService);
 
 /** @ngInject */

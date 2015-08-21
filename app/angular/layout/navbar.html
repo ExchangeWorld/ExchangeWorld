@@ -34,7 +34,7 @@
                     <md-icon class="material-icons">notifications</md-icon>
                     <p class="notification md-caption">3</p>
                 </md-button>
-                <md-menu-content width="5" style="padding-bottom: 0px">
+                <md-menu-content width="5" style="padding-bottom: 0px; max-width:400px;">
                     <md-menu-item style="min-height: 30px; height:30px">
                         <p class="md-body-1">Notification</p>
                     </md-menu-item>
@@ -45,8 +45,8 @@
                             <!-- user avatar -->
                             <img flex style="max-height:50px; max-width:50px;" ng-show="vm.isLoggedIn" ng-src="{{ vm.user.photo_path }}"></img>
                             <!-- notification text -->
-                            <div offset="5" flex="70">
-                                <p class="md-body-2 note">You like SilentSky's comment:"睡不著發個廢文豪爽窩".</p>
+                            <div offset="5" flex>
+                                <p class="md-body-2 note">You like SilentSky's comment:"睡不著發個睡不著發個睡不著發個睡不著發個".</p>
                                 <p class="md-caption note" style="color: #BCBCBC;">36分前</p>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                     </div>
                 </md-button>
                 <md-menu-content width="3">
-                    <md-menu-item ng-show="vm.isLoggedIn">
+                    <md-menu-item>
                         <md-button ng-click="vm.onClick(4)">Profile</md-button>
                     </md-menu-item>
                     <md-menu-item ng-show="vm.isLoggedIn">

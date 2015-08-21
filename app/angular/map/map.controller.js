@@ -384,10 +384,12 @@ function MapController(
 			});
 
 			good = {
-				gid : good.gid,
-				img : good.photo_path,
-				category : good.category,
-				marker : marker,
+				gid        : good.gid,
+				owner_uid  : good.owner_uid,
+				name       : good.name,
+				photo_path : good.photo_path,
+				category   : good.category,
+				marker     : marker,
 			};
 
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */

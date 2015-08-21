@@ -6,7 +6,6 @@ const bulk    = require('bulk-require');
 module.exports = angular.module('app.follow',
 	[
 		'app.core',
-		'ngStorage',
 	]
 );
 

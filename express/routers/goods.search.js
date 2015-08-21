@@ -26,6 +26,7 @@ router.get('/', function(req, res, next) {
 	var category   = req.query.category || '';
 	var position_x = parseFloat(req.query.position_x) || -1.0;
 	var position_y = parseFloat(req.query.position_y) || -1.0;
+	var distance   = parseFloat(req.query.distance) ||-10;
 	var from       = parseInt(req.query.from, 10) || -1;
 	var to         = parseInt(req.query.to, 10) || -1;
 
@@ -41,13 +42,13 @@ router.get('/', function(req, res, next) {
 			return goods.findAll({
 				where: {
 					$and: [{
-						name:     (name     == '' ? {$like: '%'} : {$like: '%' + name + '%'}),
-						category: (category == '' ? {$like: '%'} : category)
+						name:     (name     === '' ? {$like: '%'} : {$like: '%' + name + '%'}),
+						category: (category === '' ? {$like: '%'} : category)
 					}],
 					status: 0,
 					deleted: 0
 				},
-				include: [users]
+				include: [{model: users, required: true}]
 			});
 		})
 		.then(function(result) {

@@ -13,7 +13,7 @@ function getStates() {
 		{
 			state : 'root.withSidenav.follow',
 			config : {
-				url : '/profile/:uid/follow',
+				url : '/profile/:uid/:type',
 				bindToController: true,
 				controller : 'FollowController',
 				controllerAs: 'vm',

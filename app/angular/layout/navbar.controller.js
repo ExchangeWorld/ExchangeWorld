@@ -25,6 +25,14 @@ function NavbarController($mdSidenav, $state, auth) {
 				.then(function(data) {
 					vm.user = data;
 					getLoginState();
+				})
+			    .then(function(){
+					auth
+						.getLoginState()
+						.then(function(data) {
+							vm.user = data;
+							getLoginState();
+						});
 				});
 		}
 	}

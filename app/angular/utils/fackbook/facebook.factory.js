@@ -6,13 +6,13 @@ const _              = require('lodash');
 facebookModule.factory('facebookService', facebook);
 
 /** @ngInject */
-function facebook(Facebook, Restangular, $q, exception) {
+function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 	const service = {
-		getLoginStatus : getLoginStatus,
-		login          : login,
-		logout         : logout,
-		me             : me,
-		register       : register,
+		me,
+		login,
+		logout,
+		register,
+		getLoginStatus,
 	};
 
 	return service;
@@ -60,7 +60,6 @@ function facebook(Facebook, Restangular, $q, exception) {
 	}
 
 	function register(user) {
-		console.log(user);
 		const defer = $q.defer();
 
 		Restangular
@@ -69,7 +68,6 @@ function facebook(Facebook, Restangular, $q, exception) {
 			.then(function(data) {
 				if (_.isArray(data)) {
 					if (data.length === 0) {
-
 						me({ fields: 'id, name, email, picture' })
 							.then(function(user_data) {
 								Restangular
@@ -84,15 +82,19 @@ function facebook(Facebook, Restangular, $q, exception) {
 									.then(function(data) {
 										if (data !== undefined) {
 											defer.resolve(data);
+											//$localStorage.fb_id = user_data.id;
+											$localStorage.user = data;
+											
 										}
 									})
 									.catch(function(error) {
 										return exception.catcher('[Facebook Service] register error: ')(error);
 									});
 							});
-
 					} else {
 						defer.resolve(data[0]);
+						$localStorage.user = data[0];
+						//console.log($localStorage);
 					}
 				}
 			});

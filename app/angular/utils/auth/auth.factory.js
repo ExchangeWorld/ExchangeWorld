@@ -6,25 +6,24 @@ const _          = require('lodash');
 authModule.factory('auth', auth);
 
 /** @ngInject */
-function auth(facebookService, $q) {
+function auth(facebookService, $q, $localStorage) {
 	var token       = '';
 	var currentUser = {};
 
 	const service = {
-		init        : init,
-		login       : login,
-		logout      : logout,
-		isLoggedIn  : isLoggedIn,
-		currentUser : function() { return currentUser; },
-		fetchMe     : fetchMe,
-		getToken    : getAccessToken,
-		updateToken : generateAccessToken,
+		init,
+		login,
+		logout,
+		fetchMe,
+		isLoggedIn,
+		getLoginState,
+		currentUser : () => currentUser,
 	};
 	return service;
 
 	/////////////
 
-	function init() {
+	function getLoginState() {
 		const defer = $q.defer();
 		facebookService
 			.getLoginStatus()
@@ -35,8 +34,30 @@ function auth(facebookService, $q) {
 							currentUser = data;
 							defer.resolve(data);
 						});
+				} else { 
+					console.log('not logged in');
+					currentUser = {};
+					defer.resolve(currentUser);
 				}
 			});
+		return defer.promise;
+	}
+
+	function init() {
+		const defer = $q.defer();
+
+		//console.log($localStorage);
+		if($localStorage.user !== undefined) {
+			currentUser = $localStorage.user;
+			defer.resolve($localStorage.user);
+		}
+		else {
+			getLoginState()
+				.then(function(data) {
+					currentUser = data;
+					defer.resolve(data);
+				});
+		}
 		return defer.promise;
 	}
 
@@ -58,6 +79,7 @@ function auth(facebookService, $q) {
 	function logout() {
 		facebookService.logout();
 		currentUser = {};
+		delete $localStorage.user;
 	}
 
 	function isLoggedIn() {

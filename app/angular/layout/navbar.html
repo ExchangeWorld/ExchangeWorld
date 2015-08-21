@@ -44,9 +44,9 @@
 				<md-icon class="material-icons">notifications</md-icon>
 			</md-button>
 
-			<img style="max-height:20px; max-width:20px" ng-src="{{ vm.user.photo_path }}"></img>
 			<md-menu flex md-offset="8 75">
 				<md-button ng-click="$mdOpenMenu()">
+					<img ng-show="vm.isLoggedIn" style="max-height:20px; max-width:20px" ng-src="{{ vm.user.photo_path }}"></img>
 					{{ vm.user.name }}
 				</md-button>
 				<md-menu-content width="3">

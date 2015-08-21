@@ -9,6 +9,7 @@ require('./layout/layout.module');
 require('./home/home.module');
 require('./map/map.module');
 require('./profile/profile.module');
+require('./follow/follow.module');
 require('./post/post.module');
 require('./goods/goods.module');
 require('./seek/seek.module');
@@ -27,6 +28,7 @@ angular.element(document).ready(function() {
 		'app.post',
 		'app.seek',
 		'app.profile',
+		'app.follow',
 	];
 
 	// mount on window for testing

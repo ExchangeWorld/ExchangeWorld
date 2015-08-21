@@ -18,11 +18,6 @@ function getStates() {
 				controller : 'FollowController',
 				controllerAs: 'vm',
 				templateUrl : 'follow/follow.html',
-				resolve : {
-					follow : function (followService, $stateParams) {
-						return ;
-					},
-				},
 			}
 		}
 	];

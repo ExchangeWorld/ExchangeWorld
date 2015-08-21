@@ -13,14 +13,8 @@ function SeekController(seekService, $state, AvailableCategory) {
 	vm.onSearch            = onSearch;
 	vm.availableCategory   = AvailableCategory;
 
-    //$scope.loading = false;
-	activate();
-    //$timeout(function() {
-        //$scope.loading = false;
-    //}, 1000);
-    //$scope.loading = true;
-    ///////////////
 
+	activate();
 	/////////
 	
 	function activate() {
@@ -48,25 +42,4 @@ function SeekController(seekService, $state, AvailableCategory) {
 	function onClickGoods(_gid) {
 		$state.go('root.withSidenav.goods', { gid: _gid });
 	}
-
-//=======
-    //function activate() {
-        //// Use seek.service.js to get data from backend
-        //seekService.getSeekData()
-            //.then(function(data) {
-                //// promise fulfilled, collect all goods datas
-                //vm.goods = data;
-            //}).catch(function(error) {
-                //// promise rejected 
-                //console.log('error', error);
-            //});
-    //}
-
-    ////goods onClick event: change route to corrsponding gid
-    //function onClickGoods(gid) {
-        //$state.go('root.goods', {
-            //gid: gid
-        //});
-    //}
-//>>>>>>> feature/dev_UI
 }

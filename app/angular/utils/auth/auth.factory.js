@@ -23,26 +23,6 @@ function auth(facebookService, $q, $localStorage) {
 
 	/////////////
 
-	function getLoginState() {
-		const defer = $q.defer();
-		facebookService
-			.getLoginStatus()
-			.then(function(state) {
-				if(state.status == 'connected') {
-					fetchMe()
-						.then(function(data) { 
-							currentUser = data;
-							defer.resolve(data);
-						});
-				} else { 
-					console.log('not logged in');
-					currentUser = {};
-					defer.resolve(currentUser);
-				}
-			});
-		return defer.promise;
-	}
-
 	function init() {
 		const defer = $q.defer();
 
@@ -82,10 +62,6 @@ function auth(facebookService, $q, $localStorage) {
 		delete $localStorage.user;
 	}
 
-	function isLoggedIn() {
-		return !(_.isEmpty(currentUser));
-	}
-
 	function fetchMe() {
 		const defer = $q.defer();
 		facebookService
@@ -98,6 +74,30 @@ function auth(facebookService, $q, $localStorage) {
 						currentUser = userdata;
 						defer.resolve(currentUser);
 					});
+			});
+		return defer.promise;
+	}
+
+	function isLoggedIn() {
+		return !(_.isEmpty(currentUser));
+	}
+
+	function getLoginState() {
+		const defer = $q.defer();
+		facebookService
+			.getLoginStatus()
+			.then(function(state) {
+				if(state.status == 'connected') {
+					fetchMe()
+						.then(function(data) { 
+							currentUser = data;
+							defer.resolve(data);
+						});
+				} else { 
+					console.log('not logged in');
+					currentUser = {};
+					defer.resolve(currentUser);
+				}
 			});
 		return defer.promise;
 	}

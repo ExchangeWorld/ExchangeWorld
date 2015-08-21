@@ -23,10 +23,12 @@ function NavbarController($mdSidenav, $state, auth) {
 			auth
 				.init()
 				.then(function(data) {
+					// using cache data
 					vm.user = data;
 					getLoginState();
 				})
 			    .then(function(){
+					// check fb login state
 					auth
 						.getLoginState()
 						.then(function(data) {

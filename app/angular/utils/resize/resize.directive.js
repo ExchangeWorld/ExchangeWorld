@@ -10,19 +10,16 @@ function resize($window)  {
 	{
 
 		var w = angular.element($window);
-		scope.$watchCollection(function()
-		{
+		scope.$watchCollection(function() {
 			return {
 				'h': window.innerHeight,
 				'w': window.innerWidth
 			};
-		}, function (newValue, oldValue)
-		{
+		}, function (newValue, oldValue) {
 			scope.windowHeight = newValue.h;
 			scope.windowWidth = newValue.w;
 
-			scope.resizeWithOffset = function (offsetH)
-			{
+			scope.resizeWithOffset = function (offsetH) {
 				scope.$eval(attr.notifier);
 				return {
 					'min-height': (newValue.h - offsetH) + 'px',

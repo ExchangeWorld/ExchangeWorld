@@ -1,0 +1,25 @@
+{
+  "ecmaFeatures": {
+    "arrowFunctions" : true,
+    "blockBindings": true,
+    "classes" : true,
+    "defaultParams" : true,
+    "destructuring" : true,
+    "generators" : true,
+    "modules" : true,
+    "forOf": true,
+    "restParams" : true,
+    "spread" : true,
+    "templateStrings" : true,
+    "unicodeCodePointEscapes" : true
+  },
+  "parser" : "babel-eslint",
+  "rules" : {
+    "strict": 0
+  },
+  "env" : {
+    "browser" : true,
+    "node" : true,
+    "jasmine" : true
+  }
+}

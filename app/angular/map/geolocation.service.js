@@ -1,13 +1,13 @@
 "use strict";
-
+const _         = require('lodash');
 const mapModule = require('./map.module');
 mapModule.factory('geolocation', geolocation)
 
 /** @ngInject */
-function geolocation($q, $rootScope, $window, exception) {
+function geolocation($q, $rootScope, $window, exception, $localStorage) {
 
 	const services = {
-		getLocation: getLocation,
+		getLocation : getLocation,
 	};
 	return services;
 
@@ -26,7 +26,12 @@ function geolocation($q, $rootScope, $window, exception) {
 		return deferred.promise;
 
 		function success(position) {
-			$rootScope.$apply(function() {deferred.resolve(position);});
+			$localStorage.position = JSON.stringify({
+				latitude: position.coords.latitude,
+				longitude: position.coords.longitude,
+				accuracy: position.coords.accuracy,
+			});
+			deferred.resolve(position.coords);
 		}
 
 		function handleError(error) {

@@ -13,7 +13,7 @@ function getStates() {
 		{
 			state : 'root.withSidenav.seek',
 			config : {
-				url : '/seek',
+				url : '/seek?olc&z',
 				bindToController: true,
 				controller : 'SeekController',
 				controllerAs: 'vm',

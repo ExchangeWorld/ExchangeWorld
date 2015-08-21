@@ -45,9 +45,9 @@ router.get('/', function(req, res, next) {
 // For TESTING!
 router.post('/', function(req, res, next) {
 
-	var _receiver_uid = parseInt(req.body.receiver_uid);
+	var _receiver_uid   = parseInt(req.body.receiver_uid);
 	var _trigger_reason = req.body.trigger_reason;
-	var _content = req.body.content;
+	var _content        = req.body.content;
 
 	notifications
 		.sync({
@@ -55,9 +55,9 @@ router.post('/', function(req, res, next) {
 		})
 		.then(function() {
 			return notifications.create({
-				receiver_uid: _receiver_uid,
-				trigger_reason: _trigger_reason,
-				content: _content
+				receiver_uid   : _receiver_uid,
+				trigger_reason : _trigger_reason,
+				content        : _content
 			});
 		})
 		.then(function(result) {

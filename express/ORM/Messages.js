@@ -11,11 +11,11 @@ var Messages = sequelize.define('messages', {
 		primaryKey: true
 	},
 	sender_uid: {
-		type: Sequelize.INTEGER.UNSIGNED, // which goods has a queue
+		type: Sequelize.INTEGER.UNSIGNED,
 		allowNull: false
 	},
 	receiver_uid: {
-		type: Sequelize.INTEGER.UNSIGNED, // which goods queues on host_goods
+		type: Sequelize.INTEGER.UNSIGNED,
 		allowNull: false
 	},
 	content: {
@@ -24,7 +24,7 @@ var Messages = sequelize.define('messages', {
 	}
 }, {
 	timestamps: true,
-	createAt: 'timestamp',
+	createdAt: 'timestamp',
 	updatedAt: false
 });
 

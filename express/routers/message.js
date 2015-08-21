@@ -12,7 +12,6 @@ router.get('/', function(req, res, next) {
 	// sender_uid
 	// from
 	// number
-	// 
 	//
 
 	var _receiver_uid = parseInt(req.query.receiver_uid, 10);

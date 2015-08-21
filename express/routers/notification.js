@@ -14,8 +14,8 @@ router.get('/', function(req, res, next) {
 	//
 
 	var _receiver_uid = parseInt(req.query.receiver_uid);
-	var _from = parseInt(req.query.from, 10);
-	var _number = parseInt(req.query.number, 10);
+	var _from         = parseInt(req.query.from, 10);
+	var _number       = parseInt(req.query.number, 10);
 
 	notifications
 		.sync({

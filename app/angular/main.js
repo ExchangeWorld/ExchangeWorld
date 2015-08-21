@@ -10,6 +10,7 @@ require('./home/home.module');
 require('./map/map.module');
 require('./profile/profile.module');
 require('./follow/follow.module');
+require('./exchange/exchange.module');
 require('./post/post.module');
 require('./goods/goods.module');
 require('./seek/seek.module');
@@ -29,6 +30,7 @@ angular.element(document).ready(function() {
 		'app.seek',
 		'app.profile',
 		'app.follow',
+		'app.exchange',
 	];
 
 	// mount on window for testing

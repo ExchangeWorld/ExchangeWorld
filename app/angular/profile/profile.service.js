@@ -6,7 +6,7 @@ const _             = require('lodash');
 profileModule.service('profileService', profileService);
 
 /** @ngInject */
-function profileService(Restangular, $q) {
+function profileService(Restangular, $q, facebookService) {
 	var service = {
 		getProfile  : getProfile,
 		editProfile : updateProfile,
@@ -22,11 +22,17 @@ function profileService(Restangular, $q) {
 			.all('user/profile')
 			.getList({ uid : _uid })
 			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data[0]);
-				} else if (_.isObject(data)) {
-					defer.resolve(data);
-				}
+				facebookService 
+					.getLargePicture(data.fb_id || data[0].fb_id) 
+					.then(function(img) { 
+						if (_.isArray(data)) {
+							data[0].largePic = img.data.url;
+							defer.resolve(data[0]);
+						} else if (_.isObject(data)) {
+							data.largePic = img.data.url;
+							defer.resolve(data);
+						}
+					});
 			})
 			.catch(function(error) {
 				return exception.catcher('[Profiles Service] getProfile error: ')(error);

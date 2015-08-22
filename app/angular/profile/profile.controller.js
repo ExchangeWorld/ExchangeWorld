@@ -4,7 +4,7 @@ const profileModule = require('./profile.module');
 profileModule.controller('ProfileController', ProfileController);
 
 /** @ngInject */
-function ProfileController(profile, $state, facebookService) {
+function ProfileController(profile, $state) {
 	var vm              = this;
 	vm.profile          = profile;
 	vm.largePic         = '';
@@ -15,15 +15,6 @@ function ProfileController(profile, $state, facebookService) {
 
 	console.log(vm.profile);
 	/////////////
-	activate();
-
-	function activate() {
-		facebookService
-			.getLargePicture(profile.fb_id)
-			.then(function(img) {
-				vm.largePic = img.data.url;
-			});
-	}
 
 	function onClickFollower(uid) {
 		$state.go('root.withSidenav.follow', {

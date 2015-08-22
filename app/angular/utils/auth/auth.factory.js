@@ -59,6 +59,8 @@ function auth(facebookService, $q, $localStorage) {
 	function logout() {
 		facebookService.logout();
 		currentUser = {};
+		console.log('localStorage clear! ');
+		console.log($localStorage);
 		delete $localStorage.user;
 	}
 

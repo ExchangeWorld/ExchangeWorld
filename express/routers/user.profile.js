@@ -58,7 +58,9 @@ router.get('/', function(req, res, next) {
 			if (result == null) {
 				res.json({});
 			} else {
-				res.json(result);
+				var data = [];
+				data.push(result);
+				res.json(data);
 			}
 		})
 		.catch(function(err) {

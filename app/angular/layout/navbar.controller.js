@@ -53,6 +53,10 @@ function NavbarController($mdSidenav, $state, auth) {
 		//$scope.$emit('sidenavChanged', ContentType[contentIndex]);
 		if (contentIndex === 0) {
 			$state.go('root.oneCol.' + state[contentIndex]);
+		} else if(contentIndex === 4) {
+			$state.go('root.withSidenav.' + state[contentIndex], {
+				uid: auth.currentUser().uid
+			});
 		} else {
 			const isFromOneCol = $state.includes("root.oneCol");
 			$state.go('root.withSidenav.' + state[contentIndex]);

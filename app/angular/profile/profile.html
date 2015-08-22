@@ -2,12 +2,12 @@
     <div layout="row" class="info_container for_input">
         <!-- user avatar -->
         <div flex="40">
-            <a href="/#/profile"><img class="circular" src="http://i.imgur.com/BYu27mM.jpg" /></a>
+            <a href="#"><img class="circular" ng-src="{{ vm.profile.photo_path }}" /></a>
         </div>
         <!-- user name & follow button -->
         <div flex="60" layout="column">
             <div layout="row" layout-align="center center">
-                <h4 class="md-subhead">張伯新(SilentSky)</h4>
+                <h4 class="md-subhead">{{ vm.profile.name }}</h4>
             </div>
             <div layout="row" layout-align="center center">
                 <md-button flex class="md-raised md-primary">
@@ -18,8 +18,12 @@
         </div>
     </div>
     <div layout="row">
-        <p flex layout="row" layout-align="center center" class="textshade md-subhead trans">追隨人數：&nbsp;<a href='#'>28</a></p>
-        <p flex layout="row" layout-align="center center" class="textshade md-subhead trans"><a href='#'>20</a>&nbsp;人在追蹤</p>
+        <p flex layout="row" layout-align="center center" class="textshade md-subhead trans">追隨人數：&nbsp;
+            <a ng-click="vm.onClickFollowing(vm.profile.uid)">{{ vm.followingCount }}</a>
+        </p>
+        <p flex layout="row" layout-align="center center" class="textshade md-subhead trans">
+            <a ng-click="vm.onClickFollower(vm.profile.uid)">{{ vm.followerCount }}</a>&nbsp;人在追蹤
+        </p>
     </div>
     <md-divider class="info_container for_input" style="margin-bottom: 5px"></md-divider>
     <!-- tabs for user -->
@@ -145,4 +149,3 @@
         </md-tab>
     </md-tabs>
 </md-content>
-

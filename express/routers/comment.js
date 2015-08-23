@@ -3,6 +3,7 @@ var router  = express.Router();
 
 // Including tables
 var comments = require('../ORM/Comments');
+var users    = require('../ORM/Users');
 
 // Get comments of a goods
 router.get('/of/goods', function(req, res, next) {
@@ -14,13 +15,17 @@ router.get('/of/goods', function(req, res, next) {
 
 	var _goods_gid = parseInt(req.query.goods_gid, 10);
 
+	users.hasMany(comments, {foreignKey: 'commenter_uid'});
+	comments.belongsTo(users, {foreignKey: 'commenter_uid'});
+
 	comments
 		.sync({force: false})
 		.then(function() {
 			return comments.findAll({
 				where: {
 					goods_gid: _goods_gid
-				}
+				},
+				include: [users]
 			});
 		})
 		.then(function(result) {

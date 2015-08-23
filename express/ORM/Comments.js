@@ -22,6 +22,10 @@ var Comments = sequelize.define('comments', {
 		type: Sequelize.TEXT,
 		allowNull: false
 	}
+}, {
+	timestamps: true,
+	createdAt: 'timestamp',
+	updatedAt: false,
 });
 
 module.exports = Comments;

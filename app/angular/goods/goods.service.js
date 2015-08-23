@@ -8,8 +8,10 @@ goodsModule.factory('goodsService', goodsService);
 function goodsService(Restangular, $q, exception) {
 
 	const service = {
-		getGood : getGood,
-		editGood : updateGood,
+		getGood,
+		editGood, 
+		getComment,
+		postComment,
 	};
 	return service;
 
@@ -20,7 +22,6 @@ function goodsService(Restangular, $q, exception) {
 		Restangular
 			.all('goods')
 			.getList({ gid : gid })
-			//.one('goods', gid)
 			.then(function(data) {
 				if (_.isArray(data)) {
 					defer.resolve(data[0]);
@@ -31,12 +32,31 @@ function goodsService(Restangular, $q, exception) {
 			.catch(function(error) {
 				return exception.catcher('[Goods Service] getGood error: ')(error);
 			});
-		//.finally();
 		return defer.promise;
 	}
 
-	function updateGood() {
-
+	function editGood() {
 		return ;
+	}
+
+	function getComment(gid) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('comment/of/goods')
+			.getList({ goods_gid : gid })
+			.then(function(data) {
+				if (_.isArray(data)) {
+					defer.resolve(data);
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] getComments error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	function postComment(newComment) {
+		Restangular.all('comment/post').post(newComment);
 	}
 }

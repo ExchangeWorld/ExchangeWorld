@@ -1,28 +1,71 @@
 <md-content layout-padding>
-    <div flex="80" layout layout-align="center center">
-		<img style="max-width: 75%;" src="{{ vm.goodData.photo_path }}" title="source: imgur.com" />
-    </div>
     <md-tabs md-dynamic-height md-border-bottom>
         <md-tab label="ItemName">
-            <div class="goods_text">
+            <div layout layout-align="center center">
                 <p class="md-headline">{{ vm.goodData.name }}</p>
             </div>
         </md-tab>
         <md-tab label="Owner">
-            <div>
+            <div layout layout-align="center center">
                 <a ng-click="vm.onClickUser( vm.goodData.user.uid )">{{ vm.goodData.user.name }}</a>
             </div>
         </md-tab>
         <md-tab label="Catogories">
-            <div class="goods_text">
+            <div layout layout-align="center center">
                 <p class="md-headline">{{ vm.goodData.category }}</p>
             </div>
         </md-tab>
         <md-tab label="Description">
-            <div class="goods_text">
+            <div layout layout-align="center center">>
                 <p class="md-headline">{{ vm.goodData.description }}</p>
             </div>
         </md-tab>
     </md-tabs>
+    <div flex="80" layout layout-align="center center">
+        <img style="max-width: 75%;" src="{{ vm.goodData.photo_path }}" title="source: imgur.com" />
+    </div>
+    <h3 class="md-subhead">Comments</h3>
+    <md-divider></md-divider>
+    <!-- comments -->
+    <div class="comments">
+        <!-- first comment -->
+        <div class="comment">
+            <a class="avatar">
+                <img src="../../images/unknown-user.gif">
+            </a>
+            <div class="content">
+                <a class="author">天龍人</a>
+                <div class="metadata">
+                    <div class="date">2 days ago</div>
+                </div>
+                <div class="text">
+                    Hey guys, I hope this example comment is helping you read this documentation.
+                </div>
+            </div>
+            <!-- if a comment has comments, use comments tag in parant's commemt tag -->
+            <div class="comments">
+                <div class="comment">
+                    <a class="avatar">
+                        <img src="../../images/unknown-user.gif">
+                    </a>
+                    <div class="content">
+                        <a class="author">鄉下人</a>
+                        <div class="metadata">
+                            <div class="date">2 days ago</div>
+                        </div>
+                        <div class="text">
+                            Hey guys, I hope this example comment is helping you read this documentation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form>
+                <md-input-container style="bottom:20px;">
+                    <label>Write some here...</label>
+                    <textarea ng-model="commentModel" columns="1"></textarea>
+                </md-input-container>
+            </form>
+        </div>
+    </div>
 </md-content>
 

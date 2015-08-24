@@ -23,7 +23,7 @@ function NavbarController($mdSidenav, $state, auth, $localStorage) {
 			.getLoginState()
 			.then(function(data) {
 				vm.user = data;
-				getLoginState();
+				vm.isLoggedIn = Boolean(data);
 			});
 	}
 
@@ -63,16 +63,12 @@ function NavbarController($mdSidenav, $state, auth, $localStorage) {
 		vm.stateIndex = contentIndex;
 	}
 
-	function getLoginState(){
-		vm.isLoggedIn = auth.isLoggedIn();
-	}
-
 	function onLogin() {
 		auth
 			.login()
 			.then(function(user) {
 				vm.user = user;
-				getLoginState();
+				vm.isLoggedIn = Boolean(user);
 			});
 	}
 

@@ -49,7 +49,7 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 
 	/**
 	 * me()
-	 * get user's facebook basic infomations 
+	 * get user's facebook basic infomations
 	 * fields is an object like this:
 	 * { fields: 'id, name, email, pictures' }
 	 */
@@ -80,11 +80,10 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 										//introduction : user_data.bio,
 									})
 									.then(function(data) {
-										if (data !== undefined) {
+										if (data) {
 											defer.resolve(data);
 											//$localStorage.fb_id = user_data.id;
 											$localStorage.user = data;
-											
 										}
 									})
 									.catch(function(error) {

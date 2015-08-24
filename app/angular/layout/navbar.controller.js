@@ -4,7 +4,7 @@ const layoutModule = require('./layout.module');
 layoutModule.controller('NavbarController', NavbarController);
 
 /** @ngInject */
-function NavbarController($mdSidenav, $state, auth) {
+function NavbarController($mdSidenav, $state, auth, $localStorage) {
 	const vm      = this;
 	const state   = ['home', 'seek', 'post', 'manage', 'profile'];
 	vm.stateIndex = 0;
@@ -12,31 +12,19 @@ function NavbarController($mdSidenav, $state, auth) {
 	vm.onClick    = onClick;
 	vm.onLogin    = onLogin;
 	vm.onLogout   = onLogout;
-	vm.user       = {};
-	vm.isLoggedIn = false;
+	vm.user       = $localStorage.user;
+	vm.isLoggedIn = $localStorage.user ? true : false;
 
 	//////////////
 	activate();
 
 	function activate() {
-		if(!vm.isLoggedIn) {
-			auth
-				.init()
-				.then(function(data) {
-					// using cache data
-					vm.user = data;
-					getLoginState();
-				})
-			    .then(function(){
-					// check fb login state
-					auth
-						.getLoginState()
-						.then(function(data) {
-							vm.user = data;
-							getLoginState();
-						});
-				});
-		}
+		auth
+			.getLoginState()
+			.then(function(data) {
+				vm.user = data;
+				getLoginState();
+			});
 	}
 
 	function setContent(contentIndex) {
@@ -90,8 +78,8 @@ function NavbarController($mdSidenav, $state, auth) {
 
 	function onLogout() {
 		auth.logout();
-		vm.user = {};
-		getLoginState();
+		vm.user = null;
+		vm.isLoggedIn = false;
 	}
 
 }

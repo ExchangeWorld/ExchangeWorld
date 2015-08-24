@@ -44,8 +44,8 @@
             </div>
 			<div ng-repeat="comment in vm.goodCommentData">
 				<div class="content" >
-					<a class="avatar" ng-click=""> <img ng-src="{{ comment.user.photo_path }}"> </a>
-					<a class="author" ng-click="">{{ comment.user.name}}</a>
+					<a class="avatar" ng-click="vm.onClickUser(comment.user.uid)"> <img ng-src="{{ comment.user.photo_path }}"> </a>
+					<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
 					<div class="metadata">
 						<div class="date">{{ comment.timestamp| date:'MM/dd/yyyy @ h:mma' }}</div>
 					</div>
@@ -56,8 +56,8 @@
             </div>
 			<div ng-repeat="new_comment in vm.newComments">
 				<div class="content" >
-					<a class="avatar" ng-click=""> <img ng-src="{{ new_comment.photo_path }}"> </a>
-					<a class="author" ng-click="">{{ new_comment.name }}</a>
+					<a class="avatar" ng-click="vm.onClickUser(new_comment.user_uid)"> <img ng-src="{{ new_comment.photo_path }}"> </a>
+					<a class="author" ng-click="vm.onClickUser(new_comment.user_uid)">{{ new_comment.name }}</a>
 					<div class="metadata">
 						<div class="date">{{ new_comment.date }}</div>
 					</div>

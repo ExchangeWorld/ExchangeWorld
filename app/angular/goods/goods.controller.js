@@ -20,7 +20,7 @@ function GoodsController(goodData, goodsService, $state, auth) {
 			.getComment(vm.goodData.gid)
 			.then(function(data) {
 				vm.goodCommentData = data;
-				console.log(data);
+				//console.log(data);
 			});
 	}
 
@@ -36,6 +36,7 @@ function GoodsController(goodData, goodsService, $state, auth) {
 				goods_gid     : goodData.gid,
 				content       : this.comment,
 				date          : 'just now',
+				user_uid      : auth.currentUser().uid,
 				name          : auth.currentUser().name,
 				photo_path    : auth.currentUser().photo_path,
 			});
@@ -43,6 +44,5 @@ function GoodsController(goodData, goodsService, $state, auth) {
 		}
 		//console.log(vm.newComments);
 		goodsService.postComment(vm.newComments[vm.newComments.length - 1]);
-		
 	}
 }

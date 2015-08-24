@@ -49,6 +49,18 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 		return Facebook.logout();
 	}
 
+	/**
+	 * me()
+	 * get user's facebook basic infomations
+	 * fields is an object like this:
+	 * { fields: 'id, name, email, pictures' }
+	 */
+	function me(fields) {
+		return Facebook.api('/me?', fields, function(response) {
+			return response;
+		});
+	}
+
 	function register(user) {
 		const defer = $q.defer();
 
@@ -70,11 +82,10 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 										//introduction : user_data.bio,
 									})
 									.then(function(data) {
-										if (data !== undefined) {
+										if (data) {
 											defer.resolve(data);
 											//$localStorage.fb_id = user_data.id;
 											$localStorage.user = data;
-											
 										}
 									})
 									.catch(function(error) {

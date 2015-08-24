@@ -34,7 +34,6 @@ function auth(facebookService, $q, $localStorage) {
 						defer.resolve(data);
 					});
 			});
-		console.log(currentUser);
 		return defer.promise;
 	}
 
@@ -80,7 +79,6 @@ function auth(facebookService, $q, $localStorage) {
 					defer.resolve(currentUser);
 				}
 			});
-		console.log(currentUser);
 		return defer.promise;
 	}
 

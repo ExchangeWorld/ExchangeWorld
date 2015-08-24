@@ -6,39 +6,21 @@ const _          = require('lodash');
 authModule.factory('auth', auth);
 
 /** @ngInject */
-function auth(facebookService, $q) {
+function auth(facebookService, $q, $localStorage) {
 	var token       = '';
-	var currentUser = {};
+	var currentUser = null;
 
 	const service = {
-		init        : init,
-		login       : login,
-		logout      : logout,
-		isLoggedIn  : isLoggedIn,
-		currentUser : function() { return currentUser; },
-		fetchMe     : fetchMe,
-		getToken    : getAccessToken,
-		updateToken : generateAccessToken,
+		login,
+		logout,
+		fetchMe,
+		isLoggedIn,
+		getLoginState,
+		currentUser : () => currentUser,
 	};
 	return service;
 
 	/////////////
-
-	function init() {
-		const defer = $q.defer();
-		facebookService
-			.getLoginStatus()
-			.then(function(state) {
-				if(state.status == 'connected') {
-					fetchMe()
-						.then(function(data) { 
-							currentUser = data;
-							defer.resolve(data);
-						});
-				}
-			});
-		return defer.promise;
-	}
 
 	function login() {
 		const defer = $q.defer();
@@ -57,17 +39,14 @@ function auth(facebookService, $q) {
 
 	function logout() {
 		facebookService.logout();
-		currentUser = {};
-	}
-
-	function isLoggedIn() {
-		return !(_.isEmpty(currentUser));
+		currentUser = null;
+		delete $localStorage.user;
 	}
 
 	function fetchMe() {
 		const defer = $q.defer();
 		facebookService
-			.me() // get user facebook data.
+			.me({ fields: 'id' }) // get user facebook id.
 			.then(function(response) {
 				/** Call API for create/get new EXWD user. */
 				facebookService
@@ -76,6 +55,29 @@ function auth(facebookService, $q) {
 						currentUser = userdata;
 						defer.resolve(currentUser);
 					});
+			});
+		return defer.promise;
+	}
+
+	function isLoggedIn() {
+		return Boolean(currentUser);
+	}
+
+	function getLoginState() {
+		const defer = $q.defer();
+		facebookService
+			.getLoginStatus()
+			.then(function(state) {
+				if(state.status === 'connected') {
+					fetchMe().then(function(data) {
+						currentUser = data;
+						defer.resolve(currentUser);
+					});
+				} else {
+					console.log('not logged in');
+					currentUser = null;
+					defer.resolve(currentUser);
+				}
 			});
 		return defer.promise;
 	}

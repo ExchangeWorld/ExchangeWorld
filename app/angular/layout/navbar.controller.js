@@ -4,7 +4,7 @@ const layoutModule = require('./layout.module');
 layoutModule.controller('NavbarController', NavbarController);
 
 /** @ngInject */
-function NavbarController($mdSidenav, $state, auth) {
+function NavbarController($mdSidenav, $state, auth, $localStorage) {
 	const vm      = this;
 	const state   = ['home', 'seek', 'post', 'manage', 'profile'];
 	vm.stateIndex = 0;
@@ -12,21 +12,20 @@ function NavbarController($mdSidenav, $state, auth) {
 	vm.onClick    = onClick;
 	vm.onLogin    = onLogin;
 	vm.onLogout   = onLogout;
-	vm.user       = {};
-	vm.isLoggedIn = false;
+	vm.user       = $localStorage.user;
+	vm.isLoggedIn = $localStorage.user ? true : false;
 
 	//////////////
 	activate();
 
 	function activate() {
 		auth
-			.init()
+			.getLoginState()
 			.then(function(data) {
 				vm.user = data;
-				getLoginState();
+				vm.isLoggedIn = Boolean(data);
 			});
 	}
-
 
 	function setContent(contentIndex) {
 		//	vm.content = state[contentIndex];
@@ -64,23 +63,19 @@ function NavbarController($mdSidenav, $state, auth) {
 		vm.stateIndex = contentIndex;
 	}
 
-	function getLoginState(){
-		vm.isLoggedIn = auth.isLoggedIn();
-	}
-
 	function onLogin() {
 		auth
 			.login()
 			.then(function(user) {
 				vm.user = user;
-				getLoginState();
+				vm.isLoggedIn = Boolean(user);
 			});
 	}
 
 	function onLogout() {
 		auth.logout();
-		vm.user = {};
-		getLoginState();
+		vm.user = null;
+		vm.isLoggedIn = false;
 	}
 
 }

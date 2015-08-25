@@ -38,6 +38,12 @@ md-toolbar {
     &.with_border {
         border: 1px ridge #CFD8DC;
     }
+    &.profile {
+        max-width: 125%;
+        max-height: 125%;
+        width: 125%;
+        height: auto;
+    }
 }
 
 .home_container1 {

@@ -4,29 +4,36 @@ const profileModule = require('./profile.module');
 profileModule.controller('ProfileController', ProfileController);
 
 /** @ngInject */
-function ProfileController(profile, $state) {
-	var vm              = this;
-	vm.profile          = profile;
-	vm.largePic         = '';
-	vm.followerCount    = vm.profile.followers.length;
-	vm.followingCount   = vm.profile.followings.length;
-	vm.onClickFollower  = onClickFollower;
-	vm.onClickFollowing = onClickFollowing;
+function ProfileController(profile, $state, $localStorage, auth) {
+	var vm           = this;
+	const types      = ['following', 'follower'];
+	vm.profile       = profile;
+	vm.largePic      = '';
+	vm.isLoggedIn    = $localStorage.user ? true : false;
+	vm.isMe          = vm.isLoggedIn ? (profile.uid === $localStorage.user.uid) : false;
+	vm.onClickFollow = onClickFollow;
 
-	console.log(vm.profile);
+
 	/////////////
+	activate();
 
-	function onClickFollower(uid) {
-		$state.go('root.withSidenav.follow', {
-			uid: uid,
-			type: 'follower'
-		});
+	function activate(){
+		auth
+			.getLoginState()
+			.then(function(data) {
+				if(data) {
+					vm.isMe = (profile.uid === data.uid);
+				} else {
+					vm.isMe = false;
+					vm.isLoggedIn = false;
+				}
+			});
 	}
 
-	function onClickFollowing(uid) {
+	function onClickFollow(uid, idx) {
 		$state.go('root.withSidenav.follow', {
 			uid: uid,
-			type: 'following'
+			type: types[idx]
 		});
 	}
 }

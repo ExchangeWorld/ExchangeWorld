@@ -11,7 +11,7 @@
 			</div>
 			<div layout="row" layout-align="center center">
 				<span flex="10"></span>
-				<md-button flex class="md-raised md-primary">
+				<md-button flex class="md-raised md-primary" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn">
 					<md-icon md-font-set="material-icons">person_add</md-icon>
 					<span>&nbsp;Follow</span>
 				</md-button>
@@ -21,10 +21,10 @@
 	</div>
 	<div layout="row">
 		<p flex layout="row" layout-align="center center" class="textshade md-subhead trans">追隨人數：&nbsp;
-			<a ng-click="vm.onClickFollowing(vm.profile.uid)">{{ vm.followingCount }}</a>
+			<a ng-click="vm.onClickFollow(vm.profile.uid, 0)">{{ vm.profile.followings.length }}</a>
 		</p>
 		<p flex layout="row" layout-align="center center" class="textshade md-subhead trans">
-			<a ng-click="vm.onClickFollower(vm.profile.uid)">{{ vm.followerCount }}</a>&nbsp;人在追蹤
+			<a ng-click="vm.onClickFollow(vm.profile.uid, 1)">{{ vm.profile.followers.length }}</a>&nbsp;人在追蹤
 		</p>
 	</div>
 	<md-divider class="info_container for_input" style="margin-bottom: 5px"></md-divider>
@@ -61,7 +61,7 @@
 					</div>
 					<!-- edit fab button -->
 					<div flex offset="15" layout layout-align="center start">
-						<md-button class="md-fab md-primary md-hue-3">
+						<md-button class="md-fab md-primary md-hue-3" ng-show="vm.isMe">
 							<md-icon md-font-set="material-icons">edit</md-icon>
 							<md-tooltip>編輯個人資料</md-tooltip>
 						</md-button>

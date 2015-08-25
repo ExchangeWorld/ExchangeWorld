@@ -51,3 +51,13 @@ a:hover {
 .note {
     margin: 2px;
 }
+
+.online:after {
+    content: '';
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    background: #39caad;
+    border-radius: 100%;
+    margin-left: 5px;
+}

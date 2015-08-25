@@ -27,27 +27,15 @@ function FollowController($state, followService, $stateParams) {
 		} else {
 			vm.type = $stateParams.type;
 
-			if (vm.type === 'following') {
-				followService
-					.getFollowing($stateParams.uid)
-					.then(function(data) {
-						vm.followData = data;
-						console.log(vm.followData);
-					})
-					.catch(function() {
-						vm.followData = undefined;
-					});
-			} else if (vm.type === 'follower') {
-				followService
-					.getFollower($stateParams.uid)
-					.then(function(data) {
-						vm.followData = data;
-						console.log(vm.followData);
-					})
-					.catch(function() {
-						vm.followData = undefined;
-					});
-			}
+			followService
+				.getFollow($stateParams.uid, vm.type)
+				.then(function(data) {
+					vm.followData = data;
+					console.log(vm.followData);
+				})
+				.catch(function() {
+					vm.followData = undefined;
+				});
 		}
 	}
 

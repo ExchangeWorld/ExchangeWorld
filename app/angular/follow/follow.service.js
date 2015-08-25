@@ -8,20 +8,18 @@ followModule.service('followService', followService);
 /** @ngInject */
 function followService(Restangular, $q) {
 	var service = {
-		getFollower,
-		getFollowing,
+		getFollow,
 	};
 
 	return service;
 
 	//////////
 
-	function getFollower(uid) {
-		//console.log(auth.currentUser());
+	function getFollow(uid, type) {
 		const defer = $q.defer();
 
 		Restangular
-			.all('user/profile/follower')
+			.all('user/profile/' + type)
 			.getList({ my_uid: uid })
 			.then(function(data) {
 				if (_.isArray(data)) {
@@ -29,27 +27,8 @@ function followService(Restangular, $q) {
 				} 
 			})
 			.catch(function(error) {
-				return exception.catcher('[Follower Service] getFollower error: ')(error);
+				return exception.catcher('[Follow Service] getFollow error: ')(error);
 			});
 		return defer.promise;
 	}
-
-	function getFollowing(uid) {
-		const defer = $q.defer();
-
-		Restangular
-			.all('user/profile/following')
-			.getList({ my_uid: uid })
-			.then(function(data) {
-				//console.log(data);
-				if (_.isArray(data)) {
-					defer.resolve(data);
-				} 
-			})
-			.catch(function(error) {
-				return exception.catcher('[Following Service] getFollowing error: ')(error);
-			});
-		return defer.promise;
-	}
-
 }

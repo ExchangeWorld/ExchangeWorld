@@ -7,7 +7,9 @@
 		</md-tab>
 		<md-tab label="Owner">
 			<div layout layout-align="center center">
-				<a ng-click="vm.onClickUser( vm.goodData.user.uid )">{{ vm.goodData.user.name }}</a>
+				<a ng-click="vm.onClickUser( vm.goodData.user.uid )">
+				<p class="md-headline">{{ vm.goodData.user.name }}</p>
+				</a>
 			</div>
 		</md-tab>
 		<md-tab label="Catogories">

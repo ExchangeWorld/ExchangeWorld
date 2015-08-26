@@ -41,6 +41,7 @@ function geolocation($q, $rootScope, $window, exception, $localStorage) {
 					exception.catcher('Service timeout has been reached')(error);
 					break;
 			}
+			deferred.reject(error);
 		}
 	}
 }

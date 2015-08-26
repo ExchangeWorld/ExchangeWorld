@@ -1,3 +1,4 @@
+/* global google*/
 "use strict";
 
 const mapModule  = require('./map.module');
@@ -19,9 +20,9 @@ function MapController(
 		$timeout
 ) {
 
-	var map     = undefined;
+	var map     = null;
 	var goods   = [];
-	var overlay = undefined;
+	var overlay = null;
 	const vm    = this;
 	vm.mapStyle = [
 		{
@@ -285,7 +286,7 @@ function MapController(
 
 		boundChanged();
 		$scope.$on('goodsChanged', goodsChanged);
-		$scope.$on('mapMoveTo', mapMoveTo)
+		$scope.$on('mapMoveTo', mapMoveTo);
 		$scope.$on('openGoodsOverlay', openGoodsOverlay);
 		$scope.$on('closeGoodsOverlay', closeGoodsOverlay);
 		$rootScope.$on('$stateChangeSuccess', urlChanged);
@@ -302,8 +303,7 @@ function MapController(
 			geolocation
 				.getLocation()
 				.then(function(data) {
-					$localStorage.position = [data.latitude, data.longitude];
-					vm.coords = [data.latitude, data.longitude];
+					$localStorage.position = vm.coords = [data.latitude, data.longitude];
 				});
 		}
 		if (!isNaN($stateParams.z)) {

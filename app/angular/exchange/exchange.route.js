@@ -11,7 +11,7 @@ function appRun(routerHelper) {
 function getStates() {
 	return [
 		{
-			state : 'root.withSidenav.exchange',
+			state : 'root.oneCol.exchange',
 			config : {
 				url : '/manage/exchange',
 				bindToController: true,

@@ -39,7 +39,7 @@ function NavbarController($mdSidenav, $state, auth, $localStorage) {
 	function onClick(contentIndex) {
 		//$scope.content = ContentType[contentIndex];
 		//$scope.$emit('sidenavChanged', ContentType[contentIndex]);
-		if (contentIndex === 0) {
+		if (contentIndex === 0 || contentIndex === 3) {
 			$state.go('root.oneCol.' + state[contentIndex]);
 		} else if(contentIndex === 4) {
 			$state.go('root.withSidenav.' + state[contentIndex], {

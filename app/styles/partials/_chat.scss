@@ -2,6 +2,7 @@
     list-style: none;
     background: #e5e5e5;
     margin: 0;
+    height: 400px;
     padding: 0 0 20px 0; // finality
     li {
         padding: 0.5rem;
@@ -15,6 +16,12 @@
             display: block;
             width: 100%;
         }
+    }
+    &.input{
+    	background: #fff;
+    	border: 1px ridge #cdd4d8;
+    	height:50px;
+    	padding: 0;
     }
 }
 

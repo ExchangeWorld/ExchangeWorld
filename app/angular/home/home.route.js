@@ -15,6 +15,7 @@ function getStates() {
 			config : {
 				url : '/',
 				templateUrl : 'home/home.html',
+				title : 'home',
 			}
 		}
 	];

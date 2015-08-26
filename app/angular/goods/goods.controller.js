@@ -9,6 +9,11 @@ function GoodsController(goodData, $state) {
 	vm.goodData    = goodData;
 	vm.onClickUser = onClickUser;
 
+
+	function activate() {
+
+	}
+
 	// define onClick event on goods owner
 	function onClickUser(_uid) {
 		$state.go('root.withSidenav.profile', { uid : _uid });

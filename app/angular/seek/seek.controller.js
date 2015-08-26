@@ -18,7 +18,7 @@ function SeekController(seekService, $state, AvailableCategory, $scope) {
 	vm.onMouseOut          = onMouseOut;
 
 	$scope.$on('boundChanged', function(e, bound) {
-		console.log(bound);
+		//console.log(bound);
 		onSearch({
 			name     : vm.searchGoodsName,
 			category : vm.searchGoodsCategory.label,

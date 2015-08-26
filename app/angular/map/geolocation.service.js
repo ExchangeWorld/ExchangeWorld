@@ -26,11 +26,6 @@ function geolocation($q, $rootScope, $window, exception, $localStorage) {
 		return deferred.promise;
 
 		function success(position) {
-			$localStorage.position = JSON.stringify({
-				latitude: position.coords.latitude,
-				longitude: position.coords.longitude,
-				accuracy: position.coords.accuracy,
-			});
 			deferred.resolve(position.coords);
 		}
 

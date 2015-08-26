@@ -18,6 +18,7 @@ function getStates() {
 				controller : 'SeekController',
 				controllerAs: 'vm',
 				templateUrl: 'seek/seek.html',
+				title : 'seek',
 			},
 		}
 	];

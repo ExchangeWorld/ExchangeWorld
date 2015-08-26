@@ -13,6 +13,7 @@ function MapController(
 		$rootScope,
 		geolocation,
 		OpenLocationCode,
+		$localStorage,
 		$state,
 		$stateParams,
 		$timeout
@@ -264,8 +265,10 @@ function MapController(
 			]
 		}
 	];
-	vm.coords   = [0, 0];
+	vm.coords   = $localStorage ? $localStorage.position : [0, 0];
 	vm.zoom     = 17;
+	vm.draggableCursor = 'default';
+	vm.draggingCursor = 'default';
 	$scope.$on('mapInitialized', mapInitialized);
 
 
@@ -281,7 +284,6 @@ function MapController(
 		GoodsOverlay.prototype = new google.maps.OverlayView();
 
 		boundChanged();
-		//$rootScope.$broadcast('mapReady', evtMap);
 		$scope.$on('goodsChanged', goodsChanged);
 		$scope.$on('mapMoveTo', mapMoveTo)
 		$scope.$on('openGoodsOverlay', openGoodsOverlay);
@@ -300,12 +302,17 @@ function MapController(
 			geolocation
 				.getLocation()
 				.then(function(data) {
+					$localStorage.position = [data.latitude, data.longitude];
 					vm.coords = [data.latitude, data.longitude];
 				});
 		}
-
 		if (!isNaN($stateParams.z)) {
 			vm.zoom = parseInt($stateParams.z, 10);
+		}
+
+		if ($state.current.title === 'post') {
+			vm.draggableCursor = 'crosshair';
+			vm.draggingCursor = 'crosshair';
 		}
 	}
 
@@ -414,12 +421,22 @@ function MapController(
 			map.panTo({
 				lat : coord.latitudeCenter,
 				lng : coord.longitudeCenter
-			})
+			});
 		}
 		if (!isNaN($stateParams.z)) {
-			map.setZoom(parseInt($stateParams.z, 10))
+			map.setZoom(parseInt($stateParams.z, 10));
 		}
-		boundChanged();
+
+		if (toState.title === 'post') {
+			map.setOptions({ draggableCursor:'crosshair', draggingCursor: 'crosshair'});
+		} else {
+			map.setOptions({ draggableCursor:'default', draggingCursor: 'default'});
+			if (vm.marker) {
+				vm.marker.setMap(null);
+				vm.marker = undefined;
+			}
+			boundChanged();
+		}
 	}
 
 	/* Autocomplete address Search */
@@ -474,10 +491,28 @@ function MapController(
 		}
 	}
 
-	function onClick() {
+	function onClick(e) {
 		if (overlay) {
 			overlay.onRemove();
 			overlay = undefined;
+		}
+
+		if ($state.current.title === 'post') {
+			if (vm.marker) {
+				vm.marker.setPosition(e.latLng);
+			} else {
+				vm.marker = new google.maps.Marker({
+					position: e.latLng,
+					draggable: true,
+					animation: google.maps.Animation.DROP,
+					map: map,
+				});
+
+				google.maps.event.addListener(vm.marker, 'dragend', function() {
+					$rootScope.$broadcast('positionMarked', e.latLng);
+				});
+			}
+			$rootScope.$broadcast('positionMarked', e.latLng);
 		}
 	}
 

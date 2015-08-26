@@ -4,7 +4,7 @@ const postModule = require('./post.module');
 postModule.controller('PostController', PostController);
 
 /** @ngInject */
-function PostController(postService, $state, AvailableCategory) {
+function PostController(postService, $state, AvailableCategory, $scope) {
 	var vm               = this;
 	vm.goodsName         = '';
 	vm.goodsDescriptions = '';
@@ -12,6 +12,7 @@ function PostController(postService, $state, AvailableCategory) {
 	vm.imgEncoded        = [];
 	vm.onSubmit          = onSubmit;
 	vm.availableCategory = AvailableCategory;
+	$scope.$on('positionMarked', positionMarked);
 	/**
 	 * Need to get more info,
 	 * goods position X & Y
@@ -19,6 +20,14 @@ function PostController(postService, $state, AvailableCategory) {
 	 */
 
 	////////////////
+
+	function positionMarked(e, latLng) {
+		vm.positionX = latLng.lng();
+		vm.positionY = latLng.lat();
+
+		console.log(vm.positionX);
+		console.log(vm.positionY);
+	}
 
 	function onSubmit() {
 		var newPost = {

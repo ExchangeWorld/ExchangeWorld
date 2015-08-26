@@ -4,6 +4,7 @@
     margin: 0;
     height: 400px;
     padding: 0 0 20px 0; // finality
+    overflow-y: auto;
     li {
         padding: 0.5rem;
         overflow: hidden;
@@ -17,11 +18,11 @@
             width: 100%;
         }
     }
-    &.input{
-    	background: #fff;
-    	border: 1px ridge #cdd4d8;
-    	height:50px;
-    	padding: 0;
+    &.input {
+        background: #fff;
+        border: 1px ridge #cdd4d8;
+        height: 50px;
+        padding: 0;
     }
 }
 
@@ -31,6 +32,12 @@
             border: 5px solid white;
             border-left-color: transparent;
             border-bottom-color: transparent;
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
         }
     }
 }
@@ -45,6 +52,12 @@
     .avatar {
         order: 2;
         &:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
             border: 5px solid white;
             border-right-color: transparent;
             border-top-color: transparent;

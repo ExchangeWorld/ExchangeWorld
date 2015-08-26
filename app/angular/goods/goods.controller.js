@@ -10,8 +10,8 @@ function GoodsController(goodData, $state, $scope) {
 	vm.onClickUser = onClickUser;
 
 	function activate() {
-		$scope.parent.$broadcast('goodsChanged', [goodData]);
-		$scope.parent.$broadcast('mapMoveTo', goodData.gid);
+		$scope.$parent.$broadcast('goodsChanged', [goodData]);
+		$scope.$parent.$broadcast('mapMoveTo', goodData.gid);
 	}
 
 	// define onClick event on goods owner

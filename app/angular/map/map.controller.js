@@ -371,7 +371,7 @@ function MapController(
 			.filter(function(good, index) {
 				if (!(good.gid in hashTable)) return true;
 
-				console.log(good.gid + ' is already rendered.');
+				if (!good.getMap()) good.setMap(map);
 				data[index] = good;
 				return false;
 			})
@@ -417,7 +417,7 @@ function MapController(
 	 */
 	function urlChanged(event, toState, toParams, fromState, fromParams) {
 		if(toParams.olc) {
-			const coord = OpenLocationCode.decode(toParams.olc.replace(' ','+'));
+			const coord = OpenLocationCode.decode(toParams.olc.replace(' ', '+'));
 			map.panTo({
 				lat : coord.latitudeCenter,
 				lng : coord.longitudeCenter
@@ -425,6 +425,12 @@ function MapController(
 		}
 		if (!isNaN($stateParams.z)) {
 			map.setZoom(parseInt($stateParams.z, 10));
+		}
+
+		if (_.isArray(goods) && goods.length) {
+			goods.forEach(function(good) {
+				good.marker.setMap(null);
+			});
 		}
 
 		if (toState.title === 'post') {

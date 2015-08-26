@@ -8,7 +8,7 @@
 		<md-tab label="Owner">
 			<div layout layout-align="center center">
 				<a ng-click="vm.onClickUser( vm.goodData.user.uid )">
-				<p class="md-headline">{{ vm.goodData.user.name }}</p>
+					<p class="md-headline">{{ vm.goodData.user.name }}</p>
 				</a>
 			</div>
 		</md-tab>
@@ -44,56 +44,57 @@
 					Hey guys, I hope this example comment is helping you read this documentation.
 				</div>
 			</div>
-			<div ng-repeat="comment in vm.goodCommentData">
-				<div class="content" >
-					<a class="avatar" ng-click="vm.onClickUser(comment.user.uid)"> <img ng-src="{{ comment.user.photo_path }}"> </a>
-					<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
-					<div class="metadata">
-						<div class="date">{{ comment.timestamp| date:'MM/dd/yyyy @ h:mma' }}</div>
-					</div>
-					<div class="text">
-						{{ comment.content }}
-					</div>
-				</div>
-			</div>
-			<div ng-repeat="new_comment in vm.newComments">
-				<div class="content" >
-					<a class="avatar" ng-click="vm.onClickUser(new_comment.user_uid)"> <img ng-src="{{ new_comment.photo_path }}"> </a>
-					<a class="author" ng-click="vm.onClickUser(new_comment.user_uid)">{{ new_comment.name }}</a>
-					<div class="metadata">
-						<div class="date">{{ new_comment.date }}</div>
-					</div>
-					<div class="text">
-						{{ new_comment.content }}
-					</div>
-				</div>
-			</div>
-			<!-- if a comment has comments, use comments tag in parant's commemt tag -->
-			<!--<div class="comments">-->
-				<!--<div class="comment">-->
-					<!--<a class="avatar">-->
-						<!--<img src="../../images/unknown-user.gif">-->
-					<!--</a>-->
-					<!--<div class="content">-->
-						<!--<a class="author">鄉下人</a>-->
-						<!--<div class="metadata">-->
-							<!--<div class="date">2 days ago</div>-->
-						<!--</div>-->
-						<!--<div class="text">-->
-							<!--Hey guys, I hope this example comment is helping you read this documentation.-->
-						<!--</div>-->
-					<!--</div>-->
-				<!--</div>-->
-			<!--</div>-->
-			<form ng-submit="vm.onSubmitComment()"> 
-				<md-input-container style="bottom:20px;">
-					<label>Write some here...</label>
-					<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
-						<input type="text" ng-model="vm.comment" name="text" />
-				</md-input-container>
-				<input type="submit" id="submit" value="Submit" ng-show="false"/>
-			</form>
 		</div>
+		<div class="comment" ng-repeat="comment in vm.goodCommentData">
+			<a class="avatar" ng-click="vm.onClickUser(comment.user.uid)"> <img ng-src="{{ comment.user.photo_path }}"> </a>
+			<div class="content">
+				<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
+				<div class="metadata">
+					<div class="date">{{ comment.timestamp| date:'MM/dd/yyyy @ h:mma' }}</div>
+				</div>
+				<div class="text">
+					{{ comment.content }}
+				</div>
+			</div>
+		</div>
+		<div class="comment" ng-repeat="new_comment in vm.newComments">
+			<a class="avatar" ng-click="vm.onClickUser(new_comment.user_uid)"> <img ng-src="{{ new_comment.photo_path }}"> </a>
+			<div class="content">
+				<a class="author" ng-click="vm.onClickUser(new_comment.user_uid)">{{ new_comment.name }}</a>
+				<div class="metadata">
+					<div class="date">{{ new_comment.date }}</div>
+				</div>
+				<div class="text">
+					{{ new_comment.content }}
+				</div>
+			</div>
+		</div>
+		<!-- if a comment has comments, use comments tag in parant's commemt tag -->
+		<!--<div class="comments">-->
+		<!--<div class="comment">-->
+		<!--<a class="avatar">-->
+		<!--<img src="../../images/unknown-user.gif">-->
+		<!--</a>-->
+		<!--<div class="content">-->
+		<!--<a class="author">鄉下人</a>-->
+		<!--<div class="metadata">-->
+		<!--<div class="date">2 days ago</div>-->
+		<!--</div>-->
+		<!--<div class="text">-->
+		<!--Hey guys, I hope this example comment is helping you read this documentation.-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--</div>-->
+		<form ng-submit="vm.onSubmitComment()">
+			<md-input-container>
+				<label>Write some here...</label>
+				<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
+				<input type="text" ng-model="vm.comment" name="text" />
+			</md-input-container>
+			<input type="submit" id="submit" value="Submit" ng-show="false" />
+		</form>
+	</div>
 	</div>
 </md-content>
 

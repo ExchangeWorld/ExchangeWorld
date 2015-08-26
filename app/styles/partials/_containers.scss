@@ -79,7 +79,7 @@ md-toolbar {
     box-sizing: border-box;
     box-shadow: 2px 2px 4px 2px #ccc;
     img {
-        max-width: 80%;
+        max-width: 100%;
         height: auto;
     }
     &.profile {
@@ -88,6 +88,9 @@ md-toolbar {
     &.follow {
         margin: 5px 5px;
         padding: 1px;
+        img{
+        	max-width:80%;
+        }
     }
 }
 

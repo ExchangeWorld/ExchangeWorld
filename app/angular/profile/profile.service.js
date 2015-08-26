@@ -8,8 +8,9 @@ profileModule.service('profileService', profileService);
 /** @ngInject */
 function profileService(Restangular, $q, facebookService) {
 	var service = {
-		getProfile  : getProfile,
-		editProfile : updateProfile,
+		getProfile,
+		editProfile,
+		addFollowing,
 	};
 
 	return service;
@@ -40,9 +41,24 @@ function profileService(Restangular, $q, facebookService) {
 		return defer.promise;
 	}
 
-	function updateProfile() {
+	function editProfile() {
 
 		return ;
+	}
+
+	function addFollowing(my_uid, following_uid) {
+		Restangular
+			.all('user/profile/following/post')
+			.post({
+				my_uid: my_uid,
+				following_uid: following_uid,
+			});
+		Restangular
+			.all('user/profile/follower/post')
+			.post({
+				my_uid: following_uid,
+				follower_uid: my_uid,
+			});
 	}
 
 }

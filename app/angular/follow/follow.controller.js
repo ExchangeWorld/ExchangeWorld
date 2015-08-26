@@ -12,6 +12,7 @@ function FollowController($state, followService, $stateParams) {
 	vm.type        = '';
 	vm.followData  = [];
 	vm.onClickUser = onClickUser;
+	vm.onClickBack = onClickBack;
 
 	/////////////
 	activate();
@@ -31,7 +32,7 @@ function FollowController($state, followService, $stateParams) {
 				.getFollow($stateParams.uid, vm.type)
 				.then(function(data) {
 					vm.followData = data;
-					console.log(vm.followData);
+					//console.log(vm.followData);
 				})
 				.catch(function() {
 					vm.followData = undefined;
@@ -43,6 +44,11 @@ function FollowController($state, followService, $stateParams) {
 	function onClickUser(uid) {
 		$state.go('root.withSidenav.profile', {
 			uid: uid
+		});
+	}
+	function onClickBack() {
+		$state.go('root.withSidenav.profile', {
+			uid: $stateParams.uid
 		});
 	}
 }

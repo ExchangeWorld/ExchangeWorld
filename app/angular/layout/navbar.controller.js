@@ -6,7 +6,7 @@ layoutModule.controller('NavbarController', NavbarController);
 /** @ngInject */
 function NavbarController($mdSidenav, $state, auth, $localStorage) {
 	const vm      = this;
-	const state   = ['home', 'seek', 'post', 'manage', 'profile'];
+	const state   = ['home', 'seek', 'post', 'exchange', 'profile'];
 	vm.stateIndex = 0;
 	vm.contentIs  = contentIs;
 	vm.onClick    = onClick;

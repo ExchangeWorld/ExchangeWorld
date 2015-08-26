@@ -40,76 +40,80 @@
 	</div>
 </div>
 <!-- chat room -->
-<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
-	<span>Chat</span>
-</md-toolbar>
-<div>
-	<ul class="discussion">
-		<li class="other">
-			<div class="avatar">
-				<img src="../../images/unknown-user.gif" />
-			</div>
-			<div class="messages">
-				<p class="content">今天好熱RRRRR</p>
-			</div>
-		</li>
-		<li class="self">
-			<div class="avatar">
-				<img src="../../images/unknown-user.gif" />
-			</div>
-			<div class="messages">
-				<p class="content">颱風沒來結果變成這樣辣 哭哭喔GGGGGGGGGGGGGGGGGGGGGGGGGGGGG</p>
-			</div>
-		</li>
-		<li class="other">
-			<div class="avatar">
-				<img src="../../images/unknown-user.gif" />
-			</div>
-			<div class="messages">
-				<p class="content">凎 下雨了辣 沒帶雨傘</p>
-			</div>
-		</li>
-		<li class="self">
-			<div class="avatar">
-				<img src="../../images/unknown-user.gif" />
-			</div>
-			<div class="messages">
-				<p class="content">哭哭喔</p>
-			</div>
-		</li>
-		<li class="self">
-			<div class="avatar">
-				<img src="../../images/unknown-user.gif" />
-			</div>
-			<div class="messages">
-				<p class="content">哭哭喔</p>
-			</div>
-		</li>
-		<li class="self">
-			<div class="avatar">
-				<img src="../../images/unknown-user.gif" />
-			</div>
-			<div class="messages">
-				<p class="content">哭哭喔</p>
-			</div>
-		</li>
-		<li class="self">
-			<div class="avatar">
-				<img src="../../images/unknown-user.gif" />
-			</div>
-			<div class="messages">
-				<p class="content">哭哭喔</p>
-			</div>
-		</li>
-	</ul>
-	<ul class="discussion input">
-		<form>
-			<md-input-container style="padding: 0px;">
-				<label>Type some here...</label>
-				<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
-				<input type="text" ng-model="SoemModel" name="text" />
-			</md-input-container>
-		</form>
-	</ul>
+<div layout="row">
+	<span flex="10"></span>
+	<div flex="80">
+		<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
+			<span>Chat</span>
+		</md-toolbar>
+		<ul class="discussion">
+			<li class="other">
+				<div class="avatar">
+					<img src="../../images/unknown-user.gif" />
+				</div>
+				<div class="messages">
+					<p class="content">今天好熱RRRRR</p>
+				</div>
+			</li>
+			<li class="self">
+				<div class="avatar">
+					<img src="../../images/unknown-user.gif" />
+				</div>
+				<div class="messages">
+					<p class="content">颱風沒來結果變成這樣辣 哭哭喔GGGGGGGGGGGGGGGGGGGGGGGGGGGGG</p>
+				</div>
+			</li>
+			<li class="other">
+				<div class="avatar">
+					<img src="../../images/unknown-user.gif" />
+				</div>
+				<div class="messages">
+					<p class="content">凎 下雨了辣 沒帶雨傘</p>
+				</div>
+			</li>
+			<li class="self">
+				<div class="avatar">
+					<img src="../../images/unknown-user.gif" />
+				</div>
+				<div class="messages">
+					<p class="content">哭哭喔</p>
+				</div>
+			</li>
+			<li class="self">
+				<div class="avatar">
+					<img src="../../images/unknown-user.gif" />
+				</div>
+				<div class="messages">
+					<p class="content">哭哭喔QQ</p>
+				</div>
+			</li>
+			<li class="self">
+				<div class="avatar">
+					<img src="../../images/unknown-user.gif" />
+				</div>
+				<div class="messages">
+					<p class="content">哭哭喔</p>
+				</div>
+			</li>
+			<li class="self">
+				<div class="avatar">
+					<img src="../../images/unknown-user.gif" />
+				</div>
+				<div class="messages">
+					<p class="content">哭哭喔</p>
+				</div>
+			</li>
+		</ul>
+		<ul class="discussion input">
+			<form>
+				<md-input-container style="height:49px;padding: 0px;">
+					<label>Type some here...</label>
+					<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
+					<input type="text" ng-model="SoemModel" name="text" />
+				</md-input-container>
+			</form>
+		</ul>
+	</div>
+	<span flex="10"></span>
 </div>
 

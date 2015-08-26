@@ -79,14 +79,14 @@ md-toolbar {
     box-sizing: border-box;
     box-shadow: 2px 2px 4px 2px #ccc;
     img {
-        max-width: 100%;
+        max-width: 80%;
         height: auto;
     }
     &.profile {
         margin: 6px 0;
     }
     &.follow {
-        margin: 1px 1px;
+        margin: 5px 5px;
         padding: 1px;
     }
 }

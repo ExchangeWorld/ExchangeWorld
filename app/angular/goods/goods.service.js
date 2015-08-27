@@ -57,6 +57,17 @@ function goodsService(Restangular, $q, exception) {
 	}
 
 	function postComment(newComment) {
-		Restangular.all('comment/post').post(newComment);
+		const defer = $q.defer();
+		
+		Restangular
+			.all('comment/post')
+			.post(newComment)
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] postComments error: ')(error);
+			});
+		return defer.promise;
 	}
 }

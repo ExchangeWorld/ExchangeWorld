@@ -42,9 +42,14 @@
         -->
 		<!-- waterfall container and its children item -->
 		<div class="waterfall_container" ng-show="!loading">
-			<div ng-repeat="good in vm.goods" class="item hvr-box-shadow-outset hvr-grow">
-				<img ng-src="{{ good.photo_path }}" ng-click="vm.onClickGoods( good.gid )" />
-				<p>{{ good.name }}</p>
+			<div ng-repeat="good in vm.goods" class="hvr-grow">
+				<div class="item hvr-box-shadow-outset">
+					<img ng-src="{{ good.photo_path }}" ng-click="vm.onClickGoods( good.gid )" />
+					<div layout layout-align="start center">
+						<p>{{ good.name }}</p>
+					</div>
+				</div>
+				<div class="circle"></div>
 				<!--<p>{{ good.photo_path }}</p>-->
 			</div>
 			<!--<div class="item"><img style="height:300px;" src="http://i.imgur.com/7RoLGdp.jpg" />-->

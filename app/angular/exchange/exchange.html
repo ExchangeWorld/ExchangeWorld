@@ -1,14 +1,23 @@
 <md-content>
-	<!-- exchange infomation -->
 	<div layout="row" layout-sm="column">
-		<div flex offset="5">
+		<div flex="20">
+			<md-list>
+				<md-list-item class="md-2-line">
+					<div class="md-list-item-text" layout layout-align="center center">
+						<h3>GG</h3>
+						<p>3:0</p>
+					</div>
+				</md-list-item>
+			</md-list>
+		</div>
+		<div flex>
 			<!-- title -->
 			<div layout layout-align="center center">
-				<h1 class="md-display-1">Exchange Event</h1>
+				<h1 class="md-display-1">Title</h1>
 			</div>
 			<div layout="row" class="info_container">
 				<!-- first user item -->
-				<div layout="column" flex="40">
+				<div layout="column" flex>
 					<div class="item profile" layout="column" layout-align="center center">
 						<img src="http://i.imgur.com/7RoLGdp.jpg" />
 						<div layout layout-align="center center">
@@ -27,7 +36,7 @@
 					<md-icon md-font-set="material-icons" class="hide">autorenew</md-icon>
 				</div>
 				<!-- second user item -->
-				<div layout="column" flex="40">
+				<div layout="column" flex>
 					<div class="item profile" layout="column" layout-align="center center">
 						<img src="http://i.imgur.com/7RoLGdp.jpg" />
 						<div layout layout-align="center center">
@@ -41,10 +50,12 @@
 						</div>
 					</div>
 				</div>
+				<span flex="5"></span>
 			</div>
 		</div>
+		
 		<!-- chat room -->
-		<div flex class="info_container" flex layout="row">
+		<div flex class="info_container" layout="row">
 			<span flex="10"></span>
 			<div flex="80">
 				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">

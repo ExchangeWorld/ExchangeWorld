@@ -1,37 +1,34 @@
 <!-- search input bar & button -->
 <div layout="row" layout-sm="row">
-    <md-input-container flex="80" flex-sm="70" class="md-primary">
-        <label>Search</label>
-        <input ng-model="vm.searchGoodsName">
-        <md-tooltip md-direction="left">搜尋</md-tooltip>
-    </md-input-container>
-    <md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch()">
-        <md-icon md-font-set="material-icons">search</md-icon><span class="ng-scope">Seek!</span>
-    </md-button>
+	<md-input-container flex="80" flex-sm="70" class="md-primary">
+		<label>Search</label>
+		<input ng-model="vm.searchGoodsName">
+		<md-tooltip md-direction="left">搜尋</md-tooltip>
+	</md-input-container>
+	<md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch()">
+		<md-icon md-font-set="material-icons">search</md-icon><span class="ng-scope">Seek!</span>
+	</md-button>
 </div>
 <!-- select button -->
 <md-content layout="row" style="margin-bottom: 10px">
-    <md-button class="md-raised md-cornered" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-        <md-tooltip>依據使用者距離</md-tooltip>Distance
-        <span class="caret"></span> </md-button>
-    <md-button class="md-raised md-cornered" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
-        <md-tooltip>依據物品種類</md-tooltip>
-        Categories
-        <span class="caret"></span> </md-button>
+	<md-button class="md-raised md-cornered" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
+		<md-tooltip>依據物品種類</md-tooltip>
+		Categories
+		<span class="caret"></span> </md-button>
 </md-content>
 <!-- divider -->
 <md-divider class="info_container for_input"></md-divider>
 <!-- item list subheader -->
 <div layout layout-align="center center">
-    <md-subheader class="md-primary md-no-sticky" ng-show="!loading">Item List</md-subheader>
+	<md-subheader class="md-primary md-no-sticky" ng-show="!loading">Item List</md-subheader>
 </div>
 <!-- item list -->
 <div>
-    <md-list layout="row" layout-margin layout-fill layout-padding>
-        <div ng-show="loading" style="margin: 20px auto 0px auto;">
-            <md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
-        </div>
-        <!--
+	<md-list layout="row" layout-margin layout-fill layout-padding>
+		<div ng-show="loading" style="margin: 20px auto 0px auto;">
+			<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+		</div>
+		<!--
         <div ng-show="!loading">
             <md-list-item class="md-4-line" flex ng-repeat="good in vm.goods">
                 <div class="md-list-item-text" ng-click="vm.onClickGoods( good.gid )">
@@ -43,26 +40,24 @@
             </md-list-item>
         </div>
         -->
-        <!-- waterfall container and its children item -->
-        
-        <div class="waterfall_container" ng-show="!loading">
-            <div ng-repeat="good in vm.goods" class="item">
-                <img ng-src="{{ good.photo_path }}" ng-click="vm.onClickGoods( good.gid )" />
-                <p>{{ good.name }}</p>
-                <!--<p>{{ good.photo_path }}</p>-->
-            </div>
-            <!--<div class="item"><img style="height:300px;" src="http://i.imgur.com/7RoLGdp.jpg" />-->
-            <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
-            <!--</div>-->
-            <!--<div class="item"><img style="height:400px;" src="http://i.imgur.com/7RoLGdp.jpg" />-->
-            <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
-            <!--</div>-->
-            <!--<div class="item"><img style="height:500px;" src="http://i.imgur.com/7RoLGdp.jpg" />-->
-            <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
-            <!--</div>-->
-        </div>
-
-        <md-divider></md-divider>
-    </md-list>
+		<!-- waterfall container and its children item -->
+		<div class="waterfall_container" ng-show="!loading">
+			<div ng-repeat="good in vm.goods" class="item hvr-box-shadow-outset hvr-grow">
+				<img ng-src="{{ good.photo_path }}" ng-click="vm.onClickGoods( good.gid )" />
+				<p>{{ good.name }}</p>
+				<!--<p>{{ good.photo_path }}</p>-->
+			</div>
+			<!--<div class="item"><img style="height:300px;" src="http://i.imgur.com/7RoLGdp.jpg" />-->
+			<!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
+			<!--</div>-->
+			<!--<div class="item"><img style="height:400px;" src="http://i.imgur.com/7RoLGdp.jpg" />-->
+			<!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
+			<!--</div>-->
+			<!--<div class="item"><img style="height:500px;" src="http://i.imgur.com/7RoLGdp.jpg" />-->
+			<!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
+			<!--</div>-->
+		</div>
+		<md-divider></md-divider>
+	</md-list>
 </div>
 

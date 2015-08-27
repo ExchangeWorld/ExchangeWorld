@@ -17,6 +17,10 @@ md-toolbar {
     z-index: 1000;
 }
 
+md-content {
+    background-color: #fdf9fb;
+}
+
 #autocomplete {
     margin-left: 20px;
     margin-top: 5px;
@@ -73,7 +77,7 @@ md-toolbar {
 
 .item {
     display: inline-block;
-    background: #fff;
+    background: #ebebeb;
     padding: 1em;
     margin: 0 0 1.5em;
     box-sizing: border-box;
@@ -88,12 +92,12 @@ md-toolbar {
     &.follow {
         margin: 5px 5px;
         padding: 1px;
-        img{
-        	max-width:80%;
+        img {
+            max-width: 80%;
         }
     }
 }
 
 div.md-open-menu-container {
-    z-index: 100;
+    z-index: 1000;
 }

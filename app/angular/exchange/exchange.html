@@ -1,119 +1,125 @@
-<!-- title -->
-<div layout layout-align="center center">
-	<h1 class="md-display-1">Exchange Event</h1>
-</div>
-<!-- exchange infomation -->
-<div layout="row" class="info_container">
-	<!-- first user item -->
-	<div layout="column" flex="40">
-		<div class="item profile" layout="column" layout-align="center center">
-			<img src="http://i.imgur.com/7RoLGdp.jpg" />
+<md-content>
+	<!-- exchange infomation -->
+	<div layout="row" layout-sm="column">
+		<div flex offset="5">
+			<!-- title -->
 			<div layout layout-align="center center">
-				<p class="md-body-2">BestItem_TW</p>
+				<h1 class="md-display-1">Exchange Event</h1>
+			</div>
+			<div layout="row" class="info_container">
+				<!-- first user item -->
+				<div layout="column" flex="40">
+					<div class="item profile" layout="column" layout-align="center center">
+						<img src="http://i.imgur.com/7RoLGdp.jpg" />
+						<div layout layout-align="center center">
+							<p class="md-body-2">BestItem_TW</p>
+						</div>
+					</div>
+					<div layout="row">
+						<img flex="30" src="../../images/unknown-user.gif" style="max-height:60px; max-width:60px;" />
+						<div flex layout layout-align="center center">
+							<p class="md-body-2 online">Username</p>
+						</div>
+					</div>
+				</div>
+				<!-- exchange icon -->
+				<div flex="20" layout layout-align="center center">
+					<md-icon md-font-set="material-icons" class="hide">autorenew</md-icon>
+				</div>
+				<!-- second user item -->
+				<div layout="column" flex="40">
+					<div class="item profile" layout="column" layout-align="center center">
+						<img src="http://i.imgur.com/7RoLGdp.jpg" />
+						<div layout layout-align="center center">
+							<p class="md-body-2">BestItem_TW</p>
+						</div>
+					</div>
+					<div layout="row">
+						<img flex="30" src="../../images/unknown-user.gif" style="max-height:60px; max-width:60px;" />
+						<div flex layout layout-align="center center">
+							<p class="md-body-2 online">Username</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div layout="row">
-			<img flex="30" src="../../images/unknown-user.gif" style="max-height:60px; max-width:60px;" />
-			<div flex layout layout-align="center center">
-				<p class="md-body-2 online">Username</p>
+		<!-- chat room -->
+		<div flex class="info_container" flex layout="row">
+			<span flex="10"></span>
+			<div flex="80">
+				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
+					<span>Chat</span>
+				</md-toolbar>
+				<ul class="discussion">
+					<li class="other">
+						<div class="avatar">
+							<img src="../../images/unknown-user.gif" />
+						</div>
+						<div class="messages">
+							<p class="content">今天好熱RRRRR</p>
+						</div>
+					</li>
+					<li class="self">
+						<div class="avatar">
+							<img src="../../images/unknown-user.gif" />
+						</div>
+						<div class="messages">
+							<p class="content">颱風沒來結果變成這樣辣 哭哭喔GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG</p>
+						</div>
+					</li>
+					<li class="other">
+						<div class="avatar">
+							<img src="../../images/unknown-user.gif" />
+						</div>
+						<div class="messages">
+							<p class="content">凎 下雨了辣 沒帶雨傘</p>
+						</div>
+					</li>
+					<li class="self">
+						<div class="avatar">
+							<img src="../../images/unknown-user.gif" />
+						</div>
+						<div class="messages">
+							<p class="content">哭哭喔</p>
+						</div>
+					</li>
+					<li class="self">
+						<div class="avatar">
+							<img src="../../images/unknown-user.gif" />
+						</div>
+						<div class="messages">
+							<p class="content">哭哭喔QQ</p>
+						</div>
+					</li>
+					<li class="self">
+						<div class="avatar">
+							<img src="../../images/unknown-user.gif" />
+						</div>
+						<div class="messages">
+							<p class="content">哭哭喔</p>
+						</div>
+					</li>
+					<li class="self">
+						<div class="avatar">
+							<img src="../../images/unknown-user.gif" />
+						</div>
+						<div class="messages">
+							<p class="content">哭哭喔</p>
+						</div>
+					</li>
+				</ul>
+				<ul class="discussion input">
+					<form>
+						<md-input-container style="height:49px;padding: 0px;">
+							<label>Type some here...</label>
+							<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
+							<input type="text" ng-model="SoemModel" name="text" />
+						</md-input-container>
+					</form>
+				</ul>
 			</div>
+			<span flex="10"></span>
 		</div>
 	</div>
-	<!-- exchange icon -->
-	<div flex="20" layout layout-align="center center">
-		<md-icon md-font-set="material-icons" class="hide">autorenew</md-icon>
-	</div>
-	<!-- second user item -->
-	<div layout="column" flex="40">
-		<div class="item profile" layout="column" layout-align="center center">
-			<img src="http://i.imgur.com/7RoLGdp.jpg" />
-			<div layout layout-align="center center">
-				<p class="md-body-2">BestItem_TW</p>
-			</div>
-		</div>
-		<div layout="row">
-			<img flex="30" src="../../images/unknown-user.gif" style="max-height:60px; max-width:60px;" />
-			<div flex layout layout-align="center center">
-				<p class="md-body-2 online">Username</p>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- chat room -->
-<div layout="row">
-	<span flex="10"></span>
-	<div flex="80">
-		<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
-			<span>Chat</span>
-		</md-toolbar>
-		<ul class="discussion">
-			<li class="other">
-				<div class="avatar">
-					<img src="../../images/unknown-user.gif" />
-				</div>
-				<div class="messages">
-					<p class="content">今天好熱RRRRR</p>
-				</div>
-			</li>
-			<li class="self">
-				<div class="avatar">
-					<img src="../../images/unknown-user.gif" />
-				</div>
-				<div class="messages">
-					<p class="content">颱風沒來結果變成這樣辣 哭哭喔GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG</p>
-				</div>
-			</li>
-			<li class="other">
-				<div class="avatar">
-					<img src="../../images/unknown-user.gif" />
-				</div>
-				<div class="messages">
-					<p class="content">凎 下雨了辣 沒帶雨傘</p>
-				</div>
-			</li>
-			<li class="self">
-				<div class="avatar">
-					<img src="../../images/unknown-user.gif" />
-				</div>
-				<div class="messages">
-					<p class="content">哭哭喔</p>
-				</div>
-			</li>
-			<li class="self">
-				<div class="avatar">
-					<img src="../../images/unknown-user.gif" />
-				</div>
-				<div class="messages">
-					<p class="content">哭哭喔QQ</p>
-				</div>
-			</li>
-			<li class="self">
-				<div class="avatar">
-					<img src="../../images/unknown-user.gif" />
-				</div>
-				<div class="messages">
-					<p class="content">哭哭喔</p>
-				</div>
-			</li>
-			<li class="self">
-				<div class="avatar">
-					<img src="../../images/unknown-user.gif" />
-				</div>
-				<div class="messages">
-					<p class="content">哭哭喔</p>
-				</div>
-			</li>
-		</ul>
-		<ul class="discussion input">
-			<form>
-				<md-input-container style="height:49px;padding: 0px;">
-					<label>Type some here...</label>
-					<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
-					<input type="text" ng-model="SoemModel" name="text" />
-				</md-input-container>
-			</form>
-		</ul>
-	</div>
-	<span flex="10"></span>
-</div>
+</md-content>
 

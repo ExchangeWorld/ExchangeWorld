@@ -4,7 +4,7 @@ const postModule = require('./post.module');
 postModule.controller('PostController', PostController);
 
 /** @ngInject */
-function PostController(postService, $state, AvailableCategory, $scope) {
+function PostController(postService, $scope, $state, auth, AvailableCategory, logger) {
 	var vm               = this;
 	vm.goodsName         = '';
 	vm.goodsDescriptions = '';
@@ -30,16 +30,6 @@ function PostController(postService, $state, AvailableCategory, $scope) {
 	}
 
 	function onSubmit() {
-		var newPost = {
-			name        : vm.goodsName,
-			description : vm.goodsDescriptions,
-			category    : vm.goodsCategory.label,
-			position_x  : 123.4,
-			position_y  : 23.4,
-			owner_uid   : '12345',
-			photo_path  : '',
-		};
-		
 
 		/**
 		 * First, upload the photo and get photo_path,
@@ -48,9 +38,19 @@ function PostController(postService, $state, AvailableCategory, $scope) {
 		postService
 			.uploadImg(vm.imgEncoded)
 			.then(function(data){
-				newPost.photo_path = data;
-
-				postService.sendNewPostInfo(newPost);
+				postService
+					.sendNewPostInfo({
+						name        : vm.goodsName,
+						description : vm.goodsDescriptions,
+						category    : vm.goodsCategory.label,
+						position_x  : 123.4,
+						position_y  : 23.4,
+						photo_path  : data,
+						owner_uid   : auth.currentUser().uid,
+					})
+					.then(function(data) {
+						logger.success('Your post successes :)', data, 'POST');
+					});
 			});
 
 		$state.go('root.withSidenav.seek');

@@ -6,7 +6,7 @@ layoutModule.controller('NavbarController', NavbarController);
 /** @ngInject */
 function NavbarController($mdSidenav, $state, auth, $localStorage) {
 	const vm      = this;
-	const state   = ['home', 'seek', 'post', 'manage', 'profile'];
+	const state   = ['home', 'seek', 'post', 'exchange', 'profile'];
 	vm.stateIndex = 0;
 	vm.contentIs  = contentIs;
 	vm.onClick    = onClick;
@@ -39,8 +39,12 @@ function NavbarController($mdSidenav, $state, auth, $localStorage) {
 	function onClick(contentIndex) {
 		//$scope.content = ContentType[contentIndex];
 		//$scope.$emit('sidenavChanged', ContentType[contentIndex]);
-		if (contentIndex === 0) {
+		if (contentIndex === 0 || contentIndex === 3) {
 			$state.go('root.oneCol.' + state[contentIndex]);
+		} else if(contentIndex === 4) {
+			$state.go('root.withSidenav.' + state[contentIndex], {
+				uid: auth.currentUser().uid
+			});
 		} else {
 			const isFromOneCol = $state.includes("root.oneCol");
 			$state.go('root.withSidenav.' + state[contentIndex]);

@@ -6,10 +6,11 @@ const _             = require('lodash');
 profileModule.service('profileService', profileService);
 
 /** @ngInject */
-function profileService(Restangular, $q) {
+function profileService(Restangular, $q, facebookService) {
 	var service = {
-		getProfile  : getProfile,
-		editProfile : updateProfile,
+		getProfile,
+		editProfile,
+		addFollowing,
 	};
 
 	return service;
@@ -19,14 +20,20 @@ function profileService(Restangular, $q) {
 		const defer = $q.defer();
 
 		Restangular
-			.all('user')
+			.all('user/profile')
 			.getList({ uid : _uid })
 			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data[0]);
-				} else if (_.isObject(data)) {
-					defer.resolve(data);
-				}
+				facebookService 
+					.getLargePicture(data[0].fb_id) 
+					.then(function(img) { 
+						if (_.isArray(data)) {
+							data[0].largePic = img.data.url;
+							defer.resolve(data[0]);
+						} else if (_.isObject(data)) {
+							data.largePic = img.data.url;
+							defer.resolve(data);
+						}
+					});
 			})
 			.catch(function(error) {
 				return exception.catcher('[Profiles Service] getProfile error: ')(error);
@@ -34,9 +41,24 @@ function profileService(Restangular, $q) {
 		return defer.promise;
 	}
 
-	function updateProfile() {
+	function editProfile() {
 
 		return ;
+	}
+
+	function addFollowing(my_uid, following_uid) {
+		Restangular
+			.all('user/profile/following/post')
+			.post({
+				my_uid: my_uid,
+				following_uid: following_uid,
+			});
+		Restangular
+			.all('user/profile/follower/post')
+			.post({
+				my_uid: following_uid,
+				follower_uid: my_uid,
+			});
 	}
 
 }

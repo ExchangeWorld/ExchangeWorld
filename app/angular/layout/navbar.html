@@ -1,68 +1,101 @@
 <md-toolbar class="md-primary">
-
 	<div class="md-toolbar-tools md-medium-tall navbar">
-
-		<span hide-md hide-sm flex="25">
-			<a ng-click="vm.onClick(0)" style="font-size: 20px">
-				<md-icon md-font-set="material-icons">build</md-icon>
-				ExchangeWorld
-			</a>
+		<span flex="20" flex-md="15" hide-sm>
+			<md-button ng-click="vm.onClick(0)" style="text-transform: none;">
+				<md-icon md-font-set="material-icons">group</md-icon>
+				<span hide-md hide-sm>ExchangeWorld</span>
+		</md-button>
 		</span>
-
-		<div flex="33" layout="row" layout-align="center center">
-			<md-button
-					flex
-					class="navbutton-down"
-					ng-click="vm.onClick(1)"
-					ng-class="{'active': contentIs(1)}">
+		<span flex="10" hide-md hide-sm></span>
+		<!-- seek and post button -->
+		<div flex="40" flex-md="45" flex-sm="50" layout="row" layout-align="center center">
+			<md-button flex="25" flex-sm="15" ng-click="vm.onClick(1)" ng-class="{'active': contentIs(1)}">
 				<md-icon md-font-set="material-icons">dashboard</md-icon>
-				<span hide-md hide-sm>SEEK</span>
+				<span hide-md hide-sm>Seek</span>
 			</md-button>
-
-			<md-button
-					flex
-					class="navbutton-down"
-					ng-click="vm.onClick(2)"
-					ng-class="{'active': contentIs(2)}">
+			<md-button flex="25" flex-sm="15" ng-click="vm.onClick(2)" ng-class="{'active': contentIs(2)}">
 				<md-icon md-font-set="material-icons">add box</md-icon>
-				<span hide-md hide-sm>POST</span>
+				<span hide-md hide-sm>Post</span>
 			</md-button>
-
-			<md-button
-					flex
-					class="navbutton-down"
-					ng-click="vm.onClick(3)"
-					ng-class="{'active': vm.contentIs(3)}">
-				<md-icon md-font-set="material-icons">store</md-icon>
-				<span hide-md hide-sm>Manage</span>
+			<md-button flex="40" flex-sm="15" ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">
+				<md-icon md-font-set="material-icons">autorenew</md-icon>
+				<span hide-md hide-sm>Exchange</span>
 			</md-button>
 		</div>
-
-		<span flex="20"></span>
-		<div layout="row" layout-align="center center">
-			<md-button flex="30">
-				<md-icon class="material-icons">notifications</md-icon>
-			</md-button>
-
-			<md-menu flex md-offset="8 75">
+		<!-- notification div -->
+		<div flex="10" flex-md="15" flex-sm offset="5" offset-md="5" offset-sm="5" layout="row" layout-align="center center">
+			<md-menu flex="30" flex-sm md-offset="-233 75">
 				<md-button ng-click="$mdOpenMenu()">
-					<img ng-show="vm.isLoggedIn" style="max-height:20px; max-width:20px" ng-src="{{ vm.user.photo_path }}"></img>
-					{{ vm.user.name }}
+					<md-icon class="material-icons">notifications</md-icon>
+					<p class="notification md-caption">3</p>
+				</md-button>
+				<md-menu-content width="5" style="padding-bottom: 0px; max-width:400px;">
+					<md-menu-item style="min-height: 30px; height:30px">
+						<p class="md-body-1">Notification</p>
+					</md-menu-item>
+					<md-divider></md-divider>
+					<!-- unread notification -->
+					<md-menu-item style="min-height: 80px; background-color: #E9F3FF;">
+						<div layout="row" layout-align="start center">
+							<!-- user avatar -->
+							<img flex style="max-height:50px; max-width:50px;" ng-show="vm.isLoggedIn" ng-src="{{ vm.user.photo_path }}"></img>
+							<!-- notification text -->
+							<div offset="5" flex>
+								<p class="md-body-2 note">You like SilentSky's comment:"睡不著發個睡不著發個睡不著發個睡不著發個".</p>
+								<p class="md-caption note" style="color: #BCBCBC;">36分前</p>
+							</div>
+						</div>
+					</md-menu-item>
+					<md-divider></md-divider>
+					<!-- read notification -->
+					<md-menu-item style="min-height: 80px;">
+						<div layout="row" layout-algin="start center">
+							<!-- user avatar -->
+							<img flex style="max-height:50px; max-width:50px;" ng-show="vm.isLoggedIn" ng-src="{{ vm.user.photo_path }}"></img>
+							<!-- notification text -->
+							<div offset="5" flex="70">
+								<p class="md-body-2 note">從SilentSky接受一個交換要求</p>
+								<p class="md-caption note" style="color: #BCBCBC;">51分前</p>
+							</div>
+						</div>
+					</md-menu-item>
+					<md-divider></md-divider>
+					<!-- See All text -->
+					<md-menu-item style="min-height: 30px; height:30px">
+						<p class="md-body-2">See All</p>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
+		</div>
+		<!-- user menu div -->
+		<div flex="35" flex-md flex-sm layout="row" layout-align="center center">
+			<md-menu flex flex-sm="70" md-offset="-10 75">
+				<md-button ng-click="$mdOpenMenu()">
+					<span ng-show="!vm.isLoggedIn">登入</span>
+					<div ng-show="vm.isLoggedIn" layout="row" layout-align="center center">
+						<img hide-sm style="max-height:25px; max-width:25px" ng-src="{{ vm.user.photo_path }}"></img>
+						<span hide-sm>{{ vm.user.name }}</span>
+						<md-icon md-font-set="material-icons">menu</md-icon>
+					</div>
 				</md-button>
 				<md-menu-content width="3">
 					<md-menu-item>
 						<md-button ng-click="vm.onClick(4)">Profile</md-button>
 					</md-menu-item>
+					<md-menu-item ng-show="vm.isLoggedIn">
+						<md-button ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">Manage</md-button>
+					</md-menu-item>
 					<md-menu-divider></md-menu-divider>
 					<md-menu-item ng-show="!vm.isLoggedIn">
 						<md-button ng-click="vm.onLogin()">Login</md-button>
 					</md-menu-item>
-					<md-menu-item ng-show="vm.isLoggedIn" >
+					<md-menu-item ng-show="vm.isLoggedIn">
 						<md-button ng-click="vm.onLogout()">Log Out</md-button>
 					</md-menu-item>
 				</md-menu-content>
 			</md-menu>
 		</div>
-
+	</div>
 	</div>
 </md-toolbar>
+

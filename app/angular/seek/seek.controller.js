@@ -50,5 +50,4 @@ function SeekController(seekService, $state, AvailableCategory, $scope) {
 		$scope.$parent.$broadcast('mapMoveTo', gid);
 		$state.go('root.withSidenav.goods', { gid : gid });
 	}
-
 }

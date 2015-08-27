@@ -14,10 +14,11 @@ function GoodsOverlay(map, good, $state) {
 function onAdd(map, $state) {
 
 	var div = document.createElement('div');
-	div.style.borderStyle = 'none';
-	div.style.borderWidth = '0px';
-	div.style.position = 'absolute';
-	div.style.backgroundColor = 'red';
+	div.style.borderStyle     = 'none';
+	div.style.borderWidth     = '0px';
+	div.style.position        = 'absolute';
+	div.style.backgroundImage = 'url('+this.good.photo_path+')';
+	div.style.backgroundSize  = 'contain';
 
 	this.element = div;
 	google.maps.event.addDomListener(div, 'click', function(e) {
@@ -34,10 +35,10 @@ function draw() {
 
 	var el = this.element;
 	if (el) {
-		el.style.left = origin.x - 150 + 'px';
-		el.style.top = origin.y - 150 + 'px';
-		el.style.width = 300 + 'px';
-		el.style.height = 300 + 'px';
+		el.style.left = origin.x - 75 + 'px';
+		el.style.top = origin.y - 75 + 'px';
+		el.style.width = 200 + 'px';
+		el.style.height = 200 + 'px';
 	}
 }
 

@@ -20,7 +20,7 @@ var Users = sequelize.define('users', {
 	},
 	email: {
 		type: Sequelize.STRING,
-		allowNull: false
+		allowNull: true 
 	},
 	photo_path: {
 		type: Sequelize.STRING,

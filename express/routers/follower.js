@@ -3,6 +3,7 @@ var router  = express.Router();
 
 // Including tables
 var followers = require('../ORM/Followers');
+var users     = require('../ORM/Users.js');
 
 // Get ther followers by given my_uid
 router.get('/', function(req, res, next) {
@@ -13,6 +14,8 @@ router.get('/', function(req, res, next) {
 	//
 
 	var _my_uid = parseInt(req.query.my_uid, 10);
+
+	followers.belongsTo(users, {foreignKey: 'follower_uid'});
 
 	// Emit a find operation with orm in table `followers`
 	followers
@@ -29,6 +32,9 @@ router.get('/', function(req, res, next) {
 				where: {
 					my_uid : _my_uid
 				},
+				include:[
+					{model: users}
+				]
 			});
 		})
 		.then(function(result) {

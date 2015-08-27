@@ -1,28 +1,114 @@
+html,
 body {
-  overflow: hidden;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
 }
 
 #container {
-  margin-top: -$navbar-height;
-  padding-top: $navbar-height;
+    margin-top: -$navbar-height;
+    padding-top: $navbar-height;
 }
 
-md-toolbar{
-  z-index: 1000;
+md-toolbar {
+    z-index: 1000;
+}
+
+md-content {
+    background-color: #fdf9fb;
 }
 
 #autocomplete {
-  margin-left: 20px;
-  margin-top: 5px;
-
-  input {
-    margin-left: 25px;
-    ::placeholder {
-      color: #fff;
+    margin-left: 20px;
+    margin-top: 5px;
+    input {
+        margin-left: 25px;
+        ::placeholder {
+            color: #fff;
+        }
     }
-  }
+}
+
+.circular {
+    background-position: center;
+    max-width: 100%;
+    max-height: 100%;
+    background-size: cover;
+    display: block;
+    border-radius: 50%;
+    &.with_border {
+        border: 1px ridge #CFD8DC;
+    }
+    &.profile {
+        max-width: 125%;
+        max-height: 125%;
+        width: 125%;
+        height: auto;
+    }
+}
+
+.home_container1 {
+    background-color: #ECEFF1;
+    padding: 30px 0px;
+}
+
+.home_container2 {
+    background-color: #E5E5ED;
+    padding: 30px 0px;
+}
+
+.info_container {
+    margin: 30px 0px;
+    &.for_input {
+        margin: 10px 0px;
+    }
+}
+
+.waterfall_container {
+    margin: 1.5em 0;
+    padding: 0;
+    column-gap: 1.5em;
+    font-size: .85em;
+    column-count: 2;
+}
+
+.item {
+    display: inline-block;
+    background: #ebebeb;
+    padding: 1em;
+    margin: 0 0 1.5em;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 4px 2px #ccc;
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    &.profile {
+        margin: 6px 0;
+    }
+    &.follow {
+        margin: 5px 5px;
+        padding: 1px;
+        img {
+            max-width: 80%;
+        }
+    }
 }
 
 div.md-open-menu-container {
-  z-index : 100;
+    z-index: 1000;
+}
+
+.circle {
+    height: 56px;
+    width: 56px;
+    border-radius: 50%;
+    background-color: grey;
+    z-index: 10000;
+    position: absolute;
+    bottom: 10px;
+    right: 0;
 }

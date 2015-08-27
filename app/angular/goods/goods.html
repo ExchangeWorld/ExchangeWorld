@@ -1,32 +1,100 @@
 <md-content layout-padding>
-
-	<md-toolbar class="md-accent rounded-corners md-hue-1">
-		<div layout="row" layout-align="center center" class="md-toolbar-tools">
-			<h2>Goods</h2>
-		</div>
-	</md-toolbar>
-
-</md-content>
-
-
-<md-content layout-padding>
-	<img style="width:100%; height:auto" src="http://i.imgur.com/7RoLGdp.jpg" title="source: imgur.com"/>
 	<md-tabs md-dynamic-height md-border-bottom>
-
 		<md-tab label="ItemName">
-			gname = {{ vm.goodData.name }}
+			<div layout layout-align="center center">
+				<p class="md-headline">{{ vm.goodData.name }}</p>
+			</div>
 		</md-tab>
-
 		<md-tab label="Owner">
-			<a ng-click="vm.onClickUser( vm.goodData.user.uid )">{{ vm.goodData.user.name }}</a>
+			<div layout layout-align="center center">
+				<a ng-click="vm.onClickUser( vm.goodData.user.uid )">
+					<p class="md-headline">{{ vm.goodData.user.name }}</p>
+				</a>
+			</div>
 		</md-tab>
-
 		<md-tab label="Catogories">
-			Categories = {{ vm.goodData.category }}
+			<div layout layout-align="center center">
+				<p class="md-headline">{{ vm.goodData.category }}</p>
+			</div>
 		</md-tab>
-
 		<md-tab label="Description">
-			description = {{ vm.goodData.description}}
+			<div layout layout-align="center center">>
+				<p class="md-headline">{{ vm.goodData.description }}</p>
+			</div>
 		</md-tab>
 	</md-tabs>
+	<div flex="80" layout layout-align="center center">
+		<img style="max-width: 75%;" src="{{ vm.goodData.photo_path }}" title="source: imgur.com" />
+	</div>
+	<h3 class="md-subhead">Comments</h3>
+	<md-divider></md-divider>
+	<!-- comments -->
+	<div class="comments">
+		<!-- first comment -->
+		<div class="comment">
+			<a class="avatar">
+				<img src="../../images/unknown-user.gif">
+			</a>
+			<div class="content">
+				<a class="author">天龍人</a>
+				<div class="metadata">
+					<div class="date">2 days ago</div>
+				</div>
+				<div class="text">
+					Hey guys, I hope this example comment is helping you read this documentation.
+				</div>
+			</div>
+		</div>
+		<div class="comment" ng-repeat="comment in vm.goodCommentData">
+			<a class="avatar" ng-click="vm.onClickUser(comment.user.uid)"> <img ng-src="{{ comment.user.photo_path }}"> </a>
+			<div class="content">
+				<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
+				<div class="metadata">
+					<div class="date">{{ comment.timestamp| date:'MM/dd/yyyy @ h:mma' }}</div>
+				</div>
+				<div class="text">
+					{{ comment.content }}
+				</div>
+			</div>
+		</div>
+		<div class="comment" ng-repeat="new_comment in vm.newComments">
+			<a class="avatar" ng-click="vm.onClickUser(new_comment.user_uid)"> <img ng-src="{{ new_comment.photo_path }}"> </a>
+			<div class="content">
+				<a class="author" ng-click="vm.onClickUser(new_comment.user_uid)">{{ new_comment.name }}</a>
+				<div class="metadata">
+					<div class="date">{{ new_comment.date }}</div>
+				</div>
+				<div class="text">
+					{{ new_comment.content }}
+				</div>
+			</div>
+		</div>
+		<!-- if a comment has comments, use comments tag in parant's commemt tag -->
+		<!--<div class="comments">-->
+		<!--<div class="comment">-->
+		<!--<a class="avatar">-->
+		<!--<img src="../../images/unknown-user.gif">-->
+		<!--</a>-->
+		<!--<div class="content">-->
+		<!--<a class="author">鄉下人</a>-->
+		<!--<div class="metadata">-->
+		<!--<div class="date">2 days ago</div>-->
+		<!--</div>-->
+		<!--<div class="text">-->
+		<!--Hey guys, I hope this example comment is helping you read this documentation.-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--</div>-->
+		<form ng-submit="vm.onSubmitComment()">
+			<md-input-container>
+				<label>Write some here...</label>
+				<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
+				<input type="text" ng-model="vm.comment" name="text" />
+			</md-input-container>
+			<input type="submit" id="submit" value="Submit" ng-show="false" />
+		</form>
+	</div>
+	</div>
 </md-content>
+

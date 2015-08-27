@@ -13,20 +13,22 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 		logout,
 		register,
 		getLoginStatus,
+		getLargePicture,
 	};
 
 	return service;
 
 	////////////////
 
-	/** get facebook login status */
-	function getLoginStatus() {
-		return Facebook.getLoginStatus(function(response) {
-			if (response.status === 'connected') {
-				return true;
-			} else {
-				return false;
-			}
+	/**
+	 * me()
+	 * get user's facebook basic infomations 
+	 * fields is an object like this:
+	 * { fields: 'id, name, email, pictures' }
+	 */
+	function me(fields) {
+		return Facebook.api('/me?', fields, function(response) {
+			return response;
 		});
 	}
 
@@ -98,6 +100,24 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 				}
 			});
 		return defer.promise;
+	}
+
+	function getLargePicture(fb_id) {
+		console.log(fb_id);
+		return Facebook.api('/'+fb_id+'/picture?width=100', function(response) {
+			return response;
+		});
+	}
+
+	/** get facebook login status */
+	function getLoginStatus() {
+		return Facebook.getLoginStatus(function(response) {
+			if (response.status === 'connected') {
+				return true;
+			} else {
+				return false;
+			}
+		});
 	}
 
 }

@@ -4,20 +4,59 @@ const goodsModule = require('./goods.module');
 goodsModule.controller('GoodsController', GoodsController);
 
 /** @ngInject */
-function GoodsController(goodData, $state, $scope, $timeout) {
-	const vm       = this;
-	vm.goodData    = goodData;
-	vm.onClickUser = onClickUser;
+function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout) {
+	const vm           = this;
+	vm.goodData        = goodData;
+	vm.goodCommentData = [];
+	vm.onClickUser     = onClickUser;
+	vm.onSubmitComment = onSubmitComment;
+	vm.comment         = '';
+	vm.newComments     = [];
+
+	activate();
 
 	function activate() {
 		$scope.$parent.$broadcast('goodsChanged', [goodData]);
 		$timeout(function() {
 			$scope.$parent.$broadcast('mapMoveTo', goodData.gid);
 		}, 50);
+		updateComment();
 	}
 
 	// define onClick event on goods owner
-	function onClickUser(_uid) {
-		$state.go('root.withSidenav.profile', { uid : _uid });
+	function onClickUser(uid) {
+		$state.go('root.withSidenav.profile', { uid : uid });
+	}
+
+	function updateComment() {
+		goodsService
+			.getComment(vm.goodData.gid)
+			.then(function(data) {
+				vm.goodCommentData = data;
+				vm.newComments     = [];
+			});
+	}
+
+	function onSubmitComment() {
+		const mesg = vm.comment.trim();
+		if (mesg) {
+			const commentData = {
+				commenter_uid : auth.currentUser().uid,
+				goods_gid     : goodData.gid,
+				content       : mesg,
+				date          : 'just now',
+				user_uid      : auth.currentUser().uid,
+				name          : auth.currentUser().name,
+				photo_path    : auth.currentUser().photo_path,
+			};
+			vm.newComments.push(commentData);
+			goodsService
+				.postComment(commentData)
+				.then(function() {
+					vm.comment = '';
+					updateComment();
+				});
+		}
+		//console.log(vm.newComments);
 	}
 }

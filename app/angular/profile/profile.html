@@ -1,62 +1,154 @@
-<md-content layout-padding layout-margin>
-    <md-toolbar class="md-accent rounded-corners md-hue-1">
-        <div layout-align="center center" class="md-toolbar-tools">
-            <h2>Profile</h2>
-        </div>
-    </md-toolbar>
-    <div layout="row" style="margin-top:10px">
-        <div flex="40">
-            <a href="/#/profile"><img class="circular" src="http://i.imgur.com/BYu27mM.jpg" /></a>
-        </div>
-        <div flex="60" layout="column">
-            <p class="md-body-2">I'm so smart and handsome.</p>
-            <div layout="row">
-                <md-button flex class="md-raised md-primary">
-                    <div layout="row" layout-align="center center">
-                        <i class="material-icons md-24">add_circle</i>
-                        <span>&nbsp;Follow</span>
-                    </div>
-                </md-button>
-            </div>
-        </div>
-    </div>
-    <md-divider ng-if="!$last" style="margin:10px 0px 10px 0px"></md-divider>
-    <md-tabs md-dynamic-height md-border-bottom>
-        <md-tab label="Profile">
-            <md-content class="md-padding">
-                <md-toolbar class="md-primary rounded-corners">
-                    <div class="md-toolbar-tools">
-                        <h2 class="md-flex">Information</h2>
-                    </div>
-                </md-toolbar>
-                <p>Age</p>
-                <p>Gender</p>
-                <p>Country</p>
-                <p>Email</p>
-				<p>Introduction: {{ vm.profile.introduction }}</p>
-            </md-content>
-        </md-tab>
-        <md-tab label="Exchanging">
-            <md-content class="md-padding">
-                <md-toolbar class="md-primary rounded-corners">
-                    <div class="md-toolbar-tools">
-                        <h2 class="md-flex">Exchanging Items</h2>
-                    </div>
-                </md-toolbar>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
-                <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
-                <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-            </md-content>
-        </md-tab>
-        <md-tab label="Exchanged">
-            <md-content class="md-padding">
-                <md-toolbar class="md-primary rounded-corners">
-                    <div class="md-toolbar-tools">
-                        <h2 class="md-flex">Exchanged Items</h2>
-                    </div>
-                </md-toolbar>
-                <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-            </md-content>
-        </md-tab>
-    </md-tabs>
+<md-content>
+	<div layout="row" class="info_container for_input">
+		<!-- user avatar -->
+		<div flex="40" layout layout-align="center center">
+			<a href="#"><img class="circular profile" ng-src="{{ vm.profile.largePic }}" /></a>
+		</div>
+		<!-- user name & follow button -->
+		<div flex="60" layout="column">
+			<div layout="row" layout-align="center center">
+				<h4 class="md-subhead">{{ vm.profile.name }}</h4>
+			</div>
+			<div layout="row" layout-align="center center">
+				<span flex="10"></span>
+				<md-button flex class="md-raised md-primary" ng-show="!vm.isMe" ng-disabled="!(vm.isLoggedIn && !vm.isFollowed)" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
+					<md-icon md-font-set="material-icons">person_add</md-icon>
+					<span>&nbsp;Follow</span>
+				</md-button>
+				<span flex="10"></span>
+			</div>
+		</div>
+	</div>
+	<div layout="row">
+		<p flex layout="row" layout-align="center center" class="textshade md-subhead trans">追隨人數：&nbsp;
+			<a ng-click="vm.onClickFollow(vm.profile.uid, 0)">{{ vm.profile.followings.length }}</a>
+		</p>
+		<p flex layout="row" layout-align="center center" class="textshade md-subhead trans">
+			<a ng-click="vm.onClickFollow(vm.profile.uid, 1)">{{ vm.followerCount }}</a>&nbsp;人在追蹤
+		</p>
+	</div>
+	<md-divider class="info_container for_input" style="margin-bottom: 5px"></md-divider>
+	<!-- tabs for user -->
+	<md-tabs md-dynamic-height md-border-bottom md-center-tabs>
+		<md-tab label="Profile">
+			<md-content layout-padding style="margin-top: 10px">
+				<div layout="row">
+					<!-- user information -->
+					<div flex="60">
+						<div layout="row" class="profile_text">
+							<p class="md-body-2">
+								<md-icon md-font-set="material-icons" class="hide">person</md-icon>
+								Male</p>
+						</div>
+						<md-divider md-inset></md-divider>
+						<div layout="row" class="profile_text">
+							<p class="md-body-2">
+								<md-icon md-font-set="material-icons" class="hide">today</md-icon>
+								Born in February, 15, 1994</p>
+						</div>
+						<md-divider md-inset></md-divider>
+						<div layout="row">
+							<p class="md-body-2 profile_text">
+								<md-icon md-font-set="material-icons" class="hide">terrain</md-icon>
+								Taichung, Taiwan</p>
+						</div>
+						<md-divider md-inset></md-divider>
+						<div layout="row">
+							<p class="md-body-2 profile_text">
+								<md-icon md-font-set="material-icons" class="hide">email</md-icon>
+								a25204641@gmail.com</p>
+						</div>
+					</div>
+					<!-- edit fab button -->
+					<div flex offset="15" layout layout-align="center start">
+						<md-button class="md-fab md-primary md-hue-3" ng-show="vm.isMe">
+							<md-icon md-font-set="material-icons">edit</md-icon>
+							<md-tooltip>編輯個人資料</md-tooltip>
+						</md-button>
+					</div>
+				</div>
+			</md-content>
+		</md-tab>
+		<md-tab label="Exchanging">
+			<md-content layout-padding>
+				<div layout="column">
+					<div layout="row" class="info_container for_input">
+						<!-- first user item -->
+						<div layout="column" flex="40" class="item profile">
+							<img src="http://i.imgur.com/7RoLGdp.jpg" />
+							<div layout="column" layout-align="center center">
+								<p class="md-body-2">BestItem_TW</p>
+								<p class="md-body-1">SilentSky</p>
+							</div>
+						</div>
+						<!-- exchange icon -->
+						<div flex="20" layout layout-align="center center">
+							<md-icon md-font-set="material-icons" class="hide">autorenew</md-icon>
+						</div>
+						<!-- second user item -->
+						<div flex="40" class="item profile">
+							<img src="http://i.imgur.com/7RoLGdp.jpg" />
+							<div layout="column" layout-align="center center">
+								<p class="md-body-2">BestItem_US</p>
+								<p class="md-body-1">LonSilent</p>
+							</div>
+						</div>
+					</div>
+					<!-- second exchange event test -->
+					<div layout="row">
+						<div layout="column" flex="40" class="item profile">
+							<img src="http://i.imgur.com/7RoLGdp.jpg" />
+							<div layout="column" layout-align="center center">
+								<p class="md-body-2">BestItem_TW</p>
+								<p class="md-body-1">SilentSky</p>
+							</div>
+						</div>
+						<div flex="20" layout layout-align="center center">
+							<md-icon md-font-set="material-icons" class="hide">autorenew</md-icon>
+						</div>
+						<div flex="40" class="item profile">
+							<img src="http://i.imgur.com/7RoLGdp.jpg" />
+							<div layout="column" layout-align="center center">
+								<p class="md-body-2">BestItem_US</p>
+								<p class="md-body-1">LonSilent</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</md-content>
+		</md-tab>
+		<md-tab label="Exchanged">
+			<md-content layout-padding>
+				<div layout="row" layout-sm="column" layout-align="center center" class="info_container for_input">
+					<!-- item photo that user has exchanged -->
+					<div flex="40" flex-sm class="item profile">
+						<img src="http://i.imgur.com/7RoLGdp.jpg" />
+					</div>
+					<span flex="15" hide-sm></span>
+					<!-- exchange information -->
+					<div flex flex-sm>
+						<div layout="row" class="profile_text">
+							<p class="md-body-2">
+								<md-icon md-font-set="material-icons" class="hide">people_outline</md-icon>
+								with: LonSilent</p>
+						</div>
+						<md-divider></md-divider>
+						<div layout="row" class="profile_text">
+							<p class="md-body-2">
+								<md-icon md-font-set="material-icons" class="hide">event_note</md-icon>
+								Date: 2015/8/30</p>
+						</div>
+						<md-divider></md-divider>
+						<div layout="row" class="profile_text">
+							<p class="md-body-2">
+								<md-icon md-font-set="material-icons" class="hide">thumbs_up_down</md-icon>
+								Rating: Good</p>
+						</div>
+						<md-divider></md-divider>
+					</div>
+				</div>
+			</md-content>
+		</md-tab>
+	</md-tabs>
 </md-content>
+

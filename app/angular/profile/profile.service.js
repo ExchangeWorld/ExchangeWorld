@@ -24,7 +24,7 @@ function profileService(Restangular, $q, facebookService) {
 			.getList({ uid : _uid })
 			.then(function(data) {
 				facebookService 
-					.getLargePicture(data.fb_id || data[0].fb_id) 
+					.getLargePicture(data[0].fb_id) 
 					.then(function(img) { 
 						if (_.isArray(data)) {
 							data[0].largePic = img.data.url;

@@ -4,7 +4,7 @@ const goodsModule = require('./goods.module');
 goodsModule.controller('GoodsController', GoodsController);
 
 /** @ngInject */
-function GoodsController(goodData, goodsService, $state, auth) {
+function GoodsController(goodData, goodsService, $state, auth ) {
 	const vm           = this;
 	vm.goodData        = goodData;
 	vm.goodCommentData = [];
@@ -30,7 +30,7 @@ function GoodsController(goodData, goodsService, $state, auth) {
 	}
 
 	function onSubmitComment() {
-		if (vm.comment) {
+		if (vm.comment.trim()) {
 			vm.newComments.push({
 				commenter_uid : auth.currentUser().uid,
 				goods_gid     : goodData.gid,

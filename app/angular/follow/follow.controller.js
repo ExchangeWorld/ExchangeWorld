@@ -19,12 +19,7 @@ function FollowController($state, followService, $stateParams) {
 
 	function activate() {
 		if (!_.includes(types, $stateParams.type)) {
-			/**
-			 * If url not follower/following,
-			 * redirect it to seek
-			 */
-			$state.go('root.withSidenav.seek');
-
+			$state.go('root.withSidenav.404');
 		} else {
 			vm.type = $stateParams.type;
 

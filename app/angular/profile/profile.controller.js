@@ -10,7 +10,7 @@ function ProfileController(profile, profileService, $state, $localStorage, auth)
 	const types            = ['following', 'follower'];
 	vm.profile             = profile;
 	vm.largePic            = '';
-	vm.isLoggedIn          = $localStorage.user ? true : false;
+	vm.isLoggedIn          = Boolean($localStorage.user);
 	vm.isMe                = vm.isLoggedIn ? (profile.uid === $localStorage.user.uid) : false;
 	vm.onClickFollow       = onClickFollow;
 	vm.onClickAddFollowing = onClickAddFollowing;

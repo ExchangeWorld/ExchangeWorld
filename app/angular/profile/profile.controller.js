@@ -11,7 +11,7 @@ function ProfileController(profile, profileService, $state, $localStorage, auth)
 	vm.profile             = profile;
 	vm.largePic            = '';
 	vm.isLoggedIn          = Boolean($localStorage.user);
-	vm.isMe                = vm.isLoggedIn ? (profile.uid === $localStorage.user.uid) : false;
+	vm.isMe                = vm.isLoggedIn && (profile.uid === $localStorage.user.uid);
 	vm.onClickFollow       = onClickFollow;
 	vm.onClickAddFollowing = onClickAddFollowing;
 	vm.followerCount       = profile.followers.length;
@@ -22,10 +22,9 @@ function ProfileController(profile, profileService, $state, $localStorage, auth)
 
 	function activate() {
 		if(vm.isLoggedIn) {
-			var idx = _.findIndex(profile.followers, function(user) { 
-				return user.follower_uid === $localStorage.user.uid; 
-			});
-			if(idx !== -1) vm.isFollowed = true;
+			if (_.findWhere(profile.followers, { follower_uid : $localStorage.user.uid })) {
+				vm.isFollowed = true;
+			}
 		}
 
 		auth
@@ -40,10 +39,10 @@ function ProfileController(profile, profileService, $state, $localStorage, auth)
 			});
 	}
 
-	function onClickFollow(uid, idx) {
+	function onClickFollow(uid, index) {
 		$state.go('root.withSidenav.follow', {
 			uid: uid,
-			type: types[idx]
+			type: types[index]
 		});
 	}
 

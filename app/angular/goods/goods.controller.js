@@ -16,33 +16,43 @@ function GoodsController(goodData, goodsService, $state, auth ) {
 	activate();
 
 	function activate() {
-		goodsService
-			.getComment(vm.goodData.gid)
-			.then(function(data) {
-				vm.goodCommentData = data;
-				//console.log(data);
-			});
+		updateComment();
 	}
 
 	// define onClick event on goods owner
 	function onClickUser(uid) {
 		$state.go('root.withSidenav.profile', { uid : uid });
 	}
+	
+	function updateComment() {
+		goodsService
+			.getComment(vm.goodData.gid)
+			.then(function(data) {
+				vm.goodCommentData = data;
+				vm.newComments     = [];
+			});
+	}
 
 	function onSubmitComment() {
-		if (vm.comment.trim()) {
-			vm.newComments.push({
+		const mesg = vm.comment.trim();
+		if (mesg) {
+			const commentData = {
 				commenter_uid : auth.currentUser().uid,
 				goods_gid     : goodData.gid,
-				content       : this.comment,
+				content       : mesg,
 				date          : 'just now',
 				user_uid      : auth.currentUser().uid,
 				name          : auth.currentUser().name,
 				photo_path    : auth.currentUser().photo_path,
-			});
-			vm.comment = '';
+			};
+			vm.newComments.push(commentData);
+			goodsService
+				.postComment(commentData)
+				.then(function() {
+					vm.comment = '';
+					updateComment();
+				});
 		}
 		//console.log(vm.newComments);
-		goodsService.postComment(vm.newComments[vm.newComments.length - 1]);
 	}
 }

@@ -1,6 +1,7 @@
 'use strict';
 
 const goodsModule = require('./goods.module');
+const moment      = require('moment');
 goodsModule.controller('GoodsController', GoodsController);
 
 /** @ngInject */
@@ -34,6 +35,13 @@ function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout)
 			.then(function(data) {
 				vm.goodCommentData = data;
 				vm.newComments     = [];
+			})
+			.then(function() {
+				var data = vm.goodCommentData.map(function(obj) {
+					obj.timestamp = moment(obj.timestamp).fromNow();
+					return obj;
+				});
+				vm.goodCommentData = data;
 			});
 	}
 

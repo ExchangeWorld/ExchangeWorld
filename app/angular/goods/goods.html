@@ -50,7 +50,8 @@
 			<div class="content">
 				<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
 				<div class="metadata">
-					<div class="date">{{ comment.timestamp| date:'MM/dd/yyyy @ h:mma' }}</div>
+					<!--<div class="date">{{ comment.timestamp| date:'MM/dd/yyyy @ h:mma' }}</div>-->
+					<div class="date">{{ comment.timestamp}}</div>
 				</div>
 				<div class="text">
 					{{ comment.content }}

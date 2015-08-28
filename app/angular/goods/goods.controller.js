@@ -39,7 +39,7 @@ function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout,
 			})
 			.then(function() {
 				var data = vm.goodCommentData.map(function(obj) {
-					(obj.commenter_uid === $localStorage.user.uid) ?  obj.isMe = true: obj.isMe = false;
+					obj.isMe = (obj.commenter_uid === $localStorage.user.uid);
 					obj.timestamp = moment(obj.timestamp).fromNow();
 					return obj;
 				});

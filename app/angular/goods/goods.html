@@ -46,7 +46,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="comment" ng-repeat="comment in vm.goodCommentData">
+		<div class="comment" ng-repeat="comment in vm.goodData.comments">
 			<a class="avatar" ng-click="vm.onClickUser(comment.user.uid)"> <img ng-src="{{ comment.user.photo_path }}"> </a>
 			<div class="content">
 				<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>

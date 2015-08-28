@@ -29,13 +29,18 @@ function goodsService(Restangular, $q, exception) {
 
 				getStars(gid)
 					.then(function(stars) {
-						if (_.isArray(data)) {
-							data[0].stars = stars;
-							defer.resolve(data[0]);
-						} else if (_.isObject(data)) {
-							data.stars = stars;
-							defer.resolve(data);
-						}
+						getComment(gid)
+							.then(function(comments) {
+								if (_.isArray(data)) {
+									data[0].stars = stars;
+									data[0].comments = comments;
+									defer.resolve(data[0]);
+								} else if (_.isObject(data)) {
+									data.stars = stars;
+									data.comments = comments;
+									defer.resolve(data);
+								}
+							});
 					});
 			})
 			.catch(function(error) {

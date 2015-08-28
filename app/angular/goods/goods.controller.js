@@ -13,7 +13,6 @@ function GoodsController(goodData, goodsService, $state, $stateParams, $scope, a
 	vm.starred         = false;
 	vm.starbtnStr      = vm.starred ? 'UNSTAR' : 'STAR';
 	vm.starsCount      = goodData.stars.length;
-	vm.goodCommentData = [];
 	vm.comment         = '';
 	vm.onSubmitComment = onSubmitComment;
 	vm.onClickUser     = onClickUser;
@@ -54,7 +53,7 @@ function GoodsController(goodData, goodsService, $state, $stateParams, $scope, a
 		goodsService
 			.getComment(vm.goodData.gid)
 			.then(function(data) {
-				vm.goodCommentData = data;
+				vm.goodData.comments = data;
 			});
 	}
 
@@ -70,7 +69,7 @@ function GoodsController(goodData, goodsService, $state, $stateParams, $scope, a
 				name          : auth.currentUser().name,
 				photo_path    : auth.currentUser().photo_path,
 			};
-			vm.goodCommentData.push(commentData);
+			vm.goodData.comments.push(commentData);
 			goodsService
 				.postComment(commentData)
 				.then(function() {

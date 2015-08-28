@@ -14,6 +14,7 @@ function goodsService(Restangular, $q, exception) {
 		postComment,
 		getStars,
 		postStar,
+		deleteStar,
 	};
 	return service;
 
@@ -29,10 +30,10 @@ function goodsService(Restangular, $q, exception) {
 				getStars(gid)
 					.then(function(stars) {
 						if (_.isArray(data)) {
-							data[0].stars = stars.length;
+							data[0].stars = stars;
 							defer.resolve(data[0]);
 						} else if (_.isObject(data)) {
-							data.stars = stars.length;
+							data.stars = stars;
 							defer.resolve(data);
 						}
 					});
@@ -107,7 +108,25 @@ function goodsService(Restangular, $q, exception) {
 				defer.resolve(data);
 			})
 			.catch(function(error) {
-				return exception.catcher('[Goods Service] postComments error: ')(error);
+				return exception.catcher('[Goods Service] postStar error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	function deleteStar(star) {
+		const defer = $q.defer();
+		
+		Restangular
+			.all('star/delete')
+			.remove({
+				goods_gid         : star.goods_gid,
+				starring_user_uid : star.starring_user_uid,
+			})
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] deleteStar error: ')(error);
 			});
 		return defer.promise;
 	}

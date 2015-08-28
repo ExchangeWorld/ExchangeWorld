@@ -1,4 +1,5 @@
 <md-content layout-padding>
+	<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">{{vm.starbtnStr}} {{vm.starsCount }} </md-button>
 	<md-tabs md-dynamic-height md-border-bottom>
 		<md-tab label="ItemName">
 			<div layout layout-align="center center">

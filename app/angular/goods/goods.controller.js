@@ -1,17 +1,24 @@
 'use strict';
 
 const goodsModule = require('./goods.module');
+const _           = require('lodash');
 goodsModule.controller('GoodsController', GoodsController);
 
 /** @ngInject */
-function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout) {
+function GoodsController(goodData, goodsService, $state, $stateParams, $scope, auth, $timeout, $localStorage) {
 	const vm           = this;
+	vm.isLoggedIn      = Boolean($localStorage.user);
+	vm.isMe            = vm.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
 	vm.goodData        = goodData;
+	vm.starred         = false;
+	vm.starbtnStr      = vm.starred ? 'UNSTAR' : 'STAR';
+	vm.starsCount      = goodData.stars.length;
 	vm.goodCommentData = [];
-	vm.onClickUser     = onClickUser;
-	vm.onSubmitComment = onSubmitComment;
 	vm.comment         = '';
 	vm.newComments     = [];
+	vm.onSubmitComment = onSubmitComment;
+	vm.onClickUser     = onClickUser;
+	vm.onClickStar     = onClickStar;
 
 	activate();
 
@@ -21,6 +28,23 @@ function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout)
 			$scope.$parent.$broadcast('mapMoveTo', goodData.gid);
 		}, 50);
 		updateComment();
+
+		if(vm.isLoggedIn) {
+			if (_.findWhere(goodData.star, { goods_gid : $localStorage.user.uid })) {
+				vm.starred = true;
+				updateStarbtnStr(); 
+			}
+		}
+		auth
+			.getLoginState()
+			.then(function(data) {
+				if(data) {
+					vm.isMe = (goodData.owner_uid === data.uid);
+				} else {
+					vm.isMe = false;
+					vm.isLoggedIn = false;
+				}
+			});
 	}
 
 	// define onClick event on goods owner
@@ -58,5 +82,29 @@ function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout)
 				});
 		}
 		//console.log(vm.newComments);
+	}
+
+	function onClickStar() {
+		if(!vm.starred) {
+			vm.starsCount += 1;
+			goodsService
+				.postStar({
+					starring_user_uid : $localStorage.user.uid,
+					goods_gid         : vm.goodData.gid,
+				});
+		} else {
+			vm.starsCount -= 1;
+			goodsService
+				.deleteStar({
+					starring_user_uid : $localStorage.user.uid,
+					goods_gid         : vm.goodData.gid,
+				});
+		}
+		vm.starred = !vm.starred;
+		updateStarbtnStr(); 
+	}
+
+	function updateStarbtnStr() {
+		vm.starbtnStr = vm.starred ? 'UNSTAR' : 'STAR';
 	}
 }

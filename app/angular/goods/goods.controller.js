@@ -48,6 +48,10 @@ function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout,
 	}
 
 	function onSubmitComment() {
+		if(!auth.currentUser()) {
+			alert('您未登入喔！');
+			return;
+		}
 		const mesg = vm.comment.trim();
 		if (mesg) {
 			const commentData = {
@@ -71,7 +75,10 @@ function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout,
 	}
 
 	function onDeleteComment(cid) {
-		goodsService.deleteComment({ cid: cid });
-		updateComment();
+		//SweetAlert.swal("Here's a message");
+		if(confirm('您確定真的要刪除這則留言嗎？') == true) {
+			goodsService.deleteComment({ cid: cid });
+			updateComment();
+		}
 	}
 }

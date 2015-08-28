@@ -52,6 +52,7 @@
 				<div class="metadata">
 					<!--<div class="date">{{ comment.timestamp| date:'MM/dd/yyyy @ h:mma' }}</div>-->
 					<div class="date">{{ comment.timestamp}}</div>
+					<div ng-show="comment.isMe" ng-click="vm.onDeleteComment(comment.cid)">X</div>
 				</div>
 				<div class="text">
 					{{ comment.content }}

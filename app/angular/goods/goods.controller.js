@@ -5,12 +5,13 @@ const moment      = require('moment');
 goodsModule.controller('GoodsController', GoodsController);
 
 /** @ngInject */
-function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout) {
+function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout, $localStorage) {
 	const vm           = this;
 	vm.goodData        = goodData;
 	vm.goodCommentData = [];
 	vm.onClickUser     = onClickUser;
 	vm.onSubmitComment = onSubmitComment;
+	vm.onDeleteComment = onDeleteComment;
 	vm.comment         = '';
 	vm.newComments     = [];
 
@@ -38,6 +39,7 @@ function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout)
 			})
 			.then(function() {
 				var data = vm.goodCommentData.map(function(obj) {
+					(obj.commenter_uid === $localStorage.user.uid) ?  obj.isMe = true: obj.isMe = false;
 					obj.timestamp = moment(obj.timestamp).fromNow();
 					return obj;
 				});
@@ -66,5 +68,10 @@ function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout)
 				});
 		}
 		//console.log(vm.newComments);
+	}
+
+	function onDeleteComment(cid) {
+		goodsService.deleteComment({ cid: cid });
+		updateComment();
 	}
 }

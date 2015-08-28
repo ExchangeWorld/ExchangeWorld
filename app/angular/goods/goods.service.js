@@ -12,6 +12,7 @@ function goodsService(Restangular, $q, exception) {
 		editGood, 
 		getComment,
 		postComment,
+		deleteComment,
 	};
 	return service;
 
@@ -69,5 +70,20 @@ function goodsService(Restangular, $q, exception) {
 				return exception.catcher('[Goods Service] postComments error: ')(error);
 			});
 		return defer.promise;
+	}
+
+	function deleteComment(comment) {
+		const defer = $q.defer();
+		
+		Restangular
+			.all('comment/delete')
+			.remove({ cid: comment.cid })
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] deleteComment error: ')(error);
+			});
+		return defer.promise;	
 	}
 }

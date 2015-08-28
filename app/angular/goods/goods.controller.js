@@ -30,7 +30,7 @@ function GoodsController(goodData, goodsService, $state, $stateParams, $scope, a
 		updateComment();
 
 		if(vm.isLoggedIn) {
-			if (_.findWhere(goodData.star, { goods_gid : $localStorage.user.uid })) {
+			if (_.findWhere(goodData.stars, { starring_user_uid : $localStorage.user.uid })) {
 				vm.starred = true;
 				updateStarbtnStr(); 
 			}

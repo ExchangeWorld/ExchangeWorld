@@ -76,9 +76,10 @@ function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout,
 
 	function onDeleteComment(cid) {
 		//SweetAlert.swal("Here's a message");
-		if(confirm('您確定真的要刪除這則留言嗎？') == true) {
-			goodsService.deleteComment({ cid: cid });
-			updateComment();
+		if (confirm('您確定真的要刪除這則留言嗎？')) {
+			goodsService
+				.deleteComment({ cid: cid })
+				.then(updateComment);
 		}
 	}
 }

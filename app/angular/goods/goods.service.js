@@ -12,6 +12,8 @@ function goodsService(Restangular, $q, exception) {
 		editGood, 
 		getComment,
 		postComment,
+		getStars,
+		postStar,
 	};
 	return service;
 
@@ -23,11 +25,17 @@ function goodsService(Restangular, $q, exception) {
 			.all('goods')
 			.getList({ gid : gid })
 			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data[0]);
-				} else if (_.isObject(data)) {
-					defer.resolve(data);
-				}
+
+				getStars(gid)
+					.then(function(stars) {
+						if (_.isArray(data)) {
+							data[0].stars = stars.length;
+							defer.resolve(data[0]);
+						} else if (_.isObject(data)) {
+							data.stars = stars.length;
+							defer.resolve(data);
+						}
+					});
 			})
 			.catch(function(error) {
 				return exception.catcher('[Goods Service] getGood error: ')(error);
@@ -62,6 +70,39 @@ function goodsService(Restangular, $q, exception) {
 		Restangular
 			.all('comment/post')
 			.post(newComment)
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] postComments error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	function getStars(gid) {
+		const defer = $q.defer();
+		Restangular
+			.all('star/to')
+			.getList({goods_gid: gid})
+			.then(function(data) {
+				if (_.isArray(data)) {
+					defer.resolve(data);
+				} else {
+					defer.reject(data);
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] getStars error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	function postStar(newStar) {
+		const defer = $q.defer();
+		
+		Restangular
+			.all('star/post')
+			.post(newStar)
 			.then(function(data) {
 				defer.resolve(data);
 			})

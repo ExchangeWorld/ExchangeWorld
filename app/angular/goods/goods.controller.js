@@ -15,7 +15,6 @@ function GoodsController(goodData, goodsService, $state, $stateParams, $scope, a
 	vm.starsCount      = goodData.stars.length;
 	vm.goodCommentData = [];
 	vm.comment         = '';
-	vm.newComments     = [];
 	vm.onSubmitComment = onSubmitComment;
 	vm.onClickUser     = onClickUser;
 	vm.onClickStar     = onClickStar;
@@ -31,8 +30,7 @@ function GoodsController(goodData, goodsService, $state, $stateParams, $scope, a
 
 		if(vm.isLoggedIn) {
 			if (_.findWhere(goodData.stars, { starring_user_uid : $localStorage.user.uid })) {
-				vm.starred = true;
-				updateStarbtnStr(); 
+				setStarbtnStr(true); 
 			}
 		}
 		auth
@@ -57,7 +55,6 @@ function GoodsController(goodData, goodsService, $state, $stateParams, $scope, a
 			.getComment(vm.goodData.gid)
 			.then(function(data) {
 				vm.goodCommentData = data;
-				vm.newComments     = [];
 			});
 	}
 
@@ -73,7 +70,7 @@ function GoodsController(goodData, goodsService, $state, $stateParams, $scope, a
 				name          : auth.currentUser().name,
 				photo_path    : auth.currentUser().photo_path,
 			};
-			vm.newComments.push(commentData);
+			vm.goodCommentData.push(commentData);
 			goodsService
 				.postComment(commentData)
 				.then(function() {
@@ -85,26 +82,32 @@ function GoodsController(goodData, goodsService, $state, $stateParams, $scope, a
 	}
 
 	function onClickStar() {
+		const star = {
+			starring_user_uid : $localStorage.user.uid,
+			goods_gid         : vm.goodData.gid,
+		};
+		
 		if(!vm.starred) {
 			vm.starsCount += 1;
 			goodsService
-				.postStar({
-					starring_user_uid : $localStorage.user.uid,
-					goods_gid         : vm.goodData.gid,
+				.postStar(star)
+				.then(function() {
+					setStarbtnStr(true);
 				});
 		} else {
 			vm.starsCount -= 1;
 			goodsService
-				.deleteStar({
-					starring_user_uid : $localStorage.user.uid,
-					goods_gid         : vm.goodData.gid,
+				.deleteStar(star)
+				.then(function() {
+					setStarbtnStr(false);
 				});
 		}
-		vm.starred = !vm.starred;
-		updateStarbtnStr(); 
+		
+		
 	}
 
-	function updateStarbtnStr() {
-		vm.starbtnStr = vm.starred ? 'UNSTAR' : 'STAR';
+	function setStarbtnStr(starred) {
+		vm.starred = starred;
+		vm.starbtnStr = starred ? 'UNSTAR' : 'STAR';
 	}
 }

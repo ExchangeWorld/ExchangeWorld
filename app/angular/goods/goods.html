@@ -58,18 +58,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="comment" ng-repeat="new_comment in vm.newComments">
-			<a class="avatar" ng-click="vm.onClickUser(new_comment.user_uid)"> <img ng-src="{{ new_comment.photo_path }}"> </a>
-			<div class="content">
-				<a class="author" ng-click="vm.onClickUser(new_comment.user_uid)">{{ new_comment.name }}</a>
-				<div class="metadata">
-					<div class="date">{{ new_comment.date }}</div>
-				</div>
-				<div class="text">
-					{{ new_comment.content }}
-				</div>
-			</div>
-		</div>
 		<!-- if a comment has comments, use comments tag in parant's commemt tag -->
 		<!--<div class="comments">-->
 		<!--<div class="comment">-->

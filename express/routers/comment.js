@@ -25,6 +25,7 @@ router.get('/of/goods', function(req, res, next) {
 				where: {
 					goods_gid: _goods_gid
 				},
+				order : 'cid ASC',
 				include: [users]
 			});
 		})

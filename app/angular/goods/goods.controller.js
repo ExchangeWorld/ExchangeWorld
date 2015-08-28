@@ -49,8 +49,14 @@ function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout,
 
 	function onSubmitComment() {
 		if(!auth.currentUser()) {
-			alert('您未登入喔！');
-			return;
+			//alert('您未登入喔！');
+			auth
+				.login()
+				.then(function(user) {
+					vm.user = user;
+					vm.isLoggedIn = Boolean(user);
+					$state.reload();
+				});
 		}
 		const mesg = vm.comment.trim();
 		if (mesg) {

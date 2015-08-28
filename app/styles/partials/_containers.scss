@@ -21,6 +21,13 @@ md-content {
     background-color: #fdf9fb;
 }
 
+md-list-item {
+    &.md-button {
+        margin: 0;
+        padding: 0;
+    }
+}
+
 #autocomplete {
     margin-left: 20px;
     margin-top: 5px;
@@ -48,6 +55,9 @@ md-content {
         width: 125%;
         height: auto;
     }
+    &.goods {
+        width: 80px;
+    }
 }
 
 .home_container1 {
@@ -64,6 +74,9 @@ md-content {
     margin: 30px 0px;
     &.for_input {
         margin: 10px 0px;
+    }
+    &.chat {
+        margin: 5px 0 10px 0;
     }
 }
 

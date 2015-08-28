@@ -1,21 +1,29 @@
 <md-content>
 	<div layout="row" layout-sm="column">
 		<div flex="20">
-			<md-list>
-				<md-list-item class="md-2-line">
-					<div class="md-list-item-text" layout layout-align="center center">
-						<h3>GG</h3>
-						<p>3:0</p>
+			<md-list layout-sm="row">
+				<md-list-item class="md-button">
+					<div layout="row" layout-align="center center">
+						<h3 class="md-display-1">GG3:0</h3>
 					</div>
 				</md-list-item>
+				<md-divider ng-if="!$last"></md-divider>
+				<md-list-item class="md-button">
+					<div layout="row" layout-align="center center">
+						<h3 class="md-display-1">GG3:0</h3>
+					</div>
+				</md-list-item>
+				<md-divider ng-if="!$last"></md-divider>
 			</md-list>
 		</div>
+		<span flex="5"></span>
 		<div flex>
 			<!-- title -->
 			<div layout layout-align="center center">
 				<h1 class="md-display-1">Title</h1>
 			</div>
-			<div layout="row" class="info_container">
+			<div layout="row" class="hvr-shadow info_container">
+				<span flex-sm="5"></span>
 				<!-- first user item -->
 				<div layout="column" flex>
 					<div class="item profile" layout="column" layout-align="center center">
@@ -25,7 +33,7 @@
 						</div>
 					</div>
 					<div layout="row">
-						<img flex="30" src="../../images/unknown-user.gif" style="max-height:60px; max-width:60px;" />
+						<img flex="30" src="../../images/unknown-user.gif" style="max-height:50px; max-width:50px;" />
 						<div flex layout layout-align="center center">
 							<p class="md-body-2 online">Username</p>
 						</div>
@@ -44,7 +52,7 @@
 						</div>
 					</div>
 					<div layout="row">
-						<img flex="30" src="../../images/unknown-user.gif" style="max-height:60px; max-width:60px;" />
+						<img flex="30" src="../../images/unknown-user.gif" style="max-height:50px; max-width:50px;" />
 						<div flex layout layout-align="center center">
 							<p class="md-body-2 online">Username</p>
 						</div>
@@ -53,11 +61,10 @@
 				<span flex="5"></span>
 			</div>
 		</div>
-		
 		<!-- chat room -->
-		<div flex class="info_container" layout="row">
-			<span flex="10"></span>
-			<div flex="80">
+		<div flex class="info_container chat" layout="row">
+			<span flex="5"></span>
+			<div flex>
 				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
 					<span>Chat</span>
 				</md-toolbar>
@@ -65,6 +72,7 @@
 					<li class="other">
 						<div class="avatar">
 							<img src="../../images/unknown-user.gif" />
+							<md-tooltip>user1</md-tooltip>
 						</div>
 						<div class="messages">
 							<p class="content">今天好熱RRRRR</p>
@@ -73,49 +81,10 @@
 					<li class="self">
 						<div class="avatar">
 							<img src="../../images/unknown-user.gif" />
+							<md-tooltip>user2</md-tooltip>
 						</div>
 						<div class="messages">
 							<p class="content">颱風沒來結果變成這樣辣 哭哭喔GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG</p>
-						</div>
-					</li>
-					<li class="other">
-						<div class="avatar">
-							<img src="../../images/unknown-user.gif" />
-						</div>
-						<div class="messages">
-							<p class="content">凎 下雨了辣 沒帶雨傘</p>
-						</div>
-					</li>
-					<li class="self">
-						<div class="avatar">
-							<img src="../../images/unknown-user.gif" />
-						</div>
-						<div class="messages">
-							<p class="content">哭哭喔</p>
-						</div>
-					</li>
-					<li class="self">
-						<div class="avatar">
-							<img src="../../images/unknown-user.gif" />
-						</div>
-						<div class="messages">
-							<p class="content">哭哭喔QQ</p>
-						</div>
-					</li>
-					<li class="self">
-						<div class="avatar">
-							<img src="../../images/unknown-user.gif" />
-						</div>
-						<div class="messages">
-							<p class="content">哭哭喔</p>
-						</div>
-					</li>
-					<li class="self">
-						<div class="avatar">
-							<img src="../../images/unknown-user.gif" />
-						</div>
-						<div class="messages">
-							<p class="content">哭哭喔</p>
 						</div>
 					</li>
 				</ul>
@@ -129,7 +98,7 @@
 					</form>
 				</ul>
 			</div>
-			<span flex="10"></span>
+			<span flex="5"></span>
 		</div>
 	</div>
 </md-content>

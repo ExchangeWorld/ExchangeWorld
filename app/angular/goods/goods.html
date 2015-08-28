@@ -1,5 +1,7 @@
 <md-content layout-padding>
 	<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.goodData.stars.length}} </md-button>
+	<!-- 	
+>>>>>>> goods(remove tabs), some updates
 	<md-tabs md-dynamic-height md-border-bottom>
 		<md-tab label="ItemName">
 			<div layout layout-align="center center">
@@ -23,9 +25,20 @@
 				<p class="md-headline">{{ vm.goodData.description }}</p>
 			</div>
 		</md-tab>
-	</md-tabs>
-	<div flex="80" layout layout-align="center center">
-		<img style="max-width: 75%;" src="{{ vm.goodData.photo_path }}" title="source: imgur.com" />
+	</md-tabs> -->
+	<div layout layout-align="center center">
+		<img style="max-width: 100%;" src="{{ vm.goodData.photo_path }}" title="source: imgur.com" />
+	</div>
+	<div class="info_container" layout="row">
+		<div flex="30" layout="column" layout-align="center center">
+			<img class="circular goods" src="{{ vm.goodData.user.photo_path }}" title="source: imgur.com" />
+			<p class="md-tiltle" style="color:#7f8588;">{{ vm.goodData.user.name }}</p>
+		</div>
+		<div flex offset="10" layout="column">
+			<p style="color:#3e4042">{{ vm.goodData.name }}</p>
+			<p style="color:#7f8588;">{{ vm.goodData.category }}</p>
+			<p style="color:#7f8588;">{{ vm.goodData.description }}</p>
+		</div>
 	</div>
 	<h3 class="md-subhead">Comments</h3>
 	<md-divider></md-divider>
@@ -77,7 +90,7 @@
 		<!--</div>-->
 		<!--</div>-->
 		<!--</div>-->
-		<form ng-submit="vm.onSubmitComment()" >
+		<form ng-submit="vm.onSubmitComment()">
 			<md-input-container>
 				<label>Write some here...</label>
 				<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
@@ -88,3 +101,4 @@
 	</div>
 	</div>
 </md-content>
+

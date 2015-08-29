@@ -7,7 +7,9 @@
 		<!-- user name & follow button -->
 		<div flex="60" layout="column">
 			<div layout="row" layout-align="center center">
-				<h4 class="md-subhead">{{ vm.profile.name }}</h4>
+				<h4 class="md-title">{{ vm.profile.name }}</h4>
+				<i offset="20" class="material-icons star">star</i>
+				<a href="#">13</a>
 			</div>
 			<div layout="row" layout-align="center center">
 				<span flex="10"></span>
@@ -30,7 +32,7 @@
 	<md-divider class="info_container for_input" style="margin-bottom: 5px"></md-divider>
 	<!-- tabs for user -->
 	<md-tabs md-dynamic-height md-border-bottom md-center-tabs>
-		<md-tab label="Profile">
+		<md-tab label="個人資訊">
 			<md-content layout-padding style="margin-top: 10px">
 				<div layout="row">
 					<!-- user information -->
@@ -69,76 +71,68 @@
 				</div>
 			</md-content>
 		</md-tab>
-		<md-tab label="Exchanging">
+		<md-tab label="等待交換">
 			<md-content layout-padding>
 				<div layout="column">
-					<div layout="row" class="info_container for_input">
+					<div layout="row" layout-sm="column" layout-align="center center" class="info_container for_input">
 						<!-- first user item -->
-						<div layout="column" flex="40" class="item profile">
+						<div layout="column" flex="50" class="item profile">
 							<img src="http://i.imgur.com/7RoLGdp.jpg" />
 							<div layout="column" layout-align="center center">
 								<p class="md-body-2">BestItem_TW</p>
-								<p class="md-body-1">SilentSky</p>
 							</div>
 						</div>
-						<!-- exchange icon -->
-						<div flex="20" layout layout-align="center center">
-							<md-icon md-font-set="material-icons" class="hide">autorenew</md-icon>
-						</div>
-						<!-- second user item -->
-						<div flex="40" class="item profile">
-							<img src="http://i.imgur.com/7RoLGdp.jpg" />
-							<div layout="column" layout-align="center center">
-								<p class="md-body-2">BestItem_US</p>
-								<p class="md-body-1">LonSilent</p>
+						<span flex="10" flex-sm hide-sm></span>
+						<div flex flex-sm layout="column" layout-align="center center">
+							<div layout="row" class="profile_text">
+								<p class="md-body-2">
+									<md-icon md-font-set="material-icons" class="hide">star</md-icon>
+									18</p>
+							</div>
+							<div layout="row" class="profile_text">
+								<p class="md-body-2">
+									<md-icon md-font-set="material-icons" class="hide">event_note</md-icon>
+									2015/8/30</p>
+							</div>
+							<div layout="row" class="profile_text">
+								<p class="md-body-2">
+									<md-icon md-font-set="material-icons" class="hide">location_city</md-icon>
+									台北市文山區指南路</p>
 							</div>
 						</div>
 					</div>
 					<!-- second exchange event test -->
 					<div layout="row">
-						<div layout="column" flex="40" class="item profile">
+						<div layout="column" flex="50" class="item profile">
 							<img src="http://i.imgur.com/7RoLGdp.jpg" />
 							<div layout="column" layout-align="center center">
 								<p class="md-body-2">BestItem_TW</p>
 								<p class="md-body-1">SilentSky</p>
-							</div>
-						</div>
-						<div flex="20" layout layout-align="center center">
-							<md-icon md-font-set="material-icons" class="hide">autorenew</md-icon>
-						</div>
-						<div flex="40" class="item profile">
-							<img src="http://i.imgur.com/7RoLGdp.jpg" />
-							<div layout="column" layout-align="center center">
-								<p class="md-body-2">BestItem_US</p>
-								<p class="md-body-1">LonSilent</p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</md-content>
 		</md-tab>
-		<md-tab label="Exchanged">
+		<md-tab label="已交換">
 			<md-content layout-padding>
 				<div layout="row" layout-sm="column" layout-align="center center" class="info_container for_input">
 					<!-- item photo that user has exchanged -->
 					<div flex="40" flex-sm class="item profile">
 						<img src="http://i.imgur.com/7RoLGdp.jpg" />
 					</div>
-					<span flex="15" hide-sm></span>
 					<!-- exchange information -->
-					<div flex flex-sm>
+					<div flex flex-sm layout="column" layout-align="center center">
 						<div layout="row" class="profile_text">
 							<p class="md-body-2">
 								<md-icon md-font-set="material-icons" class="hide">people_outline</md-icon>
 								with: LonSilent</p>
 						</div>
-						<md-divider></md-divider>
 						<div layout="row" class="profile_text">
 							<p class="md-body-2">
 								<md-icon md-font-set="material-icons" class="hide">event_note</md-icon>
 								Date: 2015/8/30</p>
 						</div>
-						<md-divider></md-divider>
 						<div layout="row" class="profile_text">
 							<p class="md-body-2">
 								<md-icon md-font-set="material-icons" class="hide">thumbs_up_down</md-icon>

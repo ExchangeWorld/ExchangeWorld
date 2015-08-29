@@ -7,30 +7,30 @@
 					<span hide-md hide-sm>ExchangeWorld</span></div>
 	</md-button>
 	</span>
-	<span flex="10" hide-md hide-sm></span>
+	<span flex="15" hide-md hide-sm></span>
 	<!-- seek and post button -->
-	<div flex="40" flex-md="45" flex-sm="50" layout="row" layout-align="center center">
-		<md-button flex="25" flex-sm="15" ng-click="vm.onClick(1)" ng-class="{'active': contentIs(1)}">
+	<div flex="30" flex-md="45" flex-sm="50" layout="row" layout-align="center center">
+		<md-button flex flex-sm="15" ng-click="vm.onClick(1)" ng-class="{'active': contentIs(1)}">
 			<div layout layout-align="center center">
 				<i class="material-icons">dashboard</i>
-				<span hide-md hide-sm>Seek</span>
+				<span hide-md hide-sm>探索</span>
 			</div>
 		</md-button>
-		<md-button flex="25" flex-sm="15" ng-click="vm.onClick(2)" ng-class="{'active': contentIs(2)}">
+		<md-button flex flex-sm="15" ng-click="vm.onClick(2)" ng-class="{'active': contentIs(2)}">
 			<div layout layout-align="center center">
 				<i class="material-icons">add</i>
-				<span hide-md hide-sm>Post</span>
+				<span hide-md hide-sm>發佈</span>
 			</div>
 		</md-button>
-		<md-button flex="40" flex-sm="15" ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">
+		<md-button flex flex-sm="15" ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">
 			<div layout layout-align="center center">
 				<i class="material-icons">autorenew</i>
-				<span hide-md hide-sm>Exchange</span>
+				<span hide-md hide-sm>交換</span>
 			</div>
 		</md-button>
 	</div>
 	<!-- notification div -->
-	<div flex="10" flex-md="15" flex-sm offset="5" offset-md="5" offset-sm="5" layout="row" layout-align="center center">
+	<div flex="10" flex-md="15" flex-sm offset="10" offset-md="5" offset-sm="5" layout="row" layout-align="center center">
 		<md-menu flex="30" flex-sm md-offset="-233 75">
 			<md-button ng-click="$mdOpenMenu()">
 				<div layout layout-align="center center">
@@ -38,9 +38,9 @@
 					<p class="notification md-caption">3</p>
 				</div>
 			</md-button>
-			<md-menu-content width="5" style="padding-bottom: 0px; max-width:400px;">
-				<md-menu-item style="min-height: 30px; height:30px">
-					<p class="md-body-1">Notification</p>
+			<md-menu-content width="5" style="padding: 0px; max-width:400px;">
+				<md-menu-item layout layout-align="start center" style="min-height: 30px; height:30px">
+					<p class="md-body-1">通知</p>
 				</md-menu-item>
 				<md-divider></md-divider>
 				<!-- unread notification -->
@@ -70,8 +70,8 @@
 				</md-menu-item>
 				<md-divider></md-divider>
 				<!-- See All text -->
-				<md-menu-item style="min-height: 30px; height:30px">
-					<p class="md-body-2">See All</p>
+				<md-menu-item style="min-height: 30px; height:30px" layout layout-align="center center">
+					<p class="md-body-2" style="margin:0;">全部</p>
 				</md-menu-item>
 			</md-menu-content>
 		</md-menu>
@@ -89,17 +89,17 @@
 			</md-button>
 			<md-menu-content width="3">
 				<md-menu-item>
-					<md-button ng-click="vm.onClick(4)">Profile</md-button>
+					<md-button ng-click="vm.onClick(4)">個人資料</md-button>
 				</md-menu-item>
 				<md-menu-item ng-show="vm.isLoggedIn">
-					<md-button ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">Manage</md-button>
+					<md-button ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">管理</md-button>
 				</md-menu-item>
 				<md-menu-divider></md-menu-divider>
 				<md-menu-item ng-show="!vm.isLoggedIn">
-					<md-button ng-click="vm.onLogin()">Login</md-button>
+					<md-button ng-click="vm.onLogin()">登入</md-button>
 				</md-menu-item>
 				<md-menu-item ng-show="vm.isLoggedIn">
-					<md-button ng-click="vm.onLogout()">Log Out</md-button>
+					<md-button ng-click="vm.onLogout()">登出</md-button>
 				</md-menu-item>
 			</md-menu-content>
 		</md-menu>

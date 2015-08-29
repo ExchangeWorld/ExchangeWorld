@@ -12,6 +12,9 @@ function goodsService(Restangular, $q, exception) {
 		editGood, 
 		getComment,
 		postComment,
+		getStars,
+		postStar,
+		deleteStar,
 	};
 	return service;
 
@@ -23,11 +26,22 @@ function goodsService(Restangular, $q, exception) {
 			.all('goods')
 			.getList({ gid : gid })
 			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data[0]);
-				} else if (_.isObject(data)) {
-					defer.resolve(data);
-				}
+
+				getStars(gid)
+					.then(function(stars) {
+						getComment(gid)
+							.then(function(comments) {
+								if (_.isArray(data)) {
+									data[0].stars = stars;
+									data[0].comments = comments;
+									defer.resolve(data[0]);
+								} else if (_.isObject(data)) {
+									data.stars = stars;
+									data.comments = comments;
+									defer.resolve(data);
+								}
+							});
+					});
 			})
 			.catch(function(error) {
 				return exception.catcher('[Goods Service] getGood error: ')(error);
@@ -67,6 +81,57 @@ function goodsService(Restangular, $q, exception) {
 			})
 			.catch(function(error) {
 				return exception.catcher('[Goods Service] postComments error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	function getStars(gid) {
+		const defer = $q.defer();
+		Restangular
+			.all('star/to')
+			.getList({goods_gid: gid})
+			.then(function(data) {
+				if (_.isArray(data)) {
+					defer.resolve(data);
+				} else {
+					defer.reject(data);
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] getStars error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	function postStar(newStar) {
+		const defer = $q.defer();
+		
+		Restangular
+			.all('star/post')
+			.post(newStar)
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] postStar error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	function deleteStar(star) {
+		const defer = $q.defer();
+		
+		Restangular
+			.all('star/delete')
+			.remove({
+				goods_gid         : star.goods_gid,
+				starring_user_uid : star.starring_user_uid,
+			})
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] deleteStar error: ')(error);
 			});
 		return defer.promise;
 	}

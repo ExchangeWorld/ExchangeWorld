@@ -1,19 +1,38 @@
 'use strict';
 
 const goodsModule = require('./goods.module');
+const _           = require('lodash');
 const moment      = require('moment');
 goodsModule.controller('GoodsController', GoodsController);
 
 /** @ngInject */
-function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout, $localStorage) {
+function GoodsController(
+	goodData,
+	goodsService,
+	$state,
+	$stateParams,
+	$scope,
+	auth,
+	$timeout,
+	$localStorage
+) {
 	const vm           = this;
+
+	vm.isLoggedIn      = Boolean($localStorage.user);
+	vm.isMe            = vm.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
 	vm.goodData        = goodData;
-	vm.goodCommentData = [];
+
+	vm.comment         = '';
+	vm.goodComments    = [];
 	vm.onClickUser     = onClickUser;
 	vm.onSubmitComment = onSubmitComment;
 	vm.onDeleteComment = onDeleteComment;
-	vm.comment         = '';
-	vm.newComments     = [];
+
+	vm.stars           = [];
+	vm.starred         = false;
+	vm.onClickStar     = onClickStar;
+
+	vm.onClickUser     = onClickUser;
 
 	activate();
 
@@ -23,6 +42,18 @@ function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout,
 			$scope.$parent.$broadcast('mapMoveTo', goodData.gid);
 		}, 50);
 		updateComment();
+		updateStar();
+
+		auth
+			.getLoginState()
+			.then(function(data) {
+				if (data) {
+					vm.isMe = (goodData.owner_uid === data.uid);
+				} else {
+					vm.isMe = false;
+					vm.isLoggedIn = false;
+				}
+			});
 	}
 
 	// define onClick event on goods owner
@@ -34,22 +65,21 @@ function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout,
 		goodsService
 			.getComment(vm.goodData.gid)
 			.then(function(data) {
-				vm.goodCommentData = data;
-				vm.newComments     = [];
+				vm.goodComments = data;
+				vm.newComments  = [];
 			})
 			.then(function() {
-				var data = vm.goodCommentData.map(function(obj) {
-					obj.isMe = (obj.commenter_uid === $localStorage.user.uid);
-					obj.timestamp = moment(obj.timestamp).fromNow();
-					return obj;
+				var data = vm.goodComments.map(function(comment) {
+					comment.isMe = (comment.commenter_uid === $localStorage.user.uid);
+					comment.timestamp = moment(comment.timestamp).fromNow();
+					return comment;
 				});
-				vm.goodCommentData = data;
+				vm.goodComments = data;
 			});
 	}
 
 	function onSubmitComment() {
 		if(!auth.currentUser()) {
-			//alert('您未登入喔！');
 			auth
 				.login()
 				.then(function(user) {
@@ -60,6 +90,9 @@ function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout,
 		}
 		const mesg = vm.comment.trim();
 		if (mesg) {
+			/**
+			 * TODO: Use Moment.js Here
+			 */
 			const commentData = {
 				commenter_uid : auth.currentUser().uid,
 				goods_gid     : goodData.gid,
@@ -69,7 +102,7 @@ function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout,
 				name          : auth.currentUser().name,
 				photo_path    : auth.currentUser().photo_path,
 			};
-			vm.newComments.push(commentData);
+			vm.goodComments.push(commentData);
 			goodsService
 				.postComment(commentData)
 				.then(function() {
@@ -87,5 +120,43 @@ function GoodsController(goodData, goodsService, $state, $scope, auth, $timeout,
 				.deleteComment({ cid: cid })
 				.then(updateComment);
 		}
+	}
+
+	function onClickStar() {
+		const star = {
+			starring_user_uid : $localStorage.user.uid,
+			goods_gid         : vm.goodData.gid,
+		};
+
+		if (!vm.starred) {
+			goodsService
+				.postStar(star)
+				.then(function() {
+					updateStar();
+				});
+		} else {
+			goodsService
+				.deleteStar(star)
+				.then(function() {
+					updateStar();
+				});
+		}
+	}
+
+	function updateStar() {
+		goodsService
+			.getStars(vm.goodData.gid)
+			.then(function(data) {
+				vm.stars = data;
+
+				if (
+					vm.isLoggedIn &&
+					_.findWhere(data, { starring_user_uid : $localStorage.user.uid })
+				) {
+					vm.starred = true;
+				} else {
+					vm.starred = false;
+				}
+			});
 	}
 }

@@ -1,4 +1,5 @@
 <md-content layout-padding>
+	<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.goodData.stars.length}} </md-button>
 	<md-tabs md-dynamic-height md-border-bottom>
 		<md-tab label="ItemName">
 			<div layout layout-align="center center">
@@ -45,7 +46,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="comment" ng-repeat="comment in vm.goodCommentData">
+		<div class="comment" ng-repeat="comment in vm.goodComments">
 			<a class="avatar" ng-click="vm.onClickUser(comment.user.uid)"> <img ng-src="{{ comment.user.photo_path }}"> </a>
 			<div class="content">
 				<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
@@ -56,18 +57,6 @@
 				</div>
 				<div class="text">
 					{{ comment.content }}
-				</div>
-			</div>
-		</div>
-		<div class="comment" ng-repeat="new_comment in vm.newComments">
-			<a class="avatar" ng-click="vm.onClickUser(new_comment.user_uid)"> <img ng-src="{{ new_comment.photo_path }}"> </a>
-			<div class="content">
-				<a class="author" ng-click="vm.onClickUser(new_comment.user_uid)">{{ new_comment.name }}</a>
-				<div class="metadata">
-					<div class="date">{{ new_comment.date }}</div>
-				</div>
-				<div class="text">
-					{{ new_comment.content }}
 				</div>
 			</div>
 		</div>
@@ -99,4 +88,3 @@
 	</div>
 	</div>
 </md-content>
-

@@ -2,17 +2,26 @@
 
 const goodsModule = require('./goods.module');
 const _           = require('lodash');
+const moment      = require('moment');
 goodsModule.controller('GoodsController', GoodsController);
 
 /** @ngInject */
-function GoodsController(goodData, goodsService, $state, $stateParams, $scope, auth, $timeout, $localStorage) {
+function GoodsController(
+	goodData,
+	goodsService,
+	$state,
+	$stateParams,
+	$scope,
+	auth,
+	$timeout,
+	$localStorage
+) {
+
 	const vm           = this;
 	vm.isLoggedIn      = Boolean($localStorage.user);
 	vm.isMe            = vm.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
 	vm.goodData        = goodData;
 	vm.starred         = false;
-	vm.starbtnStr      = vm.starred ? 'UNSTAR' : 'STAR';
-	vm.starsCount      = goodData.stars.length;
 	vm.comment         = '';
 	vm.onSubmitComment = onSubmitComment;
 	vm.onClickUser     = onClickUser;
@@ -27,15 +36,17 @@ function GoodsController(goodData, goodsService, $state, $stateParams, $scope, a
 		}, 50);
 		updateComment();
 
-		if(vm.isLoggedIn) {
-			if (_.findWhere(goodData.stars, { starring_user_uid : $localStorage.user.uid })) {
-				setStarbtnStr(true); 
-			}
+		if(
+			vm.isLoggedIn &&
+			_.findWhere(goodData.stars, { starring_user_uid : $localStorage.user.uid })
+		) {
+				vm.starred = true;
 		}
+
 		auth
 			.getLoginState()
 			.then(function(data) {
-				if(data) {
+				if (data) {
 					vm.isMe = (goodData.owner_uid === data.uid);
 				} else {
 					vm.isMe = false;
@@ -60,6 +71,9 @@ function GoodsController(goodData, goodsService, $state, $stateParams, $scope, a
 	function onSubmitComment() {
 		const mesg = vm.comment.trim();
 		if (mesg) {
+			/**
+				TODO: Use Moment.js Here
+			*/
 			const commentData = {
 				commenter_uid : auth.currentUser().uid,
 				goods_gid     : goodData.gid,
@@ -85,28 +99,29 @@ function GoodsController(goodData, goodsService, $state, $stateParams, $scope, a
 			starring_user_uid : $localStorage.user.uid,
 			goods_gid         : vm.goodData.gid,
 		};
-		
-		if(!vm.starred) {
-			vm.starsCount += 1;
+
+		if (!vm.starred) {
 			goodsService
 				.postStar(star)
 				.then(function() {
-					setStarbtnStr(true);
+					vm.starred = true;
+					updateStar();
 				});
 		} else {
-			vm.starsCount -= 1;
 			goodsService
 				.deleteStar(star)
 				.then(function() {
-					setStarbtnStr(false);
+					vm.starred = false;
+					updateStar();
 				});
 		}
-		
-		
 	}
 
-	function setStarbtnStr(starred) {
-		vm.starred = starred;
-		vm.starbtnStr = starred ? 'UNSTAR' : 'STAR';
+	function updateStar() {
+		goodsService
+			.getStars(vm.goodData.gid)
+			.then(function(data) {
+				vm.goodData.stars = data;
+			});
 	}
 }

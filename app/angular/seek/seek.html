@@ -1,5 +1,5 @@
 <md-toolbar class="md-primary md-hue-3 md-whiteframe-z4" style="height: 76px;">
-			<!-- search input bar & button -->
+	<!-- search input bar & button -->
 	<div layout="row" layout-sm="row">
 		<md-input-container flex="55" flex-sm="70" class="md-primary">
 			<label>Search</label>
@@ -9,20 +9,17 @@
 		<md-button class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName})">
 			<md-icon md-font-set="material-icons">search</md-icon><span class="ng-scope">Seek!</span>
 		</md-button>
-
 		<md-button flex class="md-raised seek_btn" aria-expanded="true">
 			<md-tooltip>依據物品種類</md-tooltip>
-				Categories
+			Categories
 			<span class="caret"></span>
 		</md-button>
 	</div>
 </md-toolbar>
-
 <md-content resize ng-style="resizeWithOffset(140)">
 	<div ng-show="loading" style="width: 65px; margin: 0 auto; margin-top:200px">
 		<md-progress-circular class="md-warn md-hue-2" md-mode="indeterminate"></md-progress-circular>
 	</div>
-
 	<div class="md-padding"></div>
 	<div deckgrid class="deckgrid" source="vm.goods">
 		<md-card class="md-whiteframe-z3 item" ng-click="mother.onClickGoods(card.gid)">
@@ -33,3 +30,4 @@
 		</md-card>
 	</div>
 </md-content>
+

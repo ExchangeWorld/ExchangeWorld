@@ -73,6 +73,7 @@ function NavbarController($mdSidenav, $state, auth, $localStorage) {
 			.then(function(user) {
 				vm.user = user;
 				vm.isLoggedIn = Boolean(user);
+				$state.reload();
 			});
 	}
 
@@ -80,6 +81,7 @@ function NavbarController($mdSidenav, $state, auth, $localStorage) {
 		auth.logout();
 		vm.user = null;
 		vm.isLoggedIn = false;
+		$state.reload();
 	}
 
 }

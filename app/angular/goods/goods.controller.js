@@ -70,7 +70,8 @@ function GoodsController(
 			})
 			.then(function() {
 				var data = vm.goodComments.map(function(comment) {
-					comment.isMe = (comment.commenter_uid === $localStorage.user.uid);
+					if(vm.isLoggedIn)
+						comment.isMe = (comment.commenter_uid === $localStorage.user.uid);
 					comment.timestamp = moment(comment.timestamp).fromNow();
 					return comment;
 				});
@@ -90,14 +91,11 @@ function GoodsController(
 		}
 		const mesg = vm.comment.trim();
 		if (mesg) {
-			/**
-			 * TODO: Use Moment.js Here
-			 */
 			const commentData = {
 				commenter_uid : auth.currentUser().uid,
 				goods_gid     : goodData.gid,
 				content       : mesg,
-				date          : 'just now',
+				date          : moment().startOf('second').fromNow(),
 				user_uid      : auth.currentUser().uid,
 				name          : auth.currentUser().name,
 				photo_path    : auth.currentUser().photo_path,
@@ -110,11 +108,9 @@ function GoodsController(
 					updateComment();
 				});
 		}
-		//console.log(vm.newComments);
 	}
 
 	function onDeleteComment(cid) {
-		//SweetAlert.swal("Here's a message");
 		if (confirm('您確定真的要刪除這則留言嗎？')) {
 			goodsService
 				.deleteComment({ cid: cid })

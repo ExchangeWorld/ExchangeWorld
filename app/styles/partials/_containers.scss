@@ -125,3 +125,14 @@ div.md-open-menu-container {
     bottom: 10px;
     right: 0;
 }
+
+.lineup-img {
+    width: 100%;
+    height: 100%;
+    &.thing {
+        padding: 10px;
+    }
+    &.avatar {
+        padding: 5px;
+    }
+}

@@ -1,23 +1,34 @@
 <md-content>
 	<div layout="row" layout-sm="column">
-		<div flex="20">
-			<md-list layout-sm="row">
-				<md-list-item class="md-button">
+		<div flex="20" flex-sm="95" offset-sm="5">
+			<div layout="column" layout-sm="row" layout-wrap>
+				<md-button flex-sm="45" aria-label="list">
 					<div layout="row" layout-align="center center">
-						<h3 class="md-display-1">GG3:0</h3>
+						<img flex="60" class="lineup-img thing" flex src="http://i.imgur.com/7RoLGdp.jpg" />
+						<span flex></span>
+						<img flex="25" class="lineup-img avatar" src="../../images/unknown-user.gif">
 					</div>
-				</md-list-item>
+				</md-button>
 				<md-divider ng-if="!$last"></md-divider>
-				<md-list-item class="md-button">
+				<md-button flex-sm aria-label="list">
 					<div layout="row" layout-align="center center">
-						<h3 class="md-display-1">GG3:0</h3>
+						<img flex="60" class="lineup-img thing" flex src="http://i.imgur.com/7RoLGdp.jpg" />
+						<span flex></span>
+						<img flex="25" class="lineup-img avatar" src="../../images/unknown-user.gif">
 					</div>
-				</md-list-item>
+				</md-button>
 				<md-divider ng-if="!$last"></md-divider>
-			</md-list>
+				<md-button class="md-button" flex-sm aria-label="list">
+					<div layout="row" layout-align="center center">
+						<img flex="60" class="lineup-img thing" flex src="http://i.imgur.com/7RoLGdp.jpg" />
+						<span flex></span>
+						<img flex="25" class="lineup-img avatar" src="../../images/unknown-user.gif">
+					</div>
+				</md-button>
+			</div>
 		</div>
-		<span flex="5"></span>
-		<div flex>
+		<span flex="5" flex-sm="5"></span>
+		<div flex flex-sm>
 			<!-- title -->
 			<div layout layout-align="center center">
 				<h1 class="md-display-1">Title</h1>
@@ -33,7 +44,7 @@
 						</div>
 					</div>
 					<div layout="row">
-						<img flex="30" src="../../images/unknown-user.gif" style="max-height:50px; max-width:50px;" />
+						<img flex="30" class="lineup-img" src="../../images/unknown-user.gif" />
 						<div flex layout layout-align="center center">
 							<p class="md-body-2 online">Username</p>
 						</div>
@@ -52,7 +63,7 @@
 						</div>
 					</div>
 					<div layout="row">
-						<img flex="30" src="../../images/unknown-user.gif" style="max-height:50px; max-width:50px;" />
+						<img flex="30" class="lineup-img" src="../../images/unknown-user.gif" />
 						<div flex layout layout-align="center center">
 							<p class="md-body-2 online">Username</p>
 						</div>
@@ -62,7 +73,7 @@
 			</div>
 		</div>
 		<!-- chat room -->
-		<div flex class="info_container chat" layout="row">
+		<div flex flex-sm class="info_container chat" layout="row">
 			<span flex="5"></span>
 			<div flex>
 				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">

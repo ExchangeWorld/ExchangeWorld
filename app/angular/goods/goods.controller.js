@@ -32,8 +32,12 @@ function GoodsController(
 	vm.starred         = false;
 	vm.onClickStar     = onClickStar;
 
-	vm.onClickUser     = onClickUser;
+	vm.myGoods         = [];
+	vm.queue           = [];
+	vm.queued          = false;
 	vm.onClickQueue    = onClickQueue;
+
+	vm.onClickUser     = onClickUser;
 
 	activate();
 
@@ -44,6 +48,7 @@ function GoodsController(
 		}, 50);
 		updateComment();
 		updateStar();
+		updateQueue();
 
 		auth
 			.getLoginState()
@@ -55,6 +60,7 @@ function GoodsController(
 					vm.isLoggedIn = false;
 				}
 			});
+		getMyGoods();
 	}
 
 	// define onClick event on goods owner
@@ -141,7 +147,7 @@ function GoodsController(
 	}
 
 	function updateStar() {
-		goodsService
+		goodsService 
 			.getStars(vm.goodData.gid)
 			.then(function(data) {
 				vm.stars = data;
@@ -156,6 +162,32 @@ function GoodsController(
 				}
 			});
 	}
+
+	function updateQueue() {
+		goodsService
+			.getQueue(vm.goodData.gid)
+			.then(function(data) {
+				vm.queue = data;
+
+				/**
+				 * TODO: check if user already queued
+				 */
+				if ( vm.isLoggedIn ) {
+					vm.queued = true;
+				} else {
+					vm.queued = false;
+				}
+			});
+	}
+
+	function getMyGoods() {
+		goodsService
+			.getGood(-1, $localStorage.user.uid)
+			.then(function(myGoods) {
+				vm.myGoods = myGoods;
+			});
+	}
+
 	function onClickQueue(queuer_goods_gid) {
 		goodsService
 			.postQueue(goodData.gid, queuer_goods_gid)

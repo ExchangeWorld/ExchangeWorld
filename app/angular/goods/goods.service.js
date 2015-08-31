@@ -10,24 +10,31 @@ function goodsService(Restangular, $q, exception) {
 	const service = {
 		getGood,
 		editGood,
+		
 		getComment,
 		postComment,
 		deleteComment,
+		
 		getStars,
 		postStar,
 		deleteStar,
+
+		getQueue,
 		postQueue,
 		deleteQueue,
 	};
 	return service;
 
 
-	function getGood(gid) {
+	function getGood(gid, owner_uid) {
 		const defer = $q.defer();
 
 		Restangular
 			.all('goods')
-			.getList({ gid : gid })
+			.getList({
+				gid       : gid,
+				owner_uid : owner_uid,
+			})
 			.then(function(data) {
 
 				getStars(gid)
@@ -35,8 +42,8 @@ function goodsService(Restangular, $q, exception) {
 						getComment(gid)
 							.then(function(comments) {
 								if (_.isArray(data)) {
-									defer.resolve(data[0]);
-								} else if (_.isObject(data)) {
+									//defer.resolve(data[0]);
+								//} else if (_.isObject(data)) {
 									defer.resolve(data);
 								}
 							});
@@ -128,6 +135,24 @@ function goodsService(Restangular, $q, exception) {
 			})
 			.catch(function(error) {
 				return exception.catcher('[Goods Service] postStar error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	function getQueue(host_goods_gid) {
+		const defer = $q.defer();
+		Restangular
+			.all('queue/of')
+			.getList({host_goods_gid: host_goods_gid})
+			.then(function(data) {
+				if (_.isArray(data)) {
+					defer.resolve(data);
+				} else {
+					defer.reject(data);
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] getQueue error: ')(error);
 			});
 		return defer.promise;
 	}

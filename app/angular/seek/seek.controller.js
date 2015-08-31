@@ -5,11 +5,18 @@ const _ = require('lodash');
 seekModule.controller('SeekController', SeekController);
 
 /** @ngInject */
-function SeekController(seekService, $state, AvailableCategory, $scope, $rootScope) {
+function SeekController(
+	seekService, 
+	$state, 
+	AvailableCategory, 
+	$scope, 
+	$rootScope, 
+	$stateParams
+) {
 	var vm                 = this;
 	vm.goods               = [];
-	vm.searchGoodsName     = '';
-	vm.searchGoodsCategory = '';
+	vm.searchGoodsName     = $stateParams.name;
+	vm.searchGoodsCategory = $stateParams.cate || '';
 	vm.onClickGoods        = onClickGoods;
 	vm.onSearch            = onSearch;
 	vm.availableCategory   = AvailableCategory;
@@ -25,6 +32,11 @@ function SeekController(seekService, $state, AvailableCategory, $scope, $rootSco
 	});
 
 	function onSearch(filter) {
+		$state.go($state.current.name, {
+			name: filter.name, 
+			cate: filter.cate,
+		});
+		//console.log(filter);
 		seekService
 			.getSeek(filter)
 			.then(function(data) {

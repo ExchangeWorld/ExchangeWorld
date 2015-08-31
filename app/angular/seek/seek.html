@@ -42,8 +42,8 @@
         -->
 		<!-- waterfall container and its children item -->
 		<div class="waterfall_container" ng-show="!loading">
-			<div ng-repeat="good in vm.goods" class="hvr-grow">
-				<div class="item hvr-box-shadow-outset">
+			<div ng-repeat="good in vm.goods" >
+				<div class="item">
 					<img ng-src="{{ good.photo_path }}" ng-click="vm.onClickGoods( good.gid )" />
 					<div layout layout-align="start center">
 						<p>{{ good.name }}</p>
@@ -62,6 +62,6 @@
 			<!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>-->
 			<!--</div>-->
 		</div>
-		<md-divider></md-divider>
+		<!-- <md-divider></md-divider> -->
 	</md-list>
 </div>

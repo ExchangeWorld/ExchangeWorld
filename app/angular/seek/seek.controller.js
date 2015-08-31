@@ -10,7 +10,8 @@ function SeekController(seekService, $state, AvailableCategory, $scope, $rootSco
 	vm.goods               = [];
 	vm.searchGoodsName     = '';
 	vm.searchGoodsCategory = '';
-	vm.onClickGoods        = onClickGoods;
+	// vm.onClickGoods        = onClickGoods;
+	$scope.onClickGoods    = onClickGoods;
 	vm.onSearch            = onSearch;
 	vm.availableCategory   = AvailableCategory;
 	vm.onMouseOver         = onMouseOver;

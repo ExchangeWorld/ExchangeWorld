@@ -153,12 +153,14 @@ div.md-open-menu-container {
 
 .deckgrid .column {
     float: left;
-    margin-right: 3%;
+    margin-left: 1.5%;
+    margin-right: 1.5%;
     margin-bottom: 10px;
 }
 
 .deckgrid .column-1-1 {
     width: 100%;
+    text-align: center;
 }
 
 .deckgrid .column-1-2 {

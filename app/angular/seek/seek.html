@@ -1,38 +1,35 @@
-<!-- search input bar & button -->
-<div layout="row" layout-sm="row">
-	<md-input-container flex="80" flex-sm="70" class="md-primary">
-		<label>Search</label>
-		<input ng-model="vm.searchGoodsName">
-		<md-tooltip md-direction="left">搜尋</md-tooltip>
-	</md-input-container>
-	<md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch()">
-		<md-icon md-font-set="material-icons">search</md-icon><span class="ng-scope">Seek!</span>
-	</md-button>
-</div>
-<!-- select button -->
-<md-content layout="row" style="margin-bottom: 10px">
-	<md-button class="md-raised md-cornered" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
-		<md-tooltip>依據物品種類</md-tooltip>
-		Categories
-		<span class="caret"></span> </md-button>
+<md-toolbar class="md-primary md-hue-3 md-whiteframe-z4" style="height: 76px;">
+			<!-- search input bar & button -->
+	<div layout="row" layout-sm="row">
+		<md-input-container flex="60" flex-sm="70" class="md-primary">
+			<label>Search</label>
+			<input ng-model="vm.searchGoodsName">
+			<!-- <md-tooltip md-direction="left">搜尋</md-tooltip> -->
+		</md-input-container>
+		<md-button flex="20" flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch()">
+			<md-icon md-font-set="material-icons">search</md-icon><span class="ng-scope">Seek!</span>
+		</md-button>
+
+		<md-button flex class="md-raised seek_btn" aria-expanded="true">
+			<md-tooltip>依據物品種類</md-tooltip>
+				Categories
+			<span class="caret"></span>
+		</md-button>
+	</div>
+</md-toolbar>
+
+<md-content resize ng-style="resizeWithOffset(140)">
+	<div ng-show="loading" style="width: 65px; margin: 0 auto; margin-top:200px">
+		<md-progress-circular class="md-warn md-hue-2" md-mode="indeterminate"></md-progress-circular>
+	</div>
+
+	<div class="md-padding"></div>
+	<div deckgrid class="deckgrid" source="vm.goods">
+		<md-card class="md-whiteframe-z3 item" ng-click="mother.onClickGoods(card.gid)">
+			<img src="" data-ng-src="{{card.photo_path}}" class="md-card-image">
+			<md-card-content>
+				<h2 class="md-title">{{card.name}}</h2>
+			</md-card-content>
+		</md-card>
+	</div>
 </md-content>
-<!-- divider -->
-<md-divider class="info_container for_input"></md-divider>
-<!-- item list subheader -->
-<div layout layout-align="center center">
-	<md-subheader class="md-primary md-no-sticky" ng-show="!loading">Item List</md-subheader>
-</div>
-<!-- item list -->
-<div>
-		<div ng-show="loading" style="margin: 20px auto 0px auto;">
-			<md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
-		</div>
-
-		<div deckgrid class="deckgrid" source="vm.goods">
-			<div class="item">
-					<img src="" data-ng-src="{{card.photo_path}}">
-					<h1>{{card.name}}</h1>
-			</div>
-		</div>
-
-</div>

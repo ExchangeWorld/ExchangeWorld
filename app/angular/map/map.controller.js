@@ -371,7 +371,7 @@ function MapController(
 			.filter(function(good, index) {
 				if (!(good.gid in hashTable)) return true;
 
-				if (!good.getMap()) good.setMap(map);
+				if (!good.marker.getMap()) good.marker.setMap(map);
 				data[index] = good;
 				return false;
 			})

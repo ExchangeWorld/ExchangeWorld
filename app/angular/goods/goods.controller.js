@@ -45,6 +45,8 @@ function GoodsController(
 	}
 
 	function activate() {
+		$scope.$parent.$broadcast('goodsChanged', [goodData]);
+		$scope.$parent.$broadcast('mapMoveTo', goodData.gid);
 		updateComment();
 		updateStar();
 

@@ -24,6 +24,11 @@ function MapController(
 	var goods   = [];
 	var overlay = null;
 	const vm    = this;
+
+	vm.coords          = $localStorage ? $localStorage.position : [0, 0];
+	vm.zoom            = 17;
+	vm.draggableCursor = 'default';
+	vm.draggingCursor  = 'default';
 	vm.mapStyle = [
 		{
 			"featureType" : "all",
@@ -266,10 +271,6 @@ function MapController(
 			]
 		}
 	];
-	vm.coords   = $localStorage ? $localStorage.position : [0, 0];
-	vm.zoom     = 17;
-	vm.draggableCursor = 'default';
-	vm.draggingCursor = 'default';
 	$scope.$on('mapInitialized', mapInitialized);
 
 
@@ -320,6 +321,7 @@ function MapController(
 		geolocation
 			.getLocation()
 			.then(function(data) {
+				$localStorage.position = [data.latitude, data.longitude];
 				map.panTo({
 					lat : data.latitude,
 					lng : data.longitude
@@ -363,8 +365,10 @@ function MapController(
 	 * Draw maker and overlay here.
 	 */
 	function goodsChanged(e, data) {
+		closeGoodsOverlay();
+
 		console.log(data);
-		// closeGoodsOverlay();
+		console.log(goods)
 
 		/* 1. Clean unused marker */
 		var hashTable = {};
@@ -378,6 +382,8 @@ function MapController(
 				return false;
 			})
 			.forEach(function(oldGood) {
+					console.log(oldGood);
+					// oldGood.marker.setVisible(false);
 					oldGood.marker.setMap(null);
 			});
 
@@ -394,13 +400,7 @@ function MapController(
 
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
 			marker.addListener('click', function() {
-				if (overlay) {
-					overlay.onRemove();
-					overlay = undefined;
-				}
-
-				marker.setMap(null);
-
+				closeGoodsOverlay();
 				overlay = new GoodsOverlay(map, good, $state);
 			});
 
@@ -484,15 +484,11 @@ function MapController(
 	}
 
 	function mapMoveTo(e, gid) {
-		console.log(gid);
 		map.panTo(_findGood(gid).marker.getPosition());
 	}
 
 	function openGoodsOverlay(e, gid) {
-		if (overlay) {
-			overlay.onRemove();
-			overlay = undefined;
-		}
+		closeGoodsOverlay();
 		overlay = new GoodsOverlay(map, _findGood(gid), $state);
 	}
 

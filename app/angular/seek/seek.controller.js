@@ -46,7 +46,6 @@ function SeekController(seekService, $state, AvailableCategory, $scope, $rootSco
 
 	//goods onClick event: change route to corrsponding gid
 	function onClickGoods(gid) {
-		$rootScope.$broadcast('mapMoveTo', gid);
 		$state.go('root.withSidenav.goods', { gid : gid });
 	}
 }

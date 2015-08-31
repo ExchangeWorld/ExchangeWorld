@@ -1,3 +1,6 @@
+<md-button href="#" class="md-raised md-accent md-hue-1">
+	<md-icon md-font-set="material-icons">undo</md-icon>Back
+</md-button>
 <md-content layout-padding>
 	<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.goodData.stars.length}} </md-button>
 	<!-- 	
@@ -98,7 +101,6 @@
 			</md-input-container>
 			<input type="submit" id="submit" value="Submit" ng-show="false" />
 		</form>
-	</div>
 	</div>
 </md-content>
 

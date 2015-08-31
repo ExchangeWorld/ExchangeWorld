@@ -29,248 +29,7 @@ function MapController(
 	vm.zoom            = 17;
 	vm.draggableCursor = 'default';
 	vm.draggingCursor  = 'default';
-	vm.mapStyle = [
-		{
-			"featureType" : "all",
-			"elementType" : "labels",
-			"stylers" : [
-				{
-					"visibility" : "on"
-				}
-			]
-		},
-		{
-			"featureType" : "administrative",
-			"elementType" : "labels.text",
-			"stylers" : [
-				{
-					"color" : "#3a9464"
-				}, {
-					"weight" : "0.7"
-				}, {
-					"gvmma" : "1"
-				}
-			]
-		}, {
-			"featureType" : "landscape",
-			"elementType" : "all",
-			"stylers" : [
-				{
-					"visibility" : "on"
-				}, {
-					"color" : "#eaeaea"
-				}
-			]
-		}, {
-			"featureType" : "landscape.man_made",
-			"elementType" : "geometry",
-			"stylers" : [
-				{
-					"weight" : 0.9
-				}, {
-					"visibility" : "off"
-				}
-			]
-		}, {
-			"featureType" : "landscape.natural",
-			"elementType" : "labels.icon",
-			"stylers" : [
-				{
-					"visibility" : "off"
-				}
-			]
-		}, {
-			"featureType" : "landscape.natural.landcover",
-			"elementType" : "all",
-			"stylers" : [
-				{
-					"visibility" : "on"
-				}
-			]
-		}, {
-			"featureType" : "poi",
-			"elementType" : "all",
-			"stylers" : [
-				{
-					"visibility" : "off"
-				}
-			]
-		}, {
-			"featureType" : "poi",
-			"elementType" : "labels.icon",
-			"stylers" : [
-				{
-					"visibility" : "off"
-				}
-			]
-		}, {
-			"featureType" : "poi.park",
-			"elementType" : "geometry.fill",
-			"stylers" : [
-				{
-					"visibility" : "on"
-				}, {
-					"color" : "#83cead"
-				}
-			]
-		}, {
-			"featureType" : "poi.park",
-			"elementType" : "geometry.stroke",
-			"stylers" : [
-				{
-					"visibility" : "on"
-				}, {
-					"color" : "#150202"
-				}
-			]
-		}, {
-			"featureType" : "road",
-			"elementType" : "all",
-			"stylers" : [
-				{
-					"visibility" : "on"
-				}, {
-					"color" : "#ffffff"
-				}
-			]
-		}, {
-			"featureType" : "road",
-			"elementType" : "labels",
-			"stylers" : [
-				{
-					"visibility" : "on"
-				}
-			]
-		}, {
-			"featureType" : "road",
-			"elementType" : "labels.text",
-			"stylers" : [
-				{
-					"saturation" : "0"
-				}, {
-					"lightness" : "0"
-				}, {
-					"weight" : "0.4"
-				}
-			]
-		}, {
-			"featureType" : "road.highway",
-			"elementType" : "all",
-			"stylers" : [
-				{
-					"visibility" : "on"
-				}, {
-					"color" : "#f69017"
-				}
-			]
-		}, {
-			"featureType" : "road.highway",
-			"elementType" : "geometry.fill",
-			"stylers" : [
-				{
-					"color" : "#ffb63b"
-				}
-			]
-		}, {
-			"featureType" : "road.highway",
-			"elementType" : "geometry.stroke",
-			"stylers" : [
-				{
-					"hue" : "#ff0000"
-				}, {
-					"visibility" : "off"
-				}
-			]
-		}, {
-			"featureType" : "road.highway",
-			"elementType" : "labels.text",
-			"stylers" : [
-				{
-					"visibility" : "on"
-				}, {
-					"color" : "#000000"
-				}
-			]
-		}, {
-			"featureType" : "road.highway",
-			"elementType" : "labels.icon",
-			"stylers" : [
-				{
-					"visibility" : "off"
-				}
-			]
-		}, {
-			"featureType" : "road.arterial",
-			"elementType" : "all",
-			"stylers" : [
-				{
-					"visibility" : "on"
-				}, {
-					"color" : "#fee379"
-				}
-			]
-		}, {
-			"featureType" : "road.arterial",
-			"elementType" : "labels.text",
-			"stylers" : [
-				{
-					"visibility" : "on"
-				}, {
-					"color" : "#202020"
-				}, {
-					"weight" : "0.50"
-				}, {
-					"saturation" : "0"
-				}
-			]
-		}, {
-			"featureType" : "road.local",
-			"elementType" : "all",
-			"stylers" : [
-				{
-					"visibility" : "on"
-				}
-			]
-		}, {
-			"featureType" : "road.local",
-			"elementType" : "labels.text",
-			"stylers" : [
-				{
-					"visibility" : "on"
-				}, {
-					"color" : "#2e2d2d"
-				}
-			]
-		}, {
-			"featureType" : "road.local",
-			"elementType" : "labels.icon",
-			"stylers" : [
-				{
-					"visibility" : "off"
-				}
-			]
-		}, {
-			"featureType" : "water",
-			"elementType" : "all",
-			"stylers" : [
-				{
-					"visibility" : "on"
-				}, {
-					"color" : "#7fc8ed"
-				}
-			]
-		}, {
-			"featureType" : "water",
-			"elementType" : "labels.text",
-			"stylers" : [
-				{
-					"weight" : "0.8"
-				}, {
-					"color" : "#3e71bd"
-				}
-			]
-		}
-	];
+	vm.mapStyle        = require('./mapStyle.json');
 	$scope.$on('mapInitialized', mapInitialized);
 
 
@@ -367,23 +126,18 @@ function MapController(
 	function goodsChanged(e, data) {
 		closeGoodsOverlay();
 
-		console.log(data);
-		console.log(goods)
-
 		/* 1. Clean unused marker */
 		var hashTable = {};
-		data.forEach(function(obj) { hashTable[obj.gid] = true; });
+		data.forEach(function(obj, index) { hashTable[obj.gid] = index; });
 		goods
-			.filter(function(good, index) {
+			.filter(function(good) {
 				if (!(good.gid in hashTable)) return true;
 
 				if (!good.marker.getMap()) good.marker.setMap(map);
-				data[index] = good;
+				data[hashTable[good.gid]] = good;
 				return false;
 			})
 			.forEach(function(oldGood) {
-					console.log(oldGood);
-					// oldGood.marker.setVisible(false);
 					oldGood.marker.setMap(null);
 			});
 
@@ -398,12 +152,6 @@ function MapController(
 				map: map
 			});
 
-			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
-			marker.addListener('click', function() {
-				closeGoodsOverlay();
-				overlay = new GoodsOverlay(map, good, $state);
-			});
-
 			good = {
 				gid        : good.gid,
 				owner_uid  : good.owner_uid,
@@ -412,8 +160,11 @@ function MapController(
 				category   : good.category,
 				marker     : marker,
 			};
-
-
+			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
+			marker.addListener('click', function() {
+				closeGoodsOverlay();
+				overlay = new GoodsOverlay(map, good, $state);
+			});
 
 			return good;
 		});

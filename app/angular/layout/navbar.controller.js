@@ -1,19 +1,19 @@
 "use strict";
 
 const layoutModule = require('./layout.module');
+const _ = require('lodash');
 layoutModule.controller('NavbarController', NavbarController);
 
 /** @ngInject */
 function NavbarController($mdSidenav, $state, auth, $localStorage) {
 	const vm      = this;
 	const state   = ['home', 'seek', 'post', 'exchange', 'profile'];
-	vm.stateIndex = 0;
-	vm.contentIs  = contentIs;
+	vm.stateIndex = _.indexOf(state, $state.current.title);
 	vm.onClick    = onClick;
 	vm.onLogin    = onLogin;
 	vm.onLogout   = onLogout;
 	vm.user       = $localStorage.user;
-	vm.isLoggedIn = $localStorage.user ? true : false;
+	vm.isLoggedIn = Boolean($localStorage.user);
 
 	//////////////
 	activate();
@@ -27,14 +27,6 @@ function NavbarController($mdSidenav, $state, auth, $localStorage) {
 			});
 	}
 
-	function setContent(contentIndex) {
-		//	vm.content = state[contentIndex];
-		//	vm.contentHistory.push(vm.content);
-	}
-
-	function contentIs(contentIndex) {
-		return vm.stateIndex === state[contentIndex];
-	}
 
 	function onClick(contentIndex) {
 		//$scope.content = ContentType[contentIndex];
@@ -57,9 +49,11 @@ function NavbarController($mdSidenav, $state, auth, $localStorage) {
 			 */
 			if (
 				!isFromOneCol &&
-				(!$mdSidenav('left').isOpen() || (
-				$mdSidenav('left').isOpen() &&
-				vm.stateIndex === contentIndex))
+				(
+					!$mdSidenav('left').isOpen() || (
+					$mdSidenav('left').isOpen() &&
+					vm.stateIndex === contentIndex)
+				)
 			) {
 				$mdSidenav('left').toggle();
 			}

@@ -38,13 +38,14 @@ function PostController(postService, $scope, $state, auth, AvailableCategory, lo
 		postService
 			.uploadImg(vm.imgEncoded)
 			.then(function(data){
+				console.log(data);
 				postService
 					.sendNewPostInfo({
 						name        : vm.goodsName,
 						description : vm.goodsDescriptions,
 						category    : vm.goodsCategory.label,
-						position_x  : 123.4,
-						position_y  : 23.4,
+						position_x  : vm.positionX,
+						position_y  : vm.positionY,
 						photo_path  : data,
 						owner_uid   : auth.currentUser().uid,
 					})

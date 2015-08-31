@@ -33,9 +33,10 @@ function GoodsController(
 	vm.onClickStar     = onClickStar;
 
 	vm.myGoods         = [];
-	vm.queue           = [];
-	vm.queued          = false;
+	vm.queuingList     = [];
+	//vm.queued          = false;
 	vm.onClickQueue    = onClickQueue;
+	vm.onClickAccept   = onClickAccept; 
 
 	vm.onClickUser     = onClickUser;
 
@@ -48,7 +49,13 @@ function GoodsController(
 		}, 50);
 		updateComment();
 		updateStar();
-		updateQueue();
+
+		/**
+		 * if is me, get the queue list on this goods
+		 * else, get all my goods that available to send queue request.
+		 */
+		if(vm.isMe) getQueuing();
+		else        getMyGoods();
 
 		auth
 			.getLoginState()
@@ -60,7 +67,6 @@ function GoodsController(
 					vm.isLoggedIn = false;
 				}
 			});
-		getMyGoods();
 	}
 
 	// define onClick event on goods owner
@@ -163,11 +169,11 @@ function GoodsController(
 			});
 	}
 
-	function updateQueue() {
+	function getQueuing() {
 		goodsService
 			.getQueue(vm.goodData.gid)
 			.then(function(data) {
-				vm.queue = data;
+				vm.queuingList = data;
 
 				/**
 				 * TODO: check if user already queued
@@ -180,6 +186,9 @@ function GoodsController(
 			});
 	}
 
+	/**
+	 * get all goods that available to queue this goods
+	 */
 	function getMyGoods() {
 		goodsService
 			.getGood(-1, $localStorage.user.uid)
@@ -188,9 +197,31 @@ function GoodsController(
 			});
 	}
 
+	/**
+	 * user use a goods to queue the host goods 
+	 */
 	function onClickQueue(queuer_goods_gid) {
+		/**
+		 * TODO:
+		 *  1. restrict multi queue(?).
+		 */
 		goodsService
 			.postQueue(goodData.gid, queuer_goods_gid)
-			.then();
+			.then(alert('you queued using gid='+queuer_goods_gid));
+	}
+
+	/**
+	 * Accept one goods in the queuing list
+	 * create a exchange instance. 
+	 */
+	function onClickAccept(queuer_goods_gid) {
+		/**
+		 * TODO:
+		 *  1. restrict multi accept.
+		 *  2. go to the initiate exchange page.
+		 */
+		goodsService
+			.postExchange(queuer_goods_gid, goodData.gid)
+			.then(alert('you accept a queuing goods ! '));
 	}
 }

@@ -3,6 +3,7 @@ var router  = express.Router();
 
 // Including tables
 var queues = require('../ORM/Queues');
+var goods  = require('../ORM/Goods');
 
 // Get queues of a goods
 router.get('/of', function(req, res, next) {
@@ -14,13 +15,18 @@ router.get('/of', function(req, res, next) {
 
 	var _host_goods_gid = req.query.host_goods_gid;
 
+	queues.belongsTo(goods, {foreignKey: 'queuer_goods_gid'});
+
 	queues
 		.sync({force: false})
 		.then(function() {
 			return queues.findAll({
 				where: {
 					host_goods_gid: _host_goods_gid
-				}
+				},
+				include:[
+					{model: goods}
+				]
 			});
 		})
 		.then(function(result) {

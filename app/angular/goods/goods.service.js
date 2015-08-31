@@ -22,6 +22,8 @@ function goodsService(Restangular, $q, exception) {
 		getQueue,
 		postQueue,
 		deleteQueue,
+
+		postExchange,
 	};
 	return service;
 
@@ -36,18 +38,11 @@ function goodsService(Restangular, $q, exception) {
 				owner_uid : owner_uid,
 			})
 			.then(function(data) {
-
-				getStars(gid)
-					.then(function(stars) {
-						getComment(gid)
-							.then(function(comments) {
-								if (_.isArray(data)) {
-									//defer.resolve(data[0]);
-								//} else if (_.isObject(data)) {
-									defer.resolve(data);
-								}
-							});
-					});
+				if (_.isArray(data)) {
+					//defer.resolve(data[0]);
+				//} else if (_.isObject(data)) {
+					defer.resolve(data);
+				}
 			})
 			.catch(function(error) {
 				return exception.catcher('[Goods Service] getGood error: ')(error);
@@ -207,6 +202,24 @@ function goodsService(Restangular, $q, exception) {
 			})
 			.catch(function(error) {
 				return exception.catcher('[Goods Service] deleteQueue error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	function postExchange(goods1_gid, goods2_gid) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('exchange/create')
+			.post({
+				goods1_gid : goods1_gid,
+				goods2_gid : goods2_gid,
+			})
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] postExchang error: ')(error);
 			});
 		return defer.promise;
 	}

@@ -6,18 +6,18 @@ seekModule.controller('SeekController', SeekController);
 
 /** @ngInject */
 function SeekController(
-	seekService, 
-	$state, 
-	AvailableCategory, 
-	$scope, 
-	$rootScope, 
+	seekService,
+	$state,
+	AvailableCategory,
+	$scope,
+	$rootScope,
 	$stateParams
 ) {
 	var vm                 = this;
 	vm.goods               = [];
 	vm.searchGoodsName     = $stateParams.name;
 	vm.searchGoodsCategory = $stateParams.cate || '';
-	vm.onClickGoods        = onClickGoods;
+	$scope.onClickGoods    = onClickGoods;
 	vm.onSearch            = onSearch;
 	vm.availableCategory   = AvailableCategory;
 	vm.onMouseOver         = onMouseOver;
@@ -33,7 +33,7 @@ function SeekController(
 
 	function onSearch(filter) {
 		$state.go($state.current.name, {
-			name: filter.name, 
+			name: filter.name,
 			cate: filter.cate,
 		});
 		//console.log(filter);

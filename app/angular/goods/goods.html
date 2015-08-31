@@ -1,5 +1,6 @@
 <md-content layout-padding>
-	<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.goodData.stars.length}} </md-button>
+	<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.stars.length}} </md-button>
+	<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(6)">排！</md-button>
 	<md-tabs md-dynamic-height md-border-bottom>
 		<md-tab label="ItemName">
 			<div layout layout-align="center center">

@@ -16,6 +16,8 @@ function goodsService(Restangular, $q, exception) {
 		getStars,
 		postStar,
 		deleteStar,
+		postQueue,
+		deleteQueue,
 	};
 	return service;
 
@@ -144,6 +146,42 @@ function goodsService(Restangular, $q, exception) {
 			})
 			.catch(function(error) {
 				return exception.catcher('[Goods Service] deleteStar error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	function postQueue(host_goods_gid, queuer_goods_gid) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('queue/post')
+			.post({
+				host_goods_gid   : host_goods_gid,
+				queuer_goods_gid : queuer_goods_gid,
+			})
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] postQueue error: ')(error);
+			});
+		return defer.promise;
+	}
+	
+	function deleteQueue(host_goods_gid, queuer_goods_gid) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('queue/delete')
+			.remove({
+				host_goods_gid   : host_goods_gid,
+				queuer_goods_gid : queuer_goods_gid,
+			})
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] deleteQueue error: ')(error);
 			});
 		return defer.promise;
 	}

@@ -33,6 +33,7 @@ function GoodsController(
 	vm.onClickStar     = onClickStar;
 
 	vm.onClickUser     = onClickUser;
+	vm.onClickQueue    = onClickQueue;
 
 	activate();
 
@@ -154,5 +155,10 @@ function GoodsController(
 					vm.starred = false;
 				}
 			});
+	}
+	function onClickQueue(queuer_goods_gid) {
+		goodsService
+			.postQueue(goodData.gid, queuer_goods_gid)
+			.then();
 	}
 }

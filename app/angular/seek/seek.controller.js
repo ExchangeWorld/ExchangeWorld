@@ -5,9 +5,8 @@ const _ = require('lodash');
 seekModule.controller('SeekController', SeekController);
 
 /** @ngInject */
-function SeekController(seekService, $state, AvailableCategory, $scope) {
+function SeekController(seekService, $state, AvailableCategory, $scope, $rootScope) {
 	var vm                 = this;
-	// var map                = undefined;
 	vm.goods               = [];
 	vm.searchGoodsName     = '';
 	vm.searchGoodsCategory = '';
@@ -29,7 +28,7 @@ function SeekController(seekService, $state, AvailableCategory, $scope) {
 		seekService
 			.getSeek(filter)
 			.then(function(data) {
-				$scope.$parent.$broadcast('goodsChanged', data);
+				$rootScope.$broadcast('goodsChanged', data);
 				vm.goods = data;
 			})
 			.catch(function() {
@@ -38,16 +37,16 @@ function SeekController(seekService, $state, AvailableCategory, $scope) {
 	}
 
 	function onMouseOver(gid) {
-		$scope.$parent.$broadcast('openGoodsOverlay', gid);
+		$rootScope.$broadcast('openGoodsOverlay', gid);
 	}
 
 	function onMouseOut() {
-		$scope.$parent.$broadcast('closeGoodsOverlay');
+		$rootScope.$broadcast('closeGoodsOverlay');
 	}
 
 	//goods onClick event: change route to corrsponding gid
 	function onClickGoods(gid) {
-		$scope.$parent.$broadcast('mapMoveTo', gid);
+		$rootScope.$broadcast('mapMoveTo', gid);
 		$state.go('root.withSidenav.goods', { gid : gid });
 	}
 }

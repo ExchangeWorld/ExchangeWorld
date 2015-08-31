@@ -299,7 +299,7 @@ function MapController(
 		if ($stateParams.olc) {
 			const coord = OpenLocationCode.decode($stateParams.olc.replace(' ','+'));
 			vm.coords = [coord.latitudeCenter, coord.longitudeCenter];
-		} else {
+		} else if($stateParams.hasOwnProperty('olc')) {
 			geolocation
 				.getLocation()
 				.then(function(data) {
@@ -363,6 +363,8 @@ function MapController(
 	 * Draw maker and overlay here.
 	 */
 	function goodsChanged(e, data) {
+		console.log(data);
+		// closeGoodsOverlay();
 
 		/* 1. Clean unused marker */
 		var hashTable = {};
@@ -390,6 +392,18 @@ function MapController(
 				map: map
 			});
 
+			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
+			marker.addListener('click', function() {
+				if (overlay) {
+					overlay.onRemove();
+					overlay = undefined;
+				}
+
+				marker.setMap(null);
+
+				overlay = new GoodsOverlay(map, good, $state);
+			});
+
 			good = {
 				gid        : good.gid,
 				owner_uid  : good.owner_uid,
@@ -399,15 +413,7 @@ function MapController(
 				marker     : marker,
 			};
 
-			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
-			marker.addListener('click', function() {
-				if (overlay) {
-					overlay.onRemove();
-					overlay = undefined;
-				}
 
-				overlay = new GoodsOverlay(map, good, $state);
-			});
 
 			return good;
 		});
@@ -449,10 +455,7 @@ function MapController(
 
 	/* Autocomplete address Search */
 	function placeChanged() {
-		if(overlay) {
-			overlay.onRemove();
-			overlay = undefined;
-		}
+		closeGoodsOverlay();
 
 		const place = this.getPlace().geometry;
 		if (place.viewport) {
@@ -481,6 +484,7 @@ function MapController(
 	}
 
 	function mapMoveTo(e, gid) {
+		console.log(gid);
 		map.panTo(_findGood(gid).marker.getPosition());
 	}
 
@@ -500,10 +504,7 @@ function MapController(
 	}
 
 	function onClick(e) {
-		if (overlay) {
-			overlay.onRemove();
-			overlay = undefined;
-		}
+		closeGoodsOverlay();
 
 		if ($state.current.title === 'post') {
 			if (vm.marker) {

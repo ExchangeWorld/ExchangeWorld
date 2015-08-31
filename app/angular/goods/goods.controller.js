@@ -36,11 +36,15 @@ function GoodsController(
 
 	activate();
 
-	function activate() {
+	$scope.$parent.$on('mapInitialized', mapInitialized);
+
+	/* After map is loaded */
+	function mapInitialized(e, evtMap) {
 		$scope.$parent.$broadcast('goodsChanged', [goodData]);
-		$timeout(function() {
-			$scope.$parent.$broadcast('mapMoveTo', goodData.gid);
-		}, 50);
+		$scope.$parent.$broadcast('mapMoveTo', goodData.gid);
+	}
+
+	function activate() {
 		updateComment();
 		updateStar();
 

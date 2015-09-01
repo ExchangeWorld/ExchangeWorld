@@ -41,7 +41,6 @@ function MapController(
 		vm.findMyLocation      = getCurrentPosition;
 		vm.placeChanged        = placeChanged;
 		vm.zoomChanged         = zoomChanged;
-		vm.onClick             = onClick;
 		GoodsOverlay.prototype = new google.maps.OverlayView();
 
 		boundChanged();
@@ -52,6 +51,7 @@ function MapController(
 		$rootScope.$on('$stateChangeSuccess', urlChanged);
 		google.maps.event.addListener(map, 'idle', olcChanged);
 		google.maps.event.addListener(map, 'bounds_changed', boundChanged);
+		google.maps.event.addListener(map, 'mousedown', onClick);
 	}
 
 	/* Before map is loaded */
@@ -161,7 +161,7 @@ function MapController(
 				marker     : marker,
 			};
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
-			marker.addListener('click', function() {
+			marker.addListener('mousedown', function() {
 				closeGoodsOverlay();
 				overlay = new GoodsOverlay(map, good, $state);
 			});

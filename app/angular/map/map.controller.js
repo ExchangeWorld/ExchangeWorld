@@ -17,7 +17,8 @@ function MapController(
 		$localStorage,
 		$state,
 		$stateParams,
-		$timeout
+		$timeout,
+		$interval
 ) {
 
 	var map     = null;
@@ -51,7 +52,9 @@ function MapController(
 		$rootScope.$on('$stateChangeSuccess', urlChanged);
 		google.maps.event.addListener(map, 'idle', olcChanged);
 		google.maps.event.addListener(map, 'bounds_changed', boundChanged);
-		google.maps.event.addListener(map, 'mousedown', onClick);
+		google.maps.event.addListener(map, 'mousedown', onMousedown);
+		google.maps.event.addListener(map, 'mouseup', onMouseup);
+		google.maps.event.addListener(map, 'dragstart', onDragstart);
 	}
 
 	/* Before map is loaded */
@@ -161,7 +164,7 @@ function MapController(
 				marker     : marker,
 			};
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
-			marker.addListener('mousedown', function() {
+			marker.addListener('mouseup', function() {
 				closeGoodsOverlay();
 				overlay = new GoodsOverlay(map, good, $state);
 			});
@@ -250,6 +253,22 @@ function MapController(
 		}
 	}
 
+
+	var isDragged = false;
+	function onMousedown() {
+		isDragged = false;
+	}
+
+	function onDragstart() {
+		isDragged = true;
+	}
+
+	function onMouseup(e) {
+		if (!isDragged) {
+			onClick(e);
+		}
+	}
+
 	function onClick(e) {
 		closeGoodsOverlay();
 
@@ -259,7 +278,7 @@ function MapController(
 			} else {
 				vm.marker = new google.maps.Marker({
 					position: e.latLng,
-					draggable: true,
+					// draggable: true,
 					animation: google.maps.Animation.DROP,
 					map: map,
 				});
@@ -268,7 +287,7 @@ function MapController(
 					$rootScope.$broadcast('positionMarked', e.latLng);
 				});
 			}
-			$rootScope.$broadcast('positionMarked', e.latLng);
+			// $rootScope.$broadcast('positionMarked', e.latLng);
 		}
 	}
 

@@ -10,11 +10,15 @@ var Notifications = sequelize.define('notifications', {
 		autoIncrement: true,
 		primaryKey: true
 	},
+	sender_uid: {
+		type: Sequelize.INTEGER.UNSIGNED,
+		allowNull: false
+	},
 	receiver_uid: {
 		type: Sequelize.INTEGER.UNSIGNED,
 		allowNull: false
 	},
-	trigger_reason: {
+	trigger: {
 		type: Sequelize.STRING,
 		allowNull: false
 	},

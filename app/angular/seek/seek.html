@@ -22,11 +22,14 @@
 	</div>
 	<div class="md-padding"></div>
 	<div deckgrid class="deckgrid" source="vm.goods">
+		<div>{{card.user.photo_path}}</div>
 		<md-card class="md-whiteframe-z3 item" ng-click="mother.onClickGoods(card.gid)">
 			<img src="" data-ng-src="{{card.photo_path}}" class="md-card-image">
-			<md-card-content>
+			<md-card-content layout="row">
 				<h2 class="md-title">{{card.name}}</h2>
+				<img src="" data-ng-src="{{card.user.photo_path}}">
 			</md-card-content>
+			
 			<!-- <img class="circle" ng-src="{{ card.user.photo_path }}" /> -->
 		</md-card>
 	</div>

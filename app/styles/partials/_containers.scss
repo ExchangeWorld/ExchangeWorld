@@ -90,7 +90,7 @@ md-list-item {
 
 .item {
     display: inline-block;
-    background: #ebebeb;
+    background: #F5F5F5;
     padding: 1em;
     margin: 0 0 1.5em;
     box-sizing: border-box;
@@ -121,6 +121,7 @@ div.md-open-menu-container {
     border-radius: 50%;
     border: 3px double #4762dc;
     z-index: 10000;
+    background-color: black;
     position: absolute;
     bottom: 10px;
     right: 2px;

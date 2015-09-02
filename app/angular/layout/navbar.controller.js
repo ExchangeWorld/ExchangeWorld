@@ -1,20 +1,26 @@
-"use strict";
+'use strict';
 
 const layoutModule = require('./layout.module');
-const _ = require('lodash');
+const _            = require('lodash');
+const moment       = require('moment');
+
 layoutModule.controller('NavbarController', NavbarController);
 
 /** @ngInject */
-function NavbarController($mdSidenav, $state, auth, $localStorage) {
-	const vm      = this;
-	const state   = ['home', 'seek', 'post', 'exchange', 'profile'];
-	vm.stateIndex = _.indexOf(state, $state.current.title);
-	vm.onClick    = onClick;
-	vm.onLogin    = onLogin;
-	vm.onLogout   = onLogout;
-	vm.user       = $localStorage.user;
-	vm.isLoggedIn = Boolean($localStorage.user);
+function NavbarController($mdSidenav, $state, auth, $localStorage, notificationService) {
+	const vm               = this;
+	const state            = ['home', 'seek', 'post', 'exchange', 'profile'];
+	vm.stateIndex          = _.indexOf(state, $state.current.title);
+	vm.onClick             = onClick;
+	vm.onLogin             = onLogin;
+	vm.onLogout            = onLogout;
+	vm.user                = $localStorage.user;
+	vm.isLoggedIn          = Boolean($localStorage.user);
 
+	vm.notifications       = [];
+	vm.unreadCount         = '';
+	vm.onClickNotification = onClickNotification;
+	
 	//////////////
 	activate();
 
@@ -24,6 +30,27 @@ function NavbarController($mdSidenav, $state, auth, $localStorage) {
 			.then(function(data) {
 				vm.user = data;
 				vm.isLoggedIn = Boolean(data);
+			});
+
+
+
+		/**
+		 * TODO: watch notifications
+		 */
+		notificationService
+			.getNotification(vm.user.uid)
+			.then(function(data) {
+				vm.notifications = data;
+				//vm.notifications.timestamp = moment(data.timestamp).fromNow();
+			})
+			.then(function() {
+				var data = vm.notifications.map(function(notice) {
+					notice.timestamp = moment(notice.timestamp).fromNow();
+					notice.style = notice.unread ? {'background-color':'#E9F3FF'} : {};
+					return notice;
+				});
+				vm.notifications = data;
+				vm.unreadCount = vm.notifications.filter(function(n) { return n.unread; }).length;
 			});
 	}
 
@@ -78,4 +105,13 @@ function NavbarController($mdSidenav, $state, auth, $localStorage) {
 		$state.reload();
 	}
 
+	function onClickNotification(notice) {
+		notificationService
+			.updateNotification(notice.nid, !notice.unread)
+			.then(function(data) {
+				console.log(data);
+			});
+		location.href = notice.trigger;
+	
+	}
 }

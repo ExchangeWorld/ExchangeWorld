@@ -10,6 +10,7 @@ function notification(Restangular, $q, exception, $localStorage) {
 	const service = {
 		getNotification,
 		postNotification,
+		updateNotification,
 	};
 
 	return service;
@@ -18,7 +19,7 @@ function notification(Restangular, $q, exception, $localStorage) {
 		const defer = $q.defer();
 
 		Restangular
-			.all('notification')
+			.all('notification/belongsTo')
 			.getList({ receiver_uid: uid })
 			.then(function(data) {
 				if (_.isArray(data)) {
@@ -43,6 +44,26 @@ function notification(Restangular, $q, exception, $localStorage) {
 			})
 			.catch(function(error) {
 				return exception.catcher('[Notification Service] postNotification error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	function updateNotification(nid, unread) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('notification')
+			.getList({nid: nid})
+			.then(function(data) {
+				if (_.isArray(data)) {
+					console.log(data);
+					var notification = data[0];
+					notification.unread = unread;
+					notification.put();
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[Notifications Service] updateNotification error: ')(error);
 			});
 		return defer.promise;
 	}

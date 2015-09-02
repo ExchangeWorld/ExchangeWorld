@@ -21,6 +21,11 @@ var Notifications = sequelize.define('notifications', {
 	content: {
 		type: Sequelize.TEXT,
 		allowNull: false
+	},
+	unread: {
+		type: Sequelize.BOOLEAN,
+		defaultValue: true,
+		allowNull: false
 	}
 }, {
 	timestamps: true,

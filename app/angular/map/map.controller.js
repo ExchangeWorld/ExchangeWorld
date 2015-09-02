@@ -150,26 +150,24 @@ function MapController(
 				return good;
 			}
 
-			const marker = new google.maps.Marker({
-				position: new google.maps.LatLng(good.position_y, good.position_x),
-				map: map
-			});
-
-			good = {
+			const goodMarker = {
 				gid        : good.gid,
 				owner_uid  : good.owner_uid,
 				name       : good.name,
 				photo_path : good.photo_path,
 				category   : good.category,
-				marker     : marker,
+				marker     : new google.maps.Marker({
+					position: new google.maps.LatLng(good.position_y, good.position_x),
+					map: map
+				}),
 			};
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
-			marker.addListener('mouseup', function() {
+			goodMarker.marker.addListener('mouseup', function() {
 				closeGoodsOverlay();
-				overlay = new GoodsOverlay(map, good, $state);
+				overlay = new GoodsOverlay(map, goodMarker, $state);
 			});
 
-			return good;
+			return goodMarker;
 		});
 	}
 

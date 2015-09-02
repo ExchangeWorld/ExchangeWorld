@@ -39,8 +39,6 @@ function goodsService(Restangular, $q, exception) {
 			})
 			.then(function(data) {
 				if (_.isArray(data)) {
-					//defer.resolve(data[0]);
-				//} else if (_.isObject(data)) {
 					defer.resolve(data);
 				}
 			})

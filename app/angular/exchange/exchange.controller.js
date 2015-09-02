@@ -9,12 +9,15 @@ function ExchangeController(exchangeList, $state, exchangeService) {
 	vm.exchangeList    = exchangeList;
 	vm.exchange        = {};
 	vm.onClickExchange = onClickExchange;
+	vm.onClickComplete = onClickComplete;
 
 
 	activate();
 
 	function activate() {
-		onClickExchange(vm.exchangeList[0].eid);
+		if(vm.exchangeList.length) {
+			onClickExchange(vm.exchangeList[0].eid);
+		}
 	}
 
 	////////////
@@ -24,8 +27,13 @@ function ExchangeController(exchangeList, $state, exchangeService) {
 			.getExchange(eid)
 			.then(function(data) {
 				vm.exchange = data;
-				console.log(vm.exchange.goods[0].name);
 			});
-		
+	}
+	function onClickComplete(eid) {
+		exchangeService
+			.completeExchange(eid)
+			.then(function(data) {
+				console.log(data);
+			});
 	}
 }

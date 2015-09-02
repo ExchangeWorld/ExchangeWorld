@@ -18,7 +18,11 @@ router.get('/allExchange', function(req, res, next) {
 	exchanges
 		.sync({force: false})
 		.then(function() {
-			return exchanges.findAll();
+			return exchanges.findAll({
+				where: {
+					status :'initated'
+				}
+			});
 		})
 		.then(function(result) {
 			res.json(result);
@@ -47,7 +51,10 @@ router.get('/', function(req, res, next) {
 		.then(function() {
 			return exchanges.findAll({
 				where: {
-					eid: _eid
+					$AND:[{
+						eid: _eid,
+						status :'initiated'
+					}]
 				}
 			});
 		})

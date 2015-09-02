@@ -3,9 +3,63 @@ var router  = express.Router();
 
 // Including tables
 var exchanges = require('../ORM/Exchanges');
+var users     = require('../ORM/Users.js');
+var goods     = require('../ORM/Goods.js');
 
 // These routes are really dangerous
 // Only use them when you know what are you doing
+
+router.get('/', function(req, res, next) {
+
+	// Available query params
+	// 
+	// eid
+	// 
+
+	var _eid = parseInt(req.query.eid, 10);
+
+	// Set association between tables (users, goods) and (goods, comments)
+	users.hasMany(goods, {foreignKey: 'owner_uid'});
+	goods.belongsTo(users, {foreignKey: 'owner_uid'});
+
+	exchanges
+		.sync({force: false})
+		.then(function() {
+			return exchanges.findAll({
+				where: {
+					eid: _eid
+				}
+			});
+		})
+		.then(function(result) {
+			console.log(result);
+			goods
+				.sync({force: false})
+				.then(function() {
+					return goods.findAll({
+						where: {
+							$or: [{
+								gid: result[0].dataValues.goods1_gid 
+							}, {
+								gid: result[0].dataValues.goods2_gid 
+							}]
+						},
+						include: [users]
+					});
+				})
+				.then(function(goods) {
+					result[0].dataValues.goods = goods;
+					res.json(result);
+				})
+				.catch(function(err) {
+					res.send({error: err});
+				});
+		})
+		.catch(function(err) {
+			res.send({error: err});
+		});
+
+});
 
 // Create a new exchange
 // Default status of an exchange is 'initiated'

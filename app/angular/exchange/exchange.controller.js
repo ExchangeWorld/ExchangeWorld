@@ -10,6 +10,7 @@ function ExchangeController(exchangeList, $state, exchangeService) {
 	vm.exchange        = {};
 	vm.onClickExchange = onClickExchange;
 	vm.onClickComplete = onClickComplete;
+	vm.onClickDelete   = onClickDelete;
 
 
 	activate();
@@ -26,14 +27,26 @@ function ExchangeController(exchangeList, $state, exchangeService) {
 		exchangeService
 			.getExchange(eid)
 			.then(function(data) {
+				//console.log(data);
 				vm.exchange = data;
 			});
 	}
+
 	function onClickComplete(eid) {
 		exchangeService
 			.completeExchange(eid)
 			.then(function(data) {
 				console.log(data);
+				$state.reload();
+			});
+	}
+
+	function onClickDelete(eid) {
+		exchangeService
+			.deleteExchange(eid)
+			.then(function(data) {
+				console.log(data);
+				$state.reload();
 			});
 	}
 }

@@ -20,7 +20,7 @@ router.get('/allExchange', function(req, res, next) {
 		.then(function() {
 			return exchanges.findAll({
 				where: {
-					status :'initated'
+					status :'initiated'
 				}
 			});
 		})
@@ -51,7 +51,7 @@ router.get('/', function(req, res, next) {
 		.then(function() {
 			return exchanges.findAll({
 				where: {
-					$AND:[{
+					$and:[{
 						eid: _eid,
 						status :'initiated'
 					}]
@@ -79,11 +79,11 @@ router.get('/', function(req, res, next) {
 					res.json(result);
 				})
 				.catch(function(err) {
-					res.send({error: err});
+					res.send([{error: err}]);
 				});
 		})
 		.catch(function(err) {
-			res.send({error: err});
+			res.send([{error: err}]);
 		});
 
 });

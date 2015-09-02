@@ -33,8 +33,6 @@ function exchangeService(Restangular, $q) {
 						.getList({ owner_uid : owner_uid })
 						.then(function(goods_data) {
 							if (_.isArray(goods_data)) {
-								//console.log(data);
-								//console.log(goods_data);
 								var filtered = data.filter(function(exchange) {
 									if( 
 										_.findWhere(goods_data, { gid: exchange.goods1_gid}) || 
@@ -45,7 +43,6 @@ function exchangeService(Restangular, $q) {
 										return false;
 									}
 								});
-								//console.log(filtered);
 								defer.resolve(filtered);
 							}
 						})
@@ -63,6 +60,7 @@ function exchangeService(Restangular, $q) {
 
 	function getExchange(eid) {
 		const defer = $q.defer();
+		//console.log(eid);
 
 		Restangular
 			.all('exchange')
@@ -94,11 +92,8 @@ function exchangeService(Restangular, $q) {
 				if (_.isArray(data)) {
 					var exchange = data[0];
 					exchange.route += '/complete'; // PUT of "complete" is "api/exchange/complete"
-					console.log(exchange);
+					//console.log(exchange);
 					exchange.put();
-					//defer.resolve(data[0]);
-				//} else {
-					//defer.resolve(data);
 				}
 			})
 			.catch(function(error) {
@@ -112,7 +107,23 @@ function exchangeService(Restangular, $q) {
 	 * one of the user reject the exchage.
 	 */
 	function deleteExchange(eid) {
-		return;
+		const defer = $q.defer();
+
+		Restangular
+			.all('exchange')
+			.getList({eid: eid})
+			.then(function(data) {
+				if (_.isArray(data)) {
+					var exchange = data[0];
+					exchange.route += '/drop'; // PUT of "drop" is "api/exchange/drop"
+					//console.log(exchange);
+					exchange.put();
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[Exchange Service] deleteExchange error: ')(error);
+			});
+		return defer.promise;
 	}
 
 	/**

@@ -1,17 +1,17 @@
 <md-toolbar class="md-primary md-hue-3 md-whiteframe-z4" style="height: 76px;">
 	<!-- search input bar & button -->
-	<div layout="row" layout-sm="row">
-		<md-input-container flex="55" flex-sm="70" class="md-primary">
+	<div layout="row">
+		<md-input-container flex="55" flex-sm="45" class="md-primary" style="padding-left: 10px;">
 			<label>Search</label>
 			<input ng-model="vm.searchGoodsName">
 			<!-- <md-tooltip md-direction="left">搜尋</md-tooltip> -->
 		</md-input-container>
-		<md-button class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName})">
-			<md-icon md-font-set="material-icons">search</md-icon><span class="ng-scope">Seek!</span>
+		<md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName})">
+			<md-icon hide-sm md-font-set="material-icons">search</md-icon><span class="ng-scope">搜索!</span>
 		</md-button>
-		<md-button flex class="md-raised seek_btn" aria-expanded="true">
+		<md-button flex flex-sm class="md-raised seek_btn" aria-expanded="true">
 			<md-tooltip>依據物品種類</md-tooltip>
-			Categories
+			分類
 			<span class="caret"></span>
 		</md-button>
 	</div>

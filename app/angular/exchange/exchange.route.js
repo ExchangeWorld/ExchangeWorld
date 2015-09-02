@@ -23,7 +23,7 @@ function getStates() {
 						return exchangeService
 							.getAllExchange($stateParams.uid)
 							.then(function(data) { return data; })
-							.catch(function() { return undefined; });
+							.catch(function() { return []; });
 					},
 				},
 			}

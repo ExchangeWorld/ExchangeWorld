@@ -1,15 +1,17 @@
 <md-content>
-	<div layout="row" class="info_container for_input">
+	<div layout="row" class="info_container">
 		<!-- user avatar -->
-		<div flex="40" layout layout-align="center center">
+		<div flex layout layout-align="center center">
 			<a href="#"><img class="circular profile" ng-src="{{ vm.profile.largePic }}" /></a>
 		</div>
 		<!-- user name & follow button -->
 		<div flex="60" layout="column">
-			<div layout="row" layout-align="center center">
-				<h4 class="md-title">{{ vm.profile.name }}</h4>
-				<i offset="20" class="material-icons star">star</i>
-				<a href="#">13</a>
+			<div layout="column" layout-align="center center">
+				<h4 flex class="md-title" style="margin:15px 0;">{{ vm.profile.name }}</h4>
+				<div flex layout="row" layout-align="center center">
+					<i  class="material-icons star">star</i>
+					<a href="#">13</a>
+				</div>
 			</div>
 			<div layout="row" layout-align="center center">
 				<span flex="10"></span>
@@ -74,7 +76,7 @@
 		<md-tab label="等待交換">
 			<md-content layout-padding>
 				<div layout="column">
-					<div layout="row" layout-sm="column" layout-align="center center" class="info_container for_input">
+					<div class="trans" layout="row" layout-sm="column" layout-align="center center" class="info_container for_input">
 						<!-- first user item -->
 						<div layout="column" flex="50" class="item profile">
 							<img src="http://i.imgur.com/7RoLGdp.jpg" />

@@ -9,6 +9,26 @@ var goods     = require('../ORM/Goods.js');
 // These routes are really dangerous
 // Only use them when you know what are you doing
 
+router.get('/allExchange', function(req, res, next) {
+
+	// Set association between tables (users, goods) 
+	users.hasMany(goods, {foreignKey: 'owner_uid'});
+	goods.belongsTo(users, {foreignKey: 'owner_uid'});
+
+	exchanges
+		.sync({force: false})
+		.then(function() {
+			return exchanges.findAll();
+		})
+		.then(function(result) {
+			res.json(result);
+		})
+		.catch(function(err) {
+			res.send({error: err});
+		});
+
+});
+
 router.get('/', function(req, res, next) {
 
 	// Available query params
@@ -18,7 +38,7 @@ router.get('/', function(req, res, next) {
 
 	var _eid = parseInt(req.query.eid, 10);
 
-	// Set association between tables (users, goods) and (goods, comments)
+	// Set association between tables (users, goods) 
 	users.hasMany(goods, {foreignKey: 'owner_uid'});
 	goods.belongsTo(users, {foreignKey: 'owner_uid'});
 

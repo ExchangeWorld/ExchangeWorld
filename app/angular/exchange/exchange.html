@@ -3,8 +3,8 @@
 		<div flex="20">
 			<md-list>
 				<md-list-item class="md-2-line">
-					<div class="md-list-item-text" layout layout-align="center center">
-						<h3>GG</h3>
+					<div class="md-list-item-text" layout layout-align="center center" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
+						<h3>{{exchange.eid}}</h3>
 						<p>3:0</p>
 					</div>
 				</md-list-item>
@@ -19,15 +19,15 @@
 				<!-- first user item -->
 				<div layout="column" flex>
 					<div class="item profile" layout="column" layout-align="center center">
-						<img src="http://i.imgur.com/7RoLGdp.jpg" />
+						<img ng-src="{{vm.exchange.goods[0].photo_path}}"/>
 						<div layout layout-align="center center">
-							<p class="md-body-2">BestItem_TW</p>
+							<p class="md-body-2">{{vm.exchange.goods[0].name}}</p>
 						</div>
 					</div>
 					<div layout="row">
 						<img flex="30" src="../../images/unknown-user.gif" style="max-height:60px; max-width:60px;" />
 						<div flex layout layout-align="center center">
-							<p class="md-body-2 online">Username</p>
+							<p class="md-body-2 online">{{vm.exchange.goods[0].owner_uid}}</p>
 						</div>
 					</div>
 				</div>
@@ -38,15 +38,15 @@
 				<!-- second user item -->
 				<div layout="column" flex>
 					<div class="item profile" layout="column" layout-align="center center">
-						<img src="http://i.imgur.com/7RoLGdp.jpg" />
+						<img ng-src="{{vm.exchange.goods[1].photo_path}}" />
 						<div layout layout-align="center center">
-							<p class="md-body-2">BestItem_TW</p>
+							<p class="md-body-2">{{vm.exchange.goods[1].name}}</p>
 						</div>
 					</div>
 					<div layout="row">
 						<img flex="30" src="../../images/unknown-user.gif" style="max-height:60px; max-width:60px;" />
 						<div flex layout layout-align="center center">
-							<p class="md-body-2 online">Username</p>
+							<p class="md-body-2 online">{{vm.exchange.goods[1].owner_uid}}</p>
 						</div>
 					</div>
 				</div>

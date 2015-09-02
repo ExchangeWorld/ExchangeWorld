@@ -1,36 +1,21 @@
 <md-content layout-padding>
+
 	<md-button href="#" class="md-raised md-accent md-hue-1">
 		<md-icon md-font-set="material-icons">undo</md-icon>Back
 	</md-button>
-	<div layout layout-align="center center">
-		<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.goodData.stars.length}} </md-button>
-	</div>
-	<!-- 	
->>>>>>> f59eb5d8c25067a2cf7cb293bf013b467dad7eeb
-	<md-tabs md-dynamic-height md-border-bottom>
-		<md-tab label="ItemName">
-			<div layout layout-align="center center">
-				<p class="md-headline">{{ vm.goodData.name }}</p>
-			</div>
-		</md-tab>
-		<md-tab label="Owner">
-			<div layout layout-align="center center">
-				<a ng-click="vm.onClickUser( vm.goodData.user.uid )">
-					<p class="md-headline">{{ vm.goodData.user.name }}</p>
-				</a>
-			</div>
-		</md-tab>
-		<md-tab label="Catogories">
-			<div layout layout-align="center center">
-				<p class="md-headline">{{ vm.goodData.category }}</p>
-			</div>
-		</md-tab>
-		<md-tab label="Description">
-			<div layout layout-align="center center">>
-				<p class="md-headline">{{ vm.goodData.description }}</p>
-			</div>
-		</md-tab>
-	</md-tabs> -->
+	
+	<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.stars.length}} </md-button>
+	<!--<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(6)">我要排！ {{vm.queue.length}}</md-button>-->
+	<ul ng-show="!vm.isMe">
+		<md-button ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西，趕快去ＰＯ一些吧！</md-button>
+		<md-button ng-repeat="goods in vm.myGoods" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(goods.gid)">用 {{goods.name}}排！</md-button>
+	</ul>
+	<ul ng-show="vm.isMe">
+		<md-button ng-show="vm.queuingList.length === 0">目前沒有正在排的物品</md-button>
+		<md-button ng-repeat="queue in vm.queuingList" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickAccept(queue.queuer_goods_gid)">接受 {{queue.good.name}} 的排！</md-button>
+	</ul>
+
+	
 	<div layout layout-align="center center">
 		<img style="max-width: 100%;" src="{{ vm.goodData.photo_path }}" title="source: imgur.com" />
 	</div>

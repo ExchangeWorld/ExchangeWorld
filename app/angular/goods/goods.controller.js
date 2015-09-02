@@ -32,6 +32,12 @@ function GoodsController(
 	vm.starred         = false;
 	vm.onClickStar     = onClickStar;
 
+	vm.myGoods         = [];
+	vm.queuingList     = [];
+	//vm.queued          = false;
+	vm.onClickQueue    = onClickQueue;
+	vm.onClickAccept   = onClickAccept; 
+
 	vm.onClickUser     = onClickUser;
 
 	activate();
@@ -49,6 +55,13 @@ function GoodsController(
 		$scope.$parent.$broadcast('mapMoveTo', goodData.gid);
 		updateComment();
 		updateStar();
+
+		/**
+		 * if is me, get the queue list on this goods
+		 * else, get all my goods that available to send queue request.
+		 */
+		if(vm.isMe) getQueuing();
+		else getMyGoods();
 
 		auth
 			.getLoginState()
@@ -146,7 +159,7 @@ function GoodsController(
 	}
 
 	function updateStar() {
-		goodsService
+		goodsService 
 			.getStars(vm.goodData.gid)
 			.then(function(data) {
 				vm.stars = data;
@@ -160,5 +173,61 @@ function GoodsController(
 					vm.starred = false;
 				}
 			});
+	}
+
+	function getQueuing() {
+		goodsService
+			.getQueue(vm.goodData.gid)
+			.then(function(data) {
+				vm.queuingList = data;
+
+				/**
+				 * TODO: check if user already queued
+				 */
+				if ( vm.isLoggedIn ) {
+					vm.queued = true;
+				} else {
+					vm.queued = false;
+				}
+			});
+	}
+
+	/**
+	 * get all goods that available to queue this goods
+	 */
+	function getMyGoods() {
+		goodsService
+			.getGood(-1, $localStorage.user.uid)
+			.then(function(myGoods) {
+				vm.myGoods = myGoods;
+			});
+	}
+
+	/**
+	 * user use a goods to queue the host goods 
+	 */
+	function onClickQueue(queuer_goods_gid) {
+		/**
+		 * TODO:
+		 *  1. restrict multi queue(?).
+		 */
+		goodsService
+			.postQueue(goodData.gid, queuer_goods_gid)
+			.then(alert('you queued using gid=' + queuer_goods_gid));
+	}
+
+	/**
+	 * Accept one goods in the queuing list
+	 * create a exchange instance. 
+	 */
+	function onClickAccept(queuer_goods_gid) {
+		/**
+		 * TODO:
+		 *  1. restrict multi accept.
+		 *  2. go to the initiate exchange page.
+		 */
+		goodsService
+			.postExchange(queuer_goods_gid, goodData.gid)
+			.then(alert('you accept a queuing goods ! '));
 	}
 }

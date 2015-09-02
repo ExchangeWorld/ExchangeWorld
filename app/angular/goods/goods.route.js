@@ -22,8 +22,11 @@ function getStates() {
 				resolve : {
 					goodData : function (goodsService, $stateParams) {
 						return goodsService
-							.getGood($stateParams.gid)
-							.then(function(data) { return data; })
+							.getGood($stateParams.gid, -1)
+							.then(function(data) { 
+								if (data instanceof Array) return data[0];
+								return data; 
+							})
 							.catch(function() { return undefined; });
 					},
 				},

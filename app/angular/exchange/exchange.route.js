@@ -13,14 +13,17 @@ function getStates() {
 		{
 			state : 'root.oneCol.exchange',
 			config : {
-				url : '/manage/exchange',
+				url : '/manage/:uid/exchange',
 				bindToController: true,
 				controller : 'ExchangeController',
 				controllerAs: 'vm',
 				templateUrl : 'exchange/exchange.html',
 				resolve : {
-					exchange : function (exchangeService, $stateParams) {
-						return ;
+					exchangeList : function (exchangeService, $stateParams) {
+						return exchangeService
+							.getAllExchange($stateParams.uid)
+							.then(function(data) { return data; })
+							.catch(function() { return []; });
 					},
 				},
 			}

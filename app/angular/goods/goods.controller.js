@@ -61,7 +61,7 @@ function GoodsController(
 		 * else, get all my goods that available to send queue request.
 		 */
 		if(vm.isMe) getQueuing();
-		else        getMyGoods();
+		else getMyGoods();
 
 		auth
 			.getLoginState()
@@ -213,7 +213,7 @@ function GoodsController(
 		 */
 		goodsService
 			.postQueue(goodData.gid, queuer_goods_gid)
-			.then(alert('you queued using gid='+queuer_goods_gid));
+			.then(alert('you queued using gid=' + queuer_goods_gid));
 	}
 
 	/**

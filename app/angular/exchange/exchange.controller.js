@@ -37,7 +37,7 @@ function ExchangeController(exchangeList, $state, exchangeService) {
 			.completeExchange(eid)
 			.then(function(data) {
 				console.log(data);
-				$state.reload();
+				//$state.reload();
 			});
 	}
 
@@ -46,7 +46,7 @@ function ExchangeController(exchangeList, $state, exchangeService) {
 			.deleteExchange(eid)
 			.then(function(data) {
 				console.log(data);
-				$state.reload();
+				//$state.reload();
 			});
 	}
 }

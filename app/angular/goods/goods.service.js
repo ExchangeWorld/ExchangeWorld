@@ -10,35 +10,39 @@ function goodsService(Restangular, $q, exception) {
 	const service = {
 		getGood,
 		editGood,
+		
 		getComment,
 		postComment,
 		deleteComment,
+		
 		getStars,
 		postStar,
 		deleteStar,
+
+		getQueue,
+		postQueue,
+		deleteQueue,
+
+		postExchange,
 	};
 	return service;
 
 
-	function getGood(gid) {
+	function getGood(gid, owner_uid) {
 		const defer = $q.defer();
 
 		Restangular
 			.all('goods')
-			.getList({ gid : gid })
+			.getList({
+				gid       : gid,
+				owner_uid : owner_uid,
+			})
 			.then(function(data) {
-
-				getStars(gid)
-					.then(function(stars) {
-						getComment(gid)
-							.then(function(comments) {
-								if (_.isArray(data)) {
-									defer.resolve(data[0]);
-								} else if (_.isObject(data)) {
-									defer.resolve(data);
-								}
-							});
-					});
+				if (_.isArray(data)) {
+					//defer.resolve(data[0]);
+				//} else if (_.isObject(data)) {
+					defer.resolve(data);
+				}
 			})
 			.catch(function(error) {
 				return exception.catcher('[Goods Service] getGood error: ')(error);
@@ -130,6 +134,24 @@ function goodsService(Restangular, $q, exception) {
 		return defer.promise;
 	}
 
+	function getQueue(host_goods_gid) {
+		const defer = $q.defer();
+		Restangular
+			.all('queue/of')
+			.getList({host_goods_gid: host_goods_gid})
+			.then(function(data) {
+				if (_.isArray(data)) {
+					defer.resolve(data);
+				} else {
+					defer.reject(data);
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] getQueue error: ')(error);
+			});
+		return defer.promise;
+	}
+
 	function deleteStar(star) {
 		const defer = $q.defer();
 
@@ -144,6 +166,60 @@ function goodsService(Restangular, $q, exception) {
 			})
 			.catch(function(error) {
 				return exception.catcher('[Goods Service] deleteStar error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	function postQueue(host_goods_gid, queuer_goods_gid) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('queue/post')
+			.post({
+				host_goods_gid   : host_goods_gid,
+				queuer_goods_gid : queuer_goods_gid,
+			})
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] postQueue error: ')(error);
+			});
+		return defer.promise;
+	}
+	
+	function deleteQueue(host_goods_gid, queuer_goods_gid) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('queue/delete')
+			.remove({
+				host_goods_gid   : host_goods_gid,
+				queuer_goods_gid : queuer_goods_gid,
+			})
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] deleteQueue error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	function postExchange(goods1_gid, goods2_gid) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('exchange/create')
+			.post({
+				goods1_gid : goods1_gid,
+				goods2_gid : goods2_gid,
+			})
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] postExchang error: ')(error);
 			});
 		return defer.promise;
 	}

@@ -42,7 +42,6 @@ map {
 }
 
 .md-button {
-	min-width: 60px;
     text-transform: capitalize;
     &.mdbtn-border {
         border: 1px ridge #CFD8DC;
@@ -54,6 +53,7 @@ map {
 }
 
 .seek_btn {
+    min-width: 60px;
     height: 50%;
     top: 12px;
     right: 8px;

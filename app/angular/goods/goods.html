@@ -1,10 +1,12 @@
-<md-button href="#" class="md-raised md-accent md-hue-1">
-	<md-icon md-font-set="material-icons">undo</md-icon>Back
-</md-button>
 <md-content layout-padding>
-	<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.goodData.stars.length}} </md-button>
+	<md-button href="#" class="md-raised md-accent md-hue-1">
+		<md-icon md-font-set="material-icons">undo</md-icon>Back
+	</md-button>
+	<div layout layout-align="center center">
+		<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.goodData.stars.length}} </md-button>
+	</div>
 	<!-- 	
->>>>>>> goods(remove tabs), some updates
+>>>>>>> f59eb5d8c25067a2cf7cb293bf013b467dad7eeb
 	<md-tabs md-dynamic-height md-border-bottom>
 		<md-tab label="ItemName">
 			<div layout layout-align="center center">

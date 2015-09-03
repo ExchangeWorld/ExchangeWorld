@@ -9,7 +9,7 @@
 			<div layout="column" layout-align="center center">
 				<h4 flex class="md-title" style="margin:15px 0;">{{ vm.profile.name }}</h4>
 				<div flex layout="row" layout-align="center center">
-					<i  class="material-icons star">star</i>
+					<i class="material-icons star">star</i>
 					<a href="#">13</a>
 				</div>
 			</div>
@@ -37,8 +37,16 @@
 		<md-tab label="願望清單">
 			<md-content layout-padding style="margin-top: 10px">
 				<div layout="row">
-					<!-- user information -->
-					<div flex="60">
+					<div flex="70" offset="5">
+						<form name="userForm">
+							<div layout="column">
+								<md-input-container>
+									<label>3C都行、YO</label>
+									<input ng-model="wishlist" disabled>
+								</md-input-container>
+							</div>
+					</div>
+					<!-- <div flex="60">
 						<div layout="row" class="profile_text">
 							<p class="md-body-2">
 								<md-icon md-font-set="material-icons" class="hide">person</md-icon>
@@ -62,12 +70,12 @@
 								<md-icon md-font-set="material-icons" class="hide">email</md-icon>
 								a25204641@gmail.com</p>
 						</div>
-					</div>
+					</div> -->
 					<!-- edit fab button -->
-					<div flex offset="15" layout layout-align="center start">
-						<md-button class="md-fab md-primary md-hue-3" ng-show="vm.isMe">
+					<div flex offset="5" layout layout-align="center start">
+						<md-button class="md-fab md-primary md-hue-2" ng-show="vm.isMe">
 							<md-icon md-font-set="material-icons">edit</md-icon>
-							<md-tooltip>編輯個人資料</md-tooltip>
+							<md-tooltip>編輯願望清單</md-tooltip>
 						</md-button>
 					</div>
 				</div>

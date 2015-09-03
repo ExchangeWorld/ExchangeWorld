@@ -1,15 +1,15 @@
 <form ng-submit="vm.onSubmit()">
+	<md-toolbar class="rounded-corners md-primary md-hue-3">
+		<div flex class="md-toolbar-tools" layout="row" layout-align="center center">
+			<div>
+				<span><h2 class="md-headline">您所擁有的東西</h2></span>
+				<!-- fill up the space between left and right area -->
+				<span flex></span>
+			</div>
+		</div>
+	</md-toolbar>
 	<md-content layout-padding>
 		<!-- toolbar -->
-		<md-toolbar class="rounded-corners md-primary md-hue-3">
-			<div flex class="md-toolbar-tools" layout="row" layout-align="center center">
-				<div>
-					<span><h2 class="md-headline">您所擁有的東西</h2></span>
-					<!-- fill up the space between left and right area -->
-					<span flex></span>
-				</div>
-			</div>
-		</md-toolbar>
 		<!-- Item Name Input  -->
 		<md-input-container flex class="info_container for_input">
 			<label>Item Name</label>

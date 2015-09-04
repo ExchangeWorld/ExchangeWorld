@@ -3,7 +3,7 @@
 const notificationModule = require('./notification.module');
 const _                  = require('lodash');
 
-notificationModule.factory('notificationService', notification);
+notificationModule.factory('notification', notification);
 
 /** @ngInject */
 function notification(Restangular, $q, exception, $localStorage) {

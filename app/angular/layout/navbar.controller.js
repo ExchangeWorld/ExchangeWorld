@@ -7,7 +7,7 @@ const moment       = require('moment');
 layoutModule.controller('NavbarController', NavbarController);
 
 /** @ngInject */
-function NavbarController($mdSidenav, $state, auth, $localStorage, notificationService) {
+function NavbarController($mdSidenav, $state, auth, $localStorage, notification, $timeout) {
 	const vm               = this;
 	const state            = ['home', 'seek', 'post', 'exchange', 'profile'];
 	vm.stateIndex          = _.indexOf(state, $state.current.title);
@@ -32,28 +32,8 @@ function NavbarController($mdSidenav, $state, auth, $localStorage, notificationS
 				vm.isLoggedIn = Boolean(data);
 			});
 
-
-
-		/**
-		 * TODO: watch notifications
-		 */
-		notificationService
-			.getNotification(vm.user.uid)
-			.then(function(data) {
-				vm.notifications = data;
-				//vm.notifications.timestamp = moment(data.timestamp).fromNow();
-			})
-			.then(function() {
-				var data = vm.notifications.map(function(notice) {
-					notice.timestamp = moment(notice.timestamp).fromNow();
-					notice.style = notice.unread ? {'background-color':'#E9F3FF'} : {};
-					return notice;
-				});
-				vm.notifications = data;
-				vm.unreadCount = vm.notifications.filter(function(n) { return n.unread; }).length;
-			});
+		updateNotification();
 	}
-
 
 	function onClick(contentIndex) {
 		//$scope.content = ContentType[contentIndex];
@@ -106,12 +86,35 @@ function NavbarController($mdSidenav, $state, auth, $localStorage, notificationS
 	}
 
 	function onClickNotification(notice) {
-		notificationService
-			.updateNotification(notice.nid, !notice.unread)
+		notification
+			.updateNotification(notice.nid, false)
 			.then(function(data) {
 				console.log(data);
 			});
 		location.href = notice.trigger;
+	}
 	
+	var timer = $timeout(updateNotification, 2000);
+	function updateNotification() {
+
+		notification
+			.getNotification(vm.user.uid)
+			.then(function(data) {
+				data = data.map(function(notice) {
+					notice.timestamp = moment(notice.timestamp).fromNow();
+					notice.style = notice.unread ? {'background-color':'#E9F3FF'} : {};
+					return notice;
+				});
+
+				var new_unreadCount = vm.notifications.filter(function(n) { return n.unread; }).length; 
+				if(new_unreadCount === vm.unreadCount && vm.notifications.length === data.length) {
+					console.log('same');
+				} else {
+					vm.notifications = data;
+				}
+				vm.unreadCount = new_unreadCount ;
+
+				timer = $timeout(updateNotification, 2000);
+			});
 	}
 }

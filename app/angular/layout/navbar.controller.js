@@ -101,10 +101,9 @@ function NavbarController(
 			});
 		$location.href = notice.trigger;
 	}
-updateNotification();
-	// var timer = $interval(updateNotification, 2000);
-	function updateNotification() {
 
+	var timer = $interval(updateNotification, 2000);
+	function updateNotification() {
 		notification
 			.getNotification(vm.user.uid)
 			.then(function(data) {

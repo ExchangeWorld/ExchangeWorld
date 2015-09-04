@@ -7,7 +7,15 @@ const moment       = require('moment');
 layoutModule.controller('NavbarController', NavbarController);
 
 /** @ngInject */
-function NavbarController($mdSidenav, $state, auth, $localStorage, notification, $timeout) {
+function NavbarController(
+	$mdSidenav,
+	$state,
+	$timeout,
+	$localStorage,
+	auth,
+	notification,
+	message
+) {
 	const vm               = this;
 	const state            = ['home', 'seek', 'post', 'exchange', 'profile'];
 	vm.stateIndex          = _.indexOf(state, $state.current.title);
@@ -20,6 +28,8 @@ function NavbarController($mdSidenav, $state, auth, $localStorage, notification,
 	vm.notifications       = [];
 	vm.unreadCount         = '';
 	vm.onClickNotification = onClickNotification;
+
+	vm.messages            = [];
 	
 	//////////////
 	activate();
@@ -96,7 +106,6 @@ function NavbarController($mdSidenav, $state, auth, $localStorage, notification,
 	
 	var timer = $timeout(updateNotification, 2000);
 	function updateNotification() {
-
 		notification
 			.getNotification(vm.user.uid)
 			.then(function(data) {
@@ -115,6 +124,13 @@ function NavbarController($mdSidenav, $state, auth, $localStorage, notification,
 				vm.unreadCount = new_unreadCount ;
 
 				timer = $timeout(updateNotification, 2000);
+			});
+
+		message
+			.getMessage(vm.user.uid)
+			.then(function(data) {
+				vm.messages = _.unique(data, 'sender_uid');
+				console.log(vm.message);
 			});
 	}
 }

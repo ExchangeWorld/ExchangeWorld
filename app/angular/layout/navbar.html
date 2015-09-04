@@ -30,36 +30,29 @@
 					<p class="notification md-caption">{{ vm.unreadCount }}</p>
 				</md-button>
 				<md-menu-content width="5" style="padding-bottom: 0px; max-width:400px;">
+
 					<md-menu-item style="min-height: 30px; height:30px">
 						<p class="md-body-1">Notification</p>
 					</md-menu-item>
 					<md-divider></md-divider>
-					<!--unread notification -->
-					<md-menu-item style="min-height: 80px;" ng-repeat="notice in vm.notifications" ng-style="notice.style" ng-click="vm.onClickNotification(notice)">
-						<div layout="row" layout-align="start center">
+
+					<!-- unread notification -->
+					<md-list>
+						<md-list-item
+							ng-repeat="notice in vm.notifications"
+							ng-style="notice.unread && {'background-color':'#E9F3FF'}"
+							ng-click="vm.onClickNotification(notice)"
+						>
 							<!-- user avatar -->
-							<img flex style="max-height:50px; max-width:50px;" ng-show="vm.isLoggedIn" ng-src="{{ notice.user.photo_path }}"></img>
+							<img flex style="max-height:50px; max-width:50px;" ng-src="{{ notice.user.photo_path }}" />
 							<!-- notification text -->
 							<div offset="5" flex>
 								<p class="md-body-2 note">{{notice.content}}</p>
 								<p class="md-caption note" style="color: #BCBCBC;">{{ notice.timestamp }}</p>
 							</div>
-						</div>
-					</md-menu-item>
-					<!--message-->
-					<md-menu-item style="min-height: 30px; height:30px">
-						<p class="md-body-1">Message</p>
-					</md-menu-item>
-					<md-divider></md-divider>
-					<md-menu-item style="min-height: 80px;" ng-repeat="message in vm.messages" >
-						<div layout="row" layout-align="start center">
-							<img flex style="max-height:50px; max-width:50px;" ng-show="vm.isLoggedIn" ng-src="{{ message.user.photo_path }}"></img>
-							<div offset="5" flex>
-								<p class="md-body-2 note">{{message.content}}</p>
-								<p class="md-caption note" style="color: #BCBCBC;">{{ message.timestamp }}</p>
-							</div>
-						</div>
-					</md-menu-item>
+						</md-list-item>
+					</md-list>
+
 					<md-divider></md-divider>
 					<md-divider></md-divider>
 					<!-- See All text -->

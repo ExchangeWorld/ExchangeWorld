@@ -10,8 +10,9 @@ layoutModule.controller('NavbarController', NavbarController);
 function NavbarController(
 	$mdSidenav,
 	$state,
-	$timeout,
 	$localStorage,
+	$interval,
+	$location,
 	auth,
 	notification,
 	message
@@ -97,33 +98,23 @@ function NavbarController(
 
 	function onClickNotification(notice) {
 		notification
-			.updateNotification(notice.nid, false)
+			.updateNotification(notice, false)
 			.then(function(data) {
 				console.log(data);
 			});
-		location.href = notice.trigger;
+		$location.href = notice.trigger;
 	}
-	
-	var timer = $timeout(updateNotification, 2000);
+updateNotification();
+	// var timer = $interval(updateNotification, 2000);
 	function updateNotification() {
 		notification
 			.getNotification(vm.user.uid)
 			.then(function(data) {
-				data = data.map(function(notice) {
+				data.forEach(function(notice) {
 					notice.timestamp = moment(notice.timestamp).fromNow();
-					notice.style = notice.unread ? {'background-color':'#E9F3FF'} : {};
-					return notice;
 				});
-
-				var new_unreadCount = vm.notifications.filter(function(n) { return n.unread; }).length; 
-				if(new_unreadCount === vm.unreadCount && vm.notifications.length === data.length) {
-					console.log('same');
-				} else {
-					vm.notifications = data;
-				}
-				vm.unreadCount = new_unreadCount ;
-
-				timer = $timeout(updateNotification, 2000);
+				vm.notifications = data;
+				vm.unreadCount = _.filter(data, {unread : true}).length;
 			});
 
 		message

@@ -6,11 +6,12 @@ const _             = require('lodash');
 messageModule.factory('message', message);
 
 /** @ngInject */
-function message(Restangular, $q, exception, $localStorage) {
+function message(Restangular, $q, exception, $localStorage, $mdDialog, logger) {
 	const service = {
 		getMessage,
 		postMessage,
 		updateMessage,
+		showMessagebox,
 	};
 
 	return service;
@@ -64,4 +65,34 @@ function message(Restangular, $q, exception, $localStorage) {
 		return defer.promise;
 	}
 
+	function showMessagebox(ev, msg) {
+		$mdDialog.show({
+			clickOutsideToClose: true,
+			templateUrl: 'utils/message/message.html',
+			controller: function DialogController($mdDialog) {
+				const vm   = this;
+				vm.msg     = msg;
+				vm.content = '';
+
+				vm.submit = function(msg_content) {
+					$mdDialog
+						.hide(msg_content)
+						.then(function(msg_content) {
+							postMessage({
+								receiver_uid : msg.sender_uid,
+								sender_uid   : msg.receiver_uid,
+								content      : msg_content,
+							})
+							.then(function(data) {
+								logger.success('訊息已寄出', data, 'done.');
+							});
+						});
+				}
+				vm.cancel = function() {
+					$mdDialog.cancel();
+				};
+			},
+			controllerAs:'vm'
+		});
+	}
 }

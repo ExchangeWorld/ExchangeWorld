@@ -10,14 +10,11 @@ layoutModule.controller('NavbarController', NavbarController);
 function NavbarController(
 	$mdSidenav,
 	$state,
-	$scope,
 	$localStorage,
 	$interval,
 	$location,
 	$rootScope,
-	$mdDialog,
 	auth,
-	logger,
 	message,
 	notification
 ) {
@@ -35,7 +32,6 @@ function NavbarController(
 	vm.onClickNotification = onClickNotification;
 
 	vm.messages       = [];
-	vm.content        = '';
 	vm.onClickMessage = onClickMessage;
 	
 	//////////////
@@ -112,8 +108,8 @@ function NavbarController(
 	}
 
 	function onClickMessage(msg, ev) {
-		message.updateMessage(msg, false)
-		showMessagebox(ev, msg.sender_uid);
+		message.showMessagebox(ev, msg);
+		message.updateMessage(msg, false);
 	}
 
 
@@ -142,33 +138,4 @@ function NavbarController(
 			});
 	}
 
-	function showMessagebox(ev, receiver_uid) {
-		$mdDialog.show({
-			clickOutsideToClose: true,
-			scope: $scope, // use parent scope in template
-			preserveScope: true, // do not forget this if use parent scope
-
-			templateUrl: 'utils/message/message.html',
-			controller: function DialogController($scope, $mdDialog) {
-				$scope.submit = function(msg_content) {
-					$mdDialog
-						.hide(msg_content)
-						.then(function(msg_content) {
-							message
-								.postMessage({
-									receiver_uid : receiver_uid,
-									sender_uid   : vm.user.uid,
-									content      : msg_content,
-								})
-								.then(function(data) {
-									logger.success('訊息已寄出', data, 'done.');
-								})
-						});
-				}
-				$scope.cancel = function() {
-					$mdDialog.cancel();
-				};
-			}
-		});
-	}
 }

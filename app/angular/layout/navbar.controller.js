@@ -13,9 +13,10 @@ function NavbarController(
 	$localStorage,
 	$interval,
 	$location,
+	$rootScope,
 	auth,
-	notification,
-	message
+	message,
+	notification
 ) {
 	const vm               = this;
 	const state            = ['home', 'seek', 'post', 'exchange', 'profile'];
@@ -30,7 +31,8 @@ function NavbarController(
 	vm.unreadCount         = '';
 	vm.onClickNotification = onClickNotification;
 
-	vm.messages            = [];
+	vm.messages       = [];
+	vm.onClickMessage = onClickMessage;
 	
 	//////////////
 	activate();
@@ -104,9 +106,21 @@ function NavbarController(
 			});
 		$location.href = notice.trigger;
 	}
-updateNotification();
-	// var timer = $interval(updateNotification, 2000);
+
+	function onClickMessage(msg) {
+		message
+			.updateMessage(msg, false)
+			.then(function(data) {
+				console.log(data);
+			});
+	}
+
+	updateNotification();
+	var timer = $interval(updateNotification, 2000);
 	function updateNotification() {
+		vm.unreadCount = _.filter(vm.notifications, {unread : true}).length + _.filter(vm.messages, {unread : true}).length;
+		$rootScope.pageTitle = vm.unreadCount ? '(' + vm.unreadCount + ') ' + 'ExchangeWorld': 'ExchangeWorld'; 
+
 		notification
 			.getNotification(vm.user.uid)
 			.then(function(data) {
@@ -114,14 +128,16 @@ updateNotification();
 					notice.timestamp = moment(notice.timestamp).fromNow();
 				});
 				vm.notifications = data;
-				vm.unreadCount = _.filter(data, {unread : true}).length;
 			});
 
 		message
 			.getMessage(vm.user.uid)
 			.then(function(data) {
 				vm.messages = _.unique(data, 'sender_uid');
-				console.log(vm.message);
+				vm.messages.forEach(function(msg) {
+					msg.timestamp = moment(msg.timestamp).fromNow();
+				});
+
 			});
 	}
 }

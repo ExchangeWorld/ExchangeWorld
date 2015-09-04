@@ -47,23 +47,20 @@ function message(Restangular, $q, exception, $localStorage) {
 		return defer.promise;
 	}
 
-	function updateMessage(nid, unread) {
-		//const defer = $q.defer();
+	function updateMessage(message, unread) {
+		const defer = $q.defer();
 
-		//Restangular
-			//.all('message')
-			//.getList({nid: nid})
-			//.then(function(data) {
-				//if (_.isArray(data)) {
-					//console.log(data);
-					//var message = data[0];
-					//message.unread = unread;
-					//message.put();
-				//}
-			//})
-			//.catch(function(error) {
-				//return exception.catcher('[messages Service] updateMessage error: ')(error);
-			//});
-		//return defer.promise;
+		message.route = 'message';
+		message.unread = unread;
+
+		message
+			.put()
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Messages Service] updateMessage error: ')(error);
+			});
+		return defer.promise;
 	}
 }

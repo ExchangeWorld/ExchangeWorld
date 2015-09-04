@@ -74,4 +74,37 @@ router.post('/', function(req, res, next) {
 
 });
 
+/**
+ * use to update read/unread
+ */
+router.put('/', function(req, res, next) {
+
+	// Available PUT body params:
+	//
+	// mid
+	// unread
+	//
+
+	// Get property:value in PUT body
+	var _mid    = parseInt(req.body.mid, 10);
+	var _unread = Boolean(req.body.unread);
+
+	messages
+		.sync({force: false})
+		.then(function() {
+			return messages.update(
+				{unread: _unread}, 
+				{
+					where: {mid: _mid}
+				}
+			);
+		})
+		.then(function(result) {
+			res.json(result);
+		})
+		.catch(function(err) {
+			res.send({error: err});
+ 		});
+});
+
 module.exports = router;

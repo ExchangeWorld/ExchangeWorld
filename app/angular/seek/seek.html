@@ -6,13 +6,13 @@
 			<input ng-model="vm.searchGoodsName">
 			<!-- <md-tooltip md-direction="left">搜尋</md-tooltip> -->
 		</md-input-container>
-		<md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName})">
-			<md-icon hide-sm md-font-set="material-icons">search</md-icon><span class="ng-scope">搜索!</span>
-		</md-button>
 		<md-button flex flex-sm class="md-raised seek_btn" aria-expanded="true">
 			<md-tooltip>依據物品種類</md-tooltip>
 			分類
 			<span class="caret"></span>
+		</md-button>
+		<md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName})">
+			<md-icon hide-sm md-font-set="material-icons">search</md-icon><span class="ng-scope">搜索!</span>
 		</md-button>
 	</div>
 </md-toolbar>

@@ -11,8 +11,10 @@
 					<md-toolbar class="rounded-corners md-primary md-hue-3">
 						<div flex class="md-toolbar-tools" layout="row" layout-align="center center">
 							<div>
-								<span><h2 class="md-headline">寄給：{{vm.msg.user.name}}</h2></span>
-								<!-- fill up the space between left and right area -->
+								<span>
+									<img flex style="max-height:50px; max-width:50px;" ng-src="{{ vm.msg.user.photo_path }}" />
+									寄給：{{vm.msg.user.name}}
+								</span>
 								<span flex></span>
 							</div>
 						</div>

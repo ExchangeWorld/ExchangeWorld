@@ -67,14 +67,17 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog, logger) {
 
 	function showMessagebox(ev, msg) {
 		$mdDialog.show({
-			clickOutsideToClose: true,
-			templateUrl: 'utils/message/message.html',
-			controller: function DialogController($mdDialog) {
+			clickOutsideToClose : true,
+			templateUrl : 'utils/message/message.html',
+			controllerAs : 'vm',
+			controller : function DialogController($mdDialog) {
 				const vm   = this;
 				vm.msg     = msg;
 				vm.content = '';
+				vm.cancel  = onCancel;
+				vm.submit  = onSubmit;
 
-				vm.submit = function(msg_content) {
+				function onSubmit(msg_content) {
 					$mdDialog
 						.hide(msg_content)
 						.then(function(msg_content) {
@@ -84,15 +87,15 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog, logger) {
 								content      : msg_content,
 							})
 							.then(function(data) {
-								logger.success('訊息已寄出', data, 'done.');
+								logger.success('訊息已寄出', data, 'DONE');
 							});
 						});
 				}
-				vm.cancel = function() {
+
+				function onCancel() {
 					$mdDialog.cancel();
-				};
-			},
-			controllerAs:'vm'
+				}
+			}
 		});
 	}
 }

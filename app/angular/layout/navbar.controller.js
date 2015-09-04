@@ -14,6 +14,7 @@ function NavbarController(
 	$interval,
 	$location,
 	$rootScope,
+	$q,
 	auth,
 	message,
 	notification
@@ -109,33 +110,36 @@ function NavbarController(
 
 	function onClickMessage(msg, ev) {
 		message.showMessagebox(ev, msg);
-		message.updateMessage(msg, false);
+
+		message
+			.updateMessage(msg, false)
+			.then(updateNotification);
 	}
 
 
 	updateNotification();
-	var timer = $interval(updateNotification, 2000);
+	var timer = $interval(updateNotification, 5000);
 	function updateNotification() {
-		vm.unreadCount = _.filter(vm.notifications, {unread : true}).length + _.filter(vm.messages, {unread : true}).length;
-		$rootScope.pageTitle = vm.unreadCount ? '(' + vm.unreadCount + ') ' + 'ExchangeWorld': 'ExchangeWorld'; 
-
-		notification
-			.getNotification(vm.user.uid)
-			.then(function(data) {
-				data.forEach(function(notice) {
-					notice.timestamp = moment(notice.timestamp).fromNow();
-				});
-				vm.notifications = data;
+		$q.all([
+			notification.getNotification(vm.user.uid),
+			message.getMessage(vm.user.uid)
+		])
+		.then(function(data) {
+			data[0].map(function(notice) {
+				notice.timestamp = moment(notice.timestamp).fromNow();
 			});
+			vm.notifications = data[0];
 
-		message
-			.getMessage(vm.user.uid)
-			.then(function(data) {
-				vm.messages = _.unique(data, 'sender_uid');
-				vm.messages.forEach(function(msg) {
-					msg.timestamp = moment(msg.timestamp).fromNow();
-				});
+			vm.messages = _.unique(data[1], 'sender_uid');
+			vm.messages.forEach(function(msg) {
+				msg.timestamp = moment(msg.timestamp).calendar();
 			});
+			checkNotification();
+		});
 	}
 
+	function checkNotification() {
+		vm.unreadCount = _.filter(vm.notifications, {unread : true}).length + _.filter(vm.messages, {unread : true}).length;
+		$rootScope.pageTitle = vm.unreadCount ? '(' + vm.unreadCount + ') ' + 'ExchangeWorld': 'ExchangeWorld'; 
+	}
 }

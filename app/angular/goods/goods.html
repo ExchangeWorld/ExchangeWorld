@@ -1,21 +1,25 @@
 <md-content layout-padding>
-
 	<md-button href="#" class="md-raised md-accent md-hue-1">
 		<md-icon md-font-set="material-icons">undo</md-icon>Back
 	</md-button>
-	
-	<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.stars.length}} </md-button>
+	<div layout="row" layout-align="center center">
+		<div layout layout-align="center center">
+			<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
+				<md-icon md-font-set="material-icons">star</md-icon>
+				{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.stars.length}} </md-button>
+		</div>
+		<div layout layout-align="center center">
+			<ul ng-show="!vm.isMe">
+				<md-button ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西，趕快去ＰＯ一些吧！</md-button>
+				<md-button ng-repeat="goods in vm.myGoods" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(goods.gid)">用 {{goods.name}}排！</md-button>
+			</ul>
+			<ul ng-show="vm.isMe">
+				<md-button ng-show="vm.queuingList.length === 0">目前沒有正在排的物品</md-button>
+				<md-button ng-repeat="queue in vm.queuingList" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickAccept(queue.queuer_goods_gid)">接受 {{queue.good.name}} 的排！</md-button>
+			</ul>
+		</div>
+	</div>
 	<!--<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(6)">我要排！ {{vm.queue.length}}</md-button>-->
-	<ul ng-show="!vm.isMe">
-		<md-button ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西，趕快去ＰＯ一些吧！</md-button>
-		<md-button ng-repeat="goods in vm.myGoods" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(goods.gid)">用 {{goods.name}}排！</md-button>
-	</ul>
-	<ul ng-show="vm.isMe">
-		<md-button ng-show="vm.queuingList.length === 0">目前沒有正在排的物品</md-button>
-		<md-button ng-repeat="queue in vm.queuingList" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickAccept(queue.queuer_goods_gid)">接受 {{queue.good.name}} 的排！</md-button>
-	</ul>
-
-	
 	<div layout layout-align="center center">
 		<img style="max-width: 100%;" src="{{ vm.goodData.photo_path }}" title="source: imgur.com" />
 	</div>
@@ -51,13 +55,13 @@
 		</div>
 		<div class="comment" ng-repeat="comment in vm.goodComments">
 			<a class="avatar" ng-click="vm.onClickUser(comment.user.uid)"> <img ng-src="{{ comment.user.photo_path }}"> </a>
-			<div class="content">
+			<div class="content" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
 				<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
 				<div class="metadata">
 					<!--<div class="date">{{ comment.timestamp| date:'MM/dd/yyyy @ h:mma' }}</div>-->
-					<div class="date">{{ comment.timestamp}}</div>
-					<div ng-show="comment.isMe" ng-click="vm.onDeleteComment(comment.cid)">X</div>
+					<div flex class="date">{{ comment.timestamp}}</div>
 				</div>
+				<div ng-show="comment.isMe && removeMode" ng-click="vm.onDeleteComment(comment.cid)" class="cross">X</div>
 				<div class="text">
 					{{ comment.content }}
 				</div>

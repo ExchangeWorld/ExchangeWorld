@@ -43,6 +43,7 @@ function GoodsController(
 	activate();
 
 	$scope.$parent.$on('mapInitialized', mapInitialized);
+	$scope.removeMode = false;
 
 	/* After map is loaded */
 	function mapInitialized(e, evtMap) {

@@ -60,7 +60,7 @@
 						<md-list-item
 							ng-repeat="msg in vm.messages"
 							ng-style="msg.unread && {'background-color':'#E9F3FF'}"
-							ng-click="vm.onClickMessage(msg)"
+							ng-click="vm.onClickMessage(msg, $event)"
 						>
 							<!-- user avatar -->
 							<img flex style="max-height:50px; max-width:50px;" ng-src="{{ msg.user.photo_path }}" />

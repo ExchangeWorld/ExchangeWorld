@@ -1,0 +1,39 @@
+<md-dialog aria-label="Queue">
+	<form>
+		<md-toolbar>
+			<div flex class="md-toolbar-tools">
+				<h2 class="md-display-1">發送信件</h2>
+				<span flex></span>
+			</div>
+		</md-toolbar>
+		<md-dialog-content style="max-width:800px;max-height:810px; ">
+				<md-content layout-padding>
+					<md-toolbar class="rounded-corners md-primary md-hue-3">
+						<div flex class="md-toolbar-tools" layout="row" layout-align="center center">
+							<div>
+								<span><h2 class="md-headline">寄給：ＸＸＸ</h2></span>
+								<!-- fill up the space between left and right area -->
+								<span flex></span>
+							</div>
+						</div>
+					</md-toolbar>
+					<md-input-container flex class="info_container for_input">
+						<label>Description</label>
+						<textarea type="string" ng-model="vm.content" columns="10" md-maxlength="1000" required></textarea>
+						<md-tooltip md-direction="left">內文</md-tooltip>
+					</md-input-container>
+					<hr>
+					<div layout="row">
+						<input class="md-button md-primary md-raised"  ng-click="cancel()" value="算了"></input>
+						<input class="md-button md-primary md-raised"  ng-click="submit(vm.content)" value="送出"></input>
+					</div>
+				</md-content>
+		</md-dialog-content>
+		<div class="md-actions" layout="row">
+			<span flex></span>
+			<!--<md-button ng-click="closeDialog()" style="margin-right:20px;">-->
+				<!--取消-->
+			<!--</md-button>-->
+		</div>
+	</form>
+</md-dialog>

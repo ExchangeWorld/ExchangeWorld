@@ -32,12 +32,12 @@ function message(Restangular, $q, exception, $localStorage) {
 		return defer.promise;
 	}
 
-	function postMessage(newNotice) {
+	function postMessage(newMessage) {
 		const defer = $q.defer();
 
 		Restangular
 			.all('message')
-			.post(newNotice)
+			.post(newMessage)
 			.then(function(data) {
 				defer.resolve(data);
 			})
@@ -63,4 +63,5 @@ function message(Restangular, $q, exception, $localStorage) {
 			});
 		return defer.promise;
 	}
+
 }

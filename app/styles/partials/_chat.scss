@@ -2,8 +2,8 @@
     list-style: none;
     background: #e5e5e5;
     margin: 0;
-    height: 350px;
-    padding: 0 0 20px 0; // finality
+    height: 0;
+    padding: 0 0 100% 0; // finality
     overflow-y: auto;
     li {
         padding: 0.5rem;
@@ -21,7 +21,7 @@
     &.input {
         background: #fff;
         border: 1px ridge #cdd4d8;
-        height: 50px;
+        height: 48px;
         padding: 0;
         overflow-y: hidden;
     }

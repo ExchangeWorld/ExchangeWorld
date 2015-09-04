@@ -1,12 +1,7 @@
 <md-content>
-
 	<div layout="row" layout-sm="column">
-		
 		<div flex="20" flex-sm="95" offset-sm="5">
 			<div layout="column" layout-sm="row" layout-wrap>
-				<!-- <div layout layout-align="center center">
-				<p class="md-subhead">進行中</p>
-				</div> -->
 				<md-button flex-sm="45" aria-label="list">
 					<div layout="row" layout-align="center center">
 						<img flex="60" class="lineup-img thing" flex src="http://i.imgur.com/7RoLGdp.jpg" />
@@ -28,7 +23,6 @@
 						<img flex="60" class="lineup-img thing" flex src="http://i.imgur.com/7RoLGdp.jpg" />
 						<span flex></span>
 						<img flex="25" class="lineup-img avatar" src="../../images/unknown-user.gif">
-
 					</div>
 				</md-button>
 				<md-button flex-sm="45" aria-label="list">
@@ -60,15 +54,13 @@
 				<!-- first user item -->
 				<div layout="column" flex>
 					<div class="item profile" layout="column" layout-align="center center">
-						<img ng-src="{{vm.exchange.goods[0].photo_path}}"/>
+						<img ng-src="{{vm.exchange.goods[0].photo_path}}" />
 						<div layout layout-align="center center">
 							<p class="md-body-2">{{vm.exchange.goods[0].name}}</p>
 						</div>
 					</div>
 					<div layout="row">
-
 						<img flex="30" ng-src="{{vm.exchange.goods[0].user.photo_path}}" style="max-height:60px; max-width:60px;" />
-
 						<div flex layout layout-align="center center">
 							<p class="md-body-2 online">{{vm.exchange.goods[0].user.name}}</p>
 						</div>
@@ -87,9 +79,7 @@
 						</div>
 					</div>
 					<div layout="row">
-
 						<img flex="30" ng-src="{{vm.exchange.goods[1].user.photo_path}}" style="max-height:60px; max-width:60px;" />
-
 						<div flex layout layout-align="center center">
 							<p class="md-body-2 online">{{vm.exchange.goods[1].user.name}}</p>
 						</div>

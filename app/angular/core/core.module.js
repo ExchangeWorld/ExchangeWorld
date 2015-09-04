@@ -4,8 +4,6 @@ const angular  = require('angular');
 const bulk     = require('bulk-require');
 global._       = require("lodash"); //fix restangular dependency on lodash issue
 
-require('angular-base64-upload');
-require('angularjs-facebook');
 require('angular-material');
 require('angular-ui-router');
 require('restangular');
@@ -23,7 +21,6 @@ const requires = [
 	'ngStorage',
 	'restangular',
 	'ngMaterial',
-	'naif.base64',
 	'utils.facebook',
 	'utils.notification',
 	'utils.logger',

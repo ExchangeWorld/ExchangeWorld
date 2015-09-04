@@ -155,6 +155,6 @@ An example test is provided for the following types of AngularJS modules:
 - `unit/services/example_spec.js`
 - `unit/constants_spec.js`
 
-Testing AngularJS directives becomes a bit more complex involving mock data and DOM traversal, and so has been omitted from this boilerplate. This can be read about in detail [here](http://newtriks.com/2013/04/26/how-to-test-an-angularjs-directive/).
+Testing AngularJS dsad becomes a bit more complex involving mock data and DOM traversal, and so has been omitted from this boilerplate. This can be read about in detail [here](http://newtriks.com/2013/04/26/how-to-test-an-angularjs-directive/).
 
 All unit tests are run with `gulp unit`. When running unit tests, code coverage is simultaneously calculated and output as an HTML file to the `/coverage` directory.

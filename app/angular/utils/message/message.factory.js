@@ -65,7 +65,7 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog, logger) {
 		return defer.promise;
 	}
 
-	function showMessagebox(ev, msg) {
+	function showMessagebox(ev, msg, callback) {
 		$mdDialog.show({
 			clickOutsideToClose : true,
 			templateUrl : 'utils/message/message.html',
@@ -87,6 +87,7 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog, logger) {
 								content      : msg_content,
 							})
 							.then(function(data) {
+								callback();
 								logger.success('訊息已寄出', data, 'DONE');
 							});
 						});

@@ -17,7 +17,8 @@ function NavbarController(
 	$q,
 	auth,
 	message,
-	notification
+	notification,
+	AppSettings
 ) {
 	const vm               = this;
 	const state            = ['home', 'seek', 'post', 'exchange', 'profile'];
@@ -109,7 +110,7 @@ function NavbarController(
 	}
 
 	function onClickMessage(msg, ev) {
-		message.showMessagebox(ev, msg);
+		message.showMessagebox(ev, msg, updateNotification);
 
 		message
 			.updateMessage(msg, false)
@@ -117,7 +118,6 @@ function NavbarController(
 	}
 
 
-	updateNotification();
 	var timer = $interval(updateNotification, 5000);
 	function updateNotification() {
 		$q.all([
@@ -139,7 +139,7 @@ function NavbarController(
 	}
 
 	function checkNotification() {
-		vm.unreadCount = _.filter(vm.notifications, {unread : true}).length + _.filter(vm.messages, {unread : true}).length;
-		$rootScope.pageTitle = vm.unreadCount ? '(' + vm.unreadCount + ') ' + 'ExchangeWorld': 'ExchangeWorld'; 
+		vm.unreadCount = _.filter(vm.notifications.concat(vm.messages), {unread : true}).length;
+		$rootScope.pageTitle = (vm.unreadCount ? '(' + vm.unreadCount + ') ' : '') + AppSettings.appTitle; 
 	}
 }

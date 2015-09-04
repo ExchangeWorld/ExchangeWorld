@@ -122,12 +122,12 @@ router.put('/', function(req, res, next) {
 		.sync({force: false})
 		.then(function() {
 			return notifications.update(
-			{unread: _unread}, 
-			{where: {
-					nid: _nid
+				{unread: _unread}, 
+				{
+					where: {nid: _nid}
 				}
-			})
-			.then(function() {});
+			)
+			// .then(function() {});
 		})
 		.then(function(result) {
 			res.json(result);

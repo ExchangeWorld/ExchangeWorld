@@ -1,8 +1,8 @@
 'use strict';
 
 const goodsModule = require('./goods.module');
-const _           = require('lodash');
-const moment      = require('moment');
+const _ = require('lodash');
+const moment = require('moment');
 goodsModule.controller('GoodsController', GoodsController);
 
 /** @ngInject */
@@ -14,31 +14,32 @@ function GoodsController(
 	$scope,
 	auth,
 	$timeout,
-	$localStorage
+	$localStorage,
+	$mdDialog
 ) {
-	const vm           = this;
+	const vm = this;
 
-	vm.isLoggedIn      = Boolean($localStorage.user);
-	vm.isMe            = vm.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
-	vm.goodData        = goodData;
+	vm.isLoggedIn = Boolean($localStorage.user);
+	vm.isMe = vm.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
+	vm.goodData = goodData;
 
-	vm.comment         = '';
-	vm.goodComments    = [];
-	vm.onClickUser     = onClickUser;
+	vm.comment = '';
+	vm.goodComments = [];
+	vm.onClickUser = onClickUser;
 	vm.onSubmitComment = onSubmitComment;
 	vm.onDeleteComment = onDeleteComment;
 
-	vm.stars           = [];
-	vm.starred         = false;
-	vm.onClickStar     = onClickStar;
+	vm.stars = [];
+	vm.starred = false;
+	vm.onClickStar = onClickStar;
 
-	vm.myGoods         = [];
-	vm.queuingList     = [];
+	vm.myGoods = [];
+	vm.queuingList = [];
 	//vm.queued          = false;
-	vm.onClickQueue    = onClickQueue;
-	vm.onClickAccept   = onClickAccept; 
+	vm.onClickQueue = onClickQueue;
+	vm.onClickAccept = onClickAccept;
 
-	vm.onClickUser     = onClickUser;
+	vm.onClickUser = onClickUser;
 
 	activate();
 
@@ -61,7 +62,7 @@ function GoodsController(
 		 * if is me, get the queue list on this goods
 		 * else, get all my goods that available to send queue request.
 		 */
-		if(vm.isMe) getQueuing();
+		if (vm.isMe) getQueuing();
 		else getMyGoods();
 
 		auth
@@ -78,7 +79,9 @@ function GoodsController(
 
 	// define onClick event on goods owner
 	function onClickUser(uid) {
-		$state.go('root.withSidenav.profile', { uid : uid });
+		$state.go('root.withSidenav.profile', {
+			uid: uid
+		});
 	}
 
 	function updateComment() {
@@ -86,11 +89,11 @@ function GoodsController(
 			.getComment(vm.goodData.gid)
 			.then(function(data) {
 				vm.goodComments = data;
-				vm.newComments  = [];
+				vm.newComments = [];
 			})
 			.then(function() {
 				var data = vm.goodComments.map(function(comment) {
-					if(vm.isLoggedIn)
+					if (vm.isLoggedIn)
 						comment.isMe = (comment.commenter_uid === $localStorage.user.uid);
 					comment.timestamp = moment(comment.timestamp).fromNow();
 					return comment;
@@ -100,7 +103,7 @@ function GoodsController(
 	}
 
 	function onSubmitComment() {
-		if(!auth.currentUser()) {
+		if (!auth.currentUser()) {
 			auth
 				.login()
 				.then(function(user) {
@@ -112,13 +115,13 @@ function GoodsController(
 		const mesg = vm.comment.trim();
 		if (mesg) {
 			const commentData = {
-				commenter_uid : auth.currentUser().uid,
-				goods_gid     : goodData.gid,
-				content       : mesg,
-				date          : moment().startOf('second').fromNow(),
-				user_uid      : auth.currentUser().uid,
-				name          : auth.currentUser().name,
-				photo_path    : auth.currentUser().photo_path,
+				commenter_uid: auth.currentUser().uid,
+				goods_gid: goodData.gid,
+				content: mesg,
+				date: moment().startOf('second').fromNow(),
+				user_uid: auth.currentUser().uid,
+				name: auth.currentUser().name,
+				photo_path: auth.currentUser().photo_path,
 			};
 			vm.goodComments.push(commentData);
 			goodsService
@@ -133,15 +136,17 @@ function GoodsController(
 	function onDeleteComment(cid) {
 		if (confirm('您確定真的要刪除這則留言嗎？')) {
 			goodsService
-				.deleteComment({ cid: cid })
+				.deleteComment({
+					cid: cid
+				})
 				.then(updateComment);
 		}
 	}
 
 	function onClickStar() {
 		const star = {
-			starring_user_uid : $localStorage.user.uid,
-			goods_gid         : vm.goodData.gid,
+			starring_user_uid: $localStorage.user.uid,
+			goods_gid: vm.goodData.gid,
 		};
 
 		if (!vm.starred) {
@@ -160,14 +165,16 @@ function GoodsController(
 	}
 
 	function updateStar() {
-		goodsService 
+		goodsService
 			.getStars(vm.goodData.gid)
 			.then(function(data) {
 				vm.stars = data;
 
 				if (
 					vm.isLoggedIn &&
-					_.findWhere(data, { starring_user_uid : $localStorage.user.uid })
+					_.findWhere(data, {
+						starring_user_uid: $localStorage.user.uid
+					})
 				) {
 					vm.starred = true;
 				} else {
@@ -185,7 +192,7 @@ function GoodsController(
 				/**
 				 * TODO: check if user already queued
 				 */
-				if ( vm.isLoggedIn ) {
+				if (vm.isLoggedIn) {
 					vm.queued = true;
 				} else {
 					vm.queued = false;
@@ -230,5 +237,25 @@ function GoodsController(
 		goodsService
 			.postExchange(queuer_goods_gid, goodData.gid)
 			.then(alert('you accept a queuing goods ! '));
+	}
+
+	$scope.showGreeting = showCustomGreeting;
+
+	function showCustomGreeting() {
+		$mdDialog.show({
+			clickOutsideToClose: true,
+			scope: $scope, // use parent scope in template
+			preserveScope: true, // do not forget this if use parent scope
+
+			templateUrl: 'goods/goods.queue.html',
+			controller: function DialogController($scope, $mdDialog) {
+				$scope.closeDialog = function() {
+					$mdDialog.hide();
+				}
+				$scope.cancel = function() {
+					$mdDialog.cancel();
+				};
+			}
+		});
 	}
 }

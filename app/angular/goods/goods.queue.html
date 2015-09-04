@@ -1,0 +1,31 @@
+<md-dialog aria-label="Queue">
+	<form>
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2 class="md-display-1">你想要排的物品</h2>
+				<span flex></span>
+				<!-- <md-button class="md-icon-button" ng-click="answer('not applicable')">
+        <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button> -->
+			</div>
+		</md-toolbar>
+		<md-dialog-content style="max-width:800px;max-height:810px; ">
+			<div>
+				<ul ng-show="!vm.isMe">
+					<md-button ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西，趕快去ＰＯ一些吧！</md-button>
+					<md-button ng-repeat="goods in vm.myGoods" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(goods.gid)">用 {{goods.name}}排！</md-button>
+				</ul>
+				<ul ng-show="vm.isMe">
+					<md-button ng-show="vm.queuingList.length === 0">目前沒有正在排的物品</md-button>
+					<md-button ng-repeat="queue in vm.queuingList" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickAccept(queue.queuer_goods_gid)">接受 {{queue.good.name}} 的排！</md-button>
+				</ul>
+		</md-dialog-content>
+		<div class="md-actions" layout="row">
+			<span flex></span>
+			<md-button ng-click="closeDialog()" style="margin-right:20px;">
+				OK!
+			</md-button>
+		</div>
+	</form>
+</md-dialog>
+

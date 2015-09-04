@@ -9,15 +9,15 @@
 				{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.stars.length}} </md-button>
 		</div>
 		<div layout layout-align="center center">
-			<md-button>排！</md-button>		
-			<ul ng-show="!vm.isMe">
+			<md-button ng-click="showGreeting($event)">排！</md-button>		
+			<!-- <ul ng-show="!vm.isMe">
 				<md-button ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西，趕快去ＰＯ一些吧！</md-button>
 				<md-button ng-repeat="goods in vm.myGoods" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(goods.gid)">用 {{goods.name}}排！</md-button>
 			</ul>
 			<ul ng-show="vm.isMe">
 				<md-button ng-show="vm.queuingList.length === 0">目前沒有正在排的物品</md-button>
 				<md-button ng-repeat="queue in vm.queuingList" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickAccept(queue.queuer_goods_gid)">接受 {{queue.good.name}} 的排！</md-button>
-			</ul>
+			</ul> -->
 		</div>
 	</div>
 	<!--<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(6)">我要排！ {{vm.queue.length}}</md-button>-->

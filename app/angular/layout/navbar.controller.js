@@ -101,8 +101,8 @@ function NavbarController(
 			});
 		$location.href = notice.trigger;
 	}
-
-	var timer = $interval(updateNotification, 2000);
+updateNotification();
+	// var timer = $interval(updateNotification, 2000);
 	function updateNotification() {
 
 		notification

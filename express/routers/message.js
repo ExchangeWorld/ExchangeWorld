@@ -3,6 +3,7 @@ var router  = express.Router();
 
 // Including tables
 var messages = require('../ORM/Messages');
+var users    = require('../ORM/Users');
 
 router.get('/', function(req, res, next) {
 
@@ -19,6 +20,8 @@ router.get('/', function(req, res, next) {
 	var _from         = parseInt(req.query.from, 10);
 	var _number       = parseInt(req.query.number, 10);
 
+	messages.belongsTo(users, {foreignKey: 'sender_uid'});
+
 	messages
 		.sync({
 			force: false
@@ -27,14 +30,11 @@ router.get('/', function(req, res, next) {
 			return messages.findAll({
 				where: {
 					receiver_uid: _receiver_uid
-					//$and: [{
-						//receiver_uid: (receiver_uid === undefined ? {$like: '%'} : _receiver_uid)
-						//sender_uid: (sender_uid === undefined ? {$like: '%'} : _sender_uid),
-					//}],
 				},
 				order: [
 					['mid', 'DESC']
 				],
+				include:[users],
 				offset: _from,
 				limit: _number
 			});

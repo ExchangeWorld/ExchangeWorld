@@ -21,6 +21,11 @@ var Messages = sequelize.define('messages', {
 	content: {
 		type: Sequelize.TEXT,
 		allowNull: false
+	},
+	unread: {
+		type: Sequelize.BOOLEAN,
+		defaultValue: true,
+		allowNull: false
 	}
 }, {
 	timestamps: true,

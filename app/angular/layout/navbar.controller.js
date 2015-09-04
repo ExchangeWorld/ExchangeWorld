@@ -134,12 +134,9 @@ function NavbarController(
 			vm.messages.forEach(function(msg) {
 				msg.timestamp = moment(msg.timestamp).calendar();
 			});
-			checkNotification();
+			
+			vm.unreadCount = _.filter(vm.notifications.concat(vm.messages), {unread : true}).length;
+			$rootScope.pageTitle = (vm.unreadCount ? '(' + vm.unreadCount + ') ' : '') + AppSettings.appTitle; 
 		});
-	}
-
-	function checkNotification() {
-		vm.unreadCount = _.filter(vm.notifications.concat(vm.messages), {unread : true}).length;
-		$rootScope.pageTitle = (vm.unreadCount ? '(' + vm.unreadCount + ') ' : '') + AppSettings.appTitle; 
 	}
 }

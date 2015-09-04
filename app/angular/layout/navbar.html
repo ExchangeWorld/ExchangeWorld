@@ -33,45 +33,31 @@
 	<div flex="10" flex-md="15" flex-sm offset="10" offset-md="5" offset-sm="5" layout="row" layout-align="center center">
 		<md-menu flex="30" flex-sm md-offset="-233 75">
 			<md-button ng-click="$mdOpenMenu()">
-				<div layout layout-align="center center">
-					<i class="material-icons">notifications</i>
-					<p class="notification md-caption">3</p>
-				</div>
+				<md-icon class="material-icons">notifications</md-icon>
+				<p class="notification md-caption">{{ vm.unreadCount }}</p>
 			</md-button>
-			<md-menu-content width="5" style="padding: 0px; max-width:400px;">
-				<md-menu-item layout layout-align="start center" style="min-height: 30px; height:30px">
+			<md-menu-content width="5" style="padding-bottom: 0px; max-width:400px;">
+				<md-menu-item style="min-height: 30px; height:30px">
 					<p class="md-body-1">通知</p>
 				</md-menu-item>
 				<md-divider></md-divider>
 				<!-- unread notification -->
-				<md-menu-item style="min-height: 80px; background-color: #E9F3FF;">
-					<div layout="row" layout-align="start center">
+				<md-list>
+					<md-list-item ng-repeat="notice in vm.notifications" ng-style="notice.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickNotification(notice)">
 						<!-- user avatar -->
-						<img flex style="max-height:50px; max-width:50px;" ng-show="vm.isLoggedIn" ng-src="{{ vm.user.photo_path }}"></img>
+						<img flex style="max-height:50px; max-width:50px;" ng-src="{{ notice.user.photo_path }}" />
 						<!-- notification text -->
 						<div offset="5" flex>
-							<p class="md-body-2 note">You like SilentSky's comment:"睡不著發個睡不著發個睡不著發個睡不著發個".</p>
-							<p class="md-caption note" style="color: #BCBCBC;">36分前</p>
+							<p class="md-body-2 note">{{notice.content}}</p>
+							<p class="md-caption note" style="color: #BCBCBC;">{{ notice.timestamp }}</p>
 						</div>
-					</div>
-				</md-menu-item>
+					</md-list-item>
+				</md-list>
 				<md-divider></md-divider>
-				<!-- read notification -->
-				<md-menu-item style="min-height: 80px;">
-					<div layout="row" layout-algin="start center">
-						<!-- user avatar -->
-						<img flex style="max-height:50px; max-width:50px;" ng-show="vm.isLoggedIn" ng-src="{{ vm.user.photo_path }}"></img>
-						<!-- notification text -->
-						<div offset="5" flex="70">
-							<p class="md-body-2 note">從SilentSky接受一個交換要求</p>
-							<p class="md-caption note" style="color: #BCBCBC;">51分前</p>
-						</div>
-					</div>
-				</md-menu-item>
 				<md-divider></md-divider>
 				<!-- See All text -->
-				<md-menu-item style="min-height: 30px; height:30px" layout layout-align="center center">
-					<p class="md-body-2" style="margin:0;">全部</p>
+				<md-menu-item style="min-height: 30px; height:30px">
+					<p class="md-body-2">全部</p>
 				</md-menu-item>
 			</md-menu-content>
 		</md-menu>

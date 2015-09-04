@@ -95,7 +95,7 @@ function NavbarController(
 
 	function onClickNotification(notice) {
 		notification
-			.updateNotification(notice.nid, false)
+			.updateNotification(notice, false)
 			.then(function(data) {
 				console.log(data);
 			});

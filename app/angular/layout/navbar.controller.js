@@ -1,19 +1,33 @@
-"use strict";
+'use strict';
 
 const layoutModule = require('./layout.module');
-const _ = require('lodash');
+const _            = require('lodash');
+const moment       = require('moment');
+
 layoutModule.controller('NavbarController', NavbarController);
 
 /** @ngInject */
-function NavbarController($mdSidenav, $state, auth, $localStorage) {
-	const vm      = this;
-	const state   = ['home', 'seek', 'post', 'exchange', 'profile'];
-	vm.stateIndex = _.indexOf(state, $state.current.title);
-	vm.onClick    = onClick;
-	vm.onLogin    = onLogin;
-	vm.onLogout   = onLogout;
-	vm.user       = $localStorage.user;
-	vm.isLoggedIn = Boolean($localStorage.user);
+function NavbarController(
+	$mdSidenav,
+	$state,
+	$localStorage,
+	$interval,
+	$location,
+	auth,
+	notification
+) {
+	const vm               = this;
+	const state            = ['home', 'seek', 'post', 'exchange', 'profile'];
+	vm.stateIndex          = _.indexOf(state, $state.current.title);
+	vm.onClick             = onClick;
+	vm.onLogin             = onLogin;
+	vm.onLogout            = onLogout;
+	vm.user                = $localStorage.user;
+	vm.isLoggedIn          = Boolean($localStorage.user);
+
+	vm.notifications       = [];
+	vm.unreadCount         = '';
+	vm.onClickNotification = onClickNotification;
 
 	//////////////
 	activate();
@@ -25,8 +39,9 @@ function NavbarController($mdSidenav, $state, auth, $localStorage) {
 				vm.user = data;
 				vm.isLoggedIn = Boolean(data);
 			});
-	}
 
+		updateNotification();
+	}
 
 	function onClick(contentIndex) {
 		//$scope.content = ContentType[contentIndex];
@@ -78,4 +93,26 @@ function NavbarController($mdSidenav, $state, auth, $localStorage) {
 		$state.reload();
 	}
 
+	function onClickNotification(notice) {
+		notification
+			.updateNotification(notice, false)
+			.then(function(data) {
+				console.log(data);
+			});
+		$location.href = notice.trigger;
+	}
+
+	var timer = $interval(updateNotification, 2000);
+	function updateNotification() {
+
+		notification
+			.getNotification(vm.user.uid)
+			.then(function(data) {
+				data.forEach(function(notice) {
+					notice.timestamp = moment(notice.timestamp).fromNow();
+				});
+				vm.notifications = data;
+				vm.unreadCount = _.filter(data, {unread : true}).length;
+			});
+	}
 }

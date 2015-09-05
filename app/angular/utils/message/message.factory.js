@@ -70,33 +70,35 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog, logger) {
 			clickOutsideToClose : true,
 			templateUrl : 'utils/message/message.html',
 			controllerAs : 'vm',
-			controller : function DialogController($mdDialog) {
-				const vm   = this;
-				vm.msg     = msg;
-				vm.content = '';
-				vm.cancel  = onCancel;
-				vm.submit  = onSubmit;
-
-				function onSubmit(msg_content) {
-					$mdDialog
-						.hide(msg_content)
-						.then(function(msg_content) {
-							postMessage({
-								receiver_uid : msg.sender_uid,
-								sender_uid   : msg.receiver_uid,
-								content      : msg_content,
-							})
-							.then(function(data) {
-								callback();
-								logger.success('訊息已寄出', data, 'DONE');
-							});
-						});
-				}
-
-				function onCancel() {
-					$mdDialog.cancel();
-				}
-			}
+			controller : DialogController,
 		});
+	}
+	
+	function DialogController($mdDialog) {
+		const vm   = this;
+		vm.msg     = msg;
+		vm.content = '';
+		vm.cancel  = onCancel;
+		vm.submit  = onSubmit;
+		
+		function onSubmit(msg_content) {
+			$mdDialog
+				.hide(msg_content)
+				.then(function(msg_content) {
+					postMessage({
+						receiver_uid : msg.sender_uid,
+						sender_uid   : msg.receiver_uid,
+						content      : msg_content,
+					})
+					.then(function(data) {
+						callback();
+						logger.success('訊息已寄出', data, 'DONE');
+					});
+				});
+		}
+
+		function onCancel() {
+			$mdDialog.cancel();
+		}
 	}
 }

@@ -6,7 +6,7 @@ const _             = require('lodash');
 messageModule.factory('message', message);
 
 /** @ngInject */
-function message(Restangular, $q, exception, $localStorage, $mdDialog, logger) {
+function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 	const service = {
 		getMessage,
 		postMessage,
@@ -71,21 +71,27 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog, logger) {
 			templateUrl : 'utils/message/message.html',
 			controllerAs : 'vm',
 			controller : DialogController,
+			locals: {
+				msg: msg,
+				callback: callback,
+			}
 		});
 	}
+}
+
+/** @ngInject */
+function DialogController(msg, callback, $mdDialog, logger, message) {
+	const vm   = this;
+	vm.msg     = msg;
+	vm.content = '';
+	vm.cancel  = onCancel;
+	vm.submit  = onSubmit;
 	
-	/** @ngInject */
-	function DialogController($mdDialog) {
-		const vm   = this;
-		vm.msg     = msg;
-		vm.content = '';
-		vm.cancel  = onCancel;
-		vm.submit  = onSubmit;
-		
-		function onSubmit(msg_content) {
-			$mdDialog
-				.hide(msg_content)
-				.then(function(msg_content) {
+	function onSubmit(msg_content) {
+		$mdDialog
+			.hide(msg_content)
+			.then(function(msg_content) {
+				message.
 					postMessage({
 						receiver_uid : msg.sender_uid,
 						sender_uid   : msg.receiver_uid,
@@ -95,11 +101,10 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog, logger) {
 						callback();
 						logger.success('訊息已寄出', data, 'DONE');
 					});
-				});
-		}
+			});
+	}
 
-		function onCancel() {
-			$mdDialog.cancel();
-		}
+	function onCancel() {
+		$mdDialog.cancel();
 	}
 }

@@ -13,8 +13,12 @@ function NavbarController(
 	$localStorage,
 	$interval,
 	$location,
+	$rootScope,
+	$q,
 	auth,
-	notification
+	message,
+	notification,
+	AppSettings
 ) {
 	const vm               = this;
 	const state            = ['home', 'seek', 'post', 'exchange', 'profile'];
@@ -29,6 +33,9 @@ function NavbarController(
 	vm.unreadCount         = '';
 	vm.onClickNotification = onClickNotification;
 
+	vm.messages       = [];
+	vm.onClickMessage = onClickMessage;
+	
 	//////////////
 	activate();
 
@@ -102,16 +109,35 @@ function NavbarController(
 		$location.href = notice.trigger;
 	}
 
-	var timer = $interval(updateNotification, 2000);
+	function onClickMessage(msg, ev) {
+		message.showMessagebox(ev, msg, updateNotification);
+
+		message
+			.updateMessage(msg, false)
+			.then(updateNotification);
+	}
+
+
+	var timer = $interval(updateNotification, 5000);
 	function updateNotification() {
-		notification
-			.getNotification(vm.user.uid)
+		$q
+			.all([
+				notification.getNotification(vm.user.uid),
+				message.getMessage(vm.user.uid),
+			])
 			.then(function(data) {
-				data.forEach(function(notice) {
+				data[0].map(function(notice) {
 					notice.timestamp = moment(notice.timestamp).fromNow();
 				});
-				vm.notifications = data;
-				vm.unreadCount = _.filter(data, {unread : true}).length;
+				vm.notifications = data[0];
+	
+				vm.messages = _.unique(data[1], 'sender_uid');
+				vm.messages.forEach(function(msg) {
+					msg.timestamp = moment(msg.timestamp).calendar();
+				});
+				
+				vm.unreadCount = _.filter(vm.notifications.concat(vm.messages), {unread : true}).length;
+				if(vm.unreadCount) $rootScope.pageTitle = `(${vm.unreadCount}) ${AppSettings.appTitle}`;
 			});
 	}
 }

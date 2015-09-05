@@ -74,6 +74,7 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog, logger) {
 		});
 	}
 	
+	/** @ngInject */
 	function DialogController($mdDialog) {
 		const vm   = this;
 		vm.msg     = msg;

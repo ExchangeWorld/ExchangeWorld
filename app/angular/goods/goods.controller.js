@@ -43,9 +43,9 @@ function GoodsController(
 
 	activate();
 
-	$scope.$parent.$on('mapInitialized', mapInitialized);
 	$scope.removeMode = false;
-
+	$scope.$parent.$on('mapInitialized', mapInitialized);
+	
 	/* After map is loaded */
 	function mapInitialized(e, evtMap) {
 		$scope.$parent.$broadcast('goodsChanged', [goodData]);
@@ -134,12 +134,26 @@ function GoodsController(
 	}
 
 	function onDeleteComment(cid) {
-		if (confirm('您確定真的要刪除這則留言嗎？')) {
-			goodsService
-				.deleteComment({
-					cid: cid
-				})
-				.then(updateComment);
+		// if (confirm('您確定真的要刪除這則留言嗎？')) {
+		// 	goodsService
+		// 		.deleteComment({ cid: cid })
+		// 		.then(updateComment);
+		// }
+		var confirm = $mdDialog.confirm()
+			.title('刪除留言')
+			.content('您確定要刪除這則留言嗎？')
+			.ariaLabel('Delete Comment')
+			.ok('確定')
+			.cancel('取消')
+			.targetEvent(cid);
+		if (confirm) {
+			$mdDialog.show(confirm).then(function() {
+				goodsService
+					.deleteComment({
+						cid: cid
+					})
+					.then(updateComment);
+			});
 		}
 	}
 
@@ -239,9 +253,9 @@ function GoodsController(
 			.then(alert('you accept a queuing goods ! '));
 	}
 
-	$scope.showGreeting = showCustomGreeting;
+	$scope.showQueue = QueueConfirm;
 
-	function showCustomGreeting() {
+	function QueueConfirm() {
 		$mdDialog.show({
 			clickOutsideToClose: true,
 			scope: $scope, // use parent scope in template

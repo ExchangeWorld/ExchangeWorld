@@ -9,7 +9,7 @@
 				{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.stars.length}} </md-button>
 		</div>
 		<div layout layout-align="center center">
-			<md-button ng-click="showGreeting($event)">排！</md-button>		
+			<md-button ng-click="showQueue($event)">排！</md-button>
 			<!-- <ul ng-show="!vm.isMe">
 				<md-button ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西，趕快去ＰＯ一些吧！</md-button>
 				<md-button ng-repeat="goods in vm.myGoods" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(goods.gid)">用 {{goods.name}}排！</md-button>

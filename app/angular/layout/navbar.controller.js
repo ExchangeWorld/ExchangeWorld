@@ -138,6 +138,8 @@ function NavbarController(
 				
 				vm.unreadCount = _.filter(vm.notifications.concat(vm.messages), {unread : true}).length;
 				if(vm.unreadCount) $rootScope.pageTitle = `(${vm.unreadCount}) ${AppSettings.appTitle}`;
+				else $rootScope.pageTitle = AppSettings.appTitle;
+
 			});
 	}
 }

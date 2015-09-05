@@ -24,10 +24,11 @@ function SeekController(
 	vm.onMouseOut          = onMouseOut;
 
 	$scope.$on('boundChanged', function(e, bound) {
-		//console.log(bound);
+		console.log(bound.toUrlValue());
 		onSearch({
 			name     : vm.searchGoodsName,
 			category : vm.searchGoodsCategory.label,
+			bound    : bound.toUrlValue(),
 		});
 	});
 
@@ -36,7 +37,7 @@ function SeekController(
 			name: filter.name,
 			cate: filter.cate,
 		});
-		//console.log(filter);
+		
 		seekService
 			.getSeek(filter)
 			.then(function(data) {

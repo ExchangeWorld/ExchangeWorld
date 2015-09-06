@@ -244,19 +244,4 @@ function GoodsController(
 		}
 	}
 
-	/**
-	 * Accept one goods in the queuing list
-	 * create a exchange instance. 
-	 */
-	//function onClickAccept(queuer_goods_gid) {
-		/**
-		 * TODO:
-		 *  1. restrict multi accept.
-		 *  2. go to the initiate exchange page.
-		 */
-		//goodsService
-			//.postExchange(queuer_goods_gid, goodData.gid)
-			//.then(alert('you accept a queuing goods ! '));
-	//}
-
 }

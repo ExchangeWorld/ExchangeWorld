@@ -46,8 +46,10 @@ function NavbarController(
 	function onClick(contentIndex) {
 		//$scope.content = ContentType[contentIndex];
 		//$scope.$emit('sidenavChanged', ContentType[contentIndex]);
-		if (contentIndex === 0 || contentIndex === 3) {
+		if (contentIndex === 0) {
 			$state.go('root.oneCol.' + state[contentIndex]);
+		} else if(contentIndex === 3) {
+			$state.go('root.oneCol.' + state[contentIndex], {uid: vm.user.uid});
 		} else if(contentIndex === 4) {
 			$state.go('root.withSidenav.' + state[contentIndex], {
 				uid: auth.currentUser().uid

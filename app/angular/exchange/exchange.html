@@ -2,42 +2,16 @@
 	<div layout="row" layout-sm="column">
 		<div flex="20" flex-sm="95" offset-sm="5">
 			<div layout="column" layout-sm="row" layout-wrap>
-				<md-button flex-sm="45" aria-label="list">
+				<md-button flex-sm="45" aria-label="list" ng-repeat="exchange in vm.exchangeList" 
+														  ng-click="vm.onClickExchange(exchange.eid)">
+					<md-divider></md-divider>
 					<div layout="row" layout-align="center center">
-						<img flex="60" class="lineup-img thing" flex src="http://i.imgur.com/7RoLGdp.jpg" />
-						<span flex></span>
-						<img flex="25" class="lineup-img avatar" src="../../images/unknown-user.gif">
+						<div>GG {{ exchange.eid }}</div>
+						<!--<img flex="60" class="lineup-img thing" flex ng-src="exchange.detail.goods[0].photo_path" />-->
+						<!--<span flex></span>-->
+						<!--<img flex="25" class="lineup-img avatar" src="../../images/unknown-user.gif">-->
 					</div>
-				</md-button>
-				<md-divider ng-if="!$last"></md-divider>
-				<md-button flex-sm aria-label="list">
-					<div layout="row" layout-align="center center">
-						<img flex="60" class="lineup-img thing" flex src="http://i.imgur.com/7RoLGdp.jpg" />
-						<span flex></span>
-						<img flex="25" class="lineup-img avatar" src="../../images/unknown-user.gif">
-					</div>
-				</md-button>
-				<md-divider ng-if="!$last"></md-divider>
-				<md-button class="md-button" flex-sm aria-label="list">
-					<div layout="row" layout-align="center center">
-						<img flex="60" class="lineup-img thing" flex src="http://i.imgur.com/7RoLGdp.jpg" />
-						<span flex></span>
-						<img flex="25" class="lineup-img avatar" src="../../images/unknown-user.gif">
-					</div>
-				</md-button>
-				<md-button flex-sm="45" aria-label="list">
-					<div layout="row" layout-align="center center">
-						<img flex="60" class="lineup-img thing" flex src="http://i.imgur.com/7RoLGdp.jpg" />
-						<span flex></span>
-						<img flex="25" class="lineup-img avatar" src="../../images/unknown-user.gif">
-					</div>
-				</md-button>
-				<md-button flex-sm="45" aria-label="list">
-					<div layout="row" layout-align="center center">
-						<img flex="60" class="lineup-img thing" flex src="http://i.imgur.com/7RoLGdp.jpg" />
-						<span flex></span>
-						<img flex="25" class="lineup-img avatar" src="../../images/unknown-user.gif">
-					</div>
+					<md-divider></md-divider>
 				</md-button>
 			</div>
 		</div>

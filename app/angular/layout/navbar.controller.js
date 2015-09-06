@@ -94,10 +94,13 @@ function NavbarController(
 	}
 
 	function onLogout() {
-		auth.logout();
+		auth
+			.logout()
+			.then(function(){
+				$state.reload();
+			});
 		vm.user = null;
 		vm.isLoggedIn = false;
-		$state.reload();
 	}
 
 	function onClickNotification(notice) {
@@ -120,26 +123,27 @@ function NavbarController(
 
 	var timer = $interval(updateNotification, 5000);
 	function updateNotification() {
-		$q
-			.all([
-				notification.getNotification(vm.user.uid),
-				message.getMessage(vm.user.uid),
-			])
-			.then(function(data) {
-				data[0].map(function(notice) {
-					notice.timestamp = moment(notice.timestamp).fromNow();
+		if(vm.isLoggedIn) {
+			$q
+				.all([
+					notification.getNotification(vm.user.uid),
+					message.getMessage(vm.user.uid),
+				])
+				.then(function(data) {
+					data[0].map(function(notice) {
+						notice.timestamp = moment(notice.timestamp).fromNow();
+					});
+					vm.notifications = data[0];
+		
+					vm.messages = _.unique(data[1], 'sender_uid');
+					vm.messages.forEach(function(msg) {
+						msg.timestamp = moment(msg.timestamp).calendar();
+					});
+					
+					vm.unreadCount = _.filter(vm.notifications.concat(vm.messages), {unread : true}).length;
+					if(vm.unreadCount) $rootScope.pageTitle = `(${vm.unreadCount}) ${AppSettings.appTitle}`;
+					else $rootScope.pageTitle = AppSettings.appTitle;
 				});
-				vm.notifications = data[0];
-	
-				vm.messages = _.unique(data[1], 'sender_uid');
-				vm.messages.forEach(function(msg) {
-					msg.timestamp = moment(msg.timestamp).calendar();
-				});
-				
-				vm.unreadCount = _.filter(vm.notifications.concat(vm.messages), {unread : true}).length;
-				if(vm.unreadCount) $rootScope.pageTitle = `(${vm.unreadCount}) ${AppSettings.appTitle}`;
-				else $rootScope.pageTitle = AppSettings.appTitle;
-
-			});
+		}
 	}
 }

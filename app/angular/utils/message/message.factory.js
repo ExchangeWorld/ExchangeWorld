@@ -98,7 +98,7 @@ function DialogController(msg, callback, $mdDialog, logger, message) {
 						content      : msg_content,
 					})
 					.then(function(data) {
-						callback();
+						if(callback) callback();
 						logger.success('訊息已寄出', data, 'DONE');
 					});
 			});

@@ -1,8 +1,8 @@
 'use strict';
 
 const goodsModule = require('./goods.module');
-const _ = require('lodash');
-const moment = require('moment');
+const _           = require('lodash');
+const moment      = require('moment');
 goodsModule.controller('GoodsController', GoodsController);
 
 /** @ngInject */
@@ -20,26 +20,25 @@ function GoodsController(
 	const vm = this;
 
 	vm.isLoggedIn = Boolean($localStorage.user);
-	vm.isMe = vm.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
-	vm.goodData = goodData;
+	vm.isMe       = vm.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
+	vm.goodData   = goodData;
 
-	vm.comment = '';
-	vm.goodComments = [];
-	vm.onClickUser = onClickUser;
+	vm.comment         = '';
+	vm.goodComments    = [];
+	vm.onClickUser     = onClickUser;
 	vm.onSubmitComment = onSubmitComment;
 	vm.onDeleteComment = onDeleteComment;
 
-	vm.stars = [];
-	vm.starred = false;
+	vm.stars       = [];
+	vm.starred     = false;
 	vm.onClickStar = onClickStar;
 
-	vm.myGoods = [];
-	vm.queuingList = [];
-	//vm.queued          = false;
-	vm.onClickQueue = onClickQueue;
-	vm.onClickAccept = onClickAccept;
+	vm.myGoods       = [];
+	vm.queuingList   = [];
+	//vm.queued      = false;
+	vm.onClickQueue  = onClickQueue;
 
-	vm.onClickUser = onClickUser;
+	vm.onClickUser   = onClickUser;
 
 	activate();
 
@@ -228,48 +227,36 @@ function GoodsController(
 	/**
 	 * user use a goods to queue the host goods 
 	 */
-	function onClickQueue(queuer_goods_gid) {
-		/**
-		 * TODO:
-		 *  1. restrict multi queue(?).
-		 */
-		goodsService
-			.postQueue(goodData.gid, queuer_goods_gid)
-			.then(alert('you queued using gid=' + queuer_goods_gid));
+	function onClickQueue(ev, type) {
+		const types = ['want_to_queue', 'see_who_queue'];
+		
+		if(type === types[0]) {
+			/**
+			 * TODO:
+			 *  1. restrict multi queue(?).
+			 */
+			console.log('lll');
+			goodsService.showQueueBox(ev, vm.myGoods, goodData.gid);
+		} else if(type === types[1]) {
+			goodsService.showQueuingBox(ev, vm.queuingList, goodData.gid);
+		} else {
+			$state.go('root.withSidenav.404');
+		}
 	}
 
 	/**
 	 * Accept one goods in the queuing list
 	 * create a exchange instance. 
 	 */
-	function onClickAccept(queuer_goods_gid) {
+	//function onClickAccept(queuer_goods_gid) {
 		/**
 		 * TODO:
 		 *  1. restrict multi accept.
 		 *  2. go to the initiate exchange page.
 		 */
-		goodsService
-			.postExchange(queuer_goods_gid, goodData.gid)
-			.then(alert('you accept a queuing goods ! '));
-	}
+		//goodsService
+			//.postExchange(queuer_goods_gid, goodData.gid)
+			//.then(alert('you accept a queuing goods ! '));
+	//}
 
-	$scope.showQueue = QueueConfirm;
-
-	function QueueConfirm() {
-		$mdDialog.show({
-			clickOutsideToClose: true,
-			scope: $scope, // use parent scope in template
-			preserveScope: true, // do not forget this if use parent scope
-
-			templateUrl: 'goods/goods.queue.html',
-			controller: function DialogController($scope, $mdDialog) {
-				$scope.closeDialog = function() {
-					$mdDialog.hide();
-				}
-				$scope.cancel = function() {
-					$mdDialog.cancel();
-				};
-			}
-		});
-	}
 }

@@ -5,7 +5,7 @@ const _           = require('lodash');
 goodsModule.factory('goodsService', goodsService);
 
 /** @ngInject */
-function goodsService(Restangular, $q, exception) {
+function goodsService(Restangular, $q, exception, $mdDialog) {
 
 	const service = {
 		getGood,
@@ -19,6 +19,8 @@ function goodsService(Restangular, $q, exception) {
 		postStar,
 		deleteStar,
 
+		showQueueBox,
+		showQueuingBox,
 		getQueue,
 		postQueue,
 		deleteQueue,
@@ -132,24 +134,6 @@ function goodsService(Restangular, $q, exception) {
 		return defer.promise;
 	}
 
-	function getQueue(host_goods_gid) {
-		const defer = $q.defer();
-		Restangular
-			.all('queue/of')
-			.getList({host_goods_gid: host_goods_gid})
-			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data);
-				} else {
-					defer.reject(data);
-				}
-			})
-			.catch(function(error) {
-				return exception.catcher('[Goods Service] getQueue error: ')(error);
-			});
-		return defer.promise;
-	}
-
 	function deleteStar(star) {
 		const defer = $q.defer();
 
@@ -164,6 +148,24 @@ function goodsService(Restangular, $q, exception) {
 			})
 			.catch(function(error) {
 				return exception.catcher('[Goods Service] deleteStar error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	function getQueue(host_goods_gid) {
+		const defer = $q.defer();
+		Restangular
+			.all('queue/of')
+			.getList({host_goods_gid: host_goods_gid})
+			.then(function(data) {
+				if (_.isArray(data)) {
+					defer.resolve(data);
+				} else {
+					defer.reject(data);
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] getQueue error: ')(error);
 			});
 		return defer.promise;
 	}
@@ -221,4 +223,76 @@ function goodsService(Restangular, $q, exception) {
 			});
 		return defer.promise;
 	}
+
+	function showQueueBox(ev, myGoods, queuing_goods_gid) {
+		$mdDialog.show({
+			clickOutsideToClose: true,
+			templateUrl: 'goods/goods.queue.html',
+			controllerAs: 'vm',
+			controller: QueueController,
+			locals: {
+				myGoods           : myGoods,
+				queuing_goods_gid : queuing_goods_gid,
+			}
+		});
+		function QueueController($mdDialog, logger, myGoods, queuing_goods_gid) {
+			const vm             = this;
+			vm.myGoods           = myGoods;
+			vm.queuing_goods_gid = queuing_goods_gid;
+			vm.comfrim           = onComfrim;
+			vm.cancel            = onCancel;
+
+			function onComfrim(selected_gid) {
+				$mdDialog
+					.hide(selected_gid)
+					.then(function() {
+						postQueue(vm.queuing_goods_gid, selected_gid)
+							.then(function(data) {
+								logger.success('成功發出排請求', data, 'DONE');
+							});
+					});
+			}
+			function onCancel() {
+				$mdDialog.cancel();
+			};
+		}
+	}
+
+	function showQueuingBox(ev, queuingGoods, host_goods_gid) {
+		$mdDialog.show({
+			clickOutsideToClose: true,
+			templateUrl: 'goods/goods.queuing.html',
+			controllerAs: 'vm',
+			controller: QueuingController,
+			locals: {
+				queuingGoods   : queuingGoods,
+				host_goods_gid : host_goods_gid,
+			}
+		});
+		function QueuingController($mdDialog, logger, queuingGoods, host_goods_gid) {
+			const vm          = this;
+			vm.queuingGoods   = queuingGoods;
+			vm.host_goods_gid = host_goods_gid;
+			vm.comfrim        = onComfrim;
+			vm.cancel         = onCancel;
+
+			function onComfrim(selected_gid) {
+				$mdDialog
+					.hide(selected_gid)
+					.then(function(selected_gid) {
+						postExchange(selected_gid, host_goods_gid)
+							.then(function(data) {
+								logger.success('成功接受一個排', data, 'DONE');
+							});
+					});
+			}
+			function onCancel() {
+				$mdDialog.cancel();
+			};
+		}
+	}
+
 }
+
+
+

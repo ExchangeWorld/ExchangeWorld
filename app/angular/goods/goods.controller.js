@@ -38,7 +38,8 @@ function GoodsController(
 	//vm.queued      = false;
 	vm.onClickQueue  = onClickQueue;
 
-	vm.onClickUser   = onClickUser;
+	vm.onClickUser = onClickUser;
+	vm.onClickBack = function(){ $state.go('root.withSidenav.seek'); }
 
 	activate();
 

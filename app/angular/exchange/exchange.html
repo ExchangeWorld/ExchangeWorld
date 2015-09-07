@@ -1,60 +1,105 @@
 <md-content>
 	<div layout="row" layout-sm="column">
-		<div flex="20" flex-sm="95" offset-sm="5">
-			<div layout="column" layout-sm="row" layout-wrap>
+		<div flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap>
+			<!-- <div layout="column" layout-sm="row" layout-wrap>
 				<md-button flex-sm="45" aria-label="list" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
 					<md-divider></md-divider>
 					<div layout="row" layout-align="center center">
 						<div>GG {{ exchange.eid }}</div>
-						<!--<img flex="60" class="lineup-img thing" flex ng-src="exchange.detail.goods[0].photo_path" />-->
-						<!--<span flex></span>-->
-						<!--<img flex="25" class="lineup-img avatar" src="../../images/unknown-user.gif">-->
 					</div>
 					<md-divider></md-divider>
 				</md-button>
+			</div> -->
+			<div class="event-btn first" layout="row" flex-sm="50">
+				<div flex>
+					<p class="md-body-1 note">六上歷史課本</p>
+					<p class="md-body-1 note">超營養大雞排</p>
+				</div>
+				<div flex layout layout-align="end end">
+					<p class="md-caption">with kosuke</p>
+				</div>
+			</div>
+			<div class="event-btn second" layout="row" flex-sm="50">
+				<div flex>
+					<p class="md-body-1 note">六上歷史課本</p>
+					<p class="md-body-1 note">超營養大雞排</p>
+				</div>
+				<div flex layout layout-align="end end">
+					<p class="md-caption">with kosuke</p>
+				</div>
+			</div>
+			<div class="event-btn first" layout="row" flex-sm="50">
+				<div flex>
+					<p class="md-body-1 note">六上歷史課本</p>
+					<p class="md-body-1 note">超營養大雞排</p>
+				</div>
+				<div flex layout layout-align="end end">
+					<p class="md-caption">with kosuke</p>
+				</div>
+			</div>
+			<div class="event-btn second" layout="row" flex-sm="50">
+				<div flex>
+					<p class="md-body-1 note">六上歷史課本</p>
+					<p class="md-body-1 note">超營養大雞排</p>
+				</div>
+				<div flex layout layout-align="end end">
+					<p class="md-caption">with kosuke</p>
+				</div>
 			</div>
 		</div>
-		<span flex="5" flex-sm="5"></span>
-		<div flex flex-sm>
+		<!-- <span flex="5" flex-sm="5"></span> -->
+		<div flex="50" flex-sm="100">
 			<!-- title -->
 			<div layout layout-align="center center">
 				<!-- <h1 class="md-display-1">Title</h1> -->
-				<md-button ng-click="vm.onClickComplete(vm.exchange.eid)">COMPLETE !</md-button>
-				<md-button ng-click="vm.onClickDelete(vm.exchange.eid)">我不爽換！</md-button>
+				<!-- <md-button ng-click="vm.onClickComplete(vm.exchange.eid)">COMPLETE !</md-button>
+				<md-button ng-click="vm.onClickDelete(vm.exchange.eid)">我不爽換！</md-button> -->
 			</div>
-			<div layout="row" class="hvr-shadow info_container">
+			<div layout="row" class="info_container">
 				<span flex-sm="5"></span>
 				<!-- first user item -->
 				<div layout="column" flex>
-					<div class="item profile" layout="column" layout-align="center center">
-						<img ng-src="{{vm.exchange.goods[0].photo_path}}" />
+					<div class="item exchange" layout layout-align="center center">
+						<!-- <img ng-src="{{vm.exchange.goods[0].photo_path}}" />
 						<div layout layout-align="center center">
 							<p class="md-body-2">{{vm.exchange.goods[0].name}}</p>
-						</div>
+						</div> -->
+						<img src="../../images/4c6c7a9349658394adfc6592aecc2ef90767dfbdd946d123d789fd4fb6794fb6.jpeg">
 					</div>
-					<div layout="row">
-						<img flex="30" ng-src="{{vm.exchange.goods[0].user.photo_path}}" style="max-height:60px; max-width:60px;" />
+					<div layout="column" style="height:250px; background-color:#B0BEC5;">
+						<p class="md-body-1 text-ex">來~上車囉~警察局就在前面不遠處</p>
+						<!-- <img flex="30" ng-src="{{vm.exchange.goods[0].user.photo_path}}" style="max-height:60px; max-width:60px;" />
 						<div flex layout layout-align="center center">
-							<p class="md-body-2 online">{{vm.exchange.goods[0].user.name}}</p>
+							<p class="md-body-2">{{vm.exchange.goods[0].user.name}}</p>
+						</div> -->
+						<div flex layout layout-align="end end">
+							<img class="circle" src="../../images/unknown-user.gif">
 						</div>
 					</div>
 				</div>
 				<!-- exchange icon -->
-				<div flex="20" layout layout-align="center center">
-					<md-icon md-font-set="material-icons" class="hide">autorenew</md-icon>
+				<div flex="30" layout="column" layout-align="center center">
+					<img src="../../images/icon(48-48).png" height="48" width="48">
+					<md-button class="md-accent md-hue-2" ng-click="vm.onClickComplete(vm.exchange.eid)">COMPLETE !</md-button>
+					<md-button ng-click="vm.onClickDelete(vm.exchange.eid)">我不爽換！</md-button>
 				</div>
 				<!-- second user item -->
 				<div layout="column" flex>
-					<div class="item profile" layout="column" layout-align="center center">
-						<img ng-src="{{vm.exchange.goods[1].photo_path}}" />
+					<div class="item exchange" layout layout-align="center center">
+						<!-- <img ng-src="{{vm.exchange.goods[1].photo_path}}" />
 						<div layout layout-align="center center">
 							<p class="md-body-2">{{vm.exchange.goods[1].name}}</p>
-						</div>
+						</div> -->
+						<img src="../../images/b76afa8797482aa0e36ba32f5fbe53e5e80153e095cb3999bc75e98981e8d262.jpeg">
 					</div>
-					<div layout="row">
-						<img flex="30" ng-src="{{vm.exchange.goods[1].user.photo_path}}" style="max-height:60px; max-width:60px;" />
+					<div layout="column" style="height:250px; background-color:#B0BEC5;">
+						<p class="md-body-1 text-ex">來啦啦啦啦啦啦阿啦WRYYYYY</p>
+						<!-- <img flex="30" ng-src="{{vm.exchange.goods[1].user.photo_path}}" style="max-height:60px; max-width:60px;" />
 						<div flex layout layout-align="center center">
-							<p class="md-body-2 online">{{vm.exchange.goods[1].user.name}}</p>
+							<p class="md-body-2">{{vm.exchange.goods[1].user.name}}</p>
+						</div> -->
+						<div flex layout layout-align="end end">
+							<img class="circle" src="../../images/unknown-user.gif">
 						</div>
 					</div>
 				</div>
@@ -62,8 +107,8 @@
 			</div>
 		</div>
 		<!-- chat room -->
-		<div flex flex-sm class="info_container chat" layout="row">
-			<span flex="5"></span>
+		<div flex flex-sm layout="row">
+			<span flex="5" hide-sm></span>
 			<div flex>
 				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
 					<span>聊天</span>
@@ -98,7 +143,7 @@
 					</form>
 				</ul>
 			</div>
-			<span flex="5"></span>
+			<!-- <span flex="5"></span> -->
 		</div>
 	</div>
 </md-content>

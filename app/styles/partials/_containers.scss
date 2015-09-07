@@ -92,7 +92,7 @@ md-list-item {
 }
 
 .item {
-    display: inline-block;
+    //display: inline-block;
     background: #F5F5F5;
     padding: 1em;
     margin: 0 0 1.5em;
@@ -101,6 +101,10 @@ md-list-item {
     img {
         max-width: 100%;
         height: auto;
+        .img-exchange{
+        	max-height:100%;
+        	max-width:100%;
+        }
     }
     &.profile {
         margin: 6px 0;
@@ -111,6 +115,10 @@ md-list-item {
         img {
             max-width: 80%;
         }
+    }
+    &.exchange{
+    	padding:2px;
+    	height:200px;
     }
 }
 

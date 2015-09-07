@@ -239,10 +239,10 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			const vm             = this;
 			vm.myGoods           = myGoods;
 			vm.queuing_goods_gid = queuing_goods_gid;
-			vm.comfrim           = onComfrim;
+			vm.confirm           = onConfirm;
 			vm.cancel            = onCancel;
 
-			function onComfrim(selected_gid) {
+			function onConfirm(selected_gid) {
 				$mdDialog
 					.hide(selected_gid)
 					.then(function() {
@@ -273,10 +273,10 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			const vm          = this;
 			vm.queuingGoods   = queuingGoods;
 			vm.host_goods_gid = host_goods_gid;
-			vm.comfrim        = onComfrim;
+			vm.confirm        = onConfirm;
 			vm.cancel         = onCancel;
 
-			function onComfrim(selected_gid) {
+			function onConfirm(selected_gid) {
 				$mdDialog
 					.hide(selected_gid)
 					.then(function(selected_gid) {

@@ -1,17 +1,19 @@
 <md-dialog aria-label="Queue">
 	<form>
 		<md-toolbar>
-			<div flex class="md-toolbar-tools">
+			<div flex class="md-toolbar-tools" layout layout-align="center center">
 				<h2 class="md-display-1">選擇你想要排的物品</h2>
 				<span flex></span>
+				<md-button class="md-icon-button" ng-click="vm.cancel()">
+					<md-icon md-font-set="material-icons" aria-label="Close dialog">close</md-icon>
+				</md-button>
 			</div>
 		</md-toolbar>
 		<md-dialog-content style="max-width:800px;max-height:910px; ">
 			<div layout layout-align="start center">
 				<md-button ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西，趕快去ＰＯ一些吧！</md-button>
 				<md-radio-group ng-model="queue.group">
-					<md-radio-button ng-repeat = "goods in vm.myGoods" 
-									 value  = "{{goods.gid}}">
+					<md-radio-button ng-repeat="goods in vm.myGoods" value="{{goods.gid}}">
 						<img ng-src="{{goods.photo_path}}" style="width:80px; height:80px;">
 					</md-radio-button>
 				</md-radio-group>
@@ -24,7 +26,8 @@
 		</md-dialog-content>
 		<div class="md-actions" layout="row">
 			<span flex></span>
-			<md-button ng-click="vm.comfrim(queue.group1)" style="margin-right:20px;">
+			<md-button ng-click="vm.cancel()">取消</md-button>
+			<md-button ng-click="vm.confirm(queue.group1)" style="margin-right:20px;">
 				完成
 			</md-button>
 		</div>

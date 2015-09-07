@@ -2,8 +2,7 @@
 	<div layout="row" layout-sm="column">
 		<div flex="20" flex-sm="95" offset-sm="5">
 			<div layout="column" layout-sm="row" layout-wrap>
-				<md-button flex-sm="45" aria-label="list" ng-repeat="exchange in vm.exchangeList" 
-														  ng-click="vm.onClickExchange(exchange.eid)">
+				<md-button flex-sm="45" aria-label="list" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
 					<md-divider></md-divider>
 					<div layout="row" layout-align="center center">
 						<div>GG {{ exchange.eid }}</div>
@@ -19,7 +18,7 @@
 		<div flex flex-sm>
 			<!-- title -->
 			<div layout layout-align="center center">
-				<h1 class="md-display-1">Title</h1>
+				<!-- <h1 class="md-display-1">Title</h1> -->
 				<md-button ng-click="vm.onClickComplete(vm.exchange.eid)">COMPLETE !</md-button>
 				<md-button ng-click="vm.onClickDelete(vm.exchange.eid)">我不爽換！</md-button>
 			</div>

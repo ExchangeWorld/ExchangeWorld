@@ -14,7 +14,7 @@
 				<md-button ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西，趕快去ＰＯ一些吧！</md-button>
 				<md-radio-group ng-model="queue.group">
 					<md-radio-button ng-repeat="goods in vm.myGoods" value="{{goods.gid}}">
-						<img ng-src="{{goods.photo_path}}" style="width:80px; height:80px;">
+						<img ng-src="{{goods.photo_path}}" class="img-queue">
 					</md-radio-button>
 				</md-radio-group>
 			</div>

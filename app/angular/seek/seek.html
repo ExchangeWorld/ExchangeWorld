@@ -6,11 +6,15 @@
 			<input ng-model="vm.searchGoodsName">
 			<!-- <md-tooltip md-direction="left">搜尋</md-tooltip> -->
 		</md-input-container>
-		<md-button flex flex-sm class="md-raised seek_btn" aria-expanded="true">
-			<md-tooltip>依據物品種類</md-tooltip>
-			分類
-			<span class="caret"></span>
-		</md-button>
+		<!-- <select class="md-button mdbtn-border" placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" required> -->
+		<!--<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>-->
+		<!-- </select> -->
+		<md-input-container flex>
+			<label>種類</label>
+			<md-select ng-model="vm.goodsCategory">
+				<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>
+			</md-select>
+		</md-input-container>
 		<md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName})">
 			<md-icon hide-sm md-font-set="material-icons">search</md-icon><span class="ng-scope">搜索!</span>
 		</md-button>
@@ -22,7 +26,7 @@
 	</div>
 	<div class="md-padding"></div>
 	<div deckgrid class="deckgrid" source="vm.goods">
-		<md-card class="md-whiteframe-z3 item" ng-click="mother.onClickGoods(card.gid)">
+		<md-card class="md-whiteframe-z3 item grow" ng-click="mother.onClickGoods(card.gid)">
 			<img src="" data-ng-src="{{card.photo_path}}" class="md-card-image">
 			<md-card-content>
 				<div layout="row">

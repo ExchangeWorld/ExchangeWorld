@@ -10,7 +10,7 @@ var Users = sequelize.define('users', {
 		autoIncrement: true
 	},
 	fb_id: {
-		type: Sequelize.STRING(128),
+		type: Sequelize.STRING,
 		allowNull: false,
 		unique: true
 	},

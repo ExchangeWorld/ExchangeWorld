@@ -34,6 +34,15 @@ module.exports = function() {
 	/*USE TO CREATE NEW DATABASE*/
 	//server.use('/api/CreateAllTables', require('./libs/CreateAllTable.js'));
 
+	// Token authentications:
+	// If the path is not /api/authenticate, then it needs authentication
+	// If fail, return {"authentication": "fail"}
+	// If success, and then go next()
+	var authenticate = require('./routers/authenticate');
+	server.all(/\/api\/(?!authenticate).+/, authenticate.token, function(req, res, next) {
+		next();
+	});
+
 	/* ref: doc/seek.md */
 	server.use('/api/goods/search', require('./routers/goods.search'));
 	server.use('/api/goods', require('./routers/goods'));
@@ -51,9 +60,10 @@ module.exports = function() {
 	server.use('/api/queue', require('./routers/queue'));
 
 	server.use('/api/exchange', require('./routers/exchange'));
-	server.use('/api/authenticate', require('./routers/authenticate'));
 	server.use('/api/notification', require('./routers/notification'));
 	server.use('/api/message', require('./routers/message'));
+
+	server.use('/api/authenticate', authenticate.router);
 
 	// catch 404 and forward to error handler
 	server.use(function(req, res, next) {

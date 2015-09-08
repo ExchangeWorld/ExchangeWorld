@@ -134,7 +134,7 @@ router.get('/login', login_function);
 // Token middleware
 var token_function = function(req, res, next) {
 
-	var _token = req.query.token;
+	var _token = req.query.token || '';
 
 	tokens
 		.sync({
@@ -163,9 +163,10 @@ var token_function = function(req, res, next) {
 				});
 
 			} else {
-				res.json({
-					authentication: 'fail',
-				});
+				// res.json({
+				// 	authentication: 'fail',
+				// });
+				next();
 			}
 		})
 		.catch(function(err) {

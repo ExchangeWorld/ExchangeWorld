@@ -5,7 +5,7 @@
             <div flex class="md-toolbar-tools" layout="row" layout-align="center center">
                 <div>
                     <span><h2 class="md-headline">Things you have</h2></span>
-                    <!-- fill up the space between left and right area -->
+					<!-- fill up the space between left and right area -->
                     <span flex></span>
                 </div>
             </div>
@@ -27,6 +27,7 @@
             <md-icon md-font-set="material-icons" class="hide">insert_photo</md-icon>
             <input class="trans" flex="50" type='file' ng-model='vm.imgEncoded' base-sixty-four-input required accept="image/*" multiple/>
             <md-tooltip>加入相片</md-tooltip>
+			<img ng-repeat="preview in vm.imgEncoded" data-ng-src="data:image/png;base64,{{preview.base64}}" />
             <span flex></span>
         </div>
         <!-- Location -->

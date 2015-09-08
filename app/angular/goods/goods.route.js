@@ -24,8 +24,10 @@ function getStates() {
 						return goodsService
 							.getGood($stateParams.gid, -1)
 							.then(function(data) { 
-								if (data instanceof Array) return data[0];
-								return data; 
+								if (data instanceof Array) {
+									data[0].photo_path = JSON.parse(data[0].photo_path);
+									return data[0];
+								}
 							})
 							.catch(function() { return undefined; });
 					},

@@ -23,6 +23,9 @@ function SeekController(
 	vm.onMouseOver         = onMouseOver;
 	vm.onMouseOut          = onMouseOut;
 
+	/////////////////
+	onSearch({ name:'' });
+
 	$scope.$on('boundChanged', function(e, bound) {
 		console.log(bound.toUrlValue());
 		onSearch({

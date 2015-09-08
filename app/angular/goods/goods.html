@@ -1,40 +1,32 @@
 <md-content layout-padding>
-	<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.stars.length}} </md-button>
+	<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1">
+		<md-icon md-font-set="material-icons">undo</md-icon>Back
+	</md-button>
+	<div layout="row" layout-align="center center">
+		<div layout layout-align="center center">
+			<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
+				<md-icon md-font-set="material-icons" ng-class="{'active': isActive}">star</md-icon>
+				{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.stars.length}} </md-button>
+		</div>
+		<div layout layout-align="center center">
+			<md-button ng-show="!vm.isMe" ng-click="vm.onClickQueue($event, 'want_to_queue')">我要排！</md-button>
+			<md-button ng-show="vm.isMe" ng-click="vm.onClickQueue($event, 'see_who_queue')">看誰排！</md-button>
+		</div>
+	</div>
 	<!--<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(6)">我要排！ {{vm.queue.length}}</md-button>-->
-	<ul ng-show="!vm.isMe">
-		<md-button ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西，趕快去ＰＯ一些吧！</md-button>
-		<md-button ng-repeat="goods in vm.myGoods" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(goods.gid)">用 {{goods.name}}排！</md-button>
-	</ul>
-	<ul ng-show="vm.isMe">
-		<md-button ng-show="vm.queuingList.length === 0">目前沒有正在排的物品</md-button>
-		<md-button ng-repeat="queue in vm.queuingList" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickAccept(queue.queuer_goods_gid)">接受 {{queue.good.name}} 的排！</md-button>
-	</ul>
-	<md-tabs md-dynamic-height md-border-bottom>
-		<md-tab label="ItemName">
-			<div layout layout-align="center center">
-				<p class="md-headline">{{ vm.goodData.name }}</p>
-			</div>
-		</md-tab>
-		<md-tab label="Owner">
-			<div layout layout-align="center center">
-				<a ng-click="vm.onClickUser( vm.goodData.user.uid )">
-					<p class="md-headline">{{ vm.goodData.user.name }}</p>
-				</a>
-			</div>
-		</md-tab>
-		<md-tab label="Catogories">
-			<div layout layout-align="center center">
-				<p class="md-headline">{{ vm.goodData.category }}</p>
-			</div>
-		</md-tab>
-		<md-tab label="Description">
-			<div layout layout-align="center center">>
-				<p class="md-headline">{{ vm.goodData.description }}</p>
-			</div>
-		</md-tab>
-	</md-tabs>
-	<div flex="80" layout layout-align="center center">
-		<img style="max-width: 75%;" src="{{ vm.goodData.photo_path }}" title="source: imgur.com" />
+	<div layout layout-align="center center">
+		<img style="max-width: 100%;" src="{{ vm.goodData.photo_path }}" title="source: imgur.com" />
+	</div>
+	<div class="info_container" layout="row">
+		<div flex="30" layout="column" layout-align="center center">
+			<img class="circular goods with_border" src="{{ vm.goodData.user.photo_path }}" title="source: imgur.com" />
+			<p class="md-tiltle" style="color:#7f8588;">{{ vm.goodData.user.name }}</p>
+		</div>
+		<div flex offset="10" layout="column">
+			<h3 style="color:#3e4042">{{ vm.goodData.name }}</h3>
+			<p style="color:#7f8588;">{{ vm.goodData.category }}</p>
+			<p style="color:#7f8588;">{{ vm.goodData.description }}</p>
+		</div>
 	</div>
 	<h3 class="md-subhead">Comments</h3>
 	<md-divider></md-divider>
@@ -57,13 +49,13 @@
 		</div>
 		<div class="comment" ng-repeat="comment in vm.goodComments">
 			<a class="avatar" ng-click="vm.onClickUser(comment.user.uid)"> <img ng-src="{{ comment.user.photo_path }}"> </a>
-			<div class="content">
+			<div class="content" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
 				<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
 				<div class="metadata">
 					<!--<div class="date">{{ comment.timestamp| date:'MM/dd/yyyy @ h:mma' }}</div>-->
-					<div class="date">{{ comment.timestamp}}</div>
-					<div ng-show="comment.isMe" ng-click="vm.onDeleteComment(comment.cid)">X</div>
+					<div flex class="date">{{ comment.timestamp}}</div>
 				</div>
+				<div ng-show="comment.isMe && removeMode" ng-click="vm.onDeleteComment(comment.cid)" class="cross">X</div>
 				<div class="text">
 					{{ comment.content }}
 				</div>
@@ -86,7 +78,7 @@
 		<!--</div>-->
 		<!--</div>-->
 		<!--</div>-->
-		<form ng-submit="vm.onSubmitComment()" >
+		<form ng-submit="vm.onSubmitComment()">
 			<md-input-container>
 				<label>Write some here...</label>
 				<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
@@ -95,5 +87,5 @@
 			<input type="submit" id="submit" value="Submit" ng-show="false" />
 		</form>
 	</div>
-	</div>
 </md-content>
+

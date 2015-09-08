@@ -43,6 +43,7 @@ function SeekController(
 			.then(function(data) {
 				$rootScope.$broadcast('goodsChanged', data);
 				vm.goods = data;
+				console.log(data);
 			})
 			.catch(function() {
 				vm.goods = [];

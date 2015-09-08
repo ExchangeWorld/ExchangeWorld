@@ -15,6 +15,9 @@
     a {
         padding-top: 20px;
     }
+    i {
+        margin-right: 5px;
+    }
 }
 
 map {
@@ -36,6 +39,7 @@ map {
     background-color: rgba(158, 158, 158, 0.2);
     color: #293D66;
     transition: 0.6s;
+    transition-delay: 0.2s;
 }
 
 .md-button {
@@ -50,21 +54,41 @@ map {
 }
 
 .seek_btn {
+    min-width: 60px;
     height: 50%;
-    top: 8px;
-    right: 10px;
+    top: 15px;
+    right: 8px;
 }
 
 .notification {
     position: absolute;
-    right: 18px;
+    right: 13px;
     top: -2px;
     background-color: #FF8F00;
     line-height: 20px;
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    position: absolute;
-    bottom: 0;
-    right: 0;
+}
+
+.event-btn {
+    padding: 0;
+    margin: 0;
+    height: 80px;
+    max-width: 210px;
+    cursor: pointer;
+    &.first {
+        background-color: #F5F5F5;
+        &:hover {
+            background-color: #aecfdd;
+            transition: 0.6s;
+        }
+    }
+    &.second {
+        background-color: #ECEFF1;
+        &:hover {
+            background-color: #aecfdd;
+            transition: 1.0s;
+        }
+    }
 }

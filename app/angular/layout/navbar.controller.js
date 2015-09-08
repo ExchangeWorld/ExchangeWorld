@@ -35,7 +35,7 @@ function NavbarController(
 
 	vm.messages       = [];
 	vm.onClickMessage = onClickMessage;
-	
+
 	//////////////
 	activate();
 
@@ -53,8 +53,10 @@ function NavbarController(
 	function onClick(contentIndex) {
 		//$scope.content = ContentType[contentIndex];
 		//$scope.$emit('sidenavChanged', ContentType[contentIndex]);
-		if (contentIndex === 0 || contentIndex === 3) {
+		if (contentIndex === 0) {
 			$state.go('root.oneCol.' + state[contentIndex]);
+		} else if(contentIndex === 3) {
+			$state.go('root.oneCol.' + state[contentIndex], {uid: vm.user.uid});
 		} else if(contentIndex === 4) {
 			$state.go('root.withSidenav.' + state[contentIndex], {
 				uid: auth.currentUser().uid
@@ -134,12 +136,14 @@ function NavbarController(
 						notice.timestamp = moment(notice.timestamp).fromNow();
 					});
 					vm.notifications = data[0];
-		
+
 					vm.messages = _.unique(data[1], 'sender_uid');
 					vm.messages.forEach(function(msg) {
 						msg.timestamp = moment(msg.timestamp).calendar();
 					});
-					
+
+					console.log(data);
+
 					vm.unreadCount = _.filter(vm.notifications.concat(vm.messages), {unread : true}).length;
 					if(vm.unreadCount) $rootScope.pageTitle = `(${vm.unreadCount}) ${AppSettings.appTitle}`;
 					else $rootScope.pageTitle = AppSettings.appTitle;

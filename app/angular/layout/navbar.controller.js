@@ -35,7 +35,7 @@ function NavbarController(
 
 	vm.messages       = [];
 	vm.onClickMessage = onClickMessage;
-	
+
 	//////////////
 	activate();
 
@@ -136,12 +136,14 @@ function NavbarController(
 						notice.timestamp = moment(notice.timestamp).fromNow();
 					});
 					vm.notifications = data[0];
-		
+
 					vm.messages = _.unique(data[1], 'sender_uid');
 					vm.messages.forEach(function(msg) {
 						msg.timestamp = moment(msg.timestamp).calendar();
 					});
-					
+
+					console.log(data);
+
 					vm.unreadCount = _.filter(vm.notifications.concat(vm.messages), {unread : true}).length;
 					if(vm.unreadCount) $rootScope.pageTitle = `(${vm.unreadCount}) ${AppSettings.appTitle}`;
 					else $rootScope.pageTitle = AppSettings.appTitle;

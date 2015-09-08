@@ -54,6 +54,28 @@
 							</div>
 						</md-list-item>
 					</md-list>
+
+					<!-- Message -->
+					<md-menu-item style="min-height: 30px; height:30px">
+						<p class="md-body-1">Message</p>
+					</md-menu-item>
+					<md-divider></md-divider>
+					<md-list>
+						<md-list-item
+							ng-repeat="msg in vm.messages"
+							ng-style="msg.unread && {'background-color':'#E9F3FF'}"
+							ng-click="vm.onClickMessage(msg, $event)"
+						>
+							<!-- user avatar -->
+							<img flex style="max-height:50px; max-width:50px;" ng-src="{{ msg.user.photo_path }}" />
+							<!-- messages text -->
+							<div offset="5" flex>
+								<p class="md-body-2 note">{{msg.content}}</p>
+								<p class="md-caption note" style="color: #BCBCBC;">{{ msg.timestamp }}</p>
+							</div>
+						</md-list-item>
+					</md-list>
+
 					<md-divider></md-divider>
 					<md-divider></md-divider>
 					<!-- See All text -->

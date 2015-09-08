@@ -24,6 +24,9 @@ function ProfileController(
 	vm.onClickSendMsg      = onClickSendMsg;
 	vm.followerCount       = profile.followers.length;
 	vm.isFollowed          = false;
+	vm.isReadOnly          = true;
+	vm.onClickEdit         = function() { vm.isReadOnly = !vm.isReadOnly; };
+
 
 	/////////////
 	activate();

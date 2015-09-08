@@ -216,3 +216,11 @@ div.md-open-menu-container {
 	background-color: #E0E0E0;
 	margin-top: 10px;
 }
+
+.fade {
+	transition: 0.5s linear all;
+	opacity: 1;
+	&.ng-hide {
+		opacity: 0;
+	}
+}

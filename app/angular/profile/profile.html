@@ -19,10 +19,7 @@
 					<md-icon md-font-set="material-icons">person_add</md-icon>
 					<span>&nbsp;Follow</span>
 				</md-button>
-				<md-button flex class="md-raised md-primary" 
-						ng-show="!vm.isMe"
-						ng-disabled="!vm.isLoggedIn"
-						ng-click="vm.onClickSendMsg($event, vm.profile.uid)">
+				<md-button flex class="md-raised md-primary" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)">
 					<md-icon md-font-set="material-icons">person_add</md-icon>
 					<span>&nbsp;Send Message</span>
 				</md-button>
@@ -47,11 +44,18 @@
 					<div flex="70" offset="5">
 						<form name="userForm">
 							<div layout="column">
+								<p class="fade md-subhead text-ex edit" ng-hide="vm.isReadOnly">請於下方輸入您想要的物品</p>
 								<md-input-container>
-									<label>3C都行、YO</label>
-									<input ng-model="wishlist" disabled>
+									<!-- <label>輸入您想要的物品</label> -->
+									<textarea ng-model="wishlist" ng-disabled="vm.isReadOnly"></textarea>
 								</md-input-container>
+								<div layout="row">
+									<span flex="70"></span>
+									<md-button class="fade" ng-hide="vm.isReadOnly" ng-click="vm.onClickEdit()">完成</md-button>
+								</div>
 							</div>
+						</form>
+						<md-button></md-button>
 					</div>
 					<!-- <div flex="60">
 						<div layout="row" class="profile_text">
@@ -81,7 +85,7 @@
 					<!-- edit fab button -->
 					<span flex></span>
 					<div layout layout-align="center start">
-						<md-button class="md-fab md-primary md-hue-2" ng-show="vm.isMe">
+						<md-button class="md-fab md-primary md-hue-2" ng-show="vm.isMe" ng-click="vm.onClickEdit()">
 							<md-icon md-font-set="material-icons">edit</md-icon>
 							<md-tooltip>編輯願望清單</md-tooltip>
 						</md-button>

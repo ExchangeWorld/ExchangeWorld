@@ -118,7 +118,7 @@ md-list {
 	}
 	&.exchange {
 		padding: 2px;
-		height: 200px;
+		height: 220px;
 	}
 }
 
@@ -218,7 +218,7 @@ div.md-open-menu-container {
 }
 
 .fade {
-	transition: 0.5s linear all;
+	transition: 0.8s linear all;
 	opacity: 1;
 	&.ng-hide {
 		opacity: 0;

@@ -2,7 +2,7 @@
     list-style: none;
     background: #e5e5e5;
     margin: 0;
-    height: 380px;
+    height: 420px;
     padding: 0 0 10px 0; // finality
     overflow-y: auto;
     li {
@@ -34,7 +34,7 @@
             border: 5px solid white;
             border-left-color: transparent;
             border-bottom-color: transparent;
-            content: "";
+            //content: "";
             position: absolute;
             top: 0;
             right: 0;
@@ -56,7 +56,7 @@
         margin-left: 5px;
         order: 2;
         &:after {
-            content: "";
+            //content: "";
             position: absolute;
             top: 0;
             right: 0;

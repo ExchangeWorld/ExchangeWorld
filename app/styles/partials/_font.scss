@@ -1,51 +1,51 @@
 strong {
-    //color: rgba(0, 126, 244, 0.7);
-    color: rgba(0, 163, 244, 0.66);
-    &.map-font {
-        color: #000;
-    }
+	//color: rgba(0, 126, 244, 0.7);
+	color: rgba(0, 163, 244, 0.66);
+	&.map-font {
+		color: #000;
+	}
 }
 
 .goods_text {
-    padding-left: 20px;
-    padding-top: 15px;
+	padding-left: 20px;
+	padding-top: 15px;
 }
 
 .profile_text {
-    padding-left: 20px;
+	padding-left: 20px;
 }
 
 .textshade {
-    color: #616161;
-    text-shadow: 2px 2px 2px #CCCCCC;
+	color: #616161;
+	text-shadow: 2px 2px 2px #CCCCCC;
 }
 
 a {
-    color: #2196F3;
-    text-decoration: none;
-    cursor: pointer;
+	color: #2196F3;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 a:hover {
-    color: #F06292;
-    transition: 0.5s;
+	color: #F06292;
+	transition: 0.5s;
 }
 
 .note {
-    margin: 2px;
+	margin: 2px;
 }
 
 .online:after {
-    content: '';
-    display: inline-block;
-    height: 10px;
-    width: 10px;
-    background: #39caad;
-    border-radius: 100%;
-    margin-left: 5px;
+	content: '';
+	display: inline-block;
+	height: 10px;
+	width: 10px;
+	background: #39caad;
+	border-radius: 100%;
+	margin-left: 5px;
 }
 
 .text-ex {
-    color: #455A64;
-    line-height: 30px;
+	color: #455A64;
+	line-height: 30px;
 }

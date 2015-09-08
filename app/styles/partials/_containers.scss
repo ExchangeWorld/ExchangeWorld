@@ -127,7 +127,7 @@ div.md-open-menu-container {
 	width: 60px;
 	border-radius: 50%;
 	border: 3px double #4762dc;
-	z-index: 10000;
+	//z-index: 10000;
 	&.profile {
 		height: 100%;
 		width: auto;
@@ -189,7 +189,7 @@ div.md-open-menu-container {
 	}
 }
 
-.lineup-img {
+.img-lineup {
 	width: 100%;
 	height: 100%;
 	&.thing {
@@ -205,4 +205,10 @@ div.md-open-menu-container {
 	max-height: 100px;
 	height: 100px;
 	width: auto;
+}
+
+.message-box {
+	height: 250px;
+	background-color: #E0E0E0;
+	margin-top: 10px;
 }

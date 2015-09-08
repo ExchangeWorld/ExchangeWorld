@@ -49,4 +49,13 @@ a:hover {
 	color: #455A64;
 	line-height: 30px;
 	padding: 0 1em;
+	&.message {
+		padding: 8px 1em 0 1em;
+	}
+}
+
+.message {
+	color: #455A64;
+	line-height: 30px;
+	padding: 0 0.6em 0 1em;
 }

@@ -42,7 +42,11 @@ function SeekController(
 			.getSeek(filter)
 			.then(function(data) {
 				$rootScope.$broadcast('goodsChanged', data);
-				vm.goods = data;
+
+				vm.goods = data.map(function(goods) {
+					goods.photo_path = JSON.parse(goods.photo_path);
+					return goods;
+				});
 			})
 			.catch(function() {
 				vm.goods = [];

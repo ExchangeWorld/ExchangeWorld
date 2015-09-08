@@ -38,9 +38,15 @@ function auth(facebookService, $q, $localStorage) {
 	}
 
 	function logout() {
-		facebookService.logout();
-		currentUser = null;
-		delete $localStorage.user;
+		const defer = $q.defer();
+		facebookService
+			.logout()
+			.then(function() {
+				currentUser = null;
+				delete $localStorage.user;
+				defer.resolve();
+			});
+		return defer.promise;
 	}
 
 	function fetchMe() {

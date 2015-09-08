@@ -3,6 +3,7 @@ var router  = express.Router();
 
 // Including tables
 var messages = require('../ORM/Messages');
+var users    = require('../ORM/Users');
 
 router.get('/', function(req, res, next) {
 
@@ -19,6 +20,8 @@ router.get('/', function(req, res, next) {
 	var _from         = parseInt(req.query.from, 10);
 	var _number       = parseInt(req.query.number, 10);
 
+	messages.belongsTo(users, {foreignKey: 'sender_uid'});
+
 	messages
 		.sync({
 			force: false
@@ -27,14 +30,11 @@ router.get('/', function(req, res, next) {
 			return messages.findAll({
 				where: {
 					receiver_uid: _receiver_uid
-					//$and: [{
-						//receiver_uid: (receiver_uid === undefined ? {$like: '%'} : _receiver_uid)
-						//sender_uid: (sender_uid === undefined ? {$like: '%'} : _sender_uid),
-					//}],
 				},
 				order: [
 					['mid', 'DESC']
 				],
+				include:[users],
 				offset: _from,
 				limit: _number
 			});
@@ -72,6 +72,39 @@ router.post('/', function(req, res, next) {
 			res.send(err);
 		});
 
+});
+
+/**
+ * use to update read/unread
+ */
+router.put('/', function(req, res, next) {
+
+	// Available PUT body params:
+	//
+	// mid
+	// unread
+	//
+
+	// Get property:value in PUT body
+	var _mid    = parseInt(req.body.mid, 10);
+	var _unread = Boolean(req.body.unread);
+
+	messages
+		.sync({force: false})
+		.then(function() {
+			return messages.update(
+				{unread: _unread}, 
+				{
+					where: {mid: _mid}
+				}
+			);
+		})
+		.then(function(result) {
+			res.json(result);
+		})
+		.catch(function(err) {
+			res.send({error: err});
+ 		});
 });
 
 module.exports = router;

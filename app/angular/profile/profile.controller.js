@@ -5,7 +5,14 @@ const _             = require('lodash');
 profileModule.controller('ProfileController', ProfileController);
 
 /** @ngInject */
-function ProfileController(profile, profileService, $state, $localStorage, auth) {
+function ProfileController(
+	profile,
+	profileService,
+	auth,
+	message,
+	$state,
+	$localStorage
+) {
 	var vm                 = this;
 	const types            = ['following', 'follower'];
 	vm.profile             = profile;
@@ -14,6 +21,7 @@ function ProfileController(profile, profileService, $state, $localStorage, auth)
 	vm.isMe                = vm.isLoggedIn && (profile.uid === $localStorage.user.uid);
 	vm.onClickFollow       = onClickFollow;
 	vm.onClickAddFollowing = onClickAddFollowing;
+	vm.onClickSendMsg      = onClickSendMsg;
 	vm.followerCount       = profile.followers.length;
 	vm.isFollowed          = false;
 
@@ -50,5 +58,15 @@ function ProfileController(profile, profileService, $state, $localStorage, auth)
 		profileService.addFollowing($localStorage.user.uid, profile.uid);
 		vm.followerCount++;
 		vm.isFollowed = !vm.isFollowed;
+	}
+
+	function onClickSendMsg(ev, uid) {
+		var msg = {
+			sender_uid   : uid,
+			user         : profile,
+			receiver_uid : $localStorage.user.uid,
+			isNewMsg     : true,
+		};
+		message .showMessagebox(ev, msg);
 	}
 }

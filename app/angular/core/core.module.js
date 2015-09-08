@@ -11,6 +11,7 @@ require('ngstorage');
 require('../utils/exception/exception.module');
 require('../utils/fackbook/facebook.module');
 require('../utils/notification/notification.module');
+require('../utils/message/message.module');
 require('../utils/logger/logger.module');
 require('../utils/router/router.module');
 require('../utils/resize/resize.module');
@@ -23,6 +24,7 @@ const requires = [
 	'ngMaterial',
 	'utils.facebook',
 	'utils.notification',
+	'utils.message',
 	'utils.logger',
 	'utils.exception',
 	'utils.router',

@@ -1,4 +1,5 @@
 <form ng-submit="vm.onSubmit()">
+
 	<md-toolbar class="rounded-corners md-primary md-hue-3 md-whiteframe-z3">
 		<div flex class="md-toolbar-tools" layout="row" layout-align="center center">
 			<div>
@@ -23,11 +24,12 @@
 			<md-tooltip md-direction="left">物品敘述</md-tooltip>
 		</md-input-container>
 		<!-- Insert Photo -->
-		<div layout="row" class="info_container add-photo">
-			<md-icon md-font-set="material-icons" class="hide">insert_photo</md-icon>
-			<input class="trans" flex="50" type='file' ng-model='vm.imgEncoded' base-sixty-four-input required accept="image/*" />
-			<md-tooltip>加入相片</md-tooltip>
-			<span flex></span>
+		<div layout="row" class="info_container">
+				<md-icon md-font-set="material-icons" class="hide">insert_photo</md-icon>
+				<input class="trans" flex="50" type='file' ng-model='vm.imgEncoded' base-sixty-four-input required accept="image/*" multiple/>
+				<md-tooltip>加入相片</md-tooltip>
+				<img ng-repeat="preview in vm.imgEncoded" data-ng-src="data:image/png;base64,{{preview.base64}}" />
+				<span flex></span>
 		</div>
 		<!-- Location -->
 		<div class="info_container for_input" layout="row">
@@ -47,6 +49,7 @@
 			<md-tooltip>物品類別</md-tooltip>
 		</div>
 		<hr>
+
 		<!-- Submit button -->
 		<div layout="row">
 			<span flex="75" flex-sm="60"></span>
@@ -61,4 +64,3 @@
 		</div>
 	</md-content>
 </form>
-

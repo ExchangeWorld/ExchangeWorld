@@ -66,11 +66,12 @@ function exchangeService(Restangular, $q) {
 			.all('exchange')
 			.getList({eid: eid})
 			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data[0]);
-				} else {
-					defer.resolve(data);
-				}
+				data = _.isArray(data) ? data[0] : data;
+				data.goods = data.goods.map(function(goods) {
+					if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
+					return goods;
+				});
+				defer.resolve(data);
 			})
 			.catch(function(error) {
 				return exception.catcher('[Exchange Service] getExchange error: ')(error);

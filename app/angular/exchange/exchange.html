@@ -1,14 +1,5 @@
 <div layout="row" layout-sm="column">
 	<div flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap>
-		<!-- <div layout="column" layout-sm="row" layout-wrap>
-				<md-button flex-sm="45" aria-label="list" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
-					<md-divider></md-divider>
-					<div layout="row" layout-align="center center">
-						<div>GG {{ exchange.eid }}</div>
-					</div>
-					<md-divider></md-divider>
-				</md-button>
-			</div> -->
 		<div class="event-btn first" layout="row" flex-sm="50" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
 			<div flex>
 				<p class="md-body-1 note">{{ exchange.details.goods[0].name }}</p>
@@ -29,9 +20,6 @@
 		</div>
 	</div>
 	<div flex="55" flex-sm="100">
-		<!-- title -->
-		<div layout layout-align="center center">
-		</div>
 		<div layout="row" class="info_container">
 			<span flex-sm="5"></span>
 			<!-- first user item -->
@@ -40,7 +28,8 @@
 					<img ng-src="{{ vm.exchange.goods[0].photo_path[0] }}" />
 				</div>
 				<div layout="column" style="height:270px; background-color:#B0BEC5;">
-					<p class="md-body-1 text-ex">{{ vm.exchange.goods[0].name }}<br/>{{ vm.exchange.goods[0].description }}</p>
+					<p class="md-body-1 text-ex">{{ vm.exchange.goods[0].name }}
+						<br/>{{ vm.exchange.goods[0].description }}</p>
 					<div flex layout layout-align="end end">
 						<img class="circle" ng-src="{{vm.exchange.goods[0].user.photo_path}}">
 					</div>
@@ -58,7 +47,8 @@
 					<img ng-src="{{ vm.exchange.goods[1].photo_path[0] }}" />
 				</div>
 				<div layout="column" style="height:271px; background-color:#B0BEC5;">
-					<p class="md-body-1 text-ex">{{ vm.exchange.goods[1].name }}<br/>{{ vm.exchange.goods[1].description }}</p>
+					<p class="md-body-1 text-ex">{{ vm.exchange.goods[1].name }}
+						<br/>{{ vm.exchange.goods[1].description }}</p>
 					<div flex layout layout-align="end end">
 						<img class="circle" ng-src="{{vm.exchange.goods[1].user.photo_path}}">
 					</div>
@@ -87,7 +77,6 @@
 				<li class="self">
 					<div class="avatar">
 						<img src="../../images/unknown-user.gif" />
-						<md-tooltip>user2</md-tooltip>
 					</div>
 					<div class="messages">
 						<p class="content">颱風沒來結果變成這樣辣 哭哭喔GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG</p>
@@ -99,12 +88,11 @@
 					<md-input-container style="height:49px;padding: 0px;">
 						<label>Type some here...</label>
 						<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
-						<input type="text" ng-model="SoemModel" name="text" />
+						<input type="text" ng-model="SomeModel" name="text" />
 					</md-input-container>
 				</form>
 			</ul>
 		</div>
-		<!-- <span flex="5"></span> -->
 	</div>
 </div>
 

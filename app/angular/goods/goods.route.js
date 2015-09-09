@@ -23,9 +23,8 @@ function getStates() {
 					goodData : function (goodsService, $stateParams) {
 						return goodsService
 							.getGood($stateParams.gid, -1)
-							.then(function(data) { 
-								if (data instanceof Array) return data[0];
-								return data; 
+							.then(function(data) {
+								return _.isArray(data) ? data[0] : data;
 							})
 							.catch(function() { return undefined; });
 					},

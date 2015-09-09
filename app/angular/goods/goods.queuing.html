@@ -19,7 +19,7 @@
 				<div ng-show="vm.queuingGoods.length === 0">目前沒有正在排的物品</div>
 				<md-radio-group ng-model="queuing.group">
 					<md-radio-button ng-repeat="queuing in vm.queuingGoods" value="{{queuing.good.gid}}">
-						<img ng-src="{{queuing.good.photo_path}}" style="width:80px; height:80px;">
+						<img ng-src="{{queuing.good.photo_path[0]}}" style="width:80px; height:80px;">
 					</md-radio-button>
 				</md-radio-group>
 			</div>

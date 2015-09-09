@@ -17,6 +17,7 @@ router.get('/', function(req, res, next) {
 
 	var _receiver_uid = parseInt(req.query.receiver_uid, 10);
 	var _sender_uid   = parseInt(req.query.sender_uid, 10);
+	var _chatroom_cid = parseInt(req.query.chatroom_cid, 10);
 	var _from         = parseInt(req.query.from, 10);
 	var _number       = parseInt(req.query.number, 10);
 
@@ -32,7 +33,7 @@ router.get('/', function(req, res, next) {
 			return messages.findAll({
 				where: {
 					receiver_uid: _receiver_uid,
-					chatroom_cid: -1
+					chatroom_cid: _chatroom_cid
 				},
 				order: [
 					['mid', 'DESC']
@@ -54,8 +55,9 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
 
 	var _receiver_uid = parseInt(req.body.receiver_uid, 10);
-	var _sender_uid   = parseInt(req.body.sender_uid, 10);
-	var _content      = req.body.content;
+	var _sender_uid = parseInt(req.body.sender_uid, 10);
+	var _chatroom_cid = parseInt(req.query.chatroom_cid, 10);
+	var _content = req.body.content;
 
 	messages
 		.sync({
@@ -65,6 +67,7 @@ router.post('/', function(req, res, next) {
 			return messages.create({
 				receiver_uid: _receiver_uid,
 				sender_uid  : _sender_uid,
+				chatroom_cid: _chatroom_cid,
 				content     : _content
 			});
 		})

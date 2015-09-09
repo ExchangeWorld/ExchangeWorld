@@ -142,8 +142,6 @@ function NavbarController(
 						msg.timestamp = moment(msg.timestamp).calendar();
 					});
 
-					console.log(data);
-
 					vm.unreadCount = _.filter(vm.notifications.concat(vm.messages), {unread : true}).length;
 					if(vm.unreadCount) $rootScope.pageTitle = `(${vm.unreadCount}) ${AppSettings.appTitle}`;
 					else $rootScope.pageTitle = AppSettings.appTitle;

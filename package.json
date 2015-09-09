@@ -105,6 +105,7 @@
     "compression": "^1.5.1",
     "express": "^4.7.2",
     "imagemin-pngcrush": "^4.1.0",
+    "jsonwebtoken": "^5.0.5",
     "lodash": "^3.10.0",
     "memcached": "^2.1.0",
     "moment": "^2.10.6",
@@ -124,6 +125,7 @@
     "redis": "^0.12.1",
     "response-time": "^2.3.1",
     "restangular": "^1.5.1",
+    "secure-random": "^1.1.1",
     "sequelize": "^3.4.1",
     "serve-favicon": "^2.3.0",
     "validator": "^4.0.2"

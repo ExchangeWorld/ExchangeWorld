@@ -138,3 +138,11 @@
 &.huge.comments {
     font-size: 1.2em;
 }
+
+.cross {
+    display: inline-block;
+    float: right;
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 0.875em;
+    cursor: pointer;
+}

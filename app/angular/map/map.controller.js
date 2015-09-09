@@ -150,9 +150,9 @@ function MapController(
 				return good;
 			}
 
-			const goodMarker = {
+			good = {
 				gid        : good.gid,
-				owner_uid  : good.owner_uid,
+				user       : good.user,
 				name       : good.name,
 				photo_path : good.photo_path,
 				category   : good.category,
@@ -162,12 +162,12 @@ function MapController(
 				}),
 			};
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
-			goodMarker.marker.addListener('mouseup', function() {
+			good.marker.addListener('mouseup', function() {
 				closeGoodsOverlay();
-				overlay = new GoodsOverlay(map, goodMarker, $state);
+				overlay = new GoodsOverlay(map, good, $state);
 			});
 
-			return goodMarker;
+			return good;
 		});
 	}
 

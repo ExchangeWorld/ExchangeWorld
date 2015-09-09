@@ -1,35 +1,49 @@
-<md-toolbar class="md-primary md-hue-3 md-whiteframe-z4" style="height: 76px;">
-			<!-- search input bar & button -->
-	<div layout="row" layout-sm="row">
-		<md-input-container flex="55" flex-sm="70" class="md-primary">
+<md-toolbar class="md-primary md-hue-3 md-whiteframe-z2" style="height: 76px;">
+	<!-- search input bar & button -->
+	<div layout="row">
+		<md-input-container flex="55" flex-sm="45" class="md-primary" style="padding-left: 10px;">
 			<label>Search</label>
 			<input ng-model="vm.searchGoodsName">
 			<!-- <md-tooltip md-direction="left">搜尋</md-tooltip> -->
 		</md-input-container>
-		<md-button class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName})">
-			<md-icon md-font-set="material-icons">search</md-icon><span class="ng-scope">Seek!</span>
-		</md-button>
-
-		<md-button flex class="md-raised seek_btn" aria-expanded="true">
-			<md-tooltip>依據物品種類</md-tooltip>
-				Categories
-			<span class="caret"></span>
+		<!-- <select class="md-button mdbtn-border" placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" required> -->
+		<!--<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>-->
+		<!-- </select> -->
+		<md-input-container flex>
+			<label>種類</label>
+			<md-select ng-model="vm.goodsCategory" aria-label="cate">
+				<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>
+			</md-select>
+		</md-input-container>
+		<md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName})">
+			<md-icon hide-sm md-font-set="material-icons">search</md-icon><span class="ng-scope">搜索!</span>
 		</md-button>
 	</div>
 </md-toolbar>
-
 <md-content resize ng-style="resizeWithOffset(140)">
 	<div ng-show="loading" style="width: 65px; margin: 0 auto; margin-top:200px">
 		<md-progress-circular class="md-warn md-hue-2" md-mode="indeterminate"></md-progress-circular>
 	</div>
-
 	<div class="md-padding"></div>
 	<div deckgrid class="deckgrid" source="vm.goods">
 		<md-card class="md-whiteframe-z3 item" ng-click="mother.onClickGoods(card.gid)">
 			<img src="" data-ng-src="{{card.photo_path[0]}}" class="md-card-image">
 			<md-card-content>
-				<h2 class="md-title">{{card.name}}</h2>
+				<div layout="row" layout-align="center center">
+					<div flex layout="column" layout-align="center center">
+						<div layout layout-align="center center">
+							<i ng-show="card.category == 'Textbooks'" class="material-icons blue">book</i>
+							<i ng-show="card.category == 'Music CD'" class="material-icons blue">music_note</i>
+						</div>
+						<h2 class="md-title">{{card.name}}</h2>
+					</div>
+					<!-- <p>{{card.category}}</p> -->
+					<div flex layout layout-align="end end">
+						<img class="circle" src="" data-ng-src="{{card.user.photo_path}}">
+					</div>
+				</div>
 			</md-card-content>
+			<!-- <img class="circle" ng-src="{{ card.user.photo_path }}" /> -->
 		</md-card>
 	</div>
 </md-content>

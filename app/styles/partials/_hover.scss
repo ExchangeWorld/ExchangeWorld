@@ -1,5 +1,4 @@
 .hvr-box-shadow-outset {
-    display: inline-block;
     vertical-align: middle;
     transform: translateZ(0);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
@@ -14,25 +13,7 @@
     }
 }
 
-.hvr-pulse {
-    display: inline-block;
-    vertical-align: middle;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    font-smoothing: grayscale;
-    &:hover,
-    &:focus,
-    &:active {
-        animation-name: hvr-pulse;
-        animation-duration: 1s;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-    }
-}
-
 .hvr-grow {
-    display: inline-block;
     vertical-align: middle;
     transform: translateZ(0);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
@@ -45,5 +26,28 @@
     &:focus,
     &:active {
         transform: scale(1.05);
+    }
+}
+
+.hvr-shadow {
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    font-smoothing: grayscale;
+    transition-duration: 0.3s;
+    transition-property: box-shadow;
+    &:hover,
+    &:focus,
+    &:active {
+        box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+    }
+}
+
+.grow {
+    transition: all .2s ease-in-out;
+    &:hover {
+        transform: scale(1.04);
     }
 }

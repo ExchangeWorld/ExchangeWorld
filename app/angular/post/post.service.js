@@ -36,8 +36,7 @@ function postService(Restangular, $q, exception) {
 				.all('/upload/image') 
 				.post(img)
 				.then(function(data) {
-					if (data !== undefined ) {
-						console.log(data);
+					if (data) {
 						return data;
 					} 
 				})

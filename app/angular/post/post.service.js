@@ -4,7 +4,7 @@ const postModule = require('./post.module');
 postModule.service('postService', postService);
 
 /** @ngInject */
-function postService(Restangular, $q) {
+function postService(Restangular, $q, exception) {
 	var service = {
 		sendNewPostInfo,
 		uploadImg,
@@ -30,21 +30,21 @@ function postService(Restangular, $q) {
 		return defer.promise;
 	}
 
-	function uploadImg(img) {
-		const defer = $q.defer();
+	function uploadImg(imgs) {
+		var gallery = imgs.map(function(img) {
+			return Restangular
+				.all('/upload/image') 
+				.post(img)
+				.then(function(data) {
+					if (data) {
+						return data;
+					} 
+				})
+				.catch(function(error) {
+					return exception.catcher('[Post Service] uploadImg error: ')(error);
+				});
+		});
 
-		Restangular
-			.all('/upload/image')
-			.post(img)
-			.then(function(data) {
-				if (data !== undefined ) {
-					defer.resolve(data);
-				} 
-			})
-			.catch(function(error) {
-				return exception.catcher('[Post Service] uploadImg error: ')(error);
-			});
-
-		return defer.promise;
+		return $q.all(gallery);//defer.promise;
 	}
 }

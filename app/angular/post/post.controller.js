@@ -13,11 +13,6 @@ function PostController(postService, $scope, $state, auth, AvailableCategory, lo
 	vm.onSubmit          = onSubmit;
 	vm.availableCategory = AvailableCategory;
 	$scope.$on('positionMarked', positionMarked);
-	/**
-	 * Need to get more info,
-	 * goods position X & Y
-	 *
-	 */
 
 	////////////////
 
@@ -30,15 +25,13 @@ function PostController(postService, $scope, $state, auth, AvailableCategory, lo
 	}
 
 	function onSubmit() {
-
 		/**
-		 * First, upload the photo and get photo_path,
+		 * First, upload photos and get photo_pathArray,
 		 * then send new post data to backend
 		 */
 		postService
 			.uploadImg(vm.imgEncoded)
 			.then(function(data){
-				console.log(data);
 				postService
 					.sendNewPostInfo({
 						name        : vm.goodsName,
@@ -46,7 +39,7 @@ function PostController(postService, $scope, $state, auth, AvailableCategory, lo
 						category    : vm.goodsCategory.label,
 						position_x  : vm.positionX,
 						position_y  : vm.positionY,
-						photo_path  : data,
+						photo_path  : JSON.stringify(data),
 						owner_uid   : auth.currentUser().uid,
 					})
 					.then(function(data) {

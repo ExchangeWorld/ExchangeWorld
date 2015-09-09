@@ -281,11 +281,11 @@ function MapController(
 					map: map,
 				});
 
-				google.maps.event.addListener(vm.marker, 'dragend', function() {
+				google.maps.event.addListener(vm.marker, 'mouseup', function() {
 					$rootScope.$broadcast('positionMarked', e.latLng);
 				});
 			}
-			// $rootScope.$broadcast('positionMarked', e.latLng);
+			$rootScope.$broadcast('positionMarked', e.latLng);
 		}
 	}
 

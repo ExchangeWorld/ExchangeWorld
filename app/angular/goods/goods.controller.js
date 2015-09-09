@@ -41,7 +41,14 @@ function GoodsController(
 	vm.onClickUser = onClickUser;
 	vm.onClickBack = function(){ $state.go('root.withSidenav.seek'); }
 
+	vm.currentSlide   = 0;
+	vm.isCurrentSlide = function(idx) { return idx === vm.currentSlide; };
+	vm.prevSlide      = prevSlide;
+	vm.nextSlide      = nextSlide;
+
+
 	activate();
+	console.log(vm.goodData.photo_path);
 
 	$scope.removeMode = false;
 	$scope.$parent.$on('mapInitialized', mapInitialized);
@@ -237,6 +244,14 @@ function GoodsController(
 		} else {
 			$state.go('root.withSidenav.404');
 		}
+	}
+
+	function prevSlide() {
+		vm.currentSlide = (vm.currentSlide < vm.goodData.photo_path.length - 1) ? ++vm.currentSlide : 0;
+	}
+
+	function nextSlide() {
+		vm.currentSlide = (vm.currentSlide > 0) ? --vm.currentSlide : vm.goodData.photo_path.length - 1;
 	}
 
 }

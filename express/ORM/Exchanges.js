@@ -19,6 +19,18 @@ var Exchanges = sequelize.define('exchanges', {
 		type: Sequelize.INTEGER.UNSIGNED,
 		allowNull: false
 	},
+	// Set agree or not for goods1
+	goods1_agree: {
+		type: Sequelize.BOOLEAN,
+		allowNull: false,
+		defaultValue: false,
+	},
+	// Set agree or not for goods2
+	goods2_agree: {
+		type: Sequelize.BOOLEAN,
+		allowNull: false,
+		defaultValue: false,
+	},
 	// 'initiated', 'dropped', 'completed'
 	status: {
 		type: Sequelize.STRING,

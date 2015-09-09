@@ -40,19 +40,15 @@ function SeekController(
 			name: filter.name,
 			cate: filter.cate,
 		});
-		
+
 		seekService
 			.getSeek(filter)
 			.then(function(data) {
-				$rootScope.$broadcast('goodsChanged', data);
-
 				vm.goods = data.map(function(goods) {
-					console.log(goods.photo_path);
-					if(!_.isArray(goods.photo_path)) {
-						goods.photo_path = JSON.parse(goods.photo_path.toString());
-					}
+					if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
 					return goods;
 				});
+				$rootScope.$broadcast('goodsChanged', vm.goods);
 			})
 			.catch(function() {
 				vm.goods = [];

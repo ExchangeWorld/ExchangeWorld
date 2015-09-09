@@ -17,11 +17,11 @@ function onAdd(map, $state) {
 	div.style.borderStyle     = 'none';
 	div.style.borderWidth     = '0px';
 	div.style.position        = 'absolute';
-	div.style.backgroundImage = 'url('+this.good.photo_path+')';
+	div.style.backgroundImage = `url(${this.good.photo_path[0]})`;
 	div.style.backgroundSize  = 'contain';
 
 	this.element = div;
-	google.maps.event.addDomListener(div, 'click', function(e) {
+	google.maps.event.addDomListener(div, 'mouseup', function(e) {
 		e.stopPropagation();
 		$state.go('root.withSidenav.goods', {gid : this.good.gid});
 		map.panTo(this.good.marker.getPosition());

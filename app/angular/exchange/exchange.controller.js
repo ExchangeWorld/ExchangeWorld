@@ -29,9 +29,7 @@ function ExchangeController(exchangeList, $state, exchangeService) {
 			.getExchange(eid)
 			.then(function(data) {
 				data.goods = data.goods.map(function(goods) {
-					if(!_.isArray(goods.photo_path)) {
-						goods.photo_path = JSON.parse(goods.photo_path.toString());
-					}
+					if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
 					return goods;
 				});
 				console.log(data);

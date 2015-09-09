@@ -23,11 +23,11 @@ function getStates() {
 					goodData : function (goodsService, $stateParams) {
 						return goodsService
 							.getGood($stateParams.gid, -1)
-							.then(function(data) { 
-								if (data instanceof Array) {
-									data[0].photo_path = JSON.parse(data[0].photo_path);
-									return data[0];
-								}
+							.then(function(data) {
+								var good = _.isArray(data) ? data[0] : data;
+								if (_.isString(good.photo_path)) good.photo_path = JSON.parse(good.photo_path);
+
+								return good;
 							})
 							.catch(function() { return undefined; });
 					},

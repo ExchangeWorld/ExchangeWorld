@@ -1,6 +1,7 @@
 'use strict';
 
 const exchangeModule = require('./exchange.module');
+const _              = require('lodash');
 exchangeModule.controller('ExchangeController', ExchangeController);
 
 /** @ngInject */
@@ -27,7 +28,13 @@ function ExchangeController(exchangeList, $state, exchangeService) {
 		exchangeService
 			.getExchange(eid)
 			.then(function(data) {
-				//console.log(data);
+				data.goods = data.goods.map(function(goods) {
+					if(!_.isArray(goods.photo_path)) {
+						goods.photo_path = JSON.parse(goods.photo_path.toString());
+					}
+					return goods;
+				});
+				console.log(data);
 				vm.exchange = data;
 			});
 	}

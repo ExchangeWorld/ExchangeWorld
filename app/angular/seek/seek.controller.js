@@ -1,7 +1,7 @@
 'use strict';
 
 const seekModule = require('./seek.module');
-const _ = require('lodash');
+const _          = require('lodash');
 seekModule.controller('SeekController', SeekController);
 
 /** @ngInject */
@@ -24,10 +24,9 @@ function SeekController(
 	vm.onMouseOut          = onMouseOut;
 
 	/////////////////
-	onSearch({ name:'' });
 
 	$scope.$on('boundChanged', function(e, bound) {
-		console.log(bound.toUrlValue());
+		//console.log(bound.toUrlValue());
 		onSearch({
 			name     : vm.searchGoodsName,
 			category : vm.searchGoodsCategory.label,
@@ -36,6 +35,7 @@ function SeekController(
 	});
 
 	function onSearch(filter) {
+		console.log(filter);
 		$state.go($state.current.name, {
 			name: filter.name,
 			cate: filter.cate,
@@ -47,7 +47,10 @@ function SeekController(
 				$rootScope.$broadcast('goodsChanged', data);
 
 				vm.goods = data.map(function(goods) {
-					goods.photo_path = JSON.parse(goods.photo_path);
+					console.log(goods.photo_path);
+					if(!_.isArray(goods.photo_path)) {
+						goods.photo_path = JSON.parse(goods.photo_path.toString());
+					}
 					return goods;
 				});
 			})

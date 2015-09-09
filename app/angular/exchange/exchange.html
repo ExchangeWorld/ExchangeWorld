@@ -21,7 +21,7 @@
 				<!-- first user item -->
 				<div layout="column" flex>
 					<div class="item profile" layout="column" layout-align="center center">
-						<img ng-src="{{vm.exchange.goods[0].photo_path}}"/>
+						<img ng-src="{{vm.exchange.goods[0].photo_path[0]}}"/>
 						<div layout layout-align="center center">
 							<p class="md-body-2">{{vm.exchange.goods[0].name}}</p>
 						</div>
@@ -40,7 +40,7 @@
 				<!-- second user item -->
 				<div layout="column" flex>
 					<div class="item profile" layout="column" layout-align="center center">
-						<img ng-src="{{vm.exchange.goods[1].photo_path}}" />
+						<img ng-src="{{vm.exchange.goods[1].photo_path[0]}}" />
 						<div layout layout-align="center center">
 							<p class="md-body-2">{{vm.exchange.goods[1].name}}</p>
 						</div>

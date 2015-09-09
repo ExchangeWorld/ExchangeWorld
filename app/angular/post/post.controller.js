@@ -25,8 +25,6 @@ function PostController(postService, $scope, $state, auth, AvailableCategory, lo
 	}
 
 	function onSubmit() {
-		console.log(vm.positionX);
-		console.log(vm.positionY);
 		/**
 		 * First, upload photos and get photo_pathArray,
 		 * then send new post data to backend
@@ -39,8 +37,8 @@ function PostController(postService, $scope, $state, auth, AvailableCategory, lo
 						name        : vm.goodsName,
 						description : vm.goodsDescriptions,
 						category    : vm.goodsCategory.label,
-						position_x  : vm.positionX|| 121.3,
-						position_y  : vm.positionY|| 25.19,
+						position_x  : vm.positionX,
+						position_y  : vm.positionY,
 						photo_path  : JSON.stringify(data),
 						owner_uid   : auth.currentUser().uid,
 					})

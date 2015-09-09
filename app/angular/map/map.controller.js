@@ -285,7 +285,7 @@ function MapController(
 					$rootScope.$broadcast('positionMarked', e.latLng);
 				});
 			}
-			// $rootScope.$broadcast('positionMarked', e.latLng);
+			$rootScope.$broadcast('positionMarked', e.latLng);
 		}
 	}
 

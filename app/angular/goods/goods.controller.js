@@ -115,13 +115,13 @@ function GoodsController(
 		const mesg = vm.comment.trim();
 		if (mesg) {
 			const commentData = {
-				commenter_uid: auth.currentUser().uid,
-				goods_gid: goodData.gid,
-				content: mesg,
-				date: moment().startOf('second').fromNow(),
-				user_uid: auth.currentUser().uid,
-				name: auth.currentUser().name,
-				photo_path: auth.currentUser().photo_path,
+				commenter_uid : auth.currentUser().uid,
+				goods_gid     : goodData.gid,
+				content       : mesg,
+				date          : moment().startOf('second').fromNow(),
+				user_uid      : auth.currentUser().uid,
+				name          : auth.currentUser().name,
+				photo_path    : auth.currentUser().photo_path,
 			};
 			vm.goodComments.push(commentData);
 			goodsService
@@ -134,11 +134,6 @@ function GoodsController(
 	}
 
 	function onDeleteComment(cid) {
-		// if (confirm('您確定真的要刪除這則留言嗎？')) {
-		// 	goodsService
-		// 		.deleteComment({ cid: cid })
-		// 		.then(updateComment);
-		// }
 		var confirm = $mdDialog.confirm()
 			.title('刪除留言')
 			.content('您確定要刪除這則留言嗎？')
@@ -236,7 +231,6 @@ function GoodsController(
 			 * TODO:
 			 *  1. restrict multi queue(?).
 			 */
-			console.log('lll');
 			goodsService.showQueueBox(ev, vm.myGoods, goodData.gid);
 		} else if(type === types[1]) {
 			goodsService.showQueuingBox(ev, vm.queuingList, goodData.gid);

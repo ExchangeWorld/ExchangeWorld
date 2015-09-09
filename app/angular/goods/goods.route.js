@@ -24,10 +24,7 @@ function getStates() {
 						return goodsService
 							.getGood($stateParams.gid, -1)
 							.then(function(data) {
-								var good = _.isArray(data) ? data[0] : data;
-								if (_.isString(good.photo_path)) good.photo_path = JSON.parse(good.photo_path);
-
-								return good;
+								return _.isArray(data) ? data[0] : data;
 							})
 							.catch(function() { return undefined; });
 					},

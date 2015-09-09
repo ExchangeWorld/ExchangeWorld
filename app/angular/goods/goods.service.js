@@ -41,6 +41,10 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			})
 			.then(function(data) {
 				if (_.isArray(data)) {
+					data.forEach(function(goods) {
+						if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
+						return goods;
+					});
 					defer.resolve(data);
 				}
 			})
@@ -159,6 +163,12 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			.getList({host_goods_gid: host_goods_gid})
 			.then(function(data) {
 				if (_.isArray(data)) {
+					data.forEach(function(goods) {
+						if (_.isString(goods.good.photo_path)) goods.good.photo_path = JSON.parse(goods.good.photo_path);
+						return goods;
+					});
+					console.log(data);
+
 					defer.resolve(data);
 				} else {
 					defer.reject(data);

@@ -1,4 +1,7 @@
-<md-content>
+<md-content ng-show="vm.exchangeList.length === 0">
+	你還沒有任何進入交換階段的物品。
+</md-content>
+<md-content ng-show="vm.exchangeList.length !== 0">
 	<div layout="row" layout-sm="column">
 		<div flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap>
 			<!-- <div layout="column" layout-sm="row" layout-wrap>

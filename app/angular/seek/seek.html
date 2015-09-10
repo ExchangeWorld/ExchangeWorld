@@ -26,7 +26,11 @@
 	</div>
 	<div class="md-padding"></div>
 	<div deckgrid class="deckgrid" source="vm.goods">
-		<md-card class="md-whiteframe-z3 item" ng-click="mother.onClickGoods(card.gid)">
+		<md-card class="md-whiteframe-z3 item"
+			ng-click="mother.onClickGoods(card.gid)"
+			ng-mouseenter="mother.onMouseOver(card.gid)"
+			ng-mouseleave="mother.onMouseOut()"
+		>
 			<img src="" data-ng-src="{{card.photo_path[0]}}" class="md-card-image">
 			<md-card-content>
 				<div layout="row" layout-align="center center">

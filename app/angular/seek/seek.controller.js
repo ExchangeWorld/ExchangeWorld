@@ -17,11 +17,11 @@ function SeekController(
 	vm.goods               = [];
 	vm.searchGoodsName     = $stateParams.name;
 	vm.searchGoodsCategory = $stateParams.cate || '';
-	$scope.onClickGoods    = onClickGoods;
 	vm.onSearch            = onSearch;
 	vm.availableCategory   = AvailableCategory;
-	vm.onMouseOver         = onMouseOver;
-	vm.onMouseOut          = onMouseOut;
+	$scope.onClickGoods    = onClickGoods;
+	$scope.onMouseOver     = onMouseOver;
+	$scope.onMouseOut      = onMouseOut;
 
 	/////////////////
 

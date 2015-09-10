@@ -16,10 +16,11 @@
 	<!--<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(6)">我要排！ {{vm.queue.length}}</md-button>-->
 
 	<div flex="80" layout layout-align="center center">
-		<img ng-repeat = "silde in vm.goodData.photo_path" style="max-width: 75%;"
-			 ng-click  = "vm.nextSlide()"
-			 ng-src    = "{{ silde }}" 
-			 ng-hide   = "!vm.isCurrentSlide($index)"/>
+		<photoslider images="vm.goodData.photo_path"></photoslider>
+		<!--<img ng-repeat = "silde in vm.goodData.photo_path" style="max-width: 75%;"-->
+			 <!--ng-click  = "vm.nextSlide()"-->
+			 <!--ng-src    = "{{ silde }}" -->
+			 <!--ng-hide   = "!vm.isCurrentSlide($index)"/>-->
 	</div>
 	<div class="info_container" layout="row">
 		<div flex="30" layout="column" layout-align="center center">

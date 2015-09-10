@@ -28,10 +28,6 @@ function ExchangeController(exchangeList, $state, exchangeService) {
 		exchangeService
 			.getExchange(eid)
 			.then(function(data) {
-				data.goods = data.goods.map(function(goods) {
-					if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
-					return goods;
-				});
 				console.log(data);
 				vm.exchange = data;
 			});

@@ -44,10 +44,7 @@ function SeekController(
 		seekService
 			.getSeek(filter)
 			.then(function(data) {
-				vm.goods = data.map(function(goods) {
-					if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
-					return goods;
-				});
+				vm.goods = data;
 				$rootScope.$broadcast('goodsChanged', vm.goods);
 			})
 			.catch(function() {

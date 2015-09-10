@@ -1,9 +1,9 @@
-<div class="slider" >
-	<a href="#" ng-click="prevSlide()">prev</a>
-	<a href="#" ng-click="nextSlide()">next</a>
+<div style="position: relative; width:70%; margin:auto;">
     <div class="slide" ng-repeat="image in images" ng-show="isCurrentSlide($index)">
-        <img ng-src="{{ image }}"  style="width:60%;"/>
+        <img ng-src="{{ image }}"  style="width:100%;"/>
     </div>
-	<!--<div class="arrows">-->
-	<!--</div>-->
+	<div style="position: absolute; left:10px; top:10px;">
+		<a href="#" ng-click="prevSlide()"><img style="height:30px; background-color: #0F0;" src="../../../images/left-arrow.png"></a>
+		<a href="#" ng-click="nextSlide()"><img style="height:30px; background-color: #0F0;" src="../../../images/right-arrow.png"></a>
+	</div>
 </div>

@@ -29,7 +29,7 @@ function SeekController(
 		//console.log(bound.toUrlValue());
 		onSearch({
 			name     : vm.searchGoodsName,
-			category : vm.searchGoodsCategory.label,
+			category : vm.searchGoodsCategory,
 			bound    : bound.toUrlValue(),
 		});
 	});

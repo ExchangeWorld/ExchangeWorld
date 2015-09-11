@@ -43,7 +43,7 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 	function getConversation(uid1, uid2, from, number) {
 		const defer = $q.defer();
 		Restangular
-			.all('message')
+			.all('message/between')
 			.getList({ 
 				user1_uid : uid1,
 				user2_uid : uid2,
@@ -117,7 +117,13 @@ function DialogController(msg, callback, $mdDialog, logger, message) {
 	
 	activate();
 
+	//console.log(msg);
 	function activate() {
+		message
+			.getConversation(msg.sender_uid, msg.receiver_uid, 0, 10)
+			.then(function(data) {
+				vm.history = data;
+			});
 		
 	}
 

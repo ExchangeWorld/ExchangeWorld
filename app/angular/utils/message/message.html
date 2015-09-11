@@ -20,15 +20,11 @@
 					</div>
 				</md-toolbar>
 				<div class="message-box" ng-show="!vm.msg.isNewMsg">
-					<p class="md-subhead message" ng-repeat="history in vm.history" >
-						<!--<div ng-show="history.sender_uid === vm.msg.receiver_uid" style="float:right;">-->
+					<li class="md-subhead message" ng-repeat="history in vm.history" >
+						<div style="background-color:#0f0" ng-style="{ 'float': history.sender_uid === vm.msg.receiver_uid ? 'right' : 'left' }"> 
 							{{ history.content }}
-							{{ history.sender_uid }}{{ vm.msg.receiver_uid }}
-						<!--</div>-->
-						<!--<div ng-show="!history.sender_uid === vm.msg.receiver_uid" >-->
-							<!--{{ history.content }}-->
-						<!--</div>-->
-					</p>
+						</div> 
+					</li>
 				</div>
 				<md-input-container flex style="padding-top: 0;">
 					<label>回覆訊息...</label>

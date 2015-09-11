@@ -101,7 +101,7 @@ router.post('/post', function(req, res, next) {
 // Delete a queue
 router.delete('/delete', function(req, res, next) {
 
-	// Necessary DELETE body params
+	// Necessary DELETE query params
 	// 
 	// host_goods_gid
 	// queuer_goods_gid 

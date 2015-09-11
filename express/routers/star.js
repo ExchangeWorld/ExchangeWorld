@@ -94,7 +94,7 @@ router.post('/post', function(req, res, next) {
 // Delete a star
 router.delete('/delete', function(req, res, next) {
 
-	// Necessary DELETE body params
+	// Necessary DELETE query params
 	// 
 	// goods_gid
 	// starring_user_uid

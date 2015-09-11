@@ -91,7 +91,7 @@ router.post('/post', function(req, res, next) {
 // Delete a follower by given my_uid and the uid who follows my_uid
 router.delete('/delete', function(req, res, next) {
 
-	// Necessay POST body params:
+	// Necessay POST query params:
 	//
 	// my_uid
 	// follower_uid

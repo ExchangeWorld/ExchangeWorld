@@ -142,7 +142,7 @@ router.put('/edit', function(req, res, next) {
 // Delete a comment
 router.delete('/delete', function(req, res, next) {
 
-	// Necessary DELETE body params
+	// Necessary DELETE query params
 	// 
 	// cid
 	//

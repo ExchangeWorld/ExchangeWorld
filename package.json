@@ -97,6 +97,7 @@
     "angular-material": "^0.10.0",
     "angular-resource": "^1.4.3",
     "angular-toastr": "^1.4.1",
+    "angular-touch": "^1.4.5",
     "angular-ui-router": "^0.2.13",
     "angularjs-facebook": "^0.2.3",
     "async": "^1.4.2",

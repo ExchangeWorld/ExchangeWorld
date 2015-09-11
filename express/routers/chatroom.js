@@ -29,20 +29,16 @@ router.get('/', function(req, res, next) {
 			force: false
 		})
 		.then(function() {
-
-			var _tmp =
-				exchanges.findOne({
+			return exchanges.findOne({
 					where: {
 						eid: _eid
 					}
 				});
-
-			return _tmp.chatroom_cid;
 		})
-		.then(function(_chatroom_cid) {
+		.then(function(_exchange) {
 			return messages.findAll({
 				where: {
-					chatroom_cid: _chatroom_cid
+					chatroom_cid: _exchange.chatroom_cid
 				},
 				order: [
 					['mid', 'DESC']
@@ -79,19 +75,16 @@ router.post('/', function(req, res, next) {
 		})
 		.then(function() {
 
-			var _tmp =
-				exchanges.findOne({
+			return exchanges.findOne({
 					where: {
 						eid: _eid
 					}
 				});
-
-			return _tmp.chatroom_cid;
 		})
-		.then(function(_chatroom_cid) {
+		.then(function(_exchange) {
 			return messages.create({
 				sender_uid  : _sender_uid,
-				chatroom_cid: _chatroom_cid,
+				chatroom_cid: _exchange.chatroom_cid,
 				content     : _content
 			});
 		})

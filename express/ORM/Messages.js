@@ -16,6 +16,7 @@ var Messages = sequelize.define('messages', {
 	},
 	receiver_uid: {
 		type: Sequelize.INTEGER.UNSIGNED,
+		defaultValue: 0,
 		allowNull: true
 	},
 	chatroom_cid: {

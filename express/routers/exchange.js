@@ -205,6 +205,9 @@ router.put('/complete', function(req, res, next) {
 			if (result == null) {
 				return {};
 			} else {
+				if (result.goods1_agree == false || result.goods2_agree == false) {
+					return {};
+				}
 				result.status = 'completed';
 				result.save().then(function() {});
 				return result;

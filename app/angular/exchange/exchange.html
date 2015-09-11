@@ -95,7 +95,7 @@
 				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
 					<span>聊天</span>
 				</md-toolbar>
-				<ul class="discussion">
+				<ul class="discussion" id="chatroom">
 					<li class="other">
 						<div class="avatar">
 							<img src="../../images/unknown-user.gif" />
@@ -117,8 +117,10 @@
 
 					<li ng-class="{true: 'self', false: 'other'}[chat.sender_uid === {{ vm.myid }}]" ng-repeat="chat in vm.chatroom">
 						<div class="avatar">
-							<img src="../../images/unknown-user.gif" />
-							<md-tooltip>{{ chat.sender_uid }}</md-tooltip>
+							<img ng-show="(chat.sender_uid === {{ vm.myid }})" ng-src="{{vm.exchange.goods[0].user.photo_path}}" />
+							<img ng-show="(chat.sender_uid !== {{ vm.myid }})" ng-src="{{vm.exchange.goods[1].user.photo_path}}" />
+							<md-tooltip ng-show="(chat.sender_uid === {{ vm.myid }})">{{vm.exchange.goods[0].user.name}}</md-tooltip>
+							<md-tooltip ng-show="(chat.sender_uid !== {{ vm.myid }})">{{vm.exchange.goods[1].user.name}}</md-tooltip>
 						</div>
 						<div class="messages">
 							<p class="content">{{ chat.content }}</p>

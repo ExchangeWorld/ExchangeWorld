@@ -41,10 +41,15 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams)
 
 	function updateChat() {
 		exchangeService
-			.getChat(vm.exchange.eid)
+			.getChat(vm.exchange.eid, 100, 0)
 			.then(function(data) {
-				console.log(data);
 				vm.chatroom = data;
+			//})
+			//.then(function() {
+				//var chatroom = angular.element(document.querySelector('#chatroom'))[0];
+				//console.log(chatroom );
+				//chatroom.scrollTop =100;// chatroom.scrollHeight;
+				//console.log(chatroom.scrollTop+' '+chatroom.scrollHeight );
 			});
 	}
 	////////////
@@ -53,7 +58,7 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams)
 		exchangeService
 			.getExchange(eid)
 			.then(function(data) {
-				console.log(data);
+				//console.log(data);
 				vm.exchange = data;
 				updateChat();
 			});
@@ -89,9 +94,8 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams)
 				.postChat(newChat)
 				.then(function() {
 					vm.chatContent = '';
-					//updateComment();
+					updateChat();
 				});
-			updateChat();
 		}
 	}
 }

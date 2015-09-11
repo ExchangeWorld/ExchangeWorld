@@ -33,6 +33,12 @@ a:hover {
 
 .note {
 	margin: 2px;
+	&.profile {
+		margin: 5px;
+	}
+	&.username {
+		margin: 0 15px 0 25px;
+	}
 }
 
 .online:after {
@@ -54,6 +60,10 @@ a:hover {
 	}
 	&.edit {
 		padding: 0 0 0 2px;
+	}
+	&.follow {
+		margin: 0 0 5px 0;
+		padding-bottom: 3px;
 	}
 }
 

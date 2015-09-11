@@ -118,7 +118,7 @@ function NavbarController(
 		message.showMessagebox(ev, msg, updateNotification);
 
 		message
-			.updateMessage(msg, false)
+			.updateMessage(msg)
 			.then(updateNotification);
 	}
 

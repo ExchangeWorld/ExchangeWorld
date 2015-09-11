@@ -2,45 +2,53 @@ var express = require('express');
 var router  = express.Router();
 
 // Including tables
-var messages = require('../ORM/Messages');
-var users    = require('../ORM/Users');
+var exchanges = require('../ORM/Exchanges');
+var messages  = require('../ORM/Messages');
+var users     = require('../ORM/Users');
 
 router.get('/', function(req, res, next) {
 
 	// Available GET params:
 	//
-	// receiver_uid
-	// sender_uid
+	// eid
 	// from
 	// number
 	//
 
-	var _receiver_uid = parseInt(req.query.receiver_uid, 10);
-	var _sender_uid   = parseInt(req.query.sender_uid, 10);
-	var _chatroom_cid = parseInt(req.query.chatroom_cid, 10);
-	var _from         = parseInt(req.query.from, 10);
-	var _number       = parseInt(req.query.number, 10);
+	var _eid    = parseInt(req.query.eid, 10);
+	var _from   = parseInt(req.query.from, 10);
+	var _number = parseInt(req.query.number, 10);
 
-	messages.belongsTo(users, {
-		foreignKey: 'sender_uid'
-	});
+	// default _from is 0 and _number is 10
+	// means you will get 10 latest messages in the chatroom
+	_from   = (_from == _from ? _from : 0);
+	_number = (_number == _number ? _number : 10);
 
 	messages
 		.sync({
 			force: false
 		})
 		.then(function() {
+
+			var _tmp =
+				exchanges.findOne({
+					where: {
+						eid: _eid
+					}
+				});
+
+			return _tmp.chatroom_cid;
+		})
+		.then(function(_chatroom_cid) {
 			return messages.findAll({
 				where: {
-					receiver_uid: _receiver_uid,
 					chatroom_cid: _chatroom_cid
 				},
 				order: [
 					['mid', 'DESC']
 				],
-				include: [users],
-				offset : _from,
-				limit  : _number
+				offset: _from,
+				limit: _number
 			});
 		})
 		.then(function(result) {
@@ -54,18 +62,34 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 
-	var _receiver_uid = parseInt(req.body.receiver_uid, 10);
+	// Available POST params:
+	//
+	// eid
+	// sender_uid
+	// content
+	//
+
+	var _eid        = parseInt(req.body.eid, 10);
 	var _sender_uid = parseInt(req.body.sender_uid, 10);
-	var _chatroom_cid = parseInt(req.query.chatroom_cid, 10);
-	var _content = req.body.content;
+	var _content    = req.body.content;
 
 	messages
 		.sync({
 			force: false
 		})
 		.then(function() {
+
+			var _tmp =
+				exchanges.findOne({
+					where: {
+						eid: _eid
+					}
+				});
+
+			return _tmp.chatroom_cid;
+		})
+		.then(function(_chatroom_cid) {
 			return messages.create({
-				receiver_uid: _receiver_uid,
 				sender_uid  : _sender_uid,
 				chatroom_cid: _chatroom_cid,
 				content     : _content

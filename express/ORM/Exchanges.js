@@ -31,6 +31,12 @@ var Exchanges = sequelize.define('exchanges', {
 		allowNull: false,
 		defaultValue: false,
 	},
+	// Set exchange's chatroom
+	chatroom_cid: {
+		type: Sequelize.INTEGER,
+		allowNull: false,
+		unique: true,
+	},
 	// 'initiated', 'dropped', 'completed'
 	status: {
 		type: Sequelize.STRING,

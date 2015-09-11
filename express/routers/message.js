@@ -20,6 +20,9 @@ router.get('/', function(req, res, next) {
 	var _from         = parseInt(req.query.from, 10);
 	var _number       = parseInt(req.query.number, 10);
 
+	_from = (_from == _from ? _from : 0);
+	_number = (_number == _number ? _number : 10);
+
 	messages.belongsTo(users, {
 		foreignKey: 'sender_uid'
 	});

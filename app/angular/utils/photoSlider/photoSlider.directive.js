@@ -27,13 +27,13 @@ function photoSliderPostLink(scope) {
 	scope.nextSlide      = nextSlide;
 
 	function prevSlide(e) {
-		scope.currentSlide = (scope.currentSlide < scope.images.length - 1) ? ++scope.currentSlide : 0;
+		scope.currentSlide = (scope.currentSlide > 0) ? --scope.currentSlide : scope.images.length - 1;
 		e.preventDefault();
 		e.stopPropagation();
 	}
 
 	function nextSlide(e) {
-		scope.currentSlide = (scope.currentSlide > 0) ? --scope.currentSlide : scope.images.length - 1;
+		scope.currentSlide = (scope.currentSlide < scope.images.length - 1) ? ++scope.currentSlide : 0;
 		e.preventDefault();
 		e.stopPropagation();
 	}

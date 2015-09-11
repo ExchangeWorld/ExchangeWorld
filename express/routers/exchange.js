@@ -34,6 +34,41 @@ router.get('/allExchange', function(req, res, next) {
 
 });
 
+router.get('/of', function(req, res, next) {
+
+	var _owner_uid = req.query.owner_uid;
+
+	goods
+		.findAll({
+			where: {
+				owner_uid: _owner_uid,
+				status: 0,
+				deleted: 0
+			}
+		})
+		.then(function(_goods) {
+			return exchanges.findAll({
+				where: {
+					$and: [{
+						$or: [{
+							goods1_gid: _goods.gid
+						}, {
+							goods2_gid: _goods.gid
+						}]
+					}, {
+						status: 'initiated'
+					}]
+				}
+			});
+		})
+		.then(function(result) {
+			res.json(result);
+		})
+		.catch(function(err) {
+			res.send({error: err});
+		});
+});
+
 router.get('/', function(req, res, next) {
 
 	// Available query params
@@ -170,7 +205,7 @@ router.put('/complete', function(req, res, next) {
 
 	// And make sure goods1_gid < goods2_gid
 	var _goods1_gid = Math.min(__goods1_gid, __goods2_gid);
-	var _goods2_gid = Math.max(__goods1_gid, __goods1_gid);
+	var _goods2_gid = Math.max(__goods1_gid, __goods2_gid);
 
 	// First, any exchanges with goods1_gid and goods2_gid, \
 	// their status will be set to 'dropped'.
@@ -193,11 +228,8 @@ router.put('/complete', function(req, res, next) {
 		.then(function(tmp) {
 			return exchanges.findOne({
 				where: {
-					$and: [{
-						goods1_gid: _goods1_gid
-					}, {
-						goods2_gid: _goods2_gid
-					}]
+					goods1_gid: _goods1_gid,
+					goods2_gid: _goods2_gid
 				}
 			});
 		})
@@ -215,9 +247,36 @@ router.put('/complete', function(req, res, next) {
 		})
 		.then(function(result) {
 			res.json(result);
-		})
-		.catch(function(err) {
+			return result;
+		}, function(err) {
 			res.send({error: err});
+		})
+		.then(function(result) {
+			if (result != {}) {
+				goods.findOne({
+					where: {
+						gid: result.goods1_gid
+					}
+				})
+				.then(function(goods1) {
+					goods1.status = 1;
+					goods1.save().then(function() {});
+				})
+			}
+			return result;
+		})
+		.then(function(result) {
+			if (result != {}) {
+				goods.findOne({
+					where: {
+						gid: result.goods2_gid
+					}
+				})
+				.then(function(goods2) {
+					goods2.status = 1;
+					goods2.save().then(function() {});
+				})
+			}
 		});
 });
 

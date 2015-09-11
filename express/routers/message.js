@@ -20,8 +20,9 @@ router.get('/', function(req, res, next) {
 	var _from         = parseInt(req.query.from, 10);
 	var _number       = parseInt(req.query.number, 10);
 
-	_from = (_from == _from ? _from : 0);
-	_number = (_number == _number ? _number : 10);
+	_sender_uid = (_sender_uid == _sender_uid ? _sender_uid : null);
+	_from       = (_from == _from ? _from : 0);
+	_number     = (_number == _number ? _number : 10);
 
 	messages.belongsTo(users, {
 		foreignKey: 'sender_uid'
@@ -35,6 +36,7 @@ router.get('/', function(req, res, next) {
 			return messages.findAll({
 				where: {
 					receiver_uid: _receiver_uid,
+					sender_uid  : (_sender_uid == null ? {$ne:null} : {$eq:_sender_uid}),
 					chatroom_cid: -1
 				},
 				order: [

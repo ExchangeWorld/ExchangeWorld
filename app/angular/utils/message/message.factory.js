@@ -40,7 +40,7 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 	/**
 	 * Get two users conversations history. 
 	 */
-	function getConversation(uid1, uid2, from, number) {
+	function getConversation(uid1, uid2, from, offset) {
 		const defer = $q.defer();
 		Restangular
 			.all('message/between')
@@ -48,7 +48,7 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 				user1_uid : uid1,
 				user2_uid : uid2,
 				from      : from,
-				number    : number,
+				number    : offset,
 			})
 			.then(function(data) {
 				if (_.isArray(data)) {

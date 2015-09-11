@@ -48,11 +48,10 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 		return defer.promise;
 	}
 
-	function updateMessage(message, unread) {
+	function updateMessage(message) {
 		const defer = $q.defer();
 
-		message.route = 'message';
-		message.unread = unread;
+		message.route = 'message/read';
 
 		message
 			.put()

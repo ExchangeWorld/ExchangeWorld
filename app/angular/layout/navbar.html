@@ -35,7 +35,7 @@
 			<md-menu flex="30" flex-sm md-offset="-233 75">
 				<md-button ng-click="$mdOpenMenu()">
 					<md-icon class="material-icons">notifications</md-icon>
-					<p ng-show="vm.unreadCount !== 0" class="notification md-caption">{{ vm.unreadCount }}</p>
+					<p class="notification md-caption" ng-show="vm.unreadCount">{{ vm.unreadCount }}</p>
 				</md-button>
 				<md-menu-content width="5" style="padding-bottom: 0px; max-width:400px;">
 					<md-menu-item style="min-height: 30px; height:30px">

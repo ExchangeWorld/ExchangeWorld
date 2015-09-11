@@ -248,4 +248,61 @@ router.put('/drop', function(req, res, next) {
 		});
 });
 
+// Change the agreement status of goods in the exchange
+router.put('/agree', function(req, res, next) {
+
+	// Available body params
+	// 
+	// eid
+	// goods_gid
+	// agree (true or false)
+	//
+	var _eid       = parseInt(req.body.eid, 10);
+	var _goods_gid = parseInt(req.body.goods_gid, 10);
+	var _agree     = (req.body.agree == 'true' || req.body.agree == true ? true : false);
+
+	exchanges
+		.sync({
+			force: false
+		})
+		.then(function() {
+			return exchanges.findOne({
+				where: {
+					$and: [{
+						eid   : _eid,
+						status: 'initiated'
+					}]
+				}
+			});
+		})
+		.then(function(result) {
+			if (result == null) {
+				return {};
+			} else {
+				if (result.goods1_gid == _goods_gid) {
+					result.goods1_agree = _agree;
+					result.save().then(function() {});
+					return result;
+				} else if (result.goods2_gid == _goods_gid) {
+					result.goods2_agree = _agree;
+					result.save().then(function() {});
+					return result;
+				} else {
+					return {};
+				}
+			}
+		})
+		.then(function(result) {
+			res.json(result);
+		})
+		.catch(function(err) {
+			res.send({
+				error: err
+			});
+		});
+
+});
+
+
+
 module.exports = router;

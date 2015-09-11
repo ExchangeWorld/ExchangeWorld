@@ -238,5 +238,4 @@ function GoodsController(
 			$state.go('root.withSidenav.404');
 		}
 	}
-
 }

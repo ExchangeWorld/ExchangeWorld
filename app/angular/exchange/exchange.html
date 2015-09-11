@@ -114,14 +114,24 @@
 							<p class="content">颱風沒來結果變成這樣辣 哭哭喔GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG</p>
 						</div>
 					</li>
+
+					<li ng-class="{true: 'self', false: 'other'}[chat.sender_uid === {{ vm.myid }}]" ng-repeat="chat in vm.chatroom">
+						<div class="avatar">
+							<img src="../../images/unknown-user.gif" />
+							<md-tooltip>{{ chat.sender_uid }}</md-tooltip>
+						</div>
+						<div class="messages">
+							<p class="content">{{ chat.content }}</p>
+						</div>
+					</li>
 				</ul>
 				<ul class="discussion input">
-					<form>
-						<md-input-container style="height:49px;padding: 0px;">
-							<label>Type some here...</label>
-							<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
-							<input type="text" ng-model="SoemModel" name="text" />
+					<form ng-submit="vm.onSubmitChat()">
+						<md-input-container>
+							<label>Write some here...</label>
+							<input type="text" ng-model="vm.chatContent" name="text" />
 						</md-input-container>
+						<input type="submit" id="submit" value="Submit" ng-show="false" />
 					</form>
 				</ul>
 			</div>

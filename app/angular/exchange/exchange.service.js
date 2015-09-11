@@ -60,16 +60,15 @@ function exchangeService(Restangular, $q) {
 
 	function getExchange(eid) {
 		const defer = $q.defer();
-		//console.log(eid);
 
 		Restangular
 			.all('exchange')
 			.getList({eid: eid})
 			.then(function(data) {
+				console.log(data);
 				data = _.isArray(data) ? data[0] : data;
-				data.goods = data.goods.map(function(goods) {
+				data.goods.forEach(function(goods) {
 					if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
-					return goods;
 				});
 				defer.resolve(data);
 			})

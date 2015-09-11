@@ -25,7 +25,6 @@ function seekService(Restangular, $q, exception) {
 				if (_.isArray(data)) {
 					data.forEach(function(goods) {
 						if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
-						return goods;
 					});
 					defer.resolve(data);
 				}

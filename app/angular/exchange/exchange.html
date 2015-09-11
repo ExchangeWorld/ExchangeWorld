@@ -1,98 +1,131 @@
-<div layout="row" layout-sm="column">
-	<div flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap>
-		<div class="event-btn first" layout="row" flex-sm="50" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
-			<div flex>
-				<p class="md-body-1 note">{{ exchange.details.goods[0].name }}</p>
-				<p class="md-body-1 note">{{ exchange.details.goods[1].name }}</p>
-			</div>
-			<div flex layout layout-align="end end">
-				<p class="md-caption">與 {{ exchange.with }}</p>
-			</div>
-		</div>
-		<div class="event-btn second" layout="row" flex-sm="50">
-			<div flex>
-				<p class="md-body-1 note">六上歷史課本</p>
-				<p class="md-body-1 note">超營養大雞排</p>
-			</div>
-			<div flex layout layout-align="end end">
-				<p class="md-caption">with kosuke</p>
-			</div>
-		</div>
+<md-content ng-show="vm.exchangeList.length === 0">
+	<div layout="column" layout-align="center center">
+		<h2 class="md-display-1">你還沒有任何進入交換階段的物品 ！</h2>
+		<p class="md-subhead">立即在探索頁面尋找您喜歡的物品</p>
+		<md-button class="md-raised md-accent">快去探索吧</md-button>
 	</div>
-	<div flex="55" flex-sm="100">
-		<div layout="row" class="info_container">
-			<span flex-sm="5"></span>
-			<!-- first user item -->
-			<div layout="column" flex>
-				<div class="item exchange" layout layout-align="center center">
-					<img ng-src="{{ vm.exchange.goods[0].photo_path[0] }}" />
-				</div>
-				<div layout="column" style="height:270px; background-color:#B0BEC5;">
-					<p class="md-body-1 text-ex">{{ vm.exchange.goods[0].name }}
-						<br/>{{ vm.exchange.goods[0].description }}</p>
-					<div flex layout layout-align="end end">
-						<img class="circle" ng-src="{{vm.exchange.goods[0].user.photo_path}}">
-					</div>
-				</div>
-			</div>
-			<!-- exchange icon -->
-			<div flex="30" layout="column" layout-align="center center">
-				<img src="../../images/icon(48-48).png" height="48" width="48">
-				<md-button class="md-accent md-hue-2" ng-click="vm.onClickComplete(vm.exchange.eid)">COMPLETE !</md-button>
-				<md-button ng-click="vm.onClickDelete(vm.exchange.eid)">我不爽換！</md-button>
-			</div>
-			<!-- second user item -->
-			<div layout="column" flex>
-				<div class="item exchange" layout layout-align="center center">
-					<img ng-src="{{ vm.exchange.goods[1].photo_path[0] }}" />
-				</div>
-				<div layout="column" style="height:271px; background-color:#B0BEC5;">
-					<p class="md-body-1 text-ex">{{ vm.exchange.goods[1].name }}
-						<br/>{{ vm.exchange.goods[1].description }}</p>
-					<div flex layout layout-align="end end">
-						<img class="circle" ng-src="{{vm.exchange.goods[1].user.photo_path}}">
-					</div>
-				</div>
-			</div>
-			<span flex="5"></span>
-		</div>
-	</div>
-	<!-- chat room -->
-	<div flex flex-sm layout="row">
-		<span flex="5" hide-sm></span>
-		<div flex>
-			<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
-				<span>聊天</span>
-			</md-toolbar>
-			<ul class="discussion" fill-height footer-element-id="footer">
-				<li class="other">
-					<div class="avatar">
-						<img src="../../images/unknown-user.gif" />
-						<md-tooltip>user1</md-tooltip>
-					</div>
-					<div class="messages">
-						<p class="content">今天好熱RRRRR</p>
-					</div>
-				</li>
-				<li class="self">
-					<div class="avatar">
-						<img src="../../images/unknown-user.gif" />
-					</div>
-					<div class="messages">
-						<p class="content">颱風沒來結果變成這樣辣 哭哭喔GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG</p>
-					</div>
-				</li>
-			</ul>
-			<ul class="discussion input" id="footer">
-				<form>
-					<md-input-container style="height:49px;padding: 0px;">
-						<label>Type some here...</label>
-						<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
-						<input type="text" ng-model="SomeModel" name="text" />
-					</md-input-container>
-				</form>
-			</ul>
-		</div>
-	</div>
-</div>
+</md-content>
 
+
+<md-content ng-show="vm.exchangeList.length !== 0">
+	<div layout="row" layout-sm="column">
+		<div flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap>
+			<div class="event-btn first" layout="row" flex-sm="50" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
+				<div flex>
+					<p class="md-body-1 note">{{ exchange.details.goods[0].name }}</p>
+					<p class="md-body-1 note">{{ exchange.details.goods[1].name }}</p>
+				</div>
+				<div flex layout layout-align="end end">
+					<p class="md-caption">與 {{ exchange.with }}</p>
+				</div>
+			</div>
+			<div class="event-btn second" layout="row" flex-sm="50">
+				<div flex>
+					<p class="md-body-1 note">六上歷史課本</p>
+					<p class="md-body-1 note">超營養大雞排</p>
+				</div>
+				<div flex layout layout-align="end end">
+					<p class="md-caption">with kosuke</p>
+				</div>
+			</div>
+		</div>
+		<!-- <span flex="5" flex-sm="5"></span> -->
+		<div flex="50" flex-sm="100">
+			<!-- title -->
+			<div layout layout-align="center center">
+				<!-- <h1 class="md-display-1">Title</h1> -->
+				<!-- <md-button ng-click="vm.onClickComplete(vm.exchange.eid)">COMPLETE !</md-button>
+				<md-button ng-click="vm.onClickDelete(vm.exchange.eid)">我不爽換！</md-button> -->
+			</div>
+			<div layout="row" class="info_container">
+				<span flex-sm="5"></span>
+				<!-- first user item -->
+				<div layout="column" flex>
+					<div class="item exchange" layout layout-align="center center">
+						<!-- <img ng-src="{{vm.exchange.goods[0].photo_paath}}" />
+						<div layout layout-align="center center">
+							<p class="md-body-2">{{vm.exchange.goods[0].name}}</p>
+						</div> -->
+						<img ng-src="{{vm.exchange.goods[0].photo_path[0]}}" />
+					</div>
+					<div layout="column" style="height:250px; background-color:#B0BEC5;">
+						<p class="md-body-1 text-ex">來~上車囉~警察局就在前面不遠處</p>
+						<!-- <img flex="30" ng-src="{{vm.exchange.goods[0].user.photo_path}}" style="max-height:60px; max-width:60px;" />
+						<div flex layout layout-align="center center">
+							<p class="md-body-2">{{vm.exchange.goods[0].user.name}}</p>
+						</div> -->
+						<div flex layout layout-align="end end">
+							<img class="circle" src="../../images/unknown-user.gif">
+						</div>
+					</div>
+				</div>
+				<!-- exchange icon -->
+				<div flex="30" layout="column" layout-align="center center">
+					<img src="../../images/icon(48-48).png" height="48" width="48">
+					<md-button class="md-accent md-hue-2" ng-click="vm.onClickComplete(vm.exchange.eid)">COMPLETE !</md-button>
+					<md-button ng-click="vm.onClickDelete(vm.exchange.eid)">我不爽換！</md-button>
+				</div>
+				<!-- second user item -->
+				<div layout="column" flex>
+					<div class="item exchange" layout layout-align="center center">
+						<!-- <img ng-src="{{vm.exchange.goods[1].photo_path}}" />
+						<div layout layout-align="center center">
+							<p class="md-body-2">{{vm.exchange.goods[1].name}}</p>
+						</div> -->
+						<img ng-src="{{vm.exchange.goods[1].photo_path[0]}}" />
+					</div>
+					<div layout="column" style="height:250px; background-color:#B0BEC5;">
+						<p class="md-body-1 text-ex">來啦啦啦啦啦啦阿啦WRYYYYY</p>
+						<!-- <img flex="30" ng-src="{{vm.exchange.goods[1].user.photo_path}}" style="max-height:60px; max-width:60px;" />
+						<div flex layout layout-align="center center">
+							<p class="md-body-2">{{vm.exchange.goods[1].user.name}}</p>
+						</div> -->
+						<div flex layout layout-align="end end">
+							<img class="circle" src="../../images/unknown-user.gif">
+						</div>
+					</div>
+				</div>
+				<span flex="5"></span>
+			</div>
+		</div>
+		<!-- chat room -->
+		<div flex flex-sm layout="row">
+			<span flex="5" hide-sm></span>
+			<div flex>
+				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
+					<span>聊天</span>
+				</md-toolbar>
+				<ul class="discussion">
+					<li class="other">
+						<div class="avatar">
+							<img src="../../images/unknown-user.gif" />
+							<md-tooltip>user1</md-tooltip>
+						</div>
+						<div class="messages">
+							<p class="content">今天好熱RRRRR</p>
+						</div>
+					</li>
+					<li class="self">
+						<div class="avatar">
+							<img src="../../images/unknown-user.gif" />
+							<md-tooltip>user2</md-tooltip>
+						</div>
+						<div class="messages">
+							<p class="content">颱風沒來結果變成這樣辣 哭哭喔GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG</p>
+						</div>
+					</li>
+				</ul>
+				<ul class="discussion input">
+					<form>
+						<md-input-container style="height:49px;padding: 0px;">
+							<label>Type some here...</label>
+							<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
+							<input type="text" ng-model="SoemModel" name="text" />
+						</md-input-container>
+					</form>
+				</ul>
+			</div>
+			<!-- <span flex="5"></span> -->
+		</div>
+	</div>
+</md-content>

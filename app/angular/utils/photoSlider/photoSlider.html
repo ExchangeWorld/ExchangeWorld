@@ -1,0 +1,15 @@
+<div flex style="position: relative;  margin:auto;">
+	<div flex layout layout-align="center center" ng-show="images.length !== 1">
+		<a flex href="#" ng-click="prevSlide($event)">
+			<img style="height:30px; width:30px;" src="../../../images/left-arrow.png">
+		</a>
+		<span flex="60"></span>
+		<a flex href="#" ng-click="nextSlide($event);">
+			<img style="height:30px; width:30px;" src="../../../images/right-arrow.png">
+		</a>
+	</div>
+	<div ng-repeat="image in images" ng-show="isCurrentSlide($index)">
+		<img ng-src="{{ image }}" style="width:100%;" />
+	</div>
+</div>
+

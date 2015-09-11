@@ -17,8 +17,7 @@ function MapController(
 		$localStorage,
 		$state,
 		$stateParams,
-		$timeout,
-		$interval
+		$timeout
 ) {
 
 	var map     = null;

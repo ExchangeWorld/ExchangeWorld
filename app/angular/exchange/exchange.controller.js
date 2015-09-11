@@ -5,7 +5,7 @@ const _              = require('lodash');
 exchangeModule.controller('ExchangeController', ExchangeController);
 
 /** @ngInject */
-function ExchangeController(exchangeList, $state, exchangeService) {
+function ExchangeController(exchangeList, $state, exchangeService, $stateParams) {
 	var vm             = this;
 	vm.exchangeList    = exchangeList;
 	vm.exchange        = {};
@@ -17,7 +17,20 @@ function ExchangeController(exchangeList, $state, exchangeService) {
 	activate();
 
 	function activate() {
+		console.log(vm.exchangeList);
 		if(vm.exchangeList.length) {
+			vm.exchangeList.forEach(function(exchange) {
+				exchangeService
+					.getExchange(exchange.eid)
+					.then(function(data) {
+						//console.log(data);
+						exchange.details = data;
+						exchange.with = (data.goods[0].owner_uid === $stateParams.uid) 
+							? data.goods[0].user.name 
+							: data.goods[1].user.name ;
+					});
+			});
+			console.log(vm.exchangeList);
 			onClickExchange(vm.exchangeList[0].eid);
 		}
 	}

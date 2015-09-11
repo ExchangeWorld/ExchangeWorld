@@ -1,45 +1,48 @@
 <md-dialog aria-label="Queue">
 	<form>
 		<md-toolbar>
-			<div flex class="md-toolbar-tools">
-				<h2 class="md-display-1">發送信件</h2>
+			<div flex class="md-toolbar-tools" layout layout-align="center center">
+				<h2 class="md-display-1">發送訊息</h2>
 				<span flex></span>
+				<md-button class="md-icon-button" ng-click="vm.cancel()">
+					<md-icon md-font-set="material-icons" aria-label="Close dialog">close</md-icon>
+				</md-button>
 			</div>
 		</md-toolbar>
 		<md-dialog-content style="max-width:800px;max-height:810px; ">
-				<md-content layout-padding>
-					<md-toolbar class="rounded-corners md-primary md-hue-3">
-						<div flex class="md-toolbar-tools" layout="row" layout-align="center center">
-							<div>
-								<span>
+			<md-content layout-padding>
+				<md-toolbar class="rounded-corners md-primary md-hue-3">
+					<div flex class="md-toolbar-tools" layout="row" layout-align="center center">
+						<span layout="row" layout-align="center center">
 									<img flex style="max-height:50px; max-width:50px;" ng-src="{{ vm.msg.user.photo_path }}" />
-									寄給：{{vm.msg.user.name}}
+									<p>寄給：{{vm.msg.user.name}}</p>
 								</span>
-								<span flex></span>
-							</div>
-						</div>
-					</md-toolbar>
-					<div ng-show="!vm.msg.isNewMsg">
-						他跟你說：<br/>
-						{{ vm.msg.content }}
 					</div>
-					<md-input-container flex class="info_container for_input">
-						<label>回覆訊息...</label>
-						<textarea type="string" ng-model="vm.content" columns="10" md-maxlength="1000" required></textarea>
-						<md-tooltip md-direction="left">內文</md-tooltip>
-					</md-input-container>
-					<hr>
-					<div layout="row">
-						<input class="md-button md-primary md-raised"  ng-click="vm.cancel()" value="算了"></input>
-						<input class="md-button md-primary md-raised"  ng-click="vm.submit(vm.content)" value="送出"></input>
-					</div>
-				</md-content>
+				</md-toolbar>
+				<div class="message-box" ng-show="!vm.msg.isNewMsg">
+					<p class="md-subhead message">他跟你說：</p>
+					<p class="md-subhead message">{{ vm.msg.content }}</p>
+				</div>
+				<md-input-container flex style="padding-top: 0;">
+					<label>回覆訊息...</label>
+					<textarea type="string" ng-model="vm.content" columns="10" md-maxlength="1000"></textarea>
+					<md-tooltip md-direction="left">內文</md-tooltip>
+				</md-input-container>
+				<hr>
+				<div layout="row">
+					<span flex="50"></span>
+					<input flex class="md-button md-primary md-raised" ng-click="vm.cancel()" value="算了"></input>
+					<input flex class="md-button md-primary md-raised" ng-click="vm.submit(vm.content)" value="送出"></input>
+				</div>
+			</md-content>
 		</md-dialog-content>
-		<div class="md-actions" layout="row">
+		<!-- 		<div class="md-actions" layout="row">
 			<span flex></span>
-			<!--<md-button ng-click="closeDialog()" style="margin-right:20px;">-->
-				<!--取消-->
-			<!--</md-button>-->
-		</div>
+ -->
+		<!--<md-button ng-click="closeDialog()" style="margin-right:20px;">-->
+		<!--取消-->
+		<!--</md-button>-->
+		<!-- </div> -->
 	</form>
 </md-dialog>
+

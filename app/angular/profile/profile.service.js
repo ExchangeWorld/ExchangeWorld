@@ -41,9 +41,20 @@ function profileService(Restangular, $q, facebookService) {
 		return defer.promise;
 	}
 
-	function editProfile() {
+	function editProfile(profile) {
+		const defer = $q.defer();
 
-		return ;
+		profile.route = 'user/profile/edit';
+
+		profile
+			.put()
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[profiles Service] updateprofile error: ')(error);
+			});
+		return defer.promise;
 	}
 
 	function addFollowing(my_uid, following_uid) {

@@ -1,43 +1,22 @@
 <md-content ng-show="vm.exchangeList.length === 0">
-	你還沒有任何進入交換階段的物品。
+	<div layout="column" layout-align="center center">
+		<h2 class="md-display-1">你還沒有任何進入交換階段的物品 ！</h2>
+		<p class="md-subhead">立即在探索頁面尋找您喜歡的物品</p>
+		<md-button class="md-raised md-accent">快去探索吧</md-button>
+	</div>
 </md-content>
+
+
 <md-content ng-show="vm.exchangeList.length !== 0">
 	<div layout="row" layout-sm="column">
 		<div flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap>
-			<!-- <div layout="column" layout-sm="row" layout-wrap>
-				<md-button flex-sm="45" aria-label="list" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
-					<md-divider></md-divider>
-					<div layout="row" layout-align="center center">
-						<div>GG {{ exchange.eid }}</div>
-					</div>
-					<md-divider></md-divider>
-				</md-button>
-			</div> -->
-			<div class="event-btn first" layout="row" flex-sm="50">
+			<div class="event-btn first" layout="row" flex-sm="50" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
 				<div flex>
-					<p class="md-body-1 note">六上歷史課本</p>
-					<p class="md-body-1 note">超營養大雞排</p>
+					<p class="md-body-1 note">{{ exchange.details.goods[0].name }}</p>
+					<p class="md-body-1 note">{{ exchange.details.goods[1].name }}</p>
 				</div>
 				<div flex layout layout-align="end end">
-					<p class="md-caption">with kosuke</p>
-				</div>
-			</div>
-			<div class="event-btn second" layout="row" flex-sm="50">
-				<div flex>
-					<p class="md-body-1 note">六上歷史課本</p>
-					<p class="md-body-1 note">超營養大雞排</p>
-				</div>
-				<div flex layout layout-align="end end">
-					<p class="md-caption">with kosuke</p>
-				</div>
-			</div>
-			<div class="event-btn first" layout="row" flex-sm="50">
-				<div flex>
-					<p class="md-body-1 note">六上歷史課本</p>
-					<p class="md-body-1 note">超營養大雞排</p>
-				</div>
-				<div flex layout layout-align="end end">
-					<p class="md-caption">with kosuke</p>
+					<p class="md-caption">與 {{ exchange.with }}</p>
 				</div>
 			</div>
 			<div class="event-btn second" layout="row" flex-sm="50">
@@ -67,7 +46,7 @@
 						<div layout layout-align="center center">
 							<p class="md-body-2">{{vm.exchange.goods[0].name}}</p>
 						</div> -->
-						<img ng-src="{{vm.exchange.goods[0].photo_path[0]}}"/>
+						<img ng-src="{{vm.exchange.goods[0].photo_path[0]}}" />
 					</div>
 					<div layout="column" style="height:250px; background-color:#B0BEC5;">
 						<p class="md-body-1 text-ex">來~上車囉~警察局就在前面不遠處</p>

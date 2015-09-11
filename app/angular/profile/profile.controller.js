@@ -24,13 +24,17 @@ function ProfileController(
 	vm.onClickSendMsg      = onClickSendMsg;
 	vm.followerCount       = profile.followers.length;
 	vm.isFollowed          = false;
+	vm.isReadOnly          = true;
+	vm.onClickEdit         = function onClickEdit() { vm.isReadOnly = !vm.isReadOnly; };
+	vm.onClickSave         = onClickSave;
+
 
 	/////////////
 	activate();
 
 	function activate() {
-		if(vm.isLoggedIn) {
-			if (_.findWhere(profile.followers, { follower_uid : $localStorage.user.uid })) {
+		if (vm.isLoggedIn) {
+			if (_.findWhere(profile.followers, { follower_uid: $localStorage.user.uid })) {
 				vm.isFollowed = true;
 			}
 		}
@@ -38,7 +42,7 @@ function ProfileController(
 		auth
 			.getLoginState()
 			.then(function(data) {
-				if(data) {
+				if (data) {
 					vm.isMe = (profile.uid === data.uid);
 				} else {
 					vm.isMe = false;
@@ -67,6 +71,16 @@ function ProfileController(
 			receiver_uid : $localStorage.user.uid,
 			isNewMsg     : true,
 		};
-		message .showMessagebox(ev, msg);
+		message.showMessagebox(ev, msg);
+	}
+
+	function onClickSave() {
+		vm.isReadOnly = !vm.isReadOnly;
+
+		profileService
+			.editProfile(vm.profile)
+			.then(function(data) {
+				console.log(data);
+			});
 	}
 }

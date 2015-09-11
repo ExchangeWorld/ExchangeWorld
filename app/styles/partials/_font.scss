@@ -48,4 +48,17 @@ a:hover {
 .text-ex {
 	color: #455A64;
 	line-height: 30px;
+	padding: 0 1em;
+	&.message {
+		padding: 8px 1em 0 1em;
+	}
+	&.edit {
+		padding: 0 0 0 2px;
+	}
+}
+
+.message {
+	color: #455A64;
+	line-height: 30px;
+	padding: 0 0.6em 0 1em;
 }

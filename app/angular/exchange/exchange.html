@@ -1,5 +1,9 @@
 <md-content ng-show="vm.exchangeList.length === 0">
-	你還沒有任何進入交換階段的物品。
+	<div layout="column" layout-align="center center">
+		<h2 class="md-display-1">你還沒有任何進入交換階段的物品 ！</h2>
+		<p class="md-subhead">立即在探索頁面尋找您喜歡的物品</p>
+		<md-button class="md-raised md-accent">快去探索吧</md-button>
+	</div>
 </md-content>
 <md-content ng-show="vm.exchangeList.length !== 0">
 	<div layout="row" layout-sm="column">
@@ -67,7 +71,7 @@
 						<div layout layout-align="center center">
 							<p class="md-body-2">{{vm.exchange.goods[0].name}}</p>
 						</div> -->
-						<img ng-src="{{vm.exchange.goods[0].photo_path[0]}}"/>
+						<img ng-src="{{vm.exchange.goods[0].photo_path[0]}}" />
 					</div>
 					<div layout="column" style="height:250px; background-color:#B0BEC5;">
 						<p class="md-body-1 text-ex">來~上車囉~警察局就在前面不遠處</p>
@@ -150,3 +154,4 @@
 		</div>
 	</div>
 </md-content>
+

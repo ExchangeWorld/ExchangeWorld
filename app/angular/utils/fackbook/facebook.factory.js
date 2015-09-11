@@ -104,7 +104,7 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 
 	function getLargePicture(fb_id) {
 		console.log(fb_id);
-		return Facebook.api('/'+fb_id+'/picture?width=100', function(response) {
+		return Facebook.api('/'+fb_id+'/picture?width=320&height=320', function(response) {
 			return response;
 		});
 	}

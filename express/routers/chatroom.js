@@ -1,9 +1,8 @@
 var express = require('express');
-var crypto  = require('crypto');
 var router  = express.Router();
 
 // Including tables
-var chatrooms = require('../ORM/Chatrooms');
+var exchanges = require('../ORM/Exchanges');
 var messages  = require('../ORM/Messages');
 var users     = require('../ORM/Users');
 
@@ -16,13 +15,13 @@ router.get('/', function(req, res, next) {
 	// number
 	//
 
-	var _chatroom_cid = parseInt(req.query.eid, 10);
-	var _from         = parseInt(req.query.from, 10);
-	var _number       = parseInt(req.query.number, 10);
+	var _eid    = parseInt(req.query.eid, 10);
+	var _from   = parseInt(req.query.from, 10);
+	var _number = parseInt(req.query.number, 10);
 
 	// default _from is 0 and _number is 10
 	// means you will get 10 latest messages in the chatroom
-	_from = (_from == _from ? _from : 0);
+	_from   = (_from == _from ? _from : 0);
 	_number = (_number == _number ? _number : 10);
 
 	messages
@@ -30,15 +29,26 @@ router.get('/', function(req, res, next) {
 			force: false
 		})
 		.then(function() {
+
+			var _tmp =
+				exchanges.findOne({
+					where: {
+						eid: _eid
+					}
+				});
+
+			return _tmp.chatroom_cid;
+		})
+		.then(function(_chatroom_cid) {
 			return messages.findAll({
 				where: {
-					chatroom_cid: crypto.createHash('md5').update(_chatroom_cid).digest('hex')
+					chatroom_cid: _chatroom_cid
 				},
 				order: [
 					['mid', 'DESC']
 				],
 				offset: _from,
-				limit : _number
+				limit: _number
 			});
 		})
 		.then(function(result) {
@@ -59,18 +69,29 @@ router.post('/', function(req, res, next) {
 	// content
 	//
 
-	var _chatroom_cid = parseInt(req.query.eid, 10);
-	var _sender_uid   = parseInt(req.body.sender_uid, 10);
-	var _content      = req.body.content;
+	var _eid        = parseInt(req.query.eid, 10);
+	var _sender_uid = parseInt(req.body.sender_uid, 10);
+	var _content    = req.body.content;
 
 	messages
 		.sync({
 			force: false
 		})
 		.then(function() {
+
+			var _tmp =
+				exchanges.findOne({
+					where: {
+						eid: _eid
+					}
+				});
+
+			return _tmp.chatroom_cid;
+		})
+		.then(function(_chatroom_cid) {
 			return messages.create({
 				sender_uid  : _sender_uid,
-				chatroom_cid: crypto.createHash('md5').update(_chatroom_cid).digest('hex'),
+				chatroom_cid: _chatroom_cid,
 				content     : _content
 			});
 		})

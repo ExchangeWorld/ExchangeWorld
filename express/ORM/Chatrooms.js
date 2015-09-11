@@ -4,9 +4,10 @@ var sequelize = require('../libs/orm');
 // Define the schema of table `chatrooms`
 var Chatrooms = sequelize.define('chatrooms', {
 	cid: {
-		type: Sequelize.STRING,
+		type: Sequelize.INTEGER,
 		allowNull: false,
 		unique: true,
+		autoIncrement: true,
 		primaryKey: true
 	},
 	members: {

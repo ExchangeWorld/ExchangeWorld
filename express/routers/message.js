@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
 			return messages.findAll({
 				where: {
 					receiver_uid: _receiver_uid,
-					chatroom_cid: '-1'
+					chatroom_cid: -1
 				},
 				order: [
 					['mid', 'DESC']

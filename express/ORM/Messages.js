@@ -19,8 +19,8 @@ var Messages = sequelize.define('messages', {
 		allowNull: true
 	},
 	chatroom_cid: {
-		type: Sequelize.STRING,
-		defaultValue: '-1',
+		type: Sequelize.INTEGER,
+		defaultValue: -1,
 		allowNull: false
 	},
 	content: {

@@ -16,12 +16,12 @@ var Messages = sequelize.define('messages', {
 	},
 	receiver_uid: {
 		type: Sequelize.INTEGER.UNSIGNED,
-		allowNull: false
+		allowNull: true
 	},
 	chatroom_cid: {
-		type: Sequelize.INTEGER.UNSIGNED,
+		type: Sequelize.INTEGER,
 		defaultValue: -1,
-		allowNull: true
+		allowNull: false
 	},
 	content: {
 		type: Sequelize.TEXT,

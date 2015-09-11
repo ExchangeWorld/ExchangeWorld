@@ -180,12 +180,12 @@ router.put('/edit', function(req, res, next) {
 // Delete a good (but not really delete it)
 router.delete('/delete', function(req, res, next) {
 
-	// Necessary PUT body params:
+	// Necessary query params:
 	//
 	// gid
 	//
 
-	// Get property:value in PUT body
+	// Get property:value in DELETE query
 	var _gid = parseInt(req.query.gid, 10);
 
 	goods

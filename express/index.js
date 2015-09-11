@@ -62,6 +62,7 @@ module.exports = function() {
 	server.use('/api/exchange', require('./routers/exchange'));
 	server.use('/api/notification', require('./routers/notification'));
 	server.use('/api/message', require('./routers/message'));
+	server.use('/api/chatroom', require('./routers/chatroom'));
 
 	server.use('/api/authenticate', authenticate.router);
 

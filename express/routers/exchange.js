@@ -3,6 +3,7 @@ var router  = express.Router();
 
 // Including tables
 var exchanges = require('../ORM/Exchanges');
+var chatrooms = require('../ORM/Chatrooms') 
 var users     = require('../ORM/Users.js');
 var goods     = require('../ORM/Goods.js');
 
@@ -109,7 +110,9 @@ router.post('/create', function(req, res, next) {
 	// Create instance
 	// If there is already a pair (goods1_gid, goods2_gid) then do nothing
 	exchanges
-		.sync({force: false})
+		.sync({
+			force: false
+		})
 		.then(function() {
 			return exchanges.findOne({
 				where: {
@@ -123,16 +126,29 @@ router.post('/create', function(req, res, next) {
 		})
 		.then(function(isThereAlready) {
 			if (isThereAlready != null) {
-				return isThereAlready;
+				res.json(isThereAlready);
 			} else {
-				return exchanges.create({
-					goods1_gid: _goods1_gid,
-					goods2_gid: _goods2_gid
-				});
+
+				chatrooms
+					.sync({
+						force: false
+					})
+					.then(function() {
+						return chatrooms.create({
+							members: ''
+						});
+					})
+					.then(function(the_chatroom) {
+						return exchanges.create({
+							goods1_gid: _goods1_gid,
+							goods2_gid: _goods2_gid,
+							chatroom_cid: the_chatroom.cid
+						});
+					})
+					.then(function(result) {
+						res.json(result);
+					});
 			}
-		})
-		.then(function(result) {
-			res.json(result);
 		});
 });
 
@@ -189,6 +205,9 @@ router.put('/complete', function(req, res, next) {
 			if (result == null) {
 				return {};
 			} else {
+				if (result.goods1_agree == false || result.goods2_agree == false) {
+					return {};
+				}
 				result.status = 'completed';
 				result.save().then(function() {});
 				return result;

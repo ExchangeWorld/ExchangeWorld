@@ -9,6 +9,7 @@ messageModule.factory('message', message);
 function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 	const service = {
 		getMessage,
+		getConversation,
 		postMessage,
 		updateMessage,
 		showMessagebox,
@@ -21,7 +22,10 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 
 		Restangular
 			.all('message')
-			.getList({ receiver_uid: uid })
+			.getList({ 
+				receiver_uid: uid,
+				number: 9999,
+			})
 			.then(function(data) {
 				if (_.isArray(data)) {
 					defer.resolve(data);
@@ -29,6 +33,30 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 			})
 			.catch(function(error) {
 				return exception.catcher('[message Service] getMessage error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	/**
+	 * Get two users conversations history. 
+	 */
+	function getConversation(uid1, uid2, from, offset) {
+		const defer = $q.defer();
+		Restangular
+			.all('message/between')
+			.getList({ 
+				user1_uid : uid1,
+				user2_uid : uid2,
+				from      : from,
+				number    : offset,
+			})
+			.then(function(data) {
+				if (_.isArray(data)) {
+					defer.resolve(data);
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[message Service] getConversation error: ')(error);
 			});
 		return defer.promise;
 	}
@@ -82,10 +110,23 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 function DialogController(msg, callback, $mdDialog, logger, message) {
 	const vm   = this;
 	vm.msg     = msg;
+	vm.history = '';
 	vm.content = '';
 	vm.cancel  = onCancel;
 	vm.submit  = onSubmit;
 	
+	activate();
+
+	//console.log(msg);
+	function activate() {
+		message
+			.getConversation(msg.sender_uid, msg.receiver_uid, 0, 10)
+			.then(function(data) {
+				vm.history = data;
+			});
+		
+	}
+
 	function onSubmit(msg_content) {
 		$mdDialog
 			.hide(msg_content)

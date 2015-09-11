@@ -69,7 +69,7 @@ router.post('/', function(req, res, next) {
 	// content
 	//
 
-	var _eid        = parseInt(req.query.eid, 10);
+	var _eid        = parseInt(req.body.eid, 10);
 	var _sender_uid = parseInt(req.body.sender_uid, 10);
 	var _content    = req.body.content;
 

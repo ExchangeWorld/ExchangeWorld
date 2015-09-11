@@ -134,20 +134,23 @@ router.post('/create', function(req, res, next) {
 						force: false
 					})
 					.then(function() {
-						var the_chatroom = chatrooms.create({
+						return chatrooms.create({
 							members: ''
 						});
-						res.json(exchanges.create({
+					})
+					.then(function(the_chatroom) {
+						return exchanges.create({
 							goods1_gid: _goods1_gid,
 							goods2_gid: _goods2_gid,
 							chatroom_cid: the_chatroom.cid
-						}));
+						});
+					})
+					.then(function(result) {
+						res.json(result);
 					});
 			}
 		});
 });
-
-
 
 // Complete an exchagne
 // Set the status of an exchange to completed

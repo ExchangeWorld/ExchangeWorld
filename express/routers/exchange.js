@@ -36,7 +36,7 @@ router.get('/allExchange', function(req, res, next) {
 
 router.get('/of', function(req, res, next) {
 
-	var _owner_uid = req.query.owner_uid;
+	var _owner_uid = parseInt(req.query.owner_uid, 10);
 
 	goods
 		.findAll({
@@ -47,13 +47,19 @@ router.get('/of', function(req, res, next) {
 			}
 		})
 		.then(function(_goods) {
+			var tmp_gids = _goods.map(function(g,i,arr){return g.gid});
+			console.log('tmp_gids', tmp_gids);
 			return exchanges.findAll({
 				where: {
 					$and: [{
 						$or: [{
-							goods1_gid: _goods.gid
+							goods1_gid: {
+								$in: tmp_gids
+							}
 						}, {
-							goods2_gid: _goods.gid
+							goods2_gid: {
+								$in: tmp_gids
+							}
 						}]
 					}, {
 						status: 'initiated'

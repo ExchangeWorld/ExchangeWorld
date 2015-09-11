@@ -56,6 +56,58 @@ router.get('/', function(req, res, next) {
 
 });
 
+router.get('/between', function(req, res, next) {
+
+	// Available GET params:
+	//
+	// receiver_uid
+	// sender_uid
+	// from
+	// number
+	//
+
+	var _user1_uid = parseInt(req.query.user1_uid, 10);
+	var _user2_uid = parseInt(req.query.user2_uid, 10);
+	var _from      = parseInt(req.query.from, 10);
+	var _number    = parseInt(req.query.number, 10);
+
+	_from   = (_from == _from ? _from : 0);
+	_number = (_number == _number ? _number : 10);
+
+	messages
+		.sync({
+			force: false
+		})
+		.then(function() {
+			return messages.findAll({
+				where: {
+					$and: [{
+						$or: [{
+							receiver_uid: _user1_uid,
+							sender_uid: _user2_uid
+						}, {
+							receiver_uid: _user2_uid,
+							sender_uid: _user1_uid
+						}]
+					}, {
+						chatroom_cid: -1
+					}]
+				},
+				order: [
+					['mid', 'ASC']
+				],
+				offset: _from,
+				limit: _number
+			});
+		})
+		.then(function(result) {
+			res.json(result);
+		})
+		.catch(function(err) {
+			res.send(err);
+		});
+});
+
 router.post('/', function(req, res, next) {
 
 	var _receiver_uid = parseInt(req.body.receiver_uid, 10);

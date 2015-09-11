@@ -60,8 +60,13 @@ function ProfileController(
 
 	function onClickAddFollowing() {
 		profileService.addFollowing($localStorage.user.uid, profile.uid);
-		vm.followerCount++;
+		// should add unfollow code here
 		vm.isFollowed = !vm.isFollowed;
+		if (!vm.isFollowed) {
+			vm.followerCount--;
+		} else {
+			vm.followerCount++;
+		}
 	}
 
 	function onClickSendMsg(ev, uid) {

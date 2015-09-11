@@ -6,23 +6,21 @@
 			<input ng-model="vm.searchGoodsName">
 			<!-- <md-tooltip md-direction="left">搜尋</md-tooltip> -->
 		</md-input-container>
-		<!-- <select class="md-button mdbtn-border" placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" required> -->
-		<!--<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>-->
-		<!-- </select> -->
 		<md-input-container flex>
 			<label>種類</label>
-			<md-select ng-model="vm.goodsCategory" aria-label="cate">
+			<md-select ng-model="vm.searchGoodsCategory" aria-label="cate">
 				<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>
 			</md-select>
+
 		</md-input-container>
-		<md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName})">
+		<md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory})">
 			<md-icon hide-sm md-font-set="material-icons">search</md-icon><span class="ng-scope">搜索!</span>
 		</md-button>
 	</div>
 </md-toolbar>
 <md-content resize ng-style="resizeWithOffset(140)">
 	<div ng-show="loading" style="width: 65px; margin: 0 auto; margin-top:200px">
-		<md-progress-circular class="md-warn md-hue-2" md-mode="indeterminate"></md-progress-circular>
+		<md-progress-circular class="md-warn md-hue-2" md-model="indeterminate"></md-progress-circular>
 	</div>
 	<div class="md-padding"></div>
 	<div deckgrid class="deckgrid" source="vm.goods">

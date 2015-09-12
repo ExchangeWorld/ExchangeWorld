@@ -27,6 +27,7 @@ const requires = [
 	'ngTouch',
 	'ngMaterial',
 	'utils.photoSlider',
+	'utils.scroll',
 	'utils.facebook',
 	'utils.notification',
 	'utils.message',

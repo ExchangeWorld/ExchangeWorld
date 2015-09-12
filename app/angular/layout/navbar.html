@@ -32,7 +32,7 @@
 		</div>
 		<!-- notification div -->
 		<div flex="10" flex-md="15" flex-sm offset="10" offset-md="5" offset-sm="5" layout="row" layout-align="center center">
-			<md-menu flex="30" flex-sm md-offset="-233 75">
+			<md-menu flex="30" flex-sm md-offset="-233 75" ng-show="vm.isLoggedIn">
 				<md-button ng-click="$mdOpenMenu()">
 					<md-icon class="material-icons">notifications</md-icon>
 					<p class="notification md-caption" ng-show="vm.unreadCount !== 0">{{ vm.unreadCount }}</p>

@@ -14,12 +14,14 @@ function GoodsOverlay(map, good, $state) {
 function onAdd(map, $state) {
 
 	var div = document.createElement('div');
-	div.style.borderStyle      = 'none';
-	div.style.borderWidth      = '0px';
-	div.style.position         = 'absolute';
-	div.style.backgroundImage  = `url(${this.good.photo_path[0]})`;
-	div.style.backgroundSize   = 'cover';
-	div.style.backgroundRepeat = 'no-repeat';
+	div.style.borderStyle        = 'double';
+	div.style.borderWidth        = '2px';
+	div.style.borderColor        = '#388dc1';
+	div.style.position           = 'absolute';
+	div.style.backgroundImage    = `url(${this.good.photo_path[0]})`;
+	div.style.backgroundSize     = 'cover';
+	div.style.backgroundPosition = 'center';
+	div.style.backgroundRepeat   = 'no-repeat';
 
 	this.element = div;
 	google.maps.event.addDomListener(div, 'mousedown', function(e) {

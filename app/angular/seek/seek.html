@@ -11,7 +11,6 @@
 			<md-select ng-model="vm.searchGoodsCategory" aria-label="cate">
 				<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>
 			</md-select>
-
 		</md-input-container>
 		<md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory})">
 			<md-icon hide-sm md-font-set="material-icons">search</md-icon><span class="ng-scope">搜索!</span>
@@ -24,11 +23,10 @@
 	</div>
 	<div class="md-padding"></div>
 	<div deckgrid class="deckgrid" source="vm.goods">
-		<md-card class="md-whiteframe-z3 item hvr-grow"
-			ng-click="mother.onClickGoods(card.gid)"
-			ng-mouseenter="mother.onMouseOver(card.gid)"
-			ng-mouseleave="mother.onMouseOut()"
-		>
+		<md-card class="md-whiteframe-z3 item hvr-grow" ng-click="mother.onClickGoods(card.gid)" ng-mouseenter="mother.onMouseOver(card.gid)" ng-mouseleave="mother.onMouseOut()">
+			<i class="material-icons heart">favorite</i>
+			<i class="material-icons heart">favorite_border</i>
+			<i class="material-icons plus-one">plus_one</i>
 			<photoslider images="card.photo_path" class="md-card-image"></photoslider>
 			<md-card-content style="padding: 0.8em 0;">
 				<div layout="row" layout-align="center center">
@@ -51,3 +49,4 @@
 		</md-card>
 	</div>
 </md-content>
+

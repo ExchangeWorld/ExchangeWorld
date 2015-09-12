@@ -5,8 +5,6 @@
 		<md-button class="md-raised md-accent">快去探索吧</md-button>
 	</div>
 </md-content>
-
-
 <md-content ng-show="vm.exchangeList.length !== 0">
 	<div layout="row" layout-sm="column">
 		<div flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap>
@@ -43,7 +41,7 @@
 					<div layout="column" style="height:250px; background-color:#B0BEC5;">
 						<p class="md-body-1 text-ex">{{ vm.exchange.goods[0].description }}</p>
 						<div flex layout layout-align="end end">
-							<img class="circle"ng-src="{{vm.exchange.goods[0].user.photo_path}}">
+							<img class="circle" ng-src="{{vm.exchange.goods[0].user.photo_path}}">
 						</div>
 					</div>
 				</div>
@@ -61,7 +59,7 @@
 					<div layout="column" style="height:250px; background-color:#B0BEC5;">
 						<p class="md-body-1 text-ex">{{ vm.exchange.goods[1].description }}</p>
 						<div flex layout layout-align="end end">
-							<img class="circle"ng-src="{{vm.exchange.goods[1].user.photo_path}}">
+							<img class="circle" ng-src="{{vm.exchange.goods[1].user.photo_path}}">
 						</div>
 					</div>
 				</div>
@@ -76,29 +74,10 @@
 					<span>聊天</span>
 				</md-toolbar>
 				<ul class="discussion" scroll='vm.chatroom'>
-					<li class="other">
-						<div class="avatar">
-							<img src="../../images/unknown-user.gif" />
-							<md-tooltip>user1</md-tooltip>
-						</div>
-						<div class="messages">
-							<p class="content">今天好熱RRRRR</p>
-						</div>
-					</li>
-					<li class="self">
-						<div class="avatar">
-							<img src="../../images/unknown-user.gif" />
-							<md-tooltip>user2</md-tooltip>
-						</div>
-						<div class="messages">
-							<p class="content">颱風沒來結果變成這樣辣 哭哭喔GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG</p>
-						</div>
-					</li>
-
-					<li ng-class="{true: 'self', false: 'other'}[chat.sender_uid === {{ vm.myid }}]" ng-repeat="chat in vm.chatroom">
-						<div class="avatar">
+					<li ng-class="{true: 'other', false: 'self'}[chat.sender_uid === {{ vm.myid }}]" ng-repeat="chat in vm.chatroom">
+						<div class="avatar" ng-show="(chat.sender_uid === {{ vm.myid }})">
 							<img ng-show="(chat.sender_uid === {{ vm.myid }})" ng-src="{{vm.exchange.goods[0].user.photo_path}}" />
-							<img ng-show="(chat.sender_uid !== {{ vm.myid }})" ng-src="{{vm.exchange.goods[1].user.photo_path}}" />
+							<!-- <img ng-src="{{vm.exchange.goods[1].user.photo_path}}" /> -->
 							<md-tooltip ng-show="(chat.sender_uid === {{ vm.myid }})">{{vm.exchange.goods[0].user.name}}</md-tooltip>
 							<md-tooltip ng-show="(chat.sender_uid !== {{ vm.myid }})">{{vm.exchange.goods[1].user.name}}</md-tooltip>
 						</div>
@@ -120,3 +99,4 @@
 		</div>
 	</div>
 </md-content>
+

@@ -95,7 +95,7 @@
 				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
 					<span>聊天</span>
 				</md-toolbar>
-				<ul class="discussion">
+				<ul class="discussion" scroll='vm.chatroom'>
 					<li class="other">
 						<div class="avatar">
 							<img src="../../images/unknown-user.gif" />
@@ -114,14 +114,26 @@
 							<p class="content">颱風沒來結果變成這樣辣 哭哭喔GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG</p>
 						</div>
 					</li>
+
+					<li ng-class="{true: 'self', false: 'other'}[chat.sender_uid === {{ vm.myid }}]" ng-repeat="chat in vm.chatroom">
+						<div class="avatar">
+							<img ng-show="(chat.sender_uid === {{ vm.myid }})" ng-src="{{vm.exchange.goods[0].user.photo_path}}" />
+							<img ng-show="(chat.sender_uid !== {{ vm.myid }})" ng-src="{{vm.exchange.goods[1].user.photo_path}}" />
+							<md-tooltip ng-show="(chat.sender_uid === {{ vm.myid }})">{{vm.exchange.goods[0].user.name}}</md-tooltip>
+							<md-tooltip ng-show="(chat.sender_uid !== {{ vm.myid }})">{{vm.exchange.goods[1].user.name}}</md-tooltip>
+						</div>
+						<div class="messages">
+							<p class="content">{{ chat.content }}</p>
+						</div>
+					</li>
 				</ul>
 				<ul class="discussion input">
-					<form>
-						<md-input-container style="height:49px;padding: 0px;">
-							<label>Type some here...</label>
-							<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
-							<input type="text" ng-model="SoemModel" name="text" />
+					<form ng-submit="vm.onSubmitChat()">
+						<md-input-container>
+							<label>Write some here...</label>
+							<input type="text" ng-model="vm.chatContent" name="text" />
 						</md-input-container>
+						<input type="submit" id="submit" value="Submit" ng-show="false" />
 					</form>
 				</ul>
 			</div>
@@ -129,4 +141,3 @@
 		</div>
 	</div>
 </md-content>
-

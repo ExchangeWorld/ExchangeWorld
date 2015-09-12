@@ -43,6 +43,7 @@ function exchangeService(Restangular, $q) {
 										return false;
 									}
 								});
+								console.log(filtered);
 								defer.resolve(filtered);
 							}
 						})
@@ -126,14 +127,42 @@ function exchangeService(Restangular, $q) {
 		return defer.promise;
 	}
 
-	/**
-	 * eid is the chatroom id(same as exchange id)
-	 */
-	function getChat(eid) {
-		return;
+	function getChat(eid, number, offset) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('chatroom')
+			.getList({
+				eid    : eid,
+				from   : offset,
+				number : number,
+			})
+			.then(function(data) {
+				//console.log(data);
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Exchange Service] getChatroom error: ')(error);
+			});
+		return defer.promise;
 	}
 
-	function postChat(eid, chat) {
-		return;
+	function postChat(newChat) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('chatroom')
+			.post({
+				eid        : newChat.eid,
+				sender_uid : newChat.sender_uid,
+				content    : newChat.content,
+			})
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Exchange Service] postChat error: ')(error);
+			});
+		return defer.promise;
 	}
 }

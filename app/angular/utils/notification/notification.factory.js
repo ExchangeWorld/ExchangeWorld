@@ -30,7 +30,6 @@ function notification(Restangular, $q, exception, $localStorage) {
 				return exception.catcher('[notification Service] getNotification error: ')(error);
 			});
 		return defer.promise;
-
 	}
 
 	function postNotification(newNotice) {

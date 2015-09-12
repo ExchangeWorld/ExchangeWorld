@@ -245,12 +245,36 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 				goods2_gid : goods2_gid,
 			})
 			.then(function(data) {
+				deleteAllQueues(goods1_gid);
+				deleteAllQueues(goods2_gid);
 				defer.resolve(data);
 			})
 			.catch(function(error) {
 				return exception.catcher('[Goods Service] postExchang error: ')(error);
 			});
 		return defer.promise;
+	}
+
+	/**
+	 * When goodsA & goodsB publish an exchange,
+	 * must delete all queuing list of goodsA & goodsB
+	 */
+	function deleteAllQueues(gid) {
+		Restangular
+			.all('queue/by')
+			.getList({queuer_goods_gid: gid})
+			.then(function(data) {
+				if (_.isArray(data)) {
+					//console.log(data);
+					data.map(function(host_goods) {
+						deleteQueue(host_goods.host_goods_gid, gid);
+					});
+
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] getQueue error: ')(error);
+			});
 	}
 
 	function showQueueBox(ev, myGoods, queuing_goods_gid) {

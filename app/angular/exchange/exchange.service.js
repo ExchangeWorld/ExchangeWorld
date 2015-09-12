@@ -70,12 +70,17 @@ function exchangeService(Restangular, $q, $mdDialog) {
 
 		exchange.agree = 'true';
 
-		console.log(exchange);
+		// console.log(exchange);
 		exchange
 			.put()
 			.then(function(data) {
 				defer.resolve(data);
-				if(data.goods1_agree && data.goods2_agree) completeExchange(exchange);
+				if (
+					data.goods1_agree && 
+					data.goods2_agree
+				) {
+					completeExchange(exchange);
+				}
 			})
 			.catch(function(error) {
 				return exception.catcher('[exchange Service] agreeExchange error: ')(error);
@@ -116,7 +121,7 @@ function exchangeService(Restangular, $q, $mdDialog) {
 			.then(function(data) {
 				if (_.isArray(data)) {
 					var exchange = data[0];
-					exchange.route += '/drop'; // PUT of "drop" is "api/exchange/drop"
+					exchange.route = 'exchange/drop'; // PUT of "drop" is "api/exchange/drop"
 					//console.log(exchange);
 					exchange.put();
 				}
@@ -188,12 +193,12 @@ function exchangeService(Restangular, $q, $mdDialog) {
 			activate();
 
 			function activate() {
-				console.log(vm.thisExchange.goods[0].owner_uid);
-				console.log(vm.myuid);
+				// console.log(vm.thisExchange.goods[0].owner_uid);
+				// console.log(vm.myuid);
 				vm.mygid = (vm.thisExchange.goods[0].owner_uid === vm.myuid)
 					? vm.thisExchange.goods[0].gid
 					: vm.thisExchange.goods[1].gid;
-				console.log(vm.mygid);
+				// console.log(vm.mygid);
 			}
 
 

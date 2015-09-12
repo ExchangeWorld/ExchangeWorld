@@ -6,12 +6,14 @@ const _              = require('lodash');
 exchangeModule.service('exchangeService', exchangeService);
 
 /** @ngInject */
-function exchangeService(Restangular, $q) {
+function exchangeService(Restangular, $q, $mdDialog) {
 	var service = {
 		getExchange,
 		getAllExchange,
 		deleteExchange,
+		agreeExchange,
 		completeExchange,
+		showCompleteExchange,
 
 		getChat,
 		postChat,
@@ -23,34 +25,13 @@ function exchangeService(Restangular, $q) {
 		const defer = $q.defer();
 
 		Restangular
-			.all('exchange/allExchange')
-			.getList()
+			.all('exchange/of')
+			.getList({
+				owner_uid: owner_uid
+			})
 			.then(function(data) {
 				if (_.isArray(data)) {
-					
-					Restangular
-						.all('goods')
-						.getList({ owner_uid : owner_uid })
-						.then(function(goods_data) {
-							if (_.isArray(goods_data)) {
-								var filtered = data.filter(function(exchange) {
-									if( 
-										_.findWhere(goods_data, { gid: exchange.goods1_gid}) || 
-										_.findWhere(goods_data, { gid: exchange.goods2_gid}) 
-									) {
-										return true;
-									} else {
-										return false;
-									}
-								});
-								console.log(filtered);
-								defer.resolve(filtered);
-							}
-						})
-						.catch(function(error) {
-							return exception.catcher('[Exchange Service] getGood error: ')(error);
-						});
-
+					defer.resolve(data);
 				}
 			})
 			.catch(function(error) {
@@ -79,27 +60,51 @@ function exchangeService(Restangular, $q) {
 		return defer.promise;
 	}
 
-	/**
-	 * complete exchange
-	 * users all accept the exchage.
-	 */
-	function completeExchange(eid) {
+	function agreeExchange(exchange, gid) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('exchange')
-			.getList({eid: eid})
+		exchange.route = 'exchange/agree';
+		exchange.goods_gid = (gid === exchange.goods1_gid) 
+			? exchange.goods1_gid 
+			: exchange.goods2_gid;
+
+		exchange.agree = 'true';
+
+		// console.log(exchange);
+		exchange
+			.put()
 			.then(function(data) {
-				if (_.isArray(data)) {
-					var exchange = data[0];
-					exchange.route += '/complete'; // PUT of "complete" is "api/exchange/complete"
-					//console.log(exchange);
-					exchange.put();
+				defer.resolve(data);
+				if (
+					data.goods1_agree && 
+					data.goods2_agree
+				) {
+					completeExchange(exchange);
 				}
 			})
 			.catch(function(error) {
-				return exception.catcher('[Exchange Service] completeExchange error: ')(error);
+				return exception.catcher('[exchange Service] agreeExchange error: ')(error);
 			});
+		return defer.promise;
+	}
+
+	/**
+	 * complete exchange
+	 */
+	function completeExchange(exchange) {
+		const defer = $q.defer();
+
+		exchange.route = 'exchange/complete'; // PUT of "complete" is "api/exchange/complete"
+
+		exchange
+			.put()
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[exchange Service] completeExchange error: ')(error);
+			});
+
 		return defer.promise;
 	}
 
@@ -116,7 +121,7 @@ function exchangeService(Restangular, $q) {
 			.then(function(data) {
 				if (_.isArray(data)) {
 					var exchange = data[0];
-					exchange.route += '/drop'; // PUT of "drop" is "api/exchange/drop"
+					exchange.route = 'exchange/drop'; // PUT of "drop" is "api/exchange/drop"
 					//console.log(exchange);
 					exchange.put();
 				}
@@ -164,5 +169,55 @@ function exchangeService(Restangular, $q) {
 				return exception.catcher('[Exchange Service] postChat error: ')(error);
 			});
 		return defer.promise;
+	}
+
+	function showCompleteExchange(ev, thisExchange, myid) {
+		$mdDialog.show({
+			clickOutsideToClose: true,
+			templateUrl: 'exchange/exchange.complete.html',
+			controllerAs: 'vm',
+			controller: onCompleteController,
+			locals: {
+				thisExchange: thisExchange,
+				myid: myid,
+			}
+		});
+		function onCompleteController($mdDialog, logger, exchangeService, thisExchange, myid) {
+			const vm        = this;
+			vm.thisExchange = thisExchange;
+			vm.myuid        = parseInt(myid, 10);
+			vm.mygid        = '';
+			vm.confirm      = onConfirm;
+			vm.cancel       = onCancel;
+
+			activate();
+
+			function activate() {
+				// console.log(vm.thisExchange.goods[0].owner_uid);
+				// console.log(vm.myuid);
+				vm.mygid = (vm.thisExchange.goods[0].owner_uid === vm.myuid)
+					? vm.thisExchange.goods[0].gid
+					: vm.thisExchange.goods[1].gid;
+				// console.log(vm.mygid);
+			}
+
+
+			function onConfirm(scores) {
+				$mdDialog
+					.hide(scores)
+					.then(function(scores) {
+						
+						exchangeService
+							.agreeExchange(thisExchange, vm.mygid)
+							.then(function(data) {
+								logger.success('成功評價此交易', data, 'DONE');
+							});
+					});
+			}
+			function onCancel() {
+				$mdDialog.cancel();
+			};
+		}
+	
 	}
 }

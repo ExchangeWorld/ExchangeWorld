@@ -5,7 +5,7 @@ const _              = require('lodash');
 exchangeModule.controller('ExchangeController', ExchangeController);
 
 /** @ngInject */
-function ExchangeController(exchangeList, $state, exchangeService, $stateParams, $interval) {
+function ExchangeController(exchangeList, $state, exchangeService, $stateParams, $interval, $mdDialog) {
 	var vm             = this;
 	vm.myid            = $stateParams.uid;
 	vm.exchangeList    = exchangeList;
@@ -21,8 +21,6 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 	activate();
 
 	function activate() {
-		console.log(vm.myid);
-		console.log(vm.exchangeList);
 		if(vm.exchangeList.length) {
 			vm.exchangeList.forEach(function(exchange) {
 				exchangeService
@@ -30,7 +28,7 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 					.then(function(data) {
 						//console.log(data);
 						exchange.details = data;
-						exchange.with = (data.goods[0].owner_uid === vm.myid)
+						exchange.with = (data.goods[0].owner_uid !== vm.myid)
 							? data.goods[0].user.name
 							: data.goods[1].user.name ;
 					});
@@ -55,25 +53,30 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 				//console.log(data);
 				vm.exchange = data;
 				updateChat();
+				$interval(updateChat, 5000);
 			});
 	}
 
-	function onClickComplete(eid) {
-		exchangeService
-			.completeExchange(eid)
-			.then(function(data) {
-				console.log(data);
-				//$state.reload();
-			});
+	function onClickComplete(ev) {
+		exchangeService.showCompleteExchange(ev, vm.exchange, vm.myid);
 	}
 
-	function onClickDelete(eid) {
-		exchangeService
-			.deleteExchange(eid)
-			.then(function(data) {
-				console.log(data);
-				//$state.reload();
-			});
+	function onClickDelete(ev, eid) {
+		var confirm = $mdDialog.confirm()
+			.title('放棄這個交易')
+			.content('您確定要放棄這個交易嗎？<br/>此動作無法回覆！')
+			.ariaLabel('Delete Exchange')
+			.ok('確定')
+			.cancel('取消')
+			.targetEvent(ev);
+		if (confirm) {
+			$mdDialog
+				.show(confirm)
+				.then(function() {
+					exchangeService.deleteExchange(eid);
+					$state.go('root.withSidenav.seek');
+				});
+		}
 	}
 
 	function onSubmitChat() {
@@ -93,5 +96,4 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 		}
 	}
 
-	var timer = $interval(updateChat, 5000);
 }

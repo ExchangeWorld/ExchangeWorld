@@ -30,8 +30,8 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 					.then(function(data) {
 						//console.log(data);
 						exchange.details = data;
-						exchange.with = (data.goods[0].owner_uid === vm.myid) 
-							? data.goods[0].user.name 
+						exchange.with = (data.goods[0].owner_uid === vm.myid)
+							? data.goods[0].user.name
 							: data.goods[1].user.name ;
 					});
 			});
@@ -44,12 +44,6 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 			.getChat(vm.exchange.eid, 100, 0)
 			.then(function(data) {
 				vm.chatroom = data;
-			//})
-			//.then(function() {
-				//var chatroom = angular.element(document.querySelector('#chatroom'))[0];
-				//console.log(chatroom );
-				//chatroom.scrollTop = chatroom.scrollHeight;
-				//console.log(chatroom.scrollTop+' '+chatroom.scrollHeight );
 			});
 	}
 	////////////

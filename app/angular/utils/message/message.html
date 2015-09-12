@@ -21,9 +21,9 @@
 				</md-toolbar>
 				<div class="message-box" ng-show="!vm.msg.isNewMsg">
 					<li class="md-subhead message" ng-repeat="history in vm.history" >
-						<div style="background-color:#0f0" ng-style="{ 'float': history.sender_uid === vm.msg.receiver_uid ? 'right' : 'left' }"> 
+						<div style="background-color:#0f0" ng-style="{ 'float': history.sender_uid === vm.msg.receiver_uid ? 'right' : 'left' }">
 							{{ history.content }}
-						</div> 
+						</div>
 					</li>
 				</div>
 				<md-input-container flex style="padding-top: 0;">
@@ -48,4 +48,3 @@
 		<!-- </div> -->
 	</form>
 </md-dialog>
-

@@ -18,6 +18,7 @@ require('../utils/logger/logger.module');
 require('../utils/router/router.module');
 require('../utils/resize/resize.module');
 require('../utils/auth/auth.module');
+require('../utils/scroll/scroll.module');
 
 const requires = [
 	'ui.router',

@@ -24,14 +24,16 @@
 				</ul>
 				<!-- <hr> -->
 				<div layout="row" layout-algin="center center">
-					<md-input-container flex="60" style="padding: 0 2px;">
+					<md-input-container flex="70" style="padding: 0 2px;">
 						<label>回覆訊息...</label>
 						<textarea type="string" ng-model="vm.contents" columns="10" md-maxlength="1000"></textarea>
 						<!--<md-tooltip md-direction="left">內文</md-tooltip>-->
 					</md-input-container>
 					<!-- <span flex="50"></span> -->
 					<!-- <input flex class="md-button md-primary md-raised" ng-click="vm.cancel()" value="算了"></input> -->
-					<input flex class="md-button md-primary md-raised" ng-click="vm.submit(vm.contents)" value="送出"></input>
+					<div flex layout layout-align="center end">
+						<input flex class="md-button md-primary md-raised" ng-click="vm.submit(vm.contents)" value="送出" style="height:45px"></input>
+					</div>
 				</div>
 			</div>
 	</md-dialog-content>

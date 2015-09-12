@@ -30,7 +30,7 @@
 			<!-- <span flex></span> -->
 		</div>
 		<div layout="row" layout-align="center center" layout-wrap>
-			<div flex="45" ng-repeat="preview in vm.imgEncoded">
+			<div flex="45" class="md-whiteframe-z3" ng-repeat="preview in vm.imgEncoded">
 				<img data-ng-src="data:image/png;base64,{{preview.base64}}" style="max-height:100%; max-width:100%" />
 			</div>
 		</div>

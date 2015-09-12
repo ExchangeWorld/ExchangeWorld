@@ -14,7 +14,6 @@ function GoodsOverlay(map, good, $state) {
 function onAdd(map, $state) {
 
 	var div = document.createElement('div');
-	console.log(div.style)
 	div.style.borderStyle      = 'none';
 	div.style.borderWidth      = '0px';
 	div.style.position         = 'absolute';
@@ -23,7 +22,7 @@ function onAdd(map, $state) {
 	div.style.backgroundRepeat = 'no-repeat';
 
 	this.element = div;
-	google.maps.event.addDomListener(div, 'mouseup', function(e) {
+	google.maps.event.addDomListener(div, 'mousedown', function(e) {
 		e.stopPropagation();
 		$state.go('root.withSidenav.goods', {gid : this.good.gid});
 		map.panTo(this.good.marker.getPosition());

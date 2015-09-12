@@ -10,6 +10,7 @@ function ProfileController(
 	profileService,
 	auth,
 	message,
+	$scope,
 	$state,
 	$stateParams,
 	$localStorage
@@ -20,6 +21,7 @@ function ProfileController(
 	vm.largePic            = '';
 	vm.isLoggedIn          = Boolean($localStorage.user);
 	vm.isMe                = vm.isLoggedIn && (profile.uid === $localStorage.user.uid);
+	vm.myStar              = [];
 	vm.myGoodsPending      = [];
 	vm.myGoodsExchanged    = [];
 	vm.onClickFollow       = onClickFollow;
@@ -30,6 +32,7 @@ function ProfileController(
 	vm.isReadOnly          = true;
 	vm.onClickEdit         = function onClickEdit() { vm.isReadOnly = !vm.isReadOnly; };
 	vm.onClickSave         = onClickSave;
+	$scope.onClickGoods    = onClickGoods;
 
 
 	/////////////
@@ -50,8 +53,13 @@ function ProfileController(
 					profileService
 						.getMyGoods($stateParams.uid)
 						.then(function(data) {
-							vm.myGoodsPending  = data.filter(function(g) { return g.status === 0; });
-							vm.myGoodsExchange = data.filter(function(g) { return g.status === 1; });
+							vm.myGoodsPending   = data.filter(function(g) { return g.status === 0; });
+							vm.myGoodsExchanged = data.filter(function(g) { return g.status === 1; });
+						});
+					profileService
+						.getMyStar($stateParams.uid)
+						.then(function(data) {
+							vm.myStar = data;
 						});
 				} else {
 					vm.isMe = false;
@@ -68,13 +76,14 @@ function ProfileController(
 	}
 
 	function onClickAddFollowing() {
-		profileService.addFollowing($localStorage.user.uid, profile.uid);
-		// should add unfollow code here
-		vm.isFollowed = !vm.isFollowed;
-		if (!vm.isFollowed) {
+		if (vm.isFollowed) {
+			profileService.deleteFollowing($localStorage.user.uid, profile.uid);
 			vm.followerCount--;
+			vm.isFollowed = false;
 		} else {
+			profileService.addFollowing($localStorage.user.uid, profile.uid);
 			vm.followerCount++;
+			vm.isFollowed = true;
 		}
 	}
 
@@ -96,5 +105,9 @@ function ProfileController(
 			.then(function(data) {
 				console.log(data);
 			});
+	}
+
+	function onClickGoods(gid) {
+		$state.go('root.withSidenav.goods', { gid : gid });
 	}
 }

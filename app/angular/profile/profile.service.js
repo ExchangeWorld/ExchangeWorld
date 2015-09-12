@@ -11,7 +11,9 @@ function profileService(Restangular, $q, facebookService) {
 		getProfile,
 		editProfile,
 		addFollowing,
+		deleteFollowing,
 		getMyGoods,
+		getMyStar,
 	};
 
 	return service;
@@ -62,14 +64,29 @@ function profileService(Restangular, $q, facebookService) {
 		Restangular
 			.all('user/profile/following/post')
 			.post({
-				my_uid: my_uid,
-				following_uid: following_uid,
+				my_uid        : my_uid,
+				following_uid : following_uid,
 			});
 		Restangular
 			.all('user/profile/follower/post')
 			.post({
-				my_uid: following_uid,
-				follower_uid: my_uid,
+				my_uid       : following_uid,
+				follower_uid : my_uid,
+			});
+	}
+
+	function deleteFollowing(my_uid, following_uid) {
+		Restangular
+			.all('user/profile/following/delete')
+			.remove({
+				my_uid        : my_uid,
+				following_uid : following_uid,
+			});
+		Restangular
+			.all('user/profile/follower/delete')
+			.remove({
+				my_uid       : following_uid,
+				follower_uid : my_uid,
 			});
 	}
 
@@ -94,5 +111,25 @@ function profileService(Restangular, $q, facebookService) {
 				return exception.catcher('[profile Service] getProfile error: ')(error);
 			});
 		return defer.promise;
+	}
+
+	function getMyStar(uid) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('star/by')
+			.getList({
+				starring_user_uid: uid,
+			})
+			.then(function(data) {
+				if (_.isArray(data)) {
+					defer.resolve(data);
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[profile Service] getMyStar error: ')(error);
+			});
+		return defer.promise;
+	
 	}
 }

@@ -1,53 +1,13 @@
-.hvr-box-shadow-outset {
-    vertical-align: middle;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: box-shadow;
-    &:hover,
-    &:focus,
-    &:active {
-        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
-    }
-}
-
 .hvr-grow {
-    vertical-align: middle;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform;
-    margin-bottom: 10px;
-    &:hover,
-    &:focus,
-    &:active {
-        transform: scale(1.05);
-    }
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  transition-duration: 0.3s;
+  transition-property: transform;
 }
 
-.hvr-shadow {
-    vertical-align: middle;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: box-shadow;
-    &:hover,
-    &:focus,
-    &:active {
-        box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
-    }
-}
-
-.grow {
-    transition: all .2s ease-in-out;
-    &:hover {
-        transform: scale(1.04);
-    }
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+  transform: scale(1.1);
 }

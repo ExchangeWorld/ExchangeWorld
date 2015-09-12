@@ -1,10 +1,10 @@
 <div flex style="position: relative;  margin:auto;">
-	<div flex layout layout-align="center center" ng-show="images.length !== 1">
-		<a flex href="#" ng-click="prevSlide($event)">
+	<div flex layout layout-align="center center" ng-show="images.length > 1">
+		<a href="#" ng-click="prevSlide($event)" style="position: absolute; left: 0; top: 45%">
 			<img style="height:30px; width:30px;" src="../../../images/left-arrow.png">
 		</a>
-		<span flex="80"></span>
-		<a flex href="#" ng-click="nextSlide($event);">
+
+		<a href="#" ng-click="nextSlide($event);" style="position: absolute; right: 0; top: 45%">
 			<img style="height:30px; width:30px;" src="../../../images/right-arrow.png">
 		</a>
 	</div>
@@ -12,4 +12,3 @@
 		<img ng-src="{{ image }}" style="width:100%;" />
 	</div>
 </div>
-

@@ -44,6 +44,7 @@ function SeekController(
 		seekService
 			.getSeek(filter)
 			.then(function(data) {
+				console.log(data);
 				vm.goods = data;
 				$rootScope.$broadcast('goodsChanged', vm.goods);
 			})

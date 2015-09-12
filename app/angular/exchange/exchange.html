@@ -49,7 +49,7 @@
 				<div flex="30" layout="column" layout-align="center center">
 					<img src="../../images/icon(48-48).png" height="48" width="48">
 					<md-button class="md-accent md-hue-2" ng-click="vm.onClickComplete($event)">COMPLETE !</md-button>
-					<md-button ng-click="vm.onClickDelete(vm.exchange.eid)">我不爽換！</md-button>
+					<md-button ng-click="vm.onClickDelete($event, vm.exchange.eid)">我不爽換！</md-button>
 				</div>
 				<!-- second user item -->
 				<div layout="column" flex>

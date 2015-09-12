@@ -5,7 +5,7 @@ const _              = require('lodash');
 exchangeModule.controller('ExchangeController', ExchangeController);
 
 /** @ngInject */
-function ExchangeController(exchangeList, $state, exchangeService, $stateParams, $interval) {
+function ExchangeController(exchangeList, $state, exchangeService, $stateParams, $interval, $mdDialog) {
 	var vm             = this;
 	vm.myid            = $stateParams.uid;
 	vm.exchangeList    = exchangeList;
@@ -61,21 +61,27 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 
 	function onClickComplete(ev) {
 		exchangeService.showCompleteExchange(ev, vm.exchange, vm.myid);
-		//exchangeService
-			//.completeExchange(eid)
-			//.then(function(data) {
-				//console.log(data);
-				////$state.reload();
-			//});
 	}
 
-	function onClickDelete(eid) {
-		exchangeService
-			.deleteExchange(eid)
-			.then(function(data) {
-				console.log(data);
-				//$state.reload();
-			});
+	function onClickDelete(ev, eid) {
+		var confirm = $mdDialog.confirm()
+			.title('放棄這個交易')
+			.content('您確定要放棄這個交易嗎？<br/>此動作無法回覆！')
+			.ariaLabel('Delete Exchange')
+			.ok('確定')
+			.cancel('取消')
+			.targetEvent(ev);
+		if (confirm) {
+			$mdDialog
+				.show(confirm)
+				.then(function() {
+					exchangeService.deleteExchange(eid)
+						//.then(function() {
+							////$state.reload();
+						//});
+					$state.go('root.withSidenav.seek');
+				});
+		}
 	}
 
 	function onSubmitChat() {

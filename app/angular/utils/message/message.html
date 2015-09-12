@@ -8,11 +8,11 @@
 				</md-button>
 			</div>
 		</md-toolbar>
-		<md-dialog-content style="max-width:800px;max-height:1210px; ">
+		<md-dialog-content style="max-width:800px;max-height:610px; padding-top: 5px;">
 				<div flex flex-sm layout="row">
 					<span flex="5" hide-sm></span>
 					<div flex>
-						<ul class="discussion" scroll='vm.history'>
+						<ul class="discussion message" scroll='vm.history'>
 							<li ng-class="{true: 'self', false: 'other'}[history.sender_uid === {{ vm.msg.receiver_uid }}]" ng-repeat="history in vm.history">
 								<div class="avatar" ng-show="(history.sender_uid !== {{ vm.msg.receiver_uid }})">
 									<img ng-src="{{vm.msg.user.photo_path}}" />
@@ -22,15 +22,16 @@
 								</div>
 							</li>
 						</ul>
-						<md-input-container flex style="padding-top: 0;">
+						
+						<!-- <hr> -->
+						<div layout="row" layout-algin="center center">
+							<md-input-container flex="60" style="padding: 0 2px;">
 							<label>回覆訊息...</label>
 							<textarea type="string" ng-model="vm.contents" columns="10" md-maxlength="1000"></textarea>
 							<!--<md-tooltip md-direction="left">內文</md-tooltip>-->
-						</md-input-container>
-						<hr>
-						<div layout="row">
-							<span flex="50"></span>
-							<input flex class="md-button md-primary md-raised" ng-click="vm.cancel()" value="算了"></input>
+							</md-input-container>
+							<!-- <span flex="50"></span> -->
+							<!-- <input flex class="md-button md-primary md-raised" ng-click="vm.cancel()" value="算了"></input> -->
 							<input flex class="md-button md-primary md-raised" ng-click="vm.submit(vm.contents)" value="送出"></input>
 						</div>
 					</div>

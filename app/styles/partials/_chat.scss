@@ -2,7 +2,7 @@
     list-style: none;
     background: #e5e5e5;
     margin: 0;
-    height: 420px;
+    height: 470px;
     padding: 0; // finality
     overflow-y: auto;
     li {
@@ -24,6 +24,9 @@
         height: 48px;
         padding: 0;
         overflow-y: hidden;
+    }
+    &.message{
+    	height:375px;
     }
 }
 

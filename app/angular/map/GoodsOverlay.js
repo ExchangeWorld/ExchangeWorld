@@ -14,11 +14,12 @@ function GoodsOverlay(map, good, $state) {
 function onAdd(map, $state) {
 
 	var div = document.createElement('div');
+	console.log(div.style)
 	div.style.borderStyle      = 'none';
 	div.style.borderWidth      = '0px';
 	div.style.position         = 'absolute';
 	div.style.backgroundImage  = `url(${this.good.photo_path[0]})`;
-	div.style.backgroundSize   = 'contain';
+	div.style.backgroundSize   = 'cover';
 	div.style.backgroundRepeat = 'no-repeat';
 
 	this.element = div;
@@ -36,8 +37,8 @@ function draw() {
 
 	var el = this.element;
 	if (el) {
-		el.style.left = origin.x - 75 + 'px';
-		el.style.top = origin.y - 75 + 'px';
+		el.style.left = origin.x - 100 + 'px';
+		el.style.top = origin.y - 220 + 'px';
 		el.style.width = 200 + 'px';
 		el.style.height = 200 + 'px';
 	}

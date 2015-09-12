@@ -55,11 +55,12 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 				//console.log(data);
 				vm.exchange = data;
 				updateChat();
+				$interval(updateChat, 5000);
 			});
 	}
 
-	function onClickComplete(eid) {
-		exchangeService.showCompleteExchange();
+	function onClickComplete(ev) {
+		exchangeService.showCompleteExchange(ev, vm.exchange, vm.myid);
 		//exchangeService
 			//.completeExchange(eid)
 			//.then(function(data) {
@@ -94,5 +95,4 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 		}
 	}
 
-	var timer = $interval(updateChat, 5000);
 }

@@ -73,10 +73,7 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 			$mdDialog
 				.show(confirm)
 				.then(function() {
-					exchangeService.deleteExchange(eid)
-						//.then(function() {
-							////$state.reload();
-						//});
+					exchangeService.deleteExchange(eid);
 					$state.go('root.withSidenav.seek');
 				});
 		}

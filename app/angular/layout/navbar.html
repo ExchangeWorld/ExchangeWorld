@@ -1,10 +1,11 @@
 <md-toolbar class="md-primary" style="overflow-x: hidden; overflow-y: hidden;">
 	<div class="md-toolbar-tools md-medium-tall navbar">
-		<span flex="20" flex-md="15" hide-sm>
+		<span flex="20" flex-md="15" hide-sm hide-md>
 			<md-button ng-click="vm.onClick(0)" style="text-transform: none;">
 				<div layout layout-align="center center">
-					<i class="material-icons">group</i>
-					<span hide-md hide-sm>ExchangeWorld</span>
+					<!-- <i class="material-icons">group</i>
+					<span hide-md hide-sm>ExchangeWorld</span> -->
+					<img src="../../images/Ex-Logo-white (Century Gothic).png" style="height:48px; width:auto;">
 				</div>
 			</md-button>
 		</span>
@@ -30,6 +31,7 @@
 				</div>
 			</md-button>
 		</div>
+		<span flex-md="20"></span>
 		<!-- notification div -->
 		<div flex="10" flex-md="15" flex-sm offset="10" offset-md="5" offset-sm="5" layout="row" layout-align="center center">
 			<md-menu flex="30" flex-sm md-offset="-233 75" ng-show="vm.isLoggedIn">

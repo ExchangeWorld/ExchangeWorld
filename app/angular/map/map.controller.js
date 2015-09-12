@@ -25,13 +25,12 @@ function MapController(
 	var overlay = null;
 	const vm    = this;
 
-	vm.coords          = $localStorage ? $localStorage.position : [0, 0];
-	vm.zoom            = 10;
+	vm.coords          = $localStorage.position;
+	vm.zoom            = 13;
 	vm.draggableCursor = 'default';
 	vm.draggingCursor  = 'default';
 	vm.mapStyle        = require('./mapStyle.json');
 	$scope.$on('mapInitialized', mapInitialized);
-
 
 	activate();
 
@@ -42,6 +41,7 @@ function MapController(
 		vm.placeChanged        = placeChanged;
 		vm.zoomChanged         = zoomChanged;
 		GoodsOverlay.prototype = new google.maps.OverlayView();
+
 
 		boundChanged();
 		$scope.$on('goodsChanged', goodsChanged);
@@ -61,7 +61,7 @@ function MapController(
 		if ($stateParams.olc) {
 			const coord = OpenLocationCode.decode($stateParams.olc.replace(' ','+'));
 			vm.coords = [coord.latitudeCenter, coord.longitudeCenter];
-		} else if($stateParams.hasOwnProperty('olc')) {
+		} else if ($stateParams.hasOwnProperty('olc')) {
 			geolocation
 				.getLocation()
 				.then(function(data) {
@@ -175,9 +175,8 @@ function MapController(
 	 * (This event will not trigger after reloading page)
 	 */
 	function urlChanged(event, toState, toParams, fromState, fromParams) {
-		google.maps.event.trigger(map, 'click');
-
 		if(toParams.olc) {
+			console.log(map.getCenter());
 			const coord = OpenLocationCode.decode(toParams.olc.replace(' ', '+'));
 			map.panTo({
 				lat : coord.latitudeCenter,
@@ -237,7 +236,7 @@ function MapController(
 	}
 
 	function mapMoveTo(e, gid) {
-		map.panTo(_findGood(gid).marker.getPosition());
+		// map.panTo(_findGood(gid).marker.getPosition());
 	}
 
 	function openGoodsOverlay(e, gid) {

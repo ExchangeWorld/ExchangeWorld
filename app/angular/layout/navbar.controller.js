@@ -78,9 +78,9 @@ function NavbarController(
 				$mdSidenav('left').toggle();
 			}
 		}
-			if(contentIndex === vm.stateIndex) {
-				$state.reload();
-			}
+			// if(contentIndex === vm.stateIndex) {
+			// 	$state.reload();
+			// }
 		vm.stateIndex = contentIndex;
 	}
 

@@ -29,33 +29,21 @@
 				</div>
 			</div>
 		</div>
-		<!-- <span flex="5" flex-sm="5"></span> -->
 		<div flex="50" flex-sm="100">
 			<!-- title -->
 			<div layout layout-align="center center">
-				<!-- <h1 class="md-display-1">Title</h1> -->
-				<!-- <md-button ng-click="vm.onClickComplete(vm.exchange.eid)">COMPLETE !</md-button>
-				<md-button ng-click="vm.onClickDelete(vm.exchange.eid)">我不爽換！</md-button> -->
 			</div>
 			<div layout="row" class="info_container">
 				<span flex-sm="5"></span>
 				<!-- first user item -->
 				<div layout="column" flex>
 					<div class="item exchange" layout layout-align="center center">
-						<!-- <img ng-src="{{vm.exchange.goods[0].photo_paath}}" />
-						<div layout layout-align="center center">
-							<p class="md-body-2">{{vm.exchange.goods[0].name}}</p>
-						</div> -->
 						<img ng-src="{{vm.exchange.goods[0].photo_path[0]}}" />
 					</div>
 					<div layout="column" style="height:250px; background-color:#B0BEC5;">
-						<p class="md-body-1 text-ex">來~上車囉~警察局就在前面不遠處</p>
-						<!-- <img flex="30" ng-src="{{vm.exchange.goods[0].user.photo_path}}" style="max-height:60px; max-width:60px;" />
-						<div flex layout layout-align="center center">
-							<p class="md-body-2">{{vm.exchange.goods[0].user.name}}</p>
-						</div> -->
+						<p class="md-body-1 text-ex">{{ vm.exchange.goods[0].description }}</p>
 						<div flex layout layout-align="end end">
-							<img class="circle" src="../../images/unknown-user.gif">
+							<img class="circle"ng-src="{{vm.exchange.goods[0].user.photo_path}}">
 						</div>
 					</div>
 				</div>
@@ -68,20 +56,12 @@
 				<!-- second user item -->
 				<div layout="column" flex>
 					<div class="item exchange" layout layout-align="center center">
-						<!-- <img ng-src="{{vm.exchange.goods[1].photo_path}}" />
-						<div layout layout-align="center center">
-							<p class="md-body-2">{{vm.exchange.goods[1].name}}</p>
-						</div> -->
 						<img ng-src="{{vm.exchange.goods[1].photo_path[0]}}" />
 					</div>
 					<div layout="column" style="height:250px; background-color:#B0BEC5;">
-						<p class="md-body-1 text-ex">來啦啦啦啦啦啦阿啦WRYYYYY</p>
-						<!-- <img flex="30" ng-src="{{vm.exchange.goods[1].user.photo_path}}" style="max-height:60px; max-width:60px;" />
-						<div flex layout layout-align="center center">
-							<p class="md-body-2">{{vm.exchange.goods[1].user.name}}</p>
-						</div> -->
+						<p class="md-body-1 text-ex">{{ vm.exchange.goods[1].description }}</p>
 						<div flex layout layout-align="end end">
-							<img class="circle" src="../../images/unknown-user.gif">
+							<img class="circle"ng-src="{{vm.exchange.goods[1].user.photo_path}}">
 						</div>
 					</div>
 				</div>
@@ -137,7 +117,6 @@
 					</form>
 				</ul>
 			</div>
-			<!-- <span flex="5"></span> -->
 		</div>
 	</div>
 </md-content>

@@ -32,6 +32,7 @@ function ProfileController(
 	vm.isReadOnly          = true;
 	vm.onClickEdit         = function onClickEdit() { vm.isReadOnly = !vm.isReadOnly; };
 	vm.onClickSave         = onClickSave;
+	vm.getNumber           = number => new Array(number);
 	$scope.onClickGoods    = onClickGoods;
 
 
@@ -55,10 +56,6 @@ function ProfileController(
 						.then(function(data) {
 							vm.myGoodsPending   = data.filter(function(g) { return g.status === 0; });
 							vm.myGoodsExchanged = data.filter(function(g) { return g.status === 1; });
-							vm.myGoodsExchanged.forEach(function(g) { 
-								var arr = [1,2,3,4,5];
-								g.rateArr = arr.filter(function(i) { return g.rate >= i; });
-							});
 						});
 					profileService
 						.getMyStar($stateParams.uid)
@@ -114,4 +111,5 @@ function ProfileController(
 	function onClickGoods(gid) {
 		$state.go('root.withSidenav.goods', { gid : gid });
 	}
+
 }

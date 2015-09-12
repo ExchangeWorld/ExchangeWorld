@@ -10,7 +10,7 @@
 		</md-toolbar>
 		<md-dialog-content style="max-width:800px;max-height:610px; padding-top: 5px;">
 				<div flex flex-sm layout="row">
-					<span flex="5" hide-sm></span>
+					<!-- <span flex="5" hide-sm></span> -->
 					<div flex>
 						<ul class="discussion message" scroll='vm.history'>
 							<li ng-class="{true: 'self', false: 'other'}[history.sender_uid === {{ vm.msg.receiver_uid }}]" ng-repeat="history in vm.history">

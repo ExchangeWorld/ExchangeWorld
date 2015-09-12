@@ -11,7 +11,7 @@ function exchangeService(Restangular, $q, $mdDialog) {
 		getExchange,
 		getAllExchange,
 		deleteExchange,
-		//completeExchange,
+		completeExchange,
 		showCompleteExchange,
 
 		getChat,
@@ -82,7 +82,6 @@ function exchangeService(Restangular, $q, $mdDialog) {
 
 	/**
 	 * complete exchange
-	 * users all accept the exchage.
 	 */
 	function completeExchange(eid) {
 		const defer = $q.defer();
@@ -167,26 +166,35 @@ function exchangeService(Restangular, $q, $mdDialog) {
 		return defer.promise;
 	}
 
-	function showCompleteExchange(ev) {
+	function showCompleteExchange(ev, thisExchange, myid) {
 		$mdDialog.show({
 			clickOutsideToClose: true,
 			templateUrl: 'exchange/exchange.complete.html',
 			controllerAs: 'vm',
 			controller: onCompleteController,
-			//locals: {
-			//}
+			locals: {
+				thisExchange: thisExchange,
+				myid: myid,
+			};
 		});
-		function onCompleteController($mdDialog, logger) {
-			const vm          = this;
-			//vm.queuingGoods   = queuingGoods;
-			//vm.host_goods_gid = host_goods_gid;
-			vm.confirm        = onConfirm;
-			vm.cancel         = onCancel;
+		function onCompleteController($mdDialog, logger, thisExchange, myid, exchangeService) {
+			const vm        = this;
+			vm.thisExchange = thisExchange;
+			vm.myid         = myid;
+			vm.confirm      = onConfirm;
+			vm.cancel       = onCancel;
 
-			function onConfirm(selected_gid) {
+			function onConfirm(scores) {
 				$mdDialog
-					.hide(selected_gid)
-					.then(function(selected_gid) {
+					.hide(scores)
+					.then(function(scores) {
+						
+						exchangeService
+							.completeExchange(eid)
+							.then(function(data) {
+								//console.log(data);
+								logger.success('成功評價此交易', data, 'DONE');
+							});
 						//postExchange(selected_gid, host_goods_gid)
 							//.then(function(data) {
 								//logger.success('成功接受一個排', data, 'DONE');

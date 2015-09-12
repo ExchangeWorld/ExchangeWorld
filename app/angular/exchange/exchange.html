@@ -1,20 +1,19 @@
 <md-content ng-show="vm.exchangeList.length === 0">
 	<div layout="column" layout-align="center center">
-		<h2 class="md-display-1">你還沒有任何進入交換階段的物品 ！</h2>
-		<p class="md-subhead">立即在探索頁面尋找您喜歡的物品</p>
-		<md-button class="md-raised md-accent">快去探索吧</md-button>
+		<h2 class="md-display-2">你沒有正在交換的物品喔！</h2>
+		<img class="info_container" src="../../images/emoji.png">
+		<p class="md-title info_container">
+			立即在探索頁面尋找您喜歡的物品吧
+		</p>
+		<md-button class="md-raised md-accent">
+			<span style="color:#fff;">GO！！</span>
+		</md-button>
 	</div>
 </md-content>
 <md-content ng-show="vm.exchangeList.length !== 0">
 	<div layout="row" layout-sm="column">
 		<div flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap>
-			<div class="event-btn " 
-				ng-class-odd="'first'" 
-				ng-class-even="'second'" 
-				layout="row" flex-sm="50" 
-				ng-repeat="exchange in vm.exchangeList" 
-				ng-click="vm.onClickExchange(exchange.eid)"
-			>
+			<div class="event-btn " ng-class-odd="'first'" ng-class-even="'second'" layout="row" flex-sm="50" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
 				<div flex>
 					<p class="md-body-1 note">{{ exchange.details.goods[0].name }}</p>
 					<p class="md-body-1 note">{{ exchange.details.goods[1].name }}</p>
@@ -24,13 +23,13 @@
 				</div>
 			</div>
 			<!--<div class="event-btn second" layout="row" flex-sm="50">-->
-				<!--<div flex>-->
-					<!--<p class="md-body-1 note">六上歷史課本</p>-->
-					<!--<p class="md-body-1 note">超營養大雞排</p>-->
-				<!--</div>-->
-				<!--<div flex layout layout-align="end end">-->
-					<!--<p class="md-caption">with kosuke</p>-->
-				<!--</div>-->
+			<!--<div flex>-->
+			<!--<p class="md-body-1 note">六上歷史課本</p>-->
+			<!--<p class="md-body-1 note">超營養大雞排</p>-->
+			<!--</div>-->
+			<!--<div flex layout layout-align="end end">-->
+			<!--<p class="md-caption">with kosuke</p>-->
+			<!--</div>-->
 			<!--</div>-->
 		</div>
 		<div flex="50" flex-sm="100">
@@ -55,9 +54,9 @@
 				<!-- exchange icon -->
 				<div flex="30" layout="column" layout-align="center center">
 					<img src="../../images/icon(48-48).png" height="48" width="48">
-						<md-button ng-show="!vm.agreed" class="md-accent md-hue-2" ng-click="vm.onClickComplete($event)">COMPLETE !</md-button>
-						<md-button ng-show="!vm.agreed" ng-click="vm.onClickDelete($event, vm.exchange.eid)">我不爽換！</md-button>
-						<md-button ng-show="vm.agreed" disabled="true" class="md-accent md-hue-2" >您已按過完成</md-button>
+					<md-button ng-show="!vm.agreed" class="md-accent md-hue-2" ng-click="vm.onClickComplete($event)">COMPLETE !</md-button>
+					<md-button ng-show="!vm.agreed" ng-click="vm.onClickDelete($event, vm.exchange.eid)">我不爽換！</md-button>
+					<md-button ng-show="vm.agreed" disabled="true" class="md-accent md-hue-2">您已按過完成</md-button>
 				</div>
 				<!-- second user item -->
 				<div layout="column" flex>
@@ -83,16 +82,13 @@
 					<span>聊天</span>
 				</md-toolbar>
 				<ul class="discussion" scroll='vm.chatroom'>
-					<li
-						ng-class="{true: 'other', false: 'self'}[chat.sender_uid !== {{ vm.myid }}]"
-						ng-repeat="chat in vm.chatroom">
+					<li ng-class="{true: 'other', false: 'self'}[chat.sender_uid !== {{ vm.myid }}]" ng-repeat="chat in vm.chatroom">
 						<div class="avatar" ng-show="(chat.sender_uid !== {{ vm.myid }})">
 							<img ng-show="(chat.sender_uid !== {{ vm.myid }})" ng-src="{{vm.exchange.goods[0].user.photo_path}}" />
-							<md-tooltip ng-show="(chat.sender_uid === {{ vm.myid }})" >
+							<md-tooltip ng-show="(chat.sender_uid === {{ vm.myid }})">
 								{{vm.exchange.goods[0].user.name}}
 							</md-tooltip>
-
-							<md-tooltip ng-show="(chat.sender_uid !== {{ vm.myid }})" >
+							<md-tooltip ng-show="(chat.sender_uid !== {{ vm.myid }})">
 								{{vm.exchange.goods[1].user.name}}
 							</md-tooltip>
 						</div>
@@ -114,3 +110,4 @@
 		</div>
 	</div>
 </md-content>
+

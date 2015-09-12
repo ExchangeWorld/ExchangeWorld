@@ -127,9 +127,6 @@ function exchangeService(Restangular, $q) {
 		return defer.promise;
 	}
 
-	/**
-	 * eid is the chatroom id(same as exchange id)
-	 */
 	function getChat(eid, number, offset) {
 		const defer = $q.defer();
 
@@ -141,7 +138,7 @@ function exchangeService(Restangular, $q) {
 				number : number,
 			})
 			.then(function(data) {
-				console.log(data);
+				//console.log(data);
 				defer.resolve(data);
 			})
 			.catch(function(error) {

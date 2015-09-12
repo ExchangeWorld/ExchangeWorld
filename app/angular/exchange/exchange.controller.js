@@ -5,7 +5,7 @@ const _              = require('lodash');
 exchangeModule.controller('ExchangeController', ExchangeController);
 
 /** @ngInject */
-function ExchangeController(exchangeList, $state, exchangeService, $stateParams) {
+function ExchangeController(exchangeList, $state, exchangeService, $stateParams, $interval) {
 	var vm             = this;
 	vm.myid            = $stateParams.uid;
 	vm.exchangeList    = exchangeList;
@@ -48,7 +48,7 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams)
 			//.then(function() {
 				//var chatroom = angular.element(document.querySelector('#chatroom'))[0];
 				//console.log(chatroom );
-				//chatroom.scrollTop =100;// chatroom.scrollHeight;
+				//chatroom.scrollTop = chatroom.scrollHeight;
 				//console.log(chatroom.scrollTop+' '+chatroom.scrollHeight );
 			});
 	}
@@ -98,4 +98,6 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams)
 				});
 		}
 	}
+
+	var timer = $interval(updateChat, 5000);
 }

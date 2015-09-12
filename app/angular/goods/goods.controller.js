@@ -15,7 +15,8 @@ function GoodsController(
 	auth,
 	$timeout,
 	$localStorage,
-	$mdDialog
+	$mdDialog,
+	$window
 ) {
 	const vm = this;
 
@@ -39,13 +40,13 @@ function GoodsController(
 	vm.onClickQueue  = onClickQueue;
 
 	vm.onClickUser = onClickUser;
-	vm.onClickBack = function(){ $state.go('root.withSidenav.seek'); }
+	vm.onClickBack = () => $window.history.back();
 
 	activate();
 
 	$scope.removeMode = false;
 	$scope.$parent.$on('mapInitialized', mapInitialized);
-	
+
 	/* After map is loaded */
 	function mapInitialized(e, evtMap) {
 		$scope.$parent.$broadcast('goodsChanged', [goodData]);
@@ -221,11 +222,11 @@ function GoodsController(
 	}
 
 	/**
-	 * user use a goods to queue the host goods 
+	 * user use a goods to queue the host goods
 	 */
 	function onClickQueue(ev, type) {
 		const types = ['want_to_queue', 'see_who_queue'];
-		
+
 		if(type === types[0]) {
 			/**
 			 * TODO:

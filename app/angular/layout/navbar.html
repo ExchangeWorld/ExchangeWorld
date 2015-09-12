@@ -11,13 +11,13 @@
 		<span flex="15" hide-md hide-sm></span>
 		<!-- seek and post button -->
 		<div flex="30" flex-md="45" flex-sm="50" layout="row" layout-align="center center">
-			<md-button flex flex-sm="15" ng-click="vm.onClick(1)" ng-class="{'active': contentIs(1)}">
+			<md-button flex flex-sm="15" ng-click="vm.onClick(1)" ng-class="{'active': vm.contentIs(1)}">
 				<div layout layout-align="center center">
 					<i class="material-icons">dashboard</i>
 					<span hide-md hide-sm>探索</span>
 				</div>
 			</md-button>
-			<md-button flex flex-sm="15" ng-click="vm.onClick(2)" ng-class="{'active': contentIs(2)}">
+			<md-button flex flex-sm="15" ng-click="vm.onClick(2)" ng-class="{'active': vm.contentIs(2)}">
 				<div layout layout-align="center center">
 					<i class="material-icons">add</i>
 					<span hide-md hide-sm>發佈</span>

@@ -26,7 +26,7 @@ function MapController(
 	const vm    = this;
 
 	vm.coords          = $localStorage ? $localStorage.position : [0, 0];
-	vm.zoom            = 17;
+	vm.zoom            = 10;
 	vm.draggableCursor = 'default';
 	vm.draggingCursor  = 'default';
 	vm.mapStyle        = require('./mapStyle.json');

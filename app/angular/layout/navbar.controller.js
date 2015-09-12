@@ -23,6 +23,7 @@ function NavbarController(
 	const vm               = this;
 	const state            = ['home', 'seek', 'post', 'exchange', 'profile'];
 	vm.stateIndex          = _.indexOf(state, $state.current.title);
+	vm.contentIs           = function(idx) { return vm.stateIndex === idx; };
 	vm.onClick             = onClick;
 	vm.onLogin             = onLogin;
 	vm.onLogout            = onLogout;
@@ -51,8 +52,6 @@ function NavbarController(
 	}
 
 	function onClick(contentIndex) {
-		//$scope.content = ContentType[contentIndex];
-		//$scope.$emit('sidenavChanged', ContentType[contentIndex]);
 		if (contentIndex === 0) {
 			$state.go('root.oneCol.' + state[contentIndex]);
 		} else if(contentIndex === 3) {
@@ -62,6 +61,7 @@ function NavbarController(
 				uid: auth.currentUser().uid
 			});
 		} else {
+
 			const isFromOneCol = $state.includes("root.oneCol");
 			$state.go('root.withSidenav.' + state[contentIndex]);
 
@@ -73,15 +73,14 @@ function NavbarController(
 			 */
 			if (
 				!isFromOneCol &&
-				(
-					!$mdSidenav('left').isOpen() || (
-					$mdSidenav('left').isOpen() &&
-					vm.stateIndex === contentIndex)
-				)
+				( !$mdSidenav('left').isOpen() || ( $mdSidenav('left').isOpen() && vm.stateIndex === contentIndex))
 			) {
 				$mdSidenav('left').toggle();
 			}
 		}
+			if(contentIndex === vm.stateIndex) {
+				$state.reload();
+			}
 		vm.stateIndex = contentIndex;
 	}
 

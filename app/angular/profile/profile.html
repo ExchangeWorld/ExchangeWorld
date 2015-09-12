@@ -111,54 +111,32 @@
 		<md-tab label="等待交換">
 			<md-content layout-padding>
 				<div layout="column">
-					<div class="trans" layout="row" layout-sm="column" layout-align="center center" class="info_container for_input">
-						<!-- first user item -->
-						<div layout="column" flex="50" class="item profile">
-							<img src="http://i.imgur.com/7RoLGdp.jpg" />
-							<div layout="column" layout-align="center center">
-								<p class="md-body-2">BestItem_TW</p>
+					<md-card class="md-whiteframe-z3">
+						<md-card-content layout="row">
+							<div layout layout-align="center center">
+								<img ng-src="../../images/a0283a6f8e8801fcb853391dffc19a11423adf35fa1111ed5ec53a51c859dc45.jpeg" style="height:180px; width:auto;" />
+								<!-- other's avatar -->
+								<img class="circle profile" ng-src="{{ vm.profile.largePic }}">
 							</div>
-						</div>
-						<span flex="5" flex-sm hide-sm></span>
-						<div flex flex-sm layout="column" layout-align="center center">
-							<div layout="row" class="profile_text">
-								<p class="md-body-2">
-									<md-icon md-font-set="material-icons" class="hide">star</md-icon>
-									18</p>
+							<div layout="column" style="margin-left:20px;">
+								<div layout="row" layout-align="center start">
+									<h2 style="margin: 10px 0;">加八斧頭(劍人)</h2>
+								</div>
+								<!-- description -->
+								<p>這斧頭人擋殺人，佛擋殺佛，公道價81000
+								</p>
 							</div>
-							<div layout="row" class="profile_text">
-								<p class="md-body-2">
-									<md-icon md-font-set="material-icons" class="hide">event_note</md-icon>
-									2015/8/30</p>
-							</div>
-							<div layout="row" class="profile_text">
-								<p class="md-body-2">
-									<md-icon md-font-set="material-icons" class="hide">location_city</md-icon>
-									台北市文山區指南路</p>
-							</div>
-						</div>
-					</div>
-					<!-- second exchange event test -->
-					<div layout="row">
-						<div layout="column" flex="50" class="item profile">
-							<img src="http://i.imgur.com/7RoLGdp.jpg" />
-							<div layout="column" layout-align="center center">
-								<p class="md-body-2">BestItem_TW</p>
-								<p class="md-body-1">SilentSky</p>
-							</div>
-						</div>
-					</div>
+						</md-card-content>
+					</md-card>
 				</div>
 			</md-content>
 		</md-tab>
 		<md-tab label="已交換">
 			<md-content layout-padding>
 				<div layout="row" layout-sm="column" layout-align="center center" class="info_container for_input">
-					<!-- item photo that user has exchanged -->
-					<div flex="40" flex-sm class="item profile">
+					<!-- 					<div flex="40" flex-sm class="item profile">
 						<img src="http://i.imgur.com/7RoLGdp.jpg" />
 					</div>
-					<!-- exchange information -->
 					<div flex flex-sm layout="column" layout-align="center center">
 						<div layout="row" class="profile_text">
 							<p class="md-body-2">
@@ -177,6 +155,30 @@
 						</div>
 						<md-divider></md-divider>
 					</div>
+ -->
+					<md-card class="md-whiteframe-z3">
+						<md-card-content layout="row">
+							<div layout layout-align="center center">
+								<img ng-src="../../images/87d5926efbc8794593fc879055646ad2fb4f564d4792094bb0ab75ee2776efa3.jpeg" style="height:180px; width:auto;" />
+								<!-- other's avatar -->
+								<img class="circle profile" ng-src="{{ vm.profile.largePic }}">
+							</div>
+							<div layout="column" style="margin-left:20px;">
+								<div layout="row" layout-align="center center">
+									<h2 style="margin: 10px 0;">加八斧頭(劍人)</h2>
+								</div>
+								<!-- note -->
+								<p>你人長得帥，東西也讚 希望以後還有機會跟你交換東西唷&#62;///&#60;
+								</p>
+								<div layout="row">
+									<!-- <img class="circle" ng-src="{{ vm.profile.largePic }}"> -->
+									<div flex layout layout-align="start start">
+										<p>Date: 2015/8/30</p>
+									</div>
+								</div>
+							</div>
+						</md-card-content>
+					</md-card>
 				</div>
 			</md-content>
 		</md-tab>

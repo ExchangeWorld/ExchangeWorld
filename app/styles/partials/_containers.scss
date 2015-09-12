@@ -129,8 +129,7 @@ div.md-open-menu-container {
 	border: 3px double #4762dc;
 	//z-index: 10000;
 	&.profile {
-		height: 100%;
-		width: auto;
+		position: absolute; right: 0; bottom: 0;
 	}
 }
 

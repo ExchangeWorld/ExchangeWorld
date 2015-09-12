@@ -214,7 +214,7 @@ function GoodsController(
 	 */
 	function getMyGoods() {
 		goodsService
-			.getGood(-1, $localStorage.user.uid)
+			.getUserGoods($localStorage.user.uid)
 			.then(function(myGoods) {
 				vm.myGoods = myGoods;
 			});

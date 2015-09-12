@@ -9,6 +9,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 
 	const service = {
 		getGood,
+		getUserGoods,
 		editGood,
 		
 		getComment,
@@ -30,15 +31,12 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 	return service;
 
 
-	function getGood(gid, owner_uid) {
+	function getGood(gid) {
 		const defer = $q.defer();
 
 		Restangular
 			.all('goods')
-			.getList({
-				gid       : gid,
-				owner_uid : owner_uid,
-			})
+			.getList({ gid : gid })
 			.then(function(data) {
 				if (_.isArray(data)) {
 					data.forEach(function(goods) {
@@ -52,6 +50,27 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			});
 		return defer.promise;
 	}
+
+	function getUserGoods(owner_uid) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('goods/of')
+			.getList({ owner_uid : owner_uid })
+			.then(function(data) {
+				if (_.isArray(data)) {
+					data.forEach(function(goods) {
+						if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
+					});
+					defer.resolve(data);
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] getuserGood error: ')(error);
+			});
+		return defer.promise;
+	}
+
 
 	function editGood() {
 		return ;
@@ -181,6 +200,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 
 	function postQueue(host_goods_gid, queuer_goods_gid) {
 		const defer = $q.defer();
+		console.log(queuer_goods_gid);
 
 		Restangular
 			.all('queue/post')
@@ -255,6 +275,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 				$mdDialog
 					.hide(selected_gid)
 					.then(function() {
+						console.log(selected_gid);
 						postQueue(vm.queuing_goods_gid, selected_gid)
 							.then(function(data) {
 								logger.success('成功發出排請求', data, 'DONE');

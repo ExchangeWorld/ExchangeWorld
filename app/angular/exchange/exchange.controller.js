@@ -8,6 +8,7 @@ exchangeModule.controller('ExchangeController', ExchangeController);
 function ExchangeController(exchangeList, $state, exchangeService, $stateParams, $interval, $mdDialog) {
 	var vm             = this;
 	vm.myid            = $stateParams.uid;
+	vm.myGoods         = {};
 	vm.exchangeList    = exchangeList;
 	vm.exchange        = {};
 	vm.chatroom        = [];
@@ -16,8 +17,10 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 	vm.onClickComplete = onClickComplete;
 	vm.onClickDelete   = onClickDelete;
 	vm.onSubmitChat    = onSubmitChat;
+	vm.agreed          = true;
 
 
+	////////////
 	activate();
 
 	function activate() {
@@ -27,6 +30,7 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 					.getExchange(exchange.eid)
 					.then(function(data) {
 						//console.log(data);
+						vm.myGoods = (data.goods[0].owner_uid !== vm.myid) ? data.goods[0] : data.goods[1] ;
 						exchange.details = data;
 						exchange.with = (data.goods[0].owner_uid !== vm.myid)
 							? data.goods[0].user.name
@@ -44,7 +48,6 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 				vm.chatroom = data;
 			});
 	}
-	////////////
 
 	function onClickExchange(eid) {
 		exchangeService
@@ -53,6 +56,7 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 				//console.log(data);
 				vm.exchange = data;
 				updateChat();
+				agreed();
 				$interval(updateChat, 5000);
 			});
 	}
@@ -96,4 +100,13 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 		}
 	}
 
+	function agreed() {
+		if(vm.exchange.goods1_gid === vm.myGoods.gid) {
+			if(vm.exchange.goods1_agree) vm.agreed = true;
+		} else if(vm.exchange.goods1_gid === vm.myGoods.gid){
+			if(vm.exchange.goods2_agree) vm.agreed = true;
+		} else {
+			vm.agreed = false;
+		}
+	}
 }

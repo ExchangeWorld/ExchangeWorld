@@ -22,7 +22,7 @@ function getStates() {
 				resolve : {
 					goodData : function (goodsService, $stateParams) {
 						return goodsService
-							.getGood($stateParams.gid, -1)
+							.getGood($stateParams.gid)
 							.then(function(data) {
 								return _.isArray(data) ? data[0] : data;
 							})

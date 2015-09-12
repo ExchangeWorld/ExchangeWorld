@@ -21,8 +21,6 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 	activate();
 
 	function activate() {
-		console.log(vm.myid);
-		console.log(vm.exchangeList);
 		if(vm.exchangeList.length) {
 			vm.exchangeList.forEach(function(exchange) {
 				exchangeService
@@ -30,7 +28,7 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 					.then(function(data) {
 						//console.log(data);
 						exchange.details = data;
-						exchange.with = (data.goods[0].owner_uid === vm.myid)
+						exchange.with = (data.goods[0].owner_uid !== vm.myid)
 							? data.goods[0].user.name
 							: data.goods[1].user.name ;
 					});

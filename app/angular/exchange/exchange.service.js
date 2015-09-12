@@ -25,34 +25,13 @@ function exchangeService(Restangular, $q, $mdDialog) {
 		const defer = $q.defer();
 
 		Restangular
-			.all('exchange/allExchange')
-			.getList()
+			.all('exchange/of')
+			.getList({
+				owner_uid: owner_uid
+			})
 			.then(function(data) {
 				if (_.isArray(data)) {
-					
-					Restangular
-						.all('goods')
-						.getList({ owner_uid : owner_uid })
-						.then(function(goods_data) {
-							if (_.isArray(goods_data)) {
-								var filtered = data.filter(function(exchange) {
-									if( 
-										_.findWhere(goods_data, { gid: exchange.goods1_gid}) || 
-										_.findWhere(goods_data, { gid: exchange.goods2_gid}) 
-									) {
-										return true;
-									} else {
-										return false;
-									}
-								});
-								console.log(filtered);
-								defer.resolve(filtered);
-							}
-						})
-						.catch(function(error) {
-							return exception.catcher('[Exchange Service] getGood error: ')(error);
-						});
-
+					defer.resolve(data);
 				}
 			})
 			.catch(function(error) {

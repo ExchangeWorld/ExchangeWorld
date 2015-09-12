@@ -12,7 +12,7 @@
 					<h4 class="md-headline" style="margin:8px 0;">{{ vm.profile.name }}</h4>
 					<div layout="row" layout-align="center center">
 						<i class="material-icons star">star</i>
-						<a href="#"><span class="md-subhead">13</span></a>
+						<a href="#"><span class="md-subhead">{{ vm.myStar.length }}</span></a>
 					</div>
 				</div>
 				<div layout="column" layout-align="center center" class="note profile">
@@ -86,7 +86,7 @@
 		<md-tab label="等待交換">
 			<md-content layout-padding>
 				<div layout="column">
-					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsPending">
+					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsPending" ng-click="onClickGoods(goods.gid)">
 						<md-card-content layout="row">
 							<div layout layout-align="center center">
 								<img ng-src="{{ goods.photo_path[0] }}" style="height:180px; width:auto;" />
@@ -105,7 +105,7 @@
 		<md-tab label="已交換">
 			<md-content layout-padding>
 				<div layout="row" layout-sm="column" layout-align="center center" class="info_container for_input">
-					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsExchanged">
+					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsExchanged" ng-click="onClickGoods(goods.gid)">
 						<md-card-content layout="row">
 							<div layout layout-align="center center">
 								<img ng-src="{{ goods.photo_path[0] }}" style="height:180px; width:auto;" />
@@ -118,14 +118,12 @@
 							</div>
 							<!--<div layout layout-align="center center">-->
 								<!--<img ng-src="../../images/87d5926efbc8794593fc879055646ad2fb4f564d4792094bb0ab75ee2776efa3.jpeg" style="height:180px; width:auto;" />-->
-								<!--[> other's avatar <]-->
 								<!--<img class="circle profile" ng-src="{{ vm.profile.largePic }}">-->
 							<!--</div>-->
 							<!--<div layout="column" style="margin-left:20px;">-->
 								<!--<div layout="row" layout-align="center center">-->
 									<!--<h2 style="margin: 10px 0;">加八斧頭(劍人)</h2>-->
 								<!--</div>-->
-								<!--[> note <]-->
 								<!--<p>你人長得帥，東西也讚 希望以後還有機會跟你交換東西唷&#62;///&#60;-->
 								<!--</p>-->
 								<!--<div layout="row">-->
@@ -134,7 +132,7 @@
 										<!--<p>Date: 2015/8/30</p>-->
 									<!--</div>-->
 								<!--</div>-->
-							<!--</div>-->
+							</div>
 						</md-card-content>
 					</md-card>
 				</div>

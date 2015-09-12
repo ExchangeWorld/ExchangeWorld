@@ -11,6 +11,7 @@ function ProfileController(
 	auth,
 	message,
 	$state,
+	$stateParams,
 	$localStorage
 ) {
 	var vm                 = this;
@@ -19,6 +20,8 @@ function ProfileController(
 	vm.largePic            = '';
 	vm.isLoggedIn          = Boolean($localStorage.user);
 	vm.isMe                = vm.isLoggedIn && (profile.uid === $localStorage.user.uid);
+	vm.myGoodsPending      = [];
+	vm.myGoodsExchanged    = [];
 	vm.onClickFollow       = onClickFollow;
 	vm.onClickAddFollowing = onClickAddFollowing;
 	vm.onClickSendMsg      = onClickSendMsg;
@@ -44,6 +47,12 @@ function ProfileController(
 			.then(function(data) {
 				if (data) {
 					vm.isMe = (profile.uid === data.uid);
+					profileService
+						.getMyGoods($stateParams.uid)
+						.then(function(data) {
+							vm.myGoodsPending  = data.filter(function(g) { return g.status === 0; });
+							vm.myGoodsExchange = data.filter(function(g) { return g.status === 1; });
+						});
 				} else {
 					vm.isMe = false;
 					vm.isLoggedIn = false;

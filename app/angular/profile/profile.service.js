@@ -11,6 +11,7 @@ function profileService(Restangular, $q, facebookService) {
 		getProfile,
 		editProfile,
 		addFollowing,
+		getMyGoods,
 	};
 
 	return service;
@@ -72,4 +73,26 @@ function profileService(Restangular, $q, facebookService) {
 			});
 	}
 
+	function getMyGoods(uid) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('goods/of')
+			.getList({
+				owner_uid: uid,
+			})
+			.then(function(data) {
+				if (_.isArray(data)) {
+					data.forEach(function(goods) {
+						if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
+					});
+					console.log(data);
+					defer.resolve(data);
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[profile Service] getProfile error: ')(error);
+			});
+		return defer.promise;
+	}
 }

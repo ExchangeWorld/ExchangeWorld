@@ -16,10 +16,6 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		postComment,
 		deleteComment,
 		
-		getStars,
-		postStar,
-		deleteStar,
-
 		showQueueBox,
 		showQueuingBox,
 		getQueue,
@@ -71,7 +67,6 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		return defer.promise;
 	}
 
-
 	function editGood() {
 		return ;
 	}
@@ -119,57 +114,6 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			})
 			.catch(function(error) {
 				return exception.catcher('[Goods Service] deleteComment error: ')(error);
-			});
-		return defer.promise;
-	}
-
-	function getStars(gid) {
-		const defer = $q.defer();
-		Restangular
-			.all('star/to')
-			.getList({goods_gid: gid})
-			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data);
-				} else {
-					defer.reject(data);
-				}
-			})
-			.catch(function(error) {
-				return exception.catcher('[Goods Service] getStars error: ')(error);
-			});
-		return defer.promise;
-	}
-
-	function postStar(newStar) {
-		const defer = $q.defer();
-
-		Restangular
-			.all('star/post')
-			.post(newStar)
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[Goods Service] postStar error: ')(error);
-			});
-		return defer.promise;
-	}
-
-	function deleteStar(star) {
-		const defer = $q.defer();
-
-		Restangular
-			.all('star/delete')
-			.remove({
-				goods_gid         : star.goods_gid,
-				starring_user_uid : star.starring_user_uid,
-			})
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[Goods Service] deleteStar error: ')(error);
 			});
 		return defer.promise;
 	}

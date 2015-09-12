@@ -9,6 +9,7 @@ goodsModule.controller('GoodsController', GoodsController);
 function GoodsController(
 	goodData,
 	goodsService,
+	favorite,
 	$state,
 	$stateParams,
 	$scope,
@@ -160,14 +161,14 @@ function GoodsController(
 		};
 
 		if (!vm.starred) {
-			goodsService
-				.postStar(star)
+			favorite
+				.postFavorite(star)
 				.then(function() {
 					updateStar();
 				});
 		} else {
-			goodsService
-				.deleteStar(star)
+			favorite
+				.deleteFavorite(star)
 				.then(function() {
 					updateStar();
 				});
@@ -175,8 +176,8 @@ function GoodsController(
 	}
 
 	function updateStar() {
-		goodsService
-			.getStars(vm.goodData.gid)
+		favorite
+			.getFavorites(vm.goodData.gid)
 			.then(function(data) {
 				vm.stars = data;
 

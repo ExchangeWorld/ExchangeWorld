@@ -6,12 +6,13 @@ const _              = require('lodash');
 exchangeModule.service('exchangeService', exchangeService);
 
 /** @ngInject */
-function exchangeService(Restangular, $q) {
+function exchangeService(Restangular, $q, $mdDialog) {
 	var service = {
 		getExchange,
 		getAllExchange,
 		deleteExchange,
-		completeExchange,
+		//completeExchange,
+		showCompleteExchange,
 
 		getChat,
 		postChat,
@@ -164,5 +165,38 @@ function exchangeService(Restangular, $q) {
 				return exception.catcher('[Exchange Service] postChat error: ')(error);
 			});
 		return defer.promise;
+	}
+
+	function showCompleteExchange(ev) {
+		$mdDialog.show({
+			clickOutsideToClose: true,
+			templateUrl: 'exchange/exchange.complete.html',
+			controllerAs: 'vm',
+			controller: onCompleteController,
+			//locals: {
+			//}
+		});
+		function onCompleteController($mdDialog, logger) {
+			const vm          = this;
+			//vm.queuingGoods   = queuingGoods;
+			//vm.host_goods_gid = host_goods_gid;
+			vm.confirm        = onConfirm;
+			vm.cancel         = onCancel;
+
+			function onConfirm(selected_gid) {
+				$mdDialog
+					.hide(selected_gid)
+					.then(function(selected_gid) {
+						//postExchange(selected_gid, host_goods_gid)
+							//.then(function(data) {
+								//logger.success('成功接受一個排', data, 'DONE');
+							//});
+					});
+			}
+			function onCancel() {
+				$mdDialog.cancel();
+			};
+		}
+	
 	}
 }

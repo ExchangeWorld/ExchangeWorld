@@ -1,0 +1,20 @@
+<md-dialog aria-label="CompleteExchange">
+	<md-toolbar>
+		<div flex class="md-toolbar-tools" layout layout-align="center center">
+			<h2 class="md-display-1">完成交易，請評分</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="vm.cancel()">
+				<md-icon md-font-set="material-icons" aria-label="Close dialog">close</md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content style="max-width:800px;max-height:1210px; ">
+		<div flex flex-sm layout="row">
+			<div layout="row">
+				<span flex="50"></span>
+				<input flex class="md-button md-primary md-raised" ng-click="vm.cancel()" value="取消"></input>
+				<input flex class="md-button md-primary md-raised" ng-click="vm.submit(vm.contents)" value="送出"></input>
+			</div>
+		</div>
+	</md-dialog-content>
+</md-dialog>

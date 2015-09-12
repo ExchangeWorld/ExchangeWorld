@@ -59,12 +59,13 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 	}
 
 	function onClickComplete(eid) {
-		exchangeService
-			.completeExchange(eid)
-			.then(function(data) {
-				console.log(data);
-				//$state.reload();
-			});
+		exchangeService.showCompleteExchange();
+		//exchangeService
+			//.completeExchange(eid)
+			//.then(function(data) {
+				//console.log(data);
+				////$state.reload();
+			//});
 	}
 
 	function onClickDelete(eid) {

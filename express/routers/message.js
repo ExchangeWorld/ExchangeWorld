@@ -94,7 +94,7 @@ router.get('/between', function(req, res, next) {
 					}]
 				},
 				order: [
-					['mid', 'ASC']
+					['mid', 'DESC']
 				],
 				offset: _from,
 				limit: _number

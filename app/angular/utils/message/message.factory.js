@@ -40,18 +40,19 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 	/**
 	 * Get two users conversations history. 
 	 */
-	function getConversation(uid1, uid2, from, offset) {
+	function getConversation(uid1, uid2, number, offset) {
 		const defer = $q.defer();
 		Restangular
 			.all('message/between')
 			.getList({ 
 				user1_uid : uid1,
 				user2_uid : uid2,
-				from      : from,
-				number    : offset,
+				from      : offset,
+				number    : number,
 			})
 			.then(function(data) {
 				if (_.isArray(data)) {
+					console.log(data);
 					defer.resolve(data);
 				}
 			})
@@ -111,7 +112,7 @@ function DialogController(msg, callback, $mdDialog, logger, message) {
 	const vm   = this;
 	vm.msg     = msg;
 	vm.history = '';
-	vm.content = '';
+	vm.contents = '';
 	vm.cancel  = onCancel;
 	vm.submit  = onSubmit;
 	
@@ -120,11 +121,12 @@ function DialogController(msg, callback, $mdDialog, logger, message) {
 	//console.log(msg);
 	function activate() {
 		message
-			.getConversation(msg.sender_uid, msg.receiver_uid, 0, 10)
+			.getConversation(msg.sender_uid, msg.receiver_uid, 10, 0)
 			.then(function(data) {
 				vm.history = data;
+				console.log(data);
+				//vm.content = '';
 			});
-		
 	}
 
 	function onSubmit(msg_content) {

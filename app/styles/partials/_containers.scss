@@ -129,7 +129,9 @@ div.md-open-menu-container {
 	border: 3px double #4762dc;
 	//z-index: 10000;
 	&.profile {
-		position: absolute; right: 0; bottom: 0;
+		position: absolute;
+		right: 0;
+		bottom: 0;
 	}
 }
 
@@ -218,4 +220,10 @@ div.md-open-menu-container {
 	&.ng-hide {
 		opacity: 0;
 	}
+}
+
+.img-error {
+	max-height: 100%;
+	max-width: 100%;
+	padding: 25% 15px 0 15px;
 }

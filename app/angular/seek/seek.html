@@ -23,28 +23,30 @@
 	</div>
 	<div class="md-padding"></div>
 	<div deckgrid class="deckgrid" source="vm.goods">
-		<md-card class="md-whiteframe-z3 item hvr-grow" ng-click="mother.onClickGoods(card.gid)" ng-mouseenter="mother.onMouseOver(card.gid)" ng-mouseleave="mother.onMouseOut()">
+		<md-card class="md-whiteframe-z3 item hvr-grow">
 			<i class="material-icons heart">favorite</i>
 			<i class="material-icons heart">favorite_border</i>
 			<i class="material-icons plus-one">plus_one</i>
-			<photoslider images="card.photo_path" class="md-card-image"></photoslider>
-			<md-card-content style="padding: 0.8em 0;">
-				<div layout="row" layout-align="center center">
-					<div flex layout="column" layout-align="center center">
-						<div layout layout-align="center center">
-							<i ng-show="card.category == 'Books'" class="material-icons blue">book</i>
-							<i ng-show="card.category == 'Textbooks'" class="material-icons blue">library_books</i>
-							<i ng-show="card.category == 'Music CD'" class="material-icons blue">music_note</i>
-							<i ng-show="card.category == '3C'" class="material-icons blue">computer</i>
+			<div ng-click="mother.onClickGoods(card.gid)" ng-mouseenter="mother.onMouseOver(card.gid)" ng-mouseleave="mother.onMouseOut()">
+				<photoslider images="card.photo_path" class="md-card-image"></photoslider>
+				<md-card-content style="padding: 0.8em 0;">
+					<div layout="row" layout-align="center center">
+						<div flex layout="column" layout-align="center center">
+							<div layout layout-align="center center">
+								<i ng-show="card.category == 'Books'" class="material-icons blue">book</i>
+								<i ng-show="card.category == 'Textbooks'" class="material-icons blue">library_books</i>
+								<i ng-show="card.category == 'Music CD'" class="material-icons blue">music_note</i>
+								<i ng-show="card.category == '3C'" class="material-icons blue">computer</i>
+							</div>
+							<h2 class="md-title">{{card.name}}</h2>
 						</div>
-						<h2 class="md-title">{{card.name}}</h2>
+						<!-- <p>{{card.category}}</p> -->
+						<div flex layout layout-align="end end">
+							<img class="circle" src="" data-ng-src="{{card.user.photo_path}}">
+						</div>
 					</div>
-					<!-- <p>{{card.category}}</p> -->
-					<div flex layout layout-align="end end">
-						<img class="circle" src="" data-ng-src="{{card.user.photo_path}}">
-					</div>
-				</div>
-			</md-card-content>
+				</md-card-content>
+			</div>
 			<!-- <img class="circle" ng-src="{{ card.user.photo_path }}" /> -->
 		</md-card>
 	</div>

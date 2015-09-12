@@ -26,6 +26,12 @@ module.exports = function() {
 	server.use(compression());
 	server.use(express.static(config.dist.root));
 
+	app.all('/', function(req, res, next) {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "X-Requested-With");
+		next();
+	});
+
 	// Serve index.html for all routes to leave routing up to Angular
 	server.all(/^(?!\/api\/)\w*/, function(req, res, next) {
 		res.sendFile('index.html', { root : 'build' });

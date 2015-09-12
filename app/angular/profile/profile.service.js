@@ -13,7 +13,6 @@ function profileService(Restangular, $q, facebookService) {
 		addFollowing,
 		deleteFollowing,
 		getMyGoods,
-		getMyStar,
 	};
 
 	return service;
@@ -113,23 +112,4 @@ function profileService(Restangular, $q, facebookService) {
 		return defer.promise;
 	}
 
-	function getMyStar(uid) {
-		const defer = $q.defer();
-
-		Restangular
-			.all('star/by')
-			.getList({
-				starring_user_uid: uid,
-			})
-			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data);
-				}
-			})
-			.catch(function(error) {
-				return exception.catcher('[profile Service] getMyStar error: ')(error);
-			});
-		return defer.promise;
-	
-	}
 }

@@ -9,6 +9,7 @@ favoriteModule.factory('favorite', favorite);
 function favorite(Restangular, $q, exception, $localStorage, $mdDialog) {
 	const service = {
 		getFavorites,
+		getMyFavorite,
 		postFavorite,
 		deleteFavorite,
 	};
@@ -28,11 +29,30 @@ function favorite(Restangular, $q, exception, $localStorage, $mdDialog) {
 				}
 			})
 			.catch(function(error) {
-				return exception.catcher('[Goods Service] getFavorites error: ')(error);
+				return exception.catcher('[favorite Service] getFavorites error: ')(error);
 			});
 		return defer.promise;
 	}
 
+	function getMyFavorite(uid) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('star/by')
+			.getList({
+				starring_user_uid: uid,
+			})
+			.then(function(data) {
+				if (_.isArray(data)) {
+					defer.resolve(data);
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[favorite Service] getMyFavorite error: ')(error);
+			});
+		return defer.promise;
+	
+	}
 	function postFavorite(newFavorite) {
 		const defer = $q.defer();
 
@@ -43,7 +63,7 @@ function favorite(Restangular, $q, exception, $localStorage, $mdDialog) {
 				defer.resolve(data);
 			})
 			.catch(function(error) {
-				return exception.catcher('[Goods Service] postFavorite error: ')(error);
+				return exception.catcher('[favorite Service] postFavorite error: ')(error);
 			});
 		return defer.promise;
 	}
@@ -61,7 +81,7 @@ function favorite(Restangular, $q, exception, $localStorage, $mdDialog) {
 				defer.resolve(data);
 			})
 			.catch(function(error) {
-				return exception.catcher('[Goods Service] deleteStar error: ')(error);
+				return exception.catcher('[favorite Service] deleteStar error: ')(error);
 			});
 		return defer.promise;
 	}

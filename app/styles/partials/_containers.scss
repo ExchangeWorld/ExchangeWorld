@@ -228,3 +228,14 @@ div.md-open-menu-container {
 	max-width: 100%;
 	padding: 25% 15px 0 15px;
 }
+
+.img-container {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	text-align:center; /* Align center inline elements */
+	font: 0/0 a;
+}

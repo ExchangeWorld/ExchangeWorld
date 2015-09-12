@@ -55,6 +55,7 @@ function ProfileController(
 						.then(function(data) {
 							vm.myGoodsPending   = data.filter(function(g) { return g.status === 0; });
 							vm.myGoodsExchanged = data.filter(function(g) { return g.status === 1; });
+							//vm.
 						});
 					profileService
 						.getMyStar($stateParams.uid)

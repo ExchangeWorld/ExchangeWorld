@@ -14,6 +14,7 @@ function exchangeService(Restangular, $q, $mdDialog) {
 		agreeExchange,
 		completeExchange,
 		showCompleteExchange,
+		rating,
 
 		getChat,
 		postChat,
@@ -56,6 +57,25 @@ function exchangeService(Restangular, $q, $mdDialog) {
 			})
 			.catch(function(error) {
 				return exception.catcher('[Exchange Service] getExchange error: ')(error);
+			});
+		return defer.promise;
+	}
+
+	function rating(gid, rate) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('goods')
+			.getList({gid: gid})
+			.then(function(data) {
+				if(_.isArray(data)) {
+					data[0].route = 'goods/rate';
+					data[0].rate = rate;
+					data[0].put();
+				}
+			})
+			.catch(function(error) {
+				return exception.catcher('[Exchange Service] rating error: ')(error);
 			});
 		return defer.promise;
 	}
@@ -187,18 +207,21 @@ function exchangeService(Restangular, $q, $mdDialog) {
 			vm.thisExchange = thisExchange;
 			vm.myuid        = parseInt(myid, 10);
 			vm.mygid        = '';
+			vm.othersgid    = '';
+			vm.rating       = 3;
 			vm.confirm      = onConfirm;
 			vm.cancel       = onCancel;
 
 			activate();
 
 			function activate() {
-				// console.log(vm.thisExchange.goods[0].owner_uid);
-				// console.log(vm.myuid);
-				vm.mygid = (vm.thisExchange.goods[0].owner_uid === vm.myuid)
-					? vm.thisExchange.goods[0].gid
-					: vm.thisExchange.goods[1].gid;
-				// console.log(vm.mygid);
+				if (vm.thisExchange.goods[0].owner_uid === vm.myuid) {
+					vm.mygid     = vm.thisExchange.goods[0].gid;
+					vm.othersgid = vm.thisExchange.goods[1].gid;
+				} else {
+					vm.mygid     = vm.thisExchange.goods[1].gid;
+					vm.othersgid = vm.thisExchange.goods[0].gid;
+				}
 			}
 
 
@@ -210,6 +233,8 @@ function exchangeService(Restangular, $q, $mdDialog) {
 						exchangeService
 							.agreeExchange(thisExchange, vm.mygid)
 							.then(function(data) {
+								//console.log(scores);
+								exchangeService.rating(vm.othersgid, scores);
 								logger.success('成功評價此交易', data, 'DONE');
 							});
 					});

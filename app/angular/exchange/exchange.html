@@ -76,25 +76,6 @@
 					<span>聊天</span>
 				</md-toolbar>
 				<ul class="discussion" scroll='vm.chatroom'>
-					<li class="other">
-						<div class="avatar">
-							<img src="../../images/unknown-user.gif" />
-							<md-tooltip>user1</md-tooltip>
-						</div>
-						<div class="messages">
-							<p class="content">今天好熱RRRRR</p>
-						</div>
-					</li>
-					<li class="self">
-						<div class="avatar">
-							<img src="../../images/unknown-user.gif" />
-							<md-tooltip>user2</md-tooltip>
-						</div>
-						<div class="messages">
-							<p class="content">颱風沒來結果變成這樣辣 哭哭喔GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG</p>
-						</div>
-					</li>
-
 					<li ng-class="{true: 'self', false: 'other'}[chat.sender_uid === {{ vm.myid }}]" ng-repeat="chat in vm.chatroom">
 						<div class="avatar">
 							<img ng-show="(chat.sender_uid === {{ vm.myid }})" ng-src="{{vm.exchange.goods[0].user.photo_path}}" />

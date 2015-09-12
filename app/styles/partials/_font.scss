@@ -76,3 +76,46 @@ a:hover {
 .indicators {
 	filter: opacity(0.5);
 }
+
+.starRating {
+	&:not(old) {
+		display: inline-block;
+		width: 7.5em;
+		height: 1.5em;
+		overflow: hidden;
+		vertical-align: bottom;
+		> {
+			input {
+				margin-right: -100%;
+				opacity: 0;
+			}
+			label {
+				display: block;
+				float: right;
+				position: relative;
+				cursor: pointer;
+				background: url('../../images/star-off.svg');
+				background-size: contain;
+				&:before {
+					content: '';
+					display: block;
+					width: 1.5em;
+					height: 1.5em;
+					background: url('../../images/star-on.svg');
+					background-size: contain;
+					opacity: 0;
+					transition: opacity 0.2s linear;
+				}
+				&:hover {
+					&:before,
+					~ label:before {
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+	&:not(:hover) >:checked ~ label:before {
+		opacity: 1;
+	}
+}

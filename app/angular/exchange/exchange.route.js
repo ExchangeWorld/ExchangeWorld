@@ -19,6 +19,7 @@ function getStates() {
 				controllerAs: 'vm',
 				templateUrl : 'exchange/exchange.html',
 				resolve : {
+					/** @ngInject */
 					exchangeList : function (exchangeService, $stateParams) {
 						return exchangeService
 							.getAllExchange($stateParams.uid)

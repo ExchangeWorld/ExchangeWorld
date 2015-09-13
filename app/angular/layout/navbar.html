@@ -84,9 +84,9 @@
 		</div>
 		<!-- user menu div -->
 		<div flex="35" flex-md flex-sm layout="row" layout-align="center center">
+			<md-button ng-hide="vm.isLoggedIn" ng-click="vm.onLogin()">登入</md-button>
 			<md-menu flex flex-sm="70" md-offset="-10 75">
-				<md-button ng-click="$mdOpenMenu()">
-					<span ng-show="!vm.isLoggedIn">登入</span>
+				<md-button ng-show="vm.isLoggedIn" ng-click="$mdOpenMenu()">
 					<div ng-show="vm.isLoggedIn" layout="row" layout-align="center center">
 						<img hide-sm style="max-height:25px; max-width:25px" ng-src="{{ vm.user.photo_path }}"></img>
 						<span hide-sm>{{ vm.user.name }}</span>
@@ -101,9 +101,6 @@
 						<md-button ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">管理</md-button>
 					</md-menu-item>
 					<md-menu-divider></md-menu-divider>
-					<md-menu-item ng-show="!vm.isLoggedIn">
-						<md-button ng-click="vm.onLogin()">登入</md-button>
-					</md-menu-item>
 					<md-menu-item ng-show="vm.isLoggedIn">
 						<md-button ng-click="vm.onLogout()">登出</md-button>
 					</md-menu-item>

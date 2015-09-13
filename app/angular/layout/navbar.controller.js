@@ -112,7 +112,7 @@ function NavbarController(
 				console.log(data);
 			});
 		//console.log(notice);
-		$location.path ( notice.trigger);
+		$location.path(notice.trigger_url);
 	}
 
 	function onClickMessage(msg, ev) {

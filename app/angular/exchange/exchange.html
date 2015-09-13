@@ -84,7 +84,10 @@
 				<ul class="discussion" scroll='vm.chatroom'>
 					<li ng-class="{true: 'other', false: 'self'}[chat.sender_uid !== {{ vm.myid }}]" ng-repeat="chat in vm.chatroom">
 						<div class="avatar" ng-show="(chat.sender_uid !== {{ vm.myid }})">
-							<img ng-show="(chat.sender_uid !== {{ vm.myid }})" ng-src="{{vm.exchange.goods[0].user.photo_path}}" />
+							<div ng-show = "(chat.sender_uid !== {{ vm.myid }})" >
+								<img ng-show = "(chat.sender_uid === {{vm.exchange.goods[0].user.uid}})" ng-src  = "{{vm.exchange.goods[0].user.photo_path}}" />
+								<img ng-show = "(chat.sender_uid === {{vm.exchange.goods[1].user.uid}})" ng-src  = "{{vm.exchange.goods[1].user.photo_path}}" />
+							</div>
 							<md-tooltip ng-show="(chat.sender_uid === {{ vm.myid }})">
 								{{vm.exchange.goods[0].user.name}}
 							</md-tooltip>

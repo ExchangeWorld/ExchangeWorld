@@ -22,7 +22,7 @@ function getStates() {
 					/** @ngInject */
 					exchangeList : function (exchangeService, $stateParams) {
 						return exchangeService
-							.getAllExchange($stateParams.uid)
+							.getAllExchange(parseInt($stateParams.uid, 10))
 							.then(function(data) { return data; })
 							.catch(function() { return []; });
 					},

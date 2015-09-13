@@ -5,9 +5,17 @@ const _              = require('lodash');
 exchangeModule.controller('ExchangeController', ExchangeController);
 
 /** @ngInject */
-function ExchangeController(exchangeList, $state, exchangeService, $stateParams, $interval, $mdDialog, $localStorage) {
+function ExchangeController(
+	exchangeList,
+	$state,
+	exchangeService,
+	$stateParams,
+	$interval,
+	$mdDialog,
+	$localStorage
+) {
 	var vm             = this;
-	vm.myid            = $stateParams.uid;
+	vm.myid            = parseInt($stateParams.uid, 10);
 	vm.myGoods         = {};
 	vm.exchangeList    = exchangeList;
 	vm.exchange        = {};
@@ -53,7 +61,9 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 			});
 	}
 
+	var timer;
 	function onClickExchange(eid) {
+		$interval.cancel(timer);
 		exchangeService
 			.getExchange(eid)
 			.then(function(data) {
@@ -61,7 +71,7 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 				vm.exchange = data;
 				updateChat();
 				agreed();
-				$interval(updateChat, 5000);
+				timer = $interval(updateChat, 5000);
 			});
 	}
 

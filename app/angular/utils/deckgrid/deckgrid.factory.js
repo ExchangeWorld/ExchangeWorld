@@ -15,9 +15,9 @@
 
 const gridModule = require('./deckgrid.module');
 
-/** @ngInject */
 gridModule.factory('Deckgrid', initialize);
 
+/** @ngInject */
 function initialize($window, $log) {
 
 	/**

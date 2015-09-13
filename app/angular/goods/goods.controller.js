@@ -9,12 +9,14 @@ goodsModule.controller('GoodsController', GoodsController);
 function GoodsController(
 	goodData,
 	goodsService,
+	notification,
 	$state,
 	$stateParams,
 	$scope,
 	auth,
 	$timeout,
 	$localStorage,
+	$location,
 	$mdDialog,
 	$window
 ) {
@@ -131,6 +133,19 @@ function GoodsController(
 					vm.comment = '';
 					updateComment();
 				});
+
+			/**
+			 * Send notification to host
+			 */
+			//console.log($location.url());
+			notification
+				.postNotification({
+					sender_uid   : commentData.user_uid,
+					receiver_uid : vm.goodData.owner_uid,
+					trigger      : $location.url(),
+					content      : '有人對你的物品留言',
+				})
+			.then(function(data){console.log(data);});
 		}
 	}
 
@@ -165,6 +180,15 @@ function GoodsController(
 				.then(function() {
 					updateStar();
 				});
+
+			notification
+				.postNotification({
+					sender_uid   : star.starring_user_uid,
+					receiver_uid : vm.goodData.owner_uid,
+					trigger      : $location.url(),
+					content      : '有人關注你的物品',
+				});
+
 		} else {
 			goodsService
 				.deleteStar(star)
@@ -232,7 +256,7 @@ function GoodsController(
 			 * TODO:
 			 *  1. restrict multi queue(?).
 			 */
-			goodsService.showQueueBox(ev, vm.myGoods, goodData.gid);
+			goodsService.showQueueBox(ev, vm.myGoods, goodData.gid, goodData.owner_uid);
 		} else if(type === types[1]) {
 			goodsService.showQueuingBox(ev, vm.queuingList, goodData.gid);
 		} else {

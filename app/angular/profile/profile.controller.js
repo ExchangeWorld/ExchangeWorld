@@ -10,6 +10,7 @@ function ProfileController(
 	profileService,
 	auth,
 	message,
+	notification,
 	$scope,
 	$state,
 	$stateParams,
@@ -83,6 +84,13 @@ function ProfileController(
 			vm.isFollowed = false;
 		} else {
 			profileService.addFollowing($localStorage.user.uid, profile.uid);
+			notification
+				.postNotification({
+					sender_uid   : $localStorage.user.uid,
+					receiver_uid : vm.profile.uid, 
+					trigger      : '/profile/'+$localStorage.user.uid,
+					content      : '有人跟隨你',
+				});
 			vm.followerCount++;
 			vm.isFollowed = true;
 		}

@@ -5,7 +5,7 @@ const _           = require('lodash');
 goodsModule.factory('goodsService', goodsService);
 
 /** @ngInject */
-function goodsService(Restangular, $q, exception, $mdDialog) {
+function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 
 	const service = {
 		getGood,
@@ -210,6 +210,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			})
 			.then(function(data) {
 				defer.resolve(data);
+
 			})
 			.catch(function(error) {
 				return exception.catcher('[Goods Service] postQueue error: ')(error);
@@ -277,7 +278,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			});
 	}
 
-	function showQueueBox(ev, myGoods, queuing_goods_gid) {
+	function showQueueBox(ev, myGoods, queuing_goods_gid, host_uid) {
 		$mdDialog.show({
 			clickOutsideToClose: true,
 			templateUrl: 'goods/goods.queue.html',
@@ -286,9 +287,10 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			locals: {
 				myGoods           : myGoods,
 				queuing_goods_gid : queuing_goods_gid,
+				host_uid          : host_uid,
 			}
 		});
-		function QueueController($mdDialog, logger, myGoods, queuing_goods_gid) {
+		function QueueController($mdDialog, logger, myGoods, queuing_goods_gid, host_uid, notification) {
 			const vm             = this;
 			vm.myGoods           = myGoods;
 			vm.queuing_goods_gid = queuing_goods_gid;
@@ -303,6 +305,13 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 						postQueue(vm.queuing_goods_gid, selected_gid)
 							.then(function(data) {
 								logger.success('成功發出排請求', data, 'DONE');
+								notification
+									.postNotification({
+										sender_uid   : vm.myGoods[0].owner_uid,
+										receiver_uid : host_uid, 
+										trigger      : '/seek/'+queuing_goods_gid,
+										content      : '有人排了你的物品',
+									});
 							});
 					});
 			}
@@ -323,20 +332,30 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 				host_goods_gid : host_goods_gid,
 			}
 		});
-		function QueuingController($mdDialog, logger, queuingGoods, host_goods_gid) {
+		function QueuingController($mdDialog, logger, queuingGoods, host_goods_gid, $localStorage, notification) {
 			const vm          = this;
 			vm.queuingGoods   = queuingGoods;
 			vm.host_goods_gid = host_goods_gid;
 			vm.confirm        = onConfirm;
 			vm.cancel         = onCancel;
 
-			function onConfirm(selected_gid) {
+			function onConfirm(selected_goods) {
+				//console.log(JSON.parse(selected_goods));
+				selected_goods = JSON.parse(selected_goods);
 				$mdDialog
-					.hide(selected_gid)
-					.then(function(selected_gid) {
-						postExchange(selected_gid, host_goods_gid)
+					.hide(selected_goods)
+					.then(function(selected_goods) {
+						postExchange(selected_goods.gid, host_goods_gid)
 							.then(function(data) {
 								logger.success('成功接受一個排', data, 'DONE');
+								notification
+									.postNotification({
+										sender_uid   : $localStorage.user.uid,
+										receiver_uid : selected_goods.owner_uid, 
+										trigger      : '/manage/'+$localStorage.user.uid+'/exchange',
+										content      : '有人接受了你的排，進入交換階段',
+									})
+								.then(function(data) {console.log(data);});
 							});
 					});
 			}

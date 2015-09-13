@@ -110,7 +110,8 @@ function NavbarController(
 			.then(function(data) {
 				console.log(data);
 			});
-		$location.href = notice.trigger;
+		//console.log(notice);
+		$location.path ( notice.trigger);
 	}
 
 	function onClickMessage(msg, ev) {

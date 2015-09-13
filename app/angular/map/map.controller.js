@@ -150,9 +150,9 @@ function MapController(
 			}
 
 			good.marker = new google.maps.Marker({
-					position: new google.maps.LatLng(good.position_y, good.position_x),
-					map: map
-				});
+				position: new google.maps.LatLng(good.position_y, good.position_x),
+				map: map
+			});
 			
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
 			good.marker.addListener('mouseup', function() {

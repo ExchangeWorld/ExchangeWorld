@@ -27,7 +27,7 @@ function seekService(Restangular, $q, exception, $localStorage, favorite) {
 						if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
 					});
 
-					if(Boolean($localStorage.user)){
+					if($localStorage.user){
 						favorite
 							.getMyFavorite($localStorage.user.uid)
 							.then(function(f_array) {

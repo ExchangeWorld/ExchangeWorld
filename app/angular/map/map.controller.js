@@ -152,7 +152,9 @@ function MapController(
 			var icon ;
 			if(good.category === 'Books') icon = '../../images/book.png';
 			else if(good.category === 'Clothes') icon = '../../images/cloth.png';
-			else icon = '../../images/icon(48-48).png';
+			else if(good.category === '3C') icon = '../../images/3C.png';
+			else if(good.category === 'Textbooks') icon = '../../images/textbook.png';
+			else icon = '../../images/other.png';
 
 			good.marker = new google.maps.Marker({
 				position: new google.maps.LatLng(good.position_y, good.position_x),

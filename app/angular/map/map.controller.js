@@ -149,9 +149,15 @@ function MapController(
 				return good;
 			}
 
+			var icon ;
+			if(good.category === 'Books') icon = '../../images/book.png';
+			else if(good.category === 'Clothes') icon = '../../images/cloth.png';
+			else icon = '../../images/icon(48-48).png';
+
 			good.marker = new google.maps.Marker({
 				position: new google.maps.LatLng(good.position_y, good.position_x),
-				map: map
+				map: map,
+				icon: icon
 			});
 			
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */

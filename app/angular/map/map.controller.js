@@ -149,17 +149,11 @@ function MapController(
 				return good;
 			}
 
-			good = {
-				gid        : good.gid,
-				user       : good.user,
-				name       : good.name,
-				photo_path : good.photo_path,
-				category   : good.category,
-				marker     : new google.maps.Marker({
-					position: new google.maps.LatLng(good.position_y, good.position_x),
-					map: map
-				}),
-			};
+			good.marker = new google.maps.Marker({
+				position: new google.maps.LatLng(good.position_y, good.position_x),
+				map: map
+			});
+			
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
 			good.marker.addListener('mouseup', function() {
 				closeGoodsOverlay();

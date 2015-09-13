@@ -8,6 +8,7 @@ profileModule.controller('ProfileController', ProfileController);
 function ProfileController(
 	profile,
 	profileService,
+	favorite,
 	auth,
 	message,
 	notification,
@@ -58,8 +59,8 @@ function ProfileController(
 							vm.myGoodsPending   = data.filter(function(g) { return g.status === 0; });
 							vm.myGoodsExchanged = data.filter(function(g) { return g.status === 1; });
 						});
-					profileService
-						.getMyStar($stateParams.uid)
+					favorite
+						.getMyFavorite($stateParams.uid)
 						.then(function(data) {
 							vm.myStar = data;
 						});

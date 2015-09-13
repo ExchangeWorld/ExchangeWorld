@@ -6,7 +6,7 @@ const _          = require('lodash');
 seekModule.factory('seekService', seekService);
 
 /** @ngInject */
-function seekService(Restangular, $q, exception) {
+function seekService(Restangular, $q, exception, $localStorage, favorite) {
 	var service = {
 		getSeek: getSeek,
 	};
@@ -32,7 +32,19 @@ function seekService(Restangular, $q, exception) {
 							goods.photo_path = JSON.parse(goods.photo_path);
 						}
 					});
-					defer.resolve(data);
+
+					if($localStorage.user){
+						favorite
+							.getMyFavorite($localStorage.user.uid)
+							.then(function(f_array) {
+								data.forEach(function(g) {
+									if (_.findWhere(f_array, { goods_gid: g.gid })) g.favorited = true;
+									else g.favorited = false;
+								});
+								console.log(data);
+								defer.resolve(data);
+							});
+					}
 				}
 			})
 			.catch(function(error) {
@@ -40,4 +52,6 @@ function seekService(Restangular, $q, exception) {
 			});
 		return defer.promise;
 	}
+
+	
 }

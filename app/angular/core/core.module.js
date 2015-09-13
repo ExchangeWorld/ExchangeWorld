@@ -14,6 +14,7 @@ require('../utils/exception/exception.module');
 require('../utils/fackbook/facebook.module');
 require('../utils/notification/notification.module');
 require('../utils/message/message.module');
+require('../utils/favorite/favorite.module');
 require('../utils/logger/logger.module');
 require('../utils/router/router.module');
 require('../utils/resize/resize.module');
@@ -29,6 +30,7 @@ const requires = [
 	'utils.photoSlider',
 	'utils.scroll',
 	'utils.facebook',
+	'utils.favorite',
 	'utils.notification',
 	'utils.message',
 	'utils.logger',

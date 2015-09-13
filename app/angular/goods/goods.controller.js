@@ -161,7 +161,7 @@ function GoodsController(
 				.postNotification({
 					sender_uid   : commentData.user_uid,
 					receiver_uid : vm.goodData.owner_uid,
-					trigger      : $location.url(),
+					trigger_url  : $location.url(),
 					content      : '有人對你的物品留言',
 				})
 			.then(function(data){console.log(data);});
@@ -204,7 +204,7 @@ function GoodsController(
 				.postNotification({
 					sender_uid   : star.starring_user_uid,
 					receiver_uid : vm.goodData.owner_uid,
-					trigger      : $location.url(),
+					trigger_url  : $location.url(),
 					content      : '有人關注你的物品',
 				});
 

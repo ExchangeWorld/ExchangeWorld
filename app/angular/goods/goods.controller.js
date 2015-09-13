@@ -70,8 +70,10 @@ function GoodsController(
 		 * if is me, get the queue list on this goods
 		 * else, get all my goods that available to send queue request.
 		 */
-		if (vm.isMe) getQueuing();
-		else getMyGoods();
+		if(vm.isLoggedIn) {
+			if (vm.isMe) getQueuing();
+			else getMyGoods();
+		}
 
 		auth
 			.getLoginState()

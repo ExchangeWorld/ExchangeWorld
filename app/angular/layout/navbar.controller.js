@@ -55,7 +55,8 @@ function NavbarController(
 		if (contentIndex === 0) {
 			$state.go('root.oneCol.' + state[contentIndex]);
 		} else if(contentIndex === 3) {
-			$state.go('root.oneCol.' + state[contentIndex], {uid: vm.user.uid});
+			if (!$localStorage.user) onLogin();
+			else  $state.go('root.oneCol.' + state[contentIndex], {uid: vm.user.uid});
 		} else if(contentIndex === 4) {
 			$state.go('root.withSidenav.' + state[contentIndex], {
 				uid: auth.currentUser().uid

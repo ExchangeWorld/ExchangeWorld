@@ -70,7 +70,7 @@ function SeekController(
 	}
 
 	function onClickFavorite(goods) {
-		if (!Boolean($localStorage.user)) {
+		if (!$localStorage.user) {
 			auth
 				.login()
 				.then(function(user) {

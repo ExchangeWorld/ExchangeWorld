@@ -44,6 +44,8 @@ function seekService(Restangular, $q, exception, $localStorage, favorite) {
 								console.log(data);
 								defer.resolve(data);
 							});
+					} else {
+						defer.resolve(data);
 					}
 				}
 			})

@@ -38,6 +38,7 @@ function GoodsController(
 	vm.stars       = [];
 	vm.starred     = false;
 	vm.edit        = false;
+	vm.onEdit      = onEdit;
 	vm.onClickStar = onClickStar;
 
 	vm.myGoods       = [];
@@ -82,6 +83,18 @@ function GoodsController(
 					vm.isLoggedIn = false;
 				}
 			});
+	}
+
+	function onEdit(gid) {
+		if(vm.edit) {
+			goodsService
+				.editGood(gid, vm.goodData.name, vm.goodData.category, vm.goodData.description)
+				.then(function(data) {
+					console.log(data);
+				})
+				.catch(function(err){ console.log(err); });
+		}
+		vm.edit = !vm.edit;
 	}
 
 	// define onClick event on goods owner

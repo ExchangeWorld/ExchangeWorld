@@ -67,8 +67,29 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 		return defer.promise;
 	}
 
-	function editGood() {
-		return ;
+	function editGood(gid, name, cate, des) {
+		const defer = $q.defer();
+
+		getGood(gid)
+			.then(function(goods) {
+				goods             = goods[0];
+				goods.name        = name;
+				goods.category    = cate;
+				goods.description = des;
+				goods.route       = 'goods/edit';
+				goods.photo_path = JSON.stringify(goods.photo_path);
+
+				goods
+					.put()
+					.then(function(data) {
+						defer.resolve(data);
+					})
+					.catch(function(error) {
+						return exception.catcher('[goods Service] updategoods error: ')(error);
+					});
+			});
+
+		return defer.promise;
 	}
 
 	function getComment(gid) {

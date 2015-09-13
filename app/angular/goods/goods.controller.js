@@ -8,6 +8,7 @@ goodsModule.controller('GoodsController', GoodsController);
 /** @ngInject */
 function GoodsController(
 	goodData,
+	AvailableCategory,
 	goodsService,
 	notification,
 	favorite,
@@ -26,6 +27,7 @@ function GoodsController(
 	vm.isLoggedIn = Boolean($localStorage.user);
 	vm.isMe       = vm.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
 	vm.goodData   = goodData;
+	vm.availableCategory   = AvailableCategory;
 
 	vm.comment         = '';
 	vm.goodComments    = [];
@@ -35,6 +37,7 @@ function GoodsController(
 
 	vm.stars       = [];
 	vm.starred     = false;
+	vm.edit        = false;
 	vm.onClickStar = onClickStar;
 
 	vm.myGoods       = [];

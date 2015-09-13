@@ -14,19 +14,39 @@
 		</div>
 	</div>
 	<!--<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(6)">我要排！ {{vm.queue.length}}</md-button>-->
-
 	<div flex="80" layout layout-align="center center">
 		<photoslider images="vm.goodData.photo_path"></photoslider>
 	</div>
 	<div class="info_container" layout="row">
 		<div flex="30" layout="column" layout-align="center center">
-			<img ng-click="vm.onClickUser(vm.goodData.user.uid)" class="circular goods with_border anchor" src="{{ vm.goodData.user.photo_path }}"/>
+			<img ng-click="vm.onClickUser(vm.goodData.user.uid)" class="circular goods with_border anchor" src="{{ vm.goodData.user.photo_path }}" />
 			<p class="md-tiltle" style="color:#7f8588;">{{ vm.goodData.user.name }}</p>
 		</div>
-		<div flex offset="10" layout="column">
+		<div flex offset="10" layout="column" ng-show="!vm.edit">
 			<h3 style="color:#3e4042">{{ vm.goodData.name }}</h3>
 			<p style="color:#7f8588;">{{ vm.goodData.category }}</p>
 			<p style="color:#7f8588;">{{ vm.goodData.description }}</p>
+		</div>
+		<div flex offset="10" layout="column" ng-show="vm.edit && vm.isMe">
+			<md-input-container>
+				<input ng-model="vm.goodData.name">
+			</md-input-container>
+			<md-input-container>
+				<md-select ng-model="vm.goodData.category" aria-label="cate">
+					<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container>
+				<input ng-model="vm.goodData.description">
+			</md-input-container>
+		</div>
+		<div flex="20" layout layout-align="center center">
+			<md-button class="md-fab md-primary" ng-click="vm.edit=!vm.edit" ng-disabled="!vm.isMe">
+				<md-icon md-font-set="material-icons" ng-show="!vm.edit">edit</md-icon>
+				<md-icon md-font-set="material-icons" ng-show="vm.edit && vm.isMe">done</md-icon>
+				<md-tooltip ng-show="!vm.edit">編輯物品</md-tooltip>
+				<md-tooltip ng-show="vm.edit && vm.isMe">編輯完成</md-tooltip>
+			</md-button>
 		</div>
 	</div>
 	<h3 class="md-subhead">Comments</h3>
@@ -89,3 +109,4 @@
 		</form>
 	</div>
 </md-content>
+

@@ -274,7 +274,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 									.postNotification({
 										sender_uid   : vm.myGoods[0].owner_uid,
 										receiver_uid : host_uid, 
-										trigger      : '/seek/'+queuing_goods_gid,
+										trigger_url  : '/seek/'+queuing_goods_gid,
 										content      : '有人排了你的物品',
 									});
 							});
@@ -317,7 +317,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 									.postNotification({
 										sender_uid   : $localStorage.user.uid,
 										receiver_uid : selected_goods.owner_uid, 
-										trigger      : '/manage/' + selected_goods.owner_uid + '/exchange',
+										trigger_url  : '/manage/' + selected_goods.owner_uid + '/exchange',
 										content      : '有人接受了你的排，進入交換階段',
 									})
 								.then(function(data) {console.log(data);});

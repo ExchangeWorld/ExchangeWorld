@@ -4,7 +4,7 @@ const angular = require('angular');
 const resizeModule = require('./resize.module');
 resizeModule.directive('resize', resize);
 
-
+/** @ngInject */
 function resize($window)  {
 	return function (scope, element, attr)
 	{

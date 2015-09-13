@@ -24,10 +24,6 @@
 	<div class="md-padding"></div>
 	<div deckgrid class="deckgrid" source="vm.goods">
 		<md-card class="md-whiteframe-z3 item hvr-grow">
-			<div layout layout-align="end end">
-				<i ng-click="mother.onClickFavorite(card)" ng-show="card.favorited" class="material-icons heart">favorite</i>
-				<i ng-click="mother.onClickFavorite(card)" ng-show="!card.favorited" class="material-icons heart">favorite_border</i>
-			</div>
 			<!-- <i class="material-icons plus-one">plus_one</i> -->
 			<div ng-click="mother.onClickGoods(card.gid)" ng-mouseenter="mother.onMouseOver(card.gid)" ng-mouseleave="mother.onMouseOut()">
 				<photoslider images="card.photo_path" class="md-card-image"></photoslider>
@@ -35,11 +31,13 @@
 					<div layout="row" layout-align="center center">
 						<div flex layout="column" layout-align="center center">
 							<div layout layout-align="center center">
-								<img src="../../images/icon/icon-book.png" ng-show="card.category == 'Books'" style="height:24px; width:auto;">
-								<img src="../../images/icon/icon-school.svg" ng-show="card.category == 'Textbooks'" style="height:24px; width:auto;">
-								<img src="../../images/icon/icon-cloth.png" ng-show="card.category == 'Clothes'" style="height:24px; width:auto;">
-								<img src="../../images/icon/icon-phone.svg" ng-show="card.category == '3C'" style="height:24px; width:auto;">
-								<img src="../../images/icon/icon-other.svg" ng-show="card.category == 'Others'" style="height:24px; width:auto;">
+								<i ng-click="mother.onClickFavorite($event, card)" ng-show="card.favorited" class="material-icons heart">favorite</i>
+								<i ng-click="mother.onClickFavorite($event, card)" ng-hide="card.favorited" class="material-icons heart">favorite_border</i>
+								<img src="../../images/icon/icon-book.png" ng-show="card.category === 'Books'" style="height:24px; width:auto;">
+								<img src="../../images/icon/icon-school.svg" ng-show="card.category === 'Textbooks'" style="height:24px; width:auto;">
+								<img src="../../images/icon/icon-cloth.png" ng-show="card.category === 'Clothes'" style="height:24px; width:auto;">
+								<img src="../../images/icon/icon-phone.svg" ng-show="card.category === '3C'" style="height:24px; width:auto;">
+								<img src="../../images/icon/icon-other.svg" ng-show="card.category === 'Others'" style="height:24px; width:auto;">
 							</div>
 							<h2 class="md-title">{{card.name}}</h2>
 						</div>

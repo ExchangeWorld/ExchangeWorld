@@ -9,12 +9,14 @@ function SeekController(
 	auth,
 	seekService,
 	favorite,
+	notification,
 	AvailableCategory,
 	$state,
 	$scope,
 	$rootScope,
 	$localStorage,
-	$stateParams
+	$stateParams,
+	$location
 ) {
 	var vm                 = this;
 	vm.goods               = [];
@@ -70,7 +72,9 @@ function SeekController(
 		$state.go('root.withSidenav.goods', { gid : gid });
 	}
 
-	function onClickFavorite(goods) {
+	function onClickFavorite(e, goods) {
+		e.preventDefault();
+		e.stopPropagation();
 		if (!$localStorage.user) {
 			auth
 				.login()
@@ -90,6 +94,14 @@ function SeekController(
 					.then(function() {
 						var idx = _.indexOf(vm.goods, goods);
 						vm.goods[idx].favorited = true;
+					});
+
+				notification
+					.postNotification({
+						sender_uid   : $localStorage.user.uid,
+						receiver_uid : goods.owner_uid,
+						trigger      : '/seek/' + goods.gid,
+						content      : '有人關注你的物品',
 					});
 			} else {
 				favorite

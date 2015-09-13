@@ -24,9 +24,11 @@
 	<div class="md-padding"></div>
 	<div deckgrid class="deckgrid" source="vm.goods">
 		<md-card class="md-whiteframe-z3 item hvr-grow">
-			<i ng-click="mother.onClickFavorite(card)" ng-show="card.favorited" class="material-icons heart">favorite</i>
-			<i ng-click="mother.onClickFavorite(card)" ng-show="!card.favorited" class="material-icons heart">favorite_border</i>
-			<i class="material-icons plus-one">plus_one</i>
+			<div layout layout-align="end end">
+				<i ng-click="mother.onClickFavorite(card)" ng-show="card.favorited" class="material-icons heart">favorite</i>
+				<i ng-click="mother.onClickFavorite(card)" ng-show="!card.favorited" class="material-icons heart">favorite_border</i>
+			</div>
+			<!-- <i class="material-icons plus-one">plus_one</i> -->
 			<div ng-click="mother.onClickGoods(card.gid)" ng-mouseenter="mother.onMouseOver(card.gid)" ng-mouseleave="mother.onMouseOut()">
 				<photoslider images="card.photo_path" class="md-card-image"></photoslider>
 				<md-card-content style="padding: 0.8em 0;">
@@ -51,3 +53,4 @@
 		</md-card>
 	</div>
 </md-content>
+

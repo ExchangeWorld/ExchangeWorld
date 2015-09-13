@@ -35,10 +35,11 @@
 					<div layout="row" layout-align="center center">
 						<div flex layout="column" layout-align="center center">
 							<div layout layout-align="center center">
-								<i ng-show="card.category == 'Books'" class="material-icons blue">book</i>
-								<i ng-show="card.category == 'Textbooks'" class="material-icons blue">library_books</i>
-								<i ng-show="card.category == 'Music CD'" class="material-icons blue">music_note</i>
-								<i ng-show="card.category == '3C'" class="material-icons blue">computer</i>
+								<img src="../../images/icon/icon-book.png" ng-show="card.category == 'Books'" style="height:24px; width:auto;">
+								<img src="../../images/icon/icon-school.svg" ng-show="card.category == 'Textbooks'" style="height:24px; width:auto;">
+								<img src="../../images/icon/icon-cloth.png" ng-show="card.category == 'Clothes'" style="height:24px; width:auto;">
+								<img src="../../images/icon/icon-phone.svg" ng-show="card.category == '3C'" style="height:24px; width:auto;">
+								<img src="../../images/icon/icon-other.svg" ng-show="card.category == 'Others'" style="height:24px; width:auto;">
 							</div>
 							<h2 class="md-title">{{card.name}}</h2>
 						</div>

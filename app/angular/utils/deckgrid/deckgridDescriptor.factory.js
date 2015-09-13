@@ -14,9 +14,9 @@
 
 const gridModule = require('./deckgrid.module');
 
-/** @ngInject */
 gridModule.factory('DeckgridDescriptor', initialize);
 
+/** @ngInject */
 function initialize(Deckgrid, $templateCache) {
 	/**
 	 * This is a wrapper around the AngularJS

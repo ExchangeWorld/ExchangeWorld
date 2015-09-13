@@ -161,7 +161,7 @@ function MapController(
 				map: map,
 				icon: icon
 			});
-			
+
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
 			good.marker.addListener('mouseup', function() {
 				closeGoodsOverlay();
@@ -238,7 +238,7 @@ function MapController(
 	}
 
 	function mapMoveTo(e, gid) {
-		// map.panTo(_findGood(gid).marker.getPosition());
+		map.panTo(_findGood(gid).marker.getPosition());
 	}
 
 	function openGoodsOverlay(e, gid) {

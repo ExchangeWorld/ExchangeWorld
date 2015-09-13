@@ -19,6 +19,7 @@ function getStates() {
 				controllerAs: 'vm',
 				templateUrl : 'profile/profile.html',
 				resolve : {
+					/** @ngInject */
 					profile : function (profileService, $stateParams) {
 						return profileService
 							.getProfile($stateParams.uid)

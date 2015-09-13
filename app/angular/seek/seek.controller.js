@@ -100,7 +100,7 @@ function SeekController(
 					.postNotification({
 						sender_uid   : $localStorage.user.uid,
 						receiver_uid : goods.owner_uid,
-						trigger      : '/seek/' + goods.gid,
+						trigger_url  : '/seek/' + goods.gid,
 						content      : '有人關注你的物品',
 					});
 			} else {

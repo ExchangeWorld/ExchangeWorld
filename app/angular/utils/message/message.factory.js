@@ -123,7 +123,7 @@ function DialogController(msg, callback, $mdDialog, logger, message) {
 		message
 			.getConversation(msg.sender_uid, msg.receiver_uid, 10, 0)
 			.then(function(data) {
-				vm.history = data;
+				vm.history = data.reverse();
 				console.log(data);
 				//vm.content = '';
 			});

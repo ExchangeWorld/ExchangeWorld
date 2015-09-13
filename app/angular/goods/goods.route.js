@@ -20,6 +20,7 @@ function getStates() {
 				templateUrl : 'goods/goods.html',
 				title : 'goods',
 				resolve : {
+					/** @ngInject */
 					goodData : function (goodsService, $stateParams) {
 						return goodsService
 							.getGood($stateParams.gid)

@@ -5,7 +5,7 @@ const _              = require('lodash');
 exchangeModule.controller('ExchangeController', ExchangeController);
 
 /** @ngInject */
-function ExchangeController(exchangeList, $state, exchangeService, $stateParams, $interval, $mdDialog) {
+function ExchangeController(exchangeList, $state, exchangeService, $stateParams, $interval, $mdDialog, $localStorage) {
 	var vm             = this;
 	vm.myid            = $stateParams.uid;
 	vm.myGoods         = {};
@@ -24,20 +24,24 @@ function ExchangeController(exchangeList, $state, exchangeService, $stateParams,
 	activate();
 
 	function activate() {
-		if(vm.exchangeList.length) {
-			vm.exchangeList.forEach(function(exchange) {
-				exchangeService
-					.getExchange(exchange.eid)
-					.then(function(data) {
-						//console.log(data);
-						vm.myGoods = (data.goods[0].owner_uid !== vm.myid) ? data.goods[0] : data.goods[1] ;
-						exchange.details = data;
-						exchange.with = (data.goods[0].owner_uid !== vm.myid)
-							? data.goods[0].user.name
-							: data.goods[1].user.name ;
-					});
-			});
-			onClickExchange(vm.exchangeList[0].eid);
+		if($stateParams.uid !== $localStorage.user.uid) {
+			$state.go('root.withSidenav.404');
+		} else {
+			if(vm.exchangeList.length) {
+				vm.exchangeList.forEach(function(exchange) {
+					exchangeService
+						.getExchange(exchange.eid)
+						.then(function(data) {
+							//console.log(data);
+							vm.myGoods = (data.goods[0].owner_uid !== vm.myid) ? data.goods[0] : data.goods[1] ;
+							exchange.details = data;
+							exchange.with = (data.goods[0].owner_uid !== vm.myid)
+								? data.goods[0].user.name
+								: data.goods[1].user.name ;
+						});
+				});
+				onClickExchange(vm.exchangeList[0].eid);
+			}
 		}
 	}
 

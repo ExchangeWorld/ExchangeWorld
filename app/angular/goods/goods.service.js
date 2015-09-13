@@ -317,7 +317,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 									.postNotification({
 										sender_uid   : $localStorage.user.uid,
 										receiver_uid : selected_goods.owner_uid, 
-										trigger      : '/manage/'+$localStorage.user.uid+'/exchange',
+										trigger      : '/manage/' + selected_goods.owner_uid + '/exchange',
 										content      : '有人接受了你的排，進入交換階段',
 									})
 								.then(function(data) {console.log(data);});

@@ -14,19 +14,26 @@
 		<md-input-container flex class="info_container for_input">
 			<label>Item Name</label>
 			<input type="text" ng-model="vm.goodsName" required>
-			<md-tooltip md-direction="left">物品名稱</md-tooltip>
+			<!--<md-tooltip md-direction="left">物品名稱</md-tooltip>-->
 		</md-input-container>
+		<!-- Catogories Select -->
+		<div class="info_container for_input" layout="row" layout-align="start center">
+			<i class="material-icons">list</i>
+			物品類別
+			<select class="md-button mdbtn-border" placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" required>
+			</select>
+		</div>
 		<!-- Description Input -->
 		<md-input-container flex class="info_container for_input">
 			<label>Description</label>
 			<textarea type="string" ng-model="vm.goodsDescriptions" columns="10" md-maxlength="100" required></textarea>
-			<md-tooltip md-direction="left">物品敘述</md-tooltip>
+			<!--<md-tooltip md-direction="left">物品敘述</md-tooltip>-->
 		</md-input-container>
 		<!-- Insert Photo -->
 		<div layout="row" class="info_container">
-			<i class="material-icons hide">insert_photo</i>
+			<i class="material-icons">insert_photo</i>
+			加入多張相片
 			<input class="trans" type='file' ng-model='vm.imgEncoded' base-sixty-four-input required accept="image/*" multiple/>
-			<md-tooltip>加入相片</md-tooltip>
 			<!-- <span flex></span> -->
 		</div>
 		<div layout="row" layout-align="center center" layout-wrap style="background: #EEEEEE;">
@@ -42,14 +49,6 @@
 			<strong class="map-font">在右邊的地圖定位你的物品吧！</strong>
 			</h4>
 			<md-tooltip>使用滑鼠定位您的物品！</md-tooltip>
-		</div>
-		<!-- Catogories Select -->
-		<div class="info_container for_input" layout="row" layout-align="start center">
-			<i class="material-icons hide">list</i>
-			<select class="md-button mdbtn-border" placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" required>
-				<!--<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>-->
-			</select>
-			<md-tooltip>物品類別</md-tooltip>
 		</div>
 		<hr>
 		<!-- Submit button -->

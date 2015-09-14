@@ -22,8 +22,11 @@
 		<md-progress-circular class="md-warn md-hue-2" md-mode='indeterminate'></md-progress-circular>
 	</div>
 	<div class="md-padding"></div>
+	<div ng-hide="vm.goods.length" style="width:100%;height:100%">
+		地圖上沒有任何東西ＱＡＱ
+	</div>
 	<div deckgrid class="deckgrid" source="vm.goods">
-		<md-card class="md-whiteframe-z3 item hvr-grow">
+		<md-card class="md-whiteframe-z3 item hvr-grow" style="cursor:pointer;">
 			<!-- <i class="material-icons plus-one">plus_one</i> -->
 			<div ng-click="mother.onClickGoods(card.gid)" ng-mouseenter="mother.onMouseOver(card.gid)" ng-mouseleave="mother.onMouseOut()">
 				<photoslider images="card.photo_path" class="md-card-image"></photoslider>

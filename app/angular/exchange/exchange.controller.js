@@ -15,6 +15,7 @@ function ExchangeController(
 	$localStorage
 ) {
 	var vm             = this;
+	vm.goSeek          = ()=> $state.go('root.withSidenav.seek');
 	vm.myid            = parseInt($stateParams.uid, 10);
 	vm.myGoods         = {};
 	vm.exchangeList    = exchangeList;

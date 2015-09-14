@@ -149,7 +149,7 @@ function MapController(
 				return good;
 			}
 
-			var icon = '../../images/' + good.category + '.png';
+			var icon = '../../images/mapMarker/' + good.category + '.png';
 
 			good.marker = new google.maps.Marker({
 				position: new google.maps.LatLng(good.position_y, good.position_x),

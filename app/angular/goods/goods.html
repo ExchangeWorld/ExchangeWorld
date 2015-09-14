@@ -25,7 +25,7 @@
 		<div flex offset="10" layout="column" ng-show="!vm.edit">
 			<h3 style="color:#3e4042">{{ vm.goodData.name }}</h3>
 			<p style="color:#7f8588;">{{ vm.goodData.category }}</p>
-			<p style="color:#7f8588;">{{ vm.goodData.description }}</p>
+			<p style="color:#7f8588; white-space: pre;">{{ vm.goodData.description }}</p>
 		</div>
 		<div flex offset="10" layout="column" ng-show="vm.edit && vm.isMe">
 			<md-input-container>
@@ -41,7 +41,7 @@
 			</md-input-container>
 		</div>
 		<div flex="20" flex-sm="25" layout layout-align="center center">
-			<md-button class="md-fab md-primary" ng-disabled="!vm.isMe" ng-click="vm.onEdit(vm.goodData.gid)">
+			<md-button class="md-fab md-primary" ng-show="vm.isMe" ng-click="vm.onEdit(vm.goodData.gid)">
 				<md-icon md-font-set="material-icons" ng-show="!vm.edit">edit</md-icon>
 				<md-icon md-font-set="material-icons" ng-show="vm.edit && vm.isMe">done</md-icon>
 				<md-tooltip ng-show="!vm.edit">編輯物品</md-tooltip>

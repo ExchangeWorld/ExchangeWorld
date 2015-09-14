@@ -1,0 +1,14 @@
+.navbar {
+
+  //.navbar__brand
+  @include element("brand") {
+    height: $navbar-height;
+    padding: 20px 0;
+  }
+}
+
+#autocomplete {
+  md-icon {
+    fill: $warn-color;
+  }
+}

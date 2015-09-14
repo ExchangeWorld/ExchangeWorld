@@ -1,0 +1,35 @@
+<md-dialog aria-label="CompleteExchange">
+	<md-toolbar>
+		<div flex class="md-toolbar-tools" layout layout-align="center center">
+			<h2 class="md-display-1">完成交易</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="vm.cancel()">
+				<md-icon md-font-set="material-icons" aria-label="Close dialog">close</md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content style="max-width:800px;max-height:810px; ">
+		<div flex flex-sm layout="column">
+			<div layout="column" layout-align="center center">
+				<span class="starRating">
+					<input id="rating5" type="radio" ng-model="vm.rating" name="rating" value="5">
+					<label for="rating5">5</label>
+					<input id="rating4" type="radio" ng-model="vm.rating" name="rating" value="4">
+					<label for="rating4">4</label>
+					<input id="rating3" type="radio" ng-model="vm.rating" name="rating" value="3" checked>
+					<label for="rating3">3</label>
+					<input id="rating2" type="radio" ng-model="vm.rating" name="rating" value="2">
+					<label for="rating2">2</label>
+					<input id="rating1" type="radio" ng-model="vm.rating" name="rating" value="1">
+					<label for="rating1">1</label>
+				</span>
+			</div>
+			<div layout="row">
+				<span flex="50"></span>
+				<input flex class="md-button md-primary md-raised" ng-click="vm.cancel()" value="取消"></input>
+				<input flex class="md-button md-primary md-raised" ng-click="vm.confirm(vm.rating)" value="送出"></input>
+			</div>
+		</div>
+	</md-dialog-content>
+</md-dialog>
+

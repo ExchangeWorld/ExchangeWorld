@@ -1,0 +1,112 @@
+<md-content layout-padding>
+	<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1">
+		<md-icon md-font-set="material-icons">undo</md-icon>Back
+	</md-button>
+	<div layout="row" layout-align="center center">
+		<div layout layout-align="center center">
+			<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
+				<md-icon md-font-set="material-icons" ng-class="{'star': vm.starred}">star</md-icon>
+				{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.stars.length}} </md-button>
+		</div>
+		<div layout layout-align="center center">
+			<md-button ng-disabled="!vm.isLoggedIn" ng-show="!vm.isMe" ng-click="vm.onClickQueue($event, 'want_to_queue')">我要排！</md-button>
+			<md-button ng-disabled="!vm.isLoggedIn" ng-show="vm.isMe" ng-click="vm.onClickQueue($event, 'see_who_queue')">看誰排！</md-button>
+		</div>
+	</div>
+	<!--<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(6)">我要排！ {{vm.queue.length}}</md-button>-->
+	<div flex="80" layout layout-align="center center">
+		<photoslider images="vm.goodData.photo_path"></photoslider>
+	</div>
+	<div class="info_container" layout="row">
+		<div flex="30" layout="column" layout-align="center center">
+			<img ng-click="vm.onClickUser(vm.goodData.user.uid)" class="circular goods with_border anchor" src="{{ vm.goodData.user.photo_path }}" />
+			<p class="md-tiltle" style="color:#7f8588;">{{ vm.goodData.user.name }}</p>
+		</div>
+		<div flex offset="10" layout="column" ng-show="!vm.edit">
+			<h3 style="color:#3e4042">{{ vm.goodData.name }}</h3>
+			<p style="color:#7f8588;">{{ vm.goodData.category }}</p>
+			<p style="color:#7f8588;">{{ vm.goodData.description }}</p>
+		</div>
+		<div flex offset="10" layout="column" ng-show="vm.edit && vm.isMe">
+			<md-input-container>
+				<input ng-model="vm.goodData.name">
+			</md-input-container>
+			<md-input-container>
+				<md-select ng-model="vm.goodData.category" aria-label="cate">
+					<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container>
+				<input ng-model="vm.goodData.description">
+			</md-input-container>
+		</div>
+		<div flex="20" layout layout-align="center center">
+			<md-button class="md-fab md-primary"  ng-disabled="!vm.isMe" ng-click="vm.onEdit(vm.goodData.gid)">
+				<md-icon md-font-set="material-icons" ng-show="!vm.edit">edit</md-icon>
+				<md-icon md-font-set="material-icons" ng-show="vm.edit && vm.isMe">done</md-icon>
+				<md-tooltip ng-show="!vm.edit">編輯物品</md-tooltip>
+				<md-tooltip ng-show="vm.edit && vm.isMe">編輯完成</md-tooltip>
+			</md-button>
+		</div>
+	</div>
+	<h3 class="md-subhead">Comments</h3>
+	<md-divider></md-divider>
+	<!-- comments -->
+	<div class="comments">
+		<!-- first comment -->
+		<div class="comment">
+			<a class="avatar">
+				<img src="../../images/unknown-user.gif">
+			</a>
+			<div class="content">
+				<a class="author">天龍人</a>
+				<div class="metadata">
+					<div class="date">2 days ago</div>
+				</div>
+				<div class="text">
+					Hey guys, I hope this example comment is helping you read this documentation.
+				</div>
+			</div>
+		</div>
+		<div class="comment" ng-repeat="comment in vm.goodComments">
+			<a class="avatar" ng-click="vm.onClickUser(comment.user.uid)"> <img ng-src="{{ comment.user.photo_path }}"> </a>
+			<div class="content" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
+				<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
+				<div class="metadata">
+					<!--<div class="date">{{ comment.timestamp| date:'MM/dd/yyyy @ h:mma' }}</div>-->
+					<div flex class="date">{{ comment.timestamp}}</div>
+				</div>
+				<div ng-show="comment.isMe && removeMode" ng-click="vm.onDeleteComment(comment.cid)" class="cross">X</div>
+				<div class="text">
+					{{ comment.content }}
+				</div>
+			</div>
+		</div>
+		<!-- if a comment has comments, use comments tag in parant's commemt tag -->
+		<!--<div class="comments">-->
+		<!--<div class="comment">-->
+		<!--<a class="avatar">-->
+		<!--<img src="../../images/unknown-user.gif">-->
+		<!--</a>-->
+		<!--<div class="content">-->
+		<!--<a class="author">鄉下人</a>-->
+		<!--<div class="metadata">-->
+		<!--<div class="date">2 days ago</div>-->
+		<!--</div>-->
+		<!--<div class="text">-->
+		<!--Hey guys, I hope this example comment is helping you read this documentation.-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--</div>-->
+		<form ng-submit="vm.onSubmitComment()">
+			<md-input-container>
+				<label>Write some here...</label>
+				<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
+				<input type="text" ng-model="vm.comment" name="text" />
+			</md-input-container>
+			<input type="submit" id="submit" value="Submit" ng-show="false" />
+		</form>
+	</div>
+</md-content>
+

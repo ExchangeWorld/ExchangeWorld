@@ -1,0 +1,111 @@
+<md-toolbar class="md-primary" style="overflow-x: hidden; overflow-y: hidden;">
+	<div class="md-toolbar-tools md-medium-tall navbar">
+		<span flex="20" flex-md="15" hide-sm hide-md>
+			<md-button ng-click="vm.onClick(0)" style="text-transform: none;" aria-label="logo">
+				<div layout layout-align="center center">
+					<!-- <i class="material-icons">group</i>
+					<span hide-md hide-sm>ExchangeWorld</span> -->
+					<img src="../../images/Ex-Logo-white (Century Gothic).png" style="height:40px; width:auto;">
+				</div>
+			</md-button>
+		</span>
+		<span flex="15" hide-md hide-sm></span>
+		<!-- seek and post button -->
+		<div flex="30" flex-md="45" flex-sm="50" layout="row" layout-align="center center">
+			<md-button flex flex-sm="15" ng-click="vm.onClick(1)" ng-class="{'active': vm.contentIs(1)}">
+				<div layout layout-align="center center">
+					<i class="material-icons">dashboard</i>
+					<span hide-md hide-sm>探索</span>
+				</div>
+			</md-button>
+			<md-button flex flex-sm="15" ng-click="vm.onClick(2)" ng-class="{'active': vm.contentIs(2)}">
+				<div layout layout-align="center center">
+					<i class="material-icons">add</i>
+					<span hide-md hide-sm>發佈</span>
+				</div>
+			</md-button>
+			<md-button flex flex-sm="15" ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">
+				<div layout layout-align="center center">
+					<i class="material-icons">autorenew</i>
+					<span hide-md hide-sm>交換</span>
+				</div>
+			</md-button>
+		</div>
+		<span flex-md="20"></span>
+		<!-- notification div -->
+		<div flex="10" flex-md="15" flex-sm offset="10" offset-md="5" offset-sm="5" layout="row" layout-align="center center">
+			<md-menu flex="30" flex-sm md-offset="-233 75" ng-show="vm.isLoggedIn">
+				<md-button ng-click="$mdOpenMenu()">
+					<md-icon class="material-icons">notifications</md-icon>
+					<p class="notification md-caption" ng-show="vm.unreadCount !== 0">{{ vm.unreadCount }}</p>
+
+				</md-button>
+				<md-menu-content width="5" style="padding-bottom: 0px; max-width:400px;">
+					<md-menu-item style="min-height: 30px; height:30px">
+						<p class="md-body-1">通知</p>
+					</md-menu-item>
+					<md-divider></md-divider>
+					<!-- unread notification -->
+					<md-list>
+						<md-list-item ng-repeat="notice in vm.notifications" ng-style="notice.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickNotification(notice)">
+							<!-- user avatar -->
+							<img flex style="max-height:50px; max-width:50px;" ng-src="{{ notice.user.photo_path }}" />
+							<!-- notification text -->
+							<div offset="5" flex>
+								<p class="md-body-2 note">{{notice.content}}</p>
+								<p class="md-caption note" style="color: #BCBCBC;">{{ notice.timestamp }}</p>
+							</div>
+						</md-list-item>
+					</md-list>
+					<!-- Message -->
+					<md-menu-item style="min-height: 30px; height:30px">
+						<p class="md-body-1">Message</p>
+					</md-menu-item>
+					<md-divider></md-divider>
+					<md-list>
+						<md-list-item ng-repeat="msg in vm.messages" ng-style="msg.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickMessage(msg, $event)">
+							<!-- user avatar -->
+							<img flex style="max-height:50px; max-width:50px;" ng-src="{{ msg.user.photo_path }}" />
+							<!-- messages text -->
+							<div offset="5" flex>
+								<p class="md-body-2 note">{{msg.content}}</p>
+								<p class="md-caption note" style="color: #BCBCBC;">{{ msg.timestamp }}</p>
+							</div>
+						</md-list-item>
+					</md-list>
+					<md-divider></md-divider>
+					<md-divider></md-divider>
+					<!-- See All text -->
+					<md-menu-item style="min-height: 30px; height:30px">
+						<p class="md-body-2">全部</p>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
+		</div>
+		<!-- user menu div -->
+		<div flex="35" flex-md flex-sm layout="row" layout-align="center center">
+			<md-button ng-hide="vm.isLoggedIn" ng-click="vm.onLogin()">登入</md-button>
+			<md-menu flex flex-sm="70" md-offset="-10 75">
+				<md-button ng-show="vm.isLoggedIn" ng-click="$mdOpenMenu()">
+					<div ng-show="vm.isLoggedIn" layout="row" layout-align="center center">
+						<img hide-sm style="max-height:25px; max-width:25px" ng-src="{{ vm.user.photo_path }}"></img>
+						<span hide-sm>{{ vm.user.name }}</span>
+						<i class="material-icons">menu</i>
+					</div>
+				</md-button>
+				<md-menu-content width="3">
+					<md-menu-item>
+						<md-button ng-click="vm.onClick(4)">個人資料</md-button>
+					</md-menu-item>
+					<md-menu-item ng-show="vm.isLoggedIn">
+						<md-button ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">管理</md-button>
+					</md-menu-item>
+					<md-menu-divider></md-menu-divider>
+					<md-menu-item ng-show="vm.isLoggedIn">
+						<md-button ng-click="vm.onLogout()">登出</md-button>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
+		</div>
+	</div>
+</md-toolbar>

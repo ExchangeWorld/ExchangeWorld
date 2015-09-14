@@ -1,0 +1,30 @@
+<div flex style="position: relative;  margin:auto;">
+	<div ng-repeat="image in images" ng-show="isCurrentSlide($index)">
+		<div flex layout="row" ng-show="images.length !== 1">
+
+			<div
+				flex='33' layout layout-align="start start"
+				class="img-container"
+				ng-click="prevSlide($event)"
+			>
+				<a flex href="#" ng-click="prevSlide($event)" class="indicators" style="position: absolute; left: 0; top: 45%">
+					<img style="height:30px; width:30px; " src="../../../images/previoust.png">
+				</a>
+			</div>
+
+			<!-- <span flex="85"></span> -->
+			<div
+				flex='33'
+				class="img-container"
+				style="margin-left: 66%"
+				ng-click="nextSlide($event);"
+			>
+				<a href="#" ng-click="nextSlide($event);" class="indicators"  style="position: absolute; right: 0; top: 45%">
+					<img style="height:30px; width:30px;" src="../../../images/next.png">
+				</a>
+			</div>
+
+		</div>
+		<img ng-src="{{ image }}" style="width:100%;" />
+	</div>
+</div>

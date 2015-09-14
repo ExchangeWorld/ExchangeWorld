@@ -1,0 +1,40 @@
+<md-button href="#" class="md-raised md-accent md-hue-1" ng-click="vm.onClickBack()">
+	<md-icon md-font-set="material-icons">undo</md-icon>Back
+</md-button>
+<div layout layout-align="center center" style="height:80px;">
+	<p class="md-display-1">{{ vm.type }}</p>
+</div>
+<div layout="row" layout-align="center center" layout-wrap>
+	<div flex="30" class="item follow" ng-repeat="follow in vm.followData">
+		<div layout="column" layout-align="center center">
+			<img flex ng-src="{{ follow.user.photo_path }}" ng-click="vm.onClickUser(follow.user.uid)" style="width: 100%;" />
+			<p class="md-body-1">{{ follow.user.name }}</p>
+		</div>
+		
+	</div>
+	<!--<div flex="30" class="item follow">-->
+	<!--<img flex src="../../images/unknown-user.gif" />-->
+	<!--<div layout layout-align="center center">-->
+	<!--<p class="md-body-1">SilentSky</p>-->
+	<!--</div>-->
+	<!--</div>-->
+	<!--<div flex="30" class="item follow">-->
+	<!--<img flex src="../../images/unknown-user.gif" />-->
+	<!--<div layout layout-align="center center">-->
+	<!--<p class="md-body-1">SilentSky</p>-->
+	<!--</div>-->
+	<!--</div>-->
+	<!--<div flex="30" class="item follow">-->
+	<!--<img flex src="../../images/unknown-user.gif" />-->
+	<!--<div layout layout-align="center center">-->
+	<!--<p class="md-body-1">SilentSky</p>-->
+	<!--</div>-->
+	<!--</div>-->
+	<!--<div flex="30" class="item follow">-->
+	<!--<img flex src="../../images/unknown-user.gif" />-->
+	<!--<div layout layout-align="center center">-->
+	<!--<p class="md-body-1">SilentSky</p>-->
+	<!--</div>-->
+	<!--</div>-->
+</div>
+

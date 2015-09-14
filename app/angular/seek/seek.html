@@ -1,0 +1,55 @@
+<md-toolbar class="md-primary md-hue-3 md-whiteframe-z2" style="height: 76px;">
+	<!-- search input bar & button -->
+	<div layout="row">
+		<md-input-container flex="55" flex-sm="45" class="md-primary" style="padding-left: 10px;">
+			<label>Search</label>
+			<input ng-model="vm.searchGoodsName">
+			<!-- <md-tooltip md-direction="left">搜尋</md-tooltip> -->
+		</md-input-container>
+		<md-input-container flex>
+			<label>種類</label>
+			<md-select ng-model="vm.searchGoodsCategory" aria-label="cate">
+				<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>
+			</md-select>
+		</md-input-container>
+		<md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory})">
+			<md-icon hide-sm md-font-set="material-icons">search</md-icon><span class="ng-scope">搜索!</span>
+		</md-button>
+	</div>
+</md-toolbar>
+<md-content resize ng-style="resizeWithOffset(140)">
+	<div ng-show="loading" style="width: 65px; margin: 0 auto; margin-top:200px">
+		<md-progress-circular class="md-warn md-hue-2" md-mode='indeterminate'></md-progress-circular>
+	</div>
+	<div class="md-padding"></div>
+	<div deckgrid class="deckgrid" source="vm.goods">
+		<md-card class="md-whiteframe-z3 item hvr-grow">
+			<!-- <i class="material-icons plus-one">plus_one</i> -->
+			<div ng-click="mother.onClickGoods(card.gid)" ng-mouseenter="mother.onMouseOver(card.gid)" ng-mouseleave="mother.onMouseOut()">
+				<photoslider images="card.photo_path" class="md-card-image"></photoslider>
+				<md-card-content style="padding: 0.8em 0;">
+					<div layout="row" layout-align="center center">
+						<div flex layout="column" layout-align="center center">
+							<div layout layout-align="center center">
+								<i ng-click="mother.onClickFavorite($event, card)" ng-show="card.favorited" class="material-icons heart">favorite</i>
+								<i ng-click="mother.onClickFavorite($event, card)" ng-hide="card.favorited" class="material-icons heart">favorite_border</i>
+								<img src="../../images/icon/icon-book.png" ng-show="card.category === 'Books'" style="height:24px; width:auto;">
+								<img src="../../images/icon/icon-school.svg" ng-show="card.category === 'Textbooks'" style="height:24px; width:auto;">
+								<img src="../../images/icon/icon-cloth.png" ng-show="card.category === 'Clothes'" style="height:24px; width:auto;">
+								<img src="../../images/icon/icon-phone.svg" ng-show="card.category === '3C'" style="height:24px; width:auto;">
+								<img src="../../images/icon/icon-other.svg" ng-show="card.category === 'Others'" style="height:24px; width:auto;">
+							</div>
+							<h2 class="md-title">{{card.name}}</h2>
+						</div>
+						<!-- <p>{{card.category}}</p> -->
+						<div flex layout layout-align="end end">
+							<img class="circle" src="" data-ng-src="{{card.user.photo_path}}">
+						</div>
+					</div>
+				</md-card-content>
+			</div>
+			<!-- <img class="circle" ng-src="{{ card.user.photo_path }}" /> -->
+		</md-card>
+	</div>
+</md-content>
+

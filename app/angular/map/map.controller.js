@@ -160,7 +160,7 @@ function MapController(
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
 			good.marker.addListener('mouseup', function() {
 				closeGoodsOverlay();
-				overlay = new GoodsOverlay(map, good, $state);
+				overlay = new GoodsOverlay(map, overlay, good, $state);
 			});
 
 			return good;

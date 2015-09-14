@@ -34,5 +34,6 @@ function configure($logProvider, routerHelperProvider, exceptionHandlerProvider)
 
 function facebookprovider(FacebookProvider) {
 	// Set your appId through the setAppId method or use the shortcut in the initialize method directly.
+	// FacebookProvider.init('376506855853722'); // exwd appID
 	FacebookProvider.init('398517123645939'); // exwd Dev_appID
 }

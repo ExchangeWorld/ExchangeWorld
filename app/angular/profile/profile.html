@@ -130,10 +130,10 @@
 								<p>{{ goods.description }}</p>
 								<div layout="row" layout-align="center start">
 									<div ng-repeat="n in vm.getNumber(goods.rate) track by $index">
-										<img src="../../images/star-on.svg"/>
+										<img src="../../images/star-on.svg" />
 									</div>
 									<div ng-repeat="n in vm.getNumber(5 - goods.rate) track by $index">
-										<img src="../../images/star-off.svg"/>
+										<img src="../../images/star-off.svg" />
 									</div>
 								</div>
 							</div>
@@ -144,3 +144,4 @@
 		</md-tab>
 	</md-tabs>
 </md-content>
+

@@ -110,5 +110,5 @@ module.exports = function() {
 	s.listen(config.serverPort);
 
 	var ss = https.createServer(ssl.options, server);
-	ss.listen(3002)
+	ss.listen(443)
 };

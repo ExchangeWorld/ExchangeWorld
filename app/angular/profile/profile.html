@@ -87,7 +87,7 @@
 			<md-content layout-padding>
 				<div layout="column">
 					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsPending" ng-click="onClickGoods(goods.gid)">
-						<md-card-content layout="row">
+						<md-card-content layout="row" style="cursor:pointer">
 							<div layout layout-align="center center">
 								<img ng-src="{{ goods.photo_path[0] }}" style="height:180px; width:auto;" />
 							</div>
@@ -106,7 +106,7 @@
 			<md-content layout-padding>
 				<div layout="row" layout-sm="column" layout-align="center center" class="info_container for_input">
 					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsExchanged" ng-click="onClickGoods(goods.gid)">
-						<md-card-content layout="row">
+						<md-card-content layout="row" style="cursor:pointer;">
 							<div layout layout-align="center center">
 								<img ng-src="{{ goods.photo_path[0] }}" style="height:180px; width:auto;" />
 							</div>

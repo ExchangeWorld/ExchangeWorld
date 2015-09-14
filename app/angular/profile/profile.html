@@ -88,14 +88,16 @@
 				<div layout="column">
 					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsPending" ng-click="onClickGoods(goods.gid)">
 						<md-card-content layout="row">
-							<div layout layout-align="center center">
-								<img ng-src="{{ goods.photo_path[0] }}" style="height:180px; width:auto;" />
+							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto;">
+								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
-							<div layout="column" style="margin-left:20px;">
+							<div flex layout="column">
 								<div layout="row" layout-align="center start">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
-								<p>{{ goods.description }}</p>
+								<div flex layout layout-align="center center">
+									<p>{{ goods.description }}</p>
+								</div>
 							</div>
 						</md-card-content>
 					</md-card>
@@ -107,20 +109,22 @@
 				<div layout="row" layout-sm="column" layout-align="center center" class="info_container for_input">
 					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsExchanged" ng-click="onClickGoods(goods.gid)">
 						<md-card-content layout="row">
-							<div layout layout-align="center center">
-								<img ng-src="{{ goods.photo_path[0] }}" style="height:180px; width:auto;" />
+							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto;">
+								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
-							<div layout="column" style="margin-left:20px;">
+							<div flex layout="column">
 								<div layout="row" layout-align="center start">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
-								<p>{{ goods.description }}</p>
+								<div flex layout layout-align="center center">
+									<p>{{ goods.description }}</p>
+								</div>
 								<div layout="row" layout-align="center start">
 									<div ng-repeat="n in vm.getNumber(goods.rate) track by $index">
-										<img src="../../images/star-on.svg"/>
+										<img src="../../images/star-on.svg" />
 									</div>
 									<div ng-repeat="n in vm.getNumber(5 - goods.rate) track by $index">
-										<img src="../../images/star-off.svg"/>
+										<img src="../../images/star-off.svg" />
 									</div>
 								</div>
 							</div>
@@ -131,3 +135,4 @@
 		</md-tab>
 	</md-tabs>
 </md-content>
+

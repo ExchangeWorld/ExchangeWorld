@@ -22,6 +22,7 @@ function onAdd(map, $state) {
 	div.style.backgroundSize     = 'cover';
 	div.style.backgroundPosition = 'center';
 	div.style.backgroundRepeat   = 'no-repeat';
+	div.style.cursor             = 'pointer';
 
 	this.element = div;
 	google.maps.event.addDomListener(div, 'mousedown', function(e) {

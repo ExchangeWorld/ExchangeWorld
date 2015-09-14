@@ -1,10 +1,10 @@
 'use strict';
 
-function GoodsOverlay(map, overlay, good, $state) {
+function GoodsOverlay(map, good, $state) {
 	this.element = null;
 	this.good = good;
 
-	this.onAdd = onAdd.bind(this, map, overlay, $state);
+	this.onAdd = onAdd.bind(this, map, $state);
 	this.draw = draw;
 	this.onRemove = onRemove;
 	this.setMap(map);
@@ -12,13 +12,6 @@ function GoodsOverlay(map, overlay, good, $state) {
 }
 
 function onAdd(map, $state) {
-
-	if (
-		!overlay ||
-		overlay.good.gid !== this.good.gid
-	) {
-		return;
-	}
 
 	var div = document.createElement('div');
 	div.style.borderStyle        = 'double';
@@ -52,7 +45,7 @@ function draw() {
 	}
 }
 
-function onRemove(overlay) {
+function onRemove() {
 	if (this.element) {
 		this.element.parentNode.removeChild(this.element);
 		this.element = null;

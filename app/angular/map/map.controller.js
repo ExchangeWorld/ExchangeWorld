@@ -149,7 +149,7 @@ function MapController(
 				return good;
 			}
 
-			var icon = '../../images/mapMarker/' + good.category + '.png';
+			var icon = '../../images/' + good.category + '.png';
 
 			good.marker = new google.maps.Marker({
 				position: new google.maps.LatLng(good.position_y, good.position_x),
@@ -158,9 +158,9 @@ function MapController(
 			});
 
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
-			good.marker.addListener('mouseup', function() {
+			good.marker.addListener('click', function() {
 				closeGoodsOverlay();
-				overlay = new GoodsOverlay(map, overlay, good, $state);
+				overlay = new GoodsOverlay(map, good, $state);
 			});
 
 			return good;

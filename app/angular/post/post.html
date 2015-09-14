@@ -29,8 +29,8 @@
 			<md-tooltip>加入相片</md-tooltip>
 			<!-- <span flex></span> -->
 		</div>
-		<div layout="row" layout-align="center center" layout-wrap>
-			<div flex="45" class="md-whiteframe-z3" ng-repeat="preview in vm.imgEncoded">
+		<div layout="row" layout-align="center center" layout-wrap style="background: #EEEEEE;">
+			<div flex="45" layout layout-align="center center" class="md-whiteframe-z3" ng-repeat="preview in vm.imgEncoded" style="background-color: #F5F5F5;">
 				<img data-ng-src="data:image/png;base64,{{preview.base64}}" style="max-height:100%; max-width:100%" />
 			</div>
 		</div>

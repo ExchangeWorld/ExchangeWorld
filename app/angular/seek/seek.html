@@ -30,7 +30,8 @@
 				<md-card-content style="padding: 0.8em 0;">
 					<div layout="row" layout-align="center center">
 						<div flex layout="column" layout-align="center center">
-							<div layout layout-align="center center">
+							<div layout layout-align="center center"
+							style="margin-top:10px;">
 								<i ng-click="mother.onClickFavorite($event, card)" ng-show="card.favorited" class="material-icons heart">favorite</i>
 								<i ng-click="mother.onClickFavorite($event, card)" ng-hide="card.favorited" class="material-icons heart">favorite_border</i>
 								<img src="../../images/icon/icon-book.png" ng-show="card.category === 'Books'" style="height:24px; width:auto;">

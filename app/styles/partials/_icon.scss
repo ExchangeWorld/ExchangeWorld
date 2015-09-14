@@ -1,48 +1,45 @@
 // Rules for sizing the icon.
 .material-icons {
-    &.md-18 {
-        font-size: 18px;
-    }
-    &.md-24 {
-        font-size: 24px;
-    }
-    &.md-36 {
-        font-size: 36px;
-    }
-    &.md-48 {
-        font-size: 48px;
-    }
-    &.md-100 {
-        font-size: 100px;
-    }
-    &.md-dark {
-        color: rgba(0, 0, 0, 0.54);
-        &.md-inactive {
-            color: rgba(0, 0, 0, 0.26);
-        }
-    }
-    &.md-light {
-        color: rgba(255, 255, 255, 1);
-        &.md-inactive {
-            color: rgba(255, 255, 255, 0.3);
-        }
-    }
-    &.hide {
-        cursor: default;
-    }
-    &.star {
-        color: #FF9700;
-        cursor: default;
-    }
-    &.heart{
-    	color: #ff1e52;
-    	cursor: pointer;
-    }
-    &.plus-one{
-    	color: #00ff77;
-    	cursor:pointer;
-    }
-    &.blue{
-    	color: #6e5fdd;
-    }
+	&.md-18 {
+		font-size: 18px;
+	}
+	&.md-24 {
+		font-size: 24px;
+	}
+	&.md-36 {
+		font-size: 36px;
+	}
+	&.md-48 {
+		font-size: 48px;
+	}
+	&.md-100 {
+		font-size: 100px;
+	}
+	&.md-dark {
+		color: rgba(0, 0, 0, 0.54);
+		&.md-inactive {
+			color: rgba(0, 0, 0, 0.26);
+		}
+	}
+	&.md-light {
+		color: rgba(255, 255, 255, 1);
+		&.md-inactive {
+			color: rgba(255, 255, 255, 0.3);
+		}
+	}
+	&.hide {
+		cursor: default;
+	}
+	&.star {
+		color: #FF9700;
+		cursor: default;
+	}
+	&.heart {
+		color: #ff1e52;
+		cursor: pointer;
+		margin-right: 10px;
+	}
+	&.blue {
+		color: #6e5fdd;
+	}
 }

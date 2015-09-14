@@ -5,7 +5,7 @@
 	<div layout="row" layout-align="center center">
 		<div layout layout-align="center center">
 			<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
-				<md-icon md-font-set="material-icons" ng-class="{'star': vm.starred}">star</md-icon>
+				<md-icon md-font-set="material-icons" ng-class="{'heart': vm.starred}">favorite</md-icon>
 				{{vm.starred ? 'UNSTAR' : 'STAR'}} {{vm.stars.length}} </md-button>
 		</div>
 		<div layout layout-align="center center">

@@ -46,6 +46,7 @@ function GoodsController(
 	//vm.queued      = false;
 	vm.onClickQueue  = onClickQueue;
 
+	vm.showPhotoViewer = showPhotoViewer;
 	vm.onClickUser = onClickUser;
 	vm.onClickBack = () => $window.history.back();
 
@@ -280,6 +281,23 @@ function GoodsController(
 			goodsService.showQueuingBox(ev, vm.queuingList, goodData.gid);
 		} else {
 			$state.go('root.withSidenav.404');
+		}
+	}
+
+	function showPhotoViewer(ev) {
+		$mdDialog.show({
+			clickOutsideToClose: true,
+			templateUrl: 'goods/goods.photoViewer.html',
+			controllerAs: 'vm',
+			controller: popupController,
+			locals: {
+				photos: vm.goodData.photo_path
+			}
+		});
+		function popupController($mdDialog, photos) {
+			const vm = this;
+			vm.photos = photos;
+			console.log(vm.photos);
 		}
 	}
 }

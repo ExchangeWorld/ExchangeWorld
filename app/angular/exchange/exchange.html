@@ -1,7 +1,7 @@
 <md-content ng-show="vm.exchangeList.length === 0">
 	<div layout="column" layout-align="center center">
 		<h2 class="md-display-2">你沒有正在交換的物品喔！</h2>
-		<img class="info_container" src="../../images/emoji.png">
+		<img class="info_container" src="../../images/emoji.png" style="max-width:100%; max-height: 100%;">
 		<p class="md-title info_container">
 			立即在探索頁面尋找您喜歡的物品吧
 		</p>
@@ -22,15 +22,6 @@
 					<p class="md-caption">與 {{ exchange.with }}</p>
 				</div>
 			</div>
-			<!--<div class="event-btn second" layout="row" flex-sm="50">-->
-			<!--<div flex>-->
-			<!--<p class="md-body-1 note">六上歷史課本</p>-->
-			<!--<p class="md-body-1 note">超營養大雞排</p>-->
-			<!--</div>-->
-			<!--<div flex layout layout-align="end end">-->
-			<!--<p class="md-caption">with kosuke</p>-->
-			<!--</div>-->
-			<!--</div>-->
 		</div>
 		<div flex="50" flex-sm="100">
 			<!-- title -->
@@ -84,9 +75,9 @@
 				<ul class="discussion" scroll='vm.chatroom'>
 					<li ng-class="{true: 'other', false: 'self'}[chat.sender_uid !== {{ vm.myid }}]" ng-repeat="chat in vm.chatroom">
 						<div class="avatar" ng-show="(chat.sender_uid !== {{ vm.myid }})">
-							<div ng-show = "(chat.sender_uid !== {{ vm.myid }})" >
-								<img ng-show = "(chat.sender_uid === {{vm.exchange.goods[0].user.uid}})" ng-src  = "{{vm.exchange.goods[0].user.photo_path}}" />
-								<img ng-show = "(chat.sender_uid === {{vm.exchange.goods[1].user.uid}})" ng-src  = "{{vm.exchange.goods[1].user.photo_path}}" />
+							<div ng-show="(chat.sender_uid !== {{ vm.myid }})">
+								<img ng-show="(chat.sender_uid === {{vm.exchange.goods[0].user.uid}})" ng-src="{{vm.exchange.goods[0].user.photo_path}}" />
+								<img ng-show="(chat.sender_uid === {{vm.exchange.goods[1].user.uid}})" ng-src="{{vm.exchange.goods[1].user.photo_path}}" />
 							</div>
 							<md-tooltip ng-show="(chat.sender_uid === {{ vm.myid }})">
 								{{vm.exchange.goods[0].user.name}}

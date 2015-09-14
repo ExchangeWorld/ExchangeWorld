@@ -235,7 +235,13 @@ div.md-open-menu-container {
 	bottom: 0;
 	left: 0;
 	right: 0;
-
-	text-align:center; /* Align center inline elements */
+	text-align: center;
+	/* Align center inline elements */
 	font: 0/0 a;
+}
+
+.img-slider {
+	width: auto;
+	max-height: 250px;
+	max-width: 100%;
 }

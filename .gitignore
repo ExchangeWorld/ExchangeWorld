@@ -25,9 +25,7 @@ node_modules
 bower_components
 
 # dev files
-app/*
-gulp/*
-test/*
+
 *.tar.gz
 images_global
 

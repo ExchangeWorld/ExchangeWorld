@@ -297,10 +297,7 @@ function GoodsController(
 		function popupController($mdDialog, photos) {
 			const vm = this;
 			vm.photos = photos;
-			console.log(vm.photos);
-			vm.cancel = function(){ 
-				$mdDialog.cancel();
-			};
+			vm.cancel = ()=> $mdDialog.cancel();
 		}
 	}
 }

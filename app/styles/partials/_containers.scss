@@ -244,4 +244,13 @@ div.md-open-menu-container {
 	width: auto;
 	max-height: 100%;
 	max-width: 100%;
+	&.dialog {
+		max-height: 400px;
+	}
+}
+
+.viewer {
+	width: 600px;
+	height: auto;
+	background-color: #CFD8DC;
 }

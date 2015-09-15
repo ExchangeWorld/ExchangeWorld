@@ -298,6 +298,9 @@ function GoodsController(
 			const vm = this;
 			vm.photos = photos;
 			console.log(vm.photos);
+			vm.cancel = function(){ 
+				$mdDialog.cancel();
+			};
 		}
 	}
 }

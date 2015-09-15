@@ -1,6 +1,16 @@
 <md-dialog aria-label="Queue">
-	<md-dialog-content style="width:800px;height:900px; background-color: #999;">
-		<photoslider images="vm.photos" ></photoslider>
-	</md-dialog-content>
+	<md-toolbar>
+		<div flex class="md-toolbar-tools" layout layout-align="center center">
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="vm.cancel()">
+				<md-icon md-font-set="material-icons" aria-label="Close dialog">close</md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<div layout layout-align="center center">
+		<md-dialog-content class="viewer">
+			<photoslider images="vm.photos"></photoslider>
+		</md-dialog-content>
+	</div>
 </md-dialog>
 

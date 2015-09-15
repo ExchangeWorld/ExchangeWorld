@@ -254,3 +254,16 @@ div.md-open-menu-container {
 	height: auto;
 	background-color: #CFD8DC;
 }
+
+.img-goods {
+	max-height: 250px;
+	max-width: 100%;
+	height: auto;
+	cursor: pointer;
+}
+
+.img-null {
+	max-height: 100%;
+	max-width: 100%;
+	padding-top: 70px;
+}

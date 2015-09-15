@@ -242,11 +242,11 @@ div.md-open-menu-container {
 
 .img-slider {
 	// width: auto;
-	// max-height: 100%;
+	max-height: 100%;
 	max-width: 100%;
-	// &.dialog {
-	// 	max-height: 400px;
-	// }
+	&.dialog {
+		max-height: 400px;
+	}
 }
 
 .viewer {

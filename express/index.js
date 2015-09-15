@@ -1,6 +1,6 @@
 'use strict';
 
-var config       = require('../gulp/config');
+// var config       = require('../gulp/config');
 var http         = require('http');
 var https        = require('https');
 var ssl          = require('../ssl/ssl');
@@ -26,7 +26,7 @@ module.exports = function() {
 	// server.use(multer()); // for parsing multipart/form-data
 	server.use(cookieParser());
 	server.use(compression());
-	server.use(express.static(config.dist.root));
+	server.use(express.static('build'));
 
 	// server.all('*', function(req, res, next) {
 	// 	res.header('Access-Control-Allow-Origin', '*');
@@ -107,7 +107,7 @@ module.exports = function() {
 		}
 	});
 
-	s.listen(config.serverPort);
+	s.listen(80);
 
 	var ss = https.createServer(ssl.options, server);
 	ss.listen(443)

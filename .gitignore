@@ -24,9 +24,10 @@ build/Release
 node_modules
 bower_components
 
-# Build files
-build
-templates.js
+# dev files
+app/*
+gulp/*
+test/*
 *.tar.gz
 images_global
 

@@ -165,7 +165,7 @@ div.md-open-menu-container {
 
 @media screen and (min-width: $sm) {
 	.deckgrid[deckgrid]::before {
-		content: '1 .column.column-1-1';
+		content: '2 .column.column-1-2';
 		font-size: 0;
 		/* See https://github.com/akoenig/angular-deckgrid/issues/14#issuecomment-35728861 */
 		visibility: hidden;

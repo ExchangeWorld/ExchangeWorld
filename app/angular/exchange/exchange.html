@@ -12,7 +12,7 @@
 </md-content>
 <md-content ng-show="vm.exchangeList.length !== 0">
 	<div layout="row" layout-sm="column">
-		<div flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap>
+		<div flex="15" flex-sm="100" layout="column" layout-sm="row" layout-wrap style="background-color: #CFD8DC;">
 			<div class="event-btn " ng-class-odd="'first'" ng-class-even="'second'" layout="row" flex-sm="50" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
 				<div flex>
 					<p class="md-body-1 note">{{ exchange.details.goods[0].name }}</p>
@@ -23,7 +23,7 @@
 				</div>
 			</div>
 		</div>
-		<div flex="50" flex-sm="100">
+		<div offset="5" flex="50" flex-sm="100">
 			<!-- title -->
 			<div layout layout-align="center center">
 			</div>

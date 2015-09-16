@@ -32,9 +32,14 @@
 		<!-- Catogories Select -->
 		<div class="info_container for_input" layout="row" layout-align="start center">
 			<i class="material-icons">list</i>
-			<p hide-sm>物品類別</p>
-			<select class="md-button mdbtn-border" placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" required>
-			</select>
+			<!-- <select class="md-button mdbtn-border" placeholder="Catogories" ng-model="vm.goodsCategory" ng-options="cate as cate.label for cate in vm.availableCategory" required>
+			</select> -->
+			<md-input-container>
+				<label>物品類別</label>
+				<md-select ng-model="vm.goodsCategory" aria-label="good.cate">
+					<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}" required>{{cate.label}}</md-option>
+				</md-select>
+			</md-input-container>
 		</div>
 		<div layout="row" layout-align="center center" layout-wrap style="background: #EEEEEE;">
 			<div flex="45" layout layout-align="center center" class="md-whiteframe-z3" ng-repeat="preview in vm.imgEncoded" style="background-color: #F5F5F5;">

@@ -26,11 +26,11 @@ node_modules
 bower_components
 
 # dev files
-# app/*
+app/*
 gulp/*
 test/*
-*.tar.gz
 images_global
+templates.js
 
 #webstorm
 .idea

@@ -62,7 +62,7 @@ function PostController(postService, $scope, $state, auth, AvailableCategory, lo
 								owner_uid   : auth.currentUser().uid,
 							})
 							.then(function(data) {
-								logger.success('Your post successes :)', data, 'POST');
+								logger.success('已成功發佈一項物品^_^', data, 'POST');
 							});
 					});
 				$state.go('root.withSidenav.seek');

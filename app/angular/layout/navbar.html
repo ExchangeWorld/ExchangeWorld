@@ -88,7 +88,7 @@
 			<md-menu flex flex-sm="70" md-offset="-10 75">
 				<md-button ng-show="vm.isLoggedIn" ng-click="$mdOpenMenu()">
 					<div ng-show="vm.isLoggedIn" layout="row" layout-align="center center">
-						<img hide-sm style="max-height:25px; max-width:25px" ng-src="{{ vm.user.photo_path }}"></img>
+						<img hide-sm class="img-navbar" ng-src="{{ vm.user.photo_path }}"></img>
 						<span hide-sm>{{ vm.user.name }}</span>
 						<i class="material-icons">menu</i>
 					</div>

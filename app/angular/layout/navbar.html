@@ -34,7 +34,7 @@
 		<span flex-md="20"></span>
 		<!-- notification div -->
 		<div flex="10" flex-md="15" flex-sm offset="10" offset-md="5" offset-sm="5" layout="row" layout-align="center center">
-			<md-menu flex="30" flex-sm md-offset="-233 75" ng-show="vm.isLoggedIn">
+			<md-menu flex="30" flex-sm md-offset="-200 75" ng-show="vm.isLoggedIn">
 				<md-button ng-click="$mdOpenMenu()">
 					<md-icon class="material-icons">notifications</md-icon>
 					<p class="notification md-caption" ng-show="vm.unreadCount !== 0">{{ vm.unreadCount }}</p>
@@ -85,7 +85,7 @@
 		<!-- user menu div -->
 		<div flex="35" flex-md flex-sm layout="row" layout-align="center center">
 			<md-button ng-hide="vm.isLoggedIn" ng-click="vm.onLogin()">登入</md-button>
-			<md-menu flex flex-sm="70" md-offset="-10 75">
+			<md-menu flex flex-sm="70" md-offset="-10 72">
 				<md-button ng-show="vm.isLoggedIn" ng-click="$mdOpenMenu()">
 					<div ng-show="vm.isLoggedIn" layout="row" layout-align="center center">
 						<img hide-sm class="img-navbar" ng-src="{{ vm.user.photo_path }}"></img>

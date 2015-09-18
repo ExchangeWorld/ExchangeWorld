@@ -1,17 +1,17 @@
 'use strict';
 
-function GoodsOverlay(map, good, $state) {
+function GoodsOverlay(map, good, $state, $mdSidenav) {
 	this.element = null;
 	this.good = good;
 
-	this.onAdd = onAdd.bind(this, map, $state);
+	this.onAdd = onAdd.bind(this, map, $state, $mdSidenav);
 	this.draw = draw;
 	this.onRemove = onRemove;
 	this.setMap(map);
 	this.good.marker.setVisible(false);
 }
 
-function onAdd(map, $state) {
+function onAdd(map, $state, $mdSidenav) {
 
 	var div = document.createElement('div');
 	div.style.borderStyle        = 'double';
@@ -25,10 +25,11 @@ function onAdd(map, $state) {
 	div.style.cursor             = 'pointer';
 
 	this.element = div;
-	google.maps.event.addDomListener(div, 'mousedown', function(e) {
+	google.maps.event.addDomListener(div, 'mouseup', function(e) {
 		e.stopPropagation();
 		$state.go('root.withSidenav.goods', {gid : this.good.gid});
 		map.panTo(this.good.marker.getPosition());
+		$mdSidenav('left').toggle();
 	}.bind(this));
 
 	this.getPanes().overlayMouseTarget.appendChild(div);

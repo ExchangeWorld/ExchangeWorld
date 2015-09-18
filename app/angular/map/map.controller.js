@@ -10,14 +10,15 @@ mapModule.controller('MapCtrl', MapController);
 
 /** @ngInject */
 function MapController(
-		$scope,
-		$rootScope,
-		geolocation,
-		OpenLocationCode,
-		$localStorage,
-		$state,
-		$stateParams,
-		$timeout
+	$scope,
+	$rootScope,
+	geolocation,
+	OpenLocationCode,
+	$localStorage,
+	$state,
+	$stateParams,
+	$timeout,
+	$mdSidenav
 ) {
 
 	var map     = null;
@@ -158,9 +159,9 @@ function MapController(
 			});
 
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
-			good.marker.addListener('click', function() {
+			good.marker.addListener('mouseup', function() {
 				closeGoodsOverlay();
-				overlay = new GoodsOverlay(map, good, $state);
+				overlay = new GoodsOverlay(map, good, $state, $mdSidenav);
 			});
 
 			return good;
@@ -184,7 +185,10 @@ function MapController(
 			map.setZoom(parseInt($stateParams.z, 10));
 		}
 
-		if (_.isArray(goods) && goods.length) {
+		if (
+			_.isArray(goods) &&
+			goods.length
+		) {
 			goods.forEach(function(good) {
 				good.marker.setMap(null);
 			});
@@ -238,7 +242,7 @@ function MapController(
 
 	function openGoodsOverlay(e, gid) {
 		closeGoodsOverlay();
-		overlay = new GoodsOverlay(map, _findGood(gid), $state);
+		overlay = new GoodsOverlay(map, _findGood(gid), $state, $mdSidenav);
 	}
 
 	function closeGoodsOverlay() {
@@ -278,7 +282,7 @@ function MapController(
 					map: map,
 				});
 
-				google.maps.event.addListener(vm.marker, 'mouseup', function() {
+				google.maps.event.addListener(vm.marker, 'click', function(e) {
 					$rootScope.$broadcast('positionMarked', e.latLng);
 				});
 			}

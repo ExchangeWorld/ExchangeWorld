@@ -57,15 +57,16 @@ function NavbarController(
 		} else if(contentIndex === 3) {
 			if (!$localStorage.user) onLogin();
 			else  $state.go('root.oneCol.' + state[contentIndex], {uid: vm.user.uid});
-		} else if(contentIndex === 4) {
-			$state.go('root.withSidenav.' + state[contentIndex], {
-				uid: auth.currentUser().uid
-			});
 		} else {
-
 			const isFromOneCol = $state.includes("root.oneCol");
-			$state.go('root.withSidenav.' + state[contentIndex]);
 
+			if(contentIndex === 4) {
+				$state.go('root.withSidenav.' + state[contentIndex], {
+					uid: auth.currentUser().uid
+				});
+			} else {
+				$state.go('root.withSidenav.' + state[contentIndex]);
+			}
 			/**
 			 * When need to toggle the sidenav
 			 * 1. iff sidenav exists

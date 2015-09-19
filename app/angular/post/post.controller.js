@@ -34,7 +34,16 @@ function PostController(postService, $scope, $state, auth, AvailableCategory, lo
 					$state.reload();
 				});
 		} else {
-			if(!(vm.positionX && vm.positionY)) {
+			if(!vm.goodsCategory) {
+				$mdDialog.show(
+					$mdDialog.alert()
+						.parent(angular.element(document.querySelector('#popupContainer')))
+						.clickOutsideToClose(true)
+						.title('未選擇類別')
+						.content('請選擇物品的種類.')
+						.ok('Got it!')
+					);
+			} else if(!(vm.positionX && vm.positionY)) {
 				$mdDialog.show(
 					$mdDialog.alert()
 						.parent(angular.element(document.querySelector('#popupContainer')))

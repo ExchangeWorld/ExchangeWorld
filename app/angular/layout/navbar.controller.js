@@ -112,8 +112,10 @@ function NavbarController(
 			.then(function(data) {
 				console.log(data);
 			});
-		//console.log(notice);
 		$location.path(notice.trigger_url);
+		if(!$state.includes("root.oneCol") && !$mdSidenav('left').isOpen() ) {
+			$mdSidenav('left').toggle();
+		}
 	}
 
 	function onClickMessage(msg, ev) {

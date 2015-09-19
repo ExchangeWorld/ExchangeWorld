@@ -20,8 +20,10 @@ function SeekController(
 ) {
 	var vm                 = this;
 	vm.goods               = [];
+	vm.mapBound            = '';
 	vm.searchGoodsName     = $stateParams.name;
 	vm.searchGoodsCategory = $stateParams.cate || '';
+	vm.searchWithBound     = true;
 	vm.onSearch            = onSearch;
 	vm.availableCategory   = AvailableCategory;
 	$scope.onClickFavorite = onClickFavorite;
@@ -30,33 +32,35 @@ function SeekController(
 	$scope.onMouseOut      = onMouseOut;
 
 	////////////////
-
 	$scope.$on('boundChanged', function(e, bound) {
 		//console.log(bound.toUrlValue());
+		vm.mapBound = bound.toUrlValue();
 		onSearch({
 			name     : vm.searchGoodsName,
 			category : vm.searchGoodsCategory,
-			bound    : bound.toUrlValue(),
+			bound    : vm.mapBound,
 		});
 	});
 
 	function onSearch(filter) {
-		console.log(filter);
+		// console.log(filter);
+				
 		$state.go($state.current.name, {
-			name: filter.name,
-			cate: filter.cate,
+			name  : filter.name,
+			cate  : filter.cate,
+			bound : filter.bound,
 		});
 
 		seekService
 			.getSeek(filter)
 			.then(function(data) {
-				//console.log(data);
 				vm.goods = data;
 				$rootScope.$broadcast('goodsChanged', vm.goods);
 			})
 			.catch(function() {
 				vm.goods = [];
-			});
+			});			
+
 	}
 
 	function onMouseOver(gid) {

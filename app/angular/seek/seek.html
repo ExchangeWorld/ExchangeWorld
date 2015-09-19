@@ -1,7 +1,7 @@
 <md-toolbar class="md-primary md-hue-3 md-whiteframe-z2" style="height: 76px;">
 	<!-- search input bar & button -->
 	<div layout="row">
-		<md-input-container flex="55" flex-sm="45" class="md-primary" style="padding-left: 10px;">
+		<md-input-container flex="45" flex-sm="35" class="md-primary" style="padding-left: 10px;">
 			<label>Search</label>
 			<input ng-model="vm.searchGoodsName">
 			<!-- <md-tooltip md-direction="left">搜尋</md-tooltip> -->
@@ -12,7 +12,10 @@
 				<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>
 			</md-select>
 		</md-input-container>
-		<md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory})">
+		<md-switch flex ng-model="vm.searchWithBound" aria-label="searchWithBound" style="font-size: 10px;">
+			<md-tooltip>搜尋視界內物品/搜尋全世界</md-tooltip>視界內
+		</md-switch>
+		<md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory, bound:vm.searchWithBound ? vm.mapBound : ''})">
 			<md-icon hide-sm md-font-set="material-icons">search</md-icon><span class="ng-scope">搜索!</span>
 		</md-button>
 	</div>
@@ -33,8 +36,7 @@
 				<md-card-content style="padding: 0.8em 0;">
 					<div layout="row" layout-align="center center">
 						<div flex layout="column" layout-align="center center">
-							<div layout layout-align="center center"
-							style="margin-top:10px;">
+							<div layout layout-align="center center" style="margin-top:10px;">
 								<i ng-click="mother.onClickFavorite($event, card)" ng-show="card.favorited" class="material-icons heart">favorite</i>
 								<i ng-click="mother.onClickFavorite($event, card)" ng-hide="card.favorited" class="material-icons heart">favorite_border</i>
 								<img src="../../images/icon/icon-book.png" ng-show="card.category === 'Books'" style="height:24px; width:auto;">
@@ -56,4 +58,3 @@
 		</md-card>
 	</div>
 </md-content>
-

@@ -1,4 +1,4 @@
-<md-toolbar class="md-primary" style="overflow-x: hidden; overflow-y: hidden;">
+<md-toolbar ng-click="vm.closeMenu()" class="md-primary" style="overflow-x: hidden; overflow-y: hidden;">
 	<div class="md-toolbar-tools md-medium-tall navbar">
 		<span flex="20" flex-md="15" hide-sm hide-md>
 			<md-button ng-click="vm.onClick(0)" style="text-transform: none;" aria-label="logo">
@@ -35,7 +35,7 @@
 		<!-- notification div -->
 		<div flex="10" flex-md="15" flex-sm offset="10" offset-md="5" offset-sm="5" layout="row" layout-align="center center">
 			<md-menu flex="30" flex-sm md-offset="-200 78" ng-show="vm.isLoggedIn">
-				<md-button ng-click="$mdOpenMenu()">
+				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)">
 					<md-icon class="material-icons">notifications</md-icon>
 					<p class="notification md-caption" ng-show="vm.unreadCount !== 0">{{ vm.unreadCount }}</p>
 
@@ -86,7 +86,7 @@
 		<div flex="35" flex-md flex-sm layout="row" layout-align="center center">
 			<md-button ng-hide="vm.isLoggedIn" ng-click="vm.onLogin()">登入</md-button>
 			<md-menu flex flex-sm="70" md-offset="-10 72">
-				<md-button ng-show="vm.isLoggedIn" ng-click="$mdOpenMenu()">
+				<md-button ng-show="vm.isLoggedIn" ng-click="vm.openMenu($mdOpenMenu, $event)">
 					<div ng-show="vm.isLoggedIn" layout="row" layout-align="center center">
 						<img hide-sm class="img-navbar" ng-src="{{ vm.user.photo_path }}"></img>
 						<span hide-sm>{{ vm.user.name }}</span>

@@ -9,6 +9,7 @@ layoutModule.controller('NavbarController', NavbarController);
 /** @ngInject */
 function NavbarController(
 	$mdSidenav,
+	$mdMenu,
 	$state,
 	$localStorage,
 	$interval,
@@ -24,6 +25,8 @@ function NavbarController(
 	const state            = ['home', 'seek', 'post', 'exchange', 'profile'];
 	vm.stateIndex          = _.indexOf(state, $state.current.title);
 	vm.contentIs           = function(idx) { return vm.stateIndex === idx; };
+	vm.openMenu            = openMenu;
+	vm.closeMenu           = ()=> $mdMenu.hide();
 	vm.onClick             = onClick;
 	vm.onLogin             = onLogin;
 	vm.onLogout            = onLogout;
@@ -36,6 +39,8 @@ function NavbarController(
 
 	vm.messages       = [];
 	vm.onClickMessage = onClickMessage;
+
+
 
 	//////////////
 	activate();
@@ -50,6 +55,13 @@ function NavbarController(
 
 		updateNotification();
 	}
+
+	function openMenu($mdOpenMenu, e) {
+		vm.closeMenu();
+		e.preventDefault();
+		e.stopPropagation();
+		$mdOpenMenu(e);
+    }
 
 	function onClick(contentIndex) {
 		if (contentIndex === 0) {

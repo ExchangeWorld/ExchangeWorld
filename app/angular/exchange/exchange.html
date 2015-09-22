@@ -1,4 +1,4 @@
-<md-content ng-show="vm.exchangeList.length === 0">
+<md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length === 0">
 	<div layout="column" layout-align="center center">
 		<h2 class="md-display-2">你沒有正在交換的物品喔！</h2>
 		<img class="info_container" src="../../images/emoji.png" style="max-width:100%; max-height: 100%;">
@@ -10,8 +10,8 @@
 		</md-button>
 	</div>
 </md-content>
-<md-content ng-show="vm.exchangeList.length !== 0">
-	<div layout="row" layout-sm="column">
+<md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length !== 0">
+	<div layout="row" layout-sm="column" style="height:100%;">
 		<div flex="15" flex-sm="100" layout="column" layout-sm="row" layout-wrap style="background-color: #CFD8DC;">
 			<div class="event-btn " ng-class-odd="'first'" ng-class-even="'second'" layout="row" flex-sm="50" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
 				<div flex>
@@ -66,9 +66,9 @@
 			</div>
 		</div>
 		<!-- chat room -->
-		<div flex flex-sm layout="row">
+		<div flex flex-sm layout="row" style="height:100%">
 			<span flex="5" hide-sm></span>
-			<div flex>
+			<div flex style="height:100%">
 				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
 					<span>聊天</span>
 				</md-toolbar>

@@ -283,7 +283,9 @@ function GoodsController(
 		goodsService
 			.getUserGoods($localStorage.user.uid)
 			.then(function(myGoods) {
-				vm.myGoods = myGoods;
+				vm.myGoods = myGoods.filter(function(g) {
+					return (g.status !== 0 || g.deleted !== 0);
+				});
 			});
 	}
 

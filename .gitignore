@@ -37,3 +37,4 @@ templates.js
 
 # Database Authenication
 express/libs/DBLogin.js
+*.tar.gz

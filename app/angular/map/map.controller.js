@@ -37,10 +37,10 @@ function MapController(
 
 	/* After map is loaded */
 	function mapInitialized(e, evtMap) {
-		map                    = evtMap;
-		vm.findMyLocation      = getCurrentPosition;
-		vm.placeChanged        = placeChanged;
-		vm.zoomChanged         = zoomChanged;
+		map               = evtMap;
+		vm.findMyLocation = getCurrentPosition;
+		vm.placeChanged   = placeChanged;
+		vm.zoomChanged    = zoomChanged;
 		GoodsOverlay.prototype = new google.maps.OverlayView();
 
 
@@ -102,7 +102,7 @@ function MapController(
 		/* Manually trigger map resize event due to resize directive*/
 		google.maps.event.trigger(map, 'resize');
 
-		if(timer) {
+		if (timer) {
 			$timeout.cancel(timer);
 			timer = undefined;
 		}
@@ -173,7 +173,7 @@ function MapController(
 	 * (This event will not trigger after reloading page)
 	 */
 	function urlChanged(event, toState, toParams, fromState, fromParams) {
-		if(toParams.olc) {
+		if (toParams.olc) {
 			console.log(map.getCenter());
 			const coord = OpenLocationCode.decode(toParams.olc.replace(' ', '+'));
 			map.panTo({
@@ -293,4 +293,5 @@ function MapController(
 	function _findGood(gid) {
 		return _.where(goods, {gid : gid})[0];
 	}
+
 }

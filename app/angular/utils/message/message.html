@@ -12,7 +12,7 @@
 		<div flex flex-sm layout="row">
 			<!-- <span flex="5" hide-sm></span> -->
 			<div flex>
-				<ul class="discussion message" scroll='vm.history'>
+				<ul class="discussion message" scroll="vm.history">
 					<li ng-class="{true: 'self', false: 'other'}[history.sender_uid === {{ vm.msg.receiver_uid }}]" ng-repeat="history in vm.history">
 						<div class="avatar" ng-show="(history.sender_uid !== {{ vm.msg.receiver_uid }})">
 							<img ng-src="{{vm.msg.user.photo_path}}" />
@@ -38,4 +38,3 @@
 			</div>
 	</md-dialog-content>
 </md-dialog>
-

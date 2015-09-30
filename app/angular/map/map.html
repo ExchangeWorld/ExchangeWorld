@@ -1,4 +1,4 @@
-<div map-lazy-load="https://maps.googleapis.com/maps/api/js?&sensor=TRUE&signed_in=false&v=3.exp&libraries=places">
+<div map-lazy-load="https://maps.googleapis.com/maps/api/js?&sensor=TRUE&signed_in=false&v=3.exp&libraries=places" input-focus-checker="vm.autocompleteFoucsed">
 	<map
 		center="{{vm.coords}}"
 		zoom="{{vm.zoom}}"
@@ -16,10 +16,18 @@
 		map-type-control="false"
 		resize ng-style="resizeWithOffset(64)">
 
-		<custom-control position="LEFT_TOP" index="1">
-			<md-input-container class="md-warn" id="autocomplete">
+		<custom-control position="LEFT_TOP" >
+			<md-input-container class="md-warn" id="autocomplete" style="width: 250px; height: 30px">
 				<md-icon md-font-set="material-icons">room</md-icon>
-				<input places-auto-complete size="50" type="text" on-place-changed="vm.placeChanged()" aria-label="autocomplete">
+				<input
+					places-auto-complete
+					size="50"
+					type="text"
+					on-place-changed="vm.placeChanged()"
+					aria-label="autocomplete"
+					ng-model="vm.inputValue"
+					focus-checker="vm.inputValue"
+				>
 			</md-input-container>
 		</custom-control>
 

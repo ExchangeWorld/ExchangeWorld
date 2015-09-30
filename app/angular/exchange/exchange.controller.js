@@ -82,11 +82,7 @@ function ExchangeController(
 	}
 
 	function onClickComplete(ev) {
-		exchangeService
-			.showCompleteExchange(ev, vm.exchange, vm.myid)
-			.then(function() {
-				$state.go('root.withSidenav.seek');
-			});
+		exchangeService.showCompleteExchange(ev, vm.exchange, vm.myid);
 	}
 
 	function onClickDelete(ev, eid) {

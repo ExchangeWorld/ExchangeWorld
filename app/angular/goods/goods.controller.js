@@ -12,6 +12,7 @@ function GoodsController(
 	goodsService,
 	notification,
 	favorite,
+	logger,
 	$state,
 	$stateParams,
 	$scope,
@@ -20,7 +21,7 @@ function GoodsController(
 	$localStorage,
 	$location,
 	$mdDialog,
-	$window
+ 	$window
 ) {
 	const vm = this;
 
@@ -39,6 +40,7 @@ function GoodsController(
 	vm.starred     = false;
 	vm.edit        = false;
 	vm.onEdit      = onEdit;
+	vm.onDelete    = onDelete;
 	vm.onClickStar = onClickStar;
 
 	vm.myGoods       = [];
@@ -98,6 +100,26 @@ function GoodsController(
 				.catch(function(err){ console.log(err); });
 		}
 		vm.edit = !vm.edit;
+	}
+
+	function onDelete(gid) {
+		var confirm = $mdDialog.confirm()
+			.title('刪除物品')
+			.content('您確定要刪除這個物品嗎？')
+			.ariaLabel('Delete Goods')
+			.ok('確定')
+			.cancel('取消')
+			.targetEvent(gid);
+		if (confirm) {
+			$mdDialog.show(confirm).then(function() {
+				goodsService
+					.deleteGoods( gid )
+					.then(function(data) {
+						logger.success('刪除成功', data, 'DONE');
+						$state.go('root.withSidenav.seek');
+					});
+			});
+		}
 	}
 
 	// define onClick event on goods owner

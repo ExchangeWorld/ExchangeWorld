@@ -11,6 +11,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 		getGood,
 		getUserGoods,
 		editGood,
+		deleteGoods,
 		
 		getComment,
 		postComment,
@@ -92,6 +93,22 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 		return defer.promise;
 	}
 
+	function deleteGoods(gid) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('goods/delete')
+			.remove({ gid: gid })
+			.then(function(data) {
+				defer.resolve(data);
+			})
+			.catch(function(error) {
+				return exception.catcher('[Goods Service] deleteGoods error: ')(error);
+			});
+
+		return defer.promise;
+	}
+
 	function getComment(gid) {
 		const defer = $q.defer();
 
@@ -136,6 +153,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 			.catch(function(error) {
 				return exception.catcher('[Goods Service] deleteComment error: ')(error);
 			});
+
 		return defer.promise;
 	}
 

@@ -2,12 +2,14 @@
 	<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1">
 		<md-icon md-font-set="material-icons">undo</md-icon>Back
 	</md-button>
+	<div ng-show="vm.isMe" ng-click="vm.onDelete(vm.goodData.gid)" class="cross">X</div>
 	<div layout="row" layout-align="center center">
 		<div layout layout-align="center center">
 			<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
 				<md-icon md-font-set="material-icons" ng-class="{'heart': vm.starred}">favorite</md-icon>
 				{{vm.starred ? '已關注' : '關注'}} {{vm.stars.length}} </md-button>
 		</div>
+		
 		<div layout layout-align="center center">
 			<md-button ng-disabled="!vm.isLoggedIn" ng-show="!vm.isMe" ng-click="vm.onClickQueue($event, 'want_to_queue')">我要排！</md-button>
 			<md-button ng-disabled="!vm.isLoggedIn" ng-show="vm.isMe" ng-click="vm.onClickQueue($event, 'see_who_queue')">看誰排！</md-button>

@@ -32,7 +32,7 @@
 				<!-- first user item -->
 				<div layout="column" flex>
 					<div class="item exchange" layout layout-align="center center">
-						<img ng-src="{{vm.exchange.goods[0].photo_path[0]}}" />
+						<img ng-src="{{vm.exchange.goods[0].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.goods[0].gid)"/>
 					</div>
 					<div layout="column" style="height:250px; background-color:#B0BEC5;">
 						<p class="md-body-1 text-ex">{{ vm.exchange.goods[0].name}}</p>
@@ -52,7 +52,7 @@
 				<!-- second user item -->
 				<div layout="column" flex>
 					<div class="item exchange" layout layout-align="center center">
-						<img ng-src="{{vm.exchange.goods[1].photo_path[0]}}" />
+						<img ng-src="{{vm.exchange.goods[1].photo_path[0]}}"  ng-click="vm.onClickGoods(vm.exchange.goods[1].gid)"/>
 					</div>
 					<div layout="column" style="height:250px; background-color:#B0BEC5;">
 						<p class="md-body-1 text-ex">{{ vm.exchange.goods[1].name}}</p>

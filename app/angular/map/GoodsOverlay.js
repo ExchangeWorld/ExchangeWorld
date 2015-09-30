@@ -1,6 +1,6 @@
 'use strict';
 
-function GoodsOverlay(map, good, $state, $mdSidenav) {
+function GoodsOverlay(map, good, $state, $mdSidenav, callback) {
 	this.element = null;
 	this.good = good;
 
@@ -9,6 +9,8 @@ function GoodsOverlay(map, good, $state, $mdSidenav) {
 	this.onRemove = onRemove;
 	this.setMap(map);
 	this.good.marker.setVisible(false);
+
+	callback();
 }
 
 function onAdd(map, $state, $mdSidenav) {

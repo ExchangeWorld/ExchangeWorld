@@ -150,7 +150,7 @@ function MapController(
 				return good;
 			}
 
-			var icon = '../../images/mapMarker/' + good.category + '.png';
+			var icon = `../../images/mapMarker/${good.category}.png`;
 
 			good.marker = new google.maps.Marker({
 				position: new google.maps.LatLng(good.position_y, good.position_x),
@@ -160,8 +160,7 @@ function MapController(
 
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
 			good.marker.addListener('mouseup', function() {
-				closeGoodsOverlay();
-				overlay = new GoodsOverlay(map, good, $state, $mdSidenav);
+				overlay = new GoodsOverlay(map, good, $state, $mdSidenav, closeGoodsOverlay);
 			});
 
 			return good;
@@ -241,17 +240,16 @@ function MapController(
 	}
 
 	function openGoodsOverlay(e, gid) {
-		closeGoodsOverlay();
-		overlay = new GoodsOverlay(map, _findGood(gid), $state, $mdSidenav);
+		overlay = new GoodsOverlay(map, _findGood(gid), $state, $mdSidenav, closeGoodsOverlay);
 	}
 
 	function closeGoodsOverlay() {
 		if (overlay) {
 			overlay.onRemove();
-			overlay = undefined;
+			overlay.setMap(null);
+			overlay = null;
 		}
 	}
-
 
 	var isDragged = false;
 	function onMousedown() {

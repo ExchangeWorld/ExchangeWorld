@@ -202,7 +202,7 @@ function exchangeService(Restangular, $q, $mdDialog) {
 				myid: myid,
 			}
 		});
-		function onCompleteController($mdDialog, logger, exchangeService, thisExchange, myid) {
+		function onCompleteController($mdDialog, logger, exchangeService, thisExchange, myid, $state) {
 			const vm        = this;
 			vm.thisExchange = thisExchange;
 			vm.myuid        = parseInt(myid, 10);
@@ -236,6 +236,7 @@ function exchangeService(Restangular, $q, $mdDialog) {
 								//console.log(scores);
 								exchangeService.rating(vm.othersgid, scores);
 								logger.success('成功評價此交易', data, 'DONE');
+								$state.go('root.withSidenav.seek');
 							});
 					});
 			}

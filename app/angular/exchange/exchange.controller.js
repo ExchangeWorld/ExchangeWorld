@@ -22,6 +22,7 @@ function ExchangeController(
 	vm.exchange        = {};
 	vm.chatroom        = [];
 	vm.chatContent     = '';
+	vm.onClickGoods    = onClickGoods;
 	vm.onClickExchange = onClickExchange;
 	vm.onClickComplete = onClickComplete;
 	vm.onClickDelete   = onClickDelete;
@@ -54,6 +55,10 @@ function ExchangeController(
 		}
 	}
 
+	function onClickGoods(gid) {
+		$state.go('root.withSidenav.goods', { gid : gid });
+	}
+
 	function updateChat() {
 		exchangeService
 			.getChat(vm.exchange.eid, 100, 0)
@@ -77,7 +82,11 @@ function ExchangeController(
 	}
 
 	function onClickComplete(ev) {
-		exchangeService.showCompleteExchange(ev, vm.exchange, vm.myid);
+		exchangeService
+			.showCompleteExchange(ev, vm.exchange, vm.myid)
+			.then(function() {
+				$state.go('root.withSidenav.seek');
+			});
 	}
 
 	function onClickDelete(ev, eid) {
@@ -118,7 +127,7 @@ function ExchangeController(
 	function agreed() {
 		if(vm.exchange.goods1_gid === vm.myGoods.gid) {
 			if(vm.exchange.goods1_agree) vm.agreed = true;
-		} else if(vm.exchange.goods1_gid === vm.myGoods.gid){
+		} else if(vm.exchange.goods2_gid === vm.myGoods.gid){
 			if(vm.exchange.goods2_agree) vm.agreed = true;
 		} else {
 			vm.agreed = false;

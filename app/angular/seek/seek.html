@@ -34,9 +34,10 @@
 			<div ng-click="mother.onClickGoods(card.gid)" ng-mouseenter="mother.onMouseOver(card.gid)" ng-mouseleave="mother.onMouseOut()">
 				<photoslider images="card.photo_path" class="md-card-image"></photoslider>
 				<md-card-content style="padding: 0.8em 0;">
-					<div layout="row" layout-align="center center">
-						<div flex layout="column" layout-align="center center">
-							<div layout layout-align="center center" style="margin-top:10px;">
+					<div layout="column">
+						<h2 class="md-title">{{card.name}}</h2>
+						<div layout="row">
+							<div flex layout="row" layout-align="center center" style="margin-top:10px;">
 								<i ng-click="mother.onClickFavorite($event, card)" ng-show="card.favorited" class="material-icons heart">favorite</i>
 								<i ng-click="mother.onClickFavorite($event, card)" ng-hide="card.favorited" class="material-icons heart">favorite_border</i>
 								<img src="../../images/icon/icon-book.png" ng-show="card.category === 'Books'" style="height:24px; width:auto;">
@@ -45,12 +46,11 @@
 								<img src="../../images/icon/icon-phone.svg" ng-show="card.category === '3C'" style="height:24px; width:auto;">
 								<img src="../../images/icon/icon-other.svg" ng-show="card.category === 'Others'" style="height:24px; width:auto;">
 							</div>
-							<h2 class="md-title">{{card.name}}</h2>
+							<div flex layout layout-align="center center">
+								<img class="circle" src="" data-ng-src="{{card.user.photo_path}}">
+							</div>
 						</div>
 						<!-- <p>{{card.category}}</p> -->
-						<div flex layout layout-align="end end">
-							<img class="circle" src="" data-ng-src="{{card.user.photo_path}}">
-						</div>
 					</div>
 				</md-card-content>
 			</div>
@@ -58,3 +58,4 @@
 		</md-card>
 	</div>
 </md-content>
+

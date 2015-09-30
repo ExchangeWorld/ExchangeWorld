@@ -264,6 +264,10 @@ div.md-open-menu-container {
 	max-width: 100%;
 	height: auto;
 	cursor: pointer;
+	border: #fff solid 3px;
+	&:hover {
+		border: #5A95E1 double 3px;
+	}
 }
 
 .img-null {

@@ -191,7 +191,7 @@ function exchangeService(Restangular, $q, $mdDialog) {
 		return defer.promise;
 	}
 
-	function showCompleteExchange(ev, thisExchange, myid) {
+	function showCompleteExchange(ev, thisExchange, myid, callback) {
 		$mdDialog.show({
 			clickOutsideToClose: true,
 			templateUrl: 'exchange/exchange.complete.html',
@@ -236,7 +236,7 @@ function exchangeService(Restangular, $q, $mdDialog) {
 								//console.log(scores);
 								exchangeService.rating(vm.othersgid, scores);
 								logger.success('成功評價此交易', data, 'DONE');
-								$state.go('root.withSidenav.seek');
+								callback();
 							});
 					});
 			}

@@ -27,7 +27,7 @@ function ExchangeController(
 	vm.onClickComplete = onClickComplete;
 	vm.onClickDelete   = onClickDelete;
 	vm.onSubmitChat    = onSubmitChat;
-	vm.agreed          = true;
+	vm.agreed          = false;
 
 
 	////////////
@@ -43,7 +43,7 @@ function ExchangeController(
 						.getExchange(exchange.eid)
 						.then(function(data) {
 							//console.log(data);
-							vm.myGoods = (data.goods[0].owner_uid !== vm.myid) ? data.goods[0] : data.goods[1] ;
+							vm.myGoods = (data.goods[0].owner_uid === vm.myid) ? data.goods[0] : data.goods[1] ;
 							exchange.details = data;
 							exchange.with = (data.goods[0].owner_uid !== vm.myid)
 								? data.goods[0].user.name
@@ -51,6 +51,7 @@ function ExchangeController(
 						});
 				});
 				onClickExchange(vm.exchangeList[0].eid);
+				agreed();
 			}
 		}
 	}
@@ -82,7 +83,8 @@ function ExchangeController(
 	}
 
 	function onClickComplete(ev) {
-		exchangeService.showCompleteExchange(ev, vm.exchange, vm.myid);
+		exchangeService.showCompleteExchange(ev, vm.exchange, vm.myid, function(){ vm.agreed = true; });
+		//agreed();
 	}
 
 	function onClickDelete(ev, eid) {

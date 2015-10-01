@@ -64,7 +64,7 @@ function PostController(postService, $scope, $state, auth, AvailableCategory, lo
 							.sendNewPostInfo({
 								name        : vm.goodsName,
 								description : vm.goodsDescriptions,
-								category    : vm.goodsCategory.label,
+								category    : vm.goodsCategory,
 								position_x  : vm.positionX,
 								position_y  : vm.positionY,
 								photo_path  : JSON.stringify(data),

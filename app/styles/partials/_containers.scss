@@ -6,9 +6,7 @@ body {
 	margin: 0px;
 	padding: 0px;
 	overflow-x: hidden;
-	font-family: Arial, "文泉驛正黑", "WenQuanYi Zen Hei", 
-	"儷黑 Pro", "LiHei Pro", "微軟正黑體", "Microsoft JhengHei", 
-	"標楷體", DFKai-SB, sans-serif;
+	font-family: Arial, "文泉驛正黑", "WenQuanYi Zen Hei", "儷黑 Pro", "LiHei Pro", "微軟正黑體", "Microsoft JhengHei", "標楷體", DFKai-SB, sans-serif;
 }
 
 #container {
@@ -32,6 +30,10 @@ md-list-item {
 
 md-list {
 	padding: 0;
+}
+
+md-switch {
+	margin: 0px;
 }
 
 #autocomplete {
@@ -274,9 +276,12 @@ div.md-open-menu-container {
 }
 
 .img-null {
-	max-height: 100%;
-	max-width: 100%;
+	max-height: 90%;
+	max-width: 90%;
 	padding-top: 70px;
+	&.onseek {
+		padding-top: 0px;
+	}
 }
 
 .img-navbar {

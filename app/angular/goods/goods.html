@@ -31,7 +31,7 @@
 		</div>
 		<div flex offset="5" layout="column" ng-show="vm.edit && vm.isMe">
 			<md-input-container>
-				<input ng-model="vm.goodData.name">
+				<input ng-model="vm.goodData.name" aria-label="goodsname">
 			</md-input-container>
 			<md-input-container>
 				<md-select ng-model="vm.goodData.category" aria-label="cate">
@@ -39,7 +39,7 @@
 				</md-select>
 			</md-input-container>
 			<md-input-container>
-				<input ng-model="vm.goodData.description">
+				<input ng-model="vm.goodData.description" aria-label="desc">
 			</md-input-container>
 		</div>
 		<div flex="20" flex-sm="25" layout layout-align="center center">

@@ -10,11 +10,13 @@ layoutModule.controller('NavbarController', NavbarController);
 function NavbarController(
 	$mdSidenav,
 	$mdMenu,
+	$mdDialog,
 	$state,
 	$localStorage,
 	$interval,
 	$location,
 	$rootScope,
+	$window,
 	$q,
 	auth,
 	message,
@@ -27,6 +29,7 @@ function NavbarController(
 	vm.contentIs           = function(idx) { return vm.stateIndex === idx; };
 	vm.openMenu            = openMenu;
 	vm.closeMenu           = ()=> $mdMenu.hide();
+	vm.report              = report;
 	vm.onClick             = onClick;
 	vm.onLogin             = onLogin;
 	vm.onLogout            = onLogout;
@@ -161,6 +164,22 @@ function NavbarController(
 					vm.unreadCount = _.filter(vm.notifications.concat(vm.messages), {unread : true}).length;
 					if(vm.unreadCount) $rootScope.pageTitle = `(${vm.unreadCount}) ${AppSettings.appTitle}`;
 					else $rootScope.pageTitle = AppSettings.appTitle;
+				});
+		}
+	}
+	
+	function report() {
+		var confirm = $mdDialog.confirm()
+			.title('回報問題')
+			.content('<ul><li>有發現BUG嗎?</li><li>有什麼建議想跟我們說的嗎?</li><li>歡迎回報各種想法給我們吧!</li><ul>')
+			.ariaLabel('report')
+			.ok('確定')
+			.cancel('取消')
+		if (confirm) {
+			$mdDialog
+				.show(confirm)
+				.then(function() {
+					$window.open('https://goo.gl/csRLdh', '_blank');
 				});
 		}
 	}

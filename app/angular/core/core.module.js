@@ -9,6 +9,7 @@ require('angular-material');
 require('angular-ui-router');
 require('restangular');
 require('ngstorage');
+require('ngFx');
 require('../utils/photoSlider/photoSlider.module');
 require('../utils/exception/exception.module');
 require('../utils/fackbook/facebook.module');
@@ -27,6 +28,7 @@ const requires = [
 	'restangular',
 	'ngTouch',
 	'ngMaterial',
+	'ngFx',
 	'utils.photoSlider',
 	'utils.scroll',
 	'utils.facebook',

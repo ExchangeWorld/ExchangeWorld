@@ -20,7 +20,7 @@ module.exports = function() {
 	// log all requests to the console
 	if (process.env.NODE_ENV !== 'production') server.use(morgan('dev'));
 
-	//server.use(favicon(__dirname + '/' + config.images.dest + '/favicon.ico'));
+	server.use(favicon(__dirname + '/../build/images/favicon.ico'));
 	// server.use(bodyParser.json({ limit : '64mb' })); // for parsing application/json
 	// server.use(bodyParser.urlencoded({ limit : '64mb', extended : true })); // for parsing application/x-www-form-urlencoded
 	// server.use(multer()); // for parsing multipart/form-data

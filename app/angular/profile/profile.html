@@ -88,7 +88,7 @@
 					<img class="img-null" src="../../images/emoji_null.png">
 				</div>
 				<div layout="column">
-					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsPending" ng-click="vm.onClickGoods(goods.gid)">
+					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsPending" ng-click="vm.onClickGoods(goods.gid)" style="cursor:pointer;width:100%;">
 						<md-card-content layout="row" layout-sm="column">
 							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto;">
 								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
@@ -112,7 +112,7 @@
 					<img class="img-null" src="../../images/emoji_null.png">
 				</div>
 				<div layout="row" layout-sm="column" layout-align="center center" class="info_container for_input">
-					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsExchanged" ng-click="vm.onClickGoods(goods.gid)">
+					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsExchanged" ng-click="vm.onClickGoods(goods.gid)" style="cursor:pointer;width:100%;">
 						<md-card-content layout="row" layout-sm="column">
 							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto;">
 								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />

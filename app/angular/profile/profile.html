@@ -138,6 +138,30 @@
 				</div>
 			</md-content>
 		</md-tab>
+		<md-tab label="關注的物品">
+			<md-content layout-padding>
+				<div flex layout layout-align="center center" ng-show="vm.myStar.length === 0">
+					<img class="img-null" src="../../images/emoji_null.png">
+				</div>
+				<div layout="column">
+					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myStar" ng-click="vm.onClickGoods(goods.gid)" style="cursor:pointer;width:100%;">
+						<md-card-content layout="row" layout-sm="column">
+							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto;">
+								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
+							</div>
+							<div flex layout="column">
+								<div layout="row" layout-align="center start">
+									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
+								</div>
+								<div flex layout layout-align="center center">
+									<p>{{ goods.description }}</p>
+								</div>
+							</div>
+						</md-card-content>
+					</md-card>
+				</div>
+			</md-content>
+		</md-tab>
 	</md-tabs>
 </md-content>
 

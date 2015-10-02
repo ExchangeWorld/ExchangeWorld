@@ -64,7 +64,11 @@ function ProfileController(
 					favorite
 						.getMyFavorite($stateParams.uid)
 						.then(function(data) {
-							vm.myStar = data;
+							vm.myStar = data.map(function(g) {
+								if (_.isString(g.good.photo_path)) g.good.photo_path = JSON.parse(g.good.photo_path);
+								return g.good;
+							});
+							console.log(vm.myStar);
 						});
 				} else {
 					vm.isMe = false;

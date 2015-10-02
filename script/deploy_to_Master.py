@@ -21,7 +21,14 @@ str = subprocess.check_output(["git", "pull"])
 print '=:> ' + str
 
 
-print '\n[3] Change FB APP ID to Product one ...'
+print '\n[3] NPM update & install ...'
+str = subprocess.check_output(["npm", "update"])
+print '=:> ' + str
+str = subprocess.check_output(["npm", "install"])
+print '=:> ' + str
+
+
+print '\n[4] Change FB APP ID to Product one ...'
 str = subprocess.check_output(["cat", "../app/angular/core/config.js"])
 str = str.replace("// FacebookProvider.init('376506855853722')",
                   "FacebookProvider.init('376506855853722')")
@@ -33,17 +40,17 @@ toProduct.close()
 print '=:> Done\n'
 
 
-print '\n[4] Gulp build ...'
+print '\n[5] Gulp build ...'
 str = subprocess.check_output(["gulp", "build"])
 print '=:> ' + str
 
 
-print '\n[5] Reset FB APP ID to Develop one ...'
+print '\n[6] Reset FB APP ID to Develop one ...'
 str = subprocess.check_output(["git", "checkout", "--", "../app/angular/core/config.js"])
 print '=:> Done'
 
 
-print '\n[6] Copy built file to Master (File server) one...'
+print '\n[7] Copy built file to Master (File server) one...'
 subprocess.check_output(["rm", "-f", "../build/js/main.js.map"])
 subprocess.check_output(["cp", "-rf", "../build/css", "../../../ExchangeWorld/build"])
 subprocess.check_output(["cp", "-rf", "../build/js", "../../../ExchangeWorld/build"])
@@ -53,4 +60,4 @@ subprocess.check_output(["cp", "-f", "../build.tar.gz", "../../../ExchangeWorld"
 print '=:> Done'
 
 
-print '\n[7] Done!\n'
+print '\n[8] Done!\n'

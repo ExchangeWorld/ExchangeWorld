@@ -4,12 +4,23 @@ const postModule = require('./post.module');
 postModule.controller('PostController', PostController);
 
 /** @ngInject */
-function PostController(postService, $scope, $state, auth, AvailableCategory, logger, $localStorage, $mdDialog) {
+function PostController(
+	postService,
+	JIC,
+	$scope,
+	$state,
+	auth,
+	AvailableCategory,
+	logger,
+	$localStorage,
+	$mdDialog
+) {
 	var vm               = this;
 	vm.goodsName         = '';
 	vm.goodsDescriptions = '';
 	vm.goodsCategory     = '';
 	vm.imgEncoded        = [];
+	vm.imgCompressed     = [];
 	vm.onSubmit          = onSubmit;
 	vm.availableCategory = AvailableCategory;
 	$scope.$on('positionMarked', positionMarked);
@@ -54,12 +65,31 @@ function PostController(postService, $scope, $state, auth, AvailableCategory, lo
 					);
 			} else {
 				/**
-				 * First, upload photos and get photo_pathArray,
-				 * then send new post data to backend
+				 * 1. compress all img and put imgs to vm.imgCompressed.
+				 */
+				vm.imgCompressed = vm.imgEncoded.map(function(img, i) {
+					if(img.filesize/1000 < 1000) return img;// if img less than 1000 kb , no compression needs.
+
+					var quality    = 50;
+					var imgFormat  = img.filetype.replace(/image\//, '');
+					var compressed = JIC.compress(document.getElementById('img_'+i), quality, imgFormat);
+
+					return {
+						base64   : compressed.src,
+						filename : 'img_'+i,
+						filesize : img.filesize * (quality/100),
+						filetype : imgFormat,
+					};
+				});
+				/**
+				 * 2. upload photos(vm.imgCompressed) and get photo_pathArray,
 				 */
 				postService
-					.uploadImg(vm.imgEncoded)
+					.uploadImg(vm.imgCompressed)
 					.then(function(data){
+						/**
+						 * 3. send new post data to backend
+						 */
 						postService
 							.sendNewPostInfo({
 								name        : vm.goodsName,

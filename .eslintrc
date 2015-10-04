@@ -1,4 +1,20 @@
 {
+  "rules": {
+      "comma-dangle": 0,
+      "semi": [2, "always"],
+      "no-console": 1,
+      "no-unused-vars": [1, {"vars": "all", "args": "none"}],
+      "no-dupe-keys": 2,
+      "no-dupe-args": 2,
+      "radix": 1,
+
+      "camelcase": 1,
+      "one-var": [1,  {
+          "uninitialized": "always",
+          "initialized": "never"
+      }]
+  },
+
   "ecmaFeatures": {
     "arrowFunctions" : true,
     "blockBindings": true,
@@ -14,9 +30,7 @@
     "unicodeCodePointEscapes" : true
   },
   "parser" : "babel-eslint",
-  "rules" : {
-    "strict": 0
-  },
+  "extends": "eslint:recommended",
   "env" : {
     "browser" : true,
     "node" : true,

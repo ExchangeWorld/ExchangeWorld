@@ -102,9 +102,9 @@ function PostController(
 							})
 							.then(function(data) {
 								logger.success('已成功發佈一項物品^_^', data, 'POST');
+								$state.go('root.withSidenav.seek');
 							});
 					});
-				$state.go('root.withSidenav.seek');
 			}
 		}
 	}

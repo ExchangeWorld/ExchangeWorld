@@ -26,8 +26,10 @@ function MapController(
 	var overlay = null;
 	const vm    = this;
 
-	vm.coords          = $localStorage.position;
-	vm.zoom            = 14;
+	vm.coords = $localStorage.position
+		? [0, 0]
+		: [24.98918974905472, 121.57591535186772];
+	vm.zoom            = 16;
 	vm.draggableCursor = 'default';
 	vm.draggingCursor  = 'default';
 	vm.mapStyle        = require('./mapStyle.json');
@@ -88,6 +90,7 @@ function MapController(
 					lat : data.latitude,
 					lng : data.longitude
 				});
+				map.setZoom(vm.zoom);
 			});
 	}
 
@@ -173,7 +176,6 @@ function MapController(
 	 */
 	function urlChanged(event, toState, toParams, fromState, fromParams) {
 		if (toParams.olc) {
-			console.log(map.getCenter());
 			const coord = OpenLocationCode.decode(toParams.olc.replace(' ', '+'));
 			map.panTo({
 				lat : coord.latitudeCenter,

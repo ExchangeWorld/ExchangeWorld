@@ -27,7 +27,7 @@ function MapController(
 	const vm    = this;
 
 	vm.coords = $localStorage.position
-		? [0, 0]
+		? $localStorage.position
 		: [24.98918974905472, 121.57591535186772];
 	vm.zoom            = 16;
 	vm.draggableCursor = 'default';

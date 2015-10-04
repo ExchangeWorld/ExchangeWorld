@@ -1,9 +1,7 @@
 <md-content>
 	<div layout="row" class="info_container" layout-align="center center">
 		<!-- user avatar -->
-		<!-- <span flex="5"></span> -->
 		<div layout layout-align="center center" ng-style="{'background-image':'url({{ vm.profile.largePic }})','width':'170px' , 'height':'170px', 'background-repeat':'no-repeat', 'background-position':'center','border-radius':'50%','background-size':'contain'}">
-			<!-- <a href="#"><img class="circular profile" ng-src="{{ vm.profile.largePic }}" /></a> -->
 		</div>
 		<!-- user name & follow button -->
 		<div layout="column">
@@ -25,8 +23,6 @@
 				</div>
 			</div>
 			<div offset="10" layout="row" layout-align="center center" style="margin-top: 10px;">
-				<!-- <span flex="10"></span> -->
-				<!-- <md-button flex class="md-raised md-primary" ng-show="!vm.isMe" ng-disabled="!(vm.isLoggedIn && !vm.isFollowed)" ng-click="vm.onClickAddFollowing(vm.profile.uid)"> -->
 				<md-button flex class="md-raised md-primary" ng-show="!vm.isMe" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
 					<div ng-show="!vm.isFollowed">
 						<md-icon md-font-set="material-icons">person_add</md-icon>

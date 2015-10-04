@@ -7,16 +7,15 @@
 		<div layout layout-align="center center">
 			<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
 				<md-icon md-font-set="material-icons" ng-class="{'heart': vm.starred}">favorite</md-icon>
-				{{vm.starred ? '已關注' : '關注'}} {{vm.stars.length}} </md-button>
+				{{vm.starred ? '已關注' : '關注'}} {{vm.stars.length}}
+			</md-button>
 		</div>
 		<div layout layout-align="center center">
 			<md-button ng-disabled="!vm.isLoggedIn" ng-show="!vm.isMe" ng-click="vm.onClickQueue($event, 'want_to_queue')">我要排！</md-button>
 			<md-button ng-disabled="!vm.isLoggedIn" ng-show="vm.isMe" ng-click="vm.onClickQueue($event, 'see_who_queue')">看誰排！</md-button>
 		</div>
 	</div>
-	<!--<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(6)">我要排！ {{vm.queue.length}}</md-button>-->
 	<div flex="80" layout layout-align="center center">
-		<!--<photoslider images="vm.goodData.photo_path"></photoslider>-->
 		<img class="img-goods" ng-src="{{ vm.goodData.photo_path[0] }}" ng-click="vm.showPhotoViewer($event)">
 	</div>
 	<div class="info_container" layout="row">
@@ -52,7 +51,7 @@
 		</div>
 	</div>
 	<h3 class="md-subhead">Comments</h3>
-	<md-divider></md-divider>
+	<md-divider ng-show="vm.goodComments.length > 0"></md-divider>
 	<!-- comments -->
 	<div class="comments">
 		<div class="comment" ng-repeat="comment in vm.goodComments">
@@ -60,7 +59,6 @@
 			<div class="content" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
 				<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
 				<div class="metadata">
-					<!--<div class="date">{{ comment.timestamp| date:'MM/dd/yyyy @ h:mma' }}</div>-->
 					<div flex class="date">{{ comment.timestamp}}</div>
 				</div>
 				<div ng-show="comment.isMe && removeMode" ng-click="vm.onDeleteComment(comment.cid)" class="cross">X</div>
@@ -72,7 +70,6 @@
 		<form ng-submit="vm.onSubmitComment()">
 			<md-input-container>
 				<label>Write some here...</label>
-				<!--<textarea ng-model="vm.comment" columns="1"></textarea>-->
 				<input type="text" ng-model="vm.comment" name="text" />
 			</md-input-container>
 			<input type="submit" id="submit" value="Submit" ng-show="false" />

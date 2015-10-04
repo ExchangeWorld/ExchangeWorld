@@ -14,9 +14,7 @@
 			<md-button ng-disabled="!vm.isLoggedIn" ng-show="vm.isMe" ng-click="vm.onClickQueue($event, 'see_who_queue')">看誰排！</md-button>
 		</div>
 	</div>
-	<!--<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue(6)">我要排！ {{vm.queue.length}}</md-button>-->
 	<div flex="80" layout layout-align="center center">
-		<!--<photoslider images="vm.goodData.photo_path"></photoslider>-->
 		<img class="img-goods" ng-src="{{ vm.goodData.photo_path[0] }}" ng-click="vm.showPhotoViewer($event)">
 	</div>
 	<div class="info_container" layout="row">
@@ -52,7 +50,7 @@
 		</div>
 	</div>
 	<h3 class="md-subhead">Comments</h3>
-	<md-divider></md-divider>
+	<md-divider ng-show="vm.goodComments.length > 0"></md-divider>
 	<!-- comments -->
 	<div class="comments">
 		<div class="comment" ng-repeat="comment in vm.goodComments">

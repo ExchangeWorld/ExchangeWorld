@@ -21,7 +21,7 @@ function GoodsController(
 	$localStorage,
 	$location,
 	$mdDialog,
- 	$window
+	$window
 ) {
 	const vm = this;
 

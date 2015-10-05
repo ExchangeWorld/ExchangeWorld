@@ -6,7 +6,7 @@ const _             = require('lodash');
 followModule.service('followService', followService);
 
 /** @ngInject */
-function followService(Restangular, $q) {
+function followService(Restangular, $q, exception) {
 	var service = {
 		getFollow,
 	};

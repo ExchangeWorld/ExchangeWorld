@@ -300,7 +300,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 			}
 			function onCancel() {
 				$mdDialog.cancel();
-			};
+			}
 		}
 	}
 
@@ -344,7 +344,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 			}
 			function onCancel() {
 				$mdDialog.cancel();
-			};
+			}
 		}
 	}
 

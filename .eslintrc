@@ -8,7 +8,6 @@
       "no-dupe-args": 2,
       "radix": 1,
 
-      "camelcase": 1,
       "one-var": [1,  {
           "uninitialized": "always",
           "initialized": "never"

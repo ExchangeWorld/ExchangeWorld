@@ -1,5 +1,5 @@
 'use strict';
-
+const _           = require('lodash');
 const goodsModule = require('./goods.module');
 goodsModule.run(appRun);
 

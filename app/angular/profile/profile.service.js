@@ -6,7 +6,7 @@ const _             = require('lodash');
 profileModule.service('profileService', profileService);
 
 /** @ngInject */
-function profileService(Restangular, $q, facebookService) {
+function profileService(Restangular, $q, facebookService, exception) {
 	var service = {
 		getProfile,
 		editProfile,

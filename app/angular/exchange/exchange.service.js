@@ -6,7 +6,7 @@ const _              = require('lodash');
 exchangeModule.service('exchangeService', exchangeService);
 
 /** @ngInject */
-function exchangeService(Restangular, $q, $mdDialog) {
+function exchangeService(Restangular, $q, $mdDialog, exception) {
 	var service = {
 		getExchange,
 		getAllExchange,
@@ -242,7 +242,7 @@ function exchangeService(Restangular, $q, $mdDialog) {
 			}
 			function onCancel() {
 				$mdDialog.cancel();
-			};
+			}
 		}
 	
 	}

@@ -126,7 +126,7 @@ function MapController(
 	}
 
 	/**
-	 * TODO : Receive the goods from seek controller
+	 * Receive the goods from seek controller
 	 * Draw maker and overlay here.
 	 */
 	function goodsChanged(e, data) {

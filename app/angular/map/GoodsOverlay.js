@@ -25,15 +25,17 @@ function onAdd(map, $state, $mdSidenav) {
 	div.style.backgroundPosition = 'center';
 	div.style.backgroundRepeat   = 'no-repeat';
 	div.style.cursor             = 'pointer';
-
-	this.element = div;
-	google.maps.event.addDomListener(div, 'mouseup', function(e) {
+	google.maps.event.addDomListener(div, 'mousedown', function(e) {
 		e.stopPropagation();
-		$state.go('root.withSidenav.goods', {gid : this.good.gid});
+		setTimeout(function() {
+			$state.go('root.withSidenav.goods', {gid : this.good.gid});
+		}.bind(this), 200);
+
 		map.panTo(this.good.marker.getPosition());
 		$mdSidenav('left').toggle();
 	}.bind(this));
 
+	this.element = div;
 	this.getPanes().overlayMouseTarget.appendChild(div);
 }
 

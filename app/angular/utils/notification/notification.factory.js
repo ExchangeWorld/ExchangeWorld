@@ -35,15 +35,17 @@ function notification(Restangular, $q, exception, $localStorage) {
 	function postNotification(newNotice) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('notification')
-			.post(newNotice)
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[Notification Service] postNotification error: ')(error);
-			});
+		if(newNotice.sender_uid !== newNotice.receiver_uid) {
+			Restangular
+				.all('notification')
+				.post(newNotice)
+				.then(function(data) {
+					defer.resolve(data);
+				})
+				.catch(function(error) {
+					return exception.catcher('[Notification Service] postNotification error: ')(error);
+				});
+		}
 		return defer.promise;
 	}
 

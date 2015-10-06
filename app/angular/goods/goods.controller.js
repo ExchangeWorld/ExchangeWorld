@@ -186,8 +186,8 @@ function GoodsController(
 					receiver_uid : vm.goodData.owner_uid,
 					trigger_url  : $location.url(),
 					content      : '有人對你的物品留言',
-				})
-			.then(function(data){console.log(data);});
+				});
+			//.then(function(data){console.log(data);});
 		}
 	}
 

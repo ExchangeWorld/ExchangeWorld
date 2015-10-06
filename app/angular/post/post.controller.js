@@ -71,13 +71,13 @@ function PostController(
 					if(img.filesize/1000 < 1000) return img;// if img less than 1000 kb , no compression needs.
 
 					var quality    = 50;
-					var imgFormat  = img.filetype.replace(/image\//, '');
+					var imgFormat  = 'jpeg';
 					var compressed = JIC.compress(document.getElementById('img_'+i), quality, imgFormat);
 
 					return {
 						base64   : compressed.src,
 						filename : 'img_'+i,
-						filesize : img.filesize * (quality/100),
+						//filesize : img.filesize * (quality/100),
 						filetype : imgFormat,
 					};
 				});

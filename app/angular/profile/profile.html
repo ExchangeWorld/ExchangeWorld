@@ -55,23 +55,21 @@
 									<label>您想要的物品</label>
 									<textarea ng-model="vm.profile.wishlist" ng-disabled="vm.isReadOnly" style="color:#000;"></textarea>
 								</md-input-container>
-								<md-input-container>
-									<label>備註</label>
-									<textarea ng-model="vm.profile.note" ng-disabled="vm.isReadOnly"></textarea>
-								</md-input-container>
-								<div layout="row">
-									<span flex="70"></span>
-									<md-button class="fade" ng-hide="vm.isReadOnly" ng-click="vm.onClickSave()">完成</md-button>
-								</div>
+								<!--<md-input-container>-->
+									<!--<label>備註</label>-->
+									<!--<textarea ng-model="vm.profile.note" ng-disabled="vm.isReadOnly"></textarea>-->
+								<!--</md-input-container>-->
 							</div>
 						</form>
 					</div>
 					<!-- edit fab button -->
 					<span flex></span>
 					<div layout layout-align="center start">
-						<md-button class="md-fab md-primary md-hue-2" ng-show="vm.isMe && vm.isReadOnly" ng-click="vm.onClickEdit()">
-							<md-icon md-font-set="material-icons">edit</md-icon>
-							<md-tooltip>編輯願望清單</md-tooltip>
+						<md-button class="md-fab md-primary md-hue-2" ng-show="vm.isMe" ng-click="vm.onClickEdit()">
+							<md-icon md-font-set="material-icons" ng-show="vm.isMe && vm.isReadOnly">edit</md-icon>
+							<md-icon md-font-set="material-icons" ng-hide="vm.isReadOnly">done</md-icon>
+							<md-tooltip ng-show="vm.isMe && vm.isReadOnly">編輯願望清單</md-tooltip>
+							<md-tooltip ng-hide="vm.isReadOnly">完成</md-tooltip>
 						</md-button>
 					</div>
 					<span flex="5"></span>
@@ -86,14 +84,14 @@
 				<div layout="column" layout-align="center center">
 					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsPending" ng-click="vm.onClickGoods(goods.gid)" style="cursor:pointer;width:95%;">
 						<md-card-content layout="row" layout-sm="column">
-							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto;">
+							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; background-color:black; border-radius:10px;">
 								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
-							<div flex layout="column">
+							<div flex layout="column" >
 								<div layout="row" layout-align="center start">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
-								<div flex layout layout-align="center center">
+								<div flex layout style="white-space:pre-wrap; padding-left:15px;">
 									<p>{{ goods.description }}</p>
 								</div>
 							</div>
@@ -110,14 +108,14 @@
 				<div layout="column" layout-align="center center">
 					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsExchanged" ng-click="vm.onClickGoods(goods.gid)" style="cursor:pointer;width:95%;">
 						<md-card-content layout="row" layout-sm="column">
-							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto;">
+							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; background-color:black; border-radius:10px;">
 								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
-							<div flex layout="column">
+							<div flex layout="column" >
 								<div layout="row" layout-align="center start">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
-								<div flex layout layout-align="center center">
+								<div flex layout style="white-space:pre-wrap; padding-left:15px;">
 									<p>{{ goods.description }}</p>
 								</div>
 								<div layout="row" layout-align="center start">
@@ -142,14 +140,14 @@
 				<div layout="column" layout-align="center center">
 					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myStar" ng-click="vm.onClickGoods(goods.gid)" style="cursor:pointer;width:95%;">
 						<md-card-content layout="row" layout-sm="column">
-							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto;">
+							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; background-color:black; border-radius:10px;">
 								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
 							<div flex layout="column">
 								<div layout="row" layout-align="center start">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
-								<div flex layout layout-align="center center">
+								<div flex layout style="white-space:pre-wrap; padding-left:15px;">
 									<p>{{ goods.description }}</p>
 								</div>
 							</div>

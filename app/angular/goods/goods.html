@@ -25,14 +25,14 @@
 		</div>
 		<div flex offset="5" layout="column" layout-align="center center" ng-show="!vm.edit">
 			<h3 style="color:#3e4042">{{ vm.goodData.name }}</h3>
-			<p style="color:#7f8588;">
+			<div style="color:#7f8588;"  layout="row" layout-align="center center">
 				<img src="../../images/icon/icon-book.png" ng-show="vm.goodData.category === 'Books'" style="height:24px; width:auto;">
 				<img src="../../images/icon/icon-school.svg" ng-show="vm.goodData.category === 'Textbooks'" style="height:24px; width:auto;">
 				<img src="../../images/icon/icon-cloth.png" ng-show="vm.goodData.category === 'Clothes'" style="height:24px; width:auto;">
 				<img src="../../images/icon/icon-phone.svg" ng-show="vm.goodData.category === '3C'" style="height:24px; width:auto;">
 				<img src="../../images/icon/icon-other.svg" ng-show="vm.goodData.category === 'Others'" style="height:24px; width:auto;">
-				{{ vm.goodData.category }}
-			</p>
+				<span style="margin-left: 5px;">{{ vm.goodData.category }}</span>
+			</div>
 			<p style="color:#7f8588; white-space: pre-wrap; max-width: 100%;">{{ vm.goodData.description }}</p>
 		</div>
 		<div flex offset="5" layout="column" ng-show="vm.edit && vm.isMe">
@@ -45,7 +45,7 @@
 				</md-select>
 			</md-input-container>
 			<md-input-container>
-				<textarea type="string" ng-model="vm.goodData.description" columns="10" md-maxlength="100" required></textarea>
+				<textarea type="string" ng-model="vm.goodData.description" columns="10" md-maxlength="100" aria-label="desc"></textarea>
 			</md-input-container>
 		</div>
 		<div flex="20" flex-sm="25" layout layout-align="center center">

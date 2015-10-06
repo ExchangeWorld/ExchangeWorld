@@ -95,9 +95,11 @@ function GoodsController(
 			goodsService
 				.editGood(gid, vm.goodData.name, vm.goodData.category, vm.goodData.description)
 				.then(function(data) {
-					console.log(data);
+					logger.success('更新成功！', data, 'Edit');
 				})
-				.catch(function(err){ console.log(err); });
+				.catch(function(err) { 
+					logger.error('錯誤', err, 'Error');
+				});
 		}
 		vm.edit = !vm.edit;
 	}

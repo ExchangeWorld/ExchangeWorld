@@ -294,8 +294,9 @@ function GoodsController(
 	/**
 	 * user use a goods to queue the host goods
 	 */
-	function onClickQueue(ev, type) {
+	function onClickQueue(ev) {
 		const types = ['want_to_queue', 'see_who_queue'];
+		var type = vm.isMe ? 'see_who_queue' : 'want_to_queue';
 
 		if(type === types[0]) {
 			/**

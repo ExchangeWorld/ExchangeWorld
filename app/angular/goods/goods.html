@@ -11,8 +11,7 @@
 			</md-button>
 		</div>
 		<div layout layout-align="center center">
-			<md-button ng-disabled="!vm.isLoggedIn" ng-show="!vm.isMe" ng-click="vm.onClickQueue($event, 'want_to_queue')">我要排！</md-button>
-			<md-button ng-disabled="!vm.isLoggedIn" ng-show="vm.isMe" ng-click="vm.onClickQueue($event, 'see_who_queue')">看誰排！</md-button>
+			<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue($event)"> {{ vm.isMe ? '看誰排！' : '我要排！' }}</md-button>
 		</div>
 	</div>
 	<div flex="80" layout layout-align="center center">

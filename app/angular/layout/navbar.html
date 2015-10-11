@@ -9,9 +9,9 @@
 				</div>
 			</md-button>
 		</span>
-		<span flex="15" hide-md hide-sm></span>
+		<span flex="10" hide-md hide-sm></span>
 		<!-- seek and post button -->
-		<div flex="30" flex-md="45" flex-sm="50" layout="row" layout-align="center center">
+		<div flex="35" flex-md="40" flex-sm="40" layout="row" layout-align="center center">
 			<md-button flex flex-sm="15" ng-click="vm.onClick(1)" ng-class="{'active': vm.contentIs(1)}">
 				<div layout layout-align="center center">
 					<i class="material-icons">dashboard</i>
@@ -24,7 +24,7 @@
 					<span hide-md hide-sm>發佈</span>
 				</div>
 			</md-button>
-			<md-button flex flex-sm="15" ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">
+			<md-button flex flex-sm="15" hide-sm ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">
 				<div layout layout-align="center center">
 					<i class="material-icons">autorenew</i>
 					<span hide-md hide-sm>交換</span>
@@ -37,14 +37,37 @@
 				</div>
 			</md-button>
 		</div>
-		<span flex-md="20"></span>
+		<span flex-md="15"></span>
 		<!-- notification div -->
-		<div flex="10" flex-md="15" flex-sm offset="10" offset-md="5" offset-sm="5" layout="row" layout-align="center center">
-			<md-menu flex="30" flex-sm md-offset="-200 78" ng-show="vm.isLoggedIn">
+		<div flex="10" flex-md="20" flex-sm="30" offset="10" offset-md="5" offset-sm="10" layout="row" layout-align="center center">
+			<md-menu flex flex-sm md-offset="-200 78" ng-show="vm.isLoggedIn">
+				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)">
+					<md-icon class="material-icons">forum</md-icon>
+					<p class="notification md-caption" ng-show="vm.unreadCount !== 0">{{ vm.unreadCount }}</p>
+				</md-button>
+				<md-menu-content width="5" style="padding-bottom: 0px; max-width:400px;">
+					<md-menu-item style="min-height: 30px; height:30px">
+						<p class="md-body-1">訊息</p>
+					</md-menu-item>
+					<md-divider></md-divider>
+					<md-list>
+						<md-list-item ng-repeat="msg in vm.messages" ng-style="msg.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickMessage(msg, $event)">
+							<!-- user avatar -->
+							<img flex style="max-height:50px; max-width:50px;" ng-src="{{ msg.user.photo_path }}" />
+							<!-- messages text -->
+							<div offset="5" flex>
+								<p class="md-body-2 note">{{msg.content}}</p>
+								<p class="md-caption note" style="color: #BCBCBC;">{{ msg.timestamp }}</p>
+							</div>
+						</md-list-item>
+					</md-list>
+					<md-divider></md-divider>
+				</md-menu-content>
+			</md-menu>
+			<md-menu flex flex-sm flex-md md-offset="-200 78" ng-show="vm.isLoggedIn">
 				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)">
 					<md-icon class="material-icons">notifications</md-icon>
 					<p class="notification md-caption" ng-show="vm.unreadCount !== 0">{{ vm.unreadCount }}</p>
-
 				</md-button>
 				<md-menu-content width="5" style="padding-bottom: 0px; max-width:400px;">
 					<md-menu-item style="min-height: 30px; height:30px">
@@ -63,28 +86,6 @@
 							</div>
 						</md-list-item>
 					</md-list>
-					<!-- Message -->
-					<md-menu-item style="min-height: 30px; height:30px">
-						<p class="md-body-1">Message</p>
-					</md-menu-item>
-					<md-divider></md-divider>
-					<md-list>
-						<md-list-item ng-repeat="msg in vm.messages" ng-style="msg.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickMessage(msg, $event)">
-							<!-- user avatar -->
-							<img flex style="max-height:50px; max-width:50px;" ng-src="{{ msg.user.photo_path }}" />
-							<!-- messages text -->
-							<div offset="5" flex>
-								<p class="md-body-2 note">{{msg.content}}</p>
-								<p class="md-caption note" style="color: #BCBCBC;">{{ msg.timestamp }}</p>
-							</div>
-						</md-list-item>
-					</md-list>
-					<md-divider></md-divider>
-					<md-divider></md-divider>
-					<!-- See All text -->
-					<md-menu-item style="min-height: 30px; height:30px">
-						<p class="md-body-2">全部</p>
-					</md-menu-item>
 				</md-menu-content>
 			</md-menu>
 		</div>

@@ -1,7 +1,7 @@
 <md-content>
 	<div layout="row" class="info_container" layout-align="center center">
 		<!-- user avatar -->
-		<div layout layout-align="center center" ng-style="{'background-image':'url({{ vm.profile.largePic }})','width':'170px' , 'height':'170px', 'background-repeat':'no-repeat', 'background-position':'center','border-radius':'50%','background-size':'contain'}">
+		<div layout layout-align="center center" ng-style="{'background-image':'url({{ vm.profile.largePic }})','width':'150px' , 'height':'150px', 'background-repeat':'no-repeat', 'background-position':'center','border-radius':'50%','background-size':'contain'}">
 		</div>
 		<!-- user name & follow button -->
 		<div layout="column">
@@ -45,9 +45,9 @@
 	<!-- tabs for user -->
 	<md-tabs md-dynamic-height md-border-bottom md-center-tabs md-swipe-content>
 		<md-tab label="願望清單">
-			<md-content layout-padding style="margin-top: 10px">
+			<md-content layout-padding style="margin-top: 10px;">
 				<div layout="row">
-					<div flex="70" offset="5">
+					<div flex="65" offset="5">
 						<form name="userForm">
 							<div layout="column">
 								<p class="fade md-subhead text-ex edit" ng-hide="vm.isReadOnly">請於下方輸入您想要的物品</p>
@@ -91,7 +91,7 @@
 								<div layout="row" layout-align="center start">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
-								<div flex layout style="white-space:pre-wrap; padding-left:15px;">
+								<div flex layout layout-align="center center"style="white-space:pre-wrap; padding-left:15px;">
 									<p>{{ goods.description }}</p>
 								</div>
 							</div>
@@ -115,7 +115,7 @@
 								<div layout="row" layout-align="center start">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
-								<div flex layout style="white-space:pre-wrap; padding-left:15px;">
+								<div flex layout layout-align="center center" style="white-space:pre-wrap; padding-left:15px;">
 									<p>{{ goods.description }}</p>
 								</div>
 								<div layout="row" layout-align="center start">
@@ -147,7 +147,7 @@
 								<div layout="row" layout-align="center start">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
-								<div flex layout style="white-space:pre-wrap; padding-left:15px;">
+								<div flex layout layout-align="center center" style="white-space:pre-wrap; padding-left:15px;">
 									<p>{{ goods.description }}</p>
 								</div>
 							</div>

@@ -32,9 +32,9 @@
 			<div layout="row" class="info_container">
 				<span flex-sm="5"></span>
 				<!-- first user item -->
-				<div layout="column" flex>
+				<div layout="column" flex="30">
 					<div class="item exchange" layout layout-align="center center">
-						<img ng-src="{{vm.exchange.goods[0].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.goods[0].gid)" />
+						<img class="img-exchange" ng-src="{{vm.exchange.goods[0].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.goods[0].gid)" />
 					</div>
 					<div layout="column" style="height:250px; background-color:#B0BEC5;">
 						<p class="md-body-1 text-ex">{{ vm.exchange.goods[0].name}}</p>
@@ -52,9 +52,9 @@
 					<md-button ng-show="vm.agreed" disabled="true" class="md-accent md-hue-2">您已按過完成</md-button>
 				</div>
 				<!-- second user item -->
-				<div layout="column" flex>
+				<div layout="column" flex="30">
 					<div class="item exchange" layout layout-align="center center">
-						<img ng-src="{{vm.exchange.goods[1].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.goods[1].gid)" />
+						<img class="img-exchange" ng-src="{{vm.exchange.goods[1].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.goods[1].gid)" />
 					</div>
 					<div layout="column" style="height:250px; background-color:#B0BEC5;">
 						<p class="md-body-1 text-ex">{{ vm.exchange.goods[1].name}}</p>

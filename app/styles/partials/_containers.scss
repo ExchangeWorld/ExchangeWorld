@@ -36,7 +36,7 @@ md-switch {
 	margin: 0px;
 }
 
-.md-toolbar-tools{
+.md-toolbar-tools {
 	padding-left: 8px;
 }
 
@@ -127,7 +127,7 @@ md-switch {
 	}
 	&.exchange {
 		padding: 2px;
-		height: 220px;
+		height: 250px;
 	}
 }
 
@@ -292,4 +292,10 @@ div.md-open-menu-container {
 	max-height: 30px;
 	max-width: 30px;
 	margin-right: 10px;
+}
+
+.img-exchange {
+	max-width: 100%;
+	width: 100%;
+	height: auto;
 }

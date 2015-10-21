@@ -93,6 +93,10 @@ md-switch {
 	&.chat {
 		margin: 5px 0 10px 0;
 	}
+	&.profile {
+		margin-top: 40px;
+		margin-bottom: 60px;
+	}
 }
 
 .waterfall_container {
@@ -269,7 +273,7 @@ div.md-open-menu-container {
 }
 
 .img-goods {
-	max-height: 300px;
+	max-height: 350px;
 	max-width: 100%;
 	height: auto;
 	cursor: pointer;

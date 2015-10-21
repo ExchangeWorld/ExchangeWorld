@@ -7,9 +7,11 @@
 		<p class="md-title info_container">
 			立即在探索頁面尋找您喜歡的物品吧
 		</p>
-		<md-button class="md-raised md-accent" ng-click="vm.goSeek()">
-			<span style="color:#fff;">GO！！</span>
-		</md-button>
+		<div style="margin-top: 20px;">
+			<md-button class="md-raised md-accent" ng-click="vm.goSeek()">
+				<span style="color:#fff;">GO！！</span>
+			</md-button>
+		</div>
 	</div>
 </md-content>
 <md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length !== 0">

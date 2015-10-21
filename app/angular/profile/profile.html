@@ -1,11 +1,11 @@
 <md-content>
-	<div layout="row" class="info_container" layout-align="center center">
+	<div layout="row" class="info_container profile" layout-align="center center">
 		<!-- user avatar -->
 		<div layout layout-align="center center" ng-style="{'background-image':'url({{ vm.profile.largePic }})','width':'150px' , 'height':'150px', 'background-repeat':'no-repeat', 'background-position':'center','border-radius':'50%','background-size':'contain'}">
 		</div>
 		<!-- user name & follow button -->
-		<div layout="column">
-			<div layout="row" layout-sm="column">
+		<div flex="60" flex-sm="45" layout="column">
+			<div layout="column">
 				<div layout="column" layout-align="center center" class="note username">
 					<h4 class="md-headline" style="margin:8px 0;">{{ vm.profile.name }}</h4>
 					<div layout="row" layout-align="center center">
@@ -13,13 +13,15 @@
 						<a href="#"><span class="md-subhead">{{ vm.myStar.length }}</span></a>
 					</div>
 				</div>
-				<div layout="column" layout-align="center center" class="note profile">
-					<p class="md-title text-ex follow">追隨中</p>
-					<a ng-click="vm.onClickFollow(vm.profile.uid, 0)">{{ vm.profile.followings.length }}</a>
-				</div>
-				<div layout="column" layout-align="center center" class="note profile">
-					<p class="md-title text-ex follow">被追蹤</p>
-					<a ng-click="vm.onClickFollow(vm.profile.uid, 1)">{{ vm.followerCount }}</a>
+				<div layout="row" layout-sm="column" layout-align="center center">
+					<div layout="column" layout-align="center center" class="note profile">
+						<p class="md-title text-ex follow">追隨中</p>
+						<a ng-click="vm.onClickFollow(vm.profile.uid, 0)">{{ vm.profile.followings.length }}</a>
+					</div>
+					<div layout="column" layout-align="center center" class="note profile">
+						<p class="md-title text-ex follow">被追蹤</p>
+						<a ng-click="vm.onClickFollow(vm.profile.uid, 1)">{{ vm.followerCount }}</a>
+					</div>
 				</div>
 			</div>
 			<div offset="10" layout="row" layout-align="center center" style="margin-top: 10px;">
@@ -56,8 +58,8 @@
 									<textarea ng-model="vm.profile.wishlist" ng-disabled="vm.isReadOnly" style="color:#000;"></textarea>
 								</md-input-container>
 								<!--<md-input-container>-->
-									<!--<label>備註</label>-->
-									<!--<textarea ng-model="vm.profile.note" ng-disabled="vm.isReadOnly"></textarea>-->
+								<!--<label>備註</label>-->
+								<!--<textarea ng-model="vm.profile.note" ng-disabled="vm.isReadOnly"></textarea>-->
 								<!--</md-input-container>-->
 							</div>
 						</form>
@@ -87,11 +89,11 @@
 							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; background-color:black; border-radius:10px;">
 								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
-							<div flex layout="column" >
+							<div flex layout="column">
 								<div layout="row" layout-align="center start">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
-								<div flex layout layout-align="center center"style="white-space:pre-wrap; padding-left:15px;">
+								<div flex layout layout-align="center center" style="white-space:pre-wrap; padding-left:15px;">
 									<p>{{ goods.description }}</p>
 								</div>
 							</div>
@@ -111,7 +113,7 @@
 							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; background-color:black; border-radius:10px;">
 								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
-							<div flex layout="column" >
+							<div flex layout="column">
 								<div layout="row" layout-align="center start">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
@@ -158,3 +160,4 @@
 		</md-tab>
 	</md-tabs>
 </md-content>
+

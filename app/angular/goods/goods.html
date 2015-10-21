@@ -1,7 +1,9 @@
 <md-content layout-padding style="overflow-y: hidden;">
-	<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1">
-		<md-icon md-font-set="material-icons">undo</md-icon>Back
-	</md-button>
+	<div layout-padding layout-margin>
+		<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1">
+			<md-icon md-font-set="material-icons">undo</md-icon>Back
+		</md-button>
+	</div>
 	<div ng-show="vm.isMe" ng-click="vm.onDelete(vm.goodData.gid)" class="cross">X</div>
 	<div layout="row" layout-align="center center">
 		<div layout layout-align="center center">
@@ -24,7 +26,7 @@
 		</div>
 		<div flex offset="5" layout="column" layout-align="center center" ng-show="!vm.edit">
 			<h3 style="color:#3e4042">{{ vm.goodData.name }}</h3>
-			<div style="color:#7f8588;"  layout="row" layout-align="center center">
+			<div style="color:#7f8588;" layout="row" layout-align="center center">
 				<img src="../../images/icon/icon-book.png" ng-show="vm.goodData.category === 'Books'" style="height:24px; width:auto;">
 				<img src="../../images/icon/icon-school.svg" ng-show="vm.goodData.category === 'Textbooks'" style="height:24px; width:auto;">
 				<img src="../../images/icon/icon-cloth.png" ng-show="vm.goodData.category === 'Clothes'" style="height:24px; width:auto;">
@@ -56,30 +58,32 @@
 			</md-button>
 		</div>
 	</div>
-	<h3 class="md-subhead">Comments</h3>
-	<md-divider ng-show="vm.goodComments.length > 0"></md-divider>
-	<!-- comments -->
-	<div class="comments">
-		<div class="comment" ng-repeat="comment in vm.goodComments">
-			<a class="avatar" ng-click="vm.onClickUser(comment.user.uid)"> <img ng-src="{{ comment.user.photo_path }}"> </a>
-			<div class="content" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
-				<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
-				<div class="metadata">
-					<div flex class="date">{{ comment.timestamp}}</div>
-				</div>
-				<div ng-show="comment.isMe && removeMode" ng-click="vm.onDeleteComment(comment.cid)" class="cross">X</div>
-				<div class="text">
-					{{ comment.content }}
+	<div layout-padding>
+		<h3 class="md-subhead">Comments</h3>
+		<md-divider ng-show="vm.goodComments.length > 0"></md-divider>
+		<!-- comments -->
+		<div class="comments">
+			<div class="comment" ng-repeat="comment in vm.goodComments">
+				<a class="avatar" ng-click="vm.onClickUser(comment.user.uid)"> <img ng-src="{{ comment.user.photo_path }}"> </a>
+				<div class="content" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
+					<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
+					<div class="metadata">
+						<div flex class="date">{{ comment.timestamp}}</div>
+					</div>
+					<div ng-show="comment.isMe && removeMode" ng-click="vm.onDeleteComment(comment.cid)" class="cross">X</div>
+					<div class="text">
+						{{ comment.content }}
+					</div>
 				</div>
 			</div>
+			<form ng-submit="vm.onSubmitComment()">
+				<md-input-container>
+					<label>Write some here...</label>
+					<input type="text" ng-model="vm.comment" name="text" />
+				</md-input-container>
+				<input type="submit" id="submit" value="Submit" ng-show="false" />
+			</form>
 		</div>
-		<form ng-submit="vm.onSubmitComment()">
-			<md-input-container>
-				<label>Write some here...</label>
-				<input type="text" ng-model="vm.comment" name="text" />
-			</md-input-container>
-			<input type="submit" id="submit" value="Submit" ng-show="false" />
-		</form>
 	</div>
 </md-content>
 

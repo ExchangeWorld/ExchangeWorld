@@ -64,12 +64,12 @@ function MapController(
 		if ($stateParams.olc) {
 			const coord = OpenLocationCode.decode($stateParams.olc.replace(' ','+'));
 			vm.coords = [coord.latitudeCenter, coord.longitudeCenter];
-		} else if ($stateParams.hasOwnProperty('olc')) {
-			geolocation
-				.getLocation({maximumAge:60000, timeout:5000, enableHighAccuracy:true})
-				.then(function(data) {
-					$localStorage.position = vm.coords = [data.latitude, data.longitude];
-				});
+		// } else if ($stateParams.hasOwnProperty('olc')) {
+		// 	geolocation
+		// 		.getLocation({maximumAge:60000, timeout:5000, enableHighAccuracy:true})
+		// 		.then(function(data) {
+		// 			$localStorage.position = vm.coords = [data.latitude, data.longitude];
+		// 		});
 		}
 		if (!isNaN($stateParams.z)) {
 			vm.zoom = parseInt($stateParams.z, 10);

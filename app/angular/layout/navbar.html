@@ -51,6 +51,11 @@
 					</md-menu-item>
 					<md-divider></md-divider>
 					<md-list>
+						<md-list-item ng-show="vm.unreadMsg === 0">
+							<div flex>
+								<p class="md-body-2 note">No message now</p>
+							</div>
+						</md-list-item>
 						<md-list-item ng-repeat="msg in vm.messages" ng-style="msg.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickMessage(msg, $event)">
 							<!-- user avatar -->
 							<img flex style="max-height:50px; max-width:50px;" ng-src="{{ msg.user.photo_path }}" />
@@ -76,6 +81,11 @@
 					<md-divider></md-divider>
 					<!-- unread notification -->
 					<md-list>
+						<md-list-item ng-show="vm.unreadNotify === 0">
+							<div flex>
+								<p class="md-body-2 note">No notification now</p>
+							</div>
+						</md-list-item>
 						<md-list-item ng-repeat="notice in vm.notifications" ng-style="notice.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickNotification(notice)">
 							<!-- user avatar -->
 							<img flex style="max-height:50px; max-width:50px;" ng-src="{{ notice.user.photo_path }}" />

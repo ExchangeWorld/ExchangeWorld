@@ -8,7 +8,7 @@
 			</div>
 		</div>
 	</md-toolbar>
-	<md-content layout-padding layout-margin style="overflow-x: hidden; margin-top: 25px;">
+	<md-content layout-padding layout-margin style="overflow-x: hidden;">
 		<!-- toolbar -->
 		<!-- Item Name Input  -->
 		<md-input-container flex class="info_container for_input">
@@ -21,7 +21,7 @@
 			<textarea type="string" ng-model="vm.goodsDescriptions" columns="10" md-maxlength="100" required></textarea>
 		</md-input-container>
 		<!-- Catogories Select -->
-		<div layout="row" layout-align="start center">
+		<div class="info_container for_input" layout="row" layout-align="start center">
 			<i class="material-icons">list</i>
 			<md-input-container>
 				<label>物品類別</label>
@@ -31,7 +31,7 @@
 			</md-input-container>
 		</div>
 		<!-- Insert Photo -->
-		<div layout="row" layout-align="start center">
+		<div class="info_container for_input" layout="row" layout-align="start center">
 			<i class="material-icons">insert_photo</i>
 			<p hide-sm>加入多張相片</p>
 			<input ng-change="vm.onSelectFile()" class="trans" type='file' ng-model='vm.imgEncoded' base-sixty-four-input required accept="image/*" multiple/>

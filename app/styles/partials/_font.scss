@@ -78,7 +78,7 @@ a:hover {
 	filter: opacity(0.5);
 	&:hover {
 		/*opacity: 0.5;*/
-		-webkit-filter:brightness(150%);
+		-webkit-filter: brightness(150%);
 	}
 }
 
@@ -134,7 +134,12 @@ a:hover {
 	&.right {
 		margin: 2px 0 0 0;
 	}
-	&:hover{
+	&:hover {
 		text-decoration: underline;
 	}
+}
+
+.goods-name {
+	text-align: center;
+	margin-top: 6px;
 }

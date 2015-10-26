@@ -20,12 +20,16 @@
 		<img class="img-goods" ng-src="{{ vm.goodData.photo_path[0] }}" ng-click="vm.showPhotoViewer($event)">
 	</div>
 	<div class="info_container" layout="row">
-		<div flex="30" layout="column" layout-align="center center">
+		<div flex="40" layout="column" layout-align="center center" ng-show="!vm.isMe">
 			<img ng-click="vm.onClickUser(vm.goodData.user.uid)" class="circular goods with_border anchor" src="{{ vm.goodData.user.photo_path }}" />
 			<p class="md-tiltle" style="color:#7f8588;">{{ vm.goodData.user.name }}</p>
 		</div>
-		<div flex offset="5" layout="column" layout-align="center center" ng-show="!vm.edit">
-			<h3 style="color:#3e4042">{{ vm.goodData.name }}</h3>
+		<div flex="30" layout="column" layout-align="center center" ng-show="vm.isMe">
+			<img ng-click="vm.onClickUser(vm.goodData.user.uid)" class="circular goods with_border anchor" src="{{ vm.goodData.user.photo_path }}" />
+			<p class="md-tiltle" style="color:#7f8588;">{{ vm.goodData.user.name }}</p>
+		</div>
+		<div flex="50" flex-sm="45" layout="column" layout-align="center center" ng-show="!vm.edit">
+			<h3 class="goods-name" style="color:#3e4042">{{ vm.goodData.name }}</h3>
 			<div style="color:#7f8588;" layout="row" layout-align="center center">
 				<img src="../../images/icon/icon-book.png" ng-show="vm.goodData.category === 'Books'" style="height:24px; width:auto;">
 				<img src="../../images/icon/icon-school.svg" ng-show="vm.goodData.category === 'Textbooks'" style="height:24px; width:auto;">
@@ -36,7 +40,7 @@
 			</div>
 			<p style="color:#7f8588; white-space: pre-wrap; max-width: 100%;">{{ vm.goodData.description }}</p>
 		</div>
-		<div flex offset="5" layout="column" ng-show="vm.edit && vm.isMe">
+		<div flex="50" flex-sm="45" layout="column" layout-align="center center" ng-show="vm.edit && vm.isMe">
 			<md-input-container>
 				<input ng-model="vm.goodData.name" aria-label="goodsname">
 			</md-input-container>
@@ -49,8 +53,8 @@
 				<textarea type="string" ng-model="vm.goodData.description" columns="10" md-maxlength="100" aria-label="desc"></textarea>
 			</md-input-container>
 		</div>
-		<div flex="20" flex-sm="25" layout layout-align="center center">
-			<md-button class="md-fab md-primary" ng-show="vm.isMe" ng-click="vm.onEdit(vm.goodData.gid)">
+		<div flex="20" flex-sm="25" layout layout-align="center center" ng-show="vm.isMe">
+			<md-button class="md-fab md-primary" ng-click="vm.onEdit(vm.goodData.gid)">
 				<md-icon md-font-set="material-icons" ng-show="!vm.edit">edit</md-icon>
 				<md-icon md-font-set="material-icons" ng-show="vm.edit && vm.isMe">done</md-icon>
 				<md-tooltip ng-show="!vm.edit">編輯物品</md-tooltip>

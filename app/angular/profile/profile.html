@@ -48,7 +48,7 @@
 	<md-tabs md-dynamic-height md-border-bottom md-center-tabs md-swipe-content>
 		<md-tab label="願望清單">
 			<md-content layout-padding style="margin-top: 10px;">
-				<div layout="row" style="padding-top: 5%;">
+				<div layout="row" style="padding-top: 4%;">
 					<div flex="65" offset="5">
 						<form name="userForm">
 							<div layout="column">
@@ -84,7 +84,7 @@
 					<img class="img-null" src="../../images/emoji_null.png">
 				</div>
 				<div layout="column" layout-align="center center">
-					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsPending" ng-click="vm.onClickGoods(goods.gid)" style="cursor:pointer;width:95%;">
+					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myGoodsPending" ng-click="vm.onClickGoods(goods.gid)">
 						<md-card-content layout="row" layout-sm="column">
 							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; background-color:black; border-radius:10px;">
 								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
@@ -108,7 +108,7 @@
 					<img class="img-null" src="../../images/emoji_null.png">
 				</div>
 				<div layout="column" layout-align="center center">
-					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsExchanged" ng-click="vm.onClickGoods(goods.gid)" style="cursor:pointer;width:95%;">
+					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myGoodsExchanged" ng-click="vm.onClickGoods(goods.gid)">
 						<md-card-content layout="row" layout-sm="column">
 							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; background-color:black; border-radius:10px;">
 								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
@@ -140,7 +140,7 @@
 					<img class="img-null" src="../../images/emoji_null.png">
 				</div>
 				<div layout="column" layout-align="center center">
-					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myStar" ng-click="vm.onClickGoods(goods.gid)" style="cursor:pointer;width:95%;">
+					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myStar" ng-click="vm.onClickGoods(goods.gid)">
 						<md-card-content layout="row" layout-sm="column">
 							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; background-color:black; border-radius:10px;">
 								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />

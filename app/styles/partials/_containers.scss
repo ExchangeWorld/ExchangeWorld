@@ -94,8 +94,7 @@ md-switch {
 		margin: 5px 0 10px 0;
 	}
 	&.profile {
-		margin-top: 40px;
-		margin-bottom: 60px;
+		margin: 9% 0;
 	}
 }
 
@@ -111,7 +110,7 @@ md-switch {
 	//display: inline-block;
 	background: #F5F5F5;
 	padding: 0.7em;
-	margin: 0 0 1.5em;
+	margin: 5px;
 	box-sizing: border-box;
 	box-shadow: 2px 2px 4px 2px #ccc;
 	img {
@@ -161,7 +160,7 @@ div.md-open-menu-container {
 		text-align: center;
 	}
 	.column-1-1 {
-		width: 95%;
+		width: 97%;
 	}
 	.column-1-2 {
 		width: 47%;
@@ -302,4 +301,10 @@ div.md-open-menu-container {
 	max-width: 100%;
 	width: 100%;
 	height: auto;
+}
+
+.item-profile {
+	cursor: pointer;
+	width: 95%;
+	background: #F5F5F5;
 }

@@ -1,7 +1,6 @@
 'use strict';
 
 var config        = require('../config');
-//var connect       = require('gulp-connect');
 var gulp          = require('gulp');
 var gulpif        = require('gulp-if');
 var gutil         = require('gulp-util');
@@ -63,7 +62,6 @@ function buildScript(file) {
 			}))))
 			.pipe(gulpif(createSourcemap, sourcemaps.write('./')))
 			.pipe(gulp.dest(config.scripts.dest))
-			//.pipe(connect.reload());
 			.pipe(gulpif(browserSync.active, browserSync.reload({ stream: true, once: true })));
 	}
 

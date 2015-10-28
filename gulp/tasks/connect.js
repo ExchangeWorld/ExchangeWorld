@@ -8,7 +8,7 @@ var config  = require('../config');
 gulp.task('connect', function() {
 	connect.server({
 		root: 'build',
-		//livereload: true,
+		fallback: 'build/index.html',
 		port: config.serverPort
 	});
 });

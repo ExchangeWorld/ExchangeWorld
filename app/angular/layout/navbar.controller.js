@@ -37,7 +37,8 @@ function NavbarController(
 	vm.isLoggedIn          = Boolean($localStorage.user);
 
 	vm.notifications       = [];
-	vm.unreadCount         = '';
+	vm.unreadMsg           = '';
+	vm.unreadNotify        = '';
 	vm.onClickNotification = onClickNotification;
 
 	vm.messages       = [];
@@ -161,8 +162,11 @@ function NavbarController(
 						msg.timestamp = moment(msg.timestamp).calendar();
 					});
 
-					vm.unreadCount = _.filter(vm.notifications.concat(vm.messages), {unread : true}).length;
-					if(vm.unreadCount) $rootScope.pageTitle = `(${vm.unreadCount}) ${AppSettings.appTitle}`;
+					vm.unreadNotify = _.filter(vm.notifications, {unread : true}).length;
+					vm.unreadMsg = _.filter(vm.messages, {unread : true}).length;
+
+					var unread = vm.unreadMsg + vm.unreadNotify;
+					if(unread) $rootScope.pageTitle = `(${unread}) ${AppSettings.appTitle}`;
 					else $rootScope.pageTitle = AppSettings.appTitle;
 				});
 		}

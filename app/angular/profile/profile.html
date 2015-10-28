@@ -1,11 +1,11 @@
 <md-content>
-	<div layout="row" class="info_container" layout-align="center center">
+	<div layout="row" class="info_container profile" layout-align="center center">
 		<!-- user avatar -->
-		<div layout layout-align="center center" ng-style="{'background-image':'url({{ vm.profile.largePic }})','width':'170px' , 'height':'170px', 'background-repeat':'no-repeat', 'background-position':'center','border-radius':'50%','background-size':'contain'}">
+		<div layout layout-align="center center" ng-style="{'background-image':'url({{ vm.profile.largePic }})','width':'150px' , 'height':'150px', 'background-repeat':'no-repeat', 'background-position':'center','border-radius':'50%','background-size':'contain'}">
 		</div>
 		<!-- user name & follow button -->
-		<div layout="column">
-			<div layout="row" layout-sm="column">
+		<div flex="60" flex-sm="45" layout="column">
+			<div layout="column">
 				<div layout="column" layout-align="center center" class="note username">
 					<h4 class="md-headline" style="margin:8px 0;">{{ vm.profile.name }}</h4>
 					<div layout="row" layout-align="center center">
@@ -13,13 +13,15 @@
 						<a href="#"><span class="md-subhead">{{ vm.myStar.length }}</span></a>
 					</div>
 				</div>
-				<div layout="column" layout-align="center center" class="note profile">
-					<p class="md-title text-ex follow">追隨中</p>
-					<a ng-click="vm.onClickFollow(vm.profile.uid, 0)">{{ vm.profile.followings.length }}</a>
-				</div>
-				<div layout="column" layout-align="center center" class="note profile">
-					<p class="md-title text-ex follow">被追蹤</p>
-					<a ng-click="vm.onClickFollow(vm.profile.uid, 1)">{{ vm.followerCount }}</a>
+				<div layout="row" layout-sm="column" layout-align="center center">
+					<div layout="column" layout-align="center center" class="note profile">
+						<p class="md-title text-ex follow">追隨中</p>
+						<a ng-click="vm.onClickFollow(vm.profile.uid, 0)">{{ vm.profile.followings.length }}</a>
+					</div>
+					<div layout="column" layout-align="center center" class="note profile">
+						<p class="md-title text-ex follow">被追蹤</p>
+						<a ng-click="vm.onClickFollow(vm.profile.uid, 1)">{{ vm.followerCount }}</a>
+					</div>
 				</div>
 			</div>
 			<div offset="10" layout="row" layout-align="center center" style="margin-top: 10px;">
@@ -45,9 +47,9 @@
 	<!-- tabs for user -->
 	<md-tabs md-dynamic-height md-border-bottom md-center-tabs md-swipe-content>
 		<md-tab label="願望清單">
-			<md-content layout-padding style="margin-top: 10px">
-				<div layout="row">
-					<div flex="70" offset="5">
+			<md-content layout-padding style="margin-top: 10px;">
+				<div layout="row" style="padding-top: 4%;">
+					<div flex="65" offset="5">
 						<form name="userForm">
 							<div layout="column">
 								<p class="fade md-subhead text-ex edit" ng-hide="vm.isReadOnly">請於下方輸入您想要的物品</p>
@@ -55,23 +57,21 @@
 									<label>您想要的物品</label>
 									<textarea ng-model="vm.profile.wishlist" ng-disabled="vm.isReadOnly" style="color:#000;"></textarea>
 								</md-input-container>
-								<md-input-container>
-									<label>備註</label>
-									<textarea ng-model="vm.profile.note" ng-disabled="vm.isReadOnly"></textarea>
-								</md-input-container>
-								<div layout="row">
-									<span flex="70"></span>
-									<md-button class="fade" ng-hide="vm.isReadOnly" ng-click="vm.onClickSave()">完成</md-button>
-								</div>
+								<!--<md-input-container>-->
+								<!--<label>備註</label>-->
+								<!--<textarea ng-model="vm.profile.note" ng-disabled="vm.isReadOnly"></textarea>-->
+								<!--</md-input-container>-->
 							</div>
 						</form>
 					</div>
 					<!-- edit fab button -->
 					<span flex></span>
 					<div layout layout-align="center start">
-						<md-button class="md-fab md-primary md-hue-2" ng-show="vm.isMe && vm.isReadOnly" ng-click="vm.onClickEdit()">
-							<md-icon md-font-set="material-icons">edit</md-icon>
-							<md-tooltip>編輯願望清單</md-tooltip>
+						<md-button class="md-fab md-primary md-hue-2" ng-show="vm.isMe" ng-click="vm.onClickEdit()">
+							<md-icon md-font-set="material-icons" ng-show="vm.isMe && vm.isReadOnly">edit</md-icon>
+							<md-icon md-font-set="material-icons" ng-hide="vm.isReadOnly">done</md-icon>
+							<md-tooltip ng-show="vm.isMe && vm.isReadOnly">編輯願望清單</md-tooltip>
+							<md-tooltip ng-hide="vm.isReadOnly">完成</md-tooltip>
 						</md-button>
 					</div>
 					<span flex="5"></span>
@@ -83,17 +83,17 @@
 				<div flex layout layout-align="center center" ng-show="vm.myGoodsPending.length === 0">
 					<img class="img-null" src="../../images/emoji_null.png">
 				</div>
-				<div layout="column">
-					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsPending" ng-click="vm.onClickGoods(goods.gid)" style="cursor:pointer;width:100%;">
+				<div layout="column" layout-align="center center">
+					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myGoodsPending" ng-click="vm.onClickGoods(goods.gid)">
 						<md-card-content layout="row" layout-sm="column">
-							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto;">
+							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; background-color:black; border-radius:10px;">
 								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
 							<div flex layout="column">
 								<div layout="row" layout-align="center start">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
-								<div flex layout layout-align="center center">
+								<div flex layout layout-align="center center" style="white-space:pre-wrap; padding-left:15px;">
 									<p>{{ goods.description }}</p>
 								</div>
 							</div>
@@ -107,17 +107,17 @@
 				<div flex layout layout-align="center center" ng-show="vm.myGoodsExchanged.length === 0">
 					<img class="img-null" src="../../images/emoji_null.png">
 				</div>
-				<div layout="row" layout-sm="column" layout-align="center center" class="info_container for_input">
-					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myGoodsExchanged" ng-click="vm.onClickGoods(goods.gid)" style="cursor:pointer;width:100%;">
+				<div layout="column" layout-align="center center">
+					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myGoodsExchanged" ng-click="vm.onClickGoods(goods.gid)">
 						<md-card-content layout="row" layout-sm="column">
-							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto;">
+							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; background-color:black; border-radius:10px;">
 								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
 							<div flex layout="column">
 								<div layout="row" layout-align="center start">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
-								<div flex layout layout-align="center center">
+								<div flex layout layout-align="center center" style="white-space:pre-wrap; padding-left:15px;">
 									<p>{{ goods.description }}</p>
 								</div>
 								<div layout="row" layout-align="center start">
@@ -139,17 +139,17 @@
 				<div flex layout layout-align="center center" ng-show="vm.myStar.length === 0">
 					<img class="img-null" src="../../images/emoji_null.png">
 				</div>
-				<div layout="column">
-					<md-card class="md-whiteframe-z3" ng-repeat="goods in vm.myStar" ng-click="vm.onClickGoods(goods.gid)" style="cursor:pointer;width:100%;">
+				<div layout="column" layout-align="center center">
+					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myStar" ng-click="vm.onClickGoods(goods.gid)">
 						<md-card-content layout="row" layout-sm="column">
-							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto;">
+							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; background-color:black; border-radius:10px;">
 								<img ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
 							<div flex layout="column">
 								<div layout="row" layout-align="center start">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
-								<div flex layout layout-align="center center">
+								<div flex layout layout-align="center center" style="white-space:pre-wrap; padding-left:15px;">
 									<p>{{ goods.description }}</p>
 								</div>
 							</div>
@@ -160,3 +160,4 @@
 		</md-tab>
 	</md-tabs>
 </md-content>
+

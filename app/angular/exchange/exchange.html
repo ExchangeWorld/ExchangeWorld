@@ -1,13 +1,17 @@
 <md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length === 0">
-	<div layout="column" layout-align="center center">
-		<h2 class="md-display-2">你沒有正在交換的物品喔！</h2>
-		<img class="info_container" src="../../images/emoji.png" style="max-width:100%; max-height: 100%;">
+	<div layout="column" layout-align="center center" style="height:100%;">
+		<h2 class="md-display-2" style="margin:20px 0;">你沒有正在交換的物品喔！</h2>
+		<div layout layout-align="center center" style="height:50%; width:auto;">
+			<img src="../../images/emoji.png" style="max-width:100%; max-height: 100%; ">
+		</div>
 		<p class="md-title info_container">
 			立即在探索頁面尋找您喜歡的物品吧
 		</p>
-		<md-button class="md-raised md-accent" ng-click="vm.goSeek()">
-			<span style="color:#fff;">GO！！</span>
-		</md-button>
+		<div style="margin-top: 20px;">
+			<md-button class="md-raised md-accent" ng-click="vm.goSeek()">
+				<span style="color:#fff; font-weight: 800;">GO！！</span>
+			</md-button>
+		</div>
 	</div>
 </md-content>
 <md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length !== 0">
@@ -30,9 +34,9 @@
 			<div layout="row" class="info_container">
 				<span flex-sm="5"></span>
 				<!-- first user item -->
-				<div layout="column" flex>
+				<div layout="column" flex="30">
 					<div class="item exchange" layout layout-align="center center">
-						<img ng-src="{{vm.exchange.goods[0].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.goods[0].gid)"/>
+						<img class="img-exchange" ng-src="{{vm.exchange.goods[0].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.goods[0].gid)" />
 					</div>
 					<div layout="column" style="height:250px; background-color:#B0BEC5;">
 						<p class="md-body-1 text-ex">{{ vm.exchange.goods[0].name}}</p>
@@ -50,9 +54,9 @@
 					<md-button ng-show="vm.agreed" disabled="true" class="md-accent md-hue-2">您已按過完成</md-button>
 				</div>
 				<!-- second user item -->
-				<div layout="column" flex>
+				<div layout="column" flex="30">
 					<div class="item exchange" layout layout-align="center center">
-						<img ng-src="{{vm.exchange.goods[1].photo_path[0]}}"  ng-click="vm.onClickGoods(vm.exchange.goods[1].gid)"/>
+						<img class="img-exchange" ng-src="{{vm.exchange.goods[1].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.goods[1].gid)" />
 					</div>
 					<div layout="column" style="height:250px; background-color:#B0BEC5;">
 						<p class="md-body-1 text-ex">{{ vm.exchange.goods[1].name}}</p>

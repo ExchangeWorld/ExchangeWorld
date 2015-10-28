@@ -95,9 +95,11 @@ function GoodsController(
 			goodsService
 				.editGood(gid, vm.goodData.name, vm.goodData.category, vm.goodData.description)
 				.then(function(data) {
-					console.log(data);
+					logger.success('更新成功！', data, 'Edit');
 				})
-				.catch(function(err){ console.log(err); });
+				.catch(function(err) { 
+					logger.error('錯誤', err, 'Error');
+				});
 		}
 		vm.edit = !vm.edit;
 	}
@@ -186,8 +188,8 @@ function GoodsController(
 					receiver_uid : vm.goodData.owner_uid,
 					trigger_url  : $location.url(),
 					content      : '有人對你的物品留言',
-				})
-			.then(function(data){console.log(data);});
+				});
+			//.then(function(data){console.log(data);});
 		}
 	}
 
@@ -292,8 +294,9 @@ function GoodsController(
 	/**
 	 * user use a goods to queue the host goods
 	 */
-	function onClickQueue(ev, type) {
+	function onClickQueue(ev) {
 		const types = ['want_to_queue', 'see_who_queue'];
+		var type = vm.isMe ? 'see_who_queue' : 'want_to_queue';
 
 		if(type === types[0]) {
 			/**

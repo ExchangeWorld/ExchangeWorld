@@ -31,14 +31,13 @@
 	<div deckgrid class="deckgrid" source="vm.goods">
 		<md-card class="md-whiteframe-z3 item hvr-grow" style="cursor:pointer;">
 			<div ng-click="mother.onClickGoods(card.gid)" ng-mouseenter="mother.onMouseOver(card.gid)" ng-mouseleave="mother.onMouseOut()">
-				<h2 class="md-title" style="margin:0 auto;">{{card.name}}</h2>
+				<h2 class="md-title" style="margin:0 0 10px 0;">{{card.name}}</h2>
 				<photoslider images="card.photo_path" class="md-card-image"></photoslider>
 				<md-card-content style="padding: 0.8em 0;">
 					<div layout="column">
-						<div layout="row" style="margin-top:5px;">
-							<div flex layout="row" layout-align="center center" style="margin-top:10px;">
-								<i ng-click="mother.onClickFavorite($event, card)" ng-show="card.favorited" class="material-icons heart">favorite</i>
-								<i ng-click="mother.onClickFavorite($event, card)" ng-hide="card.favorited" class="material-icons heart">favorite_border</i>
+						<div layout="row" style="margin:5px 0;">
+							<div flex layout="row" layout-align="center center">
+								<i ng-click="mother.onClickFavorite($event, card)" class="material-icons heart">{{ card.favorited ? 'favorite' : 'favorite_border' }}</i>
 								<img src="../../images/icon/icon-book.png" ng-show="card.category === 'Books'" style="height:24px; width:auto;">
 								<img src="../../images/icon/icon-school.svg" ng-show="card.category === 'Textbooks'" style="height:24px; width:auto;">
 								<img src="../../images/icon/icon-cloth.png" ng-show="card.category === 'Clothes'" style="height:24px; width:auto;">

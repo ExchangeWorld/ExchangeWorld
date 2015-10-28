@@ -2,6 +2,7 @@
 
 const messageModule = require('./message.module');
 const _             = require('lodash');
+const moment        = require('moment');
 
 messageModule.factory('message', message);
 
@@ -52,7 +53,7 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 			})
 			.then(function(data) {
 				if (_.isArray(data)) {
-					console.log(data);
+					//console.log(data);
 					defer.resolve(data);
 				}
 			})
@@ -108,25 +109,35 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 }
 
 /** @ngInject */
-function DialogController(msg, callback, $mdDialog, logger, message) {
-	const vm   = this;
-	vm.msg     = msg;
-	vm.history = '';
-	vm.contents = '';
-	vm.cancel  = onCancel;
-	vm.submit  = onSubmit;
+function DialogController(msg, callback, $mdDialog, logger, message, $state) {
+	const vm       = this;
+	vm.msg         = msg;
+	vm.history     = '';
+	vm.contents    = '';
+	vm.onClickUser = onClickUser;
+	vm.cancel      = onCancel;
+	vm.submit      = onSubmit;
 	
 	activate();
 
-	//console.log(msg);
 	function activate() {
 		message
 			.getConversation(msg.sender_uid, msg.receiver_uid, 10, 0)
 			.then(function(data) {
 				vm.history = data.reverse();
+				vm.history.forEach(function(m) {
+					m.time = moment(m.timestamp).fromNow();
+				});
 				console.log(data);
 				//vm.content = '';
 			});
+	}
+
+	function onClickUser(uid) {
+		onCancel();
+		$state.go('root.withSidenav.profile', {
+			uid: uid
+		});
 	}
 
 	function onSubmit(msg_content) {

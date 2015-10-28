@@ -12,6 +12,7 @@ function ProfileController(
 	auth,
 	message,
 	notification,
+	logger,
 	$scope,
 	$state,
 	$stateParams,
@@ -33,8 +34,7 @@ function ProfileController(
 	vm.followerCount       = profile.followers.length;
 	vm.isFollowed          = false;
 	vm.isReadOnly          = true;
-	vm.onClickEdit         = function onClickEdit() { vm.isReadOnly = !vm.isReadOnly; };
-	vm.onClickSave         = onClickSave;
+	vm.onClickEdit         = onClickEdit;
 	vm.getNumber           = number => new Array(number);
 	vm.onClickGoods        = onClickGoods;
 
@@ -113,14 +113,18 @@ function ProfileController(
 		message.showMessagebox(ev, msg);
 	}
 
-	function onClickSave() {
+	function onClickEdit() {
+		if(!vm.isReadOnly) {
+			profileService
+				.editProfile(vm.profile)
+				.then(function(data) {
+					logger.success('更新成功', data, 'EDIT');
+				})
+				.catch(function(err) { 
+					logger.error('錯誤', err, 'Error');
+				});
+		}
 		vm.isReadOnly = !vm.isReadOnly;
-
-		profileService
-			.editProfile(vm.profile)
-			.then(function(data) {
-				console.log(data);
-			});
 	}
 
 	function onClickGoods(gid) {

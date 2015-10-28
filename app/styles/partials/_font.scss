@@ -35,6 +35,7 @@ a:hover {
 	margin: 2px;
 	&.profile {
 		margin: 5px;
+		padding-top: 5px;
 	}
 	&.username {
 		margin: 0 15px 0 25px;
@@ -77,7 +78,7 @@ a:hover {
 	filter: opacity(0.5);
 	&:hover {
 		/*opacity: 0.5;*/
-		-webkit-filter:brightness(150%);
+		-webkit-filter: brightness(150%);
 	}
 }
 
@@ -133,7 +134,12 @@ a:hover {
 	&.right {
 		margin: 2px 0 0 0;
 	}
-	&:hover{
+	&:hover {
 		text-decoration: underline;
 	}
+}
+
+.goods-name {
+	text-align: center;
+	margin-top: 6px;
 }

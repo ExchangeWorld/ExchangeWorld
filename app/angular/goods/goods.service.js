@@ -273,12 +273,13 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 				host_uid          : host_uid,
 			}
 		});
-		function QueueController($mdDialog, logger, myGoods, queuing_goods_gid, host_uid, notification) {
+		function QueueController($mdDialog, logger, myGoods, queuing_goods_gid, host_uid, notification, $state) {
 			const vm             = this;
 			vm.myGoods           = myGoods;
 			vm.queuing_goods_gid = queuing_goods_gid;
 			vm.confirm           = onConfirm;
 			vm.cancel            = onCancel;
+			vm.onClickGoods      = (gid)=> { $state.go('root.withSidenav.goods', {gid: gid}); };
 
 			function onConfirm(selected_gid) {
 				$mdDialog
@@ -315,12 +316,13 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 				host_goods_gid : host_goods_gid,
 			}
 		});
-		function QueuingController($mdDialog, logger, queuingGoods, host_goods_gid, $localStorage, notification) {
+		function QueuingController($mdDialog, logger, queuingGoods, host_goods_gid, $localStorage, notification, $state) {
 			const vm          = this;
 			vm.queuingGoods   = queuingGoods;
 			vm.host_goods_gid = host_goods_gid;
 			vm.confirm        = onConfirm;
 			vm.cancel         = onCancel;
+			vm.onClickGoods   = (gid)=> { $state.go('root.withSidenav.goods', {gid: gid}); };
 
 			function onConfirm(selected_goods) {
 				//console.log(JSON.parse(selected_goods));

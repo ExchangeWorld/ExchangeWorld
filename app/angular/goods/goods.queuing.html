@@ -18,9 +18,12 @@
 			<div layout layout-align="start center">
 				<div ng-show="vm.queuingGoods.length === 0">目前沒有正在排的物品</div>
 				<md-radio-group ng-model="queuing.group">
-					<md-radio-button ng-repeat="queuing in vm.queuingGoods" value="{{queuing.good}}">
-						<img ng-src="{{queuing.good.photo_path[0]}}" style="width:80px; height:80px;">
-					</md-radio-button>
+					<div ng-repeat="queuing in vm.queuingGoods">
+						<md-radio-button value="{{queuing.good}}">
+							<img ng-src="{{queuing.good.photo_path[0]}}" style="width:80px; height:80px;">
+						</md-radio-button>
+						<p>{{ queuing.good.name }} <a ng-click="vm.onClickGoods(queuing.good.gid)">看更多...</a></p>
+					</div>
 				</md-radio-group>
 			</div>
 		</md-dialog-content>

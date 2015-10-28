@@ -8,7 +8,7 @@ var fs 			= require('fs');
 
 gulp.task('zlib', function() {
 
-	return tar.pack('./', { entries: ['express', 'build'] })
+	return tar.pack('./', { entries: ['build'] })
 	.pipe(zlib.Gzip()) /* Compress the .tar file */
 	.pipe(fs.createWriteStream('build.tar.gz'));
 

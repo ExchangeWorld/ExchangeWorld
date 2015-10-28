@@ -130,7 +130,8 @@ md-switch {
 	}
 	&.exchange {
 		padding: 2px;
-		height: 250px;
+		height: 280px;
+		margin: 0 0 20px 0;
 	}
 }
 
@@ -298,8 +299,7 @@ div.md-open-menu-container {
 }
 
 .img-exchange {
-	max-width: 100%;
-	width: 100%;
+	width: 95%;
 	height: auto;
 }
 
@@ -307,4 +307,9 @@ div.md-open-menu-container {
 	cursor: pointer;
 	width: 95%;
 	background: #F5F5F5;
+}
+
+.sidebar-ex {
+	background-color: #CFD8DC;
+	margin-top: 20px;
 }

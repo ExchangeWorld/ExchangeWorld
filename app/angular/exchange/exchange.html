@@ -16,7 +16,7 @@
 </md-content>
 <md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length !== 0">
 	<div layout="row" layout-sm="column" style="height:100%;">
-		<div flex="15" flex-sm="100" layout="column" layout-sm="row" layout-wrap style="background-color: #CFD8DC;">
+		<div class="sidebar-ex" flex="15" flex-sm="100" layout="column" layout-sm="row" layout-wrap>
 			<div class="event-btn " ng-class-odd="'first'" ng-class-even="'second'" layout="row" flex-sm="50" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
 				<div flex>
 					<p class="md-body-1 note">{{ exchange.details.goods[0].name }}</p>
@@ -36,7 +36,7 @@
 				<!-- first user item -->
 				<div layout="column" flex="30">
 					<div class="item exchange" layout layout-align="center center">
-						<img class="img-exchange" ng-src="{{vm.exchange.goods[0].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.goods[0].gid)" />
+						<img class="img-exchange" src="http://ext.pimg.tw/ahuiliao/1399885467-1354590280.jpg?v=1399885468" />
 					</div>
 					<div layout="column" style="height:250px; background-color:#B0BEC5;">
 						<p class="md-body-1 text-ex">{{ vm.exchange.goods[0].name}}</p>
@@ -48,10 +48,10 @@
 				</div>
 				<!-- exchange icon -->
 				<div flex="30" layout="column" layout-align="center center">
-					<img src="../../images/icon(48-48).png" height="48" width="48">
-					<md-button ng-show="!vm.agreed" class="md-accent md-hue-2" ng-click="vm.onClickComplete($event)">COMPLETE !</md-button>
-					<md-button ng-show="!vm.agreed" ng-click="vm.onClickDelete($event, vm.exchange.eid)">我不爽換！</md-button>
-					<md-button ng-show="vm.agreed" disabled="true" class="md-accent md-hue-2">您已按過完成</md-button>
+					<img src="../../images/icon(48-48).png" style="margin:0 0 20px 0;">
+					<md-button ng-show="!vm.agreed" class="md-raised md-accent md-hue-1" ng-click="vm.onClickComplete($event)">確認交換 !</md-button>
+					<md-button ng-show="!vm.agreed" ng-click="vm.onClickDelete($event, vm.exchange.eid)">先不要換</md-button>
+					<md-button ng-show="vm.agreed" disabled="true" class="md-accent md-hue-2">已確認交換</md-button>
 				</div>
 				<!-- second user item -->
 				<div layout="column" flex="30">

@@ -51,9 +51,9 @@
 					</md-menu-item>
 					<md-divider></md-divider>
 					<md-list>
-						<md-list-item ng-show="vm.unreadMsg === 0">
+						<md-list-item ng-show="vm.messages.length === 0">
 							<div flex>
-								<p class="md-body-2 note">No message now</p>
+								<p class="md-body-2 note">目前沒有任何訊息</p>
 							</div>
 						</md-list-item>
 						<md-list-item ng-repeat="msg in vm.messages" ng-style="msg.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickMessage(msg, $event)">
@@ -81,9 +81,9 @@
 					<md-divider></md-divider>
 					<!-- unread notification -->
 					<md-list>
-						<md-list-item ng-show="vm.unreadNotify === 0">
+						<md-list-item ng-show="vm.notifications.length === 0">
 							<div flex>
-								<p class="md-body-2 note">No notification now</p>
+								<p class="md-body-2 note">目前沒有任何通知</p>
 							</div>
 						</md-list-item>
 						<md-list-item ng-repeat="notice in vm.notifications" ng-style="notice.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickNotification(notice)">

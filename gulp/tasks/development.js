@@ -5,10 +5,10 @@ var runSequence = require('run-sequence');
 
 gulp.task('dev', ['clean'], function(cb) {
 
-  cb = cb || function() {};
+	cb = cb || function() {};
 
-  global.isProd = false;
+	global.isProd = false;
 
-  runSequence(['styles', 'images', 'fonts', 'views', 'browserify'], 'watch', cb);
+	runSequence(['styles', 'images', 'fonts', 'views', 'browserify'], 'watch', cb);
 
 });

@@ -27,6 +27,7 @@ function SeekController(
 	vm.onSearch            = onSearch;
 	vm.availableCategory   = AvailableCategory;
 	$scope.onClickFavorite = onClickFavorite;
+	$scope.onClickUser     = onClickUser;
 	$scope.onClickGoods    = onClickGoods;
 	$scope.onMouseOver     = onMouseOver;
 	$scope.onMouseOut      = onMouseOut;
@@ -43,11 +44,14 @@ function SeekController(
 	});
 
 	function onSearch(filter) {
-		// console.log(filter);
-				
+		//console.log(filter);
+		if(vm.searchGoodsCategory === 'all') {
+			filter.category = '';
+		}
+
 		$state.go($state.current.name, {
 			name  : filter.name,
-			cate  : filter.cate,
+			cate  : filter.category,
 			bound : filter.bound,
 		});
 
@@ -59,7 +63,7 @@ function SeekController(
 			})
 			.catch(function() {
 				vm.goods = [];
-			});			
+			});
 
 	}
 
@@ -116,5 +120,14 @@ function SeekController(
 					});
 			}
 		}
+	}
+
+	function onClickUser(e, uid) {
+		e.preventDefault();
+		e.stopPropagation();
+		console.log(uid);
+		$state.go('root.withSidenav.profile', {
+			uid: uid
+		});
 	}
 }

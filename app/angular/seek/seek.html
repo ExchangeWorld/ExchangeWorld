@@ -8,7 +8,7 @@
 		<md-input-container flex>
 			<label>種類</label>
 			<md-select ng-model="vm.searchGoodsCategory" aria-label="cate">
-				<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>
+				<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.alias}}</md-option>
 			</md-select>
 		</md-input-container>
 		<md-switch flex="15" ng-model="vm.searchWithBound" aria-label="searchWithBound" style="font-size: 10px;">
@@ -45,7 +45,7 @@
 								<img src="../../images/icon/icon-other.svg" ng-show="card.category === 'Others'" style="height:24px; width:auto;">
 							</div>
 							<div flex layout layout-align="center center">
-								<img class="circle" data-ng-src="{{card.user.photo_path}}">
+								<img class="circle" data-ng-src="{{card.user.photo_path}}" ng-click="mother.onClickUser($event, card.user.uid)">
 							</div>
 						</div>
 					</div>

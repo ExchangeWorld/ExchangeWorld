@@ -78,7 +78,7 @@
 				</div>
 			</md-content>
 		</md-tab>
-		<md-tab label="等待交換">
+		<md-tab label="等待交換({{ vm.myGoodsPending.length }})">
 			<md-content layout-padding>
 				<div flex layout layout-align="center center" ng-show="vm.myGoodsPending.length === 0">
 					<img class="img-null" src="../../images/emoji_null.png">
@@ -102,7 +102,7 @@
 				</div>
 			</md-content>
 		</md-tab>
-		<md-tab label="已交換">
+		<md-tab label="已交換({{ vm.myGoodsExchanged.length }})">
 			<md-content layout-padding>
 				<div flex layout layout-align="center center" ng-show="vm.myGoodsExchanged.length === 0">
 					<img class="img-null" src="../../images/emoji_null.png">
@@ -134,7 +134,7 @@
 				</div>
 			</md-content>
 		</md-tab>
-		<md-tab label="關注的物品">
+		<md-tab label="關注的物品({{ vm.myStar.length }})">
 			<md-content layout-padding>
 				<div flex layout layout-align="center center" ng-show="vm.myStar.length === 0">
 					<img class="img-null" src="../../images/emoji_null.png">

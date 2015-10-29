@@ -9,23 +9,30 @@
 				</md-button>
 			</div>
 		</md-toolbar>
-		<md-dialog-content style="max-width:800px;max-height:910px; ">
+		<md-dialog-content style="max-width:500px;max-height:310px; ">
 			<div layout layout-align="start center">
-				<div ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西<br/>趕快去ＰＯ一些吧！</div>
-				<md-radio-group ng-model="queue.group">
+				<div ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西
+					<br/>趕快去ＰＯ一些吧！</div>
+				<md-radio-group ng-model="queue.group" layout-fill>
 					<div ng-repeat="goods in vm.myGoods">
-						<md-radio-button value="{{goods.gid}}">
-							<img ng-src="{{goods.photo_path[0]}}" class="img-queue">
-						</md-radio-button>
-						<p>{{ goods.name }} <a ng-click="vm.onClickGoods(goods.gid)">看更多...</a></p>
+						<div flex layout="row" layout-align="center center">
+							<div flex="60">
+								<md-radio-button value="{{goods.gid}}">
+									<img ng-src="{{goods.photo_path[0]}}" class="img-queue">
+								</md-radio-button>
+							</div>
+							<div flex="40" offset="5" layout layout-align="center center" style="text-align: center">
+								<a ng-click="vm.onClickGoods(goods.gid)">{{ goods.name }}</a>
+							</div>
+						</div>
 					</div>
 				</md-radio-group>
 			</div>
-			<div layout layout-align="center center">
+			<!-- <div layout layout-align="center center"> -->
 				<!--<p ng-show="queue.group">您選擇了-->
-					<!--<strong>{{queue.group}}</strong>-->
+				<!--<strong>{{queue.group}}</strong>-->
 				<!--</p>-->
-			</div>
+			<!-- </div> -->
 		</md-dialog-content>
 		<div class="md-actions" layout="row">
 			<span flex></span>

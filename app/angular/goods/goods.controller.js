@@ -337,25 +337,27 @@ function GoodsController(
 	function cropImg() {
 		var img = new Image();
 		img.crossOrigin = 'Anonymous';
-		img.src=vm.goodData.photo_path[0].replace('http://exwd.csie.org/', '');
+		img.src = vm.goodData.photo_path[0].replace('http://exwd.csie.org/', '');
 		//img.src = '../../images/img-home.png';
-		console.log(img);
 
 		img.onload = ()=> {
 			if(!img) return;
+			var canvas = document.getElementById('imgCanvas');
+			var ctx = canvas.getContext('2d');
+			var rwd_w = canvas.clientWidth - 20;
+			var rwd_h = 350;//canvas.clientHeight > 350 ? 350 : canvas.clientHeight;
+
 			smartcrop.crop(img, {
-				width: 500,
-				height: 500,
+				width: rwd_w,
+				height: rwd_h,
 				minScale: 1.0,
 				debug: true
 			}, (crop)=> {
-				console.log(crop);
-				var canvas = document.getElementById('imgCanvas');
-				var ctx = canvas.getContext('2d');
 				crop = crop.topCrop;
-				canvas.width = 500;
-				canvas.height = 500;
-				ctx.drawImage(img, crop.x, crop.y, crop.width, crop.height, 0, 0, 500, 500);
+				canvas.width = rwd_w;
+				canvas.height = rwd_h;
+				ctx.drawImage(img, crop.x, crop.y, crop.width, crop.height, 0, 0, rwd_w, rwd_h);
+				console.log(rwd_w, rwd_h);
 				console.log(crop.x, crop.y, crop.width, crop.height, 0, 0, 500, 500);
 			});
 		};

@@ -260,17 +260,15 @@ div.md-open-menu-container {
 
 .img-slider {
 	// width: auto;
-	max-height: 100%;
+	max-height: 400px;
 	max-width: 100%;
-	&.dialog {
-		max-height: 500px;
-	}
 }
 
 .viewer {
-	width: auto;
-	height: auto;
-	background-color: #CFD8DC;
+	width: 700px;
+	height: 400px;
+	background-color: #000;
+	overflow: hidden;
 }
 
 .img-home {

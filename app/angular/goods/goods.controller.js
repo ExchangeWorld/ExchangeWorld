@@ -3,6 +3,7 @@
 const goodsModule = require('./goods.module');
 const _           = require('lodash');
 const moment      = require('moment');
+
 goodsModule.controller('GoodsController', GoodsController);
 
 /** @ngInject */
@@ -88,6 +89,7 @@ function GoodsController(
 					vm.isLoggedIn = false;
 				}
 			});
+		goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
 	}
 
 	function onEdit(gid) {
@@ -95,6 +97,7 @@ function GoodsController(
 			goodsService
 				.editGood(gid, vm.goodData.name, vm.goodData.category, vm.goodData.description)
 				.then(function(data) {
+					goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
 					logger.success('更新成功！', data, 'Edit');
 				})
 				.catch(function(err) { 
@@ -327,4 +330,5 @@ function GoodsController(
 			vm.cancel = ()=> $mdDialog.cancel();
 		}
 	}
+
 }

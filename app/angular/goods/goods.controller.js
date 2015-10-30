@@ -336,9 +336,11 @@ function GoodsController(
 
 	function cropImg() {
 		var img = new Image();
-		img.crossOrigin = '';
-		//img.src=vm.goodData.photo_path[0];
-		img.src = '../../images/img-home.png';
+		img.crossOrigin = 'Anonymous';
+		img.src=vm.goodData.photo_path[0].replace('http://exwd.csie.org/', '');
+		//img.src = '../../images/img-home.png';
+		console.log(img);
+
 		img.onload = ()=> {
 			if(!img) return;
 			smartcrop.crop(img, {
@@ -353,8 +355,8 @@ function GoodsController(
 				crop = crop.topCrop;
 				canvas.width = 500;
 				canvas.height = 500;
-				ctx.drawImage(img, crop.x, crop.y, crop.width, crop.height);
-				//console.log(crop.x, crop.y, crop.width, crop.height);
+				ctx.drawImage(img, crop.x, crop.y, crop.width, crop.height, 0, 0, 500, 500);
+				console.log(crop.x, crop.y, crop.width, crop.height, 0, 0, 500, 500);
 			});
 		};
 	}

@@ -12,7 +12,7 @@ else:
 
 
 print '\n[1] Switching branch to develop ...'
-str = subprocess.check_output(["git", "checkout", "develop"])
+str = subprocess.check_output(["git", "checkout", "feature/smartcrop"])
 print '=:> ' + str
 
 

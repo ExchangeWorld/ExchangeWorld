@@ -49,7 +49,7 @@
 			</md-input-container>
 			<md-input-container>
 				<md-select ng-model="vm.goodData.category" aria-label="cate">
-					<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.label}}</md-option>
+					<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.alias}}</md-option>
 				</md-select>
 			</md-input-container>
 			<md-input-container>
@@ -66,7 +66,7 @@
 		</div>
 	</div>
 	<div layout-padding>
-		<h3 class="md-subhead">Comments</h3>
+		<h3 class="md-subhead">留言</h3>
 		<md-divider ng-show="vm.goodComments.length > 0"></md-divider>
 		<!-- comments -->
 		<div class="comments">
@@ -85,7 +85,7 @@
 			</div>
 			<form ng-submit="vm.onSubmitComment()">
 				<md-input-container>
-					<label>Write some here...</label>
+					<label>留言...</label>
 					<input type="text" ng-model="vm.comment" name="text" />
 				</md-input-container>
 				<input type="submit" id="submit" value="Submit" ng-show="false" />

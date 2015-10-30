@@ -110,6 +110,7 @@
     "ngstorage": "^0.3.6",
     "qs": "^5.0.0",
     "restangular": "^1.5.1",
+    "smartcrop": "0.0.1",
     "validator": "^4.0.2"
   }
 }

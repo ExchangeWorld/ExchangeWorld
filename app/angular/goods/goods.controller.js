@@ -3,6 +3,7 @@
 const goodsModule = require('./goods.module');
 const _           = require('lodash');
 const moment      = require('moment');
+const smartcrop   = require('smartcrop');
 
 goodsModule.controller('GoodsController', GoodsController);
 
@@ -69,6 +70,8 @@ function GoodsController(
 		$scope.$parent.$broadcast('mapMoveTo', goodData.gid);
 		updateComment();
 		updateStar();
+
+		cropImg();
 
 		/**
 		 * if is me, get the queue list on this goods
@@ -331,4 +334,28 @@ function GoodsController(
 		}
 	}
 
+	function cropImg() {
+		var img = new Image();
+		img.crossOrigin = '';
+		//img.src=vm.goodData.photo_path[0];
+		img.src = '../../images/img-home.png';
+		img.onload = ()=> {
+			if(!img) return;
+			smartcrop.crop(img, {
+				width: 500,
+				height: 500,
+				minScale: 1.0,
+				debug: true
+			}, (crop)=> {
+				console.log(crop);
+				var canvas = document.getElementById('imgCanvas');
+				var ctx = canvas.getContext('2d');
+				crop = crop.topCrop;
+				canvas.width = 500;
+				canvas.height = 500;
+				ctx.drawImage(img, crop.x, crop.y, crop.width, crop.height);
+				//console.log(crop.x, crop.y, crop.width, crop.height);
+			});
+		};
+	}
 }

@@ -42,4 +42,9 @@
 	&.blue {
 		color: #6e5fdd;
 	}
+	&.delete{
+		cursor: pointer;
+		color: rgba(0, 0, 0, 0.4);
+		padding-right: 16px;
+	}
 }

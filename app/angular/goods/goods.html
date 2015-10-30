@@ -4,7 +4,10 @@
 			<md-icon md-font-set="material-icons">undo</md-icon>Back
 		</md-button>
 	</div>
-	<div ng-show="vm.isMe" ng-click="vm.onDelete(vm.goodData.gid)" class="cross">X</div>
+	<!-- <div ng-show="vm.isMe" ng-click="vm.onDelete(vm.goodData.gid)" class="cross">X</div> -->
+	<div ng-show="vm.isMe" ng-click="vm.onDelete(vm.goodData.gid)" layout layout-align="end end">
+		<i class="material-icons delete">delete</i>
+	</div>
 	<div layout="row" layout-align="center center">
 		<div layout layout-align="center center">
 			<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">

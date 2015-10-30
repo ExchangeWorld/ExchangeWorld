@@ -19,8 +19,8 @@
 		<div class="sidebar-ex" flex="15" flex-sm="100" layout="column" layout-sm="row" layout-wrap>
 			<div class="event-btn " ng-class-odd="'first'" ng-class-even="'second'" layout="row" flex-sm="50" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
 				<div flex>
-					<p class="md-body-1 note">{{ exchange.details.goods[0].name }}</p>
-					<p class="md-body-1 note">{{ exchange.details.goods[1].name }}</p>
+					<p class="md-body-1 note" style="text-align: center">{{ exchange.details.goods[0].name }}</p>
+					<p class="md-body-1 note" style="text-align: center">{{ exchange.details.goods[1].name }}</p>
 				</div>
 				<div flex layout layout-align="end end">
 					<p class="md-caption">與 {{ exchange.with }}</p>

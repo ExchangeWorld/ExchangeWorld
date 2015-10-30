@@ -26,7 +26,7 @@
 			<md-input-container>
 				<label>物品類別</label>
 				<md-select ng-model="vm.goodsCategory" aria-label="good.cate">
-					<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}" required>{{cate.label}}</md-option>
+					<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}" required>{{cate.alias}}</md-option>
 				</md-select>
 			</md-input-container>
 		</div>

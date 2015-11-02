@@ -67,7 +67,7 @@
 		</div>
 	</div>
 	<div layout-padding>
-		<h3 class="md-subhead">留言</h3>
+		<!-- <h3 class="md-subhead" style="margin-left: 0.3em;">留言</h3> -->
 		<md-divider ng-show="vm.goodComments.length > 0"></md-divider>
 		<!-- comments -->
 		<div class="comments">
@@ -85,7 +85,7 @@
 				</div>
 			</div>
 			<form ng-submit="vm.onSubmitComment()">
-				<md-input-container>
+				<md-input-container style="padding-bottom: 15px;">
 					<label>留言...</label>
 					<input type="text" ng-model="vm.comment" name="text" />
 				</md-input-container>

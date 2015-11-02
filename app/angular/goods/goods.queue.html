@@ -10,8 +10,8 @@
 			</div>
 		</md-toolbar>
 		<md-dialog-content style="max-width:700px;max-height:410px;">
-			<div layout layout-align="start center">
-				<div ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西
+			<div layout="column" layout-align="start center">
+				<div flex ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西
 					<br/>趕快去ＰＯ一些吧！</div>
 				<md-radio-group ng-model="queue.group" layout-fill>
 					<div ng-repeat="goods in vm.myGoods">

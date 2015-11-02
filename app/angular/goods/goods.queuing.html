@@ -20,14 +20,23 @@
 				<md-radio-group ng-model="queuing.group">
 					<div ng-repeat="queuing in vm.queuingGoods">
 						<div flex layout="row" layout-align="center center">
-							<div flex="60">
-								<md-radio-button value="{{queuing.good}}">
-									<img ng-src="{{queuing.good.photo_path[0]}}" class="img-queue">
-								</md-radio-button>
-							</div>
-							<div flex="40" offset="5" layout layout-align="center center" style="text-align: center">
+							<md-radio-button value="{{queuing.good}}">
+							</md-radio-button>
+							<!-- <div flex="40" offset="5" layout layout-align="center center" style="text-align: center">
 								<a ng-click="vm.onClickGoods(queuing.good.gid)">{{ queuing.good.name }}</a>
-							</div>
+							</div> -->
+							<md-card class="md-whiteframe-z3 item-profile name-queue">
+								<md-card-content layout="row" layout-sm="column">
+									<div flex="55" flex-sm="100" layout layout-align="center center" style=" height:150px; width:auto; border-radius:10px;">
+										<img ng-src=ng-src="{{queuing.good.photo_path[0]}}" style="max-width: 100%; max-height:100%;" />
+									</div>
+									<div flex="45" flex-sm="100" layout="column" layout-align="center center">
+										<div layout="row">
+											<a ng-click="vm.onClickGoods(queuing.good.gid)">{{ queuing.good.name }}</a>
+										</div>
+									</div>
+								</md-card-content>
+							</md-card>
 						</div>
 					</div>
 				</md-radio-group>

@@ -36,8 +36,7 @@ function profileService(Restangular, $q, facebookService, exception) {
 							defer.resolve(data);
 						}
 					});
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[Profiles Service] getProfile error: ')(error);
 			});
 		return defer.promise;
@@ -105,8 +104,7 @@ function profileService(Restangular, $q, facebookService, exception) {
 					console.log(data);
 					defer.resolve(data);
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[profile Service] getProfile error: ')(error);
 			});
 		return defer.promise;

@@ -27,8 +27,7 @@ function favorite(Restangular, $q, exception, $localStorage, $mdDialog) {
 				} else {
 					defer.reject(data);
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[favorite Service] getFavorites error: ')(error);
 			});
 		return defer.promise;
@@ -46,8 +45,7 @@ function favorite(Restangular, $q, exception, $localStorage, $mdDialog) {
 				if (_.isArray(data)) {
 					defer.resolve(data);
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[favorite Service] getMyFavorite error: ')(error);
 			});
 		return defer.promise;

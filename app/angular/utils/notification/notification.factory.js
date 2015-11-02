@@ -25,8 +25,7 @@ function notification(Restangular, $q, exception, $localStorage) {
 				if (_.isArray(data)) {
 					defer.resolve(data);
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[notification Service] getNotification error: ')(error);
 			});
 		return defer.promise;

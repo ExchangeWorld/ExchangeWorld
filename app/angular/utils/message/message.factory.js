@@ -31,8 +31,7 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 				if (_.isArray(data)) {
 					defer.resolve(data);
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[message Service] getMessage error: ')(error);
 			});
 		return defer.promise;
@@ -56,8 +55,7 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 					//console.log(data);
 					defer.resolve(data);
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[message Service] getConversation error: ')(error);
 			});
 		return defer.promise;

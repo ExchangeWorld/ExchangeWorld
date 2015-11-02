@@ -6,7 +6,7 @@ const _          = require('lodash');
 seekModule.factory('seekService', seekService);
 
 /** @ngInject */
-function seekService(Restangular, $q, exception, $localStorage, favorite) {
+function seekService(Restangular, $q, exception, $localStorage, favorite, $mdDialog) {
 	var service = {
 		getSeek: getSeek,
 	};
@@ -48,8 +48,7 @@ function seekService(Restangular, $q, exception, $localStorage, favorite) {
 						defer.resolve(data);
 					}
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[Seek Service] getSeek error: ')(error);
 			});
 		return defer.promise;

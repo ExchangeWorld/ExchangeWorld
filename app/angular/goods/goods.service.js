@@ -41,8 +41,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 					});
 					defer.resolve(data);
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[Goods Service] getGood error: ')(error);
 			});
 		return defer.promise;
@@ -61,8 +60,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 					});
 					defer.resolve(data);
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[Goods Service] getuserGood error: ')(error);
 			});
 		return defer.promise;
@@ -119,8 +117,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 				if (_.isArray(data)) {
 					defer.resolve(data);
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[Goods Service] getComments error: ')(error);
 			});
 		return defer.promise;
@@ -174,8 +171,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 				} else {
 					defer.reject(data);
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[Goods Service] getQueue error: ')(error);
 			});
 		return defer.promise;
@@ -255,8 +251,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 					});
 
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[Goods Service] getQueue error: ')(error);
 			});
 	}

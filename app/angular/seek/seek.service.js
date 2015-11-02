@@ -6,7 +6,7 @@ const _          = require('lodash');
 seekModule.factory('seekService', seekService);
 
 /** @ngInject */
-function seekService(Restangular, $q, exception, $localStorage, favorite, $mdDialog) {
+function seekService(Restangular, $q, exception, $localStorage, favorite) {
 	var service = {
 		getSeek: getSeek,
 	};

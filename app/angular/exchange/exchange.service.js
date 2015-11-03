@@ -34,8 +34,7 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 				if (_.isArray(data)) {
 					defer.resolve(data);
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[Exchange Service] getAllExchange error: ')(error);
 			});
 		return defer.promise;
@@ -54,8 +53,7 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 					if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
 				});
 				defer.resolve(data);
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[Exchange Service] getExchange error: ')(error);
 			});
 		return defer.promise;
@@ -73,8 +71,7 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 					data[0].rate = rate;
 					data[0].put();
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[Exchange Service] rating error: ')(error);
 			});
 		return defer.promise;
@@ -145,8 +142,7 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 					//console.log(exchange);
 					exchange.put();
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[Exchange Service] deleteExchange error: ')(error);
 			});
 		return defer.promise;
@@ -165,8 +161,7 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 			.then(function(data) {
 				//console.log(data);
 				defer.resolve(data);
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[Exchange Service] getChatroom error: ')(error);
 			});
 		return defer.promise;

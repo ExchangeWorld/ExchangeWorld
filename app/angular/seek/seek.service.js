@@ -48,8 +48,7 @@ function seekService(Restangular, $q, exception, $localStorage, favorite) {
 						defer.resolve(data);
 					}
 				}
-			})
-			.catch(function(error) {
+			}, (error)=> {
 				return exception.catcher('[Seek Service] getSeek error: ')(error);
 			});
 		return defer.promise;

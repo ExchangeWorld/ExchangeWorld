@@ -87,8 +87,7 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 											//$localStorage.fb_id = user_data.id;
 											$localStorage.user = data;
 										}
-									})
-									.catch(function(error) {
+									}, (error)=> {
 										return exception.catcher('[Facebook Service] register error: ')(error);
 									});
 							});

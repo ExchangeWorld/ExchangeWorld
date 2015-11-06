@@ -17,7 +17,7 @@ function onAdd(map, $state, $mdSidenav) {
 
 	var div = document.createElement('div');
 	div.style.borderStyle        = 'double';
-	div.style.borderWidth        = '2px';
+	div.style.borderWidth        = '1px';
 	div.style.borderColor        = '#388dc1';
 	div.style.position           = 'absolute';
 	div.style.backgroundImage    = `url(${this.good.photo_path[0]})`;
@@ -25,6 +25,7 @@ function onAdd(map, $state, $mdSidenav) {
 	div.style.backgroundPosition = 'center';
 	div.style.backgroundRepeat   = 'no-repeat';
 	div.style.cursor             = 'pointer';
+	div.style.borderRadius       = '15px';
 	google.maps.event.addDomListener(div, 'mousedown', function(e) {
 		e.stopPropagation();
 		setTimeout(function() {

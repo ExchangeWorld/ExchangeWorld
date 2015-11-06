@@ -51,7 +51,7 @@ function GoodsController(
 
 	vm.showPhotoViewer = showPhotoViewer;
 	vm.onClickUser = onClickUser;
-	vm.onClickBack = () => $window.history.back();
+	vm.onClickBack = ()=> $window.history.back();
 
 	activate();
 
@@ -306,7 +306,8 @@ function GoodsController(
 			 * TODO:
 			 *  1. restrict multi queue(?).
 			 */
-			goodsService.showQueueBox(ev, vm.myGoods, goodData.gid, goodData.owner_uid);
+			$state.go('root.withSidenav.goods.queue');
+			//goodsService.showQueueBox(ev, vm.myGoods, goodData.gid, goodData.owner_uid);
 		} else if(type === types[1]) {
 			goodsService.showQueuingBox(ev, vm.queuingList, goodData.gid);
 		} else {
@@ -330,5 +331,6 @@ function GoodsController(
 			vm.cancel = ()=> $mdDialog.cancel();
 		}
 	}
-
 }
+
+

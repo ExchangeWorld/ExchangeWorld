@@ -258,7 +258,6 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 
 	function showQueueBox(ev, myGoods, queuing_goods_gid, host_uid) {
 		$mdDialog.show({
-			clickOutsideToClose: true,
 			templateUrl: 'goods/goods.queue.html',
 			controllerAs: 'vm',
 			controller: QueueController,
@@ -276,6 +275,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 			vm.cancel            = onCancel;
 			vm.onClickGoods      = (gid)=> { $state.go('root.withSidenav.goods', {gid: gid}); };
 
+			console.log(vm, host_uid);
 			function onConfirm(selected_gid) {
 				$mdDialog
 					.hide(selected_gid)
@@ -292,10 +292,16 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 										content      : '有人排了你的物品',
 									});
 							});
+						if($state.current.name === 'root.withSidenav.goods.queue') {
+							$state.go('^');
+						}
 					});
 			}
 			function onCancel() {
 				$mdDialog.cancel();
+				if($state.current.name === 'root.withSidenav.goods.queue') {
+					$state.go('^');
+				}
 			}
 		}
 	}

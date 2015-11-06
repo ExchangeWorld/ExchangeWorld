@@ -28,7 +28,6 @@ function SeekController(
 	vm.availableCategory   = AvailableCategory;
 	$scope.onClickFavorite = onClickFavorite;
 	$scope.onClickUser     = onClickUser;
-	$scope.onClickGoods    = onClickGoods;
 	$scope.onMouseOver     = onMouseOver;
 	$scope.onMouseOut      = onMouseOut;
 
@@ -73,11 +72,6 @@ function SeekController(
 
 	function onMouseOut() {
 		$rootScope.$broadcast('closeGoodsOverlay');
-	}
-
-	//goods onClick event: change route to corrsponding gid
-	function onClickGoods(gid) {
-		$state.go('root.withSidenav.goods', { gid : gid });
 	}
 
 	function onClickFavorite(e, goods) {

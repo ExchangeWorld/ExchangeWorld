@@ -38,6 +38,7 @@ function getStates() {
 				url: '/queue',
 				templateUrl: 'goods/goods.queue.html',
 				resolve: {
+					/** @ngInject */
 					host_uid: (goodsService, $stateParams)=> {
 						return goodsService
 							.getGood($stateParams.gid)
@@ -46,6 +47,7 @@ function getStates() {
 							})
 							.catch(function() { return undefined; });
 					},
+					/** @ngInject */
 					myGoods: (goodsService, $localStorage)=> {
 						return goodsService
 							.getUserGoods($localStorage.user.uid)
@@ -56,6 +58,7 @@ function getStates() {
 								return myGoods;
 							});
 					},
+					/** @ngInject */
 					queuing_goods_gid: ($stateParams)=>{
 						return parseInt($stateParams.gid, 10); 
 					}
@@ -71,9 +74,11 @@ function getStates() {
 				url: '/queuing',
 				templateUrl: 'goods/goods.queuing.html',
 				resolve: {
+					/** @ngInject */
 					host_goods_gid: ($stateParams)=> {
 						return parseInt($stateParams.gid, 10);
 					},
+					/** @ngInject */
 					queuingGoods: (goodsService, $stateParams)=> {
 						return goodsService
 							.getQueue($stateParams.gid)

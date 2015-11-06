@@ -70,15 +70,6 @@ function GoodsController(
 		updateComment();
 		updateStar();
 
-		/**
-		 * if is me, get the queue list on this goods
-		 * else, get all my goods that available to send queue request.
-		 */
-		if(vm.isLoggedIn) {
-			if (vm.isMe) getQueuing();
-			else getMyGoods();
-		}
-
 		auth
 			.getLoginState()
 			.then(function(data) {
@@ -264,36 +255,6 @@ function GoodsController(
 			});
 	}
 
-	function getQueuing() {
-		goodsService
-			.getQueue(vm.goodData.gid)
-			.then(function(data) {
-				vm.queuingList = data;
-
-				/**
-				 * TODO: check if user already queued
-				 */
-				if (vm.isLoggedIn) {
-					vm.queued = true;
-				} else {
-					vm.queued = false;
-				}
-			});
-	}
-
-	/**
-	 * get all goods that available to queue this goods
-	 */
-	function getMyGoods() {
-		goodsService
-			.getUserGoods($localStorage.user.uid)
-			.then(function(myGoods) {
-				vm.myGoods = myGoods.filter(function(g) {
-					return (g.status === 0 && g.deleted === 0);
-				});
-			});
-	}
-
 	/**
 	 * user use a goods to queue the host goods
 	 */
@@ -307,10 +268,8 @@ function GoodsController(
 			 *  1. restrict multi queue(?).
 			 */
 			$state.go('root.withSidenav.goods.queue');
-			//goodsService.showQueueBox(ev, vm.myGoods, goodData.gid, goodData.owner_uid);
 		} else if(type === types[1]) {
 			$state.go('root.withSidenav.goods.queuing');
-			//goodsService.showQueuingBox(ev, vm.queuingList, goodData.gid);
 		} else {
 			$state.go('root.withSidenav.404');
 		}

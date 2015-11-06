@@ -62,6 +62,33 @@ function getStates() {
 					goodsService.showQueueBox(null, myGoods, queuing_goods_gid, host_uid);
 				}]
 			}
+		},
+		{
+			state: 'root.withSidenav.goods.queuing',
+			config: {
+				url: '/queuing',
+				templateUrl: 'goods/goods.queuing.html',
+				resolve: {
+					host_uid: (goodsService, $stateParams)=> {
+						return goodsService
+							.getGood($stateParams.gid)
+							.then(function(data) {
+								return _.isArray(data) ? data[0].owner_uid: data.owner_uid;
+							})
+							.catch(function() { return undefined; });
+					},
+					queuingGoods: (goodsService, $stateParams)=> {
+						return goodsService
+							.getQueue($stateParams.gid)
+							.then(function(data) {
+								return data;
+							});
+					},
+				},
+				onEnter: ['goodsService', 'queuingGoods', 'host_uid', (goodsService, queuingGoods, host_uid)=> {
+					goodsService.showQueuingBox(null, queuingGoods, host_uid);
+				}]
+			}
 		}
 	];
 }

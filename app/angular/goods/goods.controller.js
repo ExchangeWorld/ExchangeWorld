@@ -309,7 +309,8 @@ function GoodsController(
 			$state.go('root.withSidenav.goods.queue');
 			//goodsService.showQueueBox(ev, vm.myGoods, goodData.gid, goodData.owner_uid);
 		} else if(type === types[1]) {
-			goodsService.showQueuingBox(ev, vm.queuingList, goodData.gid);
+			$state.go('root.withSidenav.goods.queuing');
+			//goodsService.showQueuingBox(ev, vm.queuingList, goodData.gid);
 		} else {
 			$state.go('root.withSidenav.404');
 		}

@@ -38,7 +38,7 @@
 		<div class="md-actions" layout="row">
 			<span flex></span>
 			<md-button ng-click="vm.cancel()">取消</md-button>
-			<md-button ng-click="vm.confirm(queue.group)" style="margin-right:20px;" ng-show="vm.myGoods.length !== 0">完成</md-button>
+			<md-button ng-click="vm.confirm(queue.group)" style="margin-right:20px;" ng-show="vm.myGoods.length !== 0" ng-disabled="queue.group === undefined">完成</md-button>
 		</div>
 	</form>
 </md-dialog>

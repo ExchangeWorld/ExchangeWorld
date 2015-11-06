@@ -10,11 +10,6 @@
 			</div>
 		</md-toolbar>
 		<md-dialog-content style="max-width:600px;max-height:410px;">
-			<!-- <div layout layout-align="center center">
-				<p ng-show="queuing.group">您選擇了
-					<strong>{{queuing.group.name}}</strong>
-				</p>
-			</div> -->
 			<div layout="column" layout-align="start center">
 				<div flex ng-show="vm.queuingGoods.length === 0">目前沒有正在排的物品</div>
 				<md-radio-group ng-model="queuing.group">
@@ -22,9 +17,6 @@
 						<div flex layout="row" layout-align="center center">
 							<md-radio-button value="{{queuing.good}}">
 							</md-radio-button>
-							<!-- <div flex="40" offset="5" layout layout-align="center center" style="text-align: center">
-								<a ng-click="vm.onClickGoods(queuing.good.gid)">{{ queuing.good.name }}</a>
-							</div> -->
 							<md-card class="md-whiteframe-z3 item-profile name-queue">
 								<md-card-content layout="row" layout-sm="column">
 									<div flex="55" flex-sm="100" layout layout-align="center center" style=" height:150px; width:auto; border-radius:10px;">
@@ -45,7 +37,7 @@
 		<div class="md-actions" layout="row">
 			<span flex></span>
 			<md-button ng-click="vm.cancel()">取消</md-button>
-			<md-button ng-click="vm.confirm(queuing.group)" style="margin-right:20px;">
+			<md-button ng-click="vm.confirm(queuing.group)" ng-disabled="queuing.group === undefined" style="margin-right:20px;">
 				完成
 			</md-button>
 		</div>

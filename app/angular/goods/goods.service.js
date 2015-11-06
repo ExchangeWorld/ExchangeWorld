@@ -275,7 +275,6 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 			vm.cancel            = onCancel;
 			vm.onClickGoods      = (gid)=> { $state.go('root.withSidenav.goods', {gid: gid}); };
 
-			console.log(vm, host_uid);
 			function onConfirm(selected_gid) {
 				$mdDialog
 					.hide(selected_gid)
@@ -288,7 +287,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 									.postNotification({
 										sender_uid   : vm.myGoods[0].owner_uid,
 										receiver_uid : host_uid, 
-										trigger_url  : '/seek/'+queuing_goods_gid,
+										trigger_url  : '/seek/'+queuing_goods_gid+'/queuing',
 										content      : '有人排了你的物品',
 									});
 							});
@@ -308,7 +307,6 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 
 	function showQueuingBox(ev, queuingGoods, host_goods_gid) {
 		$mdDialog.show({
-			clickOutsideToClose: true,
 			templateUrl: 'goods/goods.queuing.html',
 			controllerAs: 'vm',
 			controller: QueuingController,
@@ -326,7 +324,6 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 			vm.onClickGoods   = (gid)=> { $state.go('root.withSidenav.goods', {gid: gid}); };
 
 			function onConfirm(selected_goods) {
-				//console.log(JSON.parse(selected_goods));
 				selected_goods = JSON.parse(selected_goods);
 				$mdDialog
 					.hide(selected_goods)
@@ -343,10 +340,16 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 									})
 								.then(function(data) {console.log(data);});
 							});
+						if($state.current.name === 'root.withSidenav.goods.queuing') {
+							$state.go('^');
+						}
 					});
 			}
 			function onCancel() {
 				$mdDialog.cancel();
+				if($state.current.name === 'root.withSidenav.goods.queuing') {
+					$state.go('^');
+				}
 			}
 		}
 	}

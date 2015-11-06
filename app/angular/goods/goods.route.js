@@ -56,7 +56,9 @@ function getStates() {
 								return myGoods;
 							});
 					},
-					queuing_goods_gid: ($stateParams)=>{ return parseInt($stateParams.gid, 10); }
+					queuing_goods_gid: ($stateParams)=>{
+						return parseInt($stateParams.gid, 10); 
+					}
 				},
 				onEnter: ['goodsService', 'myGoods', 'host_uid', 'queuing_goods_gid', (goodsService, myGoods, host_uid, queuing_goods_gid)=> {
 					goodsService.showQueueBox(null, myGoods, queuing_goods_gid, host_uid);
@@ -69,13 +71,8 @@ function getStates() {
 				url: '/queuing',
 				templateUrl: 'goods/goods.queuing.html',
 				resolve: {
-					host_uid: (goodsService, $stateParams)=> {
-						return goodsService
-							.getGood($stateParams.gid)
-							.then(function(data) {
-								return _.isArray(data) ? data[0].owner_uid: data.owner_uid;
-							})
-							.catch(function() { return undefined; });
+					host_goods_gid: ($stateParams)=> {
+						return parseInt($stateParams.gid, 10);
 					},
 					queuingGoods: (goodsService, $stateParams)=> {
 						return goodsService
@@ -85,8 +82,8 @@ function getStates() {
 							});
 					},
 				},
-				onEnter: ['goodsService', 'queuingGoods', 'host_uid', (goodsService, queuingGoods, host_uid)=> {
-					goodsService.showQueuingBox(null, queuingGoods, host_uid);
+				onEnter: ['goodsService', 'queuingGoods', 'host_goods_gid', (goodsService, queuingGoods, host_goods_gid)=> {
+					goodsService.showQueuingBox(null, queuingGoods, host_goods_gid);
 				}]
 			}
 		}

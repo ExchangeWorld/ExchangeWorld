@@ -1,4 +1,14 @@
 {
+  "parser" : "babel-eslint",
+
+  "extends": "eslint:recommended",
+
+  "env" : {
+    "browser" : true,
+    "node" : true,
+    "jasmine" : true
+  },
+
   "rules": {
       "comma-dangle": 0,
       "semi": [2, "always"],
@@ -27,12 +37,6 @@
     "spread" : true,
     "templateStrings" : true,
     "unicodeCodePointEscapes" : true
-  },
-  "parser" : "babel-eslint",
-  "extends": "eslint:recommended",
-  "env" : {
-    "browser" : true,
-    "node" : true,
-    "jasmine" : true
   }
+
 }

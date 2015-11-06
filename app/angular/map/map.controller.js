@@ -115,6 +115,26 @@ function MapController(
 				/* TODO: transform the bound into the foramt that service need */
 				const bound = map.getBounds();
 				$rootScope.$broadcast('boundChanged', bound);
+
+				if (
+					bound.getNorthEast().lat() > 85 &&
+					bound.getSouthWest().lat() < -85 
+				) {
+					const zoom = map.getZoom();
+					map.setZoom(zoom + 1);
+				} else if (
+					bound.getNorthEast().lat() > 85 ||
+					bound.getSouthWest().lat() < -85 
+				) {
+					const originCenter = bound.getCenter();
+					const latOffset = bound.getNorthEast().lat() > 85
+						? bound.getNorthEast().lat() - 85
+						: bound.getSouthWest().lat() + 85;
+					map.panTo({
+						lat : originCenter.lat() - latOffset,
+						lng : originCenter.lng(),
+					});
+				}
 			}
 		}, 50);
 

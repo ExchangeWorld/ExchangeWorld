@@ -143,3 +143,12 @@ a:hover {
 	text-align: center;
 	margin-top: 6px;
 }
+
+.nav-user {
+	text-overflow: ellipsis;
+	display: inline-block;
+	width: calc(100% - 40px) ;
+	//width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}

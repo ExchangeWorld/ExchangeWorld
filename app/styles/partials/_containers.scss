@@ -36,8 +36,17 @@ md-switch {
 	margin: 0px;
 }
 
-md-radio-button{
+md-radio-button {
 	margin: 10px;
+}
+
+md-input-container {
+	label {
+		top: 0;
+	}
+	.md-input {
+		padding-bottom: 0;
+	}
 }
 
 .md-toolbar-tools {

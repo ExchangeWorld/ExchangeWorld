@@ -63,9 +63,10 @@ function getStates() {
 						return parseInt($stateParams.gid, 10); 
 					}
 				},
-				onEnter: ['goodsService', 'myGoods', 'host_uid', 'queuing_goods_gid', (goodsService, myGoods, host_uid, queuing_goods_gid)=> {
+				/** @ngInject */
+				onEnter: (goodsService, myGoods, host_uid, queuing_goods_gid)=> {
 					goodsService.showQueueBox(null, myGoods, queuing_goods_gid, host_uid);
-				}]
+				}
 			}
 		},
 		{
@@ -87,9 +88,10 @@ function getStates() {
 							});
 					},
 				},
-				onEnter: ['goodsService', 'queuingGoods', 'host_goods_gid', (goodsService, queuingGoods, host_goods_gid)=> {
+				/** @ngInject */
+				onEnter: (goodsService, queuingGoods, host_goods_gid)=> {
 					goodsService.showQueuingBox(null, queuingGoods, host_goods_gid);
-				}]
+				}
 			}
 		}
 	];

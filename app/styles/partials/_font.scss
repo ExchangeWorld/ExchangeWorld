@@ -24,6 +24,9 @@ a {
 	color: #212121;
 	text-decoration: none;
 	cursor: pointer;
+	&.profile{
+		color: #2196F3;
+	}
 }
 
 a:hover {

@@ -9,6 +9,11 @@ body {
 	font-family: Arial, "文泉驛正黑", "WenQuanYi Zen Hei", "儷黑 Pro", "LiHei Pro", "微軟正黑體", "Microsoft JhengHei", "標楷體", DFKai-SB, sans-serif;
 }
 
+.toast-top-right {
+  top: 80px;
+  right: 12px;
+}
+
 #container {
 	margin-top: -$navbar-height;
 	padding-top: $navbar-height;
@@ -36,8 +41,17 @@ md-switch {
 	margin: 0px;
 }
 
-md-radio-button{
+md-radio-button {
 	margin: 10px;
+}
+
+md-input-container {
+	label {
+		top: 0;
+	}
+	.md-input {
+		padding-bottom: 0;
+	}
 }
 
 .md-toolbar-tools {
@@ -111,15 +125,15 @@ md-radio-button{
 }
 
 .item {
-	//display: inline-block;
 	background: #F5F5F5;
-	padding: 0.7em;
-	margin: 5px;
+	margin: 5px 5px 10px 5px;
 	box-sizing: border-box;
 	box-shadow: 2px 2px 4px 2px #ccc;
+	border-radius: 8px;
 	img {
 		max-width: 100%;
 		max-height: 100%;
+		border-radius: 8px 8px 0 0;
 	}
 	&.profile {
 		margin: 6px 0;
@@ -144,10 +158,10 @@ div.md-open-menu-container {
 }
 
 .circle {
-	height: 50px;
-	width: 50px;
+	height: 55px;
+	width: 55px;
 	border-radius: 50%;
-	border: 3px double #4762dc;
+	border: 2px solid #4762dc;
 	//z-index: 10000;
 	&.profile {
 		position: absolute;
@@ -288,6 +302,7 @@ div.md-open-menu-container {
 	height: auto;
 	cursor: pointer;
 	border: #fff solid 2px;
+	border-radius: 15px;
 	&:hover {
 		border: #5A95E1 solid 2px;
 	}

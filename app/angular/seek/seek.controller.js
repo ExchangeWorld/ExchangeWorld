@@ -23,28 +23,29 @@ function SeekController(
 	vm.mapBound            = '';
 	vm.searchGoodsName     = $stateParams.name;
 	vm.searchGoodsCategory = $stateParams.cate || '';
-	vm.searchWithBound     = true;
+	vm.searchWithBound     = $stateParams.g === '0' ? true : false;
 	vm.onSearch            = onSearch;
 	vm.availableCategory   = AvailableCategory;
 	$scope.onClickFavorite = onClickFavorite;
 	$scope.onClickUser     = onClickUser;
-	$scope.onClickGoods    = onClickGoods;
 	$scope.onMouseOver     = onMouseOver;
 	$scope.onMouseOut      = onMouseOut;
 
 	////////////////
+	
 	$scope.$on('boundChanged', function(e, bound) {
 		//console.log(bound.toUrlValue());
 		vm.mapBound = bound.toUrlValue();
 		onSearch({
 			name     : vm.searchGoodsName,
 			category : vm.searchGoodsCategory,
-			bound    : vm.mapBound,
+			bound    : vm.searchWithBound ? vm.mapBound : '',
+			global   : vm.searchWithBound ? 0 : 1,
 		});
 	});
 
 	function onSearch(filter) {
-		//console.log(filter);
+		console.log(filter);
 		if(vm.searchGoodsCategory === 'all') {
 			filter.category = '';
 		}
@@ -52,7 +53,8 @@ function SeekController(
 		$state.go($state.current.name, {
 			name  : filter.name,
 			cate  : filter.category,
-			bound : filter.bound,
+			bound : filter.global ? '' : filter.bound,
+			g     : filter.global ? 1 : 0,
 		});
 
 		seekService
@@ -73,11 +75,6 @@ function SeekController(
 
 	function onMouseOut() {
 		$rootScope.$broadcast('closeGoodsOverlay');
-	}
-
-	//goods onClick event: change route to corrsponding gid
-	function onClickGoods(gid) {
-		$state.go('root.withSidenav.goods', { gid : gid });
 	}
 
 	function onClickFavorite(e, goods) {

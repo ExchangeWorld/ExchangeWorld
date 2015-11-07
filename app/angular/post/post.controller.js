@@ -22,7 +22,7 @@ function PostController(
 	vm.imgEncoded        = [];
 	vm.imgCompressed     = [];
 	vm.onSubmit          = onSubmit;
-	vm.availableCategory = AvailableCategory;
+	vm.availableCategory = AvailableCategory.slice(1);
 	$scope.$on('positionMarked', positionMarked);
 
 	////////////////

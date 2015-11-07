@@ -9,7 +9,7 @@ coreModule.config(facebookprovider);
 /** @ngInject */
 function toastConfig(toastrConfig) {
 	angular.extend(toastrConfig, {
-		positionClass : 'toast-bottom-right',
+		positionClass : 'toast-top-right',
 		timeOut : 3000,
 	});
 }

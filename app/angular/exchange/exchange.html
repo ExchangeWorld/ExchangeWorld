@@ -9,7 +9,7 @@
 		</p>
 		<div style="margin-top: 20px;">
 			<md-button class="md-raised md-accent" ng-click="vm.goSeek()">
-				<span style="color:#fff; font-weight: 800;">查看！</span>
+				<span style="color:#fff; font-weight: 500;">查看！</span>
 			</md-button>
 		</div>
 	</div>
@@ -49,8 +49,8 @@
 				<!-- exchange icon -->
 				<div flex="30" layout="column" layout-align="center center">
 					<img src="../../images/icon(48-48).png" style="margin:0 0 20px 0;">
-					<md-button ng-show="!vm.agreed" class="md-raised md-accent md-hue-1" ng-click="vm.onClickComplete($event)">確認交換 !</md-button>
-					<md-button ng-show="!vm.agreed" ng-click="vm.onClickDelete($event, vm.exchange.eid)">先不要換</md-button>
+					<md-button class="md-raised md-accent md-hue-1" ng-show="!vm.agreed"  ng-click="vm.onClickComplete($event)">確認交換 !</md-button>
+					<md-button class="md-accent white-btn" ng-show="!vm.agreed" ng-click="vm.onClickDelete($event, vm.exchange.eid)">先不要換</md-button>
 					<md-button ng-show="vm.agreed" disabled="true" class="md-accent md-hue-2">已確認交換</md-button>
 				</div>
 				<!-- second user item -->

@@ -273,7 +273,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 			vm.queuing_goods_gid = queuing_goods_gid;
 			vm.confirm           = onConfirm;
 			vm.cancel            = onCancel;
-			vm.onClickGoods      = (gid)=> { $state.go('root.withSidenav.goods', {gid: gid}); };
+			vm.onClickGoods      = gid => $state.go('root.withSidenav.goods', { gid });
 
 			function onConfirm(selected_gid) {
 				$mdDialog
@@ -287,7 +287,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 									.postNotification({
 										sender_uid   : vm.myGoods[0].owner_uid,
 										receiver_uid : host_uid, 
-										trigger_url  : '/seek/'+queuing_goods_gid+'/queuing',
+										trigger_url  : `/seek/${queuing_goods_gid}/queuing`,
 										content      : '有人排了你的物品',
 									});
 							});
@@ -335,10 +335,10 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 									.postNotification({
 										sender_uid   : $localStorage.user.uid,
 										receiver_uid : selected_goods.owner_uid, 
-										trigger_url  : '/manage/' + selected_goods.owner_uid + '/exchange',
+										trigger_url  : `/manage/${selected_goods.owner_uid}/exchange`,
 										content      : '有人接受了你的排，進入交換階段',
 									})
-								.then(function(data) {console.log(data);});
+								// .then(function(data) {console.log(data);});
 							});
 						if($state.current.name === 'root.withSidenav.goods.queuing') {
 							$state.go('^');

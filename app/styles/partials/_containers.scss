@@ -10,8 +10,8 @@ body {
 }
 
 .toast-top-right {
-  top: 80px;
-  right: 12px;
+	top: 80px;
+	right: 12px;
 }
 
 #container {
@@ -39,6 +39,10 @@ md-list {
 
 md-switch {
 	margin: 0px;
+}
+
+md-dialog {
+	max-height: 90%;
 }
 
 md-radio-button {
@@ -278,13 +282,13 @@ div.md-open-menu-container {
 
 .img-slider {
 	// width: auto;
-	max-height: 420px;
-	max-width: 100%;
+	max-height: 520px;
+	max-width: 90%;
 }
 
 .viewer {
 	width: 700px;
-	height: 420px;
+	height: 520px;
 	background-color: #000;
 	overflow: hidden;
 }
@@ -311,7 +315,7 @@ div.md-open-menu-container {
 .img-null {
 	max-height: 90%;
 	max-width: 90%;
-	padding-top: 10%;
+	padding-top: 9%;
 	&.onseek {
 		padding-top: 0px;
 	}

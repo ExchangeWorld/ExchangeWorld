@@ -29,28 +29,28 @@
 		<img class="img-null onseek" src="../../images/emoji_null.png">
 	</div>
 	<div deckgrid class="deckgrid" source="vm.goods">
-		<md-card class="md-whiteframe-z3 item hvr-grow" style="cursor:pointer;">
+		<md-card class="md-whiteframe-z3 item hvr-grow">
 			<a ng-href="/seek/{{card.gid}}" ng-mouseenter="mother.onMouseOver(card.gid)" ng-mouseleave="mother.onMouseOut()">
 				<photoslider images="card.photo_path" class="md-card-image"></photoslider>
-				<md-card-content style="padding:8px;">
-					<div layout="column">
-						<h2 class="md-title" style="margin:0 0 10px 0;">{{card.name}}</h2>
-						<div layout="row" style="margin:5px 0;">
-							<div flex layout="row" layout-align="center center">
-								<i ng-click="mother.onClickFavorite($event, card)" class="material-icons heart">{{ card.favorited ? 'favorite' : 'favorite_border' }}</i>
-								<img src="../../images/icon/icon-book.png" ng-show="card.category === 'Books'" style="height:24px; width:auto;">
-								<img src="../../images/icon/icon-school.svg" ng-show="card.category === 'Textbooks'" style="height:24px; width:auto;">
-								<img src="../../images/icon/icon-cloth.png" ng-show="card.category === 'Clothes'" style="height:24px; width:auto;">
-								<img src="../../images/icon/icon-phone.svg" ng-show="card.category === '3C'" style="height:24px; width:auto;">
-								<img src="../../images/icon/icon-other.svg" ng-show="card.category === 'Others'" style="height:24px; width:auto;">
-							</div>
-							<div flex layout layout-align="center center">
-								<img class="circle" style="border-radius: 50%; "data-ng-src="{{card.user.photo_path}}" ng-click="mother.onClickUser($event, card.user.uid)">
-							</div>
+				<h2 class="md-title" style="margin:0 0 5px 0; padding: 7px;">{{card.name}}</h2>
+			</a>
+			<md-card-content style="padding: 0;">
+				<div layout="column">
+					<div layout="row" style="margin:0 0 10px 0;">
+						<div flex layout="row" layout-align="center center">
+							<i ng-click="mother.onClickFavorite($event, card)" class="material-icons heart">{{ card.favorited ? 'favorite' : 'favorite_border' }}</i>
+							<img src="../../images/icon/icon-book.png" ng-show="card.category === 'Books'" style="height:24px; width:auto;">
+							<img src="../../images/icon/icon-school.svg" ng-show="card.category === 'Textbooks'" style="height:24px; width:auto;">
+							<img src="../../images/icon/icon-cloth.png" ng-show="card.category === 'Clothes'" style="height:24px; width:auto;">
+							<img src="../../images/icon/icon-phone.svg" ng-show="card.category === '3C'" style="height:24px; width:auto;">
+							<img src="../../images/icon/icon-other.svg" ng-show="card.category === 'Others'" style="height:24px; width:auto;">
+						</div>
+						<div flex layout layout-align="center center">
+							<img class="circle" style="border-radius: 50%; cursor: pointer; " data-ng-src="{{card.user.photo_path}}" ng-click="mother.onClickUser($event, card.user.uid)">
 						</div>
 					</div>
-				</md-card-content>
-			</a>
+				</div>
+			</md-card-content>
 		</md-card>
 	</div>
 </md-content>

@@ -29,7 +29,7 @@
 		<img class="img-null onseek" src="../../images/emoji_null.png">
 	</div>
 	<div deckgrid class="deckgrid" source="vm.goods">
-		<md-card class="md-whiteframe-z3 item hvr-grow">
+		<md-card class="md-whiteframe-z3 item hvr-glow">
 			<a ng-href="/seek/{{card.gid}}" ng-mouseenter="mother.onMouseOver(card.gid)" ng-mouseleave="mother.onMouseOut()">
 				<!-- <photoslider images="card.photo_path" class="md-card-image"></photoslider> -->
 				<img src="" data-ng-src="{{card.photo_path[0]}}" class="md-card-image">
@@ -47,7 +47,7 @@
 							<img src="../../images/icon/icon-other.svg" ng-show="card.category === 'Others'" style="height:24px; width:auto;">
 						</div>
 						<div flex layout layout-align="center center">
-							<img class="circle" style="border-radius: 50%; cursor: pointer; " data-ng-src="{{card.user.photo_path}}" ng-click="mother.onClickUser($event, card.user.uid)">
+							<img class="circle hvr-grow" style="border-radius: 50%; cursor: pointer; " data-ng-src="{{card.user.photo_path}}" ng-click="mother.onClickUser($event, card.user.uid)">
 						</div>
 					</div>
 				</div>

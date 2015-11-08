@@ -3,6 +3,7 @@ strong {
 	color: rgba(0, 163, 244, 0.66);
 	&.map-font {
 		color: #000;
+		margin-right: 20px;
 	}
 }
 
@@ -24,7 +25,7 @@ a {
 	color: #212121;
 	text-decoration: none;
 	cursor: pointer;
-	&.profile{
+	&.profile {
 		color: #2196F3;
 	}
 }
@@ -150,8 +151,16 @@ a:hover {
 .nav-user {
 	text-overflow: ellipsis;
 	display: inline-block;
-	width: calc(100% - 40px) ;
+	width: calc(100% - 40px);
 	//width: 100%;
 	white-space: nowrap;
 	overflow: hidden;
+}
+
+.tri {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 20px 0 20px 25px;
+	border-color: transparent transparent transparent #607D8B;
 }

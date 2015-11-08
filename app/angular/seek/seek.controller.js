@@ -23,7 +23,7 @@ function SeekController(
 	vm.mapBound            = '';
 	vm.searchGoodsName     = $stateParams.name;
 	vm.searchGoodsCategory = $stateParams.cate || '';
-	vm.searchWithBound     = $stateParams.g === '0' ? true : false;
+	vm.searchWithBound     = $stateParams.g === '1' ? false : true;
 	vm.onSearch            = onSearch;
 	vm.availableCategory   = AvailableCategory;
 	$scope.onClickFavorite = onClickFavorite;

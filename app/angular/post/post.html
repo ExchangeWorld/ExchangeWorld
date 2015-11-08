@@ -1,3 +1,13 @@
+<style>
+.tri {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 17px 0 17px 20px;
+	border-color: transparent transparent transparent #000000 ;
+}
+</style>
+
 <form ng-submit="vm.onSubmit()" resize ng-style="resizeWithOffset(64)">
 	<md-toolbar class="rounded-corners md-primary md-hue-3 md-whiteframe-z3">
 		<div flex class="md-toolbar-tools" layout="row" layout-align="center center">
@@ -33,7 +43,7 @@
 		<!-- Insert Photo -->
 		<div class="info_container for_input" layout="row" layout-align="start center">
 			<i class="material-icons">insert_photo</i>
-			<p hide-sm>加入多張相片</p>
+			<p hide-sm>選擇多張相片</p>
 			<input ng-change="vm.onSelectFile()" class="trans" type='file' ng-model='vm.imgEncoded' base-sixty-four-input required accept="image/*" multiple/>
 		</div>
 		<div layout="row" layout-align="center center" layout-wrap style="background: #EEEEEE;">
@@ -42,15 +52,16 @@
 			</div>
 		</div>
 		<!-- Location -->
-		<div class="info_container for_input" layout="row">
-			<h4 class="md-subhead">
-			<!-- <md-icon md-font-set="material-icons" class="hide">location_searching
-			</md-icon> -->
-			<strong class="map-font">在右邊的地圖定位你的物品吧！</strong>
-			<md-tooltip>使用滑鼠定位您的物品！</md-tooltip>
-			</h4>
+		<div class="info_container for_input" layout="row" style="margin-top:80px;">
+			<span flex="45" flex-sm="60"></span>
+			<div layout="row">
+				<div class="md-subhead">
+					<strong class="map-font">在右邊的地圖定位你的物品吧！</strong>
+					<md-tooltip>使用滑鼠定位您的物品！</md-tooltip>
+				</div>
+				<div class="tri"></div>
+			</div>
 		</div>
-		<hr>
 		<!-- Submit button -->
 		<div layout="row" style="margin-top:30px;">
 			<span flex="75" flex-sm="60"></span>

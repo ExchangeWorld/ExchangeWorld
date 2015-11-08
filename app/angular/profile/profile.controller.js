@@ -54,26 +54,25 @@ function ProfileController(
 			.then(function(data) {
 				if (data) {
 					vm.isMe = (profile.uid === data.uid);
-					profileService
-						.getMyGoods($stateParams.uid)
-						.then(function(data) {
-							vm.myGoodsPending   = data.filter(function(g) { return g.status === 0; });
-							vm.myGoodsExchanged = data.filter(function(g) { return g.status === 1; });
-							$rootScope.$broadcast('goodsChanged', vm.myGoodsPending);
-						});
-					favorite
-						.getMyFavorite($stateParams.uid)
-						.then(function(data) {
-							vm.myStar = data.map(function(g) {
-								if (_.isString(g.good.photo_path)) g.good.photo_path = JSON.parse(g.good.photo_path);
-								return g.good;
-							});
-							console.log(vm.myStar);
-						});
 				} else {
 					vm.isMe = false;
 					vm.isLoggedIn = false;
 				}
+			});
+		profileService
+			.getMyGoods($stateParams.uid)
+			.then(function(data) {
+				vm.myGoodsPending   = data.filter(function(g) { return g.status === 0; });
+				vm.myGoodsExchanged = data.filter(function(g) { return g.status === 1; });
+				$rootScope.$broadcast('goodsChanged', vm.myGoodsPending);
+			});
+		favorite
+			.getMyFavorite($stateParams.uid)
+			.then(function(data) {
+				vm.myStar = data.map(function(g) {
+					if (_.isString(g.good.photo_path)) g.good.photo_path = JSON.parse(g.good.photo_path);
+					return g.good;
+				});
 			});
 	}
 

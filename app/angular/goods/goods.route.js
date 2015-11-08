@@ -31,6 +31,69 @@ function getStates() {
 					},
 				},
 			}
+		},
+		{
+			state: 'root.withSidenav.goods.queue',
+			config: {
+				url: '/queue',
+				templateUrl: 'goods/goods.queue.html',
+				resolve: {
+					/** @ngInject */
+					host_uid: (goodsService, $stateParams)=> {
+						return goodsService
+							.getGood($stateParams.gid)
+							.then(function(data) {
+								return _.isArray(data) ? data[0].owner_uid: data.owner_uid;
+							})
+							.catch(function() { return undefined; });
+					},
+					/** @ngInject */
+					myGoods: (goodsService, $localStorage)=> {
+						return goodsService
+							.getUserGoods($localStorage.user.uid)
+							.then(function(myGoods) {
+								myGoods = myGoods.filter(function(g) {
+									return (g.status === 0 && g.deleted === 0);
+								});
+								return myGoods;
+							});
+					},
+					/** @ngInject */
+					queuing_goods_gid: ($stateParams)=>{
+						return parseInt($stateParams.gid, 10); 
+					}
+				},
+				/** @ngInject */
+				onEnter: (goodsService, myGoods, host_uid, queuing_goods_gid)=> {
+					goodsService.showQueueBox(null, myGoods, queuing_goods_gid, host_uid);
+				}
+			}
+		},
+		{
+			state: 'root.withSidenav.goods.queuing',
+			config: {
+				url: '/queuing',
+				templateUrl: 'goods/goods.queuing.html',
+				resolve: {
+					/** @ngInject */
+					host_goods_gid: ($stateParams)=> {
+						return parseInt($stateParams.gid, 10);
+					},
+					/** @ngInject */
+					queuingGoods: (goodsService, $stateParams)=> {
+						return goodsService
+							.getQueue($stateParams.gid)
+							.then(function(data) {
+								return data;
+							});
+					},
+				},
+				/** @ngInject */
+				onEnter: (goodsService, queuingGoods, host_goods_gid)=> {
+					goodsService.showQueuingBox(null, queuingGoods, host_goods_gid);
+				}
+			}
 		}
 	];
 }
+

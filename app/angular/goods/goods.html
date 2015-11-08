@@ -24,7 +24,7 @@
 	</div>
 	<!-- <div ng-show="vm.isMe" ng-click="vm.onDelete(vm.goodData.gid)" class="cross">X</div> -->
 	<div flex="80" layout layout-align="center center">
-		<img class="img-goods" ng-src="{{ vm.goodData.photo_path[0] }}" ng-click="vm.showPhotoViewer($event)">
+		<canvas id="imgCanvas" style="border:1px solid #d3d3d3; width:90%; height:350;" ng-click="vm.showPhotoViewer($event)"></canvas>
 	</div>
 	<div class="info_container" layout="row">
 		<div flex="40" layout="column" layout-align="center center" ng-show="!vm.isMe">

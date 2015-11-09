@@ -18,14 +18,17 @@
 	<div layout="row" layout-sm="column" style="height:100%;">
 		<div class="sidebar-ex" flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap>
 			<div class="event-btn" layout="row" layout-algin="center center" flex-sm="50" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
+				<div flex="5">
+					<img src="../../images/Arrow.png" />
+				</div>
 				<div flex="50" layout="column" layout-align="center center">
 					<p class="md-body-1 note goods-1">{{ exchange.details.goods[0].name }}</p>
 					<p class="md-body-1 note goods-2">{{ exchange.details.goods[1].name }}</p>
 				</div>
-				<div flex="25" layout layout-align="center center">
-					<img src="../../images/icon(48-48).png" />
+				<div flex="15" layout layout-align="center center">
+					<img style="max-height: 100%; max-width:100%;" src="../../images/Logo(ex).png" />
 				</div>
-				<div flex="20" layout layout-align="center center">
+				<div flex="25" layout layout-align="center center">
 					<!-- <p class="md-caption">與 {{ exchange.with }}</p> -->
 					<img class="circle exchange" ng-src="{{vm.exchange.goods[1].user.photo_path}}" />
 				</div>

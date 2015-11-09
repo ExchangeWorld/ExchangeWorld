@@ -44,6 +44,15 @@ a:hover {
 	&.username {
 		margin: 0 15px 0 25px;
 	}
+	&.goods-1 {
+		color: #90A4AE;
+		text-align: center;
+		font-weight: 600;
+	}
+	&.goods-2 {
+		text-align: center;
+		font-weight: bold;
+	}
 }
 
 .online:after {

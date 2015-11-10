@@ -8,7 +8,8 @@ exchangeModule.controller('ExchangeController', ExchangeController);
 function ExchangeController(
 	exchangeList,
 	$state,
-	$scope,
+	$timeout,
+	$rootScope,
 	exchangeService,
 	$stateParams,
 	$interval,
@@ -22,7 +23,7 @@ function ExchangeController(
 	vm.exchange        = undefined;
 	vm.chatroom        = [];
 	vm.chatContent     = '';
-	vm.onClickGoods    = ()=> $state.go('root.withSidenav.goods', { gid : gid });
+	vm.onClickGoods    = (gid)=> $state.go('root.withSidenav.goods', { gid : gid });
 	vm.onClickExchange = onClickExchange;
 	vm.onClickComplete = onClickComplete;
 	vm.onClickDelete   = onClickDelete;
@@ -68,15 +69,12 @@ function ExchangeController(
 		updateChat();
 		agreed();
 		
-		$scope.$parent.$on('mapInitialized', (e, evtMap)=> {
-			console.log('lllllllll');
-			if(!vm.exchange) return;
-			console.log('ppppppppppppp');
-			$scope.$parent.$broadcast('goodsChanged', [vm.exchange.details.goods[vm.exchange.lookupTable.other]]);
-			$scope.$parent.$broadcast('mapMoveTo', vm.exchange.details.goods[vm.exchange.lookupTable.other].gid);
-		});
-		$scope.$parent.$broadcast('goodsChanged', [vm.exchange.details.goods[vm.exchange.lookupTable.other]]);
-		$scope.$parent.$broadcast('mapMoveTo', vm.exchange.details.goods[vm.exchange.lookupTable.other].gid);
+		$rootScope.$broadcast('goodsChanged', [vm.exchange.details.goods[vm.exchange.lookupTable.other]]);
+		$rootScope.$broadcast('mapMoveTo', vm.exchange.details.goods[vm.exchange.lookupTable.other].gid);
+		$timeout(()=> {
+			$rootScope.$broadcast('goodsChanged', [vm.exchange.details.goods[vm.exchange.lookupTable.other]]);
+			$rootScope.$broadcast('mapMoveTo', vm.exchange.details.goods[vm.exchange.lookupTable.other].gid);
+		}, 50);
 	}
 
 	function onClickComplete(ev) {

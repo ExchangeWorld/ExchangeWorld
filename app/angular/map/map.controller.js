@@ -148,7 +148,7 @@ function MapController(
 				oldGood.marker.setMap(null);
 			});
 
-		/* 2. Draw new Maker on map */
+		/* 2. Draw new Marker on map */
 		goods = data.map(function(good) {
 			if (good.marker) {
 				return good;

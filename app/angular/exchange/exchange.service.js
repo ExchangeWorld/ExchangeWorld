@@ -47,7 +47,6 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 			.all('exchange')
 			.getList({eid: eid})
 			.then(function(data) {
-				console.log(data);
 				data = _.isArray(data) ? data[0] : data;
 				data.goods.forEach(function(goods) {
 					if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);

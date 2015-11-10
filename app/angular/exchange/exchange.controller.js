@@ -48,8 +48,7 @@ function ExchangeController(
 							};
 						});
 				});
-				onClickExchange(0);
-				agreed();
+				// agreed();
 			}
 		}
 	}
@@ -74,7 +73,10 @@ function ExchangeController(
 	}
 
 	function onClickComplete(ev) {
-		exchangeService.showCompleteExchange(ev, vm.exchange, vm.myid, function(){ vm.agreed = true; });
+		exchangeService
+			.showCompleteExchange(ev, vm.exchange, vm.myid, ()=> { 
+				$state.reload();
+			});
 		//agreed();
 	}
 
@@ -91,7 +93,7 @@ function ExchangeController(
 				.show(confirm)
 				.then(function() {
 					exchangeService.deleteExchange(eid);
-					$state.go('root.withSidenav.seek');
+					$state.reload();
 				});
 		}
 	}
@@ -114,6 +116,12 @@ function ExchangeController(
 	}
 
 	function agreed() {
-
+		if(vm.exchange.goods1_gid === vm.exchange.details.goods[vm.exchange.lookupTable.me].gid) {
+			vm.agreed = vm.exchange.goods1_agree ? true : false;
+		} else if(vm.exchange.goods2_gid === vm.exchange.details.goods[vm.exchange.lookupTable.me].gid){
+			vm.agreed = vm.exchange.goods2_agree ? true : false;
+		} else {
+			vm.agreed = false;
+		}
 	}
 }

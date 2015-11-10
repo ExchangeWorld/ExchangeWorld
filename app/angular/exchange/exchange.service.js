@@ -210,13 +210,8 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 			activate();
 
 			function activate() {
-				if (vm.thisExchange.goods[0].owner_uid === vm.myuid) {
-					vm.mygid     = vm.thisExchange.goods[0].gid;
-					vm.othersgid = vm.thisExchange.goods[1].gid;
-				} else {
-					vm.mygid     = vm.thisExchange.goods[1].gid;
-					vm.othersgid = vm.thisExchange.goods[0].gid;
-				}
+				vm.mygid     = vm.thisExchange.details.goods[vm.thisExchange.lookupTable.me].gid;
+				vm.othersgid = vm.thisExchange.details.goods[vm.thisExchange.lookupTable.other].gid;
 			}
 
 

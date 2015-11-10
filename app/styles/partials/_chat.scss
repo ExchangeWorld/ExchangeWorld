@@ -33,18 +33,21 @@
 
 .other {
 	.avatar {
-		margin-right: 5px;
+		//margin-right: 5px;
 		&:after {
-			border: 5px solid white;
-			border-left-color: transparent;
-			border-bottom-color: transparent;
-			//content: "";
+			content: "";
 			position: absolute;
 			top: 0;
 			right: 0;
 			width: 0;
 			height: 0;
+			border: 5px solid white;
+			border-left-color: transparent;
+			border-bottom-color: transparent;
 		}
+	}
+	.messages {
+		border-radius: 0 10px 10px 10px;
 	}
 }
 
@@ -56,6 +59,7 @@
 		border-bottom-right-radius: 0;
 		display: flex;
 		background-color: #E9F3FF;
+		border-radius: 10px 10px 0 10px;
 	}
 	.avatar {
 		margin-left: 5px;

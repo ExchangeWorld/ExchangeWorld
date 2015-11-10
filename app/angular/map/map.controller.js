@@ -79,6 +79,7 @@ function MapController(
 			vm.draggableCursor = 'crosshair';
 			vm.draggingCursor = 'crosshair';
 		}
+		vm.smallMap = ($state.current.title === 'exchange');
 	}
 
 	function getCurrentPosition() {
@@ -144,7 +145,7 @@ function MapController(
 				return false;
 			})
 			.forEach(function(oldGood) {
-					oldGood.marker.setMap(null);
+				oldGood.marker.setMap(null);
 			});
 
 		/* 2. Draw new Maker on map */

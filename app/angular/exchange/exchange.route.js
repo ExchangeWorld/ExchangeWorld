@@ -13,6 +13,7 @@ function getStates() {
 		{
 			state : 'root.oneCol.exchange',
 			config : {
+				title : 'exchange',
 				url : '/manage/:uid/exchange',
 				bindToController: true,
 				controller : 'ExchangeController',

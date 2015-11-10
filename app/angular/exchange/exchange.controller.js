@@ -8,6 +8,7 @@ exchangeModule.controller('ExchangeController', ExchangeController);
 function ExchangeController(
 	exchangeList,
 	$state,
+	$scope,
 	exchangeService,
 	$stateParams,
 	$interval,
@@ -21,7 +22,7 @@ function ExchangeController(
 	vm.exchange        = undefined;
 	vm.chatroom        = [];
 	vm.chatContent     = '';
-	vm.onClickGoods    = onClickGoods;
+	vm.onClickGoods    = ()=> $state.go('root.withSidenav.goods', { gid : gid });
 	vm.onClickExchange = onClickExchange;
 	vm.onClickComplete = onClickComplete;
 	vm.onClickDelete   = onClickDelete;
@@ -31,7 +32,7 @@ function ExchangeController(
 
 	////////////
 	activate();
-
+	
 	function activate() {
 		if($stateParams.uid !== $localStorage.user.uid.toString()) {
 			$state.go('root.withSidenav.404');
@@ -53,10 +54,8 @@ function ExchangeController(
 		}
 	}
 
-	function onClickGoods(gid) {
-		$state.go('root.withSidenav.goods', { gid : gid });
-	}
-
+	var timer;
+	timer = $interval(updateChat, 5000);
 	function updateChat() {
 		if(!vm.exchange) return;
 		exchangeService
@@ -64,12 +63,20 @@ function ExchangeController(
 			.then((data)=> { vm.chatroom = data; });
 	}
 
-	var timer;
-	timer = $interval(updateChat, 5000);
 	function onClickExchange(index) {
 		vm.exchange = vm.exchangeList[index];
 		updateChat();
 		agreed();
+		
+		$scope.$parent.$on('mapInitialized', (e, evtMap)=> {
+			console.log('lllllllll');
+			if(!vm.exchange) return;
+			console.log('ppppppppppppp');
+			$scope.$parent.$broadcast('goodsChanged', [vm.exchange.details.goods[vm.exchange.lookupTable.other]]);
+			$scope.$parent.$broadcast('mapMoveTo', vm.exchange.details.goods[vm.exchange.lookupTable.other].gid);
+		});
+		$scope.$parent.$broadcast('goodsChanged', [vm.exchange.details.goods[vm.exchange.lookupTable.other]]);
+		$scope.$parent.$broadcast('mapMoveTo', vm.exchange.details.goods[vm.exchange.lookupTable.other].gid);
 	}
 
 	function onClickComplete(ev) {

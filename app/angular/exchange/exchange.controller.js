@@ -17,7 +17,6 @@ function ExchangeController(
 	var vm             = this;
 	vm.goSeek          = ()=> $state.go('root.withSidenav.seek');
 	vm.myid            = parseInt($stateParams.uid, 10);
-	vm.myGoods         = {};
 	vm.exchangeList    = exchangeList;
 	vm.exchange        = {};
 	vm.chatroom        = [];
@@ -42,15 +41,14 @@ function ExchangeController(
 					exchangeService
 						.getExchange(exchange.eid)
 						.then(function(data) {
-							//console.log(data);
-							vm.myGoods = (data.goods[0].owner_uid === vm.myid) ? data.goods[0] : data.goods[1] ;
 							exchange.details = data;
-							exchange.with = (data.goods[0].owner_uid !== vm.myid)
-								? data.goods[0].user.name
-								: data.goods[1].user.name ;
+							exchange.lookupTable = {
+								me   : data.goods[0].owner_uid === vm.myid ? 0 : 1,
+								other: data.goods[1].owner_uid === vm.myid ? 0 : 1,
+							};
 						});
 				});
-				onClickExchange(vm.exchangeList[0].eid);
+				onClickExchange(0);
 				agreed();
 			}
 		}
@@ -61,25 +59,18 @@ function ExchangeController(
 	}
 
 	function updateChat() {
+		if(!vm.exchange.eid) return;
 		exchangeService
 			.getChat(vm.exchange.eid, 100, 0)
-			.then(function(data) {
-				vm.chatroom = data;
-			});
+			.then((data)=> { vm.chatroom = data; });
 	}
 
 	var timer;
-	function onClickExchange(eid) {
-		$interval.cancel(timer);
-		exchangeService
-			.getExchange(eid)
-			.then(function(data) {
-				//console.log(data);
-				vm.exchange = data;
-				updateChat();
-				agreed();
-				timer = $interval(updateChat, 5000);
-			});
+	timer = $interval(updateChat, 5000);
+	function onClickExchange(index) {
+		vm.exchange = vm.exchangeList[index];
+		updateChat();
+		agreed();
 	}
 
 	function onClickComplete(ev) {
@@ -123,12 +114,6 @@ function ExchangeController(
 	}
 
 	function agreed() {
-		if(vm.exchange.goods1_gid === vm.myGoods.gid) {
-			if(vm.exchange.goods1_agree) vm.agreed = true;
-		} else if(vm.exchange.goods2_gid === vm.myGoods.gid){
-			if(vm.exchange.goods2_agree) vm.agreed = true;
-		} else {
-			vm.agreed = false;
-		}
+
 	}
 }

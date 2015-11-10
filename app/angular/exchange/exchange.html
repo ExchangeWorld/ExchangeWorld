@@ -17,20 +17,19 @@
 <md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length !== 0">
 	<div layout="row" layout-sm="column" class="layout-ex">
 		<div class="sidebar-ex" flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap layout-align-sm="center center">
-			<div class="event-btn" layout="row" layout-algin="center center" flex-sm="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
+			<div class="event-btn" layout="row" layout-algin="center center" flex-sm="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index)">
 				<div flex="5">
 					<img src="../../images/Arrow.png" />
 				</div>
 				<div flex="50" layout="column" layout-align="center center">
-					<p class="md-body-1 note goods-1">{{ exchange.details.goods[0].name }}</p>
-					<p class="md-body-1 note goods-2">{{ exchange.details.goods[1].name }}</p>
+					<p class="md-body-1 note goods-1">{{ exchange.details.goods[exchange.lookupTable.me].name }}</p>
+					<p class="md-body-1 note goods-2">{{ exchange.details.goods[exchange.lookupTable.other].name }}</p>
 				</div>
 				<div flex="15" layout layout-align="center center">
 					<img style="max-height: 100%; max-width:100%;" src="../../images/Logo(ex).png" />
 				</div>
 				<div flex="25" layout layout-align="center center">
-					<!-- <p class="md-caption">與 {{ exchange.with }}</p> -->
-					<img class="circle exchange" ng-src="{{vm.exchange.goods[1].user.photo_path}}" />
+					<img class="circle exchange" ng-src="{{exchange.details.goods[exchange.lookupTable.other].user.photo_path}}" />
 				</div>
 				<span flex="5"></span>
 			</div>
@@ -41,13 +40,13 @@
 				<!-- first user item -->
 				<div layout="column" flex="30">
 					<div class="item exchange" layout layout-align="center center">
-						<img class="img-exchange" ng-src="{{vm.exchange.goods[0].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.goods[0].gid)" />
+						<img class="img-exchange" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)" />
 					</div>
 					<div layout="column" style="height:250px; background-color:#B0BEC5;">
-						<p class="md-body-1 text-ex">{{ vm.exchange.goods[0].name}}</p>
-						<p class="md-body-1 text-ex">{{ vm.exchange.goods[0].description }}</p>
+						<p class="md-body-1 text-ex">{{ vm.exchange.details.goods[vm.exchange.lookupTable.me].name}}</p>
+						<p class="md-body-1 text-ex">{{ vm.exchange.details.goods[vm.exchange.lookupTable.me].description }}</p>
 						<div flex layout layout-align="end end">
-							<img class="circle" ng-src="{{vm.exchange.goods[0].user.photo_path}}">
+							<img class="circle" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].user.photo_path}}">
 						</div>
 					</div>
 				</div>
@@ -61,13 +60,13 @@
 				<!-- second user item -->
 				<div layout="column" flex="30">
 					<div class="item exchange" layout layout-align="center center">
-						<img class="img-exchange" ng-src="{{vm.exchange.goods[1].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.goods[1].gid)" />
+						<img class="img-exchange" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.other].gid)" />
 					</div>
 					<div layout="column" style="height:250px; background-color:#B0BEC5;">
-						<p class="md-body-1 text-ex">{{ vm.exchange.goods[1].name}}</p>
-						<p class="md-body-1 text-ex">{{ vm.exchange.goods[1].description }}</p>
+						<p class="md-body-1 text-ex">{{ vm.exchange.details.goods[vm.exchange.lookupTable.other].name}}</p>
+						<p class="md-body-1 text-ex">{{ vm.exchange.details.goods[vm.exchange.lookupTable.other].description }}</p>
 						<div flex layout layout-align="end end">
-							<img class="circle" ng-src="{{vm.exchange.goods[1].user.photo_path}}">
+							<img class="circle" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].user.photo_path}}">
 						</div>
 					</div>
 				</div>
@@ -85,18 +84,17 @@
 					<li ng-class="{true: 'other', false: 'self'}[chat.sender_uid !== {{ vm.myid }}]" ng-repeat="chat in vm.chatroom">
 						<div class="avatar" ng-show="(chat.sender_uid !== {{ vm.myid }})">
 							<div ng-show="(chat.sender_uid !== {{ vm.myid }})">
-								<img ng-show="(chat.sender_uid === {{vm.exchange.goods[0].user.uid}})" ng-src="{{vm.exchange.goods[0].user.photo_path}}" />
-								<img ng-show="(chat.sender_uid === {{vm.exchange.goods[1].user.uid}})" ng-src="{{vm.exchange.goods[1].user.photo_path}}" />
+								<img ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].user.photo_path}}" />
 							</div>
-							<md-tooltip ng-show="(chat.sender_uid === {{ vm.myid }})">
-								{{vm.exchange.goods[0].user.name}}
-							</md-tooltip>
 							<md-tooltip ng-show="(chat.sender_uid !== {{ vm.myid }})">
-								{{vm.exchange.goods[1].user.name}}
+								{{vm.exchange.details.goods[vm.exchange.lookupTable.other].user.name}}
 							</md-tooltip>
 						</div>
 						<div class="messages">
 							<p class="content">{{ chat.content }}</p>
+							<md-tooltip>
+								{{ chat.timestamp | date:'medium' }}
+							</md-tooltip>
 						</div>
 					</li>
 				</ul>

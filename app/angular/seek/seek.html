@@ -15,8 +15,8 @@
 			<md-tooltip>搜尋視界內物品/搜尋全世界</md-tooltip>
 			<span hide-sm>{{ vm.searchWithBound ? '視界內' : '全域' }}</span>
 		</md-switch>
-		<md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory, bound:vm.searchWithBound ? vm.mapBound : '', global:vm.searchWithBound ? 0 : 1})">
-			<md-icon hide-sm md-font-set="material-icons">search</md-icon><span class="ng-scope">搜索!</span>
+		<md-button flex flex-sm="10" class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory, bound:vm.searchWithBound ? vm.mapBound : '', global:vm.searchWithBound ? 0 : 1})">
+			<md-icon md-font-set="material-icons">search</md-icon><span hide-sm>搜索!</span>
 		</md-button>
 	</div>
 </md-toolbar>

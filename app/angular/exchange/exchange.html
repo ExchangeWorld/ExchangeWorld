@@ -15,9 +15,9 @@
 	</div>
 </md-content>
 <md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length !== 0">
-	<div layout="row" layout-sm="column" style="height:100%;">
-		<div class="sidebar-ex" flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap>
-			<div class="event-btn" layout="row" layout-algin="center center" flex-sm="50" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
+	<div layout="row" layout-sm="column" class="layout-ex">
+		<div class="sidebar-ex" flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap layout-align-sm="center center">
+			<div class="event-btn" layout="row" layout-algin="center center" flex-sm="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
 				<div flex="5">
 					<img src="../../images/Arrow.png" />
 				</div>
@@ -75,13 +75,13 @@
 			</div>
 		</div>
 		<!-- chat room -->
-		<div flex="25" flex-sm layout="row" style="height:100%">
+		<div flex="25" flex-sm="100" layout="row" style="height:100%">
 			<span flex="5" hide-sm></span>
 			<div flex style="height:100%">
 				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
 					<span>聊天</span>
 				</md-toolbar>
-				<ul class="discussion" scroll='vm.chatroom'>
+				<ul class="discussion chat-ex" scroll='vm.chatroom'>
 					<li ng-class="{true: 'other', false: 'self'}[chat.sender_uid !== {{ vm.myid }}]" ng-repeat="chat in vm.chatroom">
 						<div class="avatar" ng-show="(chat.sender_uid !== {{ vm.myid }})">
 							<div ng-show="(chat.sender_uid !== {{ vm.myid }})">

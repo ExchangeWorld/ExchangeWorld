@@ -206,12 +206,18 @@ div.md-open-menu-container {
 	}
 }
 
-@media screen and (min-width: $sm) {
+@media screen and (min-width: 400px) {
 	.deckgrid[deckgrid]::before {
 		content: '2 .column.column-1-2';
 		font-size: 0;
 		/* See https://github.com/akoenig/angular-deckgrid/issues/14#issuecomment-35728861 */
 		visibility: hidden;
+	}
+	.layout-ex {
+		height: auto;
+	}
+	.chat-ex {
+		height: 400px;
 	}
 }
 
@@ -222,6 +228,12 @@ div.md-open-menu-container {
 		/* See https://github.com/akoenig/angular-deckgrid/issues/14#issuecomment-35728861 */
 		visibility: hidden;
 	}
+	.layout-ex {
+		height: 100%;
+	}
+	.chat-ex {
+		height: calc(100% - 114px);
+	}
 }
 
 @media screen and (min-width: $lg) {
@@ -230,6 +242,12 @@ div.md-open-menu-container {
 		font-size: 0;
 		/* See https://github.com/akoenig/angular-deckgrid/issues/14#issuecomment-35728861 */
 		visibility: hidden;
+	}
+	.layout-ex {
+		height: 100%;
+	}
+	.chat-ex {
+		height: calc(100% - 114px);
 	}
 }
 
@@ -323,7 +341,7 @@ div.md-open-menu-container {
 	max-width: 90%;
 	padding-top: 9%;
 	&.onseek {
-		padding-top: 0px;
+		padding-top: 180px;
 	}
 }
 

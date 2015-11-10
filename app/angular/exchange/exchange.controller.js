@@ -58,7 +58,7 @@ function ExchangeController(
 	}
 
 	function updateChat() {
-		if(!vm.exchange.eid) return;
+		if(!vm.exchange) return;
 		exchangeService
 			.getChat(vm.exchange.eid, 100, 0)
 			.then((data)=> { vm.chatroom = data; });

@@ -18,7 +18,7 @@ function ExchangeController(
 	vm.goSeek          = ()=> $state.go('root.withSidenav.seek');
 	vm.myid            = parseInt($stateParams.uid, 10);
 	vm.exchangeList    = exchangeList;
-	vm.exchange        = {};
+	vm.exchange        = undefined;
 	vm.chatroom        = [];
 	vm.chatContent     = '';
 	vm.onClickGoods    = onClickGoods;

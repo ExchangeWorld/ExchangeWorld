@@ -17,7 +17,7 @@
 <md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length !== 0">
 	<div layout="row" layout-sm="column" class="layout-ex">
 		<div class="sidebar-ex" flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap layout-align-sm="center center">
-			<div class="event-btn" layout="row" layout-algin="center center" flex-sm="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index)">
+			<div class="event-btn " layout="row" layout-algin="center center" flex-sm="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index)">
 				<div flex="5">
 					<img src="../../images/Arrow.png" />
 				</div>
@@ -34,7 +34,8 @@
 				<span flex="5"></span>
 			</div>
 		</div>
-		<div offset="5" flex="50" flex-sm="100">
+
+		<div ng-show="vm.exchange !== undefined" offset="5" flex="50" flex-sm="100">
 			<div layout="row" class="info_container">
 				<span flex-sm="5"></span>
 				<!-- first user item -->
@@ -74,7 +75,7 @@
 			</div>
 		</div>
 		<!-- chat room -->
-		<div flex="25" flex-sm="100" layout="row" style="height:100%">
+		<div ng-show="vm.exchange !== undefined" flex="25" flex-sm="100" layout="row" style="height:100%">
 			<span flex="5" hide-sm></span>
 			<div flex style="height:100%">
 				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">

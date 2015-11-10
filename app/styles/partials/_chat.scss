@@ -11,11 +11,12 @@
 		display: flex;
 	}
 	.avatar {
-		width: 40px;
+		width: 55px;
 		position: relative;
 		img {
 			display: block;
-			width: 40px;
+			width: 50px;
+			border-radius: 50%;
 		}
 	}
 	&.input {

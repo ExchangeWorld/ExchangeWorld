@@ -176,6 +176,10 @@ div.md-open-menu-container {
 		height: auto;
 		width: auto;
 	}
+	&.message {
+		height: 40px;
+		width: 40px;
+	}
 }
 
 .deckgrid {

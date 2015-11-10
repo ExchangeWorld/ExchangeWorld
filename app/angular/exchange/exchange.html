@@ -17,10 +17,8 @@
 <md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length !== 0">
 	<div layout="row" layout-sm="column" class="layout-ex">
 		<div class="sidebar-ex" flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap layout-align-sm="center center">
-			<div class="event-btn " layout="row" layout-algin="center center" flex-sm="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index)">
-				<div flex="5">
-					<img src="../../images/Arrow.png" />
-				</div>
+			<div class="event-btn hvr-bubble-float-left" layout="row" layout-algin="center center" flex-sm="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index)">
+
 				<div flex="50" layout="column" layout-align="center center">
 					<p class="md-body-1 note goods-1">{{ exchange.details.goods[exchange.lookupTable.me].name }}</p>
 					<p class="md-body-1 note goods-2">{{ exchange.details.goods[exchange.lookupTable.other].name }}</p>

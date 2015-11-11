@@ -11,25 +11,26 @@
 	<md-content layout-padding layout-margin style="overflow-x: hidden;">
 		<!-- toolbar -->
 		<!-- Item Name Input  -->
-		<md-input-container flex class="info_container for_input">
-			<label>物品名稱</label>
-			<input type="text" ng-model="vm.goodsName" required>
-		</md-input-container>
+		<div class="info_container for_input" layout="row" layout-align="center center">
+			<md-input-container flex="70">
+				<label>物品名稱</label>
+				<input type="text" ng-model="vm.goodsName" required>
+			</md-input-container>
+			<div flex="30" layout="row" layout-align="center center">
+				<i class="material-icons">list</i>
+				<md-input-container>
+					<label>物品類別</label>
+					<md-select ng-model="vm.goodsCategory" aria-label="good.cate">
+						<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}" required>{{cate.alias}}</md-option>
+					</md-select>
+				</md-input-container>
+			</div>
+		</div>
 		<!-- Description Input -->
-		<md-input-container flex class="info_container for_input">
+		<md-input-container class="info_container for_input">
 			<label>物品敘述</label>
 			<textarea type="string" ng-model="vm.goodsDescriptions" columns="10" md-maxlength="100" required></textarea>
 		</md-input-container>
-		<!-- Catogories Select -->
-		<div class="info_container for_input" layout="row" layout-align="start center">
-			<i class="material-icons">list</i>
-			<md-input-container>
-				<label>物品類別</label>
-				<md-select ng-model="vm.goodsCategory" aria-label="good.cate">
-					<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}" required>{{cate.alias}}</md-option>
-				</md-select>
-			</md-input-container>
-		</div>
 		<!-- Insert Photo -->
 		<div class="info_container for_input" layout="row" layout-align="start center">
 			<i class="material-icons">insert_photo</i>

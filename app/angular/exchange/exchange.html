@@ -18,7 +18,6 @@
 	<div layout="row" layout-sm="column" class="layout-ex">
 		<div class="sidebar-ex" flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap layout-align-sm="center center">
 			<div class="event-btn hvr-bubble-float-left" layout="row" layout-algin="center center" flex-sm="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index)">
-
 				<div flex="50" layout="column" layout-align="center center">
 					<p class="md-body-1 note goods-1">{{ exchange.details.goods[exchange.lookupTable.me].name }}</p>
 					<p class="md-body-1 note goods-2">{{ exchange.details.goods[exchange.lookupTable.other].name }}</p>
@@ -32,7 +31,6 @@
 				<span flex="5"></span>
 			</div>
 		</div>
-
 		<div ng-show="vm.exchange !== undefined" offset="5" flex="50" flex-sm="100">
 			<div layout="row" class="info_container">
 				<span flex-sm="5"></span>
@@ -72,11 +70,10 @@
 				<span flex="5"></span>
 			</div>
 		</div>
-
 		<!-- chat room -->
 		<div ng-show="vm.exchange !== undefined" flex="25" flex-sm="100" layout="column" style="height:100%">
-			<map-block style="height:40%; z-index:0;"></map-block>
-			<div style="height:60%; z-index:1;">
+			<map-block style="height:30%; z-index:0;"></map-block>
+			<div style="height:70%; z-index:1;">
 				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
 					<span>聊天</span>
 				</md-toolbar>

@@ -19,6 +19,7 @@ function PostController(
 	vm.goodsName         = '';
 	vm.goodsDescriptions = '';
 	vm.goodsCategory     = '';
+	vm.imgSelect         = [];
 	vm.imgEncoded        = [];
 	vm.imgCompressed     = [];
 	vm.onSubmit          = onSubmit;
@@ -34,6 +35,15 @@ function PostController(
 		console.log(vm.positionX);
 		console.log(vm.positionY);
 	}
+
+	$scope.$watch('vm.imgSelect', ()=> {
+		console.log(vm.imgEncoded, vm.imgSelect);
+		if(!vm.imgSelect) return;
+		if(!vm.imgEncoded.length) vm.imgEncoded = vm.imgSelect;
+		else {
+			vm.imgEncoded = vm.imgEncoded.concat(vm.imgSelect);
+		}
+	});
 
 	function onSubmit() {
 		if(!$localStorage.user) {

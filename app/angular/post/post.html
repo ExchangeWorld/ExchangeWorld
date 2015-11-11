@@ -31,14 +31,19 @@
 			</md-input-container>
 		</div>
 		<!-- Insert Photo -->
-		<div class="info_container for_input" layout="row" layout-align="start center">
+		<div class="info_container for_input" layout="row" layout-align="start center" style="margin-bottom: 0px;"> 
 			<i class="material-icons">insert_photo</i>
 			<p hide-sm>選擇一張或多張相片</p>
-			<input ng-change="vm.onSelectFile()" class="trans" type='file' ng-model='vm.imgEncoded' base-sixty-four-input required accept="image/*" multiple/>
 		</div>
-		<div layout="row" layout-align="center center" layout-wrap style="background: #EEEEEE;">
-			<div flex="45" layout layout-align="center center" class="md-whiteframe-z3" ng-repeat="preview in vm.imgEncoded" style="background-color: #F5F5F5;">
-				<img id="img_{{$index}}" data-ng-src="data:image/png;base64,{{preview.base64}}" style="max-height:150px; max-width:100%; margin:5px;" />
+		<div layout="row" layout-wrap>
+			<div layout ng-repeat="preview in vm.imgEncoded" style="background-color: #F5F5F5; border: 1px;">
+				<img id="img_{{$index}}" data-ng-src="data:image/png;base64,{{preview.base64}}" style="height:100px; width:100px; margin:2px;" />
+			</div>
+			<div layout style="background-color: #F5F5F5; border: 1px;">
+				<label style="cursor: pointer;">
+					<i class="material-icons" style="font-size:100px;">add</i>
+					<input ng-change="vm.onSelectFile()" class="trans" type='file' ng-model='vm.imgSelect' base-sixty-four-input required accept="image/*" multiple style="position:fixed; top:-1000px" />
+				</label>
 			</div>
 		</div>
 		<!-- Location -->

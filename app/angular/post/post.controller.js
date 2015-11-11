@@ -74,6 +74,15 @@ function PostController(
 						.content('請在地圖側標定物品位置.')
 						.ok('Got it!')
 					);
+			} else if(vm.imgEncoded.length === 0) {
+				$mdDialog.show(
+					$mdDialog.alert()
+						.parent(angular.element(document.querySelector('#popupContainer')))
+						.clickOutsideToClose(true)
+						.title('未上傳圖片')
+						.content('請上傳一張或多張物品的相片.')
+						.ok('Got it!')
+					);
 			} else {
 				/**
 				 * 1. compress all img and put imgs to vm.imgCompressed.

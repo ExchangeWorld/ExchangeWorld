@@ -35,10 +35,10 @@
 			<i class="material-icons">insert_photo</i>
 			<p hide-sm>選擇一張或多張相片</p>
 		</div>
-		<div layout="row" layout-wrap>
+		<div layout="row" layout-wrap layout-align="start center">
 			<div layout ng-repeat="preview in vm.imgEncoded" style="background-color: #F5F5F5; border: 1px; position: relative" class="hvr-upload" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
 				<img class="img-preview" id="img_{{$index}}" data-ng-src="data:image/png;base64,{{preview.base64}}" />
-				<div class="cross onpost" ng-show="removeMode" ng-click="vm.removeImg($index)">X</div>
+				<div class="cross onpost" ng-show="removeMode" ng-click="vm.removeImg($index)"><md-icon class="material-icon">clear</md-icon></div>
 			</div>
 			<div layout style="background-color: #F5F5F5; border: 1px;">
 				<label style="cursor: pointer;">

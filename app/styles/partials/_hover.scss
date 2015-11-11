@@ -39,16 +39,12 @@
 
 .hvr-bubble-float-left {
 	vertical-align: middle;
-	-webkit-transform: translateZ(0);
 	transform: translateZ(0);
 	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
 	-moz-osx-font-smoothing: grayscale;
 	position: relative;
-	-webkit-transition-duration: 0.3s;
 	transition-duration: 0.3s;
-	-webkit-transition-property: transform;
 	transition-property: transform;
 }
 
@@ -61,30 +57,25 @@
 	border-style: solid;
 	border-width: 40px 0 40px 20px;
 	border-color: transparent transparent transparent #CFD8DD;
-	-webkit-transition-duration: 0.3s;
 	transition-duration: 0.3s;
-	-webkit-transition-property: transform;
 	transition-property: transform;
 }
 
 .hvr-bubble-float-left:hover,
 .hvr-bubble-float-left:focus,
 .hvr-bubble-float-left:active {
-	-webkit-transform: translateX(10px);
 	transform: translateX(10px);
 }
 
 .hvr-bubble-float-left:hover:before,
 .hvr-bubble-float-left:focus:before,
 .hvr-bubble-float-left:active:before {
-	-webkit-transform: translateX(20px);
 	transform: translateX(20px);
 }
 
 .hvr-upload {
 	transition: 0.3s;
 	&:hover {
-		opacity: 0.8;
-		filter: alpha(opacity=80);
+		filter: brightness(75%);
 	}
 }

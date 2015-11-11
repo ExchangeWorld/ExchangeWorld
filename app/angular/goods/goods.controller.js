@@ -46,7 +46,6 @@ function GoodsController(
 
 	vm.myGoods       = [];
 	vm.queuingList   = [];
-	//vm.queued      = false;
 	vm.onClickQueue  = onClickQueue;
 
 	vm.showPhotoViewer = showPhotoViewer;

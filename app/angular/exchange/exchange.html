@@ -72,10 +72,11 @@
 				<span flex="5"></span>
 			</div>
 		</div>
+
 		<!-- chat room -->
-		<div ng-show="vm.exchange !== undefined" flex="25" flex-sm="100" layout="row" style="height:100%">
-			<span flex="5" hide-sm></span>
-			<div flex style="height:100%">
+		<div ng-show="vm.exchange !== undefined" flex="25" flex-sm="100" layout="column" style="height:100%">
+			<map-block style="height:40%; z-index:0;"></map-block>
+			<div style="height:60%; z-index:1;">
 				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
 					<span>聊天</span>
 				</md-toolbar>

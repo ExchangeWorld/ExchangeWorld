@@ -7,6 +7,7 @@ postModule.controller('PostController', PostController);
 function PostController(
 	postService,
 	JIC,
+	$rootScope,
 	$scope,
 	$state,
 	auth,
@@ -22,13 +23,13 @@ function PostController(
 	vm.imgSelect         = [];
 	vm.imgEncoded        = [];
 	vm.imgCompressed     = [];
+	vm.removeMode        = false;
 	vm.removeImg         = (idx)=> vm.imgEncoded.splice(idx, 1);
 	vm.onSubmit          = onSubmit;
 	vm.loading           = false;
 	vm.availableCategory = AvailableCategory.slice(1);
 	$scope.$on('positionMarked', positionMarked);
 
-	$scope.removeMode = false;
 
 	////////////////
 

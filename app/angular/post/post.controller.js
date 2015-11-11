@@ -24,6 +24,7 @@ function PostController(
 	vm.imgCompressed     = [];
 	vm.removeImg         = (idx)=> vm.imgEncoded.splice(idx, 1);
 	vm.onSubmit          = onSubmit;
+	vm.loading           = false;
 	vm.availableCategory = AvailableCategory.slice(1);
 	$scope.$on('positionMarked', positionMarked);
 
@@ -86,6 +87,7 @@ function PostController(
 						.ok('Got it!')
 					);
 			} else {
+				vm.loading = true;
 				/**
 				 * 1. compress all img and put imgs to vm.imgCompressed.
 				 */
@@ -120,7 +122,7 @@ function PostController(
 								position_x  : vm.positionX,
 								position_y  : vm.positionY,
 								photo_path  : JSON.stringify(data),
-								owner_uid   : auth.currentUser().uid,
+								owner_uid   : $localStorage.user.uid,
 							})
 							.then(function(data) {
 								logger.success('已成功發佈一項物品^_^', data, 'POST');

@@ -27,6 +27,8 @@ function PostController(
 	vm.availableCategory = AvailableCategory.slice(1);
 	$scope.$on('positionMarked', positionMarked);
 
+	$scope.removeMode = false;
+
 	////////////////
 
 	function positionMarked(e, latLng) {

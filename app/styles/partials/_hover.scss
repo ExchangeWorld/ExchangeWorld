@@ -82,8 +82,9 @@
 }
 
 .hvr-upload {
+	transition: 0.3s;
 	&:hover {
-		opacity: 0.4;
-		filter: alpha(opacity=40);
+		opacity: 0.8;
+		filter: alpha(opacity=80);
 	}
 }

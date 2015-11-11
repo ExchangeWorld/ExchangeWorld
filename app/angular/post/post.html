@@ -31,18 +31,18 @@
 			</md-input-container>
 		</div>
 		<!-- Insert Photo -->
-		<div class="info_container for_input" layout="row" layout-align="start center" style="margin-bottom: 0px;"> 
+		<div class="info_container for_input" layout="row" layout-align="start center" style="margin-bottom: 0px;">
 			<i class="material-icons">insert_photo</i>
 			<p hide-sm>選擇一張或多張相片</p>
 		</div>
 		<div layout="row" layout-wrap>
-			<div layout ng-repeat="preview in vm.imgEncoded" style="background-color: #F5F5F5; border: 1px; position: relative">
-				<img id="img_{{$index}}" data-ng-src="data:image/png;base64,{{preview.base64}}" style="height:100px; width:100px; margin:2px;" />
-				<div ng-click="vm.removeImg($index)" class="cross" style="top:5px; right:5px; position: absolute; height:20px;">X</div>
+			<div layout ng-repeat="preview in vm.imgEncoded" style="background-color: #F5F5F5; border: 1px; position: relative" class="hvr-upload" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
+				<img class="img-preview" id="img_{{$index}}" data-ng-src="data:image/png;base64,{{preview.base64}}" />
+				<div class="cross onpost" ng-show="removeMode" ng-click="vm.removeImg($index)">X</div>
 			</div>
 			<div layout style="background-color: #F5F5F5; border: 1px;">
 				<label style="cursor: pointer;">
-					<i class="material-icons" style="font-size:100px; margin:2px;">add</i>
+					<i class="material-icons add-photo">add</i>
 					<input ng-change="vm.onSelectFile()" class="trans" type='file' ng-model='vm.imgSelect' base-sixty-four-input accept="image/*" multiple style="position:fixed; top:-1000px" />
 				</label>
 			</div>

@@ -38,6 +38,7 @@
 		<div layout="row" layout-wrap>
 			<div layout ng-repeat="preview in vm.imgEncoded" style="background-color: #F5F5F5; border: 1px;">
 				<img id="img_{{$index}}" data-ng-src="data:image/png;base64,{{preview.base64}}" style="height:100px; width:100px; margin:2px;" />
+				<div ng-click="vm.removeImg($index)" class="cross" style="top:5px; right:5px; position: relative;">X</div>
 			</div>
 			<div layout style="background-color: #F5F5F5; border: 1px;">
 				<label style="cursor: pointer;">

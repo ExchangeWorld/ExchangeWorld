@@ -22,6 +22,7 @@ function PostController(
 	vm.imgSelect         = [];
 	vm.imgEncoded        = [];
 	vm.imgCompressed     = [];
+	vm.removeImg         = (idx)=> vm.imgEncoded.splice(idx, 1);
 	vm.onSubmit          = onSubmit;
 	vm.availableCategory = AvailableCategory.slice(1);
 	$scope.$on('positionMarked', positionMarked);

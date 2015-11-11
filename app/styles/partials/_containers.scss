@@ -175,6 +175,8 @@ div.md-open-menu-container {
 	&.exchange {
 		height: auto;
 		width: auto;
+		max-height: 100%;
+		max-width: 100%;
 	}
 	&.message {
 		height: 40px;

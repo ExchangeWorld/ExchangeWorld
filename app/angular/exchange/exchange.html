@@ -16,13 +16,13 @@
 </md-content>
 <md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length !== 0">
 	<div layout="row" layout-sm="column" class="layout-ex">
-		<div class="sidebar-ex" flex="20" flex-sm="100" layout="column" layout-sm="row" layout-wrap layout-align-sm="center center">
+		<div class="sidebar-ex" flex="20" flex-md="25" flex-sm="100" layout="column" layout-sm="row" layout-wrap layout-align-sm="center center">
 			<div class="event-btn hvr-bubble-float-left" layout="row" layout-algin="center center" flex-sm="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index)">
-				<div flex="50" layout="column" layout-align="center center">
+				<div flex="55" flex-md="70" flex-sm="70" layout="column" layout-align="center center">
 					<p class="md-body-1 note goods-1">{{ exchange.details.goods[exchange.lookupTable.me].name }}</p>
 					<p class="md-body-1 note goods-2">{{ exchange.details.goods[exchange.lookupTable.other].name }}</p>
 				</div>
-				<div flex="15" layout layout-align="center center">
+				<div flex="15" hide-md hide-sm layout layout-align="center center">
 					<img style="max-height: 100%; max-width:100%;" src="../../images/Logo(ex).png" />
 				</div>
 				<div flex="25" layout layout-align="center center">
@@ -31,7 +31,7 @@
 				<span flex="5"></span>
 			</div>
 		</div>
-		<div ng-show="vm.exchange !== undefined" offset="5" flex="50" flex-sm="100">
+		<div ng-show="vm.exchange !== undefined" offset="5" flex="50" flex-md="45" flex-sm="100">
 			<div layout="row" class="info_container">
 				<span flex-sm="5"></span>
 				<!-- first user item -->

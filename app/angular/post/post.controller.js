@@ -7,7 +7,6 @@ postModule.controller('PostController', PostController);
 function PostController(
 	postService,
 	JIC,
-	$rootScope,
 	$scope,
 	$state,
 	auth,
@@ -42,7 +41,6 @@ function PostController(
 	}
 
 	$scope.$watch('vm.imgSelect', ()=> {
-		console.log(vm.imgEncoded, vm.imgSelect);
 		if(!vm.imgSelect) return;
 		if(!vm.imgEncoded.length) vm.imgEncoded = vm.imgSelect;
 		else {
@@ -67,7 +65,7 @@ function PostController(
 						.clickOutsideToClose(true)
 						.title('未選擇類別')
 						.content('請選擇物品的種類.')
-						.ok('Got it!')
+						.ok('知道了!')
 					);
 			} else if(!(vm.positionX && vm.positionY)) {
 				$mdDialog.show(
@@ -76,7 +74,7 @@ function PostController(
 						.clickOutsideToClose(true)
 						.title('未指定位置')
 						.content('請在地圖側標定物品位置.')
-						.ok('Got it!')
+						.ok('知道了!')
 					);
 			} else if(vm.imgEncoded.length === 0) {
 				$mdDialog.show(
@@ -85,7 +83,7 @@ function PostController(
 						.clickOutsideToClose(true)
 						.title('未上傳圖片')
 						.content('請上傳一張或多張物品的相片.')
-						.ok('Got it!')
+						.ok('知道了!')
 					);
 			} else {
 				vm.loading = true;

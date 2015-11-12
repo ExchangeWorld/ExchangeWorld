@@ -31,8 +31,14 @@
 				<span flex="5"></span>
 			</div>
 		</div>
+		<div ng-show="vm.exchange === undefined" flex="80" flex-md="100" layout layout-align="center center">
+			<h2 class="md-display-2" hide-md hide-sm>點擊左側清單觀看目前正在進行的交換</h2>
+			<div flex-md="80">
+				<h2 class="md-display-2" hide-gt-md>點擊上方清單觀看目前正在進行的交換</h2>
+			</div>
+		</div>
 		<div ng-show="vm.exchange !== undefined" offset="5" flex="50" flex-md="100" flex-sm="100" style="height:100%;" layout layout-align="center center">
-			<div layout="row" class="info_container" style="height:80%;">
+			<div layout="row" class="info_container layout-ex center">
 				<!-- <span flex-sm="5"></span> -->
 				<!-- first user item -->
 				<!-- <div layout="column" flex="30">

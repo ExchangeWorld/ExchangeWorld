@@ -238,6 +238,9 @@ div.md-open-menu-container {
 	.chat-ex {
 		height: 400px;
 	}
+	.btn-rwd {
+		min-width: 50px;
+	}
 }
 
 @media screen and (min-width: 600px) {
@@ -260,6 +263,9 @@ div.md-open-menu-container {
 	.chat-ex {
 		height: 400px;
 	}
+	.btn-rwd {
+		min-width: 75px;
+	}
 }
 
 @media screen and (min-width: 960px) {
@@ -281,6 +287,9 @@ div.md-open-menu-container {
 	}
 	.chat-ex {
 		height: calc(100% - 114px);
+	}
+	.btn-rwd {
+		min-width: 88px;
 	}
 }
 

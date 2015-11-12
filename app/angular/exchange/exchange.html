@@ -70,8 +70,16 @@
 				<!-- exchange icon -->
 				<div flex="20" layout="column" layout-align="center center">
 					<img src="../../images/icon(48-48).png" style="margin:0 0 20px 0;">
-					<md-button class="md-raised md-accent md-hue-1" ng-show="!vm.agreed" ng-click="vm.onClickComplete($event)">確認交換 !</md-button>
-					<md-button class="md-accent white-btn" ng-show="!vm.agreed" ng-click="vm.onClickDelete($event, vm.exchange.eid)">先不要換</md-button>
+					<md-button class="btn-rwd md-raised md-accent md-hue-1" ng-show="!vm.agreed" ng-click="vm.onClickComplete($event)">
+						<span hide-sm>確認交換 !</span>
+						<div layout layout-align="center center" hide-gt-sm><i class="material-icons">sync</i></div>
+					</md-button>
+					<md-button class="btn-rwd md-accent white-btn" ng-show="!vm.agreed" ng-click="vm.onClickDelete($event, vm.exchange.eid)">
+						<span hide-sm>先不要換</span>
+						<div layout layout-align="center center" hide-gt-sm>
+							<i class="material-icons">sync_disabled</i>
+						</div>
+					</md-button>
 					<md-button ng-show="vm.agreed" disabled="true" class="md-accent md-hue-2">已確認交換</md-button>
 				</div>
 				<!-- second user item -->

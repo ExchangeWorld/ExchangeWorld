@@ -258,7 +258,6 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 
 	function showQueueBox(ev, myGoods, queuing_goods_gid, host_uid) {
 		$mdDialog.show({
-			clickOutsideToClose: true,
 			templateUrl: 'goods/goods.queue.html',
 			controllerAs: 'vm',
 			controller: QueueController,
@@ -274,7 +273,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 			vm.queuing_goods_gid = queuing_goods_gid;
 			vm.confirm           = onConfirm;
 			vm.cancel            = onCancel;
-			vm.onClickGoods      = (gid)=> { $state.go('root.withSidenav.goods', {gid: gid}); };
+			vm.onClickGoods      = gid => $state.go('root.withSidenav.goods', { gid });
 
 			function onConfirm(selected_gid) {
 				$mdDialog
@@ -288,21 +287,26 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 									.postNotification({
 										sender_uid   : vm.myGoods[0].owner_uid,
 										receiver_uid : host_uid, 
-										trigger_url  : '/seek/'+queuing_goods_gid,
+										trigger_url  : `/seek/${queuing_goods_gid}/queuing`,
 										content      : '有人排了你的物品',
 									});
 							});
+						if($state.current.name === 'root.withSidenav.goods.queue') {
+							$state.go('^');
+						}
 					});
 			}
 			function onCancel() {
 				$mdDialog.cancel();
+				if($state.current.name === 'root.withSidenav.goods.queue') {
+					$state.go('^');
+				}
 			}
 		}
 	}
 
 	function showQueuingBox(ev, queuingGoods, host_goods_gid) {
 		$mdDialog.show({
-			clickOutsideToClose: true,
 			templateUrl: 'goods/goods.queuing.html',
 			controllerAs: 'vm',
 			controller: QueuingController,
@@ -320,7 +324,6 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 			vm.onClickGoods   = (gid)=> { $state.go('root.withSidenav.goods', {gid: gid}); };
 
 			function onConfirm(selected_goods) {
-				//console.log(JSON.parse(selected_goods));
 				selected_goods = JSON.parse(selected_goods);
 				$mdDialog
 					.hide(selected_goods)
@@ -332,15 +335,21 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 									.postNotification({
 										sender_uid   : $localStorage.user.uid,
 										receiver_uid : selected_goods.owner_uid, 
-										trigger_url  : '/manage/' + selected_goods.owner_uid + '/exchange',
+										trigger_url  : `/manage/${selected_goods.owner_uid}/exchange`,
 										content      : '有人接受了你的排，進入交換階段',
 									})
-								.then(function(data) {console.log(data);});
+								// .then(function(data) {console.log(data);});
 							});
+						if($state.current.name === 'root.withSidenav.goods.queuing') {
+							$state.go('^');
+						}
 					});
 			}
 			function onCancel() {
 				$mdDialog.cancel();
+				if($state.current.name === 'root.withSidenav.goods.queuing') {
+					$state.go('^');
+				}
 			}
 		}
 	}

@@ -6,7 +6,7 @@ const _              = require('lodash');
 favoriteModule.factory('favorite', favorite);
 
 /** @ngInject */
-function favorite(Restangular, $q, exception, $localStorage, $mdDialog) {
+function favorite(Restangular, $q, exception, $localStorage, $mdDialog, logger) {
 	const service = {
 		getFavorites,
 		getMyFavorite,
@@ -59,8 +59,8 @@ function favorite(Restangular, $q, exception, $localStorage, $mdDialog) {
 			.post(newFavorite)
 			.then(function(data) {
 				defer.resolve(data);
-			})
-			.catch(function(error) {
+				logger.success('已加到最愛', data, 'DONE');
+			}, (error)=> {
 				return exception.catcher('[favorite Service] postFavorite error: ')(error);
 			});
 		return defer.promise;

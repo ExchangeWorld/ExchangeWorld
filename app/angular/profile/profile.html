@@ -10,17 +10,17 @@
 					<h4 class="md-headline" style="margin:8px 0;">{{ vm.profile.name }}</h4>
 					<div layout="row" layout-align="center center">
 						<i class="material-icons heart">favorite</i>
-						<a href="#"><span class="md-subhead">{{ vm.myStar.length }}</span></a>
+						<a class="profile" href="#"><span class="md-subhead">{{ vm.myStar.length }}</span></a>
 					</div>
 				</div>
 				<div layout="row" layout-sm="column" layout-align="center center">
 					<div layout="column" layout-align="center center" class="note profile">
 						<p class="md-title text-ex follow">追隨中</p>
-						<a ng-click="vm.onClickFollow(vm.profile.uid, 0)">{{ vm.profile.followings.length }}</a>
+						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 0)">{{ vm.profile.followings.length }}</a>
 					</div>
 					<div layout="column" layout-align="center center" class="note profile">
 						<p class="md-title text-ex follow">被追蹤</p>
-						<a ng-click="vm.onClickFollow(vm.profile.uid, 1)">{{ vm.followerCount }}</a>
+						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 1)">{{ vm.followerCount }}</a>
 					</div>
 				</div>
 			</div>

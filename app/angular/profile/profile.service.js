@@ -6,7 +6,7 @@ const _             = require('lodash');
 profileModule.service('profileService', profileService);
 
 /** @ngInject */
-function profileService(Restangular, $q, facebookService, exception) {
+function profileService(Restangular, $q, facebookService, exception, logger) {
 	var service = {
 		getProfile,
 		editProfile,
@@ -71,6 +71,7 @@ function profileService(Restangular, $q, facebookService, exception) {
 				my_uid       : following_uid,
 				follower_uid : my_uid,
 			});
+		logger.success('成功追隨', {}, 'DONE');
 	}
 
 	function deleteFollowing(my_uid, following_uid) {

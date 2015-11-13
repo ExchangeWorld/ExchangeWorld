@@ -1,18 +1,18 @@
 <md-content layout-padding style="overflow-y: hidden;">
 	<div layout-padding layout-margin layout="row" layout-align="center center">
 		<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1">
-			<md-icon md-font-set="material-icons">undo</md-icon>Back
+			<md-icon md-font-set="material-icons">undo</md-icon>上一頁
 		</md-button>
 		<!-- <span flex="70"></span> -->
 		<div flex="70" flex-sm="55" layout="row" layout-align="center center">
 			<div flex-sm="50" layout layout-align="center center">
-				<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
+				<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
 					<md-icon md-font-set="material-icons" ng-class="{'heart': vm.starred}">favorite</md-icon>
 					<span hide-sm>{{vm.starred ? '已關注' : '關注'}} {{vm.stars.length}}</span>
 				</md-button>
 			</div>
 			<div flex-sm="50" layout layout-align="center center">
-				<md-button ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue($event)">
+				<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue($event)">
 					<md-icon md-font-set="material-icons">remove_red_eye</md-icon>
 					<span hide-sm>{{ vm.isMe ? '看誰排！' : '我要排！' }}</span>
 				</md-button>

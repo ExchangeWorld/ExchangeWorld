@@ -1,98 +1,96 @@
 .navbar {
-    .md-button {
-        height: $navbar-height;
-        font-size: 1em;
-        padding: 0px 10px;
-        margin: 0px;
-        min-width: 60px;
-        md-icon {
-            vertical-align: text-bottom;
-        }
-    }
-    .active {
-        background-color: $ripple-color;
-    }
-    a {
-        padding-top: 20px;
-    }
-    i {
-        margin-right: 5px;
-    }
+	.md-button {
+		height: $navbar-height;
+		font-size: 1em;
+		padding: 0px 10px;
+		margin: 0px;
+		min-width: 60px;
+		md-icon {
+			vertical-align: text-bottom;
+		}
+	}
+	.active {
+		background-color: $ripple-color;
+	}
+	a {
+		padding-top: 20px;
+	}
+	i {
+		margin-right: 5px;
+	}
 }
 
 map {
-    .radius-button {
-        border-radius: 100%;
-        height: 56px;
-        width: 56px;
-        box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.26);
-    }
+	.radius-button {
+		border-radius: 100%;
+		height: 56px;
+		width: 56px;
+		box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.26);
+	}
 }
 
 .md-button:not([disabled]):hover {
-    background-color: rgba(158, 158, 158, 0.2);
-    color: #293D66;
-    transition: 0.6s;
+	background-color: rgba(158, 158, 158, 0.2);
+	color: #293D66;
+	transition: 0.6s;
 }
 
 .trans:not([disabled]):hover {
-    background-color: rgba(158, 158, 158, 0.2);
-    color: #293D66;
-    transition: 0.6s;
-    transition-delay: 0.2s;
+	background-color: rgba(158, 158, 158, 0.2);
+	color: #293D66;
+	transition: 0.6s;
+	transition-delay: 0.2s;
 }
 
 .md-button {
-    text-transform: capitalize;
-    &.mdbtn-border {
-        border: 1px ridge #CFD8DC;
-    }
-    &.home_btn {
-        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-        background-color: #FFF;
-    }
+	text-transform: capitalize;
+	&.mdbtn-border {
+		border: 1px ridge #CFD8DC;
+	}
+	&.white-btn {
+		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.35);
+		background-color: #FFF;
+	}
 }
 
 .seek_btn {
-    min-width: 60px;
-    height: 50%;
-    top: 15px;
-    right: 8px;
+	min-width: 40px;
+	height: 50%;
+	top: 15px;
+	right: 8px;
 }
 
 .notification {
-    position: absolute;
-    right: 13px;
-    top: -2px;
-    background-color: #FF8F00;
-    line-height: 20px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
+	position: absolute;
+	right: 13px;
+	top: -2px;
+	background-color: #FF8F00;
+	line-height: 20px;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
 }
 
 .event-btn {
-    padding: 0;
-    margin: 0;
-    height: 80px;
-    /*max-width: 210px;*/
-    cursor: pointer;
-    &.first {
-        background-color: #F5F5F5;
-        &:hover {
-            background-color: #aecfdd;
-            transition: 0.6s;
-        }
-    }
-    &.second {
-        background-color: #ECEFF1;
-        &:hover {
-            background-color: #aecfdd;
-            transition: 1.0s;
-        }
-    }
+	padding: 0;
+	margin: 15px 10px 10px 0;
+	height: 80px;
+	max-width: 95%;
+	cursor: pointer;
+	border-radius: 0 30px 30px 0;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.35);
+	background-color: #F5F5F5;
+	transition: 0.2s;
+	&:hover {
+		transform: scale(1.05);
+	}
+	&:focus {
+		background-color: #fff;
+		//box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+		transform: scale(1.05);
+	}
 }
 
 .anchor:hover {
-  cursor : pointer;
+	cursor: pointer;
 }

@@ -15,12 +15,12 @@
 			<md-tooltip>搜尋視界內物品/搜尋全世界</md-tooltip>
 			<span hide-sm>{{ vm.searchWithBound ? '視界內' : '全域' }}</span>
 		</md-switch>
-		<md-button flex flex-sm class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory, bound:vm.searchWithBound ? vm.mapBound : '', global:vm.searchWithBound ? 0 : 1})">
-			<md-icon hide-sm md-font-set="material-icons">search</md-icon><span class="ng-scope">搜索!</span>
+		<md-button flex flex-sm="5" class="md-accent md-raised md-hue-1 seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory, bound:vm.searchWithBound ? vm.mapBound : '', global:vm.searchWithBound ? 0 : 1})">
+			<md-icon md-font-set="material-icons">search</md-icon><span hide-sm>搜索!</span>
 		</md-button>
 	</div>
 </md-toolbar>
-<md-content resize ng-style="resizeWithOffset(140)">
+<md-content>
 	<div ng-show="loading" style="width: 65px; margin: 0 auto; margin-top:200px">
 		<md-progress-circular class="md-warn md-hue-2" md-mode='indeterminate'></md-progress-circular>
 	</div>
@@ -29,28 +29,29 @@
 		<img class="img-null onseek" src="../../images/emoji_null.png">
 	</div>
 	<div deckgrid class="deckgrid" source="vm.goods">
-		<md-card class="md-whiteframe-z3 item hvr-grow" style="cursor:pointer;">
+		<md-card class="md-whiteframe-z3 item hvr-glow">
 			<a ng-href="/seek/{{card.gid}}" ng-mouseenter="mother.onMouseOver(card.gid)" ng-mouseleave="mother.onMouseOut()">
-				<photoslider images="card.photo_path" class="md-card-image"></photoslider>
-				<md-card-content style="padding:8px;">
-					<div layout="column">
-						<h2 class="md-title" style="margin:0 0 10px 0;">{{card.name}}</h2>
-						<div layout="row" style="margin:5px 0;">
-							<div flex layout="row" layout-align="center center">
-								<i ng-click="mother.onClickFavorite($event, card)" class="material-icons heart">{{ card.favorited ? 'favorite' : 'favorite_border' }}</i>
-								<img src="../../images/icon/icon-book.png" ng-show="card.category === 'Books'" style="height:24px; width:auto;">
-								<img src="../../images/icon/icon-school.svg" ng-show="card.category === 'Textbooks'" style="height:24px; width:auto;">
-								<img src="../../images/icon/icon-cloth.png" ng-show="card.category === 'Clothes'" style="height:24px; width:auto;">
-								<img src="../../images/icon/icon-phone.svg" ng-show="card.category === '3C'" style="height:24px; width:auto;">
-								<img src="../../images/icon/icon-other.svg" ng-show="card.category === 'Others'" style="height:24px; width:auto;">
-							</div>
-							<div flex layout layout-align="center center">
-								<img class="circle" style="border-radius: 50%; "data-ng-src="{{card.user.photo_path}}" ng-click="mother.onClickUser($event, card.user.uid)">
-							</div>
+				<!-- <photoslider images="card.photo_path" class="md-card-image"></photoslider> -->
+				<img src="" data-ng-src="{{card.photo_path[0]}}" class="md-card-image">
+				<h2 class="md-title" style="margin:0 0 5px 0; padding: 7px;">{{card.name}}</h2>
+			</a>
+			<md-card-content style="padding: 0;">
+				<div layout="column">
+					<div layout="row" style="margin:0 0 10px 0;">
+						<div flex layout="row" layout-align="center center">
+							<i ng-click="mother.onClickFavorite($event, card)" class="material-icons heart hvr-grow">{{ card.favorited ? 'favorite' : 'favorite_border' }}</i>
+							<img src="../../images/icon/icon-book.png" ng-show="card.category === 'Books'" style="height:24px; width:auto;">
+							<img src="../../images/icon/icon-school.svg" ng-show="card.category === 'Textbooks'" style="height:24px; width:auto;">
+							<img src="../../images/icon/icon-cloth.png" ng-show="card.category === 'Clothes'" style="height:24px; width:auto;">
+							<img src="../../images/icon/icon-phone.svg" ng-show="card.category === '3C'" style="height:24px; width:auto;">
+							<img src="../../images/icon/icon-other.svg" ng-show="card.category === 'Others'" style="height:24px; width:auto;">
+						</div>
+						<div flex layout layout-align="center center">
+							<img class="circle hvr-grow" style="border-radius: 50%; cursor: pointer; " data-ng-src="{{card.user.photo_path}}" ng-click="mother.onClickUser($event, card.user.uid)">
 						</div>
 					</div>
-				</md-card-content>
-			</a>
+				</div>
+			</md-card-content>
 		</md-card>
 	</div>
 </md-content>

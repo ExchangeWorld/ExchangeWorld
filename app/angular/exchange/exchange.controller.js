@@ -8,6 +8,8 @@ exchangeModule.controller('ExchangeController', ExchangeController);
 function ExchangeController(
 	exchangeList,
 	$state,
+	$timeout,
+	$rootScope,
 	exchangeService,
 	$stateParams,
 	$interval,
@@ -17,12 +19,11 @@ function ExchangeController(
 	var vm             = this;
 	vm.goSeek          = ()=> $state.go('root.withSidenav.seek');
 	vm.myid            = parseInt($stateParams.uid, 10);
-	vm.myGoods         = {};
 	vm.exchangeList    = exchangeList;
-	vm.exchange        = {};
+	vm.exchange        = undefined;
 	vm.chatroom        = [];
 	vm.chatContent     = '';
-	vm.onClickGoods    = onClickGoods;
+	vm.onClickGoods    = (gid)=> $state.go('root.withSidenav.goods', { gid : gid });
 	vm.onClickExchange = onClickExchange;
 	vm.onClickComplete = onClickComplete;
 	vm.onClickDelete   = onClickDelete;
@@ -32,7 +33,7 @@ function ExchangeController(
 
 	////////////
 	activate();
-
+	
 	function activate() {
 		if($stateParams.uid !== $localStorage.user.uid.toString()) {
 			$state.go('root.withSidenav.404');
@@ -42,48 +43,45 @@ function ExchangeController(
 					exchangeService
 						.getExchange(exchange.eid)
 						.then(function(data) {
-							//console.log(data);
-							vm.myGoods = (data.goods[0].owner_uid === vm.myid) ? data.goods[0] : data.goods[1] ;
 							exchange.details = data;
-							exchange.with = (data.goods[0].owner_uid !== vm.myid)
-								? data.goods[0].user.name
-								: data.goods[1].user.name ;
+							exchange.lookupTable = {
+								me   : data.goods[0].owner_uid === vm.myid ? 0 : 1,
+								other: data.goods[1].owner_uid === vm.myid ? 0 : 1,
+							};
 						});
 				});
-				onClickExchange(vm.exchangeList[0].eid);
-				agreed();
+				// agreed();
 			}
 		}
 	}
 
-	function onClickGoods(gid) {
-		$state.go('root.withSidenav.goods', { gid : gid });
-	}
-
+	var timer;
+	timer = $interval(updateChat, 5000);
 	function updateChat() {
+		if(!vm.exchange) return;
 		exchangeService
 			.getChat(vm.exchange.eid, 100, 0)
-			.then(function(data) {
-				vm.chatroom = data;
-			});
+			.then((data)=> { vm.chatroom = data; });
 	}
 
-	var timer;
-	function onClickExchange(eid) {
-		$interval.cancel(timer);
-		exchangeService
-			.getExchange(eid)
-			.then(function(data) {
-				//console.log(data);
-				vm.exchange = data;
-				updateChat();
-				agreed();
-				timer = $interval(updateChat, 5000);
-			});
+	function onClickExchange(index) {
+		vm.exchange = vm.exchangeList[index];
+		updateChat();
+		agreed();
+		
+		$rootScope.$broadcast('goodsChanged', [vm.exchange.details.goods[vm.exchange.lookupTable.other]]);
+		$rootScope.$broadcast('mapMoveTo', vm.exchange.details.goods[vm.exchange.lookupTable.other].gid);
+		$timeout(()=> {
+			$rootScope.$broadcast('goodsChanged', [vm.exchange.details.goods[vm.exchange.lookupTable.other]]);
+			$rootScope.$broadcast('mapMoveTo', vm.exchange.details.goods[vm.exchange.lookupTable.other].gid);
+		}, 50);
 	}
 
 	function onClickComplete(ev) {
-		exchangeService.showCompleteExchange(ev, vm.exchange, vm.myid, function(){ vm.agreed = true; });
+		exchangeService
+			.showCompleteExchange(ev, vm.exchange, vm.myid, ()=> { 
+				$state.reload();
+			});
 		//agreed();
 	}
 
@@ -100,7 +98,7 @@ function ExchangeController(
 				.show(confirm)
 				.then(function() {
 					exchangeService.deleteExchange(eid);
-					$state.go('root.withSidenav.seek');
+					$state.reload();
 				});
 		}
 	}
@@ -123,10 +121,10 @@ function ExchangeController(
 	}
 
 	function agreed() {
-		if(vm.exchange.goods1_gid === vm.myGoods.gid) {
-			if(vm.exchange.goods1_agree) vm.agreed = true;
-		} else if(vm.exchange.goods2_gid === vm.myGoods.gid){
-			if(vm.exchange.goods2_agree) vm.agreed = true;
+		if(vm.exchange.goods1_gid === vm.exchange.details.goods[vm.exchange.lookupTable.me].gid) {
+			vm.agreed = vm.exchange.goods1_agree ? true : false;
+		} else if(vm.exchange.goods2_gid === vm.exchange.details.goods[vm.exchange.lookupTable.me].gid){
+			vm.agreed = vm.exchange.goods2_agree ? true : false;
 		} else {
 			vm.agreed = false;
 		}

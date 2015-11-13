@@ -2,7 +2,7 @@
 	list-style: none;
 	background-color: #e5e5e5;
 	margin: 0;
-	height: calc(100% - 114px);
+	//height: calc(100% - 114px);
 	padding: 0; // finality
 	overflow-y: auto;
 	li {
@@ -11,11 +11,12 @@
 		display: flex;
 	}
 	.avatar {
-		width: 40px;
+		width: 55px;
 		position: relative;
 		img {
 			display: block;
-			width: 40px;
+			width: 50px;
+			border-radius: 50%;
 		}
 	}
 	&.input {
@@ -27,23 +28,29 @@
 	}
 	&.message {
 		height: 375px;
+		background-color: rgba(229, 229, 229, 0.55);
+		border: 1px solid #e5e5e5;
+		margin-top: 10px;
 	}
 }
 
 .other {
 	.avatar {
-		margin-right: 5px;
+		//margin-right: 5px;
 		&:after {
-			border: 5px solid white;
-			border-left-color: transparent;
-			border-bottom-color: transparent;
-			//content: "";
+			content: "";
 			position: absolute;
 			top: 0;
 			right: 0;
 			width: 0;
 			height: 0;
+			border: 5px solid white;
+			border-left-color: transparent;
+			border-bottom-color: transparent;
 		}
+	}
+	.messages {
+		border-radius: 0 10px 10px 10px;
 	}
 }
 
@@ -55,6 +62,7 @@
 		border-bottom-right-radius: 0;
 		display: flex;
 		background-color: #E9F3FF;
+		border-radius: 10px 10px 0 10px;
 	}
 	.avatar {
 		margin-left: 5px;

@@ -46,12 +46,11 @@ function GoodsController(
 
 	vm.myGoods       = [];
 	vm.queuingList   = [];
-	//vm.queued      = false;
 	vm.onClickQueue  = onClickQueue;
 
 	vm.showPhotoViewer = showPhotoViewer;
 	vm.onClickUser = onClickUser;
-	vm.onClickBack = () => $window.history.back();
+	vm.onClickBack = ()=> $window.history.back();
 
 	activate();
 
@@ -69,15 +68,6 @@ function GoodsController(
 		$scope.$parent.$broadcast('mapMoveTo', goodData.gid);
 		updateComment();
 		updateStar();
-
-		/**
-		 * if is me, get the queue list on this goods
-		 * else, get all my goods that available to send queue request.
-		 */
-		if(vm.isLoggedIn) {
-			if (vm.isMe) getQueuing();
-			else getMyGoods();
-		}
 
 		auth
 			.getLoginState()
@@ -264,36 +254,6 @@ function GoodsController(
 			});
 	}
 
-	function getQueuing() {
-		goodsService
-			.getQueue(vm.goodData.gid)
-			.then(function(data) {
-				vm.queuingList = data;
-
-				/**
-				 * TODO: check if user already queued
-				 */
-				if (vm.isLoggedIn) {
-					vm.queued = true;
-				} else {
-					vm.queued = false;
-				}
-			});
-	}
-
-	/**
-	 * get all goods that available to queue this goods
-	 */
-	function getMyGoods() {
-		goodsService
-			.getUserGoods($localStorage.user.uid)
-			.then(function(myGoods) {
-				vm.myGoods = myGoods.filter(function(g) {
-					return (g.status === 0 && g.deleted === 0);
-				});
-			});
-	}
-
 	/**
 	 * user use a goods to queue the host goods
 	 */
@@ -306,9 +266,9 @@ function GoodsController(
 			 * TODO:
 			 *  1. restrict multi queue(?).
 			 */
-			goodsService.showQueueBox(ev, vm.myGoods, goodData.gid, goodData.owner_uid);
+			$state.go('root.withSidenav.goods.queue');
 		} else if(type === types[1]) {
-			goodsService.showQueuingBox(ev, vm.queuingList, goodData.gid);
+			$state.go('root.withSidenav.goods.queuing');
 		} else {
 			$state.go('root.withSidenav.404');
 		}
@@ -330,5 +290,6 @@ function GoodsController(
 			vm.cancel = ()=> $mdDialog.cancel();
 		}
 	}
-
 }
+
+

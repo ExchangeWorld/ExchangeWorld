@@ -1,6 +1,6 @@
 <md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length === 0">
 	<div layout="column" layout-align="center center" style="height:100%;">
-		<h2 class="md-display-2" style="margin:20px 0;">你沒有正在交換的物品喔！</h2>
+		<h2 class="md-display-1" style="margin:20px 0;">你沒有正在交換的物品喔！</h2>
 		<div layout layout-align="center center" style="height:50%; width:auto;">
 			<img src="../../images/emoji.png" style="max-width:100%; max-height: 100%; ">
 		</div>
@@ -9,96 +9,138 @@
 		</p>
 		<div style="margin-top: 20px;">
 			<md-button class="md-raised md-accent" ng-click="vm.goSeek()">
-				<span style="color:#fff; font-weight: 800;">GO！！</span>
+				<span style="color:#fff; font-weight: 500;">查看！</span>
 			</md-button>
 		</div>
 	</div>
 </md-content>
 <md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length !== 0">
-	<div layout="row" layout-sm="column" style="height:100%;">
-		<div class="sidebar-ex" flex="15" flex-sm="100" layout="column" layout-sm="row" layout-wrap>
-			<div class="event-btn " ng-class-odd="'first'" ng-class-even="'second'" layout="row" flex-sm="50" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange.eid)">
-				<div flex>
-					<p class="md-body-1 note" style="text-align: center">{{ exchange.details.goods[0].name }}</p>
-					<p class="md-body-1 note" style="text-align: center">{{ exchange.details.goods[1].name }}</p>
+	<div layout="row" layout-md="column" layout-sm="column" class="layout-ex">
+		<div class="sidebar-ex" flex="20" flex-md="100" flex-sm="100" layout="column" layout-md="row" layout-sm="row" layout-wrap layout-align-sm="center center">
+			<div class="event-btn hvr-bubble-float-left" layout="row" layout-algin="center center" flex-sm="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index)">
+				<div flex="55" flex-md="70" flex-sm="70" layout="column" layout-align="center center">
+					<p class="md-body-1 note goods-1">{{ exchange.details.goods[exchange.lookupTable.me].name }}</p>
+					<p class="md-body-1 note goods-2">{{ exchange.details.goods[exchange.lookupTable.other].name }}</p>
 				</div>
-				<div flex layout layout-align="end end">
-					<p class="md-caption">與 {{ exchange.with }}</p>
+				<div flex="15" hide-md hide-sm layout layout-align="center center">
+					<img style="max-height: 100%; max-width:100%;" src="../../images/Logo(ex).png" />
 				</div>
-			</div>
-		</div>
-		<div offset="5" flex="50" flex-sm="100">
-			<!-- title -->
-			<div layout layout-align="center center">
-			</div>
-			<div layout="row" class="info_container">
-				<span flex-sm="5"></span>
-				<!-- first user item -->
-				<div layout="column" flex="30">
-					<div class="item exchange" layout layout-align="center center">
-						<img class="img-exchange" ng-src="{{vm.exchange.goods[0].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.goods[0].gid)" />
-					</div>
-					<div layout="column" style="height:250px; background-color:#B0BEC5;">
-						<p class="md-body-1 text-ex">{{ vm.exchange.goods[0].name}}</p>
-						<p class="md-body-1 text-ex">{{ vm.exchange.goods[0].description }}</p>
-						<div flex layout layout-align="end end">
-							<img class="circle" ng-src="{{vm.exchange.goods[0].user.photo_path}}">
-						</div>
-					</div>
-				</div>
-				<!-- exchange icon -->
-				<div flex="30" layout="column" layout-align="center center">
-					<img src="../../images/icon(48-48).png" style="margin:0 0 20px 0;">
-					<md-button ng-show="!vm.agreed" class="md-raised md-accent md-hue-1" ng-click="vm.onClickComplete($event)">確認交換 !</md-button>
-					<md-button ng-show="!vm.agreed" ng-click="vm.onClickDelete($event, vm.exchange.eid)">先不要換</md-button>
-					<md-button ng-show="vm.agreed" disabled="true" class="md-accent md-hue-2">已確認交換</md-button>
-				</div>
-				<!-- second user item -->
-				<div layout="column" flex="30">
-					<div class="item exchange" layout layout-align="center center">
-						<img class="img-exchange" ng-src="{{vm.exchange.goods[1].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.goods[1].gid)" />
-					</div>
-					<div layout="column" style="height:250px; background-color:#B0BEC5;">
-						<p class="md-body-1 text-ex">{{ vm.exchange.goods[1].name}}</p>
-						<p class="md-body-1 text-ex">{{ vm.exchange.goods[1].description }}</p>
-						<div flex layout layout-align="end end">
-							<img class="circle" ng-src="{{vm.exchange.goods[1].user.photo_path}}">
-						</div>
-					</div>
+				<div flex="25" layout layout-align="center center">
+					<img class="circle exchange" ng-src="{{exchange.details.goods[exchange.lookupTable.other].user.photo_path}}" />
 				</div>
 				<span flex="5"></span>
 			</div>
 		</div>
+		<div ng-show="vm.exchange === undefined" flex="80" flex-md="100" flex-sm="100" layout layout-align="center center">
+			<h2 class="md-display-1" hide-md hide-sm>點擊左側清單觀看目前正在進行的交換</h2>
+			<div flex-md="80" flex-sm="80">
+				<h2 class="md-display-1" hide-gt-md>點擊上方清單觀看目前正在進行的交換</h2>
+			</div>
+		</div>
+		<div ng-show="vm.exchange !== undefined" offset="5" flex="50" flex-md="100" flex-sm="100" style="height:100%;" layout layout-align="center center">
+			<div layout="row" class="info_container layout-ex center">
+				<!-- <span flex-sm="5"></span> -->
+				<!-- first user item -->
+				<!-- <div layout="column" flex="30">
+					<div class="item exchange" layout layout-align="center center">
+						<img class="img-exchange" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)" />
+					</div>
+					<div layout="column" style="height:250px; background-color:#B0BEC5;">
+						<p class="md-body-1 text-ex">{{ vm.exchange.details.goods[vm.exchange.lookupTable.me].name}}</p>
+						<p class="md-body-1 text-ex">{{ vm.exchange.details.goods[vm.exchange.lookupTable.me].description }}</p>
+						<div flex layout layout-align="end end">
+							<img class="circle" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].user.photo_path}}">
+						</div>
+					</div>
+				</div> -->
+				<md-card flex="35" class="md-whiteframe-z3 item hvr-glow">
+					<div layout="column">
+						<img ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)" class="md-card-image" style="cursor:pointer;">
+						<md-card-content style="padding: 0;">
+							<div flex layout-fill layout="column">
+								<div layout="column" layout-align="center center">
+									<h2 class="md-title" style="padding: 7px; text-align: center;">{{ vm.exchange.details.goods[vm.exchange.lookupTable.me].name}}</h2>
+									<p class="md-subhead text-ex">{{ vm.exchange.details.goods[vm.exchange.lookupTable.me].description }}</p>
+								</div>
+								<img class="circle card-ex" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].user.photo_path}}">
+							</div>
+						</md-card-content>
+					</div>
+				</md-card>
+				<!-- exchange icon -->
+				<div flex="20" layout="column" layout-align="center center">
+					<img src="../../images/icon(48-48).png" style="margin:0 0 20px 0;">
+					<md-button class="btn-rwd md-raised md-accent md-hue-1" ng-show="!vm.agreed" ng-click="vm.onClickComplete($event)">
+						<span hide-sm>確認交換 !</span>
+						<div layout layout-align="center center" hide-gt-sm><i class="material-icons">sync</i></div>
+					</md-button>
+					<md-button class="btn-rwd md-accent white-btn" ng-show="!vm.agreed" ng-click="vm.onClickDelete($event, vm.exchange.eid)">
+						<span hide-sm>先不要換</span>
+						<div layout layout-align="center center" hide-gt-sm>
+							<i class="material-icons">sync_disabled</i>
+						</div>
+					</md-button>
+					<md-button ng-show="vm.agreed" disabled="true" class="md-accent md-hue-2">已確認交換</md-button>
+				</div>
+				<!-- second user item -->
+				<!-- <div layout="column" flex="30">
+					<div class="item exchange" layout layout-align="center center">
+						<img class="img-exchange" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.other].gid)" />
+					</div>
+					<div layout="column" style="height:250px; background-color:#B0BEC5;">
+						<p class="md-body-1 text-ex">{{ vm.exchange.details.goods[vm.exchange.lookupTable.other].name}}</p>
+						<p class="md-body-1 text-ex">{{ vm.exchange.details.goods[vm.exchange.lookupTable.other].description }}</p>
+						<div flex layout layout-align="end end">
+							<img class="circle" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].user.photo_path}}">
+						</div>
+					</div>
+				</div> -->
+				<md-card flex="35" class="md-whiteframe-z3 item hvr-glow">
+					<div layout="column">
+						<img ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.other].gid)" class="md-card-image" style="cursor:pointer;">
+						<md-card-content style="padding: 0;">
+							<div flex layout-fill layout="column">
+								<div layout="column" layout-align="center center">
+									<h2 class="md-title" style="padding: 7px; text-align: center;">{{ vm.exchange.details.goods[vm.exchange.lookupTable.other].name}}</h2>
+									<p class="md-subhead text-ex">{{ vm.exchange.details.goods[vm.exchange.lookupTable.other].description }}</p>
+								</div>
+								<img class="circle card-ex" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].user.photo_path}}">
+							</div>
+						</md-card-content>
+					</div>
+				</md-card>
+				<span flex="5"></span>
+			</div>
+		</div>
 		<!-- chat room -->
-		<div flex flex-sm layout="row" style="height:100%">
-			<span flex="5" hide-sm></span>
-			<div flex style="height:100%">
+		<div ng-show="vm.exchange !== undefined" flex="25" flex-md="75" flex-sm="95" layout="column" class="layout-ex right">
+			<map-block style="height:30%; z-index:0;"></map-block>
+			<div style="height:70%; z-index:1;">
 				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
 					<span>聊天</span>
 				</md-toolbar>
-				<ul class="discussion" scroll='vm.chatroom'>
+				<ul class="discussion chat-ex" scroll='vm.chatroom'>
 					<li ng-class="{true: 'other', false: 'self'}[chat.sender_uid !== {{ vm.myid }}]" ng-repeat="chat in vm.chatroom">
 						<div class="avatar" ng-show="(chat.sender_uid !== {{ vm.myid }})">
 							<div ng-show="(chat.sender_uid !== {{ vm.myid }})">
-								<img ng-show="(chat.sender_uid === {{vm.exchange.goods[0].user.uid}})" ng-src="{{vm.exchange.goods[0].user.photo_path}}" />
-								<img ng-show="(chat.sender_uid === {{vm.exchange.goods[1].user.uid}})" ng-src="{{vm.exchange.goods[1].user.photo_path}}" />
+								<img ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].user.photo_path}}" />
 							</div>
-							<md-tooltip ng-show="(chat.sender_uid === {{ vm.myid }})">
-								{{vm.exchange.goods[0].user.name}}
-							</md-tooltip>
 							<md-tooltip ng-show="(chat.sender_uid !== {{ vm.myid }})">
-								{{vm.exchange.goods[1].user.name}}
+								{{vm.exchange.details.goods[vm.exchange.lookupTable.other].user.name}}
 							</md-tooltip>
 						</div>
-						<div class="messages">
+						<div class="messages" layout layout-align="center center">
 							<p class="content">{{ chat.content }}</p>
+							<md-tooltip>
+								{{ chat.timestamp | date:'medium' }}
+							</md-tooltip>
 						</div>
 					</li>
 				</ul>
 				<ul class="discussion input">
 					<form ng-submit="vm.onSubmitChat()">
 						<md-input-container>
-							<label>Write some here...</label>
+							<label style="top:-5px;">輸入訊息...</label>
 							<input type="text" ng-model="vm.chatContent" name="text" />
 						</md-input-container>
 						<input type="submit" id="submit" value="Submit" ng-show="false" />

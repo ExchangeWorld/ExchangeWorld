@@ -42,9 +42,20 @@
 	&.blue {
 		color: #6e5fdd;
 	}
-	&.delete{
+	&.delete {
 		cursor: pointer;
 		color: rgba(0, 0, 0, 0.4);
 		padding-right: 16px;
+	}
+	&.add-photo {
+		font-size: 100px;
+		margin: 2px;
+		color: #757575;
+		border: 2px dashed;
+		transition: 0.3s;
+		&:hover {
+			opacity: 0.8;
+			filter: alpha(opacity=80);
+		}
 	}
 }

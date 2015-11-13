@@ -90,7 +90,7 @@ function MapController(
 					lat : data.latitude,
 					lng : data.longitude
 				});
-				map.setZoom(vm.zoom);
+				map.setZoom(parseInt(vm.zoom, 10));
 			});
 	}
 
@@ -121,7 +121,7 @@ function MapController(
 					bound.getSouthWest().lat() < -85 
 				) {
 					const zoom = map.getZoom();
-					map.setZoom(zoom + 1);
+					map.setZoom(parseInt(zoom, 10) + 1);
 				} else if (
 					bound.getNorthEast().lat() > 85 ||
 					bound.getSouthWest().lat() < -85 

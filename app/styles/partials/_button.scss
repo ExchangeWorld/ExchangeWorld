@@ -51,6 +51,11 @@ map {
 		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.35);
 		background-color: #FFF;
 	}
+	&.md-fab {
+		height: 48px;
+		width: 48px;
+		line-height: 48px;
+	}
 }
 
 .seek_btn {

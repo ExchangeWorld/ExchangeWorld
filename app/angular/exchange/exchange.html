@@ -14,7 +14,7 @@
 		</div>
 	</div>
 </md-content>
-<md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length !== 0">
+<md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length !== 0" style="overflow-x: hidden;">
 	<div layout="row" layout-md="column" layout-sm="column" class="layout-ex">
 		<div class="sidebar-ex" flex="20" flex-md="100" flex-sm="100" layout="column" layout-md="row" layout-sm="row" layout-wrap layout-align-sm="center center">
 			<div class="event-btn hvr-bubble-float-left" layout="row" layout-algin="center center" flex-sm="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index)">
@@ -37,7 +37,7 @@
 				<h2 class="md-display-1" hide-gt-md>點擊上方清單觀看目前正在進行的交換</h2>
 			</div>
 		</div>
-		<div ng-show="vm.exchange !== undefined" offset="5" flex="50" flex-md="100" flex-sm="100" style="height:100%;" layout layout-align="center center">
+		<div ng-show="vm.exchange !== undefined" offset-gt-sm="5" flex="50" flex-md="100" flex-sm="100" style="height:100%;" layout layout-align="center center">
 			<div layout="row" class="info_container layout-ex center">
 				<!-- <span flex-sm="5"></span> -->
 				<!-- first user item -->
@@ -53,7 +53,7 @@
 						</div>
 					</div>
 				</div> -->
-				<md-card flex="35" class="md-whiteframe-z3 item hvr-glow">
+				<md-card flex="35" flex-sm="40" class="md-whiteframe-z3 item hvr-glow">
 					<div layout="column">
 						<img ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)" class="md-card-image" style="cursor:pointer;">
 						<md-card-content style="padding: 0;">
@@ -68,7 +68,7 @@
 					</div>
 				</md-card>
 				<!-- exchange icon -->
-				<div flex="20" layout="column" layout-align="center center">
+				<div flex="20" flex-sm="15" layout="column" layout-align="center center">
 					<img src="../../images/icon(48-48).png" style="margin:0 0 20px 0;">
 					<md-button class="btn-rwd md-raised md-accent md-hue-1" ng-show="!vm.agreed" ng-click="vm.onClickComplete($event)">
 						<span hide-sm>確認交換 !</span>
@@ -95,7 +95,7 @@
 						</div>
 					</div>
 				</div> -->
-				<md-card flex="35" class="md-whiteframe-z3 item hvr-glow">
+				<md-card flex="35" flex-sm="40" class="md-whiteframe-z3 item hvr-glow">
 					<div layout="column">
 						<img ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.other].gid)" class="md-card-image" style="cursor:pointer;">
 						<md-card-content style="padding: 0;">
@@ -109,7 +109,7 @@
 						</md-card-content>
 					</div>
 				</md-card>
-				<span flex="5"></span>
+				<span flex-gt-sm="5"></span>
 			</div>
 		</div>
 		<!-- chat room -->

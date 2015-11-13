@@ -11,13 +11,13 @@
 	<md-content layout-padding layout-margin style="overflow-x: hidden;">
 		<!-- toolbar -->
 		<!-- Item Name Input  -->
-		<div class="info_container for_input" layout="row" layout-align="center center">
-			<md-input-container flex="70">
+		<div class="info_container for_input" layout="row" layout-align="start center">
+			<md-input-container flex="70" flex-sm="50">
 				<label>物品名稱</label>
 				<input type="text" ng-model="vm.goodsName" required>
 			</md-input-container>
-			<div flex="30" layout="row" layout-align="center center">
-				<i class="material-icons">list</i>
+			<div flex="30" flex-sm="50" layout="row" layout-align="center center">
+				<i class="material-icons" hide-sm>list</i>
 				<md-input-container>
 					<label>物品類別</label>
 					<md-select ng-model="vm.goodsCategory" aria-label="good.cate">

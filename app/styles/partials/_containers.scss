@@ -101,11 +101,12 @@ md-input-container {
 
 .home_container2 {
 	background-color: #E5E5ED;
-	padding: 30px 0px;
+	padding-top: 30px;
 }
 
 .info_container {
-	margin: 20px 0px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	&.for_input {
 		margin: 8.5% 0px;
 	}
@@ -117,6 +118,10 @@ md-input-container {
 	}
 	&.profile {
 		margin: 9% 0;
+	}
+	&.large {
+		margin-top: 50px;
+		margin-bottom: 50px;
 	}
 }
 

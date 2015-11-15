@@ -6,7 +6,7 @@ const _             = require('lodash');
 profileModule.service('profileService', profileService);
 
 /** @ngInject */
-function profileService(Restangular, $q, facebookService, exception, logger) {
+function profileService(Restangular, $q, facebookService, exception, logger, colorThief) {
 	var service = {
 		getProfile,
 		editProfile,
@@ -101,8 +101,17 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 				if (_.isArray(data)) {
 					data.forEach(function(goods) {
 						if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
+						var image = new Image();
+						image.crossOrigin = 'Anonymous';
+						image.src = goods.photo_path[0];
+						image.onload = ()=> {
+							var ct = new colorThief.ColorThief();
+							var color = ct.getColor(image); 
+							goods.bgStyle = {
+								"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+							};
+						};
 					});
-					console.log(data);
 					defer.resolve(data);
 				}
 			}, (error)=> {

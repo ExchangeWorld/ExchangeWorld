@@ -12,6 +12,7 @@ function ProfileController(
 	auth,
 	message,
 	notification,
+	colorThief,
 	logger,
 	$scope,
 	$state,
@@ -59,6 +60,7 @@ function ProfileController(
 					vm.isLoggedIn = false;
 				}
 			});
+
 		profileService
 			.getMyGoods($stateParams.uid)
 			.then(function(data) {
@@ -66,11 +68,22 @@ function ProfileController(
 				vm.myGoodsExchanged = data.filter(function(g) { return g.status === 1; });
 				$rootScope.$broadcast('goodsChanged', vm.myGoodsPending);
 			});
+		
 		favorite
 			.getMyFavorite($stateParams.uid)
 			.then(function(data) {
 				vm.myStar = data.map(function(g) {
 					if (_.isString(g.good.photo_path)) g.good.photo_path = JSON.parse(g.good.photo_path);
+					var image = new Image();
+					image.crossOrigin = 'Anonymous';
+					image.src = g.good.photo_path[0];
+					image.onload = ()=> {
+						var ct = new colorThief.ColorThief();
+						var color = ct.getColor(image); 
+						g.good.bgStyle = {
+							"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+						};
+					};
 					return g.good;
 				});
 			});

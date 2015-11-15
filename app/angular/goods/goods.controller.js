@@ -89,11 +89,9 @@ function GoodsController(
 		image.onload = ()=> {
 			var ct = new colorThief.ColorThief();
 			var color = ct.getColor(image); 
-			//console.log(color);
 			vm.bgStyle = {
 				"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`
 			};
-			//console.log(vm.bgStyle);
 		};
 
 	}

@@ -2,6 +2,7 @@
 
 const colorThiefModule = require('./colorThief.module');
 
+/** @ngInject */
 colorThiefModule.factory('colorThief', colorThief);
 
 function colorThief() {

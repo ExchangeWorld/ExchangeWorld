@@ -83,11 +83,10 @@ function GoodsController(
 			});
 		goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
 
-		var image = new Image();
+		var ct = new colorThief.ColorThief();
+		var image = document.getElementById('img');
 		image.crossOrigin = 'Anonymous';
-		image.src = goodData.photo_path[0];
 		image.onload = ()=> {
-			var ct = new colorThief.ColorThief();
 			var color = ct.getColor(image); 
 			vm.bgStyle = {
 				"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`

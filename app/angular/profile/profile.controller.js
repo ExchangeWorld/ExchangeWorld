@@ -18,7 +18,8 @@ function ProfileController(
 	$state,
 	$stateParams,
 	$rootScope,
-	$localStorage
+	$localStorage,
+	$timeout
 ) {
 	var vm                 = this;
 	var ct                 = new colorThief.ColorThief();
@@ -38,7 +39,7 @@ function ProfileController(
 	vm.isReadOnly          = true;
 	vm.onClickEdit         = onClickEdit;
 	vm.getNumber           = number => new Array(number);
-	vm.onClickGoods        = onClickGoods;
+	vm.onClickGoods        = (gid)=> $state.go('root.withSidenav.goods', { gid : gid });
 
 
 	/////////////
@@ -75,18 +76,17 @@ function ProfileController(
 			.then(function(data) {
 				vm.myStar = data.map(function(g) {
 					if (_.isString(g.good.photo_path)) g.good.photo_path = JSON.parse(g.good.photo_path);
-					var image = new Image();
-					image.crossOrigin = 'Anonymous';
-					image.src = g.good.photo_path[0];
-					image.onload = ()=> {
-						var color = ct.getColor(image); 
-						g.good.bgStyle = {
-							"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`
-						};
-					};
 					return g.good;
 				});
 			});
+			
+		$timeout(function(){
+			[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
+				console.log(goods);
+				dominateColor(goods);
+			});				
+		}, 50);
+
 	}
 
 	function onClickFollow(uid, index) {
@@ -138,9 +138,15 @@ function ProfileController(
 		}
 		vm.isReadOnly = !vm.isReadOnly;
 	}
-
-	function onClickGoods(gid) {
-		$state.go('root.withSidenav.goods', { gid : gid });
+	
+	function dominateColor(goods) {
+		var image = document.getElementById(`img_${goods.gid}`);
+		image.onload = ()=> {
+			var color = ct.getColor(image); 
+			goods.bgStyle = {
+				"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+			};
+		};
 	}
 
 }

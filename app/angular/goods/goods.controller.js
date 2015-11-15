@@ -85,7 +85,6 @@ function GoodsController(
 
 		var ct = new colorThief.ColorThief();
 		var image = document.getElementById('img');
-		image.crossOrigin = 'Anonymous';
 		image.onload = ()=> {
 			var color = ct.getColor(image); 
 			vm.bgStyle = {

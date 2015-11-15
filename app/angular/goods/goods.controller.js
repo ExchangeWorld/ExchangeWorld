@@ -31,6 +31,7 @@ function GoodsController(
 	vm.isMe       = vm.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
 	vm.goodData   = goodData;
 	vm.availableCategory   = AvailableCategory;
+	vm.bgStyle = '';
 
 	vm.comment         = '';
 	vm.goodComments    = [];
@@ -83,12 +84,16 @@ function GoodsController(
 		goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
 
 		var image = new Image();
-		image.src = goodData.photo_path[0];//'../../images/icon/icon-book.png';
-		//image.src = '../../images/404.png';
+		image.crossOrigin = 'Anonymous';
+		image.src = goodData.photo_path[0];
 		image.onload = ()=> {
 			var ct = new colorThief.ColorThief();
 			var color = ct.getColor(image); 
-			console.log(color);
+			//console.log(color);
+			vm.bgStyle = {
+				"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+			};
+			//console.log(vm.bgStyle);
 		};
 
 	}

@@ -62,10 +62,13 @@
 		<div layout="row" style="margin-top:20px;">
 			<span flex="75" flex-sm="60"></span>
 			<div flex="25" flex-sm>
-				<md-progress-circular ng-show="vm.loading" class="md-warn md-hue-2" md-mode='indeterminate'></md-progress-circular>
 				<input ng-show="!vm.loading" class="md-button md-primary md-raised" type="submit" id="submit" value="發佈物品！" style="width:100px;"></input>
 			</div>
 		</div>
+
 	</md-content>
 </form>
-
+<div ng-show="vm.loading" class="md-scroll-mask" style="z-index: 100; background-color: rgba(0, 0, 0, 0.53); bottom:-200px;" aria-hidden="true"> 
+	 <md-progress-circular class="md-warn md-hue-2" md-mode='indeterminate' style="margin:200px auto;"></md-progress-circular>
+	 <div class="md-scroll-mask-bar"></div>
+</div>

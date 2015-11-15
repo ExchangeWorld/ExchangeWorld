@@ -82,17 +82,15 @@ function GoodsController(
 			});
 		goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
 
-		//console.log(colorThief.ColorThief);
-		var image = new Image;
+		var image = new Image();
 		image.src = goodData.photo_path[0];//'../../images/icon/icon-book.png';
-		//var i = new colorThief.ColorThief();
-		var img = document.getElementById('img2');
-		console.log(image);
-		image.onload = function(){
+		//image.src = '../../images/404.png';
+		image.onload = ()=> {
 			var ct = new colorThief.ColorThief();
 			var color = ct.getColor(image); 
 			console.log(color);
 		};
+
 	}
 
 	function onEdit(gid) {

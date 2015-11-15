@@ -23,7 +23,8 @@
 		</div>
 	</div>
 	<div flex="80" layout layout-align="center center">
-		<img id="img" class="img-goods" ng-src="{{ vm.goodData.photo_path[0] }}" ng-click="vm.showPhotoViewer($event)">
+		<!--<img id="img" class="img-goods" ng-src="{{ vm.goodData.photo_path[0] }}" ng-click="vm.showPhotoViewer($event)">-->
+		<canvas id="ccanvas" width='600' height='450' style=" border: 1px solid; "></canvas>
 	</div>
 	<div class="info_container" layout="row">
 		<div flex="40" layout="column" layout-align="center center" ng-show="!vm.isMe">

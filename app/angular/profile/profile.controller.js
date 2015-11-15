@@ -21,6 +21,7 @@ function ProfileController(
 	$localStorage
 ) {
 	var vm                 = this;
+	var ct                 = new colorThief.ColorThief();
 	const types            = ['following', 'follower'];
 	vm.profile             = profile;
 	vm.largePic            = '';
@@ -78,7 +79,6 @@ function ProfileController(
 					image.crossOrigin = 'Anonymous';
 					image.src = g.good.photo_path[0];
 					image.onload = ()=> {
-						var ct = new colorThief.ColorThief();
 						var color = ct.getColor(image); 
 						g.good.bgStyle = {
 							"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`

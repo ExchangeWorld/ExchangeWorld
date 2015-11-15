@@ -20,6 +20,7 @@ require('../utils/router/router.module');
 require('../utils/resize/resize.module');
 require('../utils/auth/auth.module');
 require('../utils/scroll/scroll.module');
+require('../utils/colorThief/colorThief.module');
 
 const requires = [
 	'ui.router',
@@ -38,6 +39,7 @@ const requires = [
 	'utils.router',
 	'utils.resize',
 	'utils.auth',
+	'utils.colorThief',
 ];
 
 module.exports = angular.module('app.core', requires);

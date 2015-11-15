@@ -22,9 +22,8 @@
 			<i class="material-icons delete">delete</i>
 		</div>
 	</div>
-	<!-- <div ng-show="vm.isMe" ng-click="vm.onDelete(vm.goodData.gid)" class="cross">X</div> -->
 	<div flex="80" layout layout-align="center center">
-		<img class="img-goods" ng-src="{{ vm.goodData.photo_path[0] }}" ng-click="vm.showPhotoViewer($event)">
+		<img id="img" class="img-goods" ng-src="{{ vm.goodData.photo_path[0] }}" ng-click="vm.showPhotoViewer($event)">
 	</div>
 	<div class="info_container" layout="row">
 		<div flex="40" layout="column" layout-align="center center" ng-show="!vm.isMe">

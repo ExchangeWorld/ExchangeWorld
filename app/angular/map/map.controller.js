@@ -37,7 +37,7 @@ function MapController(
 	// $scope.$on('mapInitialized', mapInitialized);
 	NgMap.getMap().then(mapInitialized);
 
-	activate();
+	// activate();
 
 	/* After map is loaded */
 	function mapInitialized(evtMap) {
@@ -59,13 +59,19 @@ function MapController(
 		google.maps.event.addListener(map, 'mousedown', onMousedown);
 		google.maps.event.addListener(map, 'mouseup', onMouseup);
 		google.maps.event.addListener(map, 'dragstart', onDragstart);
+
+		activate();
 	}
 
 	/* Before map is loaded */
 	function activate() {
 		if ($stateParams.olc) {
 			const coord = OpenLocationCode.decode($stateParams.olc.replace(' ','+'));
-			vm.coords = [coord.latitudeCenter, coord.longitudeCenter];
+			// vm.coords = [coord.latitudeCenter, coord.longitudeCenter];
+			map.panTo({
+				lat : coord.latitudeCenter,
+				lng : coord.longitudeCenter,
+			});
 		// } else if ($stateParams.hasOwnProperty('olc')) {
 		// 	geolocation
 		// 		.getLocation({maximumAge:60000, timeout:5000, enableHighAccuracy:true})
@@ -74,14 +80,17 @@ function MapController(
 		// 		});
 		}
 		if (!isNaN($stateParams.z)) {
-			vm.zoom = parseInt($stateParams.z, 10);
+			// vm.zoom = parseInt($stateParams.z, 10);
+			map.setZoom(parseInt($stateParams.z, 10));
 		}
 
 		if ($state.current.title === 'post') {
-			vm.draggableCursor = 'crosshair';
-			vm.draggingCursor = 'crosshair';
+			map.setOptions({ 
+				draggableCursor:'crosshair', 
+				draggingCursor: 'crosshair'}
+			);
 		}
-		vm.smallMap = ($state.current.title === 'exchange');
+		vm.smallMap = $state.current.title === 'exchange';
 	}
 
 	function getCurrentPosition() {
@@ -119,25 +128,25 @@ function MapController(
 				const bound = map.getBounds();
 				$rootScope.$broadcast('boundChanged', bound);
 
-				// if (
-				// 	bound.getNorthEast().lat() > 85 &&
-				// 	bound.getSouthWest().lat() < -85 
-				// ) {
-				// 	const zoom = map.getZoom();
-				// 	map.setZoom(parseInt(zoom, 10) + 1);
-				// } else if (
-				// 	bound.getNorthEast().lat() > 85 ||
-				// 	bound.getSouthWest().lat() < -85 
-				// ) {
-				// 	const originCenter = bound.getCenter();
-				// 	const latOffset = bound.getNorthEast().lat() > 85
-				// 		? bound.getNorthEast().lat() - 85
-				// 		: bound.getSouthWest().lat() + 85;
-				// 	map.panTo({
-				// 		lat : originCenter.lat() - latOffset,
-				// 		lng : originCenter.lng(),
-				// 	});
-				// }
+				if (
+					bound.getNorthEast().lat() > 85 &&
+					bound.getSouthWest().lat() < -85 
+				) {
+					const zoom = map.getZoom();
+					map.setZoom(parseInt(zoom, 10) + 1);
+				} else if (
+					bound.getNorthEast().lat() > 85 ||
+					bound.getSouthWest().lat() < -85 
+				) {
+					const originCenter = bound.getCenter();
+					const latOffset = bound.getNorthEast().lat() > 85
+						? bound.getNorthEast().lat() - 85
+						: bound.getSouthWest().lat() + 85;
+					map.panTo({
+						lat : originCenter.lat() - latOffset,
+						lng : originCenter.lng(),
+					});
+				}
 			}
 		}, 50);
 

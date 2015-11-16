@@ -25,3 +25,5 @@ var job = (str, options) => {
 
 module.exports.out = out;
 module.exports.job = job;
+module.exports.working_path = working_path;
+

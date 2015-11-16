@@ -116,9 +116,6 @@ md-input-container {
 	&.chat {
 		margin: 5px 0 10px 0;
 	}
-	&.profile {
-		margin: 9% 0;
-	}
 	&.large {
 		margin-top: 50px;
 		margin-bottom: 50px;
@@ -246,6 +243,9 @@ div.md-open-menu-container {
 	.btn-rwd {
 		min-width: 44px;
 	}
+	.profile-top {
+		margin: 4% 0;
+	}
 }
 
 @media screen and (min-width: 600px) {
@@ -270,6 +270,9 @@ div.md-open-menu-container {
 	}
 	.btn-rwd {
 		min-width: 75px;
+	}
+	.profile-top {
+		margin: 6% 0;
 	}
 }
 
@@ -296,6 +299,9 @@ div.md-open-menu-container {
 	.btn-rwd {
 		min-width: 88px;
 	}
+	.profile-top {
+		margin: 9% 0;
+	}
 }
 
 @media screen and (min-width: 1400px) {
@@ -304,6 +310,9 @@ div.md-open-menu-container {
 		&.center {
 			height: 82%;
 		}
+	}
+	.profile-top {
+		margin: 10% 0;
 	}
 }
 

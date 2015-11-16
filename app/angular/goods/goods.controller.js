@@ -89,14 +89,14 @@ function GoodsController(
 		image.onload = ()=> {			
 			var pallete = ct.getPalette(image, 2);
 			vm.bgStyle = {
-				"background-color": `rgb(${pallete[0][0]}, ${pallete[0][1]}, ${pallete[0][2]})`
+				"background-color": `rgb(${pallete[0][0]}, ${pallete[0][1]}, ${pallete[0][2]})`,
+				"border-radius": "20px"
 			};
-			vm.bordercolor[0] = {
+			vm.bordercolor = [{
 				"border": `rgb(${pallete[1][0]}, ${pallete[1][1]}, ${pallete[1][2]}) solid 2px`
-			};
-			vm.bordercolor[1] = {
+			},{
 				"border": `rgb(${pallete[2][0]}, ${pallete[2][1]}, ${pallete[2][2]}) solid 2px`
-			};
+			}];
 		};
 	}
 

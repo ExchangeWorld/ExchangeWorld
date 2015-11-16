@@ -1,12 +1,12 @@
 <md-content>
-	<div layout="row" class="info_container profile" layout-align="center center">
+	<div layout="row" class="profile-top" layout-align="center center">
 		<!-- user avatar -->
-		<div layout layout-align="center center" ng-style="{'background-image':'url({{ vm.profile.largePic }})','width':'150px' , 'height':'150px', 'background-repeat':'no-repeat', 'background-position':'center','border-radius':'50%','background-size':'contain'}">
+		<div layout layout-align="center center" ng-style="{'background-image':'url({{ vm.profile.largePic }})','width':'120px' , 'height':'120px', 'background-repeat':'no-repeat', 'background-position':'center','border-radius':'50%','background-size':'contain'}">
 		</div>
 		<!-- user name & follow button -->
 		<div flex="60" flex-sm="45" layout="column">
 			<div layout="column">
-				<div layout="column" layout-align="center center" class="note username">
+				<div layout="column" layout-align="center center">
 					<h4 class="md-headline" style="margin:8px 0;">{{ vm.profile.name }}</h4>
 					<div layout="row" layout-align="center center">
 						<i class="material-icons heart">favorite</i>

@@ -6,7 +6,7 @@ const _             = require('lodash');
 profileModule.service('profileService', profileService);
 
 /** @ngInject */
-function profileService(Restangular, $q, facebookService, exception, logger, colorThief) {
+function profileService(Restangular, $q, facebookService, exception, logger) {
 	var service = {
 		getProfile,
 		editProfile,
@@ -99,7 +99,6 @@ function profileService(Restangular, $q, facebookService, exception, logger, col
 			})
 			.then(function(data) {
 				if (_.isArray(data)) {
-					var ct = new colorThief.ColorThief();
 					data.forEach(function(goods) {
 						if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
 					});

@@ -101,11 +101,12 @@ md-input-container {
 
 .home_container2 {
 	background-color: #E5E5ED;
-	padding: 30px 0px;
+	padding-top: 30px;
 }
 
 .info_container {
-	margin: 20px 0px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	&.for_input {
 		margin: 8.5% 0px;
 	}
@@ -117,6 +118,10 @@ md-input-container {
 	}
 	&.profile {
 		margin: 9% 0;
+	}
+	&.large {
+		margin-top: 50px;
+		margin-bottom: 50px;
 	}
 }
 
@@ -239,7 +244,7 @@ div.md-open-menu-container {
 		height: 400px;
 	}
 	.btn-rwd {
-		min-width: 50px;
+		min-width: 44px;
 	}
 }
 
@@ -282,7 +287,7 @@ div.md-open-menu-container {
 			padding-left: 0;
 		}
 		&.center {
-			height: 80%
+			height: 95%
 		}
 	}
 	.chat-ex {
@@ -297,7 +302,7 @@ div.md-open-menu-container {
 	.layout-ex {
 		height: 100%;
 		&.center {
-			height: 70%;
+			height: 82%;
 		}
 	}
 }

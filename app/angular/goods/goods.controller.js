@@ -12,6 +12,7 @@ function GoodsController(
 	AvailableCategory,
 	goodsService,
 	notification,
+	colorThief,
 	favorite,
 	logger,
 	$state,
@@ -30,6 +31,7 @@ function GoodsController(
 	vm.isMe       = vm.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
 	vm.goodData   = goodData;
 	vm.availableCategory   = AvailableCategory;
+	vm.bgStyle = '';
 
 	vm.comment         = '';
 	vm.goodComments    = [];
@@ -80,6 +82,16 @@ function GoodsController(
 				}
 			});
 		goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
+
+		var ct = new colorThief.ColorThief();
+		var image = document.getElementById('img');
+		image.onload = ()=> {
+			var color = ct.getColor(image); 
+			vm.bgStyle = {
+				"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+			};
+		};
+
 	}
 
 	function onEdit(gid) {

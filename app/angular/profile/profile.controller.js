@@ -12,14 +12,17 @@ function ProfileController(
 	auth,
 	message,
 	notification,
+	colorThief,
 	logger,
 	$scope,
 	$state,
 	$stateParams,
 	$rootScope,
-	$localStorage
+	$localStorage,
+	$timeout
 ) {
 	var vm                 = this;
+	var ct                 = new colorThief.ColorThief();
 	const types            = ['following', 'follower'];
 	vm.profile             = profile;
 	vm.largePic            = '';
@@ -36,7 +39,7 @@ function ProfileController(
 	vm.isReadOnly          = true;
 	vm.onClickEdit         = onClickEdit;
 	vm.getNumber           = number => new Array(number);
-	vm.onClickGoods        = onClickGoods;
+	vm.onClickGoods        = (gid)=> $state.go('root.withSidenav.goods', { gid : gid });
 
 
 	/////////////
@@ -59,6 +62,7 @@ function ProfileController(
 					vm.isLoggedIn = false;
 				}
 			});
+
 		profileService
 			.getMyGoods($stateParams.uid)
 			.then(function(data) {
@@ -66,6 +70,7 @@ function ProfileController(
 				vm.myGoodsExchanged = data.filter(function(g) { return g.status === 1; });
 				$rootScope.$broadcast('goodsChanged', vm.myGoodsPending);
 			});
+		
 		favorite
 			.getMyFavorite($stateParams.uid)
 			.then(function(data) {
@@ -74,6 +79,14 @@ function ProfileController(
 					return g.good;
 				});
 			});
+			
+		/**if goods fetching time more than 50ms, skip colorThief feature. */
+		$timeout(function(){
+			[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
+				dominateColor(goods);
+			});				
+		}, 50);
+
 	}
 
 	function onClickFollow(uid, index) {
@@ -125,9 +138,15 @@ function ProfileController(
 		}
 		vm.isReadOnly = !vm.isReadOnly;
 	}
-
-	function onClickGoods(gid) {
-		$state.go('root.withSidenav.goods', { gid : gid });
+	
+	function dominateColor(goods) {
+		var image = document.getElementById(`img_${goods.gid}`);
+		image.onload = ()=> {
+			var color = ct.getColor(image); 
+			goods.bgStyle = {
+				"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+			};
+		};
 	}
 
 }

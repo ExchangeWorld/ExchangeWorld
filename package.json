@@ -103,6 +103,7 @@
     "angular-ui-router": "^0.2.13",
     "angularjs-facebook": "^0.2.3",
     "async": "^1.4.2",
+    "color": "^0.10.1",
     "lodash": "^3.10.0",
     "moment": "^2.10.6",
     "ng-infinite-scroll": "^1.2.0",

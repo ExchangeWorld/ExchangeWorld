@@ -80,12 +80,12 @@ function ProfileController(
 				});
 			});
 			
-		/**if goods fetching time more than 50ms, skip colorThief feature. */
+		/**if goods fetching time more than 500ms, skip colorThief feature. */
 		$timeout(function(){
 			[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
 				dominateColor(goods);
 			});				
-		}, 50);
+		}, 500);
 
 	}
 

@@ -20,8 +20,6 @@ var job = (str, options) => {
 
 	var output = cp.execSync(str, options).toString();
 
-	// console.log(output);
-
 	return output;
 };
 

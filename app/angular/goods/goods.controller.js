@@ -33,7 +33,6 @@ function GoodsController(
 	vm.availableCategory   = AvailableCategory;
 	vm.bgStyle = '';
 	vm.bordercolor = ['',''];
-	vm.hover = '';
 
 	vm.comment         = '';
 	vm.goodComments    = [];

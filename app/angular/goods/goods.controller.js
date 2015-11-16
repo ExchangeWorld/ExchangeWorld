@@ -32,6 +32,7 @@ function GoodsController(
 	vm.goodData   = goodData;
 	vm.availableCategory   = AvailableCategory;
 	vm.bgStyle = '';
+	vm.bordercolor = ['',''];
 
 	vm.comment         = '';
 	vm.goodComments    = [];
@@ -85,13 +86,18 @@ function GoodsController(
 
 		var ct = new colorThief.ColorThief();
 		var image = document.getElementById('img');
-		image.onload = ()=> {
-			var color = ct.getColor(image); 
+		image.onload = ()=> {			
+			var pallete = ct.getPalette(image, 2);
 			vm.bgStyle = {
-				"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+				"background-color": `rgb(${pallete[0][0]}, ${pallete[0][1]}, ${pallete[0][2]})`
+			};
+			vm.bordercolor[0] = {
+				"border": `rgb(${pallete[1][0]}, ${pallete[1][1]}, ${pallete[1][2]}) solid 2px`
+			};
+			vm.bordercolor[1] = {
+				"border": `rgb(${pallete[2][0]}, ${pallete[2][1]}, ${pallete[2][2]}) solid 2px`
 			};
 		};
-
 	}
 
 	function onEdit(gid) {

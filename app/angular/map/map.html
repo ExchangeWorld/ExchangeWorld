@@ -1,40 +1,38 @@
-<div map-lazy-load="https://maps.googleapis.com/maps/api/js?signed_in=false&v=3.exp&libraries=places" input-focus-checker="vm.autocompleteFoucsed">
-	<map
-		center="{{vm.coords}}"
-		zoom="{{vm.zoom}}"
-		on-zoom_changed="vm.zoomChanged()"
-		styles="{{vm.mapStyle}}"
-		draggable-cursor="{{vm.draggableCursor}}"
-		dragging-cursor="{{vm.draggingCursor}}"
-		disable-double-click-zoom="true"
-		pan-control="false"
-		zoom-control-options="{position:'TOP_RIGHT'}"
-		map-maker="false"
-		street-view-control="false"
-		scale-control="false"
-		overview-map-control="false"
-		map-type-control="false"
-		resize ng-style="vm.smallMap ? {} : resizeWithOffset(64)">
 
-		<custom-control position="LEFT_TOP" ng-hide="vm.smallMap" >
-			<md-input-container class="md-warn" id="autocomplete" style="width: 250px; height: 30px">
-				<md-icon md-font-set="material-icons">room</md-icon>
-				<input
-					places-auto-complete
-					size="50"
-					type="text"
-					on-place-changed="vm.placeChanged()"
-					aria-label="autocomplete"
-					ng-model="vm.inputValue"
-					focus-checker="vm.inputValue"
-				>
-			</md-input-container>
-		</custom-control>
+<map
+	center="{{vm.coords}}"
+	zoom="{{vm.zoom}}"
+	on-zoom_changed="vm.zoomChanged()"
+	styles="{{vm.mapStyle}}"
+	draggable-cursor="{{vm.draggableCursor}}"
+	dragging-cursor="{{vm.draggingCursor}}"
+	disable-double-click-zoom="true"
+	pan-control="false"
+	zoom-control-options="{position:'TOP_RIGHT'}"
+	map-maker="false"
+	street-view-control="false"
+	scale-control="false"
+	overview-map-control="false"
+	map-type-control="false"
+	resize ng-style="vm.smallMap ? {} : resizeWithOffset(64)">
 
-		<custom-control id="myLocation" position="RIGHT_BOTTOM" index="2" ng-click="vm.findMyLocation()" ng-hide="vm.smallMap">
-			<button ripple class="md-fab md-button md-default-theme" aria-label="findLocation" >
-				<md-icon md-font-set="material-icons" style="width: 32px; height: 32px; font-size: 32px;">gps_fixed</md-icon>
-			</button>
-		</custom-control>
-	</map>
-</div>
+	<custom-control position="LEFT_TOP" ng-hide="vm.smallMap" >
+		<md-input-container class="md-warn" id="autocomplete" style="width: 250px; height: 30px">
+			<md-icon md-font-set="material-icons">room</md-icon>
+			<input
+				places-auto-complete
+				size="50"
+				type="text"
+				on-place-changed="vm.placeChanged()"
+				aria-label="autocomplete"
+				ng-model="vm.inputValue"
+			>
+		</md-input-container>
+	</custom-control>
+
+	<custom-control id="myLocation" position="RIGHT_BOTTOM" index="2" ng-click="vm.findMyLocation()" ng-hide="vm.smallMap">
+		<button ripple class="md-fab md-button md-default-theme" aria-label="findLocation" >
+			<md-icon md-font-set="material-icons" style="width: 32px; height: 32px; font-size: 32px;">gps_fixed</md-icon>
+		</button>
+	</custom-control>
+</map>

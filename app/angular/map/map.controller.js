@@ -117,25 +117,25 @@ function MapController(
 				const bound = map.getBounds();
 				$rootScope.$broadcast('boundChanged', bound);
 
-				if (
-					bound.getNorthEast().lat() > 85 &&
-					bound.getSouthWest().lat() < -85 
-				) {
-					const zoom = map.getZoom();
-					map.setZoom(parseInt(zoom, 10) + 1);
-				} else if (
-					bound.getNorthEast().lat() > 85 ||
-					bound.getSouthWest().lat() < -85 
-				) {
-					const originCenter = bound.getCenter();
-					const latOffset = bound.getNorthEast().lat() > 85
-						? bound.getNorthEast().lat() - 85
-						: bound.getSouthWest().lat() + 85;
-					map.panTo({
-						lat : originCenter.lat() - latOffset,
-						lng : originCenter.lng(),
-					});
-				}
+				// if (
+				// 	bound.getNorthEast().lat() > 85 &&
+				// 	bound.getSouthWest().lat() < -85 
+				// ) {
+				// 	const zoom = map.getZoom();
+				// 	map.setZoom(parseInt(zoom, 10) + 1);
+				// } else if (
+				// 	bound.getNorthEast().lat() > 85 ||
+				// 	bound.getSouthWest().lat() < -85 
+				// ) {
+				// 	const originCenter = bound.getCenter();
+				// 	const latOffset = bound.getNorthEast().lat() > 85
+				// 		? bound.getNorthEast().lat() - 85
+				// 		: bound.getSouthWest().lat() + 85;
+				// 	map.panTo({
+				// 		lat : originCenter.lat() - latOffset,
+				// 		lng : originCenter.lng(),
+				// 	});
+				// }
 			}
 		}, 50);
 

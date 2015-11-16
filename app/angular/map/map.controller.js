@@ -10,6 +10,7 @@ mapModule.controller('MapCtrl', MapController);
 
 /** @ngInject */
 function MapController(
+	NgMap,
 	$scope,
 	$rootScope,
 	geolocation,
@@ -32,13 +33,14 @@ function MapController(
 	vm.zoom            = 16;
 	vm.draggableCursor = 'default';
 	vm.draggingCursor  = 'default';
-	vm.mapStyle        = require('./mapStyle.json');
-	$scope.$on('mapInitialized', mapInitialized);
+	// vm.mapStyle        = require('./mapStyle.json');
+	// $scope.$on('mapInitialized', mapInitialized);
+	NgMap.getMap().then(mapInitialized);
 
 	activate();
 
 	/* After map is loaded */
-	function mapInitialized(e, evtMap) {
+	function mapInitialized(evtMap) {
 		map               = evtMap;
 		vm.findMyLocation = getCurrentPosition;
 		vm.placeChanged   = placeChanged;

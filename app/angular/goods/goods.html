@@ -22,8 +22,8 @@
 			<i class="material-icons delete">delete</i>
 		</div>
 	</div>
-	<div flex="80" layout layout-align="center center" ng-style="vm.bgStyle">
-		<img id="img" crossorigin="anonymous" class="img-goods" ng-src="{{ vm.goodData.photo_path[0] }}" ng-click="vm.showPhotoViewer($event)" ng-style="vm.bordercolor[$index]" ng-init="$index=1" ng-mouseover="$index=0" ng-mouseleave="$index=1" >
+	<div class="goods-lg" flex="80" layout layout-align="center center" ng-style="vm.bgStyle">
+		<img id="img" crossorigin="anonymous" class="img-goods" ng-src="{{ vm.goodData.photo_path[0] }}" ng-click="vm.showPhotoViewer($event)" ng-style="vm.bordercolor[$index]" ng-init="$index=1" ng-mouseover="$index=0" ng-mouseleave="$index=1">
 	</div>
 	<div class="info_container" layout="row">
 		<div flex="40" layout="column" layout-align="center center" ng-show="!vm.isMe">

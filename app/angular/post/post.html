@@ -42,10 +42,7 @@
 				<div class="cross onpost" ng-show="vm.removeMode" ng-click="vm.removeImg($index)"><md-icon class="material-icon">clear</md-icon></div>
 			</div>
 			<div layout style="background-color: #F5F5F5; border: 1px;">
-				<label style="cursor: pointer;">
-					<i class="material-icons add-photo">add</i>
-					<input ng-change="vm.onSelectFile()" class="trans" type='file' ng-model='vm.imgSelect' base-sixty-four-input accept="image/*" multiple style="position:fixed; top:-1000px" />
-				</label>
+				<input ng-change="vm.onSelectFile()" class="trans" type='file' ng-model='vm.imgSelect' base-sixty-four-input accept="image/*" multiple style="border: 2px dashed; color: #757575; border-radius: 2px; font-size: 1000px; height: 100px; width: 100px; margin: 2px; cursor: pointer; overflow:hidden; float:left; left:-10px; top:-10px;" />
 			</div>
 		</div>
 		<!-- Location -->

@@ -36,7 +36,6 @@ function GoodsController(
 
 	vm.comment         = '';
 	vm.goodComments    = [];
-	vm.onClickUser     = onClickUser;
 	vm.onSubmitComment = onSubmitComment;
 	vm.onDeleteComment = onDeleteComment;
 
@@ -52,7 +51,7 @@ function GoodsController(
 	vm.onClickQueue  = onClickQueue;
 
 	vm.showPhotoViewer = showPhotoViewer;
-	vm.onClickUser = onClickUser;
+	vm.onClickUser = (uid)=> $state.go('root.withSidenav.profile', { uid: uid });
 	vm.onClickBack = ()=> $window.history.back();
 
 	activate();
@@ -133,13 +132,6 @@ function GoodsController(
 					});
 			});
 		}
-	}
-
-	// define onClick event on goods owner
-	function onClickUser(uid) {
-		$state.go('root.withSidenav.profile', {
-			uid: uid
-		});
 	}
 
 	function updateComment() {

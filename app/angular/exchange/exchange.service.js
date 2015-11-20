@@ -86,7 +86,6 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 
 		exchange.agree = 'true';
 
-		// console.log(exchange);
 		exchange
 			.put()
 			.then(function(data) {
@@ -138,7 +137,6 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 				if (_.isArray(data)) {
 					var exchange = data[0];
 					exchange.route = 'exchange/drop'; // PUT of "drop" is "api/exchange/drop"
-					//console.log(exchange);
 					exchange.put();
 				}
 			}, (error)=> {
@@ -158,7 +156,6 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 				number : number,
 			})
 			.then(function(data) {
-				//console.log(data);
 				defer.resolve(data);
 			}, (error)=> {
 				return exception.catcher('[Exchange Service] getChatroom error: ')(error);
@@ -222,7 +219,6 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 						exchangeService
 							.agreeExchange(thisExchange, vm.mygid)
 							.then(function(data) {
-								//console.log(scores);
 								exchangeService.rating(vm.othersgid, scores);
 								logger.success('成功評價此交易', data, 'DONE');
 								callback();

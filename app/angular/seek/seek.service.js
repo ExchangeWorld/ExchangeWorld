@@ -41,7 +41,6 @@ function seekService(Restangular, $q, exception, $localStorage, favorite) {
 									if (_.findWhere(f_array, { goods_gid: g.gid })) g.favorited = true;
 									else g.favorited = false;
 								});
-								// console.log(data);
 								defer.resolve(data);
 							});
 					} else {

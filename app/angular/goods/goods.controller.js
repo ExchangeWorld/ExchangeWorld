@@ -85,7 +85,7 @@ function GoodsController(
 
 		var ct = new colorThief.ColorThief();
 		var image = document.getElementById('img');
-		image.onload = ()=> {			
+		image.onload = ()=> {
 			var pallete = ct.getPalette(image, 2);
 			vm.bgStyle = {
 				"background-color": `rgb(${pallete[0][0]}, ${pallete[0][1]}, ${pallete[0][2]})`,
@@ -145,7 +145,7 @@ function GoodsController(
 				var data = vm.goodComments.map(function(comment) {
 					if (vm.isLoggedIn)
 						comment.isMe = (comment.commenter_uid === $localStorage.user.uid);
-					comment.timestamp = moment(comment.timestamp).fromNow();
+					comment.timestamp = moment(comment.timestamp.slice(0, -1)).fromNow();
 					return comment;
 				});
 				vm.goodComments = data;
@@ -184,7 +184,6 @@ function GoodsController(
 			/**
 			 * Send notification to host
 			 */
-			//console.log($location.url());
 			notification
 				.postNotification({
 					sender_uid   : commentData.user_uid,
@@ -192,7 +191,6 @@ function GoodsController(
 					trigger_url  : $location.url(),
 					content      : '有人對你的物品留言',
 				});
-			//.then(function(data){console.log(data);});
 		}
 	}
 

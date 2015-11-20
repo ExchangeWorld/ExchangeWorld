@@ -27,7 +27,6 @@ function FollowController($state, followService, $stateParams) {
 				.getFollow($stateParams.uid, vm.type)
 				.then(function(data) {
 					vm.followData = data;
-					//console.log(vm.followData);
 				})
 				.catch(function() {
 					vm.followData = undefined;

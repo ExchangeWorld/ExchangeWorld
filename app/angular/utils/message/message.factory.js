@@ -52,7 +52,6 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 			})
 			.then(function(data) {
 				if (_.isArray(data)) {
-					//console.log(data);
 					defer.resolve(data);
 				}
 			}, (error)=> {
@@ -124,10 +123,8 @@ function DialogController(msg, callback, $mdDialog, logger, message, $state) {
 			.then(function(data) {
 				vm.history = data.reverse();
 				vm.history.forEach(function(m) {
-					m.time = moment(m.timestamp).fromNow();
+					m.time = moment(m.timestamp.slice(0, -1)).fromNow();
 				});
-				console.log(data);
-				//vm.content = '';
 			});
 	}
 

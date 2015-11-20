@@ -34,7 +34,6 @@ function SeekController(
 	////////////////
 	
 	$scope.$on('boundChanged', function(e, bound) {
-		//console.log(bound.toUrlValue());
 		vm.mapBound = bound.toUrlValue();
 		onSearch({
 			name     : vm.searchGoodsName,
@@ -45,7 +44,6 @@ function SeekController(
 	});
 
 	function onSearch(filter) {
-		console.log(filter);
 		if(vm.searchGoodsCategory === 'all') {
 			filter.category = '';
 		}
@@ -122,7 +120,6 @@ function SeekController(
 	function onClickUser(e, uid) {
 		e.preventDefault();
 		e.stopPropagation();
-		console.log(uid);
 		$state.go('root.withSidenav.profile', {
 			uid: uid
 		});

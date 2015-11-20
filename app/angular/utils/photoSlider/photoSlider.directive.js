@@ -20,7 +20,6 @@ function photoSliderDirective() {
 }
 
 function photoSliderPostLink(scope) {
-	//console.log(scope.images.length);
 	scope.currentSlide   = 0;
 	scope.isCurrentSlide = idx => idx === scope.currentSlide;
 	scope.prevSlide      = prevSlide;

@@ -80,7 +80,6 @@ function auth(facebookService, $q, $localStorage) {
 						defer.resolve(currentUser);
 					});
 				} else {
-					console.log('not logged in');
 					currentUser = null;
 					defer.resolve(currentUser);
 				}

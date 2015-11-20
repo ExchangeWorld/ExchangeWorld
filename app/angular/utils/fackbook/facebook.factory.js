@@ -94,7 +94,6 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 					} else {
 						defer.resolve(data[0]);
 						$localStorage.user = data[0];
-						//console.log($localStorage);
 					}
 				}
 			});
@@ -102,7 +101,6 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 	}
 
 	function getLargePicture(fb_id) {
-		console.log(fb_id);
 		return Facebook.api('/'+fb_id+'/picture?width=320&height=320', function(response) {
 			return response;
 		});

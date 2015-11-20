@@ -35,9 +35,6 @@ function PostController(
 	function positionMarked(e, latLng) {
 		vm.positionX = latLng.lng();
 		vm.positionY = latLng.lat();
-
-		console.log(vm.positionX);
-		console.log(vm.positionY);
 	}
 
 	$scope.$watch('vm.imgSelect', ()=> {

@@ -165,8 +165,6 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 						if (_.isString(goods.good.photo_path)) goods.good.photo_path = JSON.parse(goods.good.photo_path);
 						return goods;
 					});
-					console.log(data);
-
 					defer.resolve(data);
 				} else {
 					defer.reject(data);
@@ -179,7 +177,6 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 
 	function postQueue(host_goods_gid, queuer_goods_gid) {
 		const defer = $q.defer();
-		console.log(queuer_goods_gid);
 
 		Restangular
 			.all('queue/post')
@@ -245,7 +242,6 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 			.getList({queuer_goods_gid: gid})
 			.then(function(data) {
 				if (_.isArray(data)) {
-					//console.log(data);
 					data.map(function(host_goods) {
 						deleteQueue(host_goods.host_goods_gid, gid);
 					});
@@ -279,7 +275,6 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 				$mdDialog
 					.hide(selected_gid)
 					.then(function() {
-						console.log(selected_gid);
 						postQueue(vm.queuing_goods_gid, selected_gid)
 							.then(function(data) {
 								logger.success('成功發出排請求', data, 'DONE');
@@ -337,8 +332,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 										receiver_uid : selected_goods.owner_uid, 
 										trigger_url  : `/manage/${selected_goods.owner_uid}/exchange`,
 										content      : '有人接受了你的排，進入交換階段',
-									})
-								// .then(function(data) {console.log(data);});
+									});
 							});
 						if($state.current.name === 'root.withSidenav.goods.queuing') {
 							$state.go('^');

@@ -123,11 +123,8 @@ function NavbarController(
 	}
 
 	function onClickNotification(notice) {
-		notification
-			.updateNotification(notice, false)
-			.then(function(data) {
-				console.log(data);
-			});
+		notification.updateNotification(notice, false);
+		
 		$location.path(notice.trigger_url);
 		if(!$state.includes("root.oneCol") && !$mdSidenav('left').isOpen() ) {
 			$mdSidenav('left').toggle();
@@ -153,13 +150,13 @@ function NavbarController(
 				])
 				.then(function(data) {
 					data[0].map(function(notice) {
-						notice.timestamp = moment(notice.timestamp).fromNow();
+						notice.timestamp = moment(notice.timestamp.slice(0, -1)).fromNow();
 					});
 					vm.notifications = data[0];
 
 					vm.messages = _.unique(data[1], 'sender_uid');
 					vm.messages.forEach(function(msg) {
-						msg.timestamp = moment(msg.timestamp).calendar();
+						msg.timestamp = moment(msg.timestamp.slice(0, -1)).calendar();
 					});
 
 					vm.unreadNotify = _.filter(vm.notifications, {unread : true}).length;

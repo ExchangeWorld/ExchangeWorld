@@ -4,7 +4,7 @@
 		<div layout layout-align="center center" ng-style="{'background-image':'url({{ vm.profile.largePic }})','width':'120px' , 'height':'120px', 'background-repeat':'no-repeat', 'background-position':'center','border-radius':'50%','background-size':'contain'}">
 		</div>
 		<!-- user name & follow button -->
-		<div flex="60" flex-sm="45" layout="column">
+		<div flex-gt-sm="60" flex-sm="45" layout="column">
 			<div layout="column">
 				<div layout="column" layout-align="center center">
 					<h4 class="md-headline" style="margin:8px 0;">{{ vm.profile.name }}</h4>
@@ -85,15 +85,15 @@
 				</div>
 				<div layout="column" layout-align="center center">
 					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myGoodsPending" ng-click="vm.onClickGoods(goods.gid)">
-						<md-card-content layout="row" layout-sm="column">
-							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
+						<md-card-content layout="column" layout-gt-sm="row">
+							<div flex-gt-sm="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
 								<img id="img_{{goods.gid}}" crossorigin="anonymous" ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
-							<div flex layout="column">
-								<div layout="row" layout-align="center start">
+							<div flex-gt-sm="60" layout="column">
+								<div layout layout-align="center center">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
-								<div flex layout layout-align="center center" style="white-space:pre-wrap; padding-left:15px;">
+								<div flex layout layout-align="center center" style="white-space:pre-wrap;">
 									<p>{{ goods.description }}</p>
 								</div>
 							</div>
@@ -109,18 +109,18 @@
 				</div>
 				<div layout="column" layout-align="center center">
 					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myGoodsExchanged" ng-click="vm.onClickGoods(goods.gid)">
-						<md-card-content layout="row" layout-sm="column">
-							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
+						<md-card-content layout="column" layout-gt-sm="row">
+							<div flex-gt-sm="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
 								<img id="img_{{goods.gid}}" crossorigin="anonymous" ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
-							<div flex layout="column">
-								<div layout="row" layout-align="center start">
+							<div flex-gt-sm="60" layout="column">
+								<div layout="row" layout-align="center center">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
-								<div flex layout layout-align="center center" style="white-space:pre-wrap; padding-left:15px;">
+								<div flex layout layout-align="center center" style="white-space:pre-wrap; ">
 									<p>{{ goods.description }}</p>
 								</div>
-								<div layout="row" layout-align="center start">
+								<div layout layout-align="center start">
 									<div ng-repeat="n in vm.getNumber(goods.rate) track by $index">
 										<img src="../../images/star-on.svg" />
 									</div>
@@ -141,15 +141,15 @@
 				</div>
 				<div layout="column" layout-align="center center">
 					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myStar" ng-click="vm.onClickGoods(goods.gid)">
-						<md-card-content layout="row" layout-sm="column">
-							<div flex="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
+						<md-card-content layout="column" layout-gt-sm="row">
+							<div flex-gt-sm="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
 								<img id="img_{{goods.gid}}" crossorigin="anonymous" ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
-							<div flex layout="column">
-								<div layout="row" layout-align="center start">
+							<div flex-gt-sm="60" layout="column">
+								<div layout layout-align="center center">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
-								<div flex layout layout-align="center center" style="white-space:pre-wrap; padding-left:15px;">
+								<div flex layout layout-align="center center" style="white-space:pre-wrap; ">
 									<p>{{ goods.description }}</p>
 								</div>
 							</div>

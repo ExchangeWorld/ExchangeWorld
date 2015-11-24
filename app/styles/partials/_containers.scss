@@ -421,8 +421,8 @@ div.md-open-menu-container {
 }
 
 .img-preview {
-	height: 100px;
-	width: 100px;
+	max-height: 100%;
+	max-width: 100%;
 	margin: 0 2px;
 }
 
@@ -439,4 +439,27 @@ div.md-open-menu-container {
 	background-color: #CFD8DC;
 	padding-top: 5px;
 	//margin-top: 20px;
+}
+
+.file-field {
+	position: relative;
+	input[type=file] {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		font-size: 20px;
+		cursor: pointer;
+		opacity: 0;
+		filter: alpha(opacity=0);
+	}
+}
+
+.input-field {
+	position: relative;
+	margin-top: 1rem;
 }

@@ -88,7 +88,7 @@ function ExchangeController(
 	function onClickDelete(ev, eid) {
 		var confirm = $mdDialog.confirm()
 			.title('放棄這個交易')
-			.content('您確定要放棄這個交易嗎？<br/>此動作無法回覆！')
+			.content('您確定要放棄這個交易嗎？<br/>此動作無法恢復！')
 			.ariaLabel('Delete Exchange')
 			.ok('確定')
 			.cancel('取消')

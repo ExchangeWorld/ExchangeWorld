@@ -1,6 +1,6 @@
 <md-toolbar class="md-primary md-hue-3 md-whiteframe-z2" style="height: 76px;">
 	<!-- search input bar & button -->
-	<div layout="row">
+	<div layout="row" layout-align="start center">
 		<md-input-container flex="45" flex-sm="35" class="md-primary" style="padding-left: 10px;">
 			<label style="top:2px;">搜索</label>
 			<input ng-model="vm.searchGoodsName" aria-label="goodsName">
@@ -11,7 +11,7 @@
 				<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">{{cate.alias}}</md-option>
 			</md-select>
 		</md-input-container>
-		<md-switch flex="15" ng-model="vm.searchWithBound" aria-label="searchWithBound" style="font-size: 10px;">
+		<md-switch flex="15" ng-model="vm.searchWithBound" aria-label="searchWithBound" style="font-size: 10px; padding-left: 10px;">
 			<md-tooltip>搜尋視界內物品/搜尋全世界</md-tooltip>
 			<span hide-sm>{{ vm.searchWithBound ? '視界內' : '全域' }}</span>
 		</md-switch>

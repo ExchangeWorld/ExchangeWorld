@@ -14,7 +14,8 @@ function ExchangeController(
 	$stateParams,
 	$interval,
 	$mdDialog,
-	$localStorage
+	$localStorage,
+	$q
 ) {
 	var vm             = this;
 	vm.goSeek          = ()=> $state.go('root.withSidenav.seek');
@@ -22,6 +23,7 @@ function ExchangeController(
 	vm.exchangeList    = exchangeList;
 	vm.exchange        = undefined;
 	vm.chatroom        = [];
+	vm.loadMore        = loadMore;
 	vm.chatContent     = '';
 	vm.onClickGoods    = (gid)=> $state.go('root.withSidenav.goods', { gid : gid });
 	vm.onClickExchange = onClickExchange;
@@ -34,6 +36,7 @@ function ExchangeController(
 	////////////
 	activate();
 	
+	var amount, offset;
 	function activate() {
 		if($stateParams.uid !== $localStorage.user.uid.toString()) {
 			$state.go('root.withSidenav.404');
@@ -60,11 +63,28 @@ function ExchangeController(
 	function updateChat() {
 		if(!vm.exchange) return;
 		exchangeService
-			.getChat(vm.exchange.eid, 100, 0)
+			.getChat(vm.exchange.eid, amount+offset, 0)
 			.then((data)=> { vm.chatroom = data; });
 	}
 
+	function loadMore() {
+		var deferred = $q.defer();
+		console.log('ppppp');
+
+		exchangeService
+			.getChat(vm.exchange.eid, amount, offset)
+			.then((data)=> { 
+				vm.chatroom = [...vm.chatroom, ...data];
+				offset += amount;
+				deferred.resolve();
+			});
+
+		return deferred.promise;
+	}
+
 	function onClickExchange(index) {
+		amount = 8;
+		offset = 0;
 		vm.exchange = vm.exchangeList[index];
 		updateChat();
 		agreed();

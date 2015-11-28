@@ -118,14 +118,14 @@ function DialogController(msg, callback, $mdDialog, logger, message, $state, $q)
 	
 	activate();
 
-	var offset = 0;
-	var amount = 8;
+	var amount, offset;
 	function activate() {
+		amount = 3;
+		offset = 0;
 		loadMore();
 	}
 
 	function loadMore() {
-		console.log('pppppppppppppppp');
 		var deferred = $q.defer();
 
 		message

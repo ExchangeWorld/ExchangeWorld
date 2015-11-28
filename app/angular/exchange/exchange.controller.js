@@ -64,18 +64,18 @@ function ExchangeController(
 		if(!vm.exchange) return;
 		exchangeService
 			.getChat(vm.exchange.eid, amount+offset, 0)
-			.then((data)=> { vm.chatroom = data; });
+			.then((data)=> { vm.chatroom = data.reverse(); });
 	}
 
 	function loadMore() {
 		var deferred = $q.defer();
-		console.log('ppppp');
+		offset += amount;
 
 		exchangeService
 			.getChat(vm.exchange.eid, amount, offset)
 			.then((data)=> { 
-				vm.chatroom = [...vm.chatroom, ...data];
-				offset += amount;
+				vm.chatroom = [...data.reverse(), ...vm.chatroom];
+
 				deferred.resolve();
 			});
 

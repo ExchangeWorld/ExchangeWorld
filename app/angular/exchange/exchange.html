@@ -39,20 +39,6 @@
 		</div>
 		<div ng-show="vm.exchange !== undefined" offset-gt-sm="5" flex="50" flex-md="100" flex-sm="100" style="height:100%;" layout layout-align="center center">
 			<div layout="row" class="info_container layout-ex center">
-				<!-- <span flex-sm="5"></span> -->
-				<!-- first user item -->
-				<!-- <div layout="column" flex="30">
-					<div class="item exchange" layout layout-align="center center">
-						<img class="img-exchange" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)" />
-					</div>
-					<div layout="column" style="height:250px; background-color:#B0BEC5;">
-						<p class="md-body-1 text-ex">{{ vm.exchange.details.goods[vm.exchange.lookupTable.me].name}}</p>
-						<p class="md-body-1 text-ex">{{ vm.exchange.details.goods[vm.exchange.lookupTable.me].description }}</p>
-						<div flex layout layout-align="end end">
-							<img class="circle" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].user.photo_path}}">
-						</div>
-					</div>
-				</div> -->
 				<md-card flex="35" flex-sm="40" class="md-whiteframe-z3 item hvr-glow">
 					<div layout="column">
 						<img ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)" class="md-card-image" style="cursor:pointer;">
@@ -82,19 +68,6 @@
 					</md-button>
 					<md-button ng-show="vm.agreed" disabled="true" class="md-accent md-hue-2">已確認交換</md-button>
 				</div>
-				<!-- second user item -->
-				<!-- <div layout="column" flex="30">
-					<div class="item exchange" layout layout-align="center center">
-						<img class="img-exchange" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.other].gid)" />
-					</div>
-					<div layout="column" style="height:250px; background-color:#B0BEC5;">
-						<p class="md-body-1 text-ex">{{ vm.exchange.details.goods[vm.exchange.lookupTable.other].name}}</p>
-						<p class="md-body-1 text-ex">{{ vm.exchange.details.goods[vm.exchange.lookupTable.other].description }}</p>
-						<div flex layout layout-align="end end">
-							<img class="circle" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].user.photo_path}}">
-						</div>
-					</div>
-				</div> -->
 				<md-card flex="35" flex-sm="40" class="md-whiteframe-z3 item hvr-glow">
 					<div layout="column">
 						<img ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.other].gid)" class="md-card-image" style="cursor:pointer;">

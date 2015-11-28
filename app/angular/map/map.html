@@ -15,8 +15,8 @@
 	scale-control="false"
 	overview-map-control="false"
 	map-type-control="false"
-	resize ng-style="vm.smallMap ? {} : resizeWithOffset(64)"
->
+	 resize ng-style="vm.smallMap ? {'height': '100%'}: resizeWithOffset(64)"
+	>
 
 	<custom-control position="LEFT_TOP" ng-hide="vm.smallMap" >
 		<md-input-container class="md-warn" id="autocomplete" style="width: 250px; height: 30px">

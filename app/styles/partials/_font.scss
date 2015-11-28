@@ -85,7 +85,8 @@ a:hover {
 
 .message {
 	color: #455A64;
-	line-height: 30px;
+	/*line-height: 30px;*/
+	white-space: pre;
 	padding: 0 0.6em 0 1em;
 }
 

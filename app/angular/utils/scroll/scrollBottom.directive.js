@@ -3,7 +3,8 @@
 const scrollModule = require('./scroll.module');
 scrollModule.directive('scroll', scrollBottom);
 
-function scrollBottom() {
+/** @ngInject */
+function scrollBottom($timeout) {
 
 	const directive = {
 		restrict : 'A',
@@ -15,7 +16,9 @@ function scrollBottom() {
 	function link(scope, element, attr) {
 		scope.$watchCollection(attr.scroll, function (newValue) {
 			if (newValue) {
-				element[0].scrollTop = element[0].scrollHeight;
+				$timeout(()=>  {
+					element[0].scrollTop = element[0].scrollHeight;
+				});
 			}
 		});
 	}

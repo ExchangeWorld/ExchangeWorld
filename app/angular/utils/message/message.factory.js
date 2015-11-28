@@ -25,7 +25,7 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 			.all('message')
 			.getList({ 
 				receiver_uid: uid,
-				number: 9999,
+				number: 5,
 			})
 			.then(function(data) {
 				if (_.isArray(data)) {
@@ -52,6 +52,9 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 			})
 			.then(function(data) {
 				if (_.isArray(data)) {
+					data.forEach(function(m) {
+						m.time = moment(m.timestamp.slice(0, -1)).fromNow();
+					});
 					defer.resolve(data);
 				}
 			}, (error)=> {
@@ -131,9 +134,6 @@ function DialogController(msg, callback, $mdDialog, logger, message, $state, $q)
 		message
 			.getConversation(msg.sender_uid, msg.receiver_uid, amount, offset)
 			.then(function(data) {
-				data.forEach(function(m) {
-					m.time = moment(m.timestamp.slice(0, -1)).fromNow();
-				});
 				vm.history = [...data.reverse(), ...vm.history];
 				offset += amount;
 

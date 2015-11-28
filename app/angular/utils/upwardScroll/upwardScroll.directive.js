@@ -20,12 +20,5 @@ function upwardScroll($timeout) {
 						});
 				}
 			});
-
-			//scroll to bottom
-			//$timeout(function() {
-				//scope.$apply(function() {
-					//elem[0].scrollTop = raw.scrollHeight;
-				//});
-			//}, 0);
 	};
 }

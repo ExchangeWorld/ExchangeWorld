@@ -2,6 +2,7 @@
 
 const exchangeModule = require('./exchange.module');
 const _              = require('lodash');
+const moment         = require('moment');
 
 exchangeModule.service('exchangeService', exchangeService);
 
@@ -156,7 +157,12 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 				number : number,
 			})
 			.then(function(data) {
-				defer.resolve(data);
+				if (_.isArray(data)) {
+					data.forEach(function(m) {
+						m.time = moment(m.timestamp.slice(0, -1)).fromNow();
+					});
+					defer.resolve(data);
+				}
 			}, (error)=> {
 				return exception.catcher('[Exchange Service] getChatroom error: ')(error);
 			});

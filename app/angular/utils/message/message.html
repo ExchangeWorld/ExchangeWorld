@@ -11,7 +11,7 @@
 	<md-dialog-content style="max-width:800px;max-height:610px; padding: 5px 20px 16px 20px;">
 		<div flex flex-sm layout="row">
 			<div flex>
-				<ul class="discussion message" scroll="vm.history">
+				<ul class="discussion message" upward-scroll="vm.loadMore()" scroll="vm.history.length > 0">
 					<li ng-class="{true: 'self', false: 'other'}[history.sender_uid === {{ vm.msg.receiver_uid }}]" ng-repeat="history in vm.history">
 						<div class="avatar" ng-click="vm.onClickUser(history.sender_uid)" ng-show="(history.sender_uid !== {{ vm.msg.receiver_uid }})" style="cursor:pointer;">
 							<img ng-src="{{vm.msg.user.photo_path}}" />

@@ -25,7 +25,7 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 			.all('message')
 			.getList({ 
 				receiver_uid: uid,
-				number: 9999,
+				number: 5,
 			})
 			.then(function(data) {
 				if (_.isArray(data)) {
@@ -52,6 +52,9 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 			})
 			.then(function(data) {
 				if (_.isArray(data)) {
+					data.forEach(function(m) {
+						m.time = moment(m.timestamp.slice(0, -1)).fromNow();
+					});
 					defer.resolve(data);
 				}
 			}, (error)=> {
@@ -106,10 +109,11 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 }
 
 /** @ngInject */
-function DialogController(msg, callback, $mdDialog, logger, message, $state) {
+function DialogController(msg, callback, $mdDialog, logger, message, $state, $q) {
 	const vm       = this;
 	vm.msg         = msg;
-	vm.history     = '';
+	vm.history     = [];
+	vm.loadMore    = loadMore;
 	vm.contents    = '';
 	vm.onClickUser = onClickUser;
 	vm.cancel      = onCancel;
@@ -117,15 +121,26 @@ function DialogController(msg, callback, $mdDialog, logger, message, $state) {
 	
 	activate();
 
+	var amount, offset;
 	function activate() {
+		amount = 3;
+		offset = 0;
+		loadMore();
+	}
+
+	function loadMore() {
+		var deferred = $q.defer();
+
 		message
-			.getConversation(msg.sender_uid, msg.receiver_uid, 10, 0)
+			.getConversation(msg.sender_uid, msg.receiver_uid, amount, offset)
 			.then(function(data) {
-				vm.history = data.reverse();
-				vm.history.forEach(function(m) {
-					m.time = moment(m.timestamp.slice(0, -1)).fromNow();
-				});
+				vm.history = [...data.reverse(), ...vm.history];
+				offset += amount;
+
+				deferred.resolve();
 			});
+
+		return deferred.promise;
 	}
 
 	function onClickUser(uid) {

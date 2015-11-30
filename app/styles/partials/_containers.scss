@@ -231,20 +231,30 @@ div.md-open-menu-container {
 		height: auto;
 		&.right {
 			height: 100%;
-			padding-left: 5%;
 		}
 		&.center {
 			height: 100%;
 		}
 	}
 	.chat-ex {
-		height: 400px;
+		height: 250px;
+	}
+	.chat-layout {
+		height: 70%;
+		z-index: 1;
+		width: 50%;
 	}
 	.btn-rwd {
 		min-width: 44px;
 	}
 	.profile-top {
 		margin: 4% 0;
+	}
+	.map-size {
+		height: 350px;
+		width: 35%;
+		z-index: 0;
+		padding-right: 5%;
 	}
 }
 
@@ -259,20 +269,30 @@ div.md-open-menu-container {
 		height: auto;
 		&.right {
 			height: 100%;
-			padding-left: 25%;
 		}
 		&.center {
 			height: 120%;
 		}
 	}
 	.chat-ex {
-		height: 400px;
+		height: 300px;
+	}
+	.chat-layout {
+		height: 70%;
+		z-index: 1;
+		width: 40%;
 	}
 	.btn-rwd {
 		min-width: 75px;
 	}
 	.profile-top {
 		margin: 6% 0;
+	}
+	.map-size {
+		height: 400px;
+		width: 40%;
+		z-index: 0;
+		padding-right: 10%;
 	}
 }
 
@@ -286,6 +306,7 @@ div.md-open-menu-container {
 	.layout-ex {
 		height: 100%;
 		&.right {
+			max-height: 100%;
 			height: 100%;
 			padding-left: 0;
 		}
@@ -296,6 +317,11 @@ div.md-open-menu-container {
 	.chat-ex {
 		height: calc(100% - 114px);
 	}
+	.chat-layout {
+		height: 70%;
+		z-index: 1;
+		width: auto;
+	}
 	.btn-rwd {
 		min-width: 88px;
 	}
@@ -304,6 +330,12 @@ div.md-open-menu-container {
 	}
 	.goods-lg {
 		margin: 24px 0 40px 0;
+	}
+	.map-size {
+		height: 30%;
+		width: auto;
+		z-index: 0;
+		padding-right: 0;
 	}
 }
 

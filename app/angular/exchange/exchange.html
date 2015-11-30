@@ -15,8 +15,8 @@
 	</div>
 </md-content>
 <md-content resize ng-style="resizeWithOffset(64)" ng-show="vm.exchangeList.length !== 0" style="overflow-x: hidden;">
-	<div layout="row" layout-md="column" layout-sm="column" class="layout-ex">
-		<div class="sidebar-ex" flex="20" flex-md="100" flex-sm="100" layout="column" layout-md="row" layout-sm="row" layout-wrap layout-align-sm="center center">
+	<div layout="column" layout-gt-md="row" class="layout-ex">
+		<div class="sidebar-ex" flex-gt-md="20" flex-md="100" flex-sm="100" layout="column" layout-md="row" layout-sm="row" layout-wrap layout-align-sm="center center" style="max-height:100%;">
 			<div class="event-btn hvr-bubble-float-left" layout="row" layout-algin="center center" flex-sm="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index)">
 				<div flex="55" flex-md="70" flex-sm="70" layout="column" layout-align="center center">
 					<p class="md-body-1 note goods-1">{{ exchange.details.goods[exchange.lookupTable.me].name }}</p>
@@ -37,7 +37,9 @@
 				<h2 class="md-display-1" hide-gt-md style="text-align:center;">點擊上方清單觀看目前正在進行的交換</h2>
 			</div>
 		</div>
-		<div ng-show="vm.exchange !== undefined" offset-gt-sm="5" flex="50" flex-md="100" flex-sm="100" style="height:100%;" layout layout-align="center center">
+		<!-- <div ng-show="vm.exchange !== undefined" offset-gt-sm="5" flex="50" flex-md="100" flex-sm="100" style="height:100%; max-height: 100%;" layout="row" layout-align="center center">
+		</div> -->
+		<div ng-show="vm.exchange !== undefined" offset-gt-sm="5" flex="50" flex-md="100" flex-sm="100" style="height:100%; max-height: 100%;" layout="row" layout-align="center center">
 			<div layout="row" class="info_container layout-ex center">
 				<md-card flex="35" flex-sm="40" class="md-whiteframe-z3 item hvr-glow">
 					<div layout="column">
@@ -53,7 +55,6 @@
 						</md-card-content>
 					</div>
 				</md-card>
-				<!-- exchange icon -->
 				<div flex="20" flex-sm="15" layout="column" layout-align="center center">
 					<img src="../../images/icon(48-48).png" style="margin:0 0 20px 0;">
 					<md-button class="btn-rwd md-raised md-accent md-hue-1" ng-show="!vm.agreed" ng-click="vm.onClickComplete($event)">
@@ -85,10 +86,11 @@
 				<span flex-gt-sm="5"></span>
 			</div>
 		</div>
-		<!-- chat room -->
-		<div ng-show="vm.exchange !== undefined" flex="25" flex-md="75" flex-sm="95" layout="column" class="layout-ex right">
-			<map-block style="height:30%; z-index:0;"></map-block>
-			<div style="height:70%; z-index:1;">
+		<div ng-show="vm.exchange !== undefined" flex="25" flex-md="75" flex-sm="95" layout="column" layout-md="row" layout-sm="row" class="layout-ex right" layout-align-md="center center" layout-align-sm="center center">
+			<div class="map-size">
+				<map-block></map-block>
+			</div>
+			<div class="chat-layout">
 				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
 					<span>聊天</span>
 				</md-toolbar>

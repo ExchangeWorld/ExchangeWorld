@@ -41,9 +41,12 @@
 		</div> -->
 		<div ng-show="vm.exchange !== undefined" offset-gt-sm="5" flex="50" flex-md="100" flex-sm="100" style="height:100%; max-height: 100%;" layout="row" layout-align="center center">
 			<div layout="row" class="info_container layout-ex center">
-				<md-card flex="35" flex-sm="40" class="md-whiteframe-z3 item hvr-glow">
-					<div layout="column">
-						<img ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)" class="md-card-image" style="cursor:pointer;">
+				<md-card flex="35" flex-sm="40" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].bgStyle">
+					<div layout="column" >
+						<img  id="img_me" crossorigin="anonymous" 
+							  ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].photo_path[0]}}" 
+							  ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)" 
+							  class="md-card-image" style="cursor:pointer;">
 						<md-card-content style="padding: 0;">
 							<div flex layout-fill layout="column">
 								<div layout="column" layout-align="center center">
@@ -69,9 +72,12 @@
 					</md-button>
 					<md-button ng-show="vm.agreed" disabled="true" class="md-accent md-hue-2">已確認交換</md-button>
 				</div>
-				<md-card flex="35" flex-sm="40" class="md-whiteframe-z3 item hvr-glow">
+				<md-card flex="35" flex-sm="40" class="md-whiteframe-z3 item hvr-glow"  ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].bgStyle">
 					<div layout="column">
-						<img ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.other].gid)" class="md-card-image" style="cursor:pointer;">
+						<img id='img_other' crossorigin="anonymous" 
+							 ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].photo_path[0]}}" 
+							 ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.other].gid)"
+							 class="md-card-image" style="cursor:pointer;">
 						<md-card-content style="padding: 0;">
 							<div flex layout-fill layout="column">
 								<div layout="column" layout-align="center center">

@@ -11,6 +11,7 @@ function ExchangeController(
 	$timeout,
 	$rootScope,
 	exchangeService,
+	colorThief,
 	$stateParams,
 	$interval,
 	$mdDialog,
@@ -18,6 +19,7 @@ function ExchangeController(
 	$q
 ) {
 	var vm             = this;
+	var ct             = new colorThief.ColorThief();
 	vm.goSeek          = ()=> $state.go('root.withSidenav.seek');
 	vm.myid            = parseInt($stateParams.uid, 10);
 	vm.exchangeList    = exchangeList;
@@ -89,6 +91,10 @@ function ExchangeController(
 		updateChat();
 		agreed();
 		
+		dominateColor(vm.exchange.details.goods[vm.exchange.lookupTable.other], 'other');
+		dominateColor(vm.exchange.details.goods[vm.exchange.lookupTable.me], 'me');
+
+		
 		$rootScope.$broadcast('goodsChanged', [vm.exchange.details.goods[vm.exchange.lookupTable.other]]);
 		$rootScope.$broadcast('mapMoveTo', vm.exchange.details.goods[vm.exchange.lookupTable.other].gid);
 		$timeout(()=> {
@@ -148,5 +154,22 @@ function ExchangeController(
 		} else {
 			vm.agreed = false;
 		}
+	}
+	
+	function dominateColor(goods, who) {
+		console.log(goods);
+		var image = document.getElementById(`img_${who}`);
+		image.onload = ()=> {
+			var pallete = ct.getPalette(image, 2);
+			goods.bgStyle = {
+				"background-color": `rgb(${pallete[0][0]}, ${pallete[0][1]}, ${pallete[0][2]})`,
+				"border-radius": "20px"
+			};
+			goods.bordercolor = [{
+				"border": `rgb(${pallete[1][0]}, ${pallete[1][1]}, ${pallete[1][2]}) solid 2px`
+			},{
+				"border": `rgb(${pallete[2][0]}, ${pallete[2][1]}, ${pallete[2][2]}) solid 2px`
+			}];
+		};
 	}
 }

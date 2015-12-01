@@ -165,10 +165,10 @@ function ExchangeController(
 				"background-color": `rgb(${pallete[0][0]}, ${pallete[0][1]}, ${pallete[0][2]})`,
 				"border-radius": "20px"
 			};
-			goods.bordercolor = [{
-				"border": `rgb(${pallete[1][0]}, ${pallete[1][1]}, ${pallete[1][2]}) solid 2px`
+			goods.fontcolor = [{
+				"color": `rgb(${pallete[1][0]}, ${pallete[1][1]}, ${pallete[1][2]})`
 			},{
-				"border": `rgb(${pallete[2][0]}, ${pallete[2][1]}, ${pallete[2][2]}) solid 2px`
+				"color": `rgb(${pallete[2][0]}, ${pallete[2][1]}, ${pallete[2][2]})`
 			}];
 		};
 	}

@@ -39,7 +39,7 @@
 		</div>
 		<div ng-show="vm.exchange !== undefined" offset-gt-sm="5" flex="50" flex-md="100" flex-sm="100" style="height:100%; max-height: 100%;" layout="row" layout-align="center center">
 			<div layout="row" class="info_container layout-ex center">
-				<md-card flex="35" flex-sm="40" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].bgStyle">
+				<md-card flex="40" flex-sm="40" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].bgStyle">
 					<div layout="column">
 						<img id="img_me" crossorigin="anonymous" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)" class="md-card-image" style="cursor:pointer;">
 						<md-card-content style="padding: 0;">
@@ -58,21 +58,24 @@
 						</md-card-content>
 					</div>
 				</md-card>
-				<div flex="20" flex-sm="15" layout="column" layout-align="center center">
-					<img src="../../images/icon(48-48).png" style="margin:0 0 20px 0;">
-					<md-button class="btn-rwd md-raised md-accent md-hue-1" ng-show="!vm.agreed" ng-click="vm.onClickComplete($event)">
-						<span hide-sm>確認交換 !</span>
-						<div layout layout-align="center center" hide-gt-sm><i class="material-icons">sync</i></div>
-					</md-button>
-					<md-button class="btn-rwd md-accent white-btn" ng-show="!vm.agreed" ng-click="vm.onClickDelete($event, vm.exchange.eid)">
-						<span hide-sm>先不要換</span>
-						<div layout layout-align="center center" hide-gt-sm>
-							<i class="material-icons">sync_disabled</i>
+				<div flex="5" flex-gt-md="10" layout="column" layout-align="start center" style="padding-top:10%;">
+					<p class="vertical isUp">確認交換 </p>
+					<md-button class="md-fab ex-confirm md-hue-1 md-accent" ng-show="!vm.agreed" ng-click="vm.onClickComplete($event)">
+						<div layout layout-align="center center">
+							<img src="../../images/icon(48-48).png" />
 						</div>
 					</md-button>
-					<md-button ng-show="vm.agreed" disabled="true" class="md-accent md-hue-2">已確認交換</md-button>
+					<md-button class="md-fab white-btn" ng-show="!vm.agreed" ng-click="vm.onClickDelete($event, vm.exchange.eid)">
+						<md-icon md-font-set="material-icons" style="color: #FFD54F">close</md-icon>
+					</md-button>
+					<p class="vertical isDown">先不要換</p>
+					<md-button class="md-fab ex-confirm md-hue-1 md-accent" ng-show="vm.agreed" disabled="true">
+						<div layout layout-align="center center">
+							<i class="material-icons confirm">done</i>
+						</div>
+					</md-button>
 				</div>
-				<md-card flex="35" flex-sm="40" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].bgStyle">
+				<md-card flex="40" flex-sm="40" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].bgStyle">
 					<div layout="column">
 						<img id='img_other' crossorigin="anonymous" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.other].gid)" class="md-card-image" style="cursor:pointer;">
 						<md-card-content style="padding: 0;">

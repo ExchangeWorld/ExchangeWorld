@@ -176,3 +176,14 @@ a:hover {
 	border-width: 20px 0 20px 25px;
 	border-color: transparent transparent transparent #607D8B;
 }
+
+.vertical {
+	writing-mode: vertical-rl;
+	color: #CFD8DC;
+	&.isUp {
+		margin-bottom: 10px;
+	}
+	&.isDown {
+		margin-top: 10px;
+	}
+}

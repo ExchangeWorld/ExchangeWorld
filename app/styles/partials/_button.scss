@@ -55,6 +55,11 @@ map {
 		height: 48px;
 		width: 48px;
 		line-height: 48px;
+		&.ex-confirm {
+			height: 80px;
+			width: 80px;
+			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.35);
+		}
 	}
 }
 

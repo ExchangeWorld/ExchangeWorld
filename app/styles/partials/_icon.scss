@@ -58,4 +58,8 @@
 			filter: alpha(opacity=80);
 		}
 	}
+	&.confirm {
+		font-size: 48px;
+		color: rgb(84, 110, 122);
+	}
 }

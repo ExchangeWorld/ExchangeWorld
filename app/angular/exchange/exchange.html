@@ -58,7 +58,7 @@
 						</md-card-content>
 					</div>
 				</md-card>
-				<div flex="5" flex-gt-md="10" layout="column" layout-align="start center" style="padding-top:10%;">
+				<div flex="5" flex-gt-sm="10" layout="column" layout-align="start center" style="padding-top:10%;">
 					<p class="vertical isUp">確認交換 </p>
 					<md-button class="md-fab ex-confirm md-hue-1 md-accent" ng-show="!vm.agreed" ng-click="vm.onClickComplete($event)">
 						<div layout layout-align="center center">
@@ -102,7 +102,7 @@
 				<map-block></map-block>
 			</div>
 			<div class="chat-layout">
-				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center">
+				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center" style="min-height: 48px;">
 					<span>聊天</span>
 				</md-toolbar>
 				<ul class="discussion chat-ex" scroll='vm.chatroom.length > 0' upward-scroll="vm.loadMore()">

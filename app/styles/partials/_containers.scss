@@ -240,9 +240,10 @@ div.md-open-menu-container {
 		height: 250px;
 	}
 	.chat-layout {
+		padding: 5% 0 0 3%;
 		height: 70%;
 		z-index: 1;
-		width: 50%;
+		width: 90%;
 	}
 	.btn-rwd {
 		min-width: 44px;
@@ -251,10 +252,10 @@ div.md-open-menu-container {
 		margin: 4% 0;
 	}
 	.map-size {
-		height: 350px;
-		width: 35%;
+		height: 250px;
+		width: 60%;
 		z-index: 0;
-		padding-right: 5%;
+		padding: 7% 0 0 17%;
 	}
 }
 
@@ -275,12 +276,12 @@ div.md-open-menu-container {
 		}
 	}
 	.chat-ex {
-		height: 300px;
+		height: 400px;
 	}
 	.chat-layout {
-		height: 70%;
+		padding: 3% 0 0 12%;
 		z-index: 1;
-		width: 40%;
+		width: 70%;
 	}
 	.btn-rwd {
 		min-width: 75px;
@@ -289,10 +290,10 @@ div.md-open-menu-container {
 		margin: 6% 0;
 	}
 	.map-size {
-		height: 400px;
+		height: 300px;
 		width: 40%;
 		z-index: 0;
-		padding-right: 10%;
+		padding: 5% 0 0 27%;
 	}
 }
 
@@ -321,6 +322,7 @@ div.md-open-menu-container {
 		height: 70%;
 		z-index: 1;
 		width: auto;
+		padding: 0;
 	}
 	.btn-rwd {
 		min-width: 88px;
@@ -335,7 +337,7 @@ div.md-open-menu-container {
 		height: 30%;
 		width: auto;
 		z-index: 0;
-		padding-right: 0;
+		padding: 0;
 	}
 }
 

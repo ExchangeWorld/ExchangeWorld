@@ -1,5 +1,5 @@
 <md-toolbar ng-click="vm.closeMenu()" class="md-primary md-whiteframe-z2" style="overflow-x: hidden; overflow-y: hidden;">
-	<div class="md-toolbar-tools md-medium-tall navbar">
+	<div class="md-toolbar-tools md-medium-tall navbar" style="height: 56px;">
 		<span flex="20" flex-md="15" hide-sm hide-md>
 			<md-button ng-click="vm.onClick(0)" style="text-transform: none;" aria-label="logo">
 				<div layout layout-align="center center">
@@ -40,7 +40,7 @@
 		<span flex-md="15"></span>
 		<!-- notification div -->
 		<div flex="10" flex-md="20" flex-sm="30" offset="10" offset-md="5" offset-sm="15" layout="row" layout-align="center center">
-			<md-menu flex flex-sm md-offset="-200 70" ng-show="vm.isLoggedIn">
+			<md-menu flex flex-sm md-offset="-200 61" ng-show="vm.isLoggedIn">
 				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)">
 					<md-icon class="material-icons">forum</md-icon>
 					<p class="notification md-caption" ng-show="vm.unreadMsg !== 0">{{ vm.unreadMsg }}</p>
@@ -69,7 +69,7 @@
 					<md-divider></md-divider>
 				</md-menu-content>
 			</md-menu>
-			<md-menu flex flex-sm flex-md md-offset="-200 70" ng-show="vm.isLoggedIn">
+			<md-menu flex flex-sm flex-md md-offset="-200 61" ng-show="vm.isLoggedIn">
 				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)">
 					<md-icon class="material-icons">notifications</md-icon>
 					<p class="notification md-caption" ng-show="vm.unreadNotify !== 0">{{ vm.unreadNotify }}</p>
@@ -102,7 +102,7 @@
 		<!-- user menu div -->
 		<div flex="15" flex-md flex-sm layout="row" layout-align="center center">
 			<md-button ng-hide="vm.isLoggedIn" ng-click="vm.onLogin()">登入</md-button>
-			<md-menu flex flex-sm="70" md-offset="-10 72">
+			<md-menu flex flex-sm="70" md-offset="-10 64">
 				<md-button ng-show="vm.isLoggedIn" ng-click="vm.openMenu($mdOpenMenu, $event)" style="max-width: 100%;">
 					<div ng-show="vm.isLoggedIn" layout="row" layout-align="center center">
 						<img hide-sm class="img-navbar" ng-src="{{ vm.user.photo_path }}"></img>

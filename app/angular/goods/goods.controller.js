@@ -52,7 +52,7 @@ function GoodsController(
 
 	vm.showPhotoViewer = showPhotoViewer;
 	vm.onClickUser = (uid)=> $state.go('root.withSidenav.profile', { uid: uid });
-	vm.onClickBack = ()=> $window.history.back();
+	vm.onClickBack = ()=> $state.go('root.withSidenav.seek');
 
 	activate();
 

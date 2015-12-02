@@ -20,21 +20,17 @@ body {
 }
 
 md-toolbar {
-  box-sizing: border-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  position: relative;
-  z-index: 2;
-  font-size: 20px;
-  min-height: 56px;
-  width: 100%; 
-}
-
-md-toolbar {
+	box-sizing: border-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	position: relative;
+	font-size: 20px;
+	min-height: 56px;
+	width: 100%;
 	z-index: 75;
 	height: 56px;
 	&:focus {
@@ -43,18 +39,24 @@ md-toolbar {
 }
 
 @media only screen and (min-width: 0) and (max-width: 600px) and (orientation: portrait) {
-  md-toolbar {
-    min-height: 56px; }
-  .md-toolbar-tools {
-    height: 56px;
-    max-height: 56px; } }
+	md-toolbar {
+		min-height: 56px;
+	}
+	.md-toolbar-tools {
+		height: 56px;
+		max-height: 56px;
+	}
+}
 
 @media only screen and (min-width: 0) and (max-width: 600px) and (orientation: landscape) {
-  md-toolbar {
-    min-height: 56px; }
-  .md-toolbar-tools {
-    height: 56px;
-    max-height: 56px; } }
+	md-toolbar {
+		min-height: 56px;
+	}
+	.md-toolbar-tools {
+		height: 56px;
+		max-height: 56px;
+	}
+}
 
 md-list-item {
 	&.md-button {

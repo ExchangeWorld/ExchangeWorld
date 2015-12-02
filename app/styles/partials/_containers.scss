@@ -20,9 +20,41 @@ body {
 }
 
 md-toolbar {
+	box-sizing: border-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	position: relative;
+	font-size: 20px;
+	min-height: 56px;
+	width: 100%;
 	z-index: 75;
+	height: 56px;
 	&:focus {
 		outline-width: 0;
+	}
+}
+
+@media only screen and (min-width: 0) and (max-width: 600px) and (orientation: portrait) {
+	md-toolbar {
+		min-height: 56px;
+	}
+	.md-toolbar-tools {
+		height: 56px;
+		max-height: 56px;
+	}
+}
+
+@media only screen and (min-width: 0) and (max-width: 600px) and (orientation: landscape) {
+	md-toolbar {
+		min-height: 56px;
+	}
+	.md-toolbar-tools {
+		height: 56px;
+		max-height: 56px;
 	}
 }
 
@@ -240,9 +272,10 @@ div.md-open-menu-container {
 		height: 250px;
 	}
 	.chat-layout {
+		padding: 5% 0 0 3%;
 		height: 70%;
 		z-index: 1;
-		width: 50%;
+		width: 90%;
 	}
 	.btn-rwd {
 		min-width: 44px;
@@ -251,10 +284,10 @@ div.md-open-menu-container {
 		margin: 4% 0;
 	}
 	.map-size {
-		height: 350px;
-		width: 35%;
+		height: 250px;
+		width: 100%;
 		z-index: 0;
-		padding-right: 5%;
+		padding: 10% 0 0 0;
 	}
 }
 
@@ -275,12 +308,12 @@ div.md-open-menu-container {
 		}
 	}
 	.chat-ex {
-		height: 300px;
+		height: 400px;
 	}
 	.chat-layout {
-		height: 70%;
+		padding: 3% 0 0 12%;
 		z-index: 1;
-		width: 40%;
+		width: 70%;
 	}
 	.btn-rwd {
 		min-width: 75px;
@@ -289,10 +322,10 @@ div.md-open-menu-container {
 		margin: 6% 0;
 	}
 	.map-size {
-		height: 400px;
-		width: 40%;
+		height: 300px;
+		width: 100%;
 		z-index: 0;
-		padding-right: 10%;
+		padding: 8% 0 0 0;
 	}
 }
 
@@ -321,6 +354,7 @@ div.md-open-menu-container {
 		height: 70%;
 		z-index: 1;
 		width: auto;
+		padding: 0;
 	}
 	.btn-rwd {
 		min-width: 88px;
@@ -335,7 +369,7 @@ div.md-open-menu-container {
 		height: 30%;
 		width: auto;
 		z-index: 0;
-		padding-right: 0;
+		padding: 0;
 	}
 }
 
@@ -349,6 +383,11 @@ div.md-open-menu-container {
 	.profile-top {
 		margin: 10% 0;
 	}
+}
+
+_::-webkit-:not(:root:root),
+.wtfsafari {
+	top: 3px;
 }
 
 .img-lineup {

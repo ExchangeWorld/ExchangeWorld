@@ -3,14 +3,11 @@
 		<span flex="20" flex-md="15" hide-sm hide-md>
 			<md-button ng-click="vm.onClick(0)" style="text-transform: none;" aria-label="logo">
 				<div layout layout-align="center center">
-					<!-- <i class="material-icons">group</i>
-					<span hide-md hide-sm>ExchangeWorld</span> -->
 					<img src="../../images/Ex-Logo-white (Century Gothic).png" style="height:40px; width:auto;">
 				</div>
 			</md-button>
 		</span>
 		<span flex="10" hide-md hide-sm></span>
-		<!-- seek and post button -->
 		<div flex="35" flex-md="40" flex-sm="40" layout="row" layout-align="center center">
 			<md-button flex flex-sm="15" ng-click="vm.onClick(1)" ng-class="{'active': vm.contentIs(1)}">
 				<div layout layout-align="center center">
@@ -38,7 +35,6 @@
 			</md-button>
 		</div>
 		<span flex-md="15"></span>
-		<!-- notification div -->
 		<div flex="10" flex-md="20" flex-sm="30" offset="10" offset-md="5" offset-sm="15" layout="row" layout-align="center center">
 			<md-menu flex flex-sm md-offset="-200 61" ng-show="vm.isLoggedIn">
 				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)">
@@ -79,7 +75,6 @@
 						<p class="md-body-1">通知</p>
 					</md-menu-item>
 					<md-divider></md-divider>
-					<!-- unread notification -->
 					<md-list>
 						<md-list-item ng-show="vm.notifications.length === 0">
 							<div flex>
@@ -99,7 +94,6 @@
 				</md-menu-content>
 			</md-menu>
 		</div>
-		<!-- user menu div -->
 		<div flex="15" flex-md flex-sm layout="row" layout-align="center center">
 			<md-button ng-hide="vm.isLoggedIn" ng-click="vm.onLogin()">登入</md-button>
 			<md-menu flex flex-sm="70" md-offset="-10 64">

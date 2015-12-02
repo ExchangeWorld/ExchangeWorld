@@ -1,9 +1,7 @@
 <md-content>
 	<div layout="row" class="profile-top" layout-align="center center">
-		<!-- user avatar -->
 		<div layout layout-align="center center" ng-style="{'background-image':'url({{ vm.profile.largePic }})','width':'120px' , 'height':'120px', 'background-repeat':'no-repeat', 'background-position':'center','border-radius':'50%','background-size':'contain'}">
 		</div>
-		<!-- user name & follow button -->
 		<div flex-gt-sm="60" flex-sm="45" layout="column">
 			<div layout="column">
 				<div layout="column" layout-align="center center">
@@ -44,7 +42,6 @@
 		</div>
 	</div>
 	<md-divider class="info_container for_input" style="margin-bottom: 0px"></md-divider>
-	<!-- tabs for user -->
 	<md-tabs md-dynamic-height md-border-bottom md-center-tabs md-swipe-content>
 		<md-tab label="願望清單">
 			<md-content layout-padding style="margin-top: 10px;">
@@ -57,14 +54,9 @@
 									<label>您想要的物品</label>
 									<textarea ng-model="vm.profile.wishlist" ng-disabled="vm.isReadOnly" style="color:#000;"></textarea>
 								</md-input-container>
-								<!--<md-input-container>-->
-								<!--<label>備註</label>-->
-								<!--<textarea ng-model="vm.profile.note" ng-disabled="vm.isReadOnly"></textarea>-->
-								<!--</md-input-container>-->
 							</div>
 						</form>
 					</div>
-					<!-- edit fab button -->
 					<span flex></span>
 					<div layout layout-align="center start">
 						<md-button class="md-fab md-primary md-hue-2" ng-show="vm.isMe" ng-click="vm.onClickEdit()">
@@ -85,11 +77,11 @@
 				</div>
 				<div layout="column" layout-align="center center">
 					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myGoodsPending" ng-click="vm.onClickGoods(goods.gid)">
-						<md-card-content layout="column" layout-gt-sm="row">
-							<div flex-gt-sm="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
+						<md-card-content layout-gt-sm="row">
+							<div flex-gt-sm="40" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
 								<img id="img_{{goods.gid}}" crossorigin="anonymous" ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
-							<div offset-gt-sm="5 "flex-gt-sm="55" layout="column">
+							<div offset-gt-sm="5" flex-gt-sm="55" layout-gt-sm="column">
 								<div layout layout-align="center center">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
@@ -109,11 +101,11 @@
 				</div>
 				<div layout="column" layout-align="center center">
 					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myGoodsExchanged" ng-click="vm.onClickGoods(goods.gid)">
-						<md-card-content layout="column" layout-gt-sm="row">
-							<div flex-gt-sm="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
+						<md-card-content layout-gt-sm="row">
+							<div flex-gt-sm="40" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
 								<img id="img_{{goods.gid}}" crossorigin="anonymous" ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
-							<div offset-gt-sm="5 "flex-gt-sm="55" layout="column">
+							<div offset-gt-sm="5" flex-gt-sm="55" layout-gt-sm="column">
 								<div layout="row" layout-align="center center">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
@@ -141,11 +133,11 @@
 				</div>
 				<div layout="column" layout-align="center center">
 					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myStar" ng-click="vm.onClickGoods(goods.gid)">
-						<md-card-content layout="column" layout-gt-sm="row">
-							<div flex-gt-sm="40" flex-sm="100" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
+						<md-card-content layout-gt-sm="row">
+							<div flex-gt-sm="40" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
 								<img id="img_{{goods.gid}}" crossorigin="anonymous" ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
 							</div>
-							<div offset-gt-sm="5 "flex-gt-sm="55" layout="column">
+							<div offset-gt-sm="5" flex-gt-sm="55" layout-gt-sm="column">
 								<div layout layout-align="center center">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>

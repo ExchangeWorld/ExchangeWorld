@@ -163,7 +163,8 @@ function ExchangeController(
 			var pallete = ct.getPalette(image, 2);
 			goods.bgStyle = {
 				"background-color": `rgb(${pallete[0][0]}, ${pallete[0][1]}, ${pallete[0][2]})`,
-				"border-radius": "20px"
+				"border-radius": "20px",
+				"margin": "0"
 			};
 			goods.fontcolor = [{
 				"color": `rgb(${pallete[1][0]}, ${pallete[1][1]}, ${pallete[1][2]})`

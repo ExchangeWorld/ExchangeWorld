@@ -48,16 +48,6 @@ md-toolbar {
 	}
 }
 
-@media only screen and (min-width: 0) and (max-width: 600px) and (orientation: landscape) {
-	md-toolbar {
-		min-height: 56px;
-	}
-	.md-toolbar-tools {
-		height: 56px;
-		max-height: 56px;
-	}
-}
-
 md-list-item {
 	&.md-button {
 		margin: 0;
@@ -373,7 +363,7 @@ div.md-open-menu-container {
 		}
 	}
 	.chat-ex {
-		height: calc(100% - 98px);
+		height: calc(100% - 106px);
 	}
 	.chat-layout {
 		height: 70%;

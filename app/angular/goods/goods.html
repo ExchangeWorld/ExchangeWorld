@@ -1,9 +1,9 @@
 <md-content layout-padding style="overflow-y: hidden;">
 	<div layout-padding layout-margin layout="row" layout-align="center center">
-		<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1">
+		<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1" style="margin-left:0;">
 			<md-icon md-font-set="material-icons">undo</md-icon>上一頁
 		</md-button>
-		<div flex="70" flex-sm="55" layout="row" layout-align="center center">
+		<div flex="70" flex-sm="55" layout="row" layout-align="center center" style="margin-left:0;">
 			<div flex-sm="50" layout layout-align="center center">
 				<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
 					<md-icon md-font-set="material-icons" ng-class="{'heart': vm.starred}">favorite</md-icon>

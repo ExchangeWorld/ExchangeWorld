@@ -6,7 +6,7 @@ body {
 	margin: 0px;
 	padding: 0px;
 	overflow-x: hidden;
-	font-family: Arial, Droid Sans Fallback , "文泉驛正黑", "WenQuanYi Zen Hei", "儷黑 Pro", "LiHei Pro", "微軟正黑體", "Microsoft JhengHei", "標楷體", DFKai-SB, sans-serif;
+	font-family: Arial, Droid Sans Fallback, "文泉驛正黑", "WenQuanYi Zen Hei", "儷黑 Pro", "LiHei Pro", "微軟正黑體", "Microsoft JhengHei", "標楷體", DFKai-SB, sans-serif;
 }
 
 .toast-top-right {
@@ -269,7 +269,7 @@ div.md-open-menu-container {
 		}
 	}
 	.chat-ex {
-		height: 100% ;
+		height: 100%;
 	}
 	.chat-layout {
 		padding: 5% 0 0 3%;
@@ -385,9 +385,10 @@ div.md-open-menu-container {
 	}
 }
 
-_::-webkit-:not(:root:root),
-.wtfsafari {
-	top: 3px;
+@supports (overflow:-webkit-marquee) and (justify-content:inherit) {
+	.wtfsafari {
+		top: 3px;
+	}
 }
 
 .img-lineup {

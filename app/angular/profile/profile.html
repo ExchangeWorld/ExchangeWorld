@@ -12,18 +12,18 @@
 					</div>
 				</div>
 				<div layout="row" layout-sm="column" layout-align="center center">
-					<div layout="column" layout-align="center center" class="note profile">
-						<p class="md-title text-ex follow">追隨中</p>
+					<div layout="column" layout-sm="row" layout-align="center center" class="note profile">
+						<p class="md-title text-ex follow reset-follow">追隨中</p>
 						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 0)">{{ vm.profile.followings.length }}</a>
 					</div>
-					<div layout="column" layout-align="center center" class="note profile">
-						<p class="md-title text-ex follow">被追蹤</p>
+					<div layout="column" layout-sm="row" layout-align="center center" class="note profile">
+						<p class="md-title text-ex follow reset-follow">被追蹤</p>
 						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 1)">{{ vm.followerCount }}</a>
 					</div>
 				</div>
 			</div>
 			<div offset="10" layout="row" layout-align="center center" style="margin-top: 10px;">
-				<md-button flex class="md-raised md-primary" ng-show="!vm.isMe" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
+				<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
 					<div ng-show="!vm.isFollowed">
 						<md-icon md-font-set="material-icons">person_add</md-icon>
 						<span hide-sm>&nbsp;追隨</span>
@@ -33,7 +33,7 @@
 						<span hide-sm>&nbsp;取消追隨</span>
 					</div>
 				</md-button>
-				<md-button flex class="md-raised md-primary" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)">
+				<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)">
 					<md-icon md-font-set="material-icons">chat</md-icon>
 					<span hide-sm>&nbsp;送訊息</span>
 				</md-button>
@@ -41,7 +41,7 @@
 			</div>
 		</div>
 	</div>
-	<md-divider class="info_container for_input" style="margin-bottom: 0px"></md-divider>
+	<md-divider class="info_container for_input small" style="margin-bottom: 0px"></md-divider>
 	<md-tabs md-dynamic-height md-border-bottom md-center-tabs md-swipe-content>
 		<md-tab label="願望清單">
 			<md-content layout-padding style="margin-top: 10px;">

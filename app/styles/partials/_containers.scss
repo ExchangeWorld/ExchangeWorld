@@ -140,7 +140,10 @@ md-input-container {
 	margin-top: 20px;
 	margin-bottom: 20px;
 	&.for_input {
-		margin: 8.5% 0px;
+		margin: 8.5% 0;
+		&.small {
+			margin: 5% 0;
+		}
 	}
 	&.add-photo {
 		margin: 20px 0 10px 0;
@@ -278,16 +281,27 @@ div.md-open-menu-container {
 		width: 90%;
 	}
 	.btn-rwd {
-		min-width: 44px;
+		min-width: 46px;
 	}
 	.profile-top {
-		margin: 4% 0;
+		margin: 4% 0 2% 0;
 	}
 	.map-size {
 		height: 250px;
 		width: 100%;
 		z-index: 0;
 		padding: 10% 0 0 0;
+	}
+	.img-null {
+		max-height: 90%;
+		max-width: 90%;
+		padding-top: 25%;
+		&.onseek {
+			padding-top: 180px;
+		}
+	}
+	.reset-follow {
+		margin: 0;
 	}
 }
 
@@ -326,6 +340,17 @@ div.md-open-menu-container {
 		width: 100%;
 		z-index: 0;
 		padding: 8% 0 0 0;
+	}
+	.img-null {
+		max-height: 90%;
+		max-width: 90%;
+		padding-top: 30%;
+		&.onseek {
+			padding-top: 180px;
+		}
+	}
+	.reset-follow {
+		margin-bottom: 5px;
 	}
 }
 
@@ -371,6 +396,14 @@ div.md-open-menu-container {
 		z-index: 0;
 		padding: 0;
 	}
+	.img-null {
+		max-height: 90%;
+		max-width: 90%;
+		padding-top: 11%;
+		&.onseek {
+			padding-top: 180px;
+		}
+	}
 }
 
 @media screen and (min-width: 1400px) {
@@ -382,6 +415,14 @@ div.md-open-menu-container {
 	}
 	.profile-top {
 		margin: 10% 0;
+	}
+	.img-null {
+		max-height: 90%;
+		max-width: 90%;
+		padding-top: 25%;
+		&.onseek {
+			padding-top: 280px;
+		}
 	}
 }
 
@@ -470,15 +511,6 @@ div.md-open-menu-container {
 	height: auto;
 	cursor: pointer;
 	border-radius: 15px;
-}
-
-.img-null {
-	max-height: 90%;
-	max-width: 90%;
-	padding-top: 9%;
-	&.onseek {
-		padding-top: 180px;
-	}
 }
 
 .img-navbar {

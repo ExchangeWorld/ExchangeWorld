@@ -16,7 +16,9 @@ function ExchangeController(
 	$interval,
 	$mdDialog,
 	$localStorage,
-	$q
+	$q,
+	$mdSidenav,
+	$scope
 ) {
 	var vm             = this;
 	var ct             = new colorThief.ColorThief();
@@ -33,7 +35,6 @@ function ExchangeController(
 	vm.onClickDelete   = onClickDelete;
 	vm.onSubmitChat    = onSubmitChat;
 	vm.agreed          = false;
-
 
 	////////////
 	activate();
@@ -173,4 +174,12 @@ function ExchangeController(
 			}];
 		};
 	}
+
+	$scope.openLeftMenu = function() {
+    	$mdSidenav('left').toggle();
+  	};
+
+  	$scope.close = function () {
+      $mdSidenav('left').close();
+  	};
 }

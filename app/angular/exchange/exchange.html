@@ -14,7 +14,7 @@
 		</div>
 	</div>
 </md-content>
-<md-content resize ng-style="resizeWithOffset(56)" ng-show="vm.exchangeList.length !== 0" style="overflow-x: hidden;">
+<md-content resize ng-style="resizeWithOffset(56)" ng-show="vm.exchangeList.length !== 0" style="overflow-x: hidden; background-color: #f5f5f5;">
 	<div layout="column" layout-gt-md="row" class="layout-ex">
 		<div hide-gt-md>
 			<div layout layout-align="center center" style="margin-top: 20px;">
@@ -23,9 +23,14 @@
 						<i class="material-icons md-36">dns</i>
 					</div>
 				</md-button>
+				<md-button class="md-icon-button md-primary" ng-click="openRightMenu()" ng-show="vm.exchange !== undefined">
+					<div layout layout-align="center">
+						<i class="material-icons md-36">chat</i>
+					</div>
+				</md-button>
 			</div>
 			<md-sidenav md-component-id="left" class="md-sidenav-left">
-				<div class="event-btn" layout="row" layout-algin="center center" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index); close()">
+				<div class="event-btn" layout="row" layout-algin="center center" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index); closeleft()">
 					<div flex="25" layout layout-align="center center">
 						<img class="circle exchange" ng-src="{{exchange.details.goods[exchange.lookupTable.other].user.photo_path}}" />
 					</div>
@@ -164,6 +169,40 @@
 				</ul>
 			</div>
 		</div>
+		<md-sidenav md-component-id="right" class="md-sidenav-right">
+			<div class="chat-layout">
+				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center" style="min-height: 48px;">
+					<span>聊天</span>
+				</md-toolbar>
+				<ul class="discussion chat-ex" scroll='vm.chatroom.length > 0' upward-scroll="vm.loadMore()">
+					<li ng-class="{true: 'other', false: 'self'}[chat.sender_uid !== {{ vm.myid }}]" ng-repeat="chat in vm.chatroom">
+						<div class="avatar" ng-show="(chat.sender_uid !== {{ vm.myid }})">
+							<div ng-show="(chat.sender_uid !== {{ vm.myid }})">
+								<img ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].user.photo_path}}" />
+							</div>
+							<md-tooltip ng-show="(chat.sender_uid !== {{ vm.myid }})">
+								{{vm.exchange.details.goods[vm.exchange.lookupTable.other].user.name}}
+							</md-tooltip>
+						</div>
+						<div class="messages" layout layout-align="center center">
+							<p class="content">{{ chat.content }}</p>
+							<md-tooltip>
+								{{ chat.time }}
+							</md-tooltip>
+						</div>
+					</li>
+				</ul>
+				<ul class="discussion input">
+					<form ng-submit="vm.onSubmitChat()">
+						<md-input-container>
+							<label style="top:-5px;">輸入訊息...</label>
+							<input type="text" ng-model="vm.chatContent" name="text" />
+						</md-input-container>
+						<input type="submit" id="submit" value="Submit" ng-show="false" />
+					</form>
+				</ul>
+			</div>
+		</md-sidenav>
 	</div>
 </md-content>
 

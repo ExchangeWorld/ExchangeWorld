@@ -179,7 +179,15 @@ function ExchangeController(
     	$mdSidenav('left').toggle();
   	};
 
-  	$scope.close = function () {
+  	$scope.openRightMenu = function() {
+    	$mdSidenav('right').toggle();
+  	};
+
+  	$scope.closeleft = function () {
       $mdSidenav('left').close();
+  	};
+
+  	$scope.closeright = function () {
+      $mdSidenav('right').close();
   	};
 }

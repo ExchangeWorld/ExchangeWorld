@@ -43,9 +43,15 @@ module.exports = function() {
 
 	// For bots
 	server.all('*', (req, res, next) => {
-		if (req.useragent.isBot.startsWith('facebook')) {
-			res.redirect('http://' + req.hostname + ':43002' + '/bot' + req.path);
+		if (req.useragent.isBot) {
+			if (req.useragent.isBot.startsWith('facebook')) {
+				res.redirect('http://' + req.hostname + ':43002' + '/bot' + req.path);
+			} else {
+				console.log('BOT-AGENT:', req.useragent.isBot);
+				next();
+			}
 		} else {
+			// console.log(req.useragent);
 			next();
 		}
 	});

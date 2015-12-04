@@ -105,6 +105,7 @@
     "bower": "^1.4.1",
     "compression": "^1.5.1",
     "express": "^4.7.2",
+    "express-useragent": "^0.2.4",
     "imagemin-pngcrush": "^4.1.0",
     "jsonwebtoken": "^5.0.5",
     "lodash": "^3.10.0",

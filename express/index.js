@@ -12,7 +12,7 @@ var cookieParser = require('cookie-parser');
 var favicon      = require('serve-favicon');
 var compression  = require('compression');
 var multer       = require('multer');
-var useragent    = require('express-useragent')
+var useragent    = require('express-useragent');
 
 module.exports = function() {
 
@@ -34,17 +34,24 @@ module.exports = function() {
 
 	server.disable('x-powered-by');
 
-	server.all('*', function(req, res, next) {
+	server.all('*', (req, res, next) => {
 		res.header('Access-Control-Allow-Origin', '*');
 		res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		next();
 	});
 
-	server.all('*', function(req, res, next) {
-		console.log('USER-AGENT:', req.useragent);
+	// For bots
+	server.all('*', (req, res, next) => {
+		if (req.useragent.isBot.startsWith('facebook')) {
+			res.redirect('http://' + req.hostname + ':43002' + '/bot' + req.path);
+		} else {
+			next();
+		}
+	});
+
+	server.all('*', (req, res, next) => {
 		res.sendFile('index.html', { root : 'build' });
-		// next();
 	});
 
 	// Serve index.html for all routes to leave routing up to Angular
@@ -52,52 +59,16 @@ module.exports = function() {
 	// 	res.sendFile('index.html', { root : 'build' });
 	// });
 
-	/*USE TO CREATE NEW DATABASE*/
-	//server.use('/api/CreateAllTables', require('./libs/CreateAllTable.js'));
-
-	// Token authentications:
-	// If the path is not /api/authenticate, then it needs authentication
-	// If fail, return {"authentication": "fail"}
-	// If success, and then go next()
-	// var authenticate = require('./routers/authenticate');
-	// server.all(/\/api\/(?!authenticate).+/, authenticate.token, function(req, res, next) {
-	// 	next();
-	// });
-
-	// /* ref: doc/seek.md */
-	// server.use('/api/goods/search', require('./routers/goods.search'));
-	// server.use('/api/goods', require('./routers/goods'));
-
-	// server.use('/api/upload', require('./routers/upload'));
-
-	// /* ref: doc/profile.md */
-	// server.use('/api/user/profile/follower', require('./routers/follower'));
-	// server.use('/api/user/profile/following', require('./routers/following'));
-	// server.use('/api/user/profile', require('./routers/user.profile'));
-	// server.use('/api/user', require('./routers/user'));
-
-	// server.use('/api/comment', require('./routers/comment'));
-	// server.use('/api/star', require('./routers/star'));
-	// server.use('/api/queue', require('./routers/queue'));
-
-	// server.use('/api/exchange', require('./routers/exchange'));
-	// server.use('/api/notification', require('./routers/notification'));
-	// server.use('/api/message', require('./routers/message'));
-	// server.use('/api/chatroom', require('./routers/chatroom'));
-
-	// server.use('/api/authenticate', authenticate.router);
-
-	// catch 404 and forward to error handler
-	server.use(function(req, res, next) {
+	// Catch 404 and forward to error handler
+	server.use((req, res, next) => {
 		var err    = new Error('Not Found');
 		err.status = 404;
 		next(err);
 	});
 
 	// 500 error handlers
-
-	// development error handler: print stacktrace
-	server.use(function(err, req, res, next) {
+	// Development error handler: print stacktrace
+	server.use((err, req, res, next) => {
 		res.status(err.status || 500);
 		err.statusCode = 500;
 		if (process.env.NODE_ENV !== 'production' && req.xhr) {
@@ -111,7 +82,7 @@ module.exports = function() {
 
 	// Start webserver if not already running
 	var s = http.createServer(server);
-	s.on('error', function(err) {
+	s.on('error', err => {
 		if (err.code === 'EADDRINUSE') {
 			gutil.log('Development server is already started at port ' + config.serverPort);
 		} else {

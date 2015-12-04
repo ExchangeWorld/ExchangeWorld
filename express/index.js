@@ -42,8 +42,9 @@ module.exports = function() {
 	});
 
 	server.all('*', function(req, res, next) {
-		console.log(req.useragent);
-		next();
+		console.log('USER-AGENT:', req.useragent);
+		res.sendFile('index.html', { root : 'build' });
+		// next();
 	});
 
 	// Serve index.html for all routes to leave routing up to Angular

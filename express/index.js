@@ -12,6 +12,7 @@ var cookieParser = require('cookie-parser');
 var favicon      = require('serve-favicon');
 var compression  = require('compression');
 var multer       = require('multer');
+var useragent    = require('express-useragent')
 
 module.exports = function() {
 
@@ -20,16 +21,19 @@ module.exports = function() {
 	// log all requests to the console
 	if (process.env.NODE_ENV !== 'production') server.use(morgan('dev'));
 
+	server.use(cookieParser());
+	server.use(compression());
+	server.use(useragent.express());
+
 	server.use(favicon(__dirname + '/../build/images/favicon.ico'));
 	// server.use(bodyParser.json({ limit : '64mb' })); // for parsing application/json
 	// server.use(bodyParser.urlencoded({ limit : '64mb', extended : true })); // for parsing application/x-www-form-urlencoded
 	// server.use(multer()); // for parsing multipart/form-data
-	server.use(cookieParser());
-	server.use(compression());
+
 	server.use(express.static('build'));
 
 	server.disable('x-powered-by');
-	
+
 	server.all('*', function(req, res, next) {
 		res.header('Access-Control-Allow-Origin', '*');
 		res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
@@ -37,10 +41,15 @@ module.exports = function() {
 		next();
 	});
 
-	// Serve index.html for all routes to leave routing up to Angular
-	server.all(/^(?!\/api\/)\w*/, function(req, res, next) {
-		res.sendFile('index.html', { root : 'build' });
+	server.all('*', function(req, res, next) {
+		console.log(req.useragent);
+		next();
 	});
+
+	// Serve index.html for all routes to leave routing up to Angular
+	// server.all(/^(?!\/api\/)\w*/, function(req, res, next) {
+	// 	res.sendFile('index.html', { root : 'build' });
+	// });
 
 	/*USE TO CREATE NEW DATABASE*/
 	//server.use('/api/CreateAllTables', require('./libs/CreateAllTable.js'));

@@ -34,10 +34,14 @@
 		color: #FF9700;
 		cursor: default;
 	}
-	&.heart {
+	&.heart-seek {
 		color: #ff1e52;
 		cursor: pointer;
-		margin-right: 8px;
+		margin-right: 5px;
+	}
+	&.heart-goods {
+		color: #ff1e52;
+		cursor: pointer;
 	}
 	&.blue {
 		color: #6e5fdd;

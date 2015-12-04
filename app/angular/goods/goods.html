@@ -6,7 +6,7 @@
 		<div flex="70" flex-sm="55" layout="row" layout-align="center center" style="margin-left:0;">
 			<div flex-sm="50" layout layout-align="center center">
 				<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
-					<md-icon md-font-set="material-icons" ng-class="{'heart': vm.starred}">favorite</md-icon>
+					<md-icon md-font-set="material-icons" ng-class="{'heart-goods': vm.starred}">favorite</md-icon>
 					<span hide-sm>{{vm.starred ? '已關注' : '關注'}} {{vm.stars.length}}</span>
 				</md-button>
 			</div>
@@ -60,16 +60,16 @@
 					</md-select>
 				</md-input-container>
 			</div>
-			<span flex="10"></span>
-			<div flex="80" ng-show="!vm.edit" layout layout-align="center center">
+			<span flex="15" flex-sm="10"></span>
+			<div flex="70" flex-sm="80" ng-show="!vm.edit" layout layout-align="center center">
 				<p style="color:#7f8588; max-width: 100%; font-size:18px;">{{ vm.goodData.description }}</p>
 			</div>
-			<div flex="80" ng-show="vm.edit" layout layout-align="center center">
+			<div flex="70" flex-sm="80" ng-show="vm.edit" layout layout-align="center center">
 				<md-input-container>
 					<textarea type="string" ng-model="vm.goodData.description" columns="10" md-maxlength="100" aria-label="desc"></textarea>
 				</md-input-container>
 			</div>
-			<span flex="10"></span>
+			<span flex="15" flex-sm="10"></span>
 		</div>
 	</div>
 	<div layout-padding>

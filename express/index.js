@@ -7,11 +7,9 @@ var ssl          = require('../ssl/ssl');
 var express      = require('express');
 var gutil        = require('gulp-util');
 var morgan       = require('morgan');
-var bodyParser   = require('body-parser');
 var cookieParser = require('cookie-parser');
 var favicon      = require('serve-favicon');
 var compression  = require('compression');
-var multer       = require('multer');
 var useragent    = require('express-useragent');
 var cp           = require('child_process');
 var path         = require('path');
@@ -27,10 +25,7 @@ module.exports = function() {
 	server.use(compression());
 	server.use(useragent.express());
 
-	server.use(favicon(__dirname + '/../build/images/favicon.ico'));
-	// server.use(bodyParser.json({ limit : '64mb' })); // for parsing application/json
-	// server.use(bodyParser.urlencoded({ limit : '64mb', extended : true })); // for parsing application/x-www-form-urlencoded
-	// server.use(multer()); // for parsing multipart/form-data
+	server.use(favicon(path.resolve(__dirname, '../build/images/favicon.ico')));
 
 	server.use(express.static('build'));
 
@@ -39,7 +34,7 @@ module.exports = function() {
 	server.all('*', (req, res, next) => {
 		res.header('Access-Control-Allow-Origin', '*');
 		res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 		next();
 	});
 
@@ -65,7 +60,7 @@ module.exports = function() {
 	});
 
 	server.all('*', (req, res, next) => {
-		res.sendFile('index.html', { root : 'build' });
+		res.sendFile('index.html', {root: 'build'});
 	});
 
 	// Serve index.html for all routes to leave routing up to Angular
@@ -75,7 +70,7 @@ module.exports = function() {
 
 	// Catch 404 and forward to error handler
 	server.use((req, res, next) => {
-		var err    = new Error('Not Found');
+		var err = new Error('Not Found');
 		err.status = 404;
 		next(err);
 	});
@@ -98,7 +93,7 @@ module.exports = function() {
 	var s = http.createServer(server);
 	s.on('error', err => {
 		if (err.code === 'EADDRINUSE') {
-			gutil.log('Development server is already started at port ' + config.serverPort);
+			gutil.log('Development server is already started at port 80');
 		} else {
 			throw err;
 		}
@@ -107,5 +102,5 @@ module.exports = function() {
 	s.listen(80);
 
 	var ss = https.createServer(ssl.options, server);
-	ss.listen(443)
+	ss.listen(443);
 };

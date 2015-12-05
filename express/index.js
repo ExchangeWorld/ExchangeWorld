@@ -13,6 +13,8 @@ var favicon      = require('serve-favicon');
 var compression  = require('compression');
 var multer       = require('multer');
 var useragent    = require('express-useragent');
+var cp           = require('child_process');
+var path         = require('path');
 
 module.exports = function() {
 
@@ -42,16 +44,22 @@ module.exports = function() {
 	});
 
 	// For bots
-	server.all('*', (req, res, next) => {
+	server.use((req, res, next) => {
 		if (req.useragent.isBot) {
 			if (req.useragent.isBot.startsWith('facebook')) {
-				res.redirect('http://' + req.hostname + ':43002' + '/bot' + req.path);
+				// res.redirect('http://' + req.hostname + ':43002' + '/bot' + req.path);
+				cp.exec('node ' + path.resolve(__dirname, '../../ExchangeWorld-API/ipc_child/bot.js') + ' ' + req.path, (error, stdout, stderr) => {
+					if (error) {
+						res.send(error);
+					} else {
+						res.send(stdout.toString());
+					}
+				});
 			} else {
 				console.log('BOT-AGENT:', req.useragent.isBot);
 				next();
 			}
 		} else {
-			// console.log(req.useragent);
 			next();
 		}
 	});

@@ -67,11 +67,15 @@
 		</div>
 		<span flex-gt-md="5"></span>
 		<div ng-show="vm.exchange !== undefined" flex-gt-md="50" style="height:100%; max-height: 100%;" layout-gt-md="row" layout-align="center center">
-			<div layout="row" layout-wrap class="info_container layout-ex center">
+			<div layout="row" flex="100" layout-wrap class="info_container layout-ex center">
 				<span flex="5" flex-gt-md="0"></span>
 				<md-card flex="40" flex-sm="35" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].bgStyle">
 					<div layout="column">
-						<img id="img_me" crossorigin="anonymous" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)" class="md-card-image" style="cursor:pointer;">
+						<md-card ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].bgStyle">
+							<div layout layout-align="center center" style="height:270px; width:auto;">
+								<img id="img_me" crossorigin="anonymous" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)" class="md-card-image" style="cursor:pointer; max-height: 100%; max-width: 100%; width:auto; ">
+							</div>
+						</md-card>
 						<md-card-content style="padding: 0;">
 							<div flex layout-fill layout="column">
 								<div layout="column" layout-align="center center">
@@ -108,7 +112,11 @@
 				</div>
 				<md-card flex="40" flex-sm="35" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].bgStyle">
 					<div layout="column">
-						<img id='img_other' crossorigin="anonymous" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.other].gid)" class="md-card-image" style="cursor:pointer;">
+						<md-card ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].bgStyle">
+							<div layout layout-align="center center" style="height:270px; width:auto;">
+								<img id='img_other' crossorigin="anonymous" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.other].gid)" class="md-card-image" style="cursor:pointer; max-height: 100%; max-width: 100%; width:auto; ">
+							</div>
+						</md-card>
 						<md-card-content style="padding: 0;">
 							<div flex layout-fill layout="column">
 								<div layout="column" layout-align="center center">

@@ -123,7 +123,7 @@ function DialogController(msg, callback, $mdDialog, logger, message, $state, $q)
 
 	var amount, offset;
 	function activate() {
-		amount = 3;
+		amount = 10;
 		offset = 0;
 		loadMore();
 	}
@@ -151,6 +151,7 @@ function DialogController(msg, callback, $mdDialog, logger, message, $state, $q)
 	}
 
 	function onSubmit(msg_content) {
+		if(msg_content.trim().length === 0) return;
 		$mdDialog
 			.hide(msg_content)
 			.then(function(msg_content) {

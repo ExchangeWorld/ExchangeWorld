@@ -29,7 +29,7 @@ function getStates() {
 					},
 					/** @ngInject */
 					mapSize: function($window) {
-						return `${parseInt($window.innerWidth*0.25)}x${parseInt($window.innerHeight*0.3)}`;
+						return `${parseInt($window.innerWidth*0.25)}x${parseInt(($window.innerHeight-56)*0.3)}`;
 					}
 				},
 			}

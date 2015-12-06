@@ -70,7 +70,7 @@ function GoodsController(
 
 	function activate() {
 		$scope.$parent.$broadcast('goodsChanged', [goodData]);
-		$scope.$parent.$broadcast('mapMoveTo', goodData.gid);
+		$scope.$parent.$broadcast('mapMoveTo', goodData.position_y, goodData.position_x);
 		updateComment();
 		updateStar();
 

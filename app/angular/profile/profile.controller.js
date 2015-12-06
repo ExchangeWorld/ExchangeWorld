@@ -84,7 +84,7 @@ function ProfileController(
 		$timeout(function(){
 			[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
 				dominateColor(goods);
-			});				
+			});
 		}, 500);
 
 	}

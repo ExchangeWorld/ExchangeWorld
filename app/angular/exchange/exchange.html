@@ -135,14 +135,14 @@
 				</md-card>
 				<div flex="100" layout="column" ng-show="vm.exchange !== undefined" hide-gt-md>
 					<div class="map-size">
-						<map-block></map-block>
+						<img border="0" ng-src="//maps.googleapis.com/maps/api/staticmap?size={{vm.map.size}}&markers={{vm.map.marker}}"/>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div ng-show="vm.exchange !== undefined" flex-gt-md="25" layout-gt-md="column" class="layout-ex right" hide-sm hide-md>
 			<div class="map-size">
-				<map-block></map-block>
+				<img border="0" ng-src="//maps.googleapis.com/maps/api/staticmap?size={{vm.map.size}}&markers={{vm.map.marker}}"/>
 			</div>
 			<div class="chat-layout">
 				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center" style="min-height: 48px;">

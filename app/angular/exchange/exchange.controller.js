@@ -96,11 +96,26 @@ function ExchangeController(
 		dominateColor(vm.exchange.details.goods[vm.exchange.lookupTable.me], 'me');
 
 		
-		$rootScope.$broadcast('goodsChanged', [vm.exchange.details.goods[vm.exchange.lookupTable.other]]);
-		$rootScope.$broadcast('mapMoveTo', vm.exchange.details.goods[vm.exchange.lookupTable.other].gid);
+		$rootScope.$broadcast(
+			'goodsChanged', 
+			[vm.exchange.details.goods[vm.exchange.lookupTable.other]]
+		);
+		$rootScope.$broadcast(
+			'mapMoveTo',
+			vm.exchange.details.goods[vm.exchange.lookupTable.other].position_y,
+			vm.exchange.details.goods[vm.exchange.lookupTable.other].position_x
+			
+		);
 		$timeout(()=> {
-			$rootScope.$broadcast('goodsChanged', [vm.exchange.details.goods[vm.exchange.lookupTable.other]]);
-			$rootScope.$broadcast('mapMoveTo', vm.exchange.details.goods[vm.exchange.lookupTable.other].gid);
+			$rootScope.$broadcast(
+				'goodsChanged', 
+				[vm.exchange.details.goods[vm.exchange.lookupTable.other]]
+			);
+			$rootScope.$broadcast(
+				'mapMoveTo', 
+				vm.exchange.details.goods[vm.exchange.lookupTable.other].position_y,
+				vm.exchange.details.goods[vm.exchange.lookupTable.other].position_x,
+			);
 		}, 50);
 	}
 

@@ -207,6 +207,12 @@ function MapController(
 	 * (This event will not trigger after reloading page)
 	 */
 	function urlChanged(event, toState, toParams, fromState, fromParams) {
+		// console.log(fromState, toState);
+		// console.log('urlChanged');
+		// $timeout(function() {
+			// google.maps.event.trigger(map, 'resize');
+		// }, 1000);
+
 		if (toParams.olc) {
 			const coord = OpenLocationCode.decode(toParams.olc.replace(' ', '+'));
 			map.panTo({

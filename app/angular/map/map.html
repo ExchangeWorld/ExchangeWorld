@@ -15,8 +15,8 @@
 	scale-control="false"
 	overview-map-control="false"
 	map-type-control="false"
-	resize ng-style="vm.smallMap ? {'height': '100%'}: resizeWithOffset(56)"
-	>
+	style="width: 100%; height: 100%"
+>
 
 	<custom-control position="LEFT_TOP" ng-hide="vm.smallMap" >
 		<md-input-container class="md-warn" id="autocomplete" style="width: 250px; height: 30px">
@@ -32,9 +32,24 @@
 		</md-input-container>
 	</custom-control>
 
-	<custom-control id="myLocation" position="RIGHT_BOTTOM" index="2" ng-click="vm.findMyLocation()" ng-hide="vm.smallMap">
-		<button ripple class="md-fab md-button" aria-label="findLocation" style="background-color: white">
-			<md-icon md-font-set="material-icons" style="width: 32px; height: 32px; font-size: 32px;">gps_fixed</md-icon>
+	<custom-control 
+		id="myLocation" 
+		position="RIGHT_BOTTOM" 
+		index="2" 
+		ng-click="vm.findMyLocation()" 
+		ng-hide="vm.smallMap"
+	>
+		<button ripple 
+			class="md-fab md-button" 
+			aria-label="findLocation" 
+			style="background-color: white"
+		>
+			<md-icon 
+				md-font-set="material-icons" 
+				style="width: 32px; height: 32px; font-size: 32px;"
+			>
+				gps_fixed
+			</md-icon>
 		</button>
 	</custom-control>
 </map>

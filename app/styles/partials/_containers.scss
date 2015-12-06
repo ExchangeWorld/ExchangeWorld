@@ -19,6 +19,14 @@ body {
 	padding-top: $navbar-height;
 }
 
+.map-container {
+	position: absolute; 
+	top: $navbar-height; 
+	bottom: 0; 
+	right: 0;
+	width: 100%
+}
+
 md-toolbar {
 	box-sizing: border-box;
 	display: -webkit-flex;

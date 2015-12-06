@@ -9,6 +9,7 @@ profileModule.service('profileService', profileService);
 function profileService(Restangular, $q, facebookService, exception, logger) {
 	var service = {
 		getProfile,
+		getFavoriteSum,
 		editProfile,
 		addFollowing,
 		deleteFollowing,
@@ -39,6 +40,22 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 			}, (error)=> {
 				return exception.catcher('[Profiles Service] getProfile error: ')(error);
 			});
+		return defer.promise;
+	}
+
+	function getFavoriteSum(uid) {
+		const defer = $q.defer();
+
+		Restangular
+			.all('star/toOwner')
+			.getList({ owner_uid: uid })
+			.then(function(data) {
+				console.log(data);
+				defer.resolve(data);
+			}, (error) => {
+				return exception.catcher('[Profiles Service] getFavoriteSum error: ')(error);
+			});
+
 		return defer.promise;
 	}
 

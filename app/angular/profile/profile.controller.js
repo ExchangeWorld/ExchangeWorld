@@ -28,6 +28,7 @@ function ProfileController(
 	vm.largePic            = '';
 	vm.isLoggedIn          = Boolean($localStorage.user);
 	vm.isMe                = vm.isLoggedIn && (profile.uid === $localStorage.user.uid);
+	vm.favSum              = '';
 	vm.myStar              = [];
 	vm.myGoodsPending      = [];
 	vm.myGoodsExchanged    = [];
@@ -79,6 +80,12 @@ function ProfileController(
 					return g.good;
 				});
 			});
+
+		profileService
+			.getFavoriteSum($stateParams.uid) 
+			.then(function(data) { 
+				vm.favSum = data;
+			})
 			
 		/**if goods fetching time more than 500ms, skip colorThief feature. */
 		$timeout(function(){

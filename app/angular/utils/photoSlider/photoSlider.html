@@ -1,21 +1,22 @@
-<div flex style="position: relative;  margin:0 0 10px 0;" layout-fill layout layout-align="center center">
-	<div ng-repeat="image in images" ng-show="isCurrentSlide($index)" layout-fill>
-		<div flex layout="row" ng-show="images.length !== 1">
-			<div flex='33' layout layout-align="start start" class="img-container" ng-click="prevSlide($event)">
-				<a flex href="#" ng-click="prevSlide($event)" class="indicators" style="position: absolute; left: 0; top: 45%">
-					<img style="height:30px; width:30px; " src="../../../images/previoust.png">
-				</a>
-			</div>
-			<!-- <span flex="85"></span> -->
-			<div flex='33' class="img-container" style="margin-left: 66%" ng-click="nextSlide($event);">
-				<a href="#" ng-click="nextSlide($event);" class="indicators" style="position: absolute; right: 0; top: 45%">
-					<img style="height:30px; width:30px;" src="../../../images/next.png">
-				</a>
-			</div>
-		</div>
-		<div layout layout-align="center center">
-			<img ng-src="{{ image }}" class="img-slider" />
-		</div>
-	</div>
+<div flex style="position: relative;  margin:0 0 10px 0; " layout-fill layout layout-align="center center">
+    <div ng-repeat="image in images" ng-show="isCurrentSlide($index)">
+        <div flex layout="row" ng-show="images.length !== 1">
+            <div flex='33' layout layout-align="start start" class="img-container" ng-click="prevSlide($event)">
+                <a flex href="#" ng-click="prevSlide($event)" class="indicators" style="position: absolute; left: 0; top: 45%">
+                    <img style="height:30px; width:30px; " src="../../../images/previoust.png">
+                </a>
+            </div>
+            <div flex='33' class="img-container" style="margin-left: 66%" ng-click="nextSlide($event);">
+                <a href="#" ng-click="nextSlide($event);" class="indicators" style="position: absolute; right: 0; top: 45%">
+                    <img style="height:30px; width:30px;" src="../../../images/next.png">
+                </a>
+            </div>
+        </div>
+        <div layout layout-align="center center">
+            <img ng-src="{{ image }}" class="img-slider" />
+        </div>
+        <a ng-href="{{image}}" target="_blank">
+            <md-icon md-font-set="material-icons" style="color:#fff;margin-left:50%;">open_in_new</md-icon>
+        </a>
+    </div>
 </div>
-

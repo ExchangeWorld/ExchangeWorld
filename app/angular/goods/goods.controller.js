@@ -8,6 +8,7 @@ goodsModule.controller('GoodsController', GoodsController);
 
 /** @ngInject */
 function GoodsController(
+	NgMap,
 	goodData,
 	AvailableCategory,
 	goodsService,
@@ -51,18 +52,20 @@ function GoodsController(
 	vm.onClickQueue  = onClickQueue;
 
 	vm.showPhotoViewer = showPhotoViewer;
-	vm.onClickUser = (uid)=> $state.go('root.withSidenav.profile', { uid: uid });
-	vm.onClickBack = ()=> $state.go('root.withSidenav.seek');
+	vm.onClickUser = uid => $state.go('root.withSidenav.profile', { uid });
+	vm.onClickBack = () => $state.go('root.withSidenav.seek');
 
 	activate();
 
 	$scope.removeMode = false;
-	$scope.$parent.$on('mapInitialized', mapInitialized);
+	// $scope.$parent.$on('mapInitialized', mapInitialized);
 
 	/* After map is loaded */
-	function mapInitialized(e, evtMap) {
+	NgMap.getMap().then(mapInitialized);
+	function mapInitialized() {
+		// console.log(goodData);
 		$scope.$parent.$broadcast('goodsChanged', [goodData]);
-		$scope.$parent.$broadcast('mapMoveTo', goodData.gid);
+		$scope.$parent.$broadcast('mapMoveTo', goodData.position_y, goodData.position_x);
 	}
 
 	function activate() {

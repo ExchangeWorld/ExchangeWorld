@@ -47,8 +47,6 @@ function MapController(
 		vm.zoomChanged    = zoomChanged;
 		GoodsOverlay.prototype = new google.maps.OverlayView();
 
-
-		boundChanged();
 		$scope.$on('goodsChanged', goodsChanged);
 		$scope.$on('mapMoveTo', mapMoveTo);
 		$scope.$on('openGoodsOverlay', openGoodsOverlay);
@@ -61,6 +59,7 @@ function MapController(
 		google.maps.event.addListener(map, 'dragstart', onDragstart);
 
 		activate();
+		boundChanged();
 	}
 
 	/* Before map is loaded */
@@ -207,6 +206,7 @@ function MapController(
 	 * (This event will not trigger after reloading page)
 	 */
 	function urlChanged(event, toState, toParams, fromState, fromParams) {
+
 		if (toParams.olc) {
 			const coord = OpenLocationCode.decode(toParams.olc.replace(' ', '+'));
 			map.panTo({
@@ -269,8 +269,8 @@ function MapController(
 		});
 	}
 
-	function mapMoveTo(e, gid) {
-		map.panTo(_findGood(gid).marker.getPosition());
+	function mapMoveTo(e, lat, lng) {
+		map.panTo({ lat, lng });
 	}
 
 	function openGoodsOverlay(e, gid) {

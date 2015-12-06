@@ -4,6 +4,7 @@
 			class="md-sidenav-left md-whiteframe-z2"
 			style="z-index:70;"
 			md-component-id="left"
+			md-is-open="true"
 			md-is-locked-open="$mdMedia('gt-md')"
 	>
 		<md-toolbar hide-lg hide-gt-lg>
@@ -11,10 +12,13 @@
 				ExchangeWorld
 			</div>
 		</md-toolbar>
-		<md-content flex resize ng-style="resizeWithOffset(64)" style="overflow-y: scroll;">
+		<md-content flex resize ng-style="resizeWithOffset(56)" style="overflow-y: scroll;">
 			<div ui-view></div>
 		</md-content>
 	</md-sidenav>
 
-	<map-block flex></map-block>
+	<div class="map-container">
+		<map-block ></map-block>
+	<div>
+
 </div>

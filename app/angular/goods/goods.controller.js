@@ -28,12 +28,12 @@ function GoodsController(
 ) {
 	const vm = this;
 
-	vm.isLoggedIn = Boolean($localStorage.user);
-	vm.isMe       = vm.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
-	vm.goodData   = goodData;
-	vm.availableCategory   = AvailableCategory;
-	vm.bgStyle = '';
-	vm.bordercolor = ['',''];
+	vm.isLoggedIn        = Boolean($localStorage.user);
+	vm.isMe              = vm.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
+	vm.goodData          = goodData;
+	vm.availableCategory = AvailableCategory;
+	vm.bgStyle           = '';
+	vm.bordercolor       = ['',''];
 
 	vm.comment         = '';
 	vm.goodComments    = [];
@@ -47,7 +47,6 @@ function GoodsController(
 	vm.onDelete    = onDelete;
 	vm.onClickStar = onClickStar;
 
-	vm.myGoods       = [];
 	vm.queuingList   = [];
 	vm.onClickQueue  = onClickQueue;
 
@@ -85,6 +84,11 @@ function GoodsController(
 				}
 			});
 		goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
+
+		goodsService.getQueue($stateParams.gid)
+			.then(function(data) {
+				vm.queuingList = data;
+			});
 
 		var ct = new colorThief.ColorThief();
 		var image = document.getElementById('img');

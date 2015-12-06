@@ -85,7 +85,7 @@ function ProfileController(
 			.getFavoriteSum($stateParams.uid) 
 			.then(function(data) { 
 				vm.favSum = data;
-			})
+			});
 			
 		/**if goods fetching time more than 500ms, skip colorThief feature. */
 		$timeout(function(){

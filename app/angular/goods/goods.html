@@ -13,7 +13,7 @@
 			<div flex-sm="50" layout layout-align="center center">
 				<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue($event)">
 					<md-icon md-font-set="material-icons">remove_red_eye</md-icon>
-					<span hide-sm>{{ vm.isMe ? '看誰排！' : '我要排！' }}</span>
+					<span hide-sm>{{ vm.isMe ? '看誰排' : '我要排' }} {{vm.queuingList.length}}</span>
 				</md-button>
 			</div>
 		</div>

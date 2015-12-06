@@ -7,6 +7,7 @@ exchangeModule.controller('ExchangeController', ExchangeController);
 /** @ngInject */
 function ExchangeController(
 	exchangeList,
+	mapSize,
 	$state,
 	$timeout,
 	$rootScope,
@@ -15,6 +16,7 @@ function ExchangeController(
 	$stateParams,
 	$interval,
 	$mdDialog,
+	$window,
 	$localStorage,
 	$q,
 	$mdSidenav,
@@ -35,6 +37,7 @@ function ExchangeController(
 	vm.onClickDelete   = onClickDelete;
 	vm.onSubmitChat    = onSubmitChat;
 	vm.agreed          = false;
+	vm.map             = { size: mapSize };
 
 	////////////
 	activate();
@@ -95,28 +98,7 @@ function ExchangeController(
 		dominateColor(vm.exchange.details.goods[vm.exchange.lookupTable.other], 'other');
 		dominateColor(vm.exchange.details.goods[vm.exchange.lookupTable.me], 'me');
 
-		
-		$rootScope.$broadcast(
-			'goodsChanged', 
-			[vm.exchange.details.goods[vm.exchange.lookupTable.other]]
-		);
-		$rootScope.$broadcast(
-			'mapMoveTo',
-			vm.exchange.details.goods[vm.exchange.lookupTable.other].position_y,
-			vm.exchange.details.goods[vm.exchange.lookupTable.other].position_x
-			
-		);
-		$timeout(()=> {
-			$rootScope.$broadcast(
-				'goodsChanged', 
-				[vm.exchange.details.goods[vm.exchange.lookupTable.other]]
-			);
-			$rootScope.$broadcast(
-				'mapMoveTo', 
-				vm.exchange.details.goods[vm.exchange.lookupTable.other].position_y,
-				vm.exchange.details.goods[vm.exchange.lookupTable.other].position_x,
-			);
-		}, 50);
+		vm.map.marker = `${vm.exchange.details.goods[vm.exchange.lookupTable.other].position_y},${vm.exchange.details.goods[vm.exchange.lookupTable.other].position_x}`;
 	}
 
 	function onClickComplete(ev) {
@@ -191,18 +173,18 @@ function ExchangeController(
 	}
 
 	$scope.openLeftMenu = function() {
-    	$mdSidenav('left').toggle();
-  	};
+		$mdSidenav('left').toggle();
+	};
 
-  	$scope.openRightMenu = function() {
-    	$mdSidenav('right').toggle();
-  	};
+	$scope.openRightMenu = function() {
+		$mdSidenav('right').toggle();
+	};
 
-  	$scope.closeleft = function () {
-      $mdSidenav('left').close();
-  	};
+	$scope.closeleft = function () {
+		$mdSidenav('left').close();
+	};
 
-  	$scope.closeright = function () {
-      $mdSidenav('right').close();
-  	};
+	$scope.closeright = function () {
+		$mdSidenav('right').close();
+	};
 }

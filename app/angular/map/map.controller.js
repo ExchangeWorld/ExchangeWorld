@@ -33,6 +33,7 @@ function MapController(
 	vm.zoom            = 16;
 	vm.draggableCursor = 'default';
 	vm.draggingCursor  = 'default';
+	vm.olcRecord = { lat: vm.coords[1], lng: vm.coords[0] };
 	// vm.mapStyle        = require('./mapStyle.json');
 	// $scope.$on('mapInitialized', mapInitialized);
 	NgMap.getMap().then(mapInitialized);
@@ -123,7 +124,6 @@ function MapController(
 
 		$timeout(function() {
 			if (!isMoving) {
-				/* TODO: transform the bound into the foramt that service need */
 				const bound = map.getBounds();
 				$rootScope.$broadcast('boundChanged', bound);
 
@@ -206,8 +206,14 @@ function MapController(
 	 * (This event will not trigger after reloading page)
 	 */
 	function urlChanged(event, toState, toParams, fromState, fromParams) {
-
-		if (toParams.olc) {
+		if (
+			toState.title === 'seek' &&
+			!toParams.olc
+		) {
+			console.log('test');
+			console.log(vm.olcRecord);
+			map.panTo(vm.olcRecord);
+		} else if (toParams.olc) {
 			const coord = OpenLocationCode.decode(toParams.olc.replace(' ', '+'));
 			map.panTo({
 				lat : coord.latitudeCenter,
@@ -225,6 +231,11 @@ function MapController(
 			goods.forEach(function(good) {
 				good.marker.setMap(null);
 			});
+		}
+
+		// console.log(toState);
+		if (toState.name.indexOf('root.withSidenav') === -1) {
+			vm.olcRecord = map.getCenter();
 		}
 
 		if (toState.title === 'post') {

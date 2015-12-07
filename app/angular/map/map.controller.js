@@ -33,7 +33,7 @@ function MapController(
 	vm.zoom            = 16;
 	vm.draggableCursor = 'default';
 	vm.draggingCursor  = 'default';
-	vm.olcRecord = { lat: vm.coords[1], lng: vm.coords[0] };
+	vm.olcRecord = { lat: vm.coords[0], lng: vm.coords[1] };
 	// vm.mapStyle        = require('./mapStyle.json');
 	// $scope.$on('mapInitialized', mapInitialized);
 	NgMap.getMap().then(mapInitialized);
@@ -210,8 +210,8 @@ function MapController(
 			toState.title === 'seek' &&
 			!toParams.olc
 		) {
-			console.log('test');
-			console.log(vm.olcRecord);
+			// console.log('test');
+			// console.log(vm.olcRecord);
 			map.panTo(vm.olcRecord);
 		} else if (toParams.olc) {
 			const coord = OpenLocationCode.decode(toParams.olc.replace(' ', '+'));

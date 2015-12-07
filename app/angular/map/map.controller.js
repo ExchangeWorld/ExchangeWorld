@@ -210,8 +210,21 @@ function MapController(
 			toState.title === 'seek' &&
 			!toParams.olc
 		) {
-			// console.log('test');
-			// console.log(vm.olcRecord);
+			const lat = vm.olcRecord.lat instanceof(Function) 
+				? vm.olcRecord.lat()
+				: vm.olcRecord.lat;
+
+			const lng = vm.olcRecord.lng instanceof(Function) 
+				? vm.olcRecord.lng()
+				: vm.olcRecord.lng;
+
+			$state.go($state.current.name, {
+				olc : OpenLocationCode.encode(lat, lng),
+			}, {
+				location : 'replace',
+				notify : false,
+			});
+
 			map.panTo(vm.olcRecord);
 		} else if (toParams.olc) {
 			const coord = OpenLocationCode.decode(toParams.olc.replace(' ', '+'));
@@ -234,7 +247,7 @@ function MapController(
 		}
 
 		// console.log(toState);
-		if (toState.name.indexOf('root.withSidenav') === -1) {
+		if (toState.name.indexOf('root.withSidenav.seek') === -1) {
 			vm.olcRecord = map.getCenter();
 		}
 

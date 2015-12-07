@@ -31,7 +31,7 @@ function MapController(
 		? $localStorage.position
 		: [25.05517828690749, 121.54136714595292]; // 政大 [24.98918974905472, 121.57591535186772];
 
-	vm.zoom            = 16;
+	vm.zoom            = 12;
 	vm.draggableCursor = 'default';
 	vm.draggingCursor  = 'default';
 	vm.olcRecord = { lat: vm.coords[0], lng: vm.coords[1] };

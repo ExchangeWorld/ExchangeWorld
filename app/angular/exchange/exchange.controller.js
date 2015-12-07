@@ -89,7 +89,7 @@ function ExchangeController(
 	}
 
 	function onClickExchange(index) {
-		amount = 8;
+		amount = 20;
 		offset = 0;
 		vm.exchange = vm.exchangeList[index];
 		updateChat();

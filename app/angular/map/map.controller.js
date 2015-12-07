@@ -29,7 +29,8 @@ function MapController(
 
 	vm.coords = $localStorage.position
 		? $localStorage.position
-		: [24.98918974905472, 121.57591535186772];
+		: [25.05517828690749, 121.54136714595292]; // 政大 [24.98918974905472, 121.57591535186772];
+
 	vm.zoom            = 16;
 	vm.draggableCursor = 'default';
 	vm.draggingCursor  = 'default';
@@ -113,7 +114,8 @@ function MapController(
 	var isMoving = false;
 	var timer    = undefined;
 	function boundChanged() {
-
+		// console.log(map.getCenter().toString());
+		// console.log(map.getZoom());
 		/* Manually trigger map resize event due to resize directive*/
 		google.maps.event.trigger(map, 'resize');
 

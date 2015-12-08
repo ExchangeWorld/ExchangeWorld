@@ -15,7 +15,7 @@ function materialTheme($mdThemingProvider) {
 		// If you specify less than all of the keys, it will inherit from the
 		// default shades
 		.accentPalette('orange', {
-			'default': '700',
+			'default': '500',
 			'hue-1': '400',
 			'hue-2': '900',
 			'hue-3': '100'

@@ -26,17 +26,11 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 			.all('user/profile')
 			.getList({ uid : _uid })
 			.then(function(data) {
-				facebookService 
-					.getLargePicture(data[0].fb_id) 
-					.then(function(img) { 
-						if (_.isArray(data)) {
-							data[0].largePic = img.data.url;
-							defer.resolve(data[0]);
-						} else if (_.isObject(data)) {
-							data.largePic = img.data.url;
-							defer.resolve(data);
-						}
-					});
+				if (_.isArray(data)) {
+					defer.resolve(data[0]);
+				} else if (_.isObject(data)) {
+					defer.resolve(data);
+				}
 			}, (error)=> {
 				return exception.catcher('[Profiles Service] getProfile error: ')(error);
 			});

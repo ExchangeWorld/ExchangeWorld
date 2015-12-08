@@ -25,7 +25,6 @@ function ProfileController(
 	var ct                 = new colorThief.ColorThief();
 	const types            = ['following', 'follower'];
 	vm.profile             = profile;
-	vm.largePic            = '';
 	vm.isLoggedIn          = Boolean($localStorage.user);
 	vm.isMe                = vm.isLoggedIn && (profile.uid === $localStorage.user.uid);
 	vm.favSum              = '';

@@ -98,6 +98,7 @@
     "angular-base64-upload": "^0.1.12",
     "angular-material": "0.11.0",
     "angular-resource": "^1.4.3",
+    "angular-socialshare": "^0.1.19",
     "angular-toastr": "^1.4.1",
     "angular-touch": "^1.4.5",
     "angular-ui-router": "^0.2.13",

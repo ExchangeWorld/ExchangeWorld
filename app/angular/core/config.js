@@ -2,7 +2,7 @@
 
 const coreModule = require('./core.module');
 const angular    = require('angular');
-const moment   = require('moment');
+const moment     = require('moment');
 
 coreModule.config(toastConfig);
 coreModule.config(facebookprovider);
@@ -33,7 +33,6 @@ function configure($logProvider, routerHelperProvider, exceptionHandlerProvider)
 	exceptionHandlerProvider.configure('[<%= appName %> Error]');
 	//routerHelperProvider.configure({ docTitle : config.appTitle + ': ' });
 }
-
 
 function facebookprovider(FacebookProvider) {
 	// Set your appId through the setAppId method or use the shortcut in the initialize method directly.

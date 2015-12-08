@@ -1,14 +1,15 @@
 'use strict';
 
-const angular  = require('angular');
-const bulk     = require('bulk-require');
-global._       = require("lodash"); //fix restangular dependency on lodash issue
+const angular = require('angular');
+const bulk    = require('bulk-require');
+global._      = require("lodash"); //fix restangular dependency on lodash issue
 
 require('angular-touch');
 require('angular-material');
 require('angular-ui-router');
 require('restangular');
 require('ngstorage');
+require('angular-socialshare');
 require('../utils/photoSlider/photoSlider.module');
 require('../utils/exception/exception.module');
 require('../utils/fackbook/facebook.module');
@@ -29,6 +30,7 @@ const requires = [
 	'restangular',
 	'ngTouch',
 	'ngMaterial',
+	'720kb.socialshare',
 	'utils.photoSlider',
 	'utils.scroll',
 	'utils.facebook',

@@ -1,7 +1,7 @@
 <md-content layout-padding style="overflow-y: hidden;">
 	<div layout-padding layout-margin layout="row" layout-align="center center">
 		<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1" style="margin-left:0;">
-			<md-icon md-font-set="material-icons">undo</md-icon>上一頁
+			<md-icon md-font-set="material-icons">keyboard_backspace</md-icon>回列表
 		</md-button>
 		<div flex="70" flex-sm="55" layout="row" layout-align="center center" style="margin-left:0;">
 			<div flex-sm="50" layout layout-align="center center">
@@ -15,6 +15,15 @@
 					<md-icon md-font-set="material-icons">remove_red_eye</md-icon>
 					<span hide-sm>{{ vm.isMe ? '看誰排' : '我要排' }} {{vm.queuingList.length}}</span>
 				</md-button>
+			</div>
+			<div flex-sm="50" layout layout-align="center center">
+				<a href="#"
+					socialshare
+					socialshare-provider="facebook"
+					socialshare-url="http://exwd.csie.org/seek/{{vm.goodData.gid}}" >
+					<md-icon md-font-set="material-icons">share</md-icon>
+				</a>
+
 			</div>
 		</div>
 		<div ng-show="vm.isMe" ng-click="vm.onDelete(vm.goodData.gid)" layout layout-align="end end">

@@ -23,7 +23,7 @@ function routerHelperProvider($locationProvider, $stateProvider, $urlRouterProvi
 	this.$get = RouterHelper;
 
 	/** @ngInject */
-	function RouterHelper($location, $rootScope, $state, logger) {
+	function RouterHelper($location, $rootScope, $state, logger, $window) {
 		var handlingStateChangeError = false;
 		var hasOtherwise             = false;
 		var stateCounts              = {
@@ -93,7 +93,7 @@ function routerHelperProvider($locationProvider, $stateProvider, $urlRouterProvi
 			$rootScope.$on('$stateChangeSuccess', function(event, toState) {
 					stateCounts.changes++;
 					handlingStateChangeError = false;
-
+					$window.ga('send', 'pageview', $location.path());
 				}
 			);
 		}

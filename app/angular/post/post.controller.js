@@ -128,6 +128,4 @@ function PostController(
 			}
 		}
 	}
-
-
 }

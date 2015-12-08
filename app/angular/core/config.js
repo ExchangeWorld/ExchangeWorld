@@ -7,6 +7,7 @@ const moment   = require('moment');
 coreModule.config(toastConfig);
 coreModule.config(facebookprovider);
 coreModule.config(momentLocale);
+coreModule.config(fontset);
 
 
 /** @ngInject */
@@ -34,7 +35,6 @@ function configure($logProvider, routerHelperProvider, exceptionHandlerProvider)
 	//routerHelperProvider.configure({ docTitle : config.appTitle + ': ' });
 }
 
-
 function facebookprovider(FacebookProvider) {
 	// Set your appId through the setAppId method or use the shortcut in the initialize method directly.
 	// FacebookProvider.init('376506855853722'); // exwd appID
@@ -44,4 +44,10 @@ function facebookprovider(FacebookProvider) {
 function momentLocale() {
 	require('moment/locale/zh-tw');
 	moment.locale('zh-tw');
+}
+
+/** @ngInject */
+function fontset($mdIconProvider) {
+	// Specify a font-icon style alias
+	$mdIconProvider.fontSet('fa', 'fontawesome');
 }

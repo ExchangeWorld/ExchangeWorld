@@ -16,6 +16,15 @@
 					<span hide-sm>{{ vm.isMe ? '看誰排' : '我要排' }} {{vm.queuingList.length}}</span>
 				</md-button>
 			</div>
+			<div flex-sm="50" layout layout-align="center center">
+				<a href="#"
+					socialshare
+					socialshare-provider="facebook"
+					socialshare-url="http://exwd.csie.org/seek/{{vm.goodData.gid}}" >
+					<md-icon md-font-set="material-icons">share</md-icon>
+				</a>
+
+			</div>
 		</div>
 		<div ng-show="vm.isMe" ng-click="vm.onDelete(vm.goodData.gid)" layout layout-align="end end">
 			<i class="material-icons delete">delete</i>

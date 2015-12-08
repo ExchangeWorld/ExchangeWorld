@@ -104,5 +104,5 @@ module.exports = function() {
 
 	var ss = https.createServer(ssl.options, server);
 	ss.listen(443);
-	ssl.setMaxListeners(0);
+	ss.setMaxListeners(0);
 };

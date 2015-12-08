@@ -19,8 +19,8 @@ fs.writeFileSync path.resolve(working_path, './app/angular/core/config.js') file
 out ''
 
 out '[3] Update NPM pacakages ...'
-job 'npm update'
 job 'npm upgrade'
+job 'npm update'
 out ''
 
 out '[4] Gulp build ...'

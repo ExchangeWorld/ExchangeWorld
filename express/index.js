@@ -47,7 +47,7 @@ module.exports = function() {
 		if (req.useragent.isBot) {
 			if (req.useragent.isBot.startsWith('facebook')) {
 				fb_bot.send(req.path);
-				fb_bot.once(m => {
+				fb_bot.once('message', m => {
 					res.send(m);
 				});
 			} else {

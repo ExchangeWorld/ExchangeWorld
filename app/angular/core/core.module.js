@@ -1,8 +1,8 @@
 'use strict';
 
-const angular  = require('angular');
-const bulk     = require('bulk-require');
-global._       = require("lodash"); //fix restangular dependency on lodash issue
+const angular = require('angular');
+const bulk    = require('bulk-require');
+global._      = require("lodash"); //fix restangular dependency on lodash issue
 
 require('angular-touch');
 require('angular-material');

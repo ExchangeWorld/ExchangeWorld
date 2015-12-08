@@ -108,7 +108,7 @@
 					<md-menu-item>
 						<md-button ng-click="vm.onClick(4)">個人資料</md-button>
 					</md-menu-item>
-					<md-menu-item ng-show="vm.isLoggedIn">
+					<md-menu-item ng-show="vm.isLoggedIn" hide-gt-sm>
 						<md-button ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">管理</md-button>
 					</md-menu-item>
 					<md-menu-divider></md-menu-divider>

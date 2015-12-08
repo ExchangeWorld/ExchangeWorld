@@ -72,7 +72,7 @@
 				<md-card flex="40" flex-sm="35" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].bgStyle">
 					<div layout="column">
 						<md-card ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].bgStyle">
-							<div layout layout-align="center center" style="height:270px; width:auto;">
+							<div layout layout-align="center center" style="height:250px; width:auto;">
 								<img id="img_me" crossorigin="anonymous" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)" class="md-card-image" style="cursor:pointer; max-height: 100%; max-width: 100%; width:auto; ">
 							</div>
 						</md-card>
@@ -94,7 +94,7 @@
 				</md-card>
 				<div flex="10" flex-sm="15" layout="column" layout-align="start center" style="padding-top:10%;">
 					<p class="vertical isUp" ng-show="!vm.agreed">確認交換</p>
-					<md-button class="md-fab ex-confirm md-hue-1 md-accent" ng-show="!vm.agreed" ng-click="vm.onClickComplete($event)">
+					<md-button class="md-fab ex-confirm" ng-show="!vm.agreed" ng-click="vm.onClickComplete($event)">
 						<div layout layout-align="center center">
 							<img src="../../images/icon(48-48).png" />
 						</div>
@@ -113,7 +113,7 @@
 				<md-card flex="40" flex-sm="35" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].bgStyle">
 					<div layout="column">
 						<md-card ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].bgStyle">
-							<div layout layout-align="center center" style="height:270px; width:auto;">
+							<div layout layout-align="center center" style="height:250px; width:auto;">
 								<img id='img_other' crossorigin="anonymous" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.other].gid)" class="md-card-image" style="cursor:pointer; max-height: 100%; max-width: 100%; width:auto; ">
 							</div>
 						</md-card>
@@ -134,15 +134,15 @@
 					</div>
 				</md-card>
 				<div flex="100" layout="column" ng-show="vm.exchange !== undefined" hide-gt-md>
-					<div class="map-size">
-						<img border="0" ng-src="//maps.googleapis.com/maps/api/staticmap?size={{vm.map.size}}&markers={{vm.map.marker}}"/>
+					<div layout layout-align="center center" class="map-size">
+						<img border="0" ng-src="//maps.googleapis.com/maps/api/staticmap?size={{vm.map.size}}&markers={{vm.map.marker}}" />
 					</div>
 				</div>
 			</div>
 		</div>
 		<div ng-show="vm.exchange !== undefined" flex-gt-md="25" layout-gt-md="column" class="layout-ex right" hide-sm hide-md>
 			<div class="map-size">
-				<img border="0" ng-src="//maps.googleapis.com/maps/api/staticmap?size={{vm.map.size}}&markers={{vm.map.marker}}"/>
+				<img border="0" ng-src="//maps.googleapis.com/maps/api/staticmap?size={{vm.map.size}}&markers={{vm.map.marker}}" />
 			</div>
 			<div class="chat-layout">
 				<md-toolbar class="md-primary md-hue-2" layout layout-align="center center" style="min-height: 48px;">

@@ -20,9 +20,9 @@ body {
 }
 
 .map-container {
-	position: absolute; 
-	top: $navbar-height; 
-	bottom: 0; 
+	position: absolute;
+	top: $navbar-height;
+	bottom: 0;
 	right: 0;
 	left: 45%;
 }
@@ -225,8 +225,8 @@ div.md-open-menu-container {
 	}
 	&.card-ex {
 		position: absolute;
-		bottom: 5px;
-		right: 5px;
+		bottom: -15px;
+		right: -15px;
 		border-radius: 50%;
 	}
 }
@@ -582,4 +582,22 @@ div.md-open-menu-container {
 	bottom: 5px;
 	left: 5px;
 	position: absolute;
+}
+
+.animated {
+	animation-duration: 1.5s;
+	animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.fadeIn {
+	animation-name: fadeIn;
 }

@@ -41,16 +41,14 @@ module.exports = function() {
 	});
 
 	// For bots
+	var fb_bot = cp.fork(path.resolve(__dirname, '../../ExchangeWorld-API/ipc_child/fb_bot.js'));
+	fb_bot.setMaxListeners(0);
 	server.use((req, res, next) => {
 		if (req.useragent.isBot) {
 			if (req.useragent.isBot.startsWith('facebook')) {
-				// res.redirect('http://' + req.hostname + ':43002' + '/bot' + req.path);
-				cp.exec('node ' + path.resolve(__dirname, '../../ExchangeWorld-API/ipc_child/bot.js') + ' ' + req.path, (error, stdout, stderr) => {
-					if (error) {
-						res.send(error);
-					} else {
-						res.send(stdout.toString());
-					}
+				fb_bot.send(req.path);
+				fb_bot.once('message', m => {
+					res.send(m);
 				});
 			} else {
 				console.log('BOT-AGENT:', req.useragent.isBot);
@@ -102,7 +100,9 @@ module.exports = function() {
 	});
 
 	s.listen(80);
+	s.setMaxListeners(0);
 
 	var ss = https.createServer(ssl.options, server);
 	ss.listen(443);
+	ss.setMaxListeners(0);
 };

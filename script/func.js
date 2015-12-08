@@ -1,6 +1,7 @@
 var cp = require('child_process');
+var path = require('path');
 
-var working_path = '/root/ExchangeWorld-Develop/ExchangeWorld';
+var working_path = path.resolve(__dirname, '../');
 
 var out = str => {
 	console.log(str);
@@ -26,4 +27,3 @@ var job = (str, options) => {
 module.exports.out = out;
 module.exports.job = job;
 module.exports.working_path = working_path;
-

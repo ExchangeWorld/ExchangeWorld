@@ -127,6 +127,8 @@ function DialogController(msg, callback, $mdDialog, logger, message, $state, $q,
 
 	var amount, offset;
 	function activate() {
+
+
 		amount = 10;
 		offset = 0;
 		loadMore();

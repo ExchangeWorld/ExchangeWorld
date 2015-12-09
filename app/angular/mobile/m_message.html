@@ -1,0 +1,25 @@
+<h1>FUCK</h1>
+<div flex flex-sm layout="row">
+    <div flex>
+        <ul id="chatbox" class="discussion message" upward-scroll="vm.loadMore()" scroll="vm.newMsgs.length">
+            <li ng-class="{true: 'self', false: 'other'}[history.sender_uid === {{ vm.receiver_uid }}]" ng-repeat="history in vm.history">
+                <div class="avatar" ng-click="vm.onClickUser(history.sender_uid)" ng-show="(history.sender_uid !== {{ vm.receiver_uid }})" style="cursor:pointer;">
+                    <img ng-src="{{vm.user.photo_path}}" />
+                </div>
+                <div class="messages">
+                    <p class="content">{{ history.content }}</p>
+                    <md-tooltip>{{ history.time }}</md-tooltip>
+                </div>
+            </li>
+        </ul>
+        <div layout="row" layout-algin="center center">
+            <md-input-container flex="70" flex-sm="55" style="padding: 0 2px;">
+                <label>回覆訊息...</label>
+                <textarea type="string" ng-model="vm.contents" ng-keyup="vm.keyup($event)" ng-keydown="vm.keydown($event)" columns="10" md-maxlength="1000"></textarea>
+            </md-input-container>
+            <div flex="30" flex-sm="45" layout layout-align="center end">
+                <input flex class="md-button md-primary md-raised" ng-disabled="!vm.contents.length" ng-click="vm.submit(vm.contents)" value="送出" style="height:45px"></input>
+            </div>
+        </div>
+    </div>
+</div>

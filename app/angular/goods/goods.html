@@ -1,9 +1,10 @@
 <md-content layout-padding style="overflow-y: hidden;">
 	<div layout-padding layout-margin layout="row" layout-align="center center">
-		<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1" style="margin-left:0;">
-			<md-icon md-font-set="material-icons">keyboard_backspace</md-icon>回列表
+		<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1 btn-rwd" style="margin-left:0;">
+			<md-icon md-font-set="material-icons">keyboard_backspace</md-icon>
+			<span hide-sm>回列表</span>
 		</md-button>
-		<div flex="70" flex-sm="55" layout="row" layout-align="center center" style="margin-left:0;">
+		<div flex="70" flex-sm="60" layout="row" layout-wrap layout-align="center center" style="margin-left:0;">
 			<div flex-sm="50" layout layout-align="center center">
 				<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
 					<md-icon md-font-set="material-icons" ng-class="{'heart-goods': vm.starred}">favorite</md-icon>
@@ -17,13 +18,12 @@
 				</md-button>
 			</div>
 			<div flex-sm="50" layout layout-align="center center">
-				<a href="#"
-					socialshare
-					socialshare-provider="facebook"
-					socialshare-url="http://exwd.csie.org/seek/{{vm.goodData.gid}}" >
-					<md-icon md-font-set="material-icons">share</md-icon>
-				</a>
-
+				<md-button class="white-btn btn-rwd">
+					<a href="#" socialshare socialshare-provider="facebook" socialshare-url="http://exwd.csie.org/seek/{{vm.goodData.gid}}">
+						<md-icon md-font-set="material-icons">share</md-icon>
+						<span hide-sm>分享</span>
+					</a>
+				</md-button>
 			</div>
 		</div>
 		<div ng-show="vm.isMe" ng-click="vm.onDelete(vm.goodData.gid)" layout layout-align="end end">

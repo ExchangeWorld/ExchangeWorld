@@ -13,8 +13,8 @@
         </ul>
         <div layout="row" layout-algin="center center">
             <md-input-container flex="70" flex-sm="55" style="padding: 0 2px;">
-                <label>回覆訊息...</label>
-                <textarea type="string" ng-model="vm.contents" ng-keyup="vm.keyup($event)" ng-keydown="vm.keydown($event)" columns="10" md-maxlength="1000"></textarea>
+				<label>回覆訊息...</label>
+				<textarea type="string" ng-model="vm.contents" columns="10" md-maxlength="1000"></textarea>
             </md-input-container>
             <div flex="30" flex-sm="45" layout layout-align="center end">
                 <input flex class="md-button md-primary md-raised" ng-disabled="!vm.contents.length" ng-click="vm.submit(vm.contents)" value="送出" style="height:45px"></input>

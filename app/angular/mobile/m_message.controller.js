@@ -21,8 +21,6 @@ function m_messageController(
 	vm.contents    = '';
 	vm.onClickUser = onClickUser;
 	vm.submit      = onSubmit;
-	vm.keyup       = keyup;
-	vm.keydown     = keydown;
 	vm.newMsgs     = [];
 
 	activate();
@@ -77,16 +75,5 @@ function m_messageController(
 				vm.newMsgs.push(data);
 				vm.contents = '';
 			});
-	}
-
-	function keyup(ev) {
-		if(ev.keyCode === 16) { shiftPressed = false; }
-	}
-
-	function keydown(ev) {
-		if(ev.keyCode === 16) { shiftPressed = true; }
-		if(ev.keyCode === 13 && !shiftPressed) {
-			onSubmit(vm.contents);
-		}
 	}
 }

@@ -133,10 +133,7 @@ function NavbarController(
 
 	function onClickMessage(msg, ev) {
 		if($window.innerWidth < 768) {
-			$state.go('root.oneCol.m_message', {
-				sid: msg.sender_uid,
-				rid: msg.receiver_uid,
-			});
+			$state.go('root.oneCol.m_message', { msg: msg });
 		} else {
 			message.showMessagebox(ev, msg, updateNotification);
 		}

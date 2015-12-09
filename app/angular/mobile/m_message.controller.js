@@ -14,8 +14,8 @@ function m_messageController(
 	$timeout
 ) {
 	const vm       = this;
-	vm.receiver_uid = $stateParams.rid;
-	vm.sender_uid = $stateParams.sid;
+	vm.msg         = $stateParams.msg;
+	console.log($stateParams);
 	vm.history     = [];
 	vm.loadMore    = loadMore;
 	vm.contents    = '';
@@ -45,7 +45,7 @@ function m_messageController(
 		var deferred = $q.defer();
 
 		message
-			.getConversation(vm.sender_uid, vm.receiver_uid, amount, offset)
+			.getConversation(vm.msg.sender_uid, vm.msg.receiver_uid, amount, offset)
 			.then(function(data) {
 				vm.history = [...data.reverse(), ...vm.history];
 				offset += amount;

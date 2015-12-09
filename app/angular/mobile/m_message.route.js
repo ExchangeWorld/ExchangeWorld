@@ -13,7 +13,8 @@ function getStates() {
 		{
 			state : 'root.oneCol.m_message',
 			config : {
-				url : '/m_message/:sid/:rid',
+				url : '/m_message/',
+				params: {msg: null},
 				bindToController: true,
 				controller : 'm_messageController',
 				controllerAs: 'vm',

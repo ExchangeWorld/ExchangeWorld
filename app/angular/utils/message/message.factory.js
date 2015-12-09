@@ -113,13 +113,17 @@ function DialogController(msg, callback, $mdDialog, logger, message, $state, $q)
 	const vm       = this;
 	vm.msg         = msg;
 	vm.history     = [];
+	vm.newMsgs     = [];
 	vm.loadMore    = loadMore;
 	vm.contents    = '';
 	vm.onClickUser = onClickUser;
 	vm.cancel      = onCancel;
 	vm.submit      = onSubmit;
-	
+	vm.keyup       = keyup;
+	vm.keydown     = keydown;
+
 	activate();
+	var shiftPressed = false;
 
 	var amount, offset;
 	function activate() {
@@ -162,11 +166,25 @@ function DialogController(msg, callback, $mdDialog, logger, message, $state, $q)
 				if(callback) callback();
 				logger.success('訊息已寄出', data, 'DONE');
 				vm.history.push(data);
+				vm.newMsgs.push(data);
 				vm.contents = '';
 			});
 	}
 
 	function onCancel() {
 		$mdDialog.cancel();
+	}
+
+	function keyup(ev) {
+		console.log(ev);
+		if(ev.keyCode === 16) { shiftPressed = false; }
+	}
+
+	function keydown(ev) {
+		console.log(ev);
+		if(ev.keyCode === 16) { shiftPressed = true; }
+		if(ev.keyCode === 13 && !shiftPressed) {
+			onSubmit(vm.contents);
+		}
 	}
 }

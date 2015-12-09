@@ -21,13 +21,17 @@ function getStates() {
 				title : 'goods',
 				resolve : {
 					/** @ngInject */
-					goodData : function (goodsService, $stateParams) {
+					goodData : function (goodsService, $stateParams, $state) {
 						return goodsService
 							.getGood($stateParams.gid)
 							.then(function(data) {
-								return _.isArray(data) ? data[0] : data;
-							})
-							.catch(function() { return undefined; });
+								if(data.length === 0) {
+									$state.go('root.withSidenav.404');
+								}
+								return data[0];
+							}, (error) => {
+								$state.go('root.withSidenav.404');
+							});
 					},
 				},
 			}

@@ -28,8 +28,17 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 	return service;
 
 
-	function getGood(gid) {
+	function getGood(id) {
 		const defer = $q.defer();
+
+		var gid = parseInt(id);
+		if(!gid) {
+			defer.reject({
+				error: true,
+				msg: 'invalid gid'
+			});
+			return defer.promise;
+		}
 
 		Restangular
 			.all('goods')

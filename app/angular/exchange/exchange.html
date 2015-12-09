@@ -50,10 +50,7 @@
 					<p class="md-body-1 note goods-1">{{ exchange.details.goods[exchange.lookupTable.me].name }}</p>
 					<p class="md-body-1 note goods-2">{{ exchange.details.goods[exchange.lookupTable.other].name }}</p>
 				</div>
-				<div flex="15" hide-md hide-sm layout layout-align="center center">
-					<img style="max-height: 100%; max-width:100%;" src="../../images/Logo(ex).png" />
-				</div>
-				<div flex="25" layout layout-align="center center">
+				<div flex layout layout-align="center center">
 					<img class="circle exchange" ng-src="{{exchange.details.goods[exchange.lookupTable.other].user.photo_path}}" />
 				</div>
 				<span flex="5"></span>

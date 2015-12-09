@@ -214,8 +214,8 @@ div.md-open-menu-container {
 		bottom: 0;
 	}
 	&.exchange {
-		height: auto;
-		width: auto;
+		height: 65px;
+		width: 65px;
 		max-height: 100%;
 		max-width: 100%;
 	}
@@ -259,7 +259,7 @@ div.md-open-menu-container {
 	}
 }
 
-@media screen and (min-width: 320px) {
+@media screen and (min-width: 300px) {
 	.deckgrid[deckgrid]::before {
 		content: '2 .column.column-1-2';
 		font-size: 0;

@@ -18,12 +18,7 @@ function getStates() {
 				bindToController: true,
 				controller : 'm_messageController',
 				controllerAs: 'vm',
-				templateUrl : 'mobile/m_message.html',
-				//resolve : {
-					//[>* @ngInject <]
-					//msg : function (messageService, $stateParams) {
-					//},
-				//},
+				templateUrl : 'mobile/m_message/m_message.html',
 			}
 		}
 	];

@@ -23,7 +23,7 @@ require('../utils/auth/auth.module');
 require('../utils/scroll/scroll.module');
 require('../utils/colorThief/colorThief.module');
 require('../utils/upwardScroll/upwardScroll.module');
-require('../mobile/m_message.module');
+require('../mobile/m_message/m_message.module');
 
 const requires = [
 	'ui.router',

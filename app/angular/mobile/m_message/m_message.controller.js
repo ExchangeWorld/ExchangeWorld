@@ -15,7 +15,6 @@ function m_messageController(
 ) {
 	const vm       = this;
 	vm.msg         = $stateParams.msg;
-	console.log($stateParams);
 	vm.history     = [];
 	vm.loadMore    = loadMore;
 	vm.contents    = '';
@@ -28,6 +27,9 @@ function m_messageController(
 
 	var amount, offset;
 	function activate() {
+		if(!vm.msg) {
+			$state.go('root.oneCol.home');
+		}
 		amount = 10;
 		offset = 0;
 		loadMore();
@@ -65,8 +67,8 @@ function m_messageController(
 		if(msg_content.trim().length === 0) return;
 		message.
 			postMessage({
-				receiver_uid : msg.sender_uid,
-				sender_uid   : msg.receiver_uid,
+				receiver_uid : vm.msg.sender_uid,
+				sender_uid   : vm.msg.receiver_uid,
 				content      : msg_content,
 			})
 			.then(function(data) {

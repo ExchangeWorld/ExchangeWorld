@@ -109,11 +109,10 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 }
 
 /** @ngInject */
-function DialogController(msg, callback, $mdDialog, logger, message, $state, $q) {
+function DialogController(msg, callback, $mdDialog, logger, message, $state, $q, $timeout) {
 	const vm       = this;
 	vm.msg         = msg;
 	vm.history     = [];
-	vm.newMsgs     = [];
 	vm.loadMore    = loadMore;
 	vm.contents    = '';
 	vm.onClickUser = onClickUser;
@@ -121,6 +120,7 @@ function DialogController(msg, callback, $mdDialog, logger, message, $state, $q)
 	vm.submit      = onSubmit;
 	vm.keyup       = keyup;
 	vm.keydown     = keydown;
+	vm.newMsgs     = [];
 
 	activate();
 	var shiftPressed = false;
@@ -130,6 +130,12 @@ function DialogController(msg, callback, $mdDialog, logger, message, $state, $q)
 		amount = 10;
 		offset = 0;
 		loadMore();
+
+		// Sooooooooooo hack
+		// trigger the scrollBottom directive to work.
+		$timeout(function(){
+			vm.newMsgs.push('hack');
+		}, 100);
 	}
 
 	function loadMore() {
@@ -176,12 +182,10 @@ function DialogController(msg, callback, $mdDialog, logger, message, $state, $q)
 	}
 
 	function keyup(ev) {
-		console.log(ev);
 		if(ev.keyCode === 16) { shiftPressed = false; }
 	}
 
 	function keydown(ev) {
-		console.log(ev);
 		if(ev.keyCode === 16) { shiftPressed = true; }
 		if(ev.keyCode === 13 && !shiftPressed) {
 			onSubmit(vm.contents);

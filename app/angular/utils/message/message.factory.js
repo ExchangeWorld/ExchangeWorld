@@ -152,19 +152,17 @@ function DialogController(msg, callback, $mdDialog, logger, message, $state, $q)
 
 	function onSubmit(msg_content) {
 		if(msg_content.trim().length === 0) return;
-		$mdDialog
-			.hide(msg_content)
-			.then(function(msg_content) {
-				message.
-					postMessage({
-						receiver_uid : msg.sender_uid,
-						sender_uid   : msg.receiver_uid,
-						content      : msg_content,
-					})
-					.then(function(data) {
-						if(callback) callback();
-						logger.success('訊息已寄出', data, 'DONE');
-					});
+		message.
+			postMessage({
+				receiver_uid : msg.sender_uid,
+				sender_uid   : msg.receiver_uid,
+				content      : msg_content,
+			})
+			.then(function(data) {
+				if(callback) callback();
+				logger.success('訊息已寄出', data, 'DONE');
+				vm.history.push(data);
+				vm.contents = '';
 			});
 	}
 

@@ -20,10 +20,33 @@ function getStates() {
 				templateUrl : 'profile/profile.html',
 				resolve : {
 					/** @ngInject */
-					profile : function (profileService, $stateParams) {
+					profile : function (profileService, $state, $stateParams) {
 						return profileService
 							.getProfile($stateParams.uid)
-							.then(function(data) { return data; })
+							.then(function(data) { 
+								return data; 
+							})
+							.catch(function() { return undefined; });
+					},
+				},
+			}
+		},
+		{
+			state : 'root.oneCol.m_profile',
+			config : {
+				url : '/m_profile/:uid',
+				bindToController: true,
+				controller : 'ProfileController',
+				controllerAs: 'vm',
+				templateUrl : 'profile/profile.html',
+				resolve : {
+					/** @ngInject */
+					profile : function (profileService, $state, $stateParams) {
+						return profileService
+							.getProfile($stateParams.uid)
+							.then(function(data) {
+								return data;
+							})
 							.catch(function() { return undefined; });
 					},
 				},

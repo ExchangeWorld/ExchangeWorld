@@ -77,9 +77,9 @@ function NavbarController(
 			const isFromOneCol = $state.includes("root.oneCol");
 
 			if(contentIndex === 4) {
-				$state.go('root.withSidenav.' + state[contentIndex], {
-					uid: $localStorage.user.uid
-				});
+				$window.innerWidth > 600 
+					? $state.go('root.withSidenav.' + state[contentIndex], { uid: $localStorage.user.uid })
+					: $state.go('root.oneCol.m_' + state[contentIndex], { uid: $localStorage.user.uid });
 			} else {
 				$state.go('root.withSidenav.' + state[contentIndex]);
 			}

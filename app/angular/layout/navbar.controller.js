@@ -24,7 +24,7 @@ function NavbarController(
 	AppSettings
 ) {
 	const vm               = this;
-	const state            = ['home', 'seek', 'post', 'exchange', 'profile'];
+	const state            = ['home', 'seek', 'post', 'exchange', 'profile', 'm_messagebox', 'm_notification'];
 	vm.stateIndex          = _.indexOf(state, $state.current.title);
 	vm.contentIs           = function(idx) { return vm.stateIndex === idx; };
 	vm.openMenu            = openMenu;
@@ -68,7 +68,7 @@ function NavbarController(
     }
 
 	function onClick(contentIndex) {
-		if (contentIndex === 0) {
+		if ([0, 5, 6].indexOf(contentIndex) !== -1) {
 			$state.go('root.oneCol.' + state[contentIndex]);
 		} else if(contentIndex === 3) {
 			if (!$localStorage.user) onLogin();
@@ -78,7 +78,7 @@ function NavbarController(
 
 			if(contentIndex === 4) {
 				$state.go('root.withSidenav.' + state[contentIndex], {
-					uid: auth.currentUser().uid
+					uid: $localStorage.user.uid
 				});
 			} else {
 				$state.go('root.withSidenav.' + state[contentIndex]);

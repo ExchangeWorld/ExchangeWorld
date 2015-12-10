@@ -23,6 +23,9 @@ require('../utils/auth/auth.module');
 require('../utils/scroll/scroll.module');
 require('../utils/colorThief/colorThief.module');
 require('../utils/upwardScroll/upwardScroll.module');
+require('../mobile/m_message/m_message.module');
+require('../mobile/m_messagebox/m_messagebox.module');
+require('../mobile/m_notification/m_notification.module');
 
 const requires = [
 	'ui.router',
@@ -44,6 +47,9 @@ const requires = [
 	'utils.auth',
 	'utils.colorThief',
 	'utils.upwardScroll',
+	'm.message',
+	'm.messagebox',
+	'm.notification',
 ];
 
 module.exports = angular.module('app.core', requires);

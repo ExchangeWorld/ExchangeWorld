@@ -35,7 +35,19 @@
 			</md-button>
 		</div>
 		<span flex-md="15"></span>
-		<div flex="10" flex-md="20" flex-sm="30" offset="10" offset-md="5" offset-sm="15" layout="row" layout-align="center center">
+
+		<!-- show fake btn for small sceen -->
+		<div hide-gt-md flex="10" flex-md="20" flex-sm="30" offset="10" offset-md="5" offset-sm="15" layout="row" layout-align="center center">
+			<md-button ng-click="vm.onClick(5)">
+				<md-icon class="material-icons">forum</md-icon>
+				<p class="notification md-caption" ng-show="vm.unreadMsg !== 0">{{ vm.unreadMsg }}</p>
+			</md-button>
+			<md-button ng-click="vm.onClick(6)">
+				<md-icon class="material-icons">notifications</md-icon>
+				<p class="notification md-caption" ng-show="vm.unreadNotify !== 0">{{ vm.unreadNotify }}</p>
+			</md-button>
+		</div>
+		<div hide-md hide-sm flex="10" flex-md="20" flex-sm="30" offset="10" offset-md="5" offset-sm="15" layout="row" layout-align="center center">
 			<md-menu flex flex-sm md-offset="-200 61" ng-show="vm.isLoggedIn">
 				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)">
 					<md-icon class="material-icons">forum</md-icon>

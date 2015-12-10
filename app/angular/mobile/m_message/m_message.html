@@ -1,7 +1,7 @@
 <div flex flex-sm layout="row">
 	<div flex>
 		<md-toolbar class="md-primary md-hue-2" layout layout-align="center center" style="min-height: 48px;">
-			<span>訊息</span>
+			<span>{{vm.msg.user.name}}</span>
 		</md-toolbar>
 		<ul id="chatbox" class="discussion message" upward-scroll="vm.loadMore()" scroll="vm.newMsgs.length" style="margin: 0 5px 10px 5px;">
 			<li ng-class="{true: 'self', false: 'other'}[history.sender_uid === {{ vm.msg.receiver_uid }}]" ng-repeat="history in vm.history">

@@ -17,7 +17,7 @@ function m_messageboxController(logger, message, $state, $localStorage) {
 
 	function activate() {
 		if(!vm.user) {
-			$state.go('root.withSidenav.404');
+			$state.go('root.404');
 		}
 		updateMessagebox();
 	}

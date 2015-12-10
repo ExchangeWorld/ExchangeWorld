@@ -26,11 +26,11 @@ function getStates() {
 							.getGood($stateParams.gid)
 							.then(function(data) {
 								if(data.length === 0) {
-									$state.go('root.withSidenav.404');
+									$state.go('root.404');
 								}
 								return data[0];
 							}, (error) => {
-								$state.go('root.withSidenav.404');
+								$state.go('root.404');
 							});
 					},
 				},

@@ -285,7 +285,7 @@ function GoodsController(
 		} else if(type === types[1]) {
 			$state.go('root.withSidenav.goods.queuing');
 		} else {
-			$state.go('root.withSidenav.404');
+			$state.go('root.404');
 		}
 	}
 

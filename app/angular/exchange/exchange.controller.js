@@ -45,7 +45,7 @@ function ExchangeController(
 	var amount, offset;
 	function activate() {
 		if($stateParams.uid !== $localStorage.user.uid.toString()) {
-			$state.go('root.withSidenav.404');
+			$state.go('root.404');
 		} else {
 			if(vm.exchangeList.length) {
 				vm.exchangeList.forEach(function(exchange) {

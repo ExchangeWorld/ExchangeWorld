@@ -19,7 +19,7 @@ function FollowController($state, followService, $stateParams) {
 
 	function activate() {
 		if (!_.includes(types, $stateParams.type)) {
-			$state.go('root.withSidenav.404');
+			$state.go('root.404');
 		} else {
 			vm.type = $stateParams.type;
 

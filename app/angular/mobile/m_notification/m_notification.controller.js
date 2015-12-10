@@ -23,7 +23,7 @@ function m_notificationController(
 
 	function activate() {
 		if(!$localStorage.user) {
-			$state.go('root.withSidenav.404');
+			$state.go('root.404');
 		} else {
 			notification
 				.getNotification($localStorage.user.uid)

@@ -24,7 +24,7 @@
 				</div>
 			</div>
 			<div offset="10" layout="row" layout-align="center center" style="margin-top: 10px;">
-				<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
+				<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
 					<div ng-show="!vm.isFollowed">
 						<md-icon md-font-set="material-icons">person_add</md-icon>
 						<span hide-sm>&nbsp;追隨</span>

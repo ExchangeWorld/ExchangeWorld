@@ -19,7 +19,19 @@ function m_messageboxController(logger, message, $state, $localStorage) {
 		if(!vm.user) {
 			$state.go('root.withSidenav.404');
 		}
+		updateMessagebox();
+	}
 
+	function onClickMessage(msg, ev) {
+		message
+			.updateMessage(msg)
+			.then(() => {
+				updateMessagebox();
+				$state.go('root.oneCol.m_message', { msg: msg });
+			});
+	}
+
+	function updateMessagebox() {
 		message
 			.getMessage(vm.user.uid)
 			.then((msgs) => {
@@ -29,10 +41,6 @@ function m_messageboxController(logger, message, $state, $localStorage) {
 					msg.timestamp = moment(msg.timestamp.slice(0, -1)).calendar();
 				});
 			});
-	}
-
-	function onClickMessage(msg, ev) {
-		$state.go('root.oneCol.m_message', { msg: msg });
 	}
 
 }

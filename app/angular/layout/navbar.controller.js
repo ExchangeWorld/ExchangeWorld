@@ -12,10 +12,9 @@ function NavbarController(
 	$mdMenu,
 	$mdDialog,
 	$state,
-	$localStorage,
-	$interval,
-	$location,
 	$rootScope,
+	$localStorage,
+	$location,
 	$window,
 	$q,
 	auth,
@@ -47,6 +46,10 @@ function NavbarController(
 
 
 	//////////////
+	$rootScope.$on('$stateChangeSuccess', function() {
+		updateNotification();
+	});
+	
 	activate();
 
 	function activate() {
@@ -140,7 +143,6 @@ function NavbarController(
 	}
 
 
-	var timer = $interval(updateNotification, 5000);
 	function updateNotification() {
 		if(vm.isLoggedIn) {
 			$q

@@ -2,6 +2,8 @@
 
 const m_notificationModule = require('./m_notification.module');
 const _                    = require('lodash');
+const moment               = require('moment');
+
 m_notificationModule.controller('m_notificationController', m_notificationController);
 
 /** @ngInject */
@@ -26,7 +28,10 @@ function m_notificationController(
 			notification
 				.getNotification($localStorage.user.uid)
 				.then(function(data) {
-					vm.notifications = data;
+					vm.notifications = data.map(function(notice) {
+						notice.timestamp = moment(notice.timestamp.slice(0, -1)).fromNow();
+						return notice;
+					});
 				});
 		}
 	}

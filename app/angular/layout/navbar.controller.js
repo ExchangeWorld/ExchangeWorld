@@ -78,7 +78,7 @@ function NavbarController(
 
 			if(contentIndex === 4) {
 				$state.go('root.withSidenav.' + state[contentIndex], {
-					uid: auth.currentUser().uid
+					uid: $localStorage.user.uid
 				});
 			} else {
 				$state.go('root.withSidenav.' + state[contentIndex]);

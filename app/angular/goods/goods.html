@@ -1,23 +1,23 @@
 <md-content layout-padding style="overflow-y: hidden;">
-	<div layout-padding layout-margin layout="row" layout-align="center center">
+	<div layout-padding layout-margin layout="row" layout-align="center center" style="padding-left:0; margin-left: 0;">
 		<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1 btn-rwd" style="margin-left:0;">
 			<md-icon md-font-set="material-icons">keyboard_backspace</md-icon>
 			<span hide-sm>回列表</span>
 		</md-button>
-		<div flex="70" flex-sm="60" layout="row" layout-wrap layout-align="center center" style="margin:0px; padding:0px;">
-			<div flex-sm="45" layout layout-align="center center">
+		<div flex="70" flex-sm="70" layout="row" layout-wrap layout-align="center center" style="margin:0px; padding:0px;">
+			<div flex-sm="33" layout layout-align="center center">
 				<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
 					<md-icon md-font-set="material-icons" ng-class="{'heart-goods': vm.starred}">favorite</md-icon>
 					<span hide-sm>{{vm.starred ? '已關注' : '關注'}} {{vm.stars.length}}</span>
 				</md-button>
 			</div>
-			<div flex-sm="45" layout layout-align="center center">
+			<div flex-sm="33" layout layout-align="center center">
 				<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue($event)">
 					<md-icon md-font-set="material-icons">remove_red_eye</md-icon>
 					<span hide-sm>{{ vm.isMe ? '看誰排' : '我要排' }} {{vm.queuingList.length}}</span>
 				</md-button>
 			</div>
-			<div flex-sm="45" layout layout-align="center center">
+			<div flex-sm="30" layout layout-align="center center">
 				<md-button class="white-btn btn-rwd">
 					<a href="#" socialshare socialshare-provider="facebook" socialshare-url="http://exwd.csie.org/seek/{{vm.goodData.gid}}">
 						<md-icon md-font-set="material-icons">share</md-icon>

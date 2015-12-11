@@ -86,13 +86,23 @@ function ProfileController(
 				vm.favSum = data;
 			});
 			
-		/**if goods fetching time more than 500ms, skip colorThief feature. */
-		$timeout(function(){
+		/**
+		 * only do this is desktop mode.
+		 * if goods fetching time more than 500ms, skip colorThief feature.
+		 */
+		if($state.current.name === 'profile') {
+			$timeout(function(){
+				[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
+					dominateColor(goods);
+				});
+			}, 500);
+		} else {
 			[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
-				dominateColor(goods);
+				goods.bgStyle = {
+					"background-color": 'rgb(0, 0, 0)'
+				};
 			});
-		}, 500);
-
+		}
 	}
 
 	function onClickFollow(uid, index) {

@@ -1,23 +1,21 @@
 <md-list>
 	<md-list-item style="padding: 0;">
 		<div offset="5" flex>
-			<p>通知</p>
+			<p class="md-subhead">通知</p>
 		</div>
 		<md-divider></md-divider>
 	</md-list-item>
-	<div layout-padding></div>
-    <md-list-item ng-show="vm.notifications.length === 0">
-        <div flex>
-            <p class="md-body-2 note">目前沒有任何通知</p>
-        </div>
-    </md-list-item>
-    <md-list-item ng-repeat="notice in vm.notifications" ng-style="notice.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickNotification(notice)">
-        <!-- user avatar -->
-        <img flex style="max-height:50px; max-width:50px;" ng-src="{{ notice.user.photo_path }}" />
-        <!-- notification text -->
-        <div offset="5" flex>
-            <p class="md-body-2 note">{{notice.content}}</p>
-            <p class="md-caption note" style="color: #BCBCBC;">{{ notice.timestamp }}</p>
-        </div>
-    </md-list-item>
+	<md-list-item ng-show="vm.notifications.length === 0">
+		<div flex>
+			<p class="md-body-2 note">目前沒有任何通知</p>
+		</div>
+	</md-list-item>
+	<md-list-item ng-repeat="notice in vm.notifications" ng-style="notice.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickNotification(notice)">
+		<img flex style="max-height:50px; max-width:50px;" ng-src="{{ notice.user.photo_path }}" />
+		<div offset="5" flex>
+			<p class="md-body-2 note">{{notice.content}}</p>
+			<p class="md-caption note" style="color: #BCBCBC;">{{ notice.timestamp }}</p>
+		</div>
+	</md-list-item>
 </md-list>
+

@@ -42,7 +42,7 @@
 				<md-icon class="material-icons">forum</md-icon>
 				<p class="notification md-caption" ng-show="vm.unreadMsg !== 0">{{ vm.unreadMsg }}</p>
 			</md-button>
-			<md-button ng-click="vm.onClick(6)">
+			<md-button ng-click="vm.onClick(6)" ng-show="vm.isLoggedIn">
 				<md-icon class="material-icons">notifications</md-icon>
 				<p class="notification md-caption" ng-show="vm.unreadNotify !== 0">{{ vm.unreadNotify }}</p>
 			</md-button>

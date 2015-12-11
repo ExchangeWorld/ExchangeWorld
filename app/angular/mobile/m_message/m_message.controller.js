@@ -9,6 +9,7 @@ function m_messageController(
 	logger,
 	message,
 	$state,
+	$rootScope,
 	$q,
 	$stateParams,
 	$timeout
@@ -18,7 +19,7 @@ function m_messageController(
 	vm.history     = [];
 	vm.loadMore    = loadMore;
 	vm.contents    = '';
-	vm.onClickUser = onClickUser;
+	vm.onClickUser = $rootScope.onClickUser;
 	vm.submit      = onSubmit;
 	vm.newMsgs     = [];
 
@@ -54,13 +55,6 @@ function m_messageController(
 			});
 
 		return deferred.promise;
-	}
-
-	function onClickUser(uid) {
-		onCancel();
-		$state.go('root.withSidenav.profile', {
-			uid: uid
-		});
 	}
 
 	function onSubmit(msg_content) {

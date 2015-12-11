@@ -33,7 +33,7 @@ function ProfileController(
 	vm.myStar              = myFavorite;
 	vm.myGoodsPending      = myGoods.myGoodsPending;
 	vm.myGoodsExchanged    = myGoods.myGoodsExchanged;
-	vm.onClickFollow       = (uid, type) => $rootScope.onClickFollow(uid, type);
+	vm.onClickFollow       = $rootScope.onClickFollow;
 	vm.onClickAddFollowing = onClickAddFollowing;
 	vm.onClickSendMsg      = onClickSendMsg;
 	vm.followerCount       = profile.followers.length;

@@ -325,7 +325,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
 			vm.host_goods_gid = host_goods_gid;
 			vm.confirm        = onConfirm;
 			vm.cancel         = onCancel;
-			vm.onClickGoods   = (gid)=> { $state.go('root.withSidenav.goods', {gid: gid}); };
+			vm.onClickGoods   = gid=> { $state.go('root.withSidenav.goods', {gid: gid}); };
 
 			function onConfirm(selected_goods) {
 				selected_goods = JSON.parse(selected_goods);

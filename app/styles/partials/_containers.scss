@@ -307,6 +307,9 @@ div.md-open-menu-container {
 	.reset-follow {
 		margin: 0;
 	}
+	.switch {
+		padding-left: 5px;
+	}
 }
 
 @media screen and (min-width: 600px) {
@@ -355,6 +358,9 @@ div.md-open-menu-container {
 	}
 	.reset-follow {
 		margin-bottom: 5px;
+	}
+	.switch {
+		padding-left: 10px;
 	}
 }
 

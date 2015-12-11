@@ -15,8 +15,7 @@ function SeekController(
 	$scope,
 	$rootScope,
 	$localStorage,
-	$stateParams,
-	$location
+	$stateParams
 ) {
 	var vm                 = this;
 	vm.goods               = [];

@@ -8,7 +8,6 @@ m_notificationModule.controller('m_notificationController', m_notificationContro
 
 /** @ngInject */
 function m_notificationController(
-	logger,
 	notification,
 	$state,
 	$location,

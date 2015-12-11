@@ -4,7 +4,7 @@ const mapModule = require('./map.module');
 mapModule.factory('geolocation', geolocation)
 
 /** @ngInject */
-function geolocation($q, $rootScope, $window, exception, $localStorage) {
+function geolocation($q, $rootScope, $window, exception) {
 
 	const services = {
 		getLocation : getLocation,

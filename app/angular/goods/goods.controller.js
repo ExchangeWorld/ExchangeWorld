@@ -21,7 +21,6 @@ function GoodsController(
 	$stateParams,
 	$scope,
 	$rootScope,
-	$timeout,
 	$localStorage,
 	$location,
 	$mdDialog,

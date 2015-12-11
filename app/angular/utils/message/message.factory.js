@@ -109,7 +109,7 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 }
 
 /** @ngInject */
-function DialogController(msg, callback, $mdDialog, logger, message, $state, $q, $timeout) {
+function DialogController(msg, callback, $mdDialog, logger, message, $state, $q, $timeout, $rootScope) {
 	const vm       = this;
 	vm.msg         = msg;
 	vm.history     = [];
@@ -155,9 +155,7 @@ function DialogController(msg, callback, $mdDialog, logger, message, $state, $q,
 
 	function onClickUser(uid) {
 		onCancel();
-		$state.go('root.withSidenav.profile', {
-			uid: uid
-		});
+		$rootScope.onClickUser(uid);
 	}
 
 	function onSubmit(msg_content) {

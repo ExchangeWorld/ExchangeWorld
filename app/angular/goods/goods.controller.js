@@ -52,7 +52,7 @@ function GoodsController(
 	vm.onClickQueue  = onClickQueue;
 
 	vm.showPhotoViewer = showPhotoViewer;
-	vm.onClickUser = uid => $rootScope.onClickUser(uid);
+	vm.onClickUser = $rootScope.onClickUser;
 	vm.onClickBack = () => $state.go('root.withSidenav.seek');
 
 	activate();

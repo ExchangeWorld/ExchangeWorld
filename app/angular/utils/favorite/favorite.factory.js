@@ -6,7 +6,7 @@ const _              = require('lodash');
 favoriteModule.factory('favorite', favorite);
 
 /** @ngInject */
-function favorite(Restangular, $q, exception, $localStorage, $mdDialog, logger) {
+function favorite(Restangular, $q, exception, logger) {
 	const service = {
 		getFavorites,
 		getMyFavorite,

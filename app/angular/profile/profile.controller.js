@@ -10,19 +10,15 @@ function ProfileController(
 	myGoods,
 	myFavorite,
 	profileService,
-	favorite,
 	auth,
-	message,
 	notification,
 	colorThief,
 	logger,
-	$scope,
 	$state,
 	$stateParams,
 	$rootScope,
 	$localStorage,
-	$timeout,
-	$window
+	$timeout
 ) {
 	var vm                 = this;
 	var ct                 = new colorThief.ColorThief();

@@ -9,18 +9,15 @@ function ExchangeController(
 	exchangeList,
 	mapSize,
 	$state,
-	$timeout,
 	$rootScope,
 	exchangeService,
 	colorThief,
 	$stateParams,
 	$interval,
 	$mdDialog,
-	$window,
 	$localStorage,
 	$q,
-	$mdSidenav,
-	$scope
+	$mdSidenav
 ) {
 	var vm             = this;
 	var ct             = new colorThief.ColorThief();

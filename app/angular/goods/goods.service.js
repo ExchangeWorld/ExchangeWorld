@@ -5,7 +5,7 @@ const _           = require('lodash');
 goodsModule.factory('goodsService', goodsService);
 
 /** @ngInject */
-function goodsService(Restangular, $q, exception, $mdDialog, $localStorage) {
+function goodsService(Restangular, $q, exception, $mdDialog) {
 
 	const service = {
 		getGood,

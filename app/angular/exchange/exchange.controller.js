@@ -39,6 +39,11 @@ function ExchangeController(
 	vm.agreed          = false;
 	vm.map             = { size: mapSize };
 
+	vm.openLeftMenu    = () => $mdSidenav('left').toggle();
+	vm.openRightMenu   = () => $mdSidenav('right').toggle();
+	vm.closeleft       = () => $mdSidenav('left').close();
+	vm.closeright      = () => $mdSidenav('right').close();
+
 	////////////
 	activate();
 	
@@ -172,19 +177,4 @@ function ExchangeController(
 		};
 	}
 
-	$scope.openLeftMenu = function() {
-		$mdSidenav('left').toggle();
-	};
-
-	$scope.openRightMenu = function() {
-		$mdSidenav('right').toggle();
-	};
-
-	$scope.closeleft = function () {
-		$mdSidenav('left').close();
-	};
-
-	$scope.closeright = function () {
-		$mdSidenav('right').close();
-	};
 }

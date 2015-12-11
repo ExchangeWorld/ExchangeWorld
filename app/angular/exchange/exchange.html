@@ -18,19 +18,19 @@
 	<div layout="column" layout-gt-md="row" class="layout-ex">
 		<div hide-gt-md>
 			<div layout layout-align="center center" style="margin-top: 20px;">
-				<md-button class="md-icon-button md-primary" ng-click="openLeftMenu()">
+				<md-button class="md-icon-button md-primary" ng-click="vm.openLeftMenu()">
 					<div layout layout-align="center">
 						<i class="material-icons md-36">dns</i>
 					</div>
 				</md-button>
-				<md-button class="md-icon-button md-primary" ng-click="openRightMenu()" ng-show="vm.exchange !== undefined">
+				<md-button class="md-icon-button md-primary" ng-click="vm.openRightMenu()" ng-show="vm.exchange !== undefined">
 					<div layout layout-align="center">
 						<i class="material-icons md-36">chat</i>
 					</div>
 				</md-button>
 			</div>
 			<md-sidenav md-component-id="left" class="md-sidenav-left">
-				<div class="event-btn" layout="row" layout-algin="center center" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index); closeleft()">
+				<div class="event-btn" layout="row" layout-algin="center center" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index); vm.closeleft()">
 					<div flex="25" layout layout-align="center center">
 						<img class="circle exchange" ng-src="{{exchange.details.goods[exchange.lookupTable.other].user.photo_path}}" />
 					</div>

@@ -33,6 +33,16 @@
 		margin-top: 10px;
 		margin-bottom: 5px;
 	}
+	&.m_message {
+		background-color: rgba(229, 229, 229, 0.55);
+		border: 1px solid #e5e5e5;
+		margin: 0 5px 10px 5px;
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 40px;
+		top: 112px;
+	}
 }
 
 .other {

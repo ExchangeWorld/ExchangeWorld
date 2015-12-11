@@ -1,9 +1,11 @@
-<div flex flex-sm layout="row">
-	<div flex>
+<div flex>
+	<div>
 		<md-toolbar class="md-primary md-hue-2" layout layout-align="center center" style="min-height: 48px;">
 			<span>{{vm.msg.user.name}}</span>
 		</md-toolbar>
-		<ul id="chatbox" class="discussion message" upward-scroll="vm.loadMore()" scroll="vm.newMsgs.length" style="margin: 0 5px 10px 5px;">
+	</div>
+	<div>
+		<ul id="chatbox" class="discussion m_message" upward-scroll="vm.loadMore()" scroll="vm.newMsgs.length">
 			<li ng-class="{true: 'self', false: 'other'}[history.sender_uid === {{ vm.msg.receiver_uid }}]" ng-repeat="history in vm.history">
 				<div class="avatar" ng-click="vm.onClickUser(history.sender_uid)" ng-show="(history.sender_uid !== {{ vm.msg.receiver_uid }})" style="cursor:pointer;">
 					<img ng-src="{{vm.msg.user.photo_path}}" />
@@ -14,14 +16,14 @@
 				</div>
 			</li>
 		</ul>
-		<div layout="row" layout-algin="center center">
-			<md-input-container flex="70" flex-sm="55" style="padding: 0 2px;">
-				<label>回覆訊息...</label>
-				<textarea type="string" ng-model="vm.contents" columns="10" md-maxlength="1000"></textarea>
-			</md-input-container>
-			<div flex="30" flex-sm="45" layout layout-align="center end">
-				<input flex class="md-button md-primary md-raised" ng-disabled="!vm.contents.length" ng-click="vm.submit(vm.contents)" value="送出" style="height:45px"></input>
-			</div>
+	</div>
+	<div layout="row" layout-algin="center center" style="height:61px; bottom:0; position:fixed;">
+		<md-input-container flex="70" flex-sm="55" style="padding: 0 2px;">
+			<label>回覆訊息...</label>
+			<textarea type="string" ng-model="vm.contents" columns="10" md-maxlength="1000"></textarea>
+		</md-input-container>
+		<div flex="30" flex-sm="45" layout layout-align="center end">
+			<input flex class="md-button md-primary md-raised" ng-disabled="!vm.contents.length" ng-click="vm.submit(vm.contents)" value="送出" style="height:45px"></input>
 		</div>
 	</div>
 </div>

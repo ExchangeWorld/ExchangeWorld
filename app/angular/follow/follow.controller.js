@@ -9,6 +9,7 @@ followModule.controller('FollowController', FollowController);
 function FollowController($state, followService, $stateParams, $rootScope) {
 	var vm         = this;
 	const types    = ['following', 'follower'];
+	vm.type        = '';
 	vm.followData  = [];
 	vm.onClickUser = $rootScope.onClickUser;
 	vm.onClickBack = $rootScope.onClickUser.bind(this, $stateParams.uid);
@@ -20,6 +21,8 @@ function FollowController($state, followService, $stateParams, $rootScope) {
 		if (!_.includes(types, $stateParams.type)) {
 			$state.go('root.404');
 		} else {
+			vm.type = $stateParams.type;
+			
 			followService
 				.getFollow($stateParams.uid, $stateParams.type)
 				.then(function(data) {

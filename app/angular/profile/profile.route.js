@@ -12,7 +12,6 @@ function appRun(routerHelper) {
 var resolve = {
 	/** @ngInject */
 	profile : function (profileService, $state, $stateParams) {
-		console.log('fucker');
 		return profileService
 			.getProfile($stateParams.uid)
 			.then(function(data) { 

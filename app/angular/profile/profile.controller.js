@@ -7,6 +7,8 @@ profileModule.controller('ProfileController', ProfileController);
 /** @ngInject */
 function ProfileController(
 	profile,
+	myGoods,
+	myFavorite,
 	profileService,
 	favorite,
 	auth,
@@ -19,19 +21,19 @@ function ProfileController(
 	$stateParams,
 	$rootScope,
 	$localStorage,
-	$timeout
+	$timeout,
+	$window
 ) {
 	var vm                 = this;
 	var ct                 = new colorThief.ColorThief();
-	const types            = ['following', 'follower'];
 	vm.profile             = profile;
 	vm.isLoggedIn          = Boolean($localStorage.user);
 	vm.isMe                = vm.isLoggedIn && (profile.uid === $localStorage.user.uid);
 	vm.favSum              = '';
-	vm.myStar              = [];
-	vm.myGoodsPending      = [];
-	vm.myGoodsExchanged    = [];
-	vm.onClickFollow       = onClickFollow;
+	vm.myStar              = myFavorite;
+	vm.myGoodsPending      = myGoods.myGoodsPending;
+	vm.myGoodsExchanged    = myGoods.myGoodsExchanged;
+	vm.onClickFollow       = (uid, type) => $rootScope.onClickFollow(uid, type);
 	vm.onClickAddFollowing = onClickAddFollowing;
 	vm.onClickSendMsg      = onClickSendMsg;
 	vm.followerCount       = profile.followers.length;
@@ -39,10 +41,10 @@ function ProfileController(
 	vm.isReadOnly          = true;
 	vm.onClickEdit         = onClickEdit;
 	vm.getNumber           = number => new Array(number);
-	vm.onClickGoods        = (gid)=> $state.go('root.withSidenav.goods', { gid : gid });
-
+	vm.onClickGoods        = gid => $state.go('root.withSidenav.goods', { gid : gid });
 
 	/////////////
+
 	activate();
 
 	function activate() {
@@ -64,23 +66,6 @@ function ProfileController(
 			});
 
 		profileService
-			.getMyGoods($stateParams.uid)
-			.then(function(data) {
-				vm.myGoodsPending   = data.filter(function(g) { return g.status === 0; });
-				vm.myGoodsExchanged = data.filter(function(g) { return g.status === 1; });
-				$rootScope.$broadcast('goodsChanged', vm.myGoodsPending);
-			});
-		
-		favorite
-			.getMyFavorite($stateParams.uid)
-			.then(function(data) {
-				vm.myStar = data.map(function(g) {
-					if (_.isString(g.good.photo_path)) g.good.photo_path = JSON.parse(g.good.photo_path);
-					return g.good;
-				});
-			});
-
-		profileService
 			.getFavoriteSum($stateParams.uid) 
 			.then(function(data) { 
 				vm.favSum = data;
@@ -90,7 +75,7 @@ function ProfileController(
 		 * only do this is desktop mode.
 		 * if goods fetching time more than 500ms, skip colorThief feature.
 		 */
-		if($state.current.name === 'profile') {
+		if($state.current.name === 'root.withSidenav.profile') {
 			$timeout(function(){
 				[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
 					dominateColor(goods);
@@ -103,13 +88,7 @@ function ProfileController(
 				};
 			});
 		}
-	}
-
-	function onClickFollow(uid, index) {
-		$state.go('root.withSidenav.follow', {
-			uid: uid,
-			type: types[index]
-		});
+		$rootScope.$broadcast('goodsChanged', vm.myGoodsPending);
 	}
 
 	function onClickAddFollowing() {

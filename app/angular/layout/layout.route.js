@@ -15,6 +15,32 @@ function getStates() {
 			config : {
 				abstract : true,
 				templateUrl : 'layout/layout.html',
+				onEnter: function($rootScope, $state, $window){
+					$rootScope.onClickUser   = onClickUser;
+					$rootScope.onClickFollow = onClickFollow;
+
+					function onClickUser(uid) {
+						if($window.innerWidth > 600) {
+							$state.go('root.withSidenav.profile', { uid: uid });
+						} else {
+							$state.go('root.oneCol.m_profile', { uid: uid });
+						}
+					}
+
+					function onClickFollow(uid, type) {
+						if($window.innerWidth < 600) {
+							$state.go('root.oneCol.m_follow', {
+								uid: uid,
+								type: type
+							});
+						} else {
+							$state.go('root.withSidenav.follow', {
+								uid: uid,
+								type: type
+							});
+						}
+					}
+				}
 			}
 		},
 		{

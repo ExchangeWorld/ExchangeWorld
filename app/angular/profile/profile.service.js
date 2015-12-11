@@ -19,6 +19,7 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 	return service;
 
 	//////////
+	
 	function getProfile(_uid) {
 		const defer = $q.defer();
 
@@ -32,8 +33,10 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 					defer.resolve(data);
 				}
 			}, (error)=> {
-				return exception.catcher('[Profiles Service] getProfile error: ')(error);
+				defer.reject({ error: error });
+				exception.catcher('[Profiles Service] getProfile error: ')(error);
 			});
+
 		return defer.promise;
 	}
 
@@ -44,7 +47,6 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 			.all('star/toOwner')
 			.getList({ owner_uid: uid })
 			.then(function(data) {
-				console.log(data);
 				defer.resolve(data);
 			}, (error) => {
 				return exception.catcher('[Profiles Service] getFavoriteSum error: ')(error);

@@ -15,11 +15,11 @@
 				<div layout="row" layout-sm="column" layout-align="center center">
 					<div layout="column" layout-sm="row" layout-align="center center" class="note profile">
 						<p class="md-title text-ex follow reset-follow">追隨中</p>
-						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 0)">{{ vm.profile.followings.length }}</a>
+						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'following')">{{ vm.profile.followings.length }}</a>
 					</div>
 					<div layout="column" layout-sm="row" layout-align="center center" class="note profile">
 						<p class="md-title text-ex follow reset-follow">被追蹤</p>
-						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 1)">{{ vm.followerCount }}</a>
+						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'follower')">{{ vm.followerCount }}</a>
 					</div>
 				</div>
 			</div>

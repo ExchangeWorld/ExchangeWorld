@@ -8,6 +8,7 @@ goodsModule.controller('GoodsController', GoodsController);
 
 /** @ngInject */
 function GoodsController(
+	auth,
 	NgMap,
 	goodData,
 	AvailableCategory,
@@ -19,7 +20,7 @@ function GoodsController(
 	$state,
 	$stateParams,
 	$scope,
-	auth,
+	$rootScope,
 	$timeout,
 	$localStorage,
 	$location,
@@ -51,7 +52,7 @@ function GoodsController(
 	vm.onClickQueue  = onClickQueue;
 
 	vm.showPhotoViewer = showPhotoViewer;
-	vm.onClickUser = uid => $state.go('root.withSidenav.profile', { uid });
+	vm.onClickUser = uid => $rootScope.onClickUser(uid);
 	vm.onClickBack = () => $state.go('root.withSidenav.seek');
 
 	activate();

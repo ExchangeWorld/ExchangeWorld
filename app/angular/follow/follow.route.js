@@ -19,6 +19,16 @@ function getStates() {
 				controllerAs: 'vm',
 				templateUrl : 'follow/follow.html',
 			}
+		},
+		{
+			state : 'root.oneCol.m_follow',
+			config : {
+				url : '/m_profile/:uid/:type',
+				bindToController: true,
+				controller : 'FollowController',
+				controllerAs: 'vm',
+				templateUrl : 'follow/follow.html',
+			}
 		}
 	];
 }

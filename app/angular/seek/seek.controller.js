@@ -64,7 +64,6 @@ function SeekController(
 			.catch(function() {
 				vm.goods = [];
 			});
-
 	}
 
 	function onMouseOver(gid) {
@@ -120,8 +119,6 @@ function SeekController(
 	function onClickUser(e, uid) {
 		e.preventDefault();
 		e.stopPropagation();
-		$state.go('root.withSidenav.profile', {
-			uid: uid
-		});
+		$rootScope.onClickUser(uid);
 	}
 }

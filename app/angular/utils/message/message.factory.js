@@ -168,7 +168,6 @@ function DialogController(msg, callback, $mdDialog, logger, message, $state, $q,
 			})
 			.then(function(data) {
 				if(callback) callback();
-				logger.success('訊息已寄出', data, 'DONE');
 				vm.history.push(data);
 				vm.newMsgs.push(data);
 				vm.contents = '';

@@ -34,18 +34,16 @@ function NavbarController(
 	vm.onLogout            = onLogout;
 	vm.user                = $localStorage.user;
 	vm.isLoggedIn          = Boolean($localStorage.user);
-
 	vm.notifications       = [];
 	vm.unreadMsg           = '';
 	vm.unreadNotify        = '';
 	vm.onClickNotification = onClickNotification;
-
-	vm.messages       = [];
-	vm.onClickMessage = onClickMessage;
-
+	vm.messages            = [];
+	vm.onClickMessage      = onClickMessage;
 
 
 	//////////////
+
 	$rootScope.$on('$stateChangeSuccess', function() {
 		updateNotification();
 	});
@@ -97,9 +95,6 @@ function NavbarController(
 				$mdSidenav('left').toggle();
 			}
 		}
-			// if(contentIndex === vm.stateIndex) {
-			// 	$state.reload();
-			// }
 		vm.stateIndex = contentIndex;
 	}
 

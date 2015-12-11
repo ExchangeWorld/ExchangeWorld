@@ -117,7 +117,7 @@ function ProfileController(
 			receiver_uid : $localStorage.user.uid,
 			isNewMsg     : true,
 		};
-		message.showMessagebox(ev, msg);
+		$rootScope.onClickMessage(ev, msg);
 	}
 
 	function onClickEdit() {

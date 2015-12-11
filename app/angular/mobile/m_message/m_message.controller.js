@@ -6,7 +6,6 @@ m_messageModule.controller('m_messageController', m_messageController);
 
 /** @ngInject */
 function m_messageController(
-	logger,
 	message,
 	$state,
 	$rootScope,
@@ -66,7 +65,6 @@ function m_messageController(
 				content      : msg_content,
 			})
 			.then(function(data) {
-				logger.success('訊息已寄出', data, 'DONE');
 				vm.history.push(data);
 				vm.newMsgs.push(data);
 				vm.contents = '';

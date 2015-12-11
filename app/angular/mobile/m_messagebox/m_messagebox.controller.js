@@ -7,7 +7,7 @@ const moment          = require('moment');
 m_messageModule.controller('m_messageboxController', m_messageboxController);
 
 /** @ngInject */
-function m_messageboxController(logger, message, $state, $localStorage) {
+function m_messageboxController(message, $state, $localStorage) {
 	const vm          = this;
 	vm.user           = $localStorage.user;
 	vm.messages       = [];

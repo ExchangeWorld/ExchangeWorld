@@ -13,7 +13,7 @@
 	<md-list-item ng-repeat="msg in vm.messages" ng-style="msg.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickMessage(msg, $event)">
 		<img flex style="max-height:50px; max-width:50px;" ng-src="{{ msg.user.photo_path }}" />
 		<div offset="5" flex>
-			<p class="md-subhead note" style="font-weight: bold;">{{ msg.user.name }}</p>
+			<p class="md-subhead note msg-user">{{ msg.user.name }}</p>
 			<p class="md-body-2 note">{{msg.content}}</p>
 			<p class="md-caption note" style="color: #BCBCBC;">{{ msg.timestamp }}</p>
 		</div>

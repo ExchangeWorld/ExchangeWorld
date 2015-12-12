@@ -53,6 +53,10 @@ a:hover {
 		text-align: center;
 		font-weight: bold;
 	}
+	&.msg-user {
+		font-weight: bold;
+		margin-top: 10px;
+	}
 }
 
 .online:after {

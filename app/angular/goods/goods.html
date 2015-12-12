@@ -1,34 +1,37 @@
 <md-content layout-padding style="overflow-y: hidden;">
 	<div layout="row" layout-align="center center" style="padding:20px 0 0 5px;">
-		<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1 btn-rwd" style="margin-left:0;">
-			<md-icon md-font-set="material-icons">keyboard_backspace</md-icon>
-			<span hide-sm>回列表</span>
-		</md-button>
-		<div flex layout="row" layout-wrap layout-align="center center" style="margin:0px; padding:0px;">
-			<div flex="30" flex-sm layout layout-align="center center">
-				<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
-					<md-icon md-font-set="material-icons" ng-class="{'heart-goods': vm.starred}">favorite</md-icon>
-					<span hide-sm>{{vm.starred ? '已關注' : '關注'}} {{vm.stars.length}}</span>
-				</md-button>
-			</div>
-			<div flex="30" flex-sm layout layout-align="center center">
-				<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue($event)">
-					<md-icon md-font-set="material-icons">remove_red_eye</md-icon>
-					<span hide-sm>{{ vm.isMe ? '看誰排' : '我要排' }} {{vm.queuingList.length}}</span>
-				</md-button>
-			</div>
-			<div flex="30" flex-sm layout layout-align="center center">
-				<md-button class="white-btn btn-rwd">
-					<a href="#" socialshare socialshare-provider="facebook" socialshare-url="http://exwd.csie.org/seek/{{vm.goodData.gid}}">
-						<md-icon md-font-set="material-icons">share</md-icon>
-						<span hide-sm>分享</span>
-					</a>
-				</md-button>
-			</div>
-			<div flex flex-sm ng-show="vm.isMe" ng-click="vm.onDelete(vm.goodData.gid)" layout layout-align="center center">
-				<i class="material-icons delete">delete</i>
-			</div>
+		<div flex layout layout-align="center center">
+			<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1 btn-rwd" style="margin-left:0;">
+				<md-icon md-font-set="material-icons">keyboard_backspace</md-icon>
+				<span hide-sm>回列表</span>
+			</md-button>
 		</div>
+		<div flex flex-sm="25" layout layout-align="center center">
+			<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
+				<md-icon md-font-set="material-icons" ng-class="{'heart-goods': vm.starred}">favorite</md-icon>
+				<span hide-sm>{{vm.starred ? '已關注' : '關注'}} </span>
+				<span>{{vm.stars.length}}</span>
+			</md-button>
+		</div>
+		<div flex flex-sm="25" layout layout-align="center center">
+			<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue($event)">
+				<md-icon md-font-set="material-icons">remove_red_eye</md-icon>
+				<span hide-sm>{{ vm.isMe ? '看誰排' : '我要排' }} </span>
+				<span>{{vm.queuingList.length}}</span>
+			</md-button>
+		</div>
+		<div flex layout layout-align="center center">
+			<md-button class="white-btn btn-rwd">
+				<a href="#" socialshare socialshare-provider="facebook" socialshare-url="http://exwd.csie.org/seek/{{vm.goodData.gid}}">
+					<md-icon md-font-set="material-icons">share</md-icon>
+					<span hide-sm>分享</span>
+				</a>
+			</md-button>
+		</div>
+		<div flex ng-show="vm.isMe" ng-click="vm.onDelete(vm.goodData.gid)" layout layout-align="center center">
+			<i class="material-icons delete">delete</i>
+		</div>
+	</div>
 	</div>
 	<div class="goods-lg" flex="80" layout layout-align="center center" ng-style="vm.bgStyle">
 		<img id="img" crossorigin="anonymous" class="img-goods" ng-src="{{ vm.goodData.photo_path[0] }}" ng-click="vm.showPhotoViewer($event)" ng-style="vm.bordercolor[$index]" ng-init="$index=1" ng-mouseover="$index=0" ng-mouseleave="$index=1">

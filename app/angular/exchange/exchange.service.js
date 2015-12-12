@@ -69,6 +69,7 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 				if(_.isArray(data)) {
 					data[0].route = 'goods/rate';
 					data[0].rate = rate;
+					data[0].byuser = byuserGen(data[0].owner_uid); 
 					data[0].put();
 				}
 			}, (error)=> {
@@ -128,7 +129,7 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 	 * drop exchange
 	 * one of the user reject the exchage.
 	 */
-	function deleteExchange(eid) {
+	function deleteExchange(eid, uid) {
 		const defer = $q.defer();
 
 		Restangular
@@ -137,6 +138,7 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 			.then(function(data) {
 				if (_.isArray(data)) {
 					var exchange = data[0];
+					exchange.byuser = byuserGen(uid);
 					exchange.route = 'exchange/drop'; // PUT of "drop" is "api/exchange/drop"
 					exchange.put();
 				}

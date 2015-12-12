@@ -123,7 +123,7 @@ function ExchangeController(
 			$mdDialog
 				.show(confirm)
 				.then(function() {
-					exchangeService.deleteExchange(eid);
+					exchangeService.deleteExchange(eid, vm.exchangeworld.detail.goods[vm.exchange.lookupTale.me].owner_uid);
 					$state.reload();
 				});
 		}

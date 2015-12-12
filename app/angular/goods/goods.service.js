@@ -86,6 +86,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 				goods.description = des;
 				goods.route       = 'goods/edit';
 				goods.photo_path = JSON.stringify(goods.photo_path);
+				goods.byuser = byuserGen(goods.owner_uid);
 
 				goods
 					.put()

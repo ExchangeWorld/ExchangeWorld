@@ -301,7 +301,7 @@ div.md-open-menu-container {
 		max-width: 90%;
 		padding-top: 25%;
 		&.onseek {
-			padding-top: 120px;
+			padding-top: 0;
 		}
 	}
 	.reset-follow {
@@ -357,9 +357,6 @@ div.md-open-menu-container {
 		max-height: 90%;
 		max-width: 90%;
 		padding-top: 30%;
-		&.onseek {
-			padding-top: 180px;
-		}
 	}
 	.reset-follow {
 		margin-bottom: 5px;
@@ -415,9 +412,6 @@ div.md-open-menu-container {
 		max-height: 90%;
 		max-width: 90%;
 		padding-top: 11%;
-		&.onseek {
-			padding-top: 180px;
-		}
 	}
 	.ex-bg {
 		overflow-x: hidden;
@@ -440,9 +434,6 @@ div.md-open-menu-container {
 		max-height: 90%;
 		max-width: 90%;
 		padding-top: 25%;
-		&.onseek {
-			padding-top: 280px;
-		}
 	}
 }
 

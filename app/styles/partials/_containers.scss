@@ -94,6 +94,12 @@ md-input-container {
 	}
 }
 
+.xmas {
+	background-color: #212121;
+	background-image: url('http://i.imgur.com/BiSmXaq.png'), url('http://i.imgur.com/XHuy0NJ.png'), url('http://i.imgur.com/okpRxJU.png');
+	animation: snow 20s linear infinite;
+}
+
 .md-toolbar-tools {
 	padding-left: 8px;
 }
@@ -131,12 +137,12 @@ md-input-container {
 }
 
 .home_container1 {
-	background-color: #ECEFF1;
+	//background-color: #ECEFF1;
 	padding: 30px 0px;
 }
 
 .home_container2 {
-	background-color: #E5E5ED;
+	//background-color: #E5E5ED;
 	padding-top: 30px;
 }
 
@@ -616,4 +622,13 @@ div.md-open-menu-container {
 
 .fadeIn {
 	animation-name: fadeIn;
+}
+
+@keyframes snow {
+	0% {
+		background-position: 0px 0px, 0px 0px, 0px 0px
+	}
+	100% {
+		background-position: 500px 1000px, 400px 400px, 300px 300px;
+	}
 }

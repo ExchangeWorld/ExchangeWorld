@@ -52,7 +52,7 @@ function GoodsController(
 
 	vm.showPhotoViewer = showPhotoViewer;
 	vm.onClickUser = $rootScope.onClickUser;
-	vm.onClickBack = () => $state.go('root.withSidenav.seek');
+	vm.onClickBack = () => $window.history.back();
 
 	activate();
 
@@ -281,9 +281,9 @@ function GoodsController(
 			 * TODO:
 			 *  1. restrict multi queue(?).
 			 */
-			$state.go('root.withSidenav.goods.queue');
+			$state.go('root.withSidenav.goods.queue', {}, {location:false});
 		} else if(type === types[1]) {
-			$state.go('root.withSidenav.goods.queuing');
+			$state.go('root.withSidenav.goods.queuing',{}, {location:false});
 		} else {
 			$state.go('root.404');
 		}

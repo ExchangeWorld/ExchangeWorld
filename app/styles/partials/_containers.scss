@@ -495,7 +495,6 @@ div.md-open-menu-container {
 }
 
 .img-slider {
-	// width: auto;
 	max-height: 520px;
 	max-width: 90%;
 	border-radius: 8px;
@@ -514,6 +513,15 @@ div.md-open-menu-container {
 	width: 80%;
 	border-radius: 8px;
 	height: auto;
+}
+
+.img-profile {
+	width: 120px;
+	height: 120px;
+	background-repeat: no-repeat;
+	background-position: center;
+	border-radius: 50%;
+	background-size: contain;
 }
 
 .img-goods {

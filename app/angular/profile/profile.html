@@ -1,8 +1,8 @@
 <md-content>
 	<div layout="row" class="profile-top" layout-align="center center">
-		<div layout layout-align="center center" ng-style="{'background-image':'url({{ vm.profile.photo_path }})','width':'120px' , 'height':'120px', 'background-repeat':'no-repeat', 'background-position':'center','border-radius':'50%','background-size':'contain'}">
+		<div layout layout-align="center center" class="img-profile" ng-style="{'background-image':'url({{ vm.profile.photo_path }})'}">
 		</div>
-		<div flex-gt-sm="60" flex-sm="45" layout="column">
+		<div flex-gt-sm="60" flex-sm="50" layout="column">
 			<div layout="column">
 				<div layout="column" layout-align="center center">
 					<h4 class="md-headline" style="margin:8px 0; text-align: center;">{{ vm.profile.name }}</h4>

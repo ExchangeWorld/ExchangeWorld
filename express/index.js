@@ -1,30 +1,30 @@
 'use strict';
 
 // var config       = require('../gulp/config');
-var http         = require('http');
-var https        = require('https');
-var ssl          = require('../ssl/ssl');
-var express      = require('express');
-var gutil        = require('gulp-util');
-var morgan       = require('morgan');
+var http = require('http');
+var https = require('https');
+var cp = require('child_process');
+var path = require('path');
+
+var ssl = require('../ssl/ssl');
+var express = require('express');
+var gutil = require('gulp-util');
+var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
-var favicon      = require('serve-favicon');
-var compression  = require('compression');
-var useragent    = require('express-useragent');
-var cp           = require('child_process');
-var path         = require('path');
+var favicon = require('serve-favicon');
+var compression = require('compression');
+var useragent = require('express-useragent');
+
+var server = express();
 
 module.exports = function() {
 
-	var server = express();
-	server.setMaxListeners(0);
-	process.setMaxListeners(0);
-
 	// log all requests to the console
-	if (process.env.NODE_ENV !== 'production') server.use(morgan('dev'));
+	if (process.env.NODE_ENV !== 'production') server.use(morgan('short'));
+
+	server.use(compression());
 
 	server.use(cookieParser());
-	server.use(compression());
 	server.use(useragent.express());
 
 	server.use(favicon(path.resolve(__dirname, '../build/images/favicon.ico')));
@@ -60,7 +60,9 @@ module.exports = function() {
 	});
 
 	server.all('*', (req, res, next) => {
-		res.sendFile('index.html', {root: 'build'});
+		res.sendFile('index.html', {
+			root: 'build'
+		});
 	});
 
 	// Serve index.html for all routes to leave routing up to Angular
@@ -100,9 +102,12 @@ module.exports = function() {
 	});
 
 	s.listen(80);
-	s.setMaxListeners(0);
 
 	var ss = https.createServer(ssl.options, server);
 	ss.listen(443);
+
+	s.setMaxListeners(0);
 	ss.setMaxListeners(0);
+	server.setMaxListeners(0);
+	process.setMaxListeners(0);
 };

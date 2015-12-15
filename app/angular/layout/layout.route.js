@@ -37,6 +37,7 @@ function getStates() {
 
 /** @ngInject */
 function setGlobalFunc($rootScope, $state, $window, message){
+	$rootScope.historyCounter = 1;
 	$rootScope.onClickUser    = onClickUser;
 	$rootScope.onClickFollow  = onClickFollow;
 	$rootScope.onClickMessage = onClickMessage;

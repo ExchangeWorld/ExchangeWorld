@@ -19,6 +19,10 @@ function getStates() {
 				controllerAs: 'vm',
 				templateUrl: 'seek/seek.html',
 				title : 'seek',
+				/** @ngInject */
+				onEnter: ($rootScope)=> {
+					$rootScope.historyCounter = 0;
+				}
 			},
 		}
 	];

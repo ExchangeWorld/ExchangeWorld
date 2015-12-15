@@ -52,7 +52,7 @@ function GoodsController(
 
 	vm.showPhotoViewer = showPhotoViewer;
 	vm.onClickUser = $rootScope.onClickUser;
-	vm.onClickBack = () => $window.history.back();
+	vm.onClickBack = () => $window.history.go(-$rootScope.historyCounter);
 
 	activate();
 

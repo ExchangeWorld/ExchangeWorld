@@ -21,7 +21,7 @@ function getStates() {
 				title : 'seek',
 				/** @ngInject */
 				onEnter: ($rootScope)=> {
-					$rootScope.historyCounter = 0;
+					$rootScope.historyCounter = 1;
 				}
 			},
 		}

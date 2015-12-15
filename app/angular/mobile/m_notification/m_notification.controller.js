@@ -17,13 +17,15 @@ function m_notificationController(
 	const vm               = this;
 	vm.notifications       = [];
 	vm.onClickNotification = onClickNotification;
+	vm.loading             = false;
 
 	activate();
 
 	function activate() {
+		vm.loading = true;
 		if(!$localStorage.user) {
 			$state.go('root.404');
-		} else {
+		} else {		
 			notification
 				.getNotification($localStorage.user.uid)
 				.then(function(data) {
@@ -31,6 +33,7 @@ function m_notificationController(
 						notice.timestamp = moment(notice.timestamp.slice(0, -1)).fromNow();
 						return notice;
 					});
+					vm.loading = false;
 				});
 		}
 	}

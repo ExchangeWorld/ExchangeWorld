@@ -10,21 +10,22 @@ var ssl = require('../ssl/ssl');
 var express = require('express');
 var gutil = require('gulp-util');
 var morgan = require('morgan');
-var cookieParser = require('cookie-parser');
+// var cookieParser = require('cookie-parser');
 var favicon = require('serve-favicon');
 var compression = require('compression');
 var useragent = require('express-useragent');
 
 var server = express();
 
-module.exports = function() {
-
+module.exports = () => {
 	// log all requests to the console
-	if (process.env.NODE_ENV !== 'production') server.use(morgan('short'));
+	if (process.env.NODE_ENV !== 'production') {
+		server.use(morgan('short'));
+	}
 
 	server.use(compression());
 
-	server.use(cookieParser());
+	// server.use(cookieParser());
 	server.use(useragent.express());
 
 	server.use(favicon(path.resolve(__dirname, '../build/images/favicon.ico')));
@@ -59,7 +60,7 @@ module.exports = function() {
 		}
 	});
 
-	server.all('*', (req, res, next) => {
+	server.all('*', (req, res) => {
 		res.sendFile('index.html', {
 			root: 'build'
 		});

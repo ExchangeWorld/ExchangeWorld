@@ -260,7 +260,7 @@ div.md-open-menu-container {
 
 @media screen and (min-width: 300px) {
 	.deckgrid[deckgrid]::before {
-		content: '2 .column.column-1-2';
+		content: '1 .column.column-1-1';
 		font-size: 0;
 		visibility: hidden;
 	}

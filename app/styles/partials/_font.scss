@@ -60,13 +60,21 @@ a:hover {
 	}
 	&.msg-user {
 		font-weight: bold;
-		margin-top: 4px;
+		margin-top: 8px;
+		font-size: 14px;
+		line-height: 20px;
 	}
 	&.msg-content {
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		overflow: hidden;
-		width: 95%;
+		width: 100%;
+		line-height: 20px;
+		font-size: 12px;
+	}
+	&.time {
+		font-size: 10px;
+		line-height: 20px;
 	}
 }
 

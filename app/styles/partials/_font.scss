@@ -62,6 +62,12 @@ a:hover {
 		font-weight: bold;
 		margin-top: 4px;
 	}
+	&.msg-content {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		width: 95%;
+	}
 }
 
 .online:after {

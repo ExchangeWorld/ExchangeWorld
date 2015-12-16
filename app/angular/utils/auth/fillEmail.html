@@ -3,20 +3,20 @@
 		<div flex class="md-toolbar-tools" layout layout-align="center center">
 			<h2 class="md-display-1" style="padding-left: 12px;">填寫您的常用信箱</h2>
 			<span flex></span>
-			<md-button class="md-icon-button" ng-click="vm.cancel()">
-				<md-icon md-font-set="material-icons" aria-label="Close dialog">close</md-icon>
-			</md-button>
 		</div>
 	</md-toolbar>
-	<md-dialog-content style="max-width:800px;max-height:610px; padding: 5px 20px 16px 20px;">
-		<md-input-container class="info_container for_input">
-			<i class="material-icons">email</i>
-			<input ng-model="vm.email" type="email" placeholder="常用信箱" ng-required="true">
+	<md-dialog-content style="max-width:400px;max-height:610px;">
+		<p class="md-subhead">
+			填寫您的常用信箱，之後ExchangeWorld的通知及訊息就能透過信箱得知囉^_^
+		</p>
+		<md-input-container>
+			<label>您的信箱</label>
+			<input ng-model="vm.email" type="email" ng-required="true">
 		</md-input-container>
 	</md-dialog-content>
 	<div class="md-actions" layout="row">
 		<span flex></span>
-		<md-button ng-click="vm.cancel()">取消</md-button>
+		<md-button ng-click="vm.cancel()">之後再說</md-button>
 		<md-button ng-click="vm.submit()" style="margin-right:20px;" ng-disabled="!vm.email">完成</md-button>
 	</div>
 </md-dialog>

@@ -60,9 +60,6 @@ function auth(facebookService, $q, $localStorage, $mdDialog) {
 					.register(response)
 					.then(function(userdata) {
 						currentUser = userdata;
-						if(userdata.email.length === 0) {
-							showEmailBox(userdata);
-						}
 						defer.resolve(currentUser);
 					});
 			});
@@ -81,6 +78,10 @@ function auth(facebookService, $q, $localStorage, $mdDialog) {
 				if(state.status === 'connected') {
 					fetchMe().then(function(data) {
 						currentUser = data;
+
+						// let user fill email if email is empty
+						if(data.email.length === 0) showEmailBox(data);
+
 						defer.resolve(currentUser);
 					});
 				} else {

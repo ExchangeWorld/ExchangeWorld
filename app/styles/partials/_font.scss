@@ -41,6 +41,7 @@ a:hover {
 
 .note {
 	margin: 2px;
+	line-height: 24px;
 	&.profile {
 		margin: 5px;
 		padding-top: 5px;
@@ -59,7 +60,7 @@ a:hover {
 	}
 	&.msg-user {
 		font-weight: bold;
-		margin-top: 10px;
+		margin-top: 4px;
 	}
 }
 

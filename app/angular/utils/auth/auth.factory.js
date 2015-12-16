@@ -60,9 +60,9 @@ function auth(facebookService, $q, $localStorage, $mdDialog) {
 					.register(response)
 					.then(function(userdata) {
 						currentUser = userdata;
-						//if(userdata.email.length === 0) {
+						if(userdata.email.length === 0) {
 							showEmailBox(userdata);
-						//}
+						}
 						defer.resolve(currentUser);
 					});
 			});

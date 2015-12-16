@@ -73,16 +73,13 @@ function GoodsController(
 		updateComment();
 		updateStar();
 
-		auth
-			.getLoginState()
-			.then(function(data) {
-				if (data) {
-					vm.isMe = (goodData.owner_uid === data.uid);
-				} else {
-					vm.isMe = false;
-					vm.isLoggedIn = false;
-				}
-			});
+		if ($localStorage.user) {
+			vm.isMe = (goodData.owner_uid === $localStorage.user.uid);
+		} else {
+			vm.isMe = false;
+			vm.isLoggedIn = false;
+		}
+
 		goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
 
 		goodsService.getQueue($stateParams.gid)

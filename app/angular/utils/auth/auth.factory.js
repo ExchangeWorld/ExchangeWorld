@@ -6,7 +6,7 @@ const _          = require('lodash');
 authModule.factory('auth', auth);
 
 /** @ngInject */
-function auth(facebookService, $q, $localStorage) {
+function auth(facebookService, $q, $localStorage, $mdDialog) {
 	var token       = '';
 	var currentUser = null;
 
@@ -17,6 +17,7 @@ function auth(facebookService, $q, $localStorage) {
 		isLoggedIn,
 		getLoginState,
 		currentUser : () => currentUser,
+		showEmailBox,
 	};
 	return service;
 
@@ -77,6 +78,10 @@ function auth(facebookService, $q, $localStorage) {
 				if(state.status === 'connected') {
 					fetchMe().then(function(data) {
 						currentUser = data;
+
+						// let user fill email if email is empty
+						if(data.email.length === 0) showEmailBox(data);
+
 						defer.resolve(currentUser);
 					});
 				} else {
@@ -93,6 +98,41 @@ function auth(facebookService, $q, $localStorage) {
 
 	function getAccessToken() {
 		return token;
+	}
+
+	function showEmailBox(user) {
+		$mdDialog.show({
+			templateUrl : 'utils/auth/fillEmail.html',
+			controllerAs : 'vm',
+			controller : DialogController,
+			locals : {
+				user: user
+			}
+		});
+	}
+}
+
+/** @ngInject */
+function DialogController(user, profileService, $mdDialog, logger, $state) {
+	const vm  = this;
+	vm.email = '';
+	vm.cancel = onCancel;
+	vm.submit = onSubmit;
+
+	function onSubmit() {
+		if(vm.email) {
+			user.email = vm.email;
+			profileService
+				.editProfile(user)
+				.then(() => {
+					logger.success('更新成功！');
+				});
+		}
+		$mdDialog.cancel();
+	}
+
+	function onCancel() {
+		$mdDialog.cancel();
 	}
 
 }

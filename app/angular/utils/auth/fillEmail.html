@@ -1,0 +1,23 @@
+<md-dialog aria-label="message">
+	<md-toolbar>
+		<div flex class="md-toolbar-tools" layout layout-align="center center">
+			<h2 class="md-display-1" style="padding-left: 12px;">填寫您的常用信箱</h2>
+			<span flex></span>
+		</div>
+	</md-toolbar>
+	<md-dialog-content style="max-width:400px;max-height:610px;">
+		<p class="md-subhead">
+			填寫您的常用信箱，之後ExchangeWorld的通知及訊息就能透過信箱得知囉^_^
+		</p>
+		<md-input-container>
+			<label>您的信箱</label>
+			<input ng-model="vm.email" type="email" ng-required="true">
+		</md-input-container>
+	</md-dialog-content>
+	<div class="md-actions" layout="row">
+		<span flex></span>
+		<md-button ng-click="vm.cancel()">之後再說</md-button>
+		<md-button ng-click="vm.submit()" style="margin-right:20px;" ng-disabled="!vm.email">完成</md-button>
+	</div>
+</md-dialog>
+

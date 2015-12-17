@@ -2,54 +2,42 @@
 
 'use strict';
 
-function MarkerOverlay(good, zoom) {
+function MarkerOverlay(map, category, latlng, zoom) {
+	console.log('MarkerOverlay');
 	this.element = null;
-	this.good = good;
+	// this.good = good;
 
-	this.onAdd = onAdd;
-	this.draw = draw.bind(zoom);
+	this.onAdd = onAdd.bind(this, category);
+	this.draw = draw.bind(this, latlng, zoom);
 	this.onRemove = onRemove;
-	// this.setMap(map);
-	// this.good.marker.setVisible(false);
+	this.setVisible = setVisible;
+	this.getPosition = () => latlng;
+	this.onResize = onResize;
 
-	// callback();
+	this.setMap(map);
 }
 
-function onAdd(map, $state, $mdSidenav) {
+function onAdd(category) {
 
-	var div = document.createElement('div');
-	div.style.position           = 'absolute';
-	div.style.borderStyle        = 'solid';
-	div.style.borderWidth        = '1px';
-	div.style.borderColor        = '#388dc1';
-	// div.style.backgroundImage    = `url(${this.good.photo_path[0]})`;
-	// div.style.backgroundSize     = 'cover';
-	// div.style.backgroundPosition = 'center';
-	// div.style.backgroundRepeat   = 'no-repeat';
-	// div.style.cursor             = 'pointer';
-	// div.style.borderRadius       = '15px';
-	// google.maps.event.addDomListener(div, 'mousedown', function(e) {
-	// 	e.stopPropagation();
-	// 	setTimeout(function() {
-	// 		$state.go('root.withSidenav.goods', {gid : this.good.gid});
-	// 	}.bind(this), 200);
+	let div = document.createElement('div');
+	div.className = 'marker';
 
-	// 	map.panTo(this.good.marker.getPosition());
-	// 	$mdSidenav('left').toggle();
-	// }.bind(this));
+	var img = document.createElement('img');
+	img.src = `../../images/mapMarker/${category}.svg`;
+	div.appendChild(img);
 
 	this.element = div;
 	this.getPanes().overlayMouseTarget.appendChild(div);
 }
 
-function draw(zoom) {
-	const origin = this.getProjection().fromLatLngToDivPixel(this.good.marker.getPosition());
-	const width = 50 * (zoom / 20);
-
-	const el = this.element;
+function draw(latlng, zoom) {
+	const origin = this.getProjection().fromLatLngToDivPixel(latlng);
+	const width = 50;
+	
+	let el = this.element;
 	if (el) {
 		el.style.left = `${origin.x - width}px`;
-		el.style.top = `${origin.x - width}px`;
+		el.style.top = `${origin.y - width}px`;
 		el.style.width = `${width}px`;
 		el.style.height = `${width}px`;
 	}
@@ -69,12 +57,16 @@ function toggleHighlight() {
 	el.style.backgroundColor = '#f00';
 }
 
-function setVisibile(visible) {
+function setVisible(visible) {
 	if (this.element) {
 		this.element.parentNode.removeChild(this.element);
 		this.element = null;
 		this.good.marker.setVisible(true);
 	}
+}
+
+function onResize(zoom) {
+
 }
 
 module.exports = MarkerOverlay;

@@ -66,11 +66,11 @@ function SeekController(
 	}
 
 	function onMouseOver(gid) {
-		$rootScope.$broadcast('openGoodsOverlay', gid);
+		// $rootScope.$broadcast('openGoodsOverlay', gid);
 	}
 
 	function onMouseOut() {
-		$rootScope.$broadcast('closeGoodsOverlay');
+		// $rootScope.$broadcast('closeGoodsOverlay');
 	}
 
 	function onClickFavorite(e, goods) {

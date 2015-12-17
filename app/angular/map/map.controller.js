@@ -3,8 +3,8 @@
 
 const mapModule  = require('./map.module');
 const _          = require('lodash');
-const  GoodsOverlay = require('./GoodsOverlay.js');
-const  MarkerOverlay = require('./MarkerOverlay.js');
+let GoodsOverlay = require('./GoodsOverlay.js');
+let MarkerOverlay = require('./MarkerOverlay.js');
 
 // Controller name 'MapController' has been used by ng-map
 mapModule.controller('MapCtrl', MapController);
@@ -49,8 +49,8 @@ function MapController(
 		vm.findMyLocation = getCurrentPosition;
 		vm.placeChanged   = placeChanged;
 		vm.zoomChanged    = zoomChanged;
-		GoodsOverlay.prototype = new google.maps.OverlayView();
 		MarkerOverlay.prototype = new google.maps.OverlayView();
+		GoodsOverlay.prototype = new google.maps.OverlayView();
 
 		$scope.$on('goodsChanged', goodsChanged);
 		$scope.$on('mapMoveTo', mapMoveTo);
@@ -202,19 +202,24 @@ function MapController(
 				return good;
 			}
 
-			good.marker = new MarkerOverlay(good);
-			var icon = `../../images/mapMarker/${good.category}.png`;
+			good.marker = new MarkerOverlay(
+				map,
+				good.category, 
+				new google.maps.LatLng(good.position_y, good.position_x),
+				map.getZoom()
+			);
+			// var icon = `../../images/mapMarker/${good.category}.png`;
 
-			good.marker = new google.maps.Marker({
-				position: new google.maps.LatLng(good.position_y, good.position_x),
-				map: map,
-				icon: icon
-			});
+			// good.marker = new google.maps.Marker({
+			// 	position: new google.maps.LatLng(good.position_y, good.position_x),
+			// 	map: map,
+			// 	icon: icon
+			// });
 
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
-			good.marker.addListener('mouseup', function() {
-				overlay = new GoodsOverlay(map, good, $state, $mdSidenav, closeGoodsOverlay);
-			});
+			// good.marker.addListener('mouseup', function() {
+				// overlay = new GoodsOverlay(map, good, $state, $mdSidenav, closeGoodsOverlay);
+			// });
 
 			return good;
 		});

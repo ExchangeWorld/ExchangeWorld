@@ -13,6 +13,7 @@
 'use strict';
 
 const gridModule = require('./deckgrid.module');
+const angular  = require('angular');
 
 gridModule.factory('DeckgridDescriptor', initialize);
 

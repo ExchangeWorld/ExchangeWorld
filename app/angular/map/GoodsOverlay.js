@@ -1,3 +1,5 @@
+/* global google*/
+
 'use strict';
 
 function GoodsOverlay(map, good, $state, $mdSidenav, callback) {

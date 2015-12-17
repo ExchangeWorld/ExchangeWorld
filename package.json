@@ -15,7 +15,7 @@
     "gulp",
     "browserify",
     "angular",
-    "sass",
+    "sass"
   ],
   "private": true,
   "engines": {
@@ -90,7 +90,7 @@
     "angular-animate": "~1.4.8",
     "angular-aria": "~1.4.8",
     "angular-base64-upload": "~0.1.13",
-    "angular-material": "~0.11.0",
+    "angular-material": "0.11.0",
     "angular-resource": "~1.4.8",
     "angular-socialshare": "~0.1.19",
     "angular-toastr": "~1.6.0",

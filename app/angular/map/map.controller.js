@@ -3,7 +3,8 @@
 
 const mapModule  = require('./map.module');
 const _          = require('lodash');
-var GoodsOverlay = require('./GoodsOverlay.js');
+const  GoodsOverlay = require('./GoodsOverlay.js');
+const  MarkerOverlay = require('./MarkerOverlay.js');
 
 // Controller name 'MapController' has been used by ng-map
 mapModule.controller('MapCtrl', MapController);
@@ -29,17 +30,18 @@ function MapController(
 
 	vm.coords = $localStorage.position
 		? $localStorage.position
-		: [25.05517828690749, 121.54136714595292]; // 政大 [24.98918974905472, 121.57591535186772];
+		: [25.05517828690749, 121.54136714595292]; 
+		// 政大 [24.98918974905472, 121.57591535186772];
 
 	vm.zoom            = 12;
 	vm.draggableCursor = 'default';
 	vm.draggingCursor  = 'default';
 	vm.olcRecord = { lat: vm.coords[0], lng: vm.coords[1] };
-	// vm.mapStyle        = require('./mapStyle.json');
+	vm.mapStyle        = require('./mapStyle.json');
 	// $scope.$on('mapInitialized', mapInitialized);
 	NgMap.getMap().then(mapInitialized);
 
-	// activate();
+	activate();
 
 	/* After map is loaded */
 	function mapInitialized(evtMap) {
@@ -48,19 +50,23 @@ function MapController(
 		vm.placeChanged   = placeChanged;
 		vm.zoomChanged    = zoomChanged;
 		GoodsOverlay.prototype = new google.maps.OverlayView();
+		MarkerOverlay.prototype = new google.maps.OverlayView();
 
 		$scope.$on('goodsChanged', goodsChanged);
 		$scope.$on('mapMoveTo', mapMoveTo);
 		$scope.$on('openGoodsOverlay', openGoodsOverlay);
 		$scope.$on('closeGoodsOverlay', closeGoodsOverlay);
+		$scope.$on('getBound', getBound);
 		$rootScope.$on('$stateChangeSuccess', urlChanged);
+
+
 		google.maps.event.addListener(map, 'idle', olcChanged);
 		google.maps.event.addListener(map, 'bounds_changed', boundChanged);
 		google.maps.event.addListener(map, 'mousedown', onMousedown);
 		google.maps.event.addListener(map, 'mouseup', onMouseup);
 		google.maps.event.addListener(map, 'dragstart', onDragstart);
 
-		activate();
+		// activate();
 		boundChanged();
 	}
 
@@ -68,11 +74,11 @@ function MapController(
 	function activate() {
 		if ($stateParams.olc) {
 			const coord = OpenLocationCode.decode($stateParams.olc.replace(' ','+'));
-			// vm.coords = [coord.latitudeCenter, coord.longitudeCenter];
-			map.panTo({
-				lat : coord.latitudeCenter,
-				lng : coord.longitudeCenter,
-			});
+			vm.coords = [coord.latitudeCenter, coord.longitudeCenter];
+			// map.panTo({
+				// lat : coord.latitudeCenter,
+				// lng : coord.longitudeCenter,
+			// });
 		// } else if ($stateParams.hasOwnProperty('olc')) {
 		// 	geolocation
 		// 		.getLocation({maximumAge:60000, timeout:5000, enableHighAccuracy:true})
@@ -81,17 +87,20 @@ function MapController(
 		// 		});
 		}
 		if (!isNaN($stateParams.z)) {
-			// vm.zoom = parseInt($stateParams.z, 10);
-			map.setZoom(parseInt($stateParams.z, 10));
+			vm.zoom = parseInt($stateParams.z, 10);
+			// map.setZoom(parseInt($stateParams.z, 10));
 		}
 
 		if ($state.current.title === 'post') {
-			map.setOptions({ 
-				draggableCursor:'crosshair', 
-				draggingCursor: 'crosshair'}
-			);
+			vm.draggableCursor = 'crosshair';
+			vm.draggingCursor  = 'crosshair';
+			// map.setOptions({ 
+			// 	draggableCursor:'crosshair', 
+			// 	draggingCursor: 'crosshair'}
+			// );
 		}
-		vm.smallMap = $state.current.title === 'exchange';
+
+		// vm.smallMap = $state.current.title === 'exchange';
 	}
 
 	function getCurrentPosition() {
@@ -158,6 +167,12 @@ function MapController(
 
 	}
 
+	function getBound() {
+		if (map) return map.getBounds();
+
+		return undefined;
+	}
+
 	/**
 	 * Receive the goods from seek controller
 	 * Draw maker and overlay here.
@@ -167,7 +182,8 @@ function MapController(
 
 		/* 1. Clean unused marker */
 		var hashTable = {};
-		data.forEach(function(obj, index) { hashTable[obj.gid] = index; });
+		data.forEach( (obj, i) => hashTable[obj.gid] = i );
+
 		goods
 			.filter(function(good) {
 				if (!(good.gid in hashTable)) return true;
@@ -186,6 +202,7 @@ function MapController(
 				return good;
 			}
 
+			good.marker = new MarkerOverlay(good);
 			var icon = `../../images/mapMarker/${good.category}.png`;
 
 			good.marker = new google.maps.Marker({
@@ -248,7 +265,6 @@ function MapController(
 			});
 		}
 
-		// console.log(toState);
 		if (toState.name.indexOf('root.withSidenav.seek') === -1) {
 			vm.olcRecord = map.getCenter();
 		}
@@ -293,6 +309,10 @@ function MapController(
 			location : 'replace',
 			notify : false,
 		});
+	}
+
+	function highlightMarker(e, gid) {
+		
 	}
 
 	function mapMoveTo(e, lat, lng) {

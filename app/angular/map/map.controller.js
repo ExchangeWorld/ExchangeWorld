@@ -182,6 +182,7 @@ function MapController(
 
 		/* 1. Clean unused marker */
 		var hashTable = {};
+
 		data.forEach( (obj, i) => hashTable[obj.gid] = i );
 
 		goods
@@ -196,31 +197,25 @@ function MapController(
 				oldGood.marker.setMap(null);
 			});
 
+		const viewedGoods = $localStorage.viewedGoods || [];
+
 		/* 2. Draw new Marker on map */
 		goods = data.map(function(good) {
 			if (good.marker) {
 				return good;
 			}
-
 			good.marker = new MarkerOverlay(
 				map,
-				good.category, 
+				good.category,
+				viewedGoods.indexOf(good.gid) > -1,
 				new google.maps.LatLng(good.position_y, good.position_x),
-				map.getZoom()
-			);
-			// var icon = `../../images/mapMarker/${good.category}.png`;
-
-			// good.marker = new google.maps.Marker({
-			// 	position: new google.maps.LatLng(good.position_y, good.position_x),
-			// 	map: map,
-			// 	icon: icon
-			// });
-
+				map.getZoom(),
 			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
-			// good.marker.addListener('mouseup', function() {
-				// overlay = new GoodsOverlay(map, good, $state, $mdSidenav, closeGoodsOverlay);
-			// });
-
+				() => {
+					overlay = new GoodsOverlay(map, good, $state, $mdSidenav, closeGoodsOverlay);
+					$localStorage.viewedGoods = _.uniq(viewedGoods.concat(good.gid));
+				}
+			);
 			return good;
 		});
 	}

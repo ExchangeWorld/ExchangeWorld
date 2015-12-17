@@ -2,12 +2,12 @@
 
 'use strict';
 
-function MarkerOverlay(map, category, latlng, zoom) {
+function MarkerOverlay(map, category, viewed,latlng, zoom, onClick) {
 	console.log('MarkerOverlay');
 	this.element = null;
 	// this.good = good;
 
-	this.onAdd = onAdd.bind(this, category);
+	this.onAdd = onAdd.bind(this, category, viewed, onClick);
 	this.draw = draw.bind(this, latlng, zoom);
 	this.onRemove = onRemove;
 	this.setVisible = setVisible;
@@ -17,10 +17,15 @@ function MarkerOverlay(map, category, latlng, zoom) {
 	this.setMap(map);
 }
 
-function onAdd(category) {
+function onAdd(category, viewed, onClick) {
 
 	let div = document.createElement('div');
 	div.className = 'marker';
+	if (viewed) div.style.backgroundColor = '#9f9f9f';
+	div.onclick = () => {
+		onClick();
+		div.style.backgroundColor = '#9f9f9f';
+	};
 
 	var img = document.createElement('img');
 	img.src = `../../images/mapMarker/${category}.svg`;
@@ -36,7 +41,7 @@ function draw(latlng, zoom) {
 	
 	let el = this.element;
 	if (el) {
-		el.style.left = `${origin.x - width}px`;
+		el.style.left = `${origin.x - width/2}px`;
 		el.style.top = `${origin.y - width}px`;
 		el.style.width = `${width}px`;
 		el.style.height = `${width}px`;
@@ -54,14 +59,19 @@ function onRemove() {
 
 function toggleHighlight() {
 	let el = this.element;
-	el.style.backgroundColor = '#f00';
+	if (el) {
+		el.style.backgroundColor === 'white'
+			? el.style.backgroundColor = 'red'
+			: el.style.backgroundColor = 'white';
+	}
+	
 }
 
 function setVisible(visible) {
 	if (this.element) {
-		this.element.parentNode.removeChild(this.element);
-		this.element = null;
-		this.good.marker.setVisible(true);
+		visible
+			? this.element.style.display = 'initial'
+			: this.element.style.display = 'none';
 	}
 }
 

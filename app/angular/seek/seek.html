@@ -1,9 +1,9 @@
-<md-toolbar class="md-primary md-hue-1 md-whiteframe-z2" style="height: 76px;">
+<md-toolbar class="md-primary md-hue-2 md-whiteframe-z2" style="height: 76px;">
 	<!-- search input bar & button -->
 	<div layout="row" layout-align="start center">
 		<md-input-container flex="45" flex-sm="35" class="md-primary wtfsafari" style="padding-left: 10px;">
 			<label style="top:2px;">搜索</label>
-			<input ng-model="vm.searchGoodsName" aria-label="goodsName">
+			<input style="border-color: green;" ng-model="vm.searchGoodsName" aria-label="goodsName">
 		</md-input-container>
 		<md-input-container flex>
 			<label>種類</label>
@@ -29,7 +29,7 @@
 		<img class="img-null onseek" src="../../images/emoji_null.png">
 	</div>
 	<div deckgrid class="deckgrid" source="vm.goods">
-		<md-card class="md-whiteframe-z3 item hvr-glow" style="background: #9FA8DA;">
+		<md-card class="md-whiteframe-z3 item hvr-glow xmas-card">
 			<a ng-href="/seek/{{card.gid}}" ng-mouseenter="mother.onMouseOver(card.gid)" ng-mouseleave="mother.onMouseOut()">
 				<!-- <photoslider images="card.photo_path" class="md-card-image"></photoslider> -->
 				<img src="" data-ng-src="{{card.photo_path[0]}}" class="md-card-image">

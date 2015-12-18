@@ -1,3 +1,12 @@
+map {
+	.radius-button {
+		border-radius: 100%;
+		height: 56px;
+		width: 56px;
+		box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.26);
+	}
+}
+
 .marker {
    position: absolute;
    box-sizing: border-box;

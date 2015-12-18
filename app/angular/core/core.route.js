@@ -19,15 +19,9 @@ function getStates() {
 				templateUrl: 'core/404.html',
 				/** @ngInject */
 				onEnter: function($state, $window, $timeout) {
-					if($window.innerWidth < 600) {
-						$timeout(() => {
-							$state.go('root.oneCol.404');	
-						});
-					} else {
-						$timeout(() => {
-							$state.go('root.withSidenav.404');
-						});
-					}
+					$window.innerWidth < 600
+						? $timeout(() => $state.go('root.oneCol.404'))
+						: $timeout(() => $state.go('root.withSidenav.404'));
 				}
 			}
 		},

@@ -18,10 +18,10 @@ gulp.task('styles', function () {
 				'node_modules/angular-material/'+ (global.isProd ? 'angular-material.min.css' : 'angular-material.css'),
 				'node_modules/angular-toastr/dist/'+ (global.isProd ? 'angular-toastr.min.css' : 'angular-toastr.css'),
 			]),
-			gulp.src(config.styles.src)
+			gulp
+				.src(config.styles.src)
 				.pipe(sass({
 					sourceComments: global.isProd ? 'none' : 'map',
-					sourceMap: 'sass',
 					outputStyle: global.isProd ? 'compressed' : 'nested',
 				}))
 				.pipe(autoprefixer("last 2 versions", "> 1%", "ie 8"))

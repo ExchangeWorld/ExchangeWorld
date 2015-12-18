@@ -3,6 +3,18 @@
 const goodsModule = require('./goods.module');
 const _           = require('lodash');
 const moment      = require('moment');
+const marked = require('marked');
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: false,
+  tables: false,
+  breaks: true,
+  pedantic: false,
+  sanitize: false,
+  smartLists: false,
+  smartypants: false
+});
+
 
 goodsModule.controller('GoodsController', GoodsController);
 
@@ -25,13 +37,15 @@ function GoodsController(
 	$location,
 	$mdDialog,
 	$timeout,
-	$window
+	$window,
+	$sce
 ) {
 	const vm = this;
 
 	vm.isLoggedIn        = Boolean($localStorage.user);
 	vm.isMe              = vm.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
 	vm.goodData          = goodData;
+	vm.goodDesc          = $sce.trustAsHtml(marked(goodData.description));
 	vm.availableCategory = AvailableCategory;
 	vm.bgStyle           = '';
 	vm.bordercolor       = ['',''];
@@ -55,6 +69,7 @@ function GoodsController(
 	vm.onClickUser = $rootScope.onClickUser;
 	vm.onClickBack = () => $window.history.go(-$rootScope.historyCounter);
 
+	vm.getGoodsDescription = getGoodsDescription;
 	activate();
 
 	$scope.removeMode = false;
@@ -290,7 +305,7 @@ function GoodsController(
 	}
 
 	function showPhotoViewer(ev) {
-		$mdDialog.show({
+		$mdDialog.show({	
 			clickOutsideToClose: true,
 			templateUrl: 'goods/goods.photoViewer.html',
 			controllerAs: 'vm',
@@ -304,6 +319,10 @@ function GoodsController(
 			vm.photos = photos;
 			vm.cancel = ()=> $mdDialog.cancel();
 		}
+	}
+
+	function getGoodsDescription() {
+		return marked(vm.goodData.description);
 	}
 }
 

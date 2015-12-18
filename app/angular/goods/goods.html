@@ -27,7 +27,7 @@
 			</a>
 		</div>
 		<div flex ng-show="vm.isMe" ng-click="vm.onDelete(vm.goodData.gid)" layout layout-align="center center">
-			<i class="material-icons delete">delete</i>
+			<i class="material-icons delete xmas">delete</i>
 		</div>
 	</div>
 	</div>
@@ -106,7 +106,7 @@
 			<form ng-submit="vm.onSubmitComment()">
 				<md-input-container style="padding-bottom: 15px;">
 					<label>留言...</label>
-					<input style="border-bottom-color: lemonchiffon;"type="text" ng-model="vm.comment" name="text" />
+					<input style="border-bottom-color: lemonchiffon; color:white;	"type="text" ng-model="vm.comment" name="text" />
 				</md-input-container>
 				<input type="submit" id="submit" value="Submit" ng-show="false" />
 			</form>

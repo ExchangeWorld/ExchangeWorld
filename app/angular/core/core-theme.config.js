@@ -6,7 +6,7 @@ coreModule.config(materialTheme);
 function materialTheme($mdThemingProvider) {
 	$mdThemingProvider
 		.theme('default')
-		.primaryPalette('blue-grey', {
+		.primaryPalette('green', {
 			'default': '600', // by default use shade 600 from the teal palette for primary intentions
 			'hue-1': '100', // use shade 400 for the <code>md-hue-1</code> class
 			'hue-2': '900', // use shade 900 for the <code>md-hue-2</code> class
@@ -14,7 +14,7 @@ function materialTheme($mdThemingProvider) {
 		})
 		// If you specify less than all of the keys, it will inherit from the
 		// default shades
-		.accentPalette('orange', {
+		.accentPalette('red', {
 			'default': '500',
 			'hue-1': '400',
 			'hue-2': '900',

@@ -1,0 +1,97 @@
+.xmas {
+	background-color: #37474F;
+	background-image: url('http://i.imgur.com/BiSmXaq.png'), url('http://i.imgur.com/XHuy0NJ.png'), url('http://i.imgur.com/okpRxJU.png');
+	animation: snow 15s linear infinite;
+	transition: 0.5s;
+	// z-index: 1;
+}
+
+@keyframes snow {
+	0% {
+		background-position: 0px 0px, 0px 0px, 0px 0px
+	}
+	100% {
+		background-position: 500px 1000px, 400px 400px, 300px 300px;
+	}
+}
+
+.xmas-font {
+	color: #fff;
+}
+
+.xmas-input {
+	padding-left: 20px;
+}
+
+md-input-container {
+	label {
+		color: white;
+	}
+}
+
+.md-char-counter {
+	color: white;
+}
+
+md-select {
+	span {
+		color: #fff;
+	}
+}
+
+md-tab-item {
+	span {
+		color: white;
+	}
+}
+
+.xmas-card {
+	background: #E8EAF6;
+}
+
+.material-icons {
+	&.xmas {
+		color: white;
+	}
+}
+
+.xmas-button {
+	box-sizing: border-box;
+	min-width: 100px;
+	padding: 11px 22px;
+	font-size: 20px;
+	color: #FFF;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
+	background: #5e0d0c;
+	border-radius: 15px;
+	border: 1px solid #4c0300;
+	box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.25), /* highlight */
+	inset 0 0 6px #a23227, /* inner glow */
+	inset 0 80px 80px -40px #ac3223, /* gradient */
+	1px 1px 3px rgba(0, 0, 0, 0.75);
+	position: relative;
+	overflow: visible;
+	transition: 500ms linear;
+}
+
+.xmas-button:hover {
+	background: #a61715;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75), 0 0 40px #FFF;
+	box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.25), /* highlight */
+	inset 0 0 6px #da3b2c, /* inner glow */
+	inset 0 80px 80px -40px #dd4330, /* gradient */
+	1px 1px 3px rgba(0, 0, 0, 0.75);
+}
+
+.xmas-button:focus {
+	outline: none;
+}
+
+.xmas-button:active {
+	box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.25), /* highlight */
+	inset 0 0 6px #da3b2c, /* inner glow */
+	inset 0 80px 80px -40px #dd4330, /* gradient */
+	0px 1px 0px rgba(255, 255, 255, 0.25);
+	/* shadow */
+	transition: 50ms linear;
+}

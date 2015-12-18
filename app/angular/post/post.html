@@ -8,47 +8,56 @@
 			<h2 class="md-headline">您所擁有的東西</h2>
 		</div>
 	</md-toolbar>
+
 	<md-content 
+		class="xmas"
 		layout-padding layout-margin 
 		style="overflow-x: hidden;"
-	>
+	>	
+		<!-- toolbar -->
+		<!-- Item Name Input  -->
 		<div 
 			class="info_container for_input" 
 			layout="row" layout-align="start center"
 		>
 			<div flex="30" flex-sm="50" layout="row" layout-align="center center">
-				<i class="material-icons" hide-sm>list</i>
+				<i class="material-icons xmas" hide-sm>list</i>
 				<md-input-container>
 					<label>物品類別</label>
 					<md-select 
 						ng-model="vm.goodsCategory" 
 						aria-label="good.cate"
 					>
-						<md-option 
+						<md-option
+							style="border-color: green;"
 							ng-repeat="cate in vm.availableCategory" 
 							value="{{cate.label}}" 
 							required
 						>
 							{{cate.alias}}
 						</md-option>
+
 					</md-select>
 				</md-input-container>
 			</div>
 
-			<md-input-container 
+			<md-input-container
+				class="xmas-input"
 				flex="70" flex-sm="50"
 				ng-hide="vm.goodsCategory === 'Christmas'"
 			>
 				<label>物品名稱</label>
-				<input type="text" ng-model="vm.goodsName">
+				<input style="border-color: green;" type="text" ng-model="vm.goodsName">
 			</md-input-container>
 			
 			<md-input-container 
+				class="xmas-input"
 				flex="70" flex-sm="50"
 				ng-show="vm.goodsCategory === 'Christmas'"
 			>
 				<label>禮物價位</label>
-				<textarea 
+				<textarea
+					style="border-color: green;"
 					type="text"
 					ng-model="vm.goodPrice" 
 					md-maxlength="20"
@@ -59,10 +68,11 @@
 		</div>
 
 		<!-- Description Input -->
-		<md-input-container class="info_container for_input">
+		<md-input-container class="info_container for_input xmas-input">
 			<label>物品敘述</label>
 			<textarea 
-				type="string" 
+				type="string"
+				style="border-color: green;"
 				ng-model="vm.goodsDescriptions" 
 				columns="10" md-maxlength="100" 
 				required
@@ -71,14 +81,14 @@
 
 		<!-- Insert Photo -->
 		<div 
-			class="info_container for_input" 
+			class="info_container for_input xmas-input" 
 			layout="row" layout-align="start center" 
 			style="margin-bottom: 0px;"
 		>
-			<i class="material-icons">insert_photo</i>
-			<p hide-sm>選擇一張或多張相片</p>
+			<i class="material-icons xmas">insert_photo</i>
+			<p class="xmas-font" hide-sm>選擇一張或多張相片</p>
 		</div>
-		<div layout="row" layout-wrap layout-align="start center">
+		<div class="xmas-input" layout="row" layout-wrap layout-align="start center">
 			<div 
 				layout layout-align="center center" 
 				ng-repeat="preview in vm.imgEncoded" 
@@ -106,7 +116,7 @@
 					style="width:100px; height:100px; border: 2px #757575 dashed"
 				>
 					<div layout-fill layout layout-align="center center">
-						<i class="material-icons" style="font-size:64px;">add_a_photo</i>
+						<i class="material-icons xmas" style="font-size:64px;">add_a_photo</i>
 						<input 
 							type='file' 
 							ng-model='vm.imgSelect' 
@@ -119,21 +129,26 @@
 			</div>
 		</div>
 		<!-- Location -->
-		<div class="info_container for_input" layout="row" layout-align="end center">
+		<div class="info_container for_input" layout="row" layout-align="end center" style="padding-right: 20px;">
 			<div layout="row" layout-align="center center">
 				<div class="md-subhead">
-					<strong class="map-font">在右邊的地圖定位你的物品吧！</strong>
+					<strong class="map-font xmas-font">在右邊的地圖定位你的物品吧！</strong>
 					<md-tooltip>使用滑鼠定位您的物品！</md-tooltip>
 				</div>
 				<div class="tri"></div>
 			</div>
 		</div>
 		<!-- Submit button -->
-		<div layout="row" style="margin-top:20px;">
-			<span flex="75" flex-sm="60"></span>
-			<div flex="25" flex-sm>
-				<input ng-show="!vm.loading" class="md-button md-primary md-raised" type="submit" id="submit" value="發佈物品！" style="width:100px;"></input>
+		<div layout="row" style="margin:20px 0;">
+			<span flex="70" flex-sm="60"></span>
+			<div flex>
+				<!-- <input ng-show="!vm.loading" class="md-button md-primary md-raised" type="submit" id="submit" value="發佈物品！" style="width:100px;"></input> -->
+				<input ng-show="!vm.loading" type="submit" id="submit" value="發佈物品！" class="xmas-button">
+				</a>
 			</div>
+		</div>
+		<div>
+		</div>
 		</div>
 	</md-content>
 </form>

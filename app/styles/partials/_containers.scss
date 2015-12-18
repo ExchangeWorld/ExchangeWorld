@@ -94,12 +94,6 @@ md-input-container {
 	}
 }
 
-.xmas {
-	background-color: #212121;
-	background-image: url('http://i.imgur.com/BiSmXaq.png'), url('http://i.imgur.com/XHuy0NJ.png'), url('http://i.imgur.com/okpRxJU.png');
-	animation: snow 20s linear infinite;
-}
-
 .md-toolbar-tools {
 	padding-left: 8px;
 }
@@ -179,7 +173,7 @@ md-input-container {
 	background: #F5F5F5;
 	margin: 5px 5px 10px 5px;
 	box-sizing: border-box;
-	box-shadow: 2px 2px 4px 2px #ccc;
+	//box-shadow: 2px 2px 4px 2px #ccc;
 	border-radius: 8px;
 	img {
 		max-width: 100%;
@@ -307,7 +301,7 @@ div.md-open-menu-container {
 		max-width: 90%;
 		padding-top: 25%;
 		&.onseek {
-			padding-top: 120px;
+			padding-top: 0;
 		}
 	}
 	.reset-follow {
@@ -363,9 +357,6 @@ div.md-open-menu-container {
 		max-height: 90%;
 		max-width: 90%;
 		padding-top: 30%;
-		&.onseek {
-			padding-top: 180px;
-		}
 	}
 	.reset-follow {
 		margin-bottom: 5px;
@@ -421,9 +412,6 @@ div.md-open-menu-container {
 		max-height: 90%;
 		max-width: 90%;
 		padding-top: 11%;
-		&.onseek {
-			padding-top: 180px;
-		}
 	}
 	.ex-bg {
 		overflow-x: hidden;
@@ -622,13 +610,4 @@ div.md-open-menu-container {
 
 .fadeIn {
 	animation-name: fadeIn;
-}
-
-@keyframes snow {
-	0% {
-		background-position: 0px 0px, 0px 0px, 0px 0px
-	}
-	100% {
-		background-position: 500px 1000px, 400px 400px, 300px 300px;
-	}
 }

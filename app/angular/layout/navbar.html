@@ -67,8 +67,8 @@
 							<img flex style="max-height:50px; max-width:50px;" ng-src="{{ msg.user.photo_path }}" />
 							<div offset="5" flex>
 								<p class="md-subhead note msg-user">{{ msg.user.name }}</p>
-								<p class="md-body-2 note">{{msg.content}}</p>
-								<p class="md-caption note" style="color: #BCBCBC;">{{ msg.timestamp }}</p>
+								<p class="md-body-2 note msg-content">{{msg.content}}</p>
+								<p class="md-caption note time" style="color: #BCBCBC;">{{ msg.timestamp }}</p>
 							</div>
 							<md-divider></md-divider>
 						</md-list-item>
@@ -96,7 +96,7 @@
 							<img flex style="max-height:50px; max-width:50px;" ng-src="{{ notice.user.photo_path }}" />
 							<div offset="5" flex>
 								<p class="md-body-2 note">{{notice.content}}</p>
-								<p class="md-caption note" style="color: #BCBCBC;">{{ notice.timestamp }}</p>
+								<p class="md-caption note time" style="color: #BCBCBC;">{{ notice.timestamp }}</p>
 							</div>
 							<md-divider></md-divider>
 						</md-list-item>

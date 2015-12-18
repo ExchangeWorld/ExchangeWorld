@@ -50,17 +50,13 @@ function ProfileController(
 			}
 		}
 
-		auth
-			.getLoginState()
-			.then(function(data) {
-				if (data) {
-					vm.isMe = (profile.uid === data.uid);
-				} else {
-					vm.isMe = false;
-					vm.isLoggedIn = false;
-				}
-			});
-
+		if ($localStorage.user) {
+			vm.isMe = (profile.uid === $localStorage.user.uid);
+		} else {
+			vm.isMe = false;
+			vm.isLoggedIn = false;
+		}
+	
 		profileService
 			.getFavoriteSum($stateParams.uid) 
 			.then(function(data) { 

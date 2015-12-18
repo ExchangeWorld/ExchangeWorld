@@ -1,5 +1,4 @@
 .hvr-grow {
-	display: inline-block;
 	vertical-align: middle;
 	transform: translateZ(0);
 	backface-visibility: hidden;
@@ -14,14 +13,9 @@
 	transform: scale(1.1);
 }
 
-
-/* Glow */
-
 .hvr-glow {
-	display: inline-block;
 	vertical-align: middle;
 	transform: translateZ(0);
-	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
 	-moz-osx-font-smoothing: grayscale;
 	transition-duration: 0.3s;
@@ -33,9 +27,6 @@
 .hvr-glow:active {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
-
-
-/* Bubble Float Left */
 
 .hvr-bubble-float-left {
 	vertical-align: middle;

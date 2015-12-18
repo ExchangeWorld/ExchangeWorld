@@ -15,11 +15,12 @@ function m_messageboxController(message, $state, $localStorage) {
 
 	activate();
 
-	function activate() {
+	function activate() {	
 		if(!vm.user) {
 			$state.go('root.404');
 		}
 		updateMessagebox();
+
 	}
 
 	function onClickMessage(msg, ev) {
@@ -32,6 +33,7 @@ function m_messageboxController(message, $state, $localStorage) {
 	}
 
 	function updateMessagebox() {
+		vm.loading = true;
 		message
 			.getMessage(vm.user.uid)
 			.then((msgs) => {
@@ -40,6 +42,7 @@ function m_messageboxController(message, $state, $localStorage) {
 				vm.messages.forEach(function(msg) {
 					msg.timestamp = moment(msg.timestamp.slice(0, -1)).calendar();
 				});
+				vm.loading = false;
 			});
 	}
 

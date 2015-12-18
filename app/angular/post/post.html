@@ -10,9 +10,12 @@
 	</md-toolbar>
 
 	<md-content 
+		class="xmas"
 		layout-padding layout-margin 
 		style="overflow-x: hidden;"
-	>
+	>	
+		<!-- toolbar -->
+		<!-- Item Name Input  -->
 		<div 
 			class="info_container for_input" 
 			layout="row" layout-align="start center"
@@ -53,7 +56,8 @@
 				ng-show="vm.goodsCategory === 'Christmas'"
 			>
 				<label>禮物價位</label>
-				<textarea 
+				<textarea
+					style="border-color: green;"
 					type="text"
 					ng-model="vm.goodPrice" 
 					md-maxlength="20"

@@ -21,12 +21,10 @@
 			</md-button>
 		</div>
 		<div flex layout layout-align="center center">
-			<md-button class="white-btn btn-rwd">
-				<a href="#" socialshare socialshare-provider="facebook" socialshare-url="http://exwd.csie.org/seek/{{vm.goodData.gid}}">
-					<md-icon md-font-set="material-icons">share</md-icon>
-					<span hide-sm>分享</span>
-				</a>
-			</md-button>
+			<a class="md-button white-btn btn-rwd" href="#" socialshare socialshare-provider="facebook" socialshare-url="http://exwd.csie.org/seek/{{vm.goodData.gid}}">
+				<md-icon md-font-set="material-icons">share</md-icon>
+				<span hide-sm>分享</span>
+			</a>
 		</div>
 		<div flex ng-show="vm.isMe" ng-click="vm.onDelete(vm.goodData.gid)" layout layout-align="center center">
 			<i class="material-icons delete">delete</i>

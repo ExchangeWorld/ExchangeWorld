@@ -88,7 +88,7 @@ function PostController(
 				 * 1. compress all img and put imgs to vm.imgCompressed.
 				 */
 				vm.imgCompressed = vm.imgEncoded.map(function(img, i) {
-					if(img.filesize/1000 < 1000) return img;// if img less than 1000 kb , no compression needs.
+					if(img.filesize/100 < 100) return img;// if img less than 100 kb , no compression needs.
 
 					var quality    = 50;
 					var imgFormat  = 'jpeg';

@@ -1,10 +1,14 @@
 strong {
-	//color: rgba(0, 126, 244, 0.7);
 	color: rgba(0, 163, 244, 0.66);
 	&.map-font {
 		color: #000;
 		margin-right: 20px;
 	}
+}
+
+p,
+h2 {
+	word-break: break-word;
 }
 
 .goods_text {
@@ -37,6 +41,7 @@ a:hover {
 
 .note {
 	margin: 2px;
+	line-height: 24px;
 	&.profile {
 		margin: 5px;
 		padding-top: 5px;
@@ -55,7 +60,21 @@ a:hover {
 	}
 	&.msg-user {
 		font-weight: bold;
-		margin-top: 10px;
+		margin-top: 8px;
+		font-size: 14px;
+		line-height: 20px;
+	}
+	&.msg-content {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		width: 100%;
+		line-height: 20px;
+		font-size: 12px;
+	}
+	&.time {
+		font-size: 10px;
+		line-height: 20px;
 	}
 }
 
@@ -192,6 +211,7 @@ a:hover {
 	.ex-story {
 		font-size: 14px;
 		line-height: 24px;
+		word-break: break-word;
 	}
 }
 

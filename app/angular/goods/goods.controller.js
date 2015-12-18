@@ -24,6 +24,7 @@ function GoodsController(
 	$localStorage,
 	$location,
 	$mdDialog,
+	$timeout,
 	$window
 ) {
 	const vm = this;
@@ -52,7 +53,7 @@ function GoodsController(
 
 	vm.showPhotoViewer = showPhotoViewer;
 	vm.onClickUser = $rootScope.onClickUser;
-	vm.onClickBack = () => $state.go('root.withSidenav.seek');
+	vm.onClickBack = () => $window.history.go(-$rootScope.historyCounter);
 
 	activate();
 
@@ -75,16 +76,13 @@ function GoodsController(
 		updateComment();
 		updateStar();
 
-		auth
-			.getLoginState()
-			.then(function(data) {
-				if (data) {
-					vm.isMe = (goodData.owner_uid === data.uid);
-				} else {
-					vm.isMe = false;
-					vm.isLoggedIn = false;
-				}
-			});
+		if ($localStorage.user) {
+			vm.isMe = (goodData.owner_uid === $localStorage.user.uid);
+		} else {
+			vm.isMe = false;
+			vm.isLoggedIn = false;
+		}
+
 		goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
 
 		goodsService.getQueue($stateParams.gid)
@@ -283,9 +281,9 @@ function GoodsController(
 			 * TODO:
 			 *  1. restrict multi queue(?).
 			 */
-			$state.go('root.withSidenav.goods.queue');
+			$state.go('root.withSidenav.goods.queue', {}, {location:false});
 		} else if(type === types[1]) {
-			$state.go('root.withSidenav.goods.queuing');
+			$state.go('root.withSidenav.goods.queuing',{}, {location:false});
 		} else {
 			$state.go('root.404');
 		}

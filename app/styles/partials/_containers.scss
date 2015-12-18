@@ -127,6 +127,7 @@ md-input-container {
 	}
 	&.goods {
 		width: 80px;
+		height: 80px;
 	}
 }
 
@@ -207,7 +208,6 @@ div.md-open-menu-container {
 	width: 50px;
 	border-radius: 50%;
 	border: 2px solid #B0BEC5;
-	//z-index: 10000;
 	&.profile {
 		position: absolute;
 		right: 0;
@@ -261,9 +261,8 @@ div.md-open-menu-container {
 
 @media screen and (min-width: 300px) {
 	.deckgrid[deckgrid]::before {
-		content: '2 .column.column-1-2';
+		content: '1 .column.column-1-1';
 		font-size: 0;
-		/* See https://github.com/akoenig/angular-deckgrid/issues/14#issuecomment-35728861 */
 		visibility: hidden;
 	}
 	.layout-ex {
@@ -301,7 +300,7 @@ div.md-open-menu-container {
 		max-width: 90%;
 		padding-top: 25%;
 		&.onseek {
-			padding-top: 120px;
+			padding-top: 0;
 		}
 	}
 	.reset-follow {
@@ -321,7 +320,6 @@ div.md-open-menu-container {
 	.deckgrid[deckgrid]::before {
 		content: '2 .column.column-1-2';
 		font-size: 0;
-		/* See https://github.com/akoenig/angular-deckgrid/issues/14#issuecomment-35728861 */
 		visibility: hidden;
 	}
 	.layout-ex {
@@ -357,9 +355,6 @@ div.md-open-menu-container {
 		max-height: 90%;
 		max-width: 90%;
 		padding-top: 30%;
-		&.onseek {
-			padding-top: 180px;
-		}
 	}
 	.reset-follow {
 		margin-bottom: 5px;
@@ -373,7 +368,6 @@ div.md-open-menu-container {
 	.deckgrid[deckgrid]::before {
 		content: '3 .column.column-1-3';
 		font-size: 0;
-		/* See https://github.com/akoenig/angular-deckgrid/issues/14#issuecomment-35728861 */
 		visibility: hidden;
 	}
 	.layout-ex {
@@ -415,9 +409,6 @@ div.md-open-menu-container {
 		max-height: 90%;
 		max-width: 90%;
 		padding-top: 11%;
-		&.onseek {
-			padding-top: 180px;
-		}
 	}
 	.ex-bg {
 		overflow-x: hidden;
@@ -440,9 +431,6 @@ div.md-open-menu-container {
 		max-height: 90%;
 		max-width: 90%;
 		padding-top: 25%;
-		&.onseek {
-			padding-top: 280px;
-		}
 	}
 }
 
@@ -508,7 +496,6 @@ div.md-open-menu-container {
 }
 
 .img-slider {
-	// width: auto;
 	max-height: 520px;
 	max-width: 90%;
 	border-radius: 8px;
@@ -527,6 +514,15 @@ div.md-open-menu-container {
 	width: 80%;
 	border-radius: 8px;
 	height: auto;
+}
+
+.img-profile {
+	width: 120px;
+	height: 120px;
+	background-repeat: no-repeat;
+	background-position: center;
+	border-radius: 50%;
+	background-size: contain;
 }
 
 .img-goods {

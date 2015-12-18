@@ -68,7 +68,8 @@ function getStates() {
 					}
 				},
 				/** @ngInject */
-				onEnter: (goodsService, myGoods, host_uid, queuing_goods_gid)=> {
+				onEnter: (goodsService, myGoods, host_uid, queuing_goods_gid, $rootScope)=> {
+					$rootScope.historyCounter++;
 					goodsService.showQueueBox(null, myGoods, queuing_goods_gid, host_uid);
 				}
 			}
@@ -93,7 +94,8 @@ function getStates() {
 					},
 				},
 				/** @ngInject */
-				onEnter: (goodsService, queuingGoods, host_goods_gid)=> {
+				onEnter: (goodsService, queuingGoods, host_goods_gid, $rootScope)=> {
+					$rootScope.historyCounter++;
 					goodsService.showQueuingBox(null, queuingGoods, host_goods_gid);
 				}
 			}

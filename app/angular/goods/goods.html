@@ -1,4 +1,4 @@
-<md-content layout-padding style="overflow-y: hidden;">
+<md-content class="xmas" style="overflow-y: hidden;">
 	<div layout="row" layout-align="center center" style="padding:20px 0 0 5px; margin-bottom: 15px;">
 		<div flex layout layout-align="center center">
 			<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1 btn-rwd" style="margin-left:0;">
@@ -47,17 +47,17 @@
 			</div>
 			<div flex="40" layout="column" layout-align="center center">
 				<img ng-click="vm.onClickUser(vm.goodData.user.uid)" class="circular goods with_border anchor" src="{{ vm.goodData.user.photo_path }}" />
-				<p class="md-tiltle" style="color:#7f8588;">{{ vm.goodData.user.name }}</p>
+				<p class="md-tiltle xmas-font">{{ vm.goodData.user.name }}</p>
 			</div>
 			<div flex="55" layout="column" layout-align="start center" ng-show="!vm.edit">
-				<h3 class="goods-name" style="color:#3e4042">{{ vm.goodData.name }}</h3>
+				<h3 class="goods-name xmas-font">{{ vm.goodData.name }}</h3>
 
 				<div style="color:#7f8588;" layout="row" layout-align="center center">
 					<img 
 						data-ng-src="../../images/icon/{{vm.goodData.category}}.svg"
 						style="height:24px; width:auto;"
 					/>
-					<span style="margin-left: 5px;">{{ vm.goodData.category_alias }}</span>
+					<span class="xmas-font" style="margin-left: 5px;">{{ vm.goodData.category_alias }}</span>
 				</div>
 			</div>
 			<div flex="55" layout="column" layout-align="start center" ng-show="vm.edit">
@@ -74,7 +74,7 @@
 			<div flex="70" flex-sm="80" ng-show="!vm.edit" layout layout-align="center center">
 				<div 
 					ng-bind-html="vm.goodDesc"
-					style="color:#7f8588; max-width: 100%; font-size:18px;"
+					style="max-width: 100%; font-size:18px; color:white;"
 				>
 				</div>
 			</div>
@@ -93,12 +93,12 @@
 			<div class="comment" ng-repeat="comment in vm.goodComments">
 				<a class="avatar" ng-click="vm.onClickUser(comment.user.uid)"> <img ng-src="{{ comment.user.photo_path }}"> </a>
 				<div class="content" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
-					<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
+					<a class="author" style="color:#C5E1A5;" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
 					<div class="metadata">
-						<div flex class="date">{{ comment.timestamp}}</div>
+						<div flex class="date" style="color:#C5CAE9">{{ comment.timestamp}}</div>
 					</div>
 					<div ng-show="comment.isMe && removeMode" ng-click="vm.onDeleteComment(comment.cid)" class="cross">X</div>
-					<div class="text">
+					<div class="text" style="color:lemonchiffon;">
 						{{ comment.content }}
 					</div>
 				</div>
@@ -106,7 +106,7 @@
 			<form ng-submit="vm.onSubmitComment()">
 				<md-input-container style="padding-bottom: 15px;">
 					<label>留言...</label>
-					<input type="text" ng-model="vm.comment" name="text" />
+					<input style="border-bottom-color: lemonchiffon;"type="text" ng-model="vm.comment" name="text" />
 				</md-input-container>
 				<input type="submit" id="submit" value="Submit" ng-show="false" />
 			</form>

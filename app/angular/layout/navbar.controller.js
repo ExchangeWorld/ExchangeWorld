@@ -23,7 +23,15 @@ function NavbarController(
 	AppSettings
 ) {
 	const vm               = this;
-	const state            = ['home', 'seek', 'post', 'exchange', 'profile', 'm_messagebox', 'm_notification'];
+	const state            = [
+		'home', 
+		'seek', 
+		'post', 
+		'exchange', 
+		'profile', 
+		'm_messagebox', 
+		'm_notification'
+	];
 	vm.stateIndex          = _.indexOf(state, $state.current.title);
 	vm.contentIs           = function(idx) { return vm.stateIndex === idx; };
 	vm.openMenu            = openMenu;
@@ -167,7 +175,13 @@ function NavbarController(
 	function report() {
 		var confirm = $mdDialog.confirm()
 			.title('回報問題')
-			.content('<ul><li>有發現BUG嗎?</li><li>有什麼建議想跟我們說的嗎?</li><li>歡迎回報各種想法給我們吧!</li><ul>')
+			.content([
+				'<ul>',
+				'<li>有發現BUG嗎?</li>',
+				'<li>有什麼建議想跟我們說的嗎?</li>',
+				'<li>歡迎回報各種想法給我們吧!</li>',
+				'<ul>'
+			].join(''))
 			.ariaLabel('report')
 			.ok('確定')
 			.cancel('取消');

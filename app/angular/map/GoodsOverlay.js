@@ -1,3 +1,5 @@
+/* global google*/
+
 'use strict';
 
 function GoodsOverlay(map, good, $state, $mdSidenav, callback) {
@@ -46,7 +48,7 @@ function draw() {
 	var el = this.element;
 	if (el) {
 		el.style.left = origin.x - 100 + 'px';
-		el.style.top = origin.y - 220 + 'px';
+		el.style.top = origin.y - 210 + 'px';
 		el.style.width = 200 + 'px';
 		el.style.height = 200 + 'px';
 	}

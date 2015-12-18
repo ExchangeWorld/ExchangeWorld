@@ -8,12 +8,14 @@
    cursor: pointer;
    will-change: background-color;
    transition: background-color 0.1s cubic-bezier(.23,.89,.71,.39);
+   user-select: none;
 
    img {
-        width: 80%;
-        height: auto;
-        margin: 5px;
-        position: absolute;
+     width: 80%;
+     height: auto;
+     margin: 5px;
+     position: absolute;
+     user-select: none;
    }
 }
 

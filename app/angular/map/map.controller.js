@@ -110,7 +110,6 @@ function MapController(
 		$scope.$on('goodsChanged', goodsChangedBeforeMap);
 		$scope.$on('mapMoveTo', mapMoveToBeforeMap);
 
-		// vm.smallMap = $state.current.title === 'exchange';
 	}
 
 	function getCurrentPosition() {
@@ -212,13 +211,11 @@ function MapController(
 			});
 
 		let viewedGoods = $localStorage.viewedGoods || [];
-
 		/* 2. Draw new Marker on map */
 		goods = data.map(function(good) {
 			if (good.marker) {
 				return good;
 			}
-
 			const isViewed = _.indexOf(viewedGoods, good.gid) > -1;
 			good.marker = new MarkerOverlay(
 				map,
@@ -227,18 +224,17 @@ function MapController(
 				new google.maps.LatLng(good.position_y, good.position_x), //latlng
 				map.getZoom(), //zoom
 				'rgb(255, 167, 38)',
-				//highColor
 				// 3. Click Event that Generate a new overlay which can transistTo state of goods
 				() => {
 					overlay = new GoodsOverlay(map, good, $state, $mdSidenav, closeGoodsOverlay);
 					if (!isViewed) {
-						viewedGoods.push(good.id);
-						$localStorage.viewedGoods = _.chain(viewedGoods).uniq().sort(n => n);
+						viewedGoods.push(good.gid);
 					}
 				}
 			);
 			return good;
 		});
+		$localStorage.viewedGoods = viewedGoods;
 	}
 
 	/**

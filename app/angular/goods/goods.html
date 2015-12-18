@@ -51,12 +51,12 @@
 			</div>
 			<div flex="55" layout="column" layout-align="start center" ng-show="!vm.edit">
 				<h3 class="goods-name" style="color:#3e4042">{{ vm.goodData.name }}</h3>
+
 				<div style="color:#7f8588;" layout="row" layout-align="center center">
-					<img src="../../images/icon/icon-book.png" ng-show="vm.goodData.category === 'Books'" style="height:24px; width:auto;">
-					<img src="../../images/icon/icon-school.svg" ng-show="vm.goodData.category === 'Textbooks'" style="height:24px; width:auto;">
-					<img src="../../images/icon/icon-cloth.png" ng-show="vm.goodData.category === 'Clothes'" style="height:24px; width:auto;">
-					<img src="../../images/icon/icon-phone.svg" ng-show="vm.goodData.category === '3C'" style="height:24px; width:auto;">
-					<img src="../../images/icon/icon-other.svg" ng-show="vm.goodData.category === 'Others'" style="height:24px; width:auto;">
+					<img 
+						data-ng-src="../../images/icon/{{vm.goodData.category}}.svg"
+						style="height:24px; width:auto;"
+					/>
 					<span style="margin-left: 5px;">{{ vm.goodData.category_alias }}</span>
 				</div>
 			</div>
@@ -72,7 +72,11 @@
 			</div>
 			<span flex="15" flex-sm="10"></span>
 			<div flex="70" flex-sm="80" ng-show="!vm.edit" layout layout-align="center center">
-				<p style="color:#7f8588; max-width: 100%; font-size:18px;">{{ vm.goodData.description }}</p>
+				<div 
+					ng-bind-html="vm.goodDesc"
+					style="color:#7f8588; max-width: 100%; font-size:18px;"
+				>
+				</div>
 			</div>
 			<div flex="70" flex-sm="80" ng-show="vm.edit" layout layout-align="center center">
 				<md-input-container>

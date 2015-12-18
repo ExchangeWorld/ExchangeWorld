@@ -1,5 +1,6 @@
 'use strict';
 
+const angular = require('angular');
 const postModule = require('./post.module');
 postModule.controller('PostController', PostController);
 
@@ -18,12 +19,13 @@ function PostController(
 	var vm               = this;
 	vm.goodsName         = '';
 	vm.goodsDescriptions = '';
+	vm.goodPrice 		 = '';
 	vm.goodsCategory     = '';
 	vm.imgSelect         = [];
 	vm.imgEncoded        = [];
 	vm.imgCompressed     = [];
 	vm.removeMode        = false;
-	vm.removeImg         = (idx)=> vm.imgEncoded.splice(idx, 1);
+	vm.removeImg         = idx => vm.imgEncoded.splice(idx, 1);
 	vm.onSubmit          = onSubmit;
 	vm.loading           = false;
 	vm.availableCategory = AvailableCategory.slice(1);
@@ -41,6 +43,7 @@ function PostController(
 		if(!vm.imgSelect) return;
 		if(!vm.imgEncoded.length) vm.imgEncoded = vm.imgSelect;
 		else {
+			// vm.imgEncoded.push(vm.imgSelect);
 			vm.imgEncoded = vm.imgEncoded.concat(vm.imgSelect);
 		}
 	});
@@ -63,8 +66,20 @@ function PostController(
 						.title('未選擇類別')
 						.content('請選擇物品的種類.')
 						.ok('知道了!')
-					);
-			} else if(!(vm.positionX && vm.positionY)) {
+				);
+			} else if (
+				vm.goodsCategory === 'Christmas' &&
+				!vm.goodPrice
+			) {
+				$mdDialog.show(
+					$mdDialog.alert()
+						.parent(angular.element(document.querySelector('#popupContainer')))
+						.clickOutsideToClose(true)
+						.title('聖誕活動')
+						.content('聖誕禮物請記得填寫價位喔OvO')
+						.ok('知道了!')
+				);
+			}else if(!(vm.positionX && vm.positionY)) {
 				$mdDialog.show(
 					$mdDialog.alert()
 						.parent(angular.element(document.querySelector('#popupContainer')))
@@ -104,6 +119,10 @@ function PostController(
 				/**
 				 * 2. upload photos(vm.imgCompressed) and get photo_pathArray,
 				 */
+				const desc = vm.goodsCategory === 'Christmas'
+					? `禮物價位：${vm.goodPrice}\n${vm.goodsDescriptions}`
+					: vm.goodsDescriptions;
+
 				postService
 					.uploadImg(vm.imgCompressed)
 					.then(function(data){
@@ -113,7 +132,7 @@ function PostController(
 						postService
 							.sendNewPostInfo({
 								name        : vm.goodsName,
-								description : vm.goodsDescriptions,
+								description : desc,
 								category    : vm.goodsCategory,
 								position_x  : vm.positionX,
 								position_y  : vm.positionY,

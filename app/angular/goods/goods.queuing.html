@@ -20,7 +20,17 @@
 							<md-card class="md-whiteframe-z3 item-profile name-queue">
 								<md-card-content layout="row" layout-sm="column">
 									<div flex="55" flex-sm="100" layout layout-align="center center" style=" height:150px; width:auto; border-radius:10px;">
-										<img ng-src="{{queuing.good.photo_path[0]}}" style="max-width: 100%; max-height:100%;" />
+										<img 
+											ng-src="{{queuing.good.photo_path[0]}}" 
+											style="max-width: 100%; max-height:100%;"
+											ng-show="goods.category !== 'Christmas'"
+										/>
+
+										<img 
+											src="./../images/Gift.jpg"
+											style="max-width: 100%; max-height:100%;"
+											ng-show="goods.category === 'Christmas'"
+										/>
 									</div>
 									<div flex="45" flex-sm="100" layout="column" layout-align="center center">
 										<div layout="row">

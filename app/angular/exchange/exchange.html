@@ -70,21 +70,50 @@
 					<div layout="column">
 						<md-card ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].bgStyle">
 							<div layout layout-align="center center" style="height:250px; width:auto;">
-								<img id="img_me" crossorigin="anonymous" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)" class="md-card-image" style="cursor:pointer; max-height: 100%; max-width: 100%; width:auto; ">
+								<img 
+									id="img_me" 
+									crossorigin="anonymous" 
+									ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].photo_path[0]}}" 
+									ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)" 
+									class="md-card-image" 
+									style="cursor:pointer; max-height: 100%; max-width: 100%; width:auto; "
+									ng-show="vm.exchange.details.goods[vm.exchange.lookupTable.me].category !== 'Christmas'"
+								/>
+
+								<img 
+									id="img_me" 
+									crossorigin="anonymous"
+									src="./../images/Gift(Small).jpg"
+									ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)"
+									class="md-card-image"
+									style="cursor:pointer; max-height: 100%; max-width: 100%; width:auto; "
+									ng-show="vm.exchange.details.goods[vm.exchange.lookupTable.me].category === 'Christmas'"
+								/>
 							</div>
 						</md-card>
 						<md-card-content style="padding: 0;">
 							<div flex layout-fill layout="column">
 								<div layout="column" layout-align="center center">
 									<h2 class="md-title" style="padding: 7px; text-align: center;" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].fontcolor[0]">{{ vm.exchange.details.goods[vm.exchange.lookupTable.me].name}}</h2>
-									<p class="md-subhead text-ex ex-story" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].fontcolor[1]">{{ vm.exchange.details.goods[vm.exchange.lookupTable.me].description }}</p>
+
+									<div 
+										ng-bind-html="vm.meDesc"
+										ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].fontcolor[1]"
+										class="md-subhead text-ex ex-story" 
+										style="color:#7f8588; max-width: 100%; font-size:18px;"
+									>
+									</div>
 								</div>
-								<img class="ex-icon" src="../../images/mapMarker/Books.png" ng-show=" vm.exchange.details.goods[vm.exchange.lookupTable.me].category === 'Books'">
-								<img class="ex-icon" src="../../images/mapMarker/Textbooks.png" ng-show=" vm.exchange.details.goods[vm.exchange.lookupTable.me].category === 'Textbooks'">
-								<img class="ex-icon" src="../../images/mapMarker/Clothes.png" ng-show=" vm.exchange.details.goods[vm.exchange.lookupTable.me].category === 'Clothes'">
-								<img class="ex-icon" src="../../images/mapMarker/3C.png" ng-show=" vm.exchange.details.goods[vm.exchange.lookupTable.me].category === '3C'">
-								<img class="ex-icon" src="../../images/mapMarker/Others.png" ng-show=" vm.exchange.details.goods[vm.exchange.lookupTable.me].category === 'Others'">
-								<img class="circle card-ex" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].user.photo_path}}">
+								<img
+									class="ex-icon"
+									data-ng-src="../../images/icon/{{vm.exchange.details.goods[vm.exchange.lookupTable.me].category}}.svg"
+									style="height:24px; width:auto;"
+								/>
+
+								<img 
+									class="circle card-ex" 
+									ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.me].user.photo_path}}"
+								>
 							</div>
 						</md-card-content>
 					</div>
@@ -111,20 +140,47 @@
 					<div layout="column">
 						<md-card ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].bgStyle">
 							<div layout layout-align="center center" style="height:250px; width:auto;">
-								<img id='img_other' crossorigin="anonymous" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].photo_path[0]}}" ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.other].gid)" class="md-card-image" style="cursor:pointer; max-height: 100%; max-width: 100%; width:auto; ">
+								<img 
+									id='img_other' 
+									crossorigin="anonymous" 
+									ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].photo_path[0]}}" 
+									ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.other].gid)" 
+									class="md-card-image" 
+									style="cursor:pointer; max-height: 100%; max-width: 100%; width:auto; "
+									ng-show="vm.exchange.details.goods[vm.exchange.lookupTable.other].category !== 'Christmas'"
+								>
+
+								<img 
+									id="img_me" 
+									crossorigin="anonymous"
+									src="./../images/Gift(Small).jpg"
+									ng-click="vm.onClickGoods(vm.exchange.details.goods[vm.exchange.lookupTable.me].gid)"
+									class="md-card-image"
+									style="cursor:pointer; max-height: 100%; max-width: 100%; width:auto; "
+									ng-show="vm.exchange.details.goods[vm.exchange.lookupTable.other].category === 'Christmas'"
+								>
 							</div>
 						</md-card>
 						<md-card-content style="padding: 0;">
 							<div flex layout-fill layout="column">
 								<div layout="column" layout-align="center center">
 									<h2 class="md-title" style="padding: 7px; text-align: center;" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].fontcolor[0]">{{ vm.exchange.details.goods[vm.exchange.lookupTable.other].name}}</h2>
-									<p class="md-subhead text-ex ex-story" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].fontcolor[1]">{{ vm.exchange.details.goods[vm.exchange.lookupTable.other].description }}</p>
+
+									<div 
+										ng-bind-html="vm.otherDesc"
+										ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].fontcolor[1]"
+										class="md-subhead text-ex ex-story" 
+										style="color:#7f8588; max-width: 100%; font-size:18px;"
+									>
+									</div>
 								</div>
-								<img class="ex-icon" src="../../images/mapMarker/Books.png" ng-show=" vm.exchange.details.goods[vm.exchange.lookupTable.other].category === 'Books'">
-								<img class="ex-icon" src="../../images/mapMarker/Textbooks.png" ng-show=" vm.exchange.details.goods[vm.exchange.lookupTable.other].category === 'Textbooks'">
-								<img class="ex-icon" src="../../images/mapMarker/Clothes.png" ng-show=" vm.exchange.details.goods[vm.exchange.lookupTable.other].category === 'Clothes'">
-								<img class="ex-icon" src="../../images/mapMarker/3C.png" ng-show=" vm.exchange.details.goods[vm.exchange.lookupTable.other].category === '3C'">
-								<img class="ex-icon" src="../../images/mapMarker/Others.png" ng-show=" vm.exchange.details.goods[vm.exchange.lookupTable.other].category === 'Others'">
+
+								<img
+									class="ex-icon"
+									data-ng-src="../../images/icon/{{vm.exchange.details.goods[vm.exchange.lookupTable.other].category}}.svg"
+									style="height:24px; width:auto;"
+								/>
+
 								<img class="circle card-ex" ng-src="{{vm.exchange.details.goods[vm.exchange.lookupTable.other].user.photo_path}}">
 							</div>
 						</md-card-content>

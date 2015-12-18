@@ -2,6 +2,18 @@
 
 const profileModule = require('./profile.module');
 const _             = require('lodash');
+const marked = require('marked');
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: false,
+  tables: false,
+  breaks: true,
+  pedantic: false,
+  sanitize: false,
+  smartLists: false,
+  smartypants: false
+});
+
 profileModule.controller('ProfileController', ProfileController);
 
 /** @ngInject */
@@ -18,7 +30,8 @@ function ProfileController(
 	$stateParams,
 	$rootScope,
 	$localStorage,
-	$timeout
+	$timeout,
+	$sce
 ) {
 	var vm                 = this;
 	var ct                 = new colorThief.ColorThief();
@@ -38,7 +51,7 @@ function ProfileController(
 	vm.onClickEdit         = onClickEdit;
 	vm.getNumber           = number => new Array(number);
 	vm.onClickGoods        = gid => $state.go('root.withSidenav.goods', { gid : gid });
-
+	vm.getHTMLDesc = getHTMLDesc;
 	/////////////
 
 	activate();
@@ -134,6 +147,10 @@ function ProfileController(
 				"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`
 			};
 		};
+	}
+
+	function getHTMLDesc(desc) {
+		return $sce.trustAsHtml(marked(desc));
 	}
 
 }

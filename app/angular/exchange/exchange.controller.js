@@ -1,7 +1,20 @@
 'use strict';
 
 const exchangeModule = require('./exchange.module');
-const _              = require('lodash');
+// const _              = require('lodash');
+const marked = require('marked');
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: false,
+  tables: false,
+  breaks: true,
+  pedantic: false,
+  sanitize: false,
+  smartLists: false,
+  smartypants: false
+});
+
+
 exchangeModule.controller('ExchangeController', ExchangeController);
 
 /** @ngInject */
@@ -17,7 +30,8 @@ function ExchangeController(
 	$mdDialog,
 	$localStorage,
 	$q,
-	$mdSidenav
+	$mdSidenav,
+	$sce
 ) {
 	var vm             = this;
 	var ct             = new colorThief.ColorThief();
@@ -35,6 +49,9 @@ function ExchangeController(
 	vm.onSubmitChat    = onSubmitChat;
 	vm.agreed          = false;
 	vm.map             = { size: mapSize };
+
+	vm.meDesc = '';
+	vm.otherDesc = '';
 
 	vm.openLeftMenu    = () => $mdSidenav('left').toggle();
 	vm.openRightMenu   = () => $mdSidenav('right').toggle();
@@ -94,6 +111,10 @@ function ExchangeController(
 		amount = 20;
 		offset = 0;
 		vm.exchange = vm.exchangeList[index];
+
+		vm.meDesc          = $sce.trustAsHtml(marked(vm.exchange.details.goods[vm.exchange.lookupTable.me].description));
+		vm.otherDesc       = $sce.trustAsHtml(marked(vm.exchange.details.goods[vm.exchange.lookupTable.other].description));
+
 		updateChat();
 		agreed();
 		
@@ -157,7 +178,7 @@ function ExchangeController(
 	}
 	
 	function dominateColor(goods, who) {
-		console.log(goods);
+		// console.log(goods);
 		var image = document.getElementById(`img_${who}`);
 		image.onload = ()=> {
 			var pallete = ct.getPalette(image, 2);

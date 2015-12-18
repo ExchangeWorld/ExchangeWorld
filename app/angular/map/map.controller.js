@@ -191,7 +191,7 @@ function MapController(
 	 * Draw maker and overlay here.
 	 */
 	function goodsChanged(e, data) {
-		console.log(data);
+		// console.log(data);
 		closeGoodsOverlay();
 
 		/* 1. Clean unused marker */
@@ -224,7 +224,7 @@ function MapController(
 				viewedGoods.indexOf(good.gid) > -1, //viewed
 				new google.maps.LatLng(good.position_y, good.position_x), //latlng
 				map.getZoom(), //zoom
-				'rgb(250, 85, 62)',
+				'rgb(255, 167, 38)',
 				//highColor
 				// 3. Click Event that Generate a new overlay which can transistTo state of goods 
 				() => {

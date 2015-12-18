@@ -1,7 +1,7 @@
 @media screen and (min-width: 300px) {
 	.xmas {
 		background-color: #37474F;
-		background-image: url('http://i.imgur.com/BiSmXaq.png'), url('http://i.imgur.com/XHuy0NJ.png'), url('http://i.imgur.com/okpRxJU.png');
+		background-image: url('../../images/snow1.png'), url('../../images/snow2.png'), url('../../images/snow3.png');
 		//animation: snow 15s linear infinite;
 		transition: 0.5s;
 	}
@@ -10,7 +10,7 @@
 @media screen and (min-width: 960px) {
 	.xmas {
 		background-color: #37474F;
-		background-image: url('http://i.imgur.com/BiSmXaq.png'), url('http://i.imgur.com/XHuy0NJ.png'), url('http://i.imgur.com/okpRxJU.png');
+		background-image: url('../../images/snow1.png'), url('../../images/snow2.png'), url('../../images/snow3.png');
 		animation: snow 15s linear infinite;
 		transition: 0.5s;
 	}

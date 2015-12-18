@@ -6,6 +6,8 @@
    border-color: #388dc1;
    background-color: white;
    cursor: pointer;
+   will-change: background-color;
+   transition: background-color 0.1s cubic-bezier(.23,.89,.71,.39);
 
    img {
         width: 80%;

@@ -1,30 +1,30 @@
-/* global google*/
-
 'use strict';
 
-function MarkerOverlay(map, category, viewed,latlng, zoom, onClick) {
-	console.log('MarkerOverlay');
+function MarkerOverlay(map, category, viewed, latlng, zoom, highColor ,onClick) {
 	this.element = null;
+	this.viewed = viewed;
 	// this.good = good;
 
-	this.onAdd = onAdd.bind(this, category, viewed, onClick);
+	this.onAdd = onAdd.bind(this, category, onClick);
 	this.draw = draw.bind(this, latlng, zoom);
 	this.onRemove = onRemove;
 	this.setVisible = setVisible;
 	this.getPosition = () => latlng;
 	this.onResize = onResize;
+	this.toggleHighlight = toggleHighlight.bind(this, highColor);
+	this.setMarkerViewed = setMarkerViewed;
 
 	this.setMap(map);
 }
 
-function onAdd(category, viewed, onClick) {
+function onAdd(category, onClick) {
 
 	let div = document.createElement('div');
 	div.className = 'marker';
-	if (viewed) div.style.backgroundColor = '#9f9f9f';
+	if (this.viewed) div.style.backgroundColor = '#9f9f9f';
 	div.onclick = () => {
 		onClick();
-		div.style.backgroundColor = '#9f9f9f';
+		this.setMarkerViewed();
 	};
 
 	var img = document.createElement('img');
@@ -57,14 +57,21 @@ function onRemove() {
 	}
 }
 
-function toggleHighlight() {
+function toggleHighlight(highColor) {
 	let el = this.element;
 	if (el) {
-		el.style.backgroundColor === 'white'
-			? el.style.backgroundColor = 'red'
-			: el.style.backgroundColor = 'white';
+		el.style.backgroundColor !== highColor
+			? el.style.backgroundColor = highColor
+			: el.style.backgroundColor = this.viewed ? '#9f9f9f' : 'white';
 	}
-	
+}
+
+function setMarkerViewed() {
+	let el = this.element;
+	if (el) {
+		this.viewed = true;
+		el.style.backgroundColor = '#9f9f9f';
+	}
 }
 
 function setVisible(visible) {

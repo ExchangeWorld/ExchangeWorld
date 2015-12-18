@@ -26,6 +26,7 @@ function MapController(
 	var map     = null;
 	var goods   = [];
 	var overlay = null;
+	var queueData = null;
 	const vm    = this;
 
 	vm.coords = $localStorage.position
@@ -57,8 +58,14 @@ function MapController(
 		$scope.$on('openGoodsOverlay', openGoodsOverlay);
 		$scope.$on('closeGoodsOverlay', closeGoodsOverlay);
 		$scope.$on('getBound', getBound);
+		$scope.$on('highlightMarker', highlightMarker);
+		$scope.$on('markGoodViewed', markGoodViewed);
 		$rootScope.$on('$stateChangeSuccess', urlChanged);
 
+		// If event is called before init
+		if (queueData) {
+			goodsChanged(null, queueData);
+		}
 
 		google.maps.event.addListener(map, 'idle', olcChanged);
 		google.maps.event.addListener(map, 'bounds_changed', boundChanged);
@@ -100,9 +107,12 @@ function MapController(
 			// );
 		}
 
+		$scope.$on('goodsChanged', goodsChangedBeforeMap);
+		$scope.$on('mapMoveTo', mapMoveToBeforeMap);
+		
 		// vm.smallMap = $state.current.title === 'exchange';
 	}
-
+                                     
 	function getCurrentPosition() {
 		geolocation
 			.getLocation({maximumAge:60000, timeout:5000, enableHighAccuracy:true})
@@ -173,11 +183,15 @@ function MapController(
 		return undefined;
 	}
 
+	function goodsChangedBeforeMap(e, data) {
+		queueData = data;
+	}
 	/**
 	 * Receive the goods from seek controller
 	 * Draw maker and overlay here.
 	 */
 	function goodsChanged(e, data) {
+		console.log(data);
 		closeGoodsOverlay();
 
 		/* 1. Clean unused marker */
@@ -207,10 +221,12 @@ function MapController(
 			good.marker = new MarkerOverlay(
 				map,
 				good.category,
-				viewedGoods.indexOf(good.gid) > -1,
-				new google.maps.LatLng(good.position_y, good.position_x),
-				map.getZoom(),
-			/* 3. Click Event that Generate a new overlay which can transistTo state of goods */
+				viewedGoods.indexOf(good.gid) > -1, //viewed
+				new google.maps.LatLng(good.position_y, good.position_x), //latlng
+				map.getZoom(), //zoom
+				'rgb(250, 85, 62)',
+				//highColor
+				// 3. Click Event that Generate a new overlay which can transistTo state of goods 
 				() => {
 					overlay = new GoodsOverlay(map, good, $state, $mdSidenav, closeGoodsOverlay);
 					$localStorage.viewedGoods = _.uniq(viewedGoods.concat(good.gid));
@@ -312,7 +328,17 @@ function MapController(
 	}
 
 	function highlightMarker(e, gid) {
-		
+		_findGood(gid).marker.toggleHighlight();
+	}
+
+	function markGoodViewed(e, gid) {
+		_findGood(gid).marker.setMarkerViewed();
+		const viewedGoods = $localStorage.viewedGoods || [];
+		$localStorage.viewedGoods = _.uniq(viewedGoods.concat(gid));
+	}
+
+	function mapMoveToBeforeMap(e, lat, lng) {
+		vm.coords = [lat, lng];
 	}
 
 	function mapMoveTo(e, lat, lng) {

@@ -62,14 +62,17 @@ function GoodsController(
 	/* After map is loaded */
 	NgMap.getMap().then(mapInitialized);
 	function mapInitialized() {
-		// console.log(goodData);
+		console.log('goodsChanged');
 		$scope.$parent.$broadcast('goodsChanged', [goodData]);
 		$scope.$parent.$broadcast('mapMoveTo', goodData.position_y, goodData.position_x);
+		$scope.$parent.$broadcast('markGoodViewed', goodData.gid);
 	}
 
 	function activate() {
 		$scope.$parent.$broadcast('goodsChanged', [goodData]);
 		$scope.$parent.$broadcast('mapMoveTo', goodData.position_y, goodData.position_x);
+		$scope.$parent.$broadcast('markGoodViewed', goodData.gid);
+		
 		updateComment();
 		updateStar();
 

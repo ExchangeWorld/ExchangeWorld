@@ -30,7 +30,11 @@
 	</div>
 	<div deckgrid class="deckgrid" source="vm.goods">
 		<md-card class="md-whiteframe-z3 item hvr-glow">
-			<a ng-href="/seek/{{card.gid}}" ng-mouseenter="mother.onMouseOver(card.gid)" ng-mouseleave="mother.onMouseOut()">
+			<a 
+				ng-href="/seek/{{card.gid}}" 
+				ng-mouseenter="mother.onMouseOver(card.gid)" 
+				ng-mouseleave="mother.onMouseOut(card.gid)"
+			>
 				<!-- <photoslider images="card.photo_path" class="md-card-image"></photoslider> -->
 				<img width="300" src="" data-ng-src="{{card.photo_path[0]}}" class="md-card-image">
 				<h2 class="md-title" style="margin:0 0 5px 0; padding: 7px;">{{card.name}}</h2>

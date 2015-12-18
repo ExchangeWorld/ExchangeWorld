@@ -22,7 +22,10 @@ function onAdd(map, $state, $mdSidenav) {
 	div.style.borderWidth        = '1px';
 	div.style.borderColor        = '#388dc1';
 	div.style.position           = 'absolute';
-	div.style.backgroundImage    = `url(${this.good.photo_path[0]})`;
+	div.style.backgroundImage = this.good.category === 'Christmas'
+		? `url("../../images/Gift(Small).jpg")`
+		: `url(${this.good.photo_path[0]})`;
+
 	div.style.backgroundSize     = 'cover';
 	div.style.backgroundPosition = 'center';
 	div.style.backgroundRepeat   = 'no-repeat';

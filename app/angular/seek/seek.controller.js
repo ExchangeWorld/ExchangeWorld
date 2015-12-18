@@ -29,6 +29,8 @@ function SeekController(
 	$scope.onClickUser     = onClickUser;
 	$scope.onMouseOver     = onMouseOver;
 	$scope.onMouseOut      = onMouseOut;
+	$scope.postfixImageUrl = postfixImageUrl;
+	vm.postfixImageUrl = postfixImageUrl;
 
 	////////////////
 	
@@ -122,5 +124,14 @@ function SeekController(
 		e.preventDefault();
 		e.stopPropagation();
 		$rootScope.onClickUser(uid);
+	}
+
+	function postfixImageUrl(url) {
+		if (typeof(url) !== 'string') return url;
+
+		url = url.split('.');
+		url[url.length - 2] += '-250';
+
+		return url.join('.');
 	}
 }

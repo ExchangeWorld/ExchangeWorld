@@ -1,4 +1,4 @@
-<md-content class="xmas" style="height:1000px;">
+<md-content class="xmas" resize ng-style="resizeWithOffset(56)">
 	<div layout="row" class="profile-top" layout-align="center center">
 		<div layout layout-align="center center" class="img-profile" ng-style="{'background-image':'url({{ vm.profile.photo_path }})'}" style="border: 2px solid #ff2222;">
 		</div>
@@ -80,21 +80,8 @@
 					<md-card class="md-whiteframe-z3 item-profile xmas-card" ng-repeat="goods in vm.myGoodsPending" ng-click="vm.onClickGoods(goods.gid)">
 						<md-card-content layout-gt-sm="row">
 							<div flex-gt-sm="40" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
-								<img 
-									id="img_{{goods.gid}}" 
-									crossorigin="anonymous" 
-									ng-src="{{ goods.photo_path[0] }}" 
-									style="max-width: 100%; max-height:100%; cursor:pointer;"
-									ng-show="goods.category !== 'Christmas'"
-								/>
-
-								<img 
-									id="img_{{goods.gid}}" 
-									crossorigin="anonymous" 
-									src="./../images/Gift(Small).jpg"
-									style="max-width: 100%; max-height:100%; cursor:pointer;" 
-									ng-show="goods.category === 'Christmas'"
-								/>
+								<img id="img_{{goods.gid}}" crossorigin="anonymous" ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" ng-show="goods.category !== 'Christmas'" />
+								<img id="img_{{goods.gid}}" crossorigin="anonymous" src="./../images/Gift(Small).jpg" style="max-width: 100%; max-height:100%; cursor:pointer;" ng-show="goods.category === 'Christmas'" />
 							</div>
 							<div offset-gt-sm="5" flex-gt-sm="55" layout-gt-sm="column">
 								<div layout layout-align="center center">
@@ -152,21 +139,8 @@
 					<md-card class="md-whiteframe-z3 item-profile xmas-card" ng-repeat="goods in vm.myStar" ng-click="vm.onClickGoods(goods.gid)">
 						<md-card-content layout-gt-sm="row">
 							<div flex-gt-sm="40" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
-								<img 
-									id="img_{{goods.gid}}" 
-									crossorigin="anonymous" 
-									ng-src="{{ goods.photo_path[0] }}" 
-									style="max-width: 100%; max-height:100%; cursor:pointer;"
-									ng-show="goods.category !== 'Christmas'"
-								/>
-
-								<img 
-									id="img_{{goods.gid}}" 
-									crossorigin="anonymous" 
-									src="./../images/Gift(Small).jpg"
-									style="max-width: 100%; max-height:100%; cursor:pointer;"
-									ng-show="goods.category === 'Christmas'"
-								/>
+								<img id="img_{{goods.gid}}" crossorigin="anonymous" ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" ng-show="goods.category !== 'Christmas'" />
+								<img id="img_{{goods.gid}}" crossorigin="anonymous" src="./../images/Gift(Small).jpg" style="max-width: 100%; max-height:100%; cursor:pointer;" ng-show="goods.category === 'Christmas'" />
 							</div>
 							<div offset-gt-sm="5" flex-gt-sm="55" layout-gt-sm="column">
 								<div layout layout-align="center center">

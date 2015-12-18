@@ -16,7 +16,7 @@ function materialTheme($mdThemingProvider) {
 		// default shades
 		.accentPalette('red', {
 			'default': '500',
-			'hue-1': '400',
+			'hue-1': '600',
 			'hue-2': '900',
 			'hue-3': '100'
 		});

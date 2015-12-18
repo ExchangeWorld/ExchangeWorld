@@ -1,10 +1,10 @@
-<md-content resize ng-style="resizeWithOffset(56)" ng-show="vm.exchangeList.length === 0">
+<md-content class="xmas" resize ng-style="resizeWithOffset(56)" ng-show="vm.exchangeList.length === 0">
 	<div layout="column" layout-align="center center" style="height:100%;">
-		<h2 class="md-display-1" style="margin:20px 0; text-align: center">你沒有正在交換的物品喔！</h2>
+		<h2 class="md-display-1 xmas-font" style="margin:20px 0; text-align: center">你沒有正在交換的物品喔！</h2>
 		<div layout layout-align="center center" style="height:50%; width:auto;">
 			<img src="../../images/emoji.png" style="max-width:90%; max-height: 90%; ">
 		</div>
-		<p class="md-title info_container" style="text-align: center;">
+		<p class="md-title info_container xmas-font" style="text-align: center;">
 			立即在探索頁面尋找您喜歡的物品吧
 		</p>
 		<div style="margin-top: 20px;">
@@ -14,7 +14,7 @@
 		</div>
 	</div>
 </md-content>
-<md-content resize ng-style="resizeWithOffset(56)" ng-show="vm.exchangeList.length !== 0" class="ex-bg">
+<md-content resize ng-style="resizeWithOffset(56)" ng-show="vm.exchangeList.length !== 0" class="ex-bg xmas">
 	<div layout="column" layout-gt-md="row" class="layout-ex">
 		<div hide-gt-md>
 			<div layout layout-align="center center" style="margin-top: 20px;">
@@ -57,9 +57,9 @@
 			</div>
 		</div>
 		<div ng-show="vm.exchange === undefined" flex-gt-md="80" layout layout-align="center center">
-			<h2 class="md-display-1" hide-md hide-sm>點擊左側清單觀看目前正在進行的交換</h2>
+			<h2 class="md-display-1 xmas-font" hide-md hide-sm>點擊左側清單觀看目前正在進行的交換</h2>
 			<div flex-md="80" flex-sm="80">
-				<h2 class="md-display-1" hide-gt-md style="text-align:center;">點擊上方清單觀看目前正在進行的交換</h2>
+				<h2 class="md-display-1 xmas-font" hide-gt-md style="text-align:center;">點擊上方清單觀看目前正在進行的交換</h2>
 			</div>
 		</div>
 		<span flex-gt-md="5"></span>

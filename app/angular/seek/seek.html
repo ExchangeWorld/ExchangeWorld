@@ -1,4 +1,4 @@
-<md-toolbar class="md-primary md-hue-3 md-whiteframe-z2" style="height: 76px;">
+<md-toolbar class="md-primary md-hue-2 md-whiteframe-z2" style="height: 76px;">
 	<!-- search input bar & button -->
 	<div layout="row" layout-align="start center">
 		<md-input-container 
@@ -7,7 +7,7 @@
 			style="padding-left: 10px;"
 		>
 			<label style="top:2px;">搜索</label>
-			<input ng-model="vm.searchGoodsName" aria-label="goodsName">
+			<input style="border-color: green;" ng-model="vm.searchGoodsName" aria-label="goodsName">
 		</md-input-container>
 		<md-input-container flex>
 			<label>種類</label>
@@ -40,7 +40,8 @@
 		</md-button>
 	</div>
 </md-toolbar>
-<md-content >
+
+<md-content class="xmas" resize ng-style="resizeWithOffset(132)">
 	<div class="md-padding"></div>
 	<div 
 		layout layout-align="center center" 

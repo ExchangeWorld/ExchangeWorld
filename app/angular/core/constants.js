@@ -12,6 +12,10 @@ const AvailableCategory = [
 		alias: "全部"
 	},
 	{
+		label: "Christmas",
+		alias: "聖誕禮物"
+	},
+	{
 		label: "Books",
 		alias: "書"
 	},
@@ -22,7 +26,8 @@ const AvailableCategory = [
 	{
 		label: "3C",
 		alias: "電子產品"
-	}, {
+	}, 
+	{
 		label: "Clothes",
 		alias: "服飾"
 	},

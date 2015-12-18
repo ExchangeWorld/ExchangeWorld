@@ -15,6 +15,7 @@ function getStates() {
 			config : {
 				url : '/profile/:uid/:type',
 				bindToController: true,
+				scope: {},
 				controller : 'FollowController',
 				controllerAs: 'vm',
 				templateUrl : 'follow/follow.html',
@@ -25,6 +26,7 @@ function getStates() {
 			config : {
 				url : '/m_profile/:uid/:type',
 				bindToController: true,
+				scope: {},
 				controller : 'FollowController',
 				controllerAs: 'vm',
 				templateUrl : 'follow/follow.html',

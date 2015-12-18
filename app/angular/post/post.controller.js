@@ -120,8 +120,12 @@ function PostController(
 				 * 2. upload photos(vm.imgCompressed) and get photo_pathArray,
 				 */
 				const desc = vm.goodsCategory === 'Christmas'
-					? `禮物價位：${vm.goodPrice}\n${vm.goodsDescriptions}`
+					? `\<p\>禮物價位：${vm.goodPrice}\</p\>${vm.goodsDescriptions}`
 					: vm.goodsDescriptions;
+
+				const name = vm.goodsCategory === 'Christmas'
+					? '神秘聖誕禮物'
+					: vm.goodsName;
 
 				postService
 					.uploadImg(vm.imgCompressed)
@@ -131,7 +135,7 @@ function PostController(
 						 */
 						postService
 							.sendNewPostInfo({
-								name        : vm.goodsName,
+								name        : name,
 								description : desc,
 								category    : vm.goodsCategory,
 								position_x  : vm.positionX,

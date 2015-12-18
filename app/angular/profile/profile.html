@@ -1,15 +1,15 @@
 <md-content class="xmas" style="height:1000px;">
 	<div layout="row" class="profile-top" layout-align="center center">
-		<div layout layout-align="center center" class="img-profile" ng-style="{'background-image':'url({{ vm.profile.photo_path }})'}">
+		<div layout layout-align="center center" class="img-profile" ng-style="{'background-image':'url({{ vm.profile.photo_path }})'}" style="border: 2px solid #ff2222;">
 		</div>
 		<div flex-gt-sm="60" flex-sm="50" layout="column">
 			<div layout="column">
 				<div layout="column" layout-align="center center">
-					<h4 class="md-headline" style="margin:8px 0; text-align: center;">{{ vm.profile.name }}</h4>
+					<h4 class="md-headline xmas-font" style="margin:8px 0; text-align: center;">{{ vm.profile.name }}</h4>
 					<div layout="row" layout-align="center center">
 						<md-tooltip>被關注總量</md-tooltip>
 						<i class="material-icons heart-seek">favorite</i>
-						<span class="md-subhead">{{ vm.favSum.length }}</span>
+						<span class="md-subhead xmas-font">{{ vm.favSum.length }}</span>
 					</div>
 				</div>
 				<div layout="row" layout-sm="column" layout-align="center center">

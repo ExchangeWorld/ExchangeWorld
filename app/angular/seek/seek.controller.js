@@ -31,10 +31,12 @@ function SeekController(
 	$scope.onMouseOut      = onMouseOut;
 	$scope.postfixImageUrl = postfixImageUrl;
 	vm.postfixImageUrl = postfixImageUrl;
+	vm.loading             = false;
 
 	////////////////
 	
 	$scope.$on('boundChanged', function(e, bound) {
+		vm.loading = true;
 		vm.mapBound = bound.toUrlValue();
 		onSearch({
 			name     : vm.searchGoodsName,
@@ -48,7 +50,6 @@ function SeekController(
 		if(vm.searchGoodsCategory === 'all') {
 			filter.category = '';
 		}
-
 		$state.go($state.current.name, {
 			name  : filter.name,
 			cate  : filter.category,
@@ -61,9 +62,11 @@ function SeekController(
 			.then(function(data) {
 				vm.goods = data;
 				$rootScope.$broadcast('goodsChanged', vm.goods);
+				vm.loading = false;
 			})
 			.catch(function() {
 				vm.goods = [];
+				vm.loading = false;
 			});
 	}
 

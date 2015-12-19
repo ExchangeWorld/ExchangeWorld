@@ -4,6 +4,7 @@ const goodsModule = require('./goods.module');
 const _           = require('lodash');
 const moment      = require('moment');
 const marked = require('marked');
+
 marked.setOptions({
   renderer: new marked.Renderer(),
   gfm: false,
@@ -69,7 +70,6 @@ function GoodsController(
 	vm.onClickUser = $rootScope.onClickUser;
 	vm.onClickBack = () => $window.history.go(-$rootScope.historyCounter);
 
-	vm.getGoodsDescription = getGoodsDescription;
 	activate();
 
 	$scope.removeMode = false;
@@ -98,26 +98,31 @@ function GoodsController(
 			vm.isLoggedIn = false;
 		}
 
-		goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
+		goodData.category_alias = _.result(
+			_.find(AvailableCategory, 'label', goodData.category), 
+			'alias'
+		);
 
-		goodsService.getQueue($stateParams.gid)
-			.then(function(data) {
-				vm.queuingList = data;
-			});
+		goodsService
+			.getQueue($stateParams.gid)
+			.then(data => vm.queuingList = data);
 
-		var ct = new colorThief.ColorThief();
-		var image = document.getElementById('img');
+		const ct = new colorThief.ColorThief();
+		const image = document.getElementById('img');
 		image.onload = ()=> {
-			var pallete = ct.getPalette(image, 2);
+			const pallete = ct.getPalette(image, 2);
 			vm.bgStyle = {
 				"background-color": `rgb(${pallete[0][0]}, ${pallete[0][1]}, ${pallete[0][2]})`,
 				"border-radius": "20px"
 			};
-			vm.bordercolor = [{
-				"border": `rgb(${pallete[1][0]}, ${pallete[1][1]}, ${pallete[1][2]}) solid 2px`
-			},{
-				"border": `rgb(${pallete[2][0]}, ${pallete[2][1]}, ${pallete[2][2]}) solid 2px`
-			}];
+			vm.bordercolor = [
+				{
+					"border": `rgb(${pallete[1][0]}, ${pallete[1][1]}, ${pallete[1][2]}) solid 2px`
+				},
+				{
+					"border": `rgb(${pallete[2][0]}, ${pallete[2][1]}, ${pallete[2][2]}) solid 2px`
+				}
+			];
 		};
 	}
 
@@ -126,24 +131,25 @@ function GoodsController(
 			goodsService
 				.editGood(gid, vm.goodData.name, vm.goodData.category, vm.goodData.description)
 				.then(function(data) {
-					goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
+					goodData.category_alias = _.result(
+						_.find(AvailableCategory, 'label', goodData.category), 
+						'alias'
+					);
 					logger.success('更新成功！', data, 'Edit');
 				})
-				.catch(function(err) { 
-					logger.error('錯誤', err, 'Error');
-				});
+				.catch(err => logger.error('錯誤', err, 'Error'));
 		}
 		vm.edit = !vm.edit;
 	}
 
 	function onDelete(gid) {
-		var confirm = $mdDialog.confirm()
+		var confirm = $mdDialog
+			.confirm()
 			.title('刪除物品')
-			.content('您確定要刪除這個物品嗎？')
-			.ariaLabel('Delete Goods')
+			.textContent('您確定要刪除這個物品嗎？')
 			.ok('確定')
-			.cancel('取消')
-			.targetEvent(gid);
+			.cancel('取消');
+
 		if (confirm) {
 			$mdDialog.show(confirm).then(function() {
 				goodsService
@@ -164,7 +170,7 @@ function GoodsController(
 				vm.newComments = [];
 			})
 			.then(function() {
-				var data = vm.goodComments.map(function(comment) {
+				const data = vm.goodComments.map(function(comment) {
 					if (vm.isLoggedIn)
 						comment.isMe = (comment.commenter_uid === $localStorage.user.uid);
 					comment.timestamp = moment(comment.timestamp.slice(0, -1)).fromNow();
@@ -219,11 +225,11 @@ function GoodsController(
 	function onDeleteComment(cid) {
 		var confirm = $mdDialog.confirm()
 			.title('刪除留言')
-			.content('您確定要刪除這則留言嗎？')
-			.ariaLabel('Delete Comment')
+			.textContent('您確定要刪除這則留言嗎？')
+			// .ariaLabel('Delete Comment')
 			.ok('確定')
-			.cancel('取消')
-			.targetEvent(cid);
+			.cancel('取消');
+			// .targetEvent(cid);
 		if (confirm) {
 			$mdDialog.show(confirm).then(function() {
 				goodsService
@@ -289,7 +295,7 @@ function GoodsController(
 	 */
 	function onClickQueue(ev) {
 		const types = ['want_to_queue', 'see_who_queue'];
-		var type = vm.isMe ? 'see_who_queue' : 'want_to_queue';
+		const type = vm.isMe ? 'see_who_queue' : 'want_to_queue';
 
 		if(type === types[0]) {
 			/**
@@ -315,15 +321,11 @@ function GoodsController(
 			}
 		});
 		function popupController($mdDialog, photos) {
-			const vm = this;
-			vm.photos = photos;
-			vm.cancel = ()=> $mdDialog.cancel();
+			this.photos = photos;
+			this.cancel = () => $mdDialog.cancel();
 		}
 	}
 
-	function getGoodsDescription() {
-		return marked(vm.goodData.description);
-	}
 }
 
 

@@ -1,3 +1,4 @@
+/* global byuserGen */
 'use strict';
 
 const goodsModule = require('./goods.module');
@@ -31,8 +32,8 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 	function getGood(id) {
 		const defer = $q.defer();
 
-		var gid = parseInt(id);
-		if(!gid) {
+		const gid = parseInt(id, 10);
+		if (!gid) {
 			defer.reject({
 				error: true,
 				msg: 'invalid gid'
@@ -46,13 +47,13 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			.then(function(data) {
 				if (_.isArray(data)) {
 					data.forEach(function(goods) {
-						if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
+						if (_.isString(goods.photo_path)) {
+							goods.photo_path = JSON.parse(goods.photo_path);
+						}
 					});
 					defer.resolve(data);
 				}
-			}, (error)=> {
-				return exception.catcher('[Goods Service] getGood error: ')(error);
-			});
+			}, error => exception.catcher('[Goods Service] getGood error: ')(error));
 		return defer.promise;
 	}
 
@@ -65,13 +66,13 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			.then(function(data) {
 				if (_.isArray(data)) {
 					data.forEach(function(goods) {
-						if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
+						if (_.isString(goods.photo_path)) {
+							goods.photo_path = JSON.parse(goods.photo_path);
+						}
 					});
 					defer.resolve(data);
 				}
-			}, (error)=> {
-				return exception.catcher('[Goods Service] getuserGood error: ')(error);
-			});
+			}, error => exception.catcher('[Goods Service] getuserGood error: ')(error) );
 		return defer.promise;
 	}
 
@@ -90,12 +91,10 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 
 				goods
 					.put()
-					.then(function(data) {
-						defer.resolve(data);
-					})
-					.catch(function(error) {
-						return exception.catcher('[goods Service] updategoods error: ')(error);
-					});
+					.then( data => defer.resolve(data) )
+					.catch(
+						error => exception.catcher('[goods Service] updategoods error: ')(error)
+					);
 			});
 
 		return defer.promise;
@@ -107,12 +106,10 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		Restangular
 			.all('goods/delete')
 			.remove({ gid: gid })
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[Goods Service] deleteGoods error: ')(error);
-			});
+			.then( data => defer.resolve(data) )
+			.catch(
+				error => exception.catcher('[goods Service] deleteGoods error: ')(error)
+			);
 
 		return defer.promise;
 	}
@@ -127,9 +124,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 				if (_.isArray(data)) {
 					defer.resolve(data);
 				}
-			}, (error)=> {
-				return exception.catcher('[Goods Service] getComments error: ')(error);
-			});
+			}, error =>exception.catcher('[Goods Service] getComments error: ')(error));
 		return defer.promise;
 	}
 
@@ -139,12 +134,8 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		Restangular
 			.all('comment/post')
 			.post(newComment)
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[Goods Service] postComments error: ')(error);
-			});
+			.then( data => defer.resolve(data))
+			.catch( error =>  exception.catcher('[Goods Service] postComments error: ')(error));
 		return defer.promise;
 	}
 
@@ -154,12 +145,8 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		Restangular
 			.all('comment/delete')
 			.remove({ cid: comment.cid })
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[Goods Service] deleteComment error: ')(error);
-			});
+			.then( data =>defer.resolve(data) )
+			.catch( error => exception.catcher('[Goods Service] deleteComment error: ')(error));
 
 		return defer.promise;
 	}
@@ -179,9 +166,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 				} else {
 					defer.reject(data);
 				}
-			}, (error)=> {
-				return exception.catcher('[Goods Service] getQueue error: ')(error);
-			});
+			}, error => exception.catcher('[Goods Service] getQueue error: ')(error));
 		return defer.promise;
 	}
 
@@ -194,13 +179,9 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 				host_goods_gid   : host_goods_gid,
 				queuer_goods_gid : queuer_goods_gid,
 			})
-			.then(function(data) {
-				defer.resolve(data);
+			.then(data => defer.resolve(data))
+			.catch(error => exception.catcher('[Goods Service] postQueue error: ')(error));
 
-			})
-			.catch(function(error) {
-				return exception.catcher('[Goods Service] postQueue error: ')(error);
-			});
 		return defer.promise;
 	}
 	
@@ -213,12 +194,8 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 				host_goods_gid   : host_goods_gid,
 				queuer_goods_gid : queuer_goods_gid,
 			})
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[Goods Service] deleteQueue error: ')(error);
-			});
+			.then(data => defer.resolve(data))
+			.catch(error => exception.catcher('[Goods Service] deleteQueue error: ')(error));
 		return defer.promise;
 	}
 
@@ -236,9 +213,8 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 				deleteAllQueues(goods2_gid);
 				defer.resolve(data);
 			})
-			.catch(function(error) {
-				return exception.catcher('[Goods Service] postExchang error: ')(error);
-			});
+			.catch( error => exception.catcher('[Goods Service] postExchang error: ')(error));
+
 		return defer.promise;
 	}
 
@@ -257,9 +233,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 					});
 
 				}
-			}, (error)=> {
-				return exception.catcher('[Goods Service] getQueue error: ')(error);
-			});
+			}, error => exception.catcher('[Goods Service] getQueue error: ')(error));
 	}
 
 	function showQueueBox(ev, myGoods, queuing_goods_gid, host_uid) {
@@ -296,14 +270,14 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 										content      : '有人排了你的物品',
 									});
 							});
-						if($state.current.name === 'root.withSidenav.goods.queue') {
+						if ($state.current.name === 'root.withSidenav.goods.queue') {
 							$state.go('^');
 						}
 					});
 			}
 			function onCancel() {
 				$mdDialog.cancel();
-				if($state.current.name === 'root.withSidenav.goods.queue') {
+				if ($state.current.name === 'root.withSidenav.goods.queue') {
 					$state.go('^');
 				}
 			}
@@ -320,13 +294,22 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 				host_goods_gid : host_goods_gid,
 			}
 		});
-		function QueuingController($mdDialog, logger, queuingGoods, host_goods_gid, $localStorage, notification, $state) {
+
+		function QueuingController(
+			$mdDialog, 
+			logger, 
+			queuingGoods, 
+			host_goods_gid, 
+			$localStorage, 
+			notification, 
+			$state
+		) {
 			const vm          = this;
 			vm.queuingGoods   = queuingGoods;
 			vm.host_goods_gid = host_goods_gid;
 			vm.confirm        = onConfirm;
 			vm.cancel         = onCancel;
-			vm.onClickGoods   = gid=> { $state.go('root.withSidenav.goods', {gid: gid}); };
+			vm.onClickGoods   = gid => $state.go('root.withSidenav.goods', {gid: gid});
 
 			function onConfirm(selected_goods) {
 				selected_goods = JSON.parse(selected_goods);
@@ -344,7 +327,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 										content      : '有人接受了你的排，進入交換階段',
 									});
 							});
-						if($state.current.name === 'root.withSidenav.goods.queuing') {
+						if ($state.current.name === 'root.withSidenav.goods.queuing') {
 							$state.go('^');
 						}
 					});

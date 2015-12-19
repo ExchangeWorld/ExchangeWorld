@@ -147,6 +147,7 @@ function GoodsController(
 			.confirm()
 			.title('刪除物品')
 			.textContent('您確定要刪除這個物品嗎？')
+			.ariaLabel('Delete Goods')
 			.ok('確定')
 			.cancel('取消');
 
@@ -226,7 +227,7 @@ function GoodsController(
 		var confirm = $mdDialog.confirm()
 			.title('刪除留言')
 			.textContent('您確定要刪除這則留言嗎？')
-			// .ariaLabel('Delete Comment')
+			.ariaLabel('Delete Comment')
 			.ok('確定')
 			.cancel('取消');
 			// .targetEvent(cid);

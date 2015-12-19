@@ -60,7 +60,7 @@
 				<!-- <photoslider images="card.photo_path" class="md-card-image"></photoslider> -->
 				<img
 					width="300"
-					data-ng-src="{{card.photo_path[0]}}"
+					data-ng-src="{{mother.postfixImageUrl(card.photo_path[0])}}"
 					class="md-card-image"
 					ng-show="card.category !== 'Christmas'"
 				>

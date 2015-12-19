@@ -33,9 +33,8 @@ function onAdd(map, $state, $mdSidenav) {
 	div.style.borderRadius       = '15px';
 	google.maps.event.addDomListener(div, 'mousedown', function(e) {
 		e.stopPropagation();
-		setTimeout(function() {
-			$state.go('root.withSidenav.goods', {gid : this.good.gid});
-		}.bind(this), 200);
+		e.preventDefault();
+		setTimeout(() => $state.go('root.withSidenav.goods', {gid : this.good.gid}))
 
 		map.panTo(this.good.marker.getPosition());
 		$mdSidenav('left').toggle();

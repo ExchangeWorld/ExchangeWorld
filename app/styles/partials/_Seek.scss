@@ -10,11 +10,12 @@
 	-moz-column-fill: auto;
 	column-gap: 15px;
 	column-fill: auto;
-		.card {
-			-webkit-column-break-inside: avoid;
-			-moz-column-break-inside: avoid;
-			column-break-inside: avoid;
-		}
+	.card {
+		-webkit-column-break-inside: avoid;
+		-moz-column-break-inside: avoid;
+		column-break-inside: avoid;
+		display: inline-block;
+	}
 }
 
 @media screen and (min-width: 300px) {

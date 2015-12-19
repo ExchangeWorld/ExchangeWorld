@@ -31,7 +31,7 @@ function SeekController(
 	$scope.onMouseOut      = onMouseOut;
 	$scope.postfixImageUrl = postfixImageUrl;
 	vm.postfixImageUrl = postfixImageUrl;
-	vm.loading             = false;
+	vm.loading             = true;
 
 	////////////////
 	

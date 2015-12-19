@@ -24,12 +24,12 @@ function NavbarController(
 ) {
 	const vm               = this;
 	const state            = [
-		'home', 
-		'seek', 
-		'post', 
-		'exchange', 
-		'profile', 
-		'm_messagebox', 
+		'home',
+		'seek',
+		'post',
+		'exchange',
+		'profile',
+		'm_messagebox',
 		'm_notification'
 	];
 	vm.stateIndex          = _.indexOf(state, $state.current.title);
@@ -55,7 +55,7 @@ function NavbarController(
 	$rootScope.$on('$stateChangeSuccess', function() {
 		updateNotification();
 	});
-	
+
 	activate();
 
 	function activate() {
@@ -87,6 +87,12 @@ function NavbarController(
 
 			if(contentIndex === 4) {
 				$rootScope.onClickUser($localStorage.user.uid);
+			} else if (
+				contentIndex === 1 &&
+				$state.includes("root.withSidenav.goods") ||
+				$state.includes("root.oneCol.goods")
+			) {
+				// consol	
 			} else {
 				$state.go('root.withSidenav.' + state[contentIndex]);
 			}
@@ -129,7 +135,7 @@ function NavbarController(
 
 	function onClickNotification(notice) {
 		notification.updateNotification(notice, false);
-		
+
 		$location.path(notice.trigger_url);
 		if(!$state.includes("root.oneCol") && !$mdSidenav('left').isOpen() ) {
 			$mdSidenav('left').toggle();
@@ -172,7 +178,7 @@ function NavbarController(
 				});
 		}
 	}
-	
+
 	function report() {
 		var confirm = $mdDialog.confirm()
 			.title('回報問題')

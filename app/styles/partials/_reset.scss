@@ -14,17 +14,16 @@ img:focus {
   }
 }
 
-@media (min-width: $md) {
+@media (min-width: $lg) {
   md-sidenav,
   md-sidenav.md-locked-open,
   md-sidenav.md-closed.md-locked-open-add-active {
-    min-width: 470px !important;
     width: 38.1966011vw !important;
     max-width: none !important;
   }
 }
 
-@media (max-width: $md) {
+@media (max-width: $lg) {
   md-sidenav,
   md-sidenav.md-locked-open,
   md-sidenav.md-closed.md-locked-open-add-active {

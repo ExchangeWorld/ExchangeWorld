@@ -19,20 +19,6 @@ body {
 	padding-top: $navbar-height;
 }
 
-.map-container {
-	position: absolute;
-	top: $navbar-height;
-	bottom: 0;
-	right: 0;
-	left: 45%;
-}
-
-@media screen and (max-width: $md) {
-	.map-container {
-		left: 0;
-	}
-}
-
 md-toolbar {
 	box-sizing: border-box;
 	display: -webkit-flex;

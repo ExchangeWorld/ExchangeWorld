@@ -4,7 +4,6 @@ const angular = require('angular');
 const bulk    = require('bulk-require');
 global._      = require("lodash"); //fix restangular dependency on lodash issue
 
-require('angular-touch');
 require('angular-material');
 require('angular-ui-router');
 require('restangular');
@@ -31,7 +30,6 @@ const requires = [
 	'ui.router',
 	'ngStorage',
 	'restangular',
-	'ngTouch',
 	'ngMaterial',
 	'720kb.socialshare',
 	'utils.photoSlider',

@@ -1,3 +1,18 @@
+
+.map-container {
+  position: absolute;
+  top: $navbar-height;
+  bottom: 0;
+  right: 0;
+  left: 38.1966011vw;
+}
+
+@media screen and (max-width: $lg) {
+  .map-container {
+    left: 0;
+  }
+}
+
 map {
 	.radius-button {
 		border-radius: 100%;

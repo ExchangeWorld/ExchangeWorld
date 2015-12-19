@@ -15,7 +15,7 @@ gulp.task('styles', function () {
 	return streamqueue({ objectMode: true },
 		gulp.src(
 			[
-				'node_modules/angular-material/'+ (global.isProd ? 'angular-material.min.css' : 'angular-material.css'),
+				// 'node_modules/angular-material/'+ (global.isProd ? 'angular-material.min.css' : 'angular-material.css'),
 				'node_modules/angular-toastr/dist/'+ (global.isProd ? 'angular-toastr.min.css' : 'angular-toastr.css'),
 			]),
 			gulp

@@ -104,6 +104,7 @@ function NavbarController(
 			}
 		}
 		vm.stateIndex = contentIndex;
+		vm.closeMenu();
 	}
 
 	function onLogin() {

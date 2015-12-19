@@ -45,7 +45,7 @@
 	<div class="md-padding"></div>
 	<div
 		layout layout-align="center center"
-		ng-show="vm.goods.length === 0"
+		ng-show="vm.goods.length === 0 && !vm.loading"
 		style="width:100%;height:90%"
 	>
 		<img class="img-null onseek" src="../../images/emoji_null.png">
@@ -105,3 +105,18 @@
 		</md-card>
 	</div>
 </md-content>
+
+<div 
+	ng-show="vm.loading" 
+	class="md-scroll-mask" 
+	style="z-index: 100; bottom:-30%" 
+	aria-hidden="true"
+>
+	<md-progress-circular 
+		class="md-primary" 
+		md-mode='indeterminate' 
+		style="margin:200px auto;"
+	></md-progress-circular>
+
+	<div class="md-scroll-mask-bar"></div>
+</div>

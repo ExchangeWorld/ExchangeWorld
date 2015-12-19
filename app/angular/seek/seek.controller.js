@@ -17,19 +17,19 @@ function SeekController(
 	$localStorage,
 	$stateParams
 ) {
-	var vm                 = this;
+	const vm               = this;
 	vm.goods               = [];
 	vm.mapBound            = '';
 	vm.searchGoodsName     = $stateParams.name;
 	vm.searchGoodsCategory = $stateParams.cate || '';
-	vm.searchWithBound     = $stateParams.g === '1' ? false : true;
+	vm.searchWithBound     = $stateParams.g !== '1';
 	vm.onSearch            = onSearch;
 	vm.availableCategory   = AvailableCategory;
-	$scope.onClickFavorite = onClickFavorite;
-	$scope.onClickUser     = onClickUser;
-	$scope.onMouseOver     = onMouseOver;
-	$scope.onMouseOut      = onMouseOut;
-	$scope.postfixImageUrl = postfixImageUrl;
+	vm.onClickFavorite = onClickFavorite;
+	vm.onClickUser     = onClickUser;
+	vm.onMouseOver     = onMouseOver;
+	vm.onMouseOut      = onMouseOut;
+	vm.postfixImageUrl = postfixImageUrl;
 	vm.postfixImageUrl = postfixImageUrl;
 	vm.loading             = false;
 

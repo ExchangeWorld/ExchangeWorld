@@ -1,44 +1,57 @@
-<md-toolbar class="md-primary md-hue-2 md-whiteframe-z2" style="height: 76px;">
-	<!-- search input bar & button -->
-	<div layout="row" layout-align="start center">
-		<md-input-container
-			flex="45" flex-sm="35"
-			class="md-primary wtfsafari"
-			style="padding-left: 10px;"
+<md-toolbar 
+	class="md-primary md-hue-2 md-whiteframe-z2" 
+	style="height: 76px;"
+	layout="row"
+	layout-align="start center"
+>
+	<md-input-container
+		class="md-primary"
+		style="position: initial;"
+		flex="45" flex-sm="35"
+	>
+		<label >搜索</label>
+		<input 
+			style="border-color: green; margin-bottom: -23px" 
+			ng-model="vm.searchGoodsName" 
+			aria-label="goodsName"
 		>
-			<label style="top:2px;">搜索</label>
-			<input style="border-color: green;" ng-model="vm.searchGoodsName" aria-label="goodsName">
-		</md-input-container>
-		<md-input-container flex>
-			<label class="xmas-font">種類</label>
-			<md-select ng-model="vm.searchGoodsCategory" aria-label="cate">
-				<md-option
-					ng-repeat="cate in vm.availableCategory"
-					value="{{cate.label}}"
-				>
-					{{cate.alias}}
-				</md-option>
-			</md-select>
-		</md-input-container>
+	</md-input-container>
+
+	<md-input-container flex>
+		<label style="margin-top: -21px" class="xmas-font">種類</label>
+		<md-select ng-model="vm.searchGoodsCategory" aria-label="cate">
+			<md-option
+				ng-repeat="cate in vm.availableCategory"
+				value="{{cate.label}}"
+			>
+				{{cate.alias}}
+			</md-option>
+		</md-select>
+	</md-input-container>
+
+	<div flex="15">
+		<md-tooltip>是否只搜尋地圖範圍內物品</md-tooltip>
 		<md-switch
 			class="switch"
-			flex="15"
 			ng-model="vm.searchWithBound"
 			aria-label="searchWithBound"
 			style="font-size: 10px;"
 		>
-			<md-tooltip>搜尋視界內物品/搜尋全世界</md-tooltip>
-			<span hide-sm>{{ vm.searchWithBound ? '視界內' : '全域' }}</span>
+			<span hide-xs>
+				{{ vm.searchWithBound ? '視界內' : '全域' }}
+			</span>
 		</md-switch>
-		<md-button
-			flex flex-sm="5"
-			class="md-accent md-raised md-hue-1 seek_btn"
-			ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory, bound:vm.searchWithBound ? vm.mapBound : '', global:vm.searchWithBound ? 0 : 1})"
-		>
-			<md-icon md-font-set="material-icons">search</md-icon>
-			<span hide-sm>搜索!</span>
-		</md-button>
 	</div>
+	
+
+	<md-button
+		flex flex-sm="5"
+		class="md-accent md-raised md-hue-1 seek_btn"
+		ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory, bound:vm.searchWithBound ? vm.mapBound : '', global:vm.searchWithBound ? 0 : 1})"
+	>
+		<md-icon md-font-set="material-icons">search</md-icon>
+		<span hide-sm hide-xs>搜索!</span>
+	</md-button>
 </md-toolbar>
 
 <md-content class="xmas" resize ng-style="resizeWithOffset(132)">
@@ -55,17 +68,17 @@
 		<div class="grid__columns">
 			<md-card 
 				ng-repeat="card in vm.goods"
-				class="md-whiteframe-z3 item card" 
+				class="md-whiteframe-z3 item card"
 			>
 				<a
 					ng-href="/seek/{{card.gid}}"
-					ng-mouseenter="onMouseOver(card.gid)"
-					ng-mouseleave="onMouseOut(card.gid)"
+					ng-mouseenter="vm.onMouseOver(card.gid)"
+					ng-mouseleave="vm.onMouseOut(card.gid)"
 				>
 					<!-- <photoslider images="card.photo_path" class="md-card-image"></photoslider> -->
 					<img
 						width="300"
-						data-ng-src="{{postfixImageUrl(card.photo_path[0])}}"
+						data-ng-src="{{vm.postfixImageUrl(card.photo_path[0])}}"
 						class="md-card-image"
 						ng-show="card.category !== 'Christmas'"
 					>
@@ -77,7 +90,10 @@
 						ng-show="card.category === 'Christmas'"
 					>
 
-					<h2 class="md-title" style="margin:0; padding: 7px; text-align: center;">
+					<h2 
+						class="md-title" 
+						style="margin:0; padding: 7px; text-align: center;"
+					>
 						{{card.name}}
 					</h2>
 				</a>
@@ -86,7 +102,7 @@
 						<div layout="row" style="margin:0 0 10px 0;">
 							<div flex layout="row" layout-align="center center">
 								<i
-									ng-click="onClickFavorite($event, card)"
+									ng-click="vm.onClickFavorite($event, card)"
 									class="material-icons heart-seek"
 									style="outline: 0"
 								>
@@ -103,7 +119,7 @@
 									class="circle hvr-grow"
 									style="border-radius: 50%; cursor: pointer;"
 									data-ng-src="{{card.user.photo_path}}"
-									ng-click="onClickUser($event, card.user.uid)"
+									ng-click="vm.onClickUser($event, card.user.uid)"
 								/>
 							</div>
 						</div>
@@ -124,7 +140,8 @@
 		class="md-primary"
 		md-mode='indeterminate'
 		style="margin:200px auto;"
-	></md-progress-circular>
+	>
+	</md-progress-circular>
 
 	<div class="md-scroll-mask-bar"></div>
 </div>

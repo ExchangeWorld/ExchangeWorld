@@ -24,7 +24,6 @@ function seekService(Restangular, $q, exception, $localStorage, favorite) {
 			.then(function(data) {
 				if (_.isArray(data)) {
 					data.forEach(function(goods) {
-
 						if (
 							_.isString(goods.photo_path) &&
 							goods.photo_path.indexOf('error') === -1
@@ -47,7 +46,7 @@ function seekService(Restangular, $q, exception, $localStorage, favorite) {
 						defer.resolve(data);
 					}
 				}
-			}, (error)=> {
+			}, error => {
 				return exception.catcher('[Seek Service] getSeek error: ')(error);
 			});
 		return defer.promise;

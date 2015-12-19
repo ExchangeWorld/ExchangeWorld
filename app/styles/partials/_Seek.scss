@@ -1,0 +1,42 @@
+.grid-wrapper {
+	width: 95%;
+	margin: 10px auto;
+}
+
+.grid__columns {
+	-webkit-column-gap: 10px;
+	-webkit-column-fill: auto;
+	-moz-column-gap: 10px;
+	-moz-column-fill: auto;
+	column-gap: 15px;
+	column-fill: auto;
+		.card {
+			-webkit-column-break-inside: avoid;
+			-moz-column-break-inside: avoid;
+			column-break-inside: avoid;
+		}
+}
+
+@media screen and (min-width: 300px) {
+	.grid__columns {
+		column-count: 1;
+		-moz-column-count: 1;
+		-webkit-column-count: 1;
+	}
+}
+
+@media screen and (min-width: 600px) {
+	.grid__columns {
+		column-count: 2;
+		-moz-column-count: 2;
+		-webkit-column-count: 2;
+	}
+}
+
+@media screen and (min-width: 960px) {
+	.grid__columns {
+		column-count: 3;
+		-moz-column-count: 3;
+		-webkit-column-count: 3;
+	}
+}

@@ -50,71 +50,78 @@
 	>
 		<img class="img-null onseek" src="../../images/emoji_null.png">
 	</div>
-	<div deckgrid class="deckgrid" source="vm.goods">
-		<md-card class="md-whiteframe-z3 item hvr-glow">
-			<a
-				ng-href="/seek/{{card.gid}}"
-				ng-mouseenter="mother.onMouseOver(card.gid)"
-				ng-mouseleave="mother.onMouseOut(card.gid)"
-			>
-				<!-- <photoslider images="card.photo_path" class="md-card-image"></photoslider> -->
-				<img
-					width="300"
-					data-ng-src="{{mother.postfixImageUrl(card.photo_path[0])}}"
-					class="md-card-image"
-					ng-show="card.category !== 'Christmas'"
-				>
 
-				<img
-					width="300"
-					src="./../images/Gift(Small).jpg"
-					class="md-card-image"
-					ng-show="card.category === 'Christmas'"
-				>
+	<div class="grid-wrapper">
+		<div class="grid__columns">
+			<div ng-repeat="card in vm.goods">
+				<md-card class="md-whiteframe-z3 item hvr-glow card">
+					<a
+						ng-href="/seek/{{card.gid}}"
+						ng-mouseenter="onMouseOver(card.gid)"
+						ng-mouseleave="onMouseOut(card.gid)"
+					>
+						<!-- <photoslider images="card.photo_path" class="md-card-image"></photoslider> -->
+						<img
+							width="300"
+							data-ng-src="{{postfixImageUrl(card.photo_path[0])}}"
+							class="md-card-image"
+							ng-show="card.category !== 'Christmas'"
+						>
 
-				<h2 class="md-title" style="margin:0 0 5px 0; padding: 7px;">{{card.name}}</h2>
-			</a>
-			<md-card-content style="padding: 0;">
-				<div layout="column">
-					<div layout="row" style="margin:0 0 10px 0;">
-						<div flex layout="row" layout-align="center center">
-							<i
-								ng-click="mother.onClickFavorite($event, card)"
-								class="material-icons heart-seek hvr-grow"
-								style="outline: 0"
-							>
-								{{ card.favorited ? 'favorite' : 'favorite_border' }}
-							</i>
+						<img
+							width="300"
+							src="./../images/Gift(Small).jpg"
+							class="md-card-image"
+							ng-show="card.category === 'Christmas'"
+						>
 
-							<img
-								data-ng-src="../../images/icon/{{card.category}}.svg"
-								style="height:24px; width:auto;"
-							/>
+						<h2 class="md-title" style="margin:0; padding: 7px; text-align: center;">
+							{{card.name}}
+						</h2>
+					</a>
+					<md-card-content style="padding: 0;">
+						<div layout="column">
+							<div layout="row" style="margin:0 0 10px 0;">
+								<div flex layout="row" layout-align="center center">
+									<i
+										ng-click="onClickFavorite($event, card)"
+										class="material-icons heart-seek hvr-grow"
+										style="outline: 0"
+									>
+										{{ card.favorited ? 'favorite' : 'favorite_border' }}
+									</i>
+
+									<img
+										data-ng-src="../../images/icon/{{card.category}}.svg"
+										style="height:24px; width:auto;"
+									/>
+								</div>
+								<div flex layout layout-align="center center">
+									<img
+										class="circle hvr-grow"
+										style="border-radius: 50%; cursor: pointer;"
+										data-ng-src="{{card.user.photo_path}}"
+										ng-click="onClickUser($event, card.user.uid)"
+									/>
+								</div>
+							</div>
 						</div>
-						<div flex layout layout-align="center center">
-							<img
-								class="circle hvr-grow"
-								style="border-radius: 50%; cursor: pointer;"
-								data-ng-src="{{card.user.photo_path}}"
-								ng-click="mother.onClickUser($event, card.user.uid)"
-							/>
-						</div>
-					</div>
-				</div>
-			</md-card-content>
-		</md-card>
+					</md-card-content>
+				</md-card>
+		</div>
 	</div>
+
 </md-content>
 
-<div 
-	ng-show="vm.loading" 
-	class="md-scroll-mask" 
-	style="z-index: 100; bottom:-30%" 
+<div
+	ng-show="vm.loading"
+	class="md-scroll-mask"
+	style="z-index: 100; bottom:-30%"
 	aria-hidden="true"
 >
-	<md-progress-circular 
-		class="md-primary" 
-		md-mode='indeterminate' 
+	<md-progress-circular
+		class="md-primary"
+		md-mode='indeterminate'
 		style="margin:200px auto;"
 	></md-progress-circular>
 

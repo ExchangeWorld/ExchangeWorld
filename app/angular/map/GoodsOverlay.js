@@ -24,7 +24,7 @@ function onAdd(map, $state, $mdSidenav) {
 	div.style.position           = 'absolute';
 	div.style.backgroundImage = this.good.category === 'Christmas'
 		? `url("../../images/Gift(Small).jpg")`
-		: `url(${this.good.photo_path[0]})`;
+		: `url(${postfixImageUrl(this.good.photo_path[0])})`;
 
 	div.style.backgroundSize     = 'cover';
 	div.style.backgroundPosition = 'center';
@@ -34,7 +34,7 @@ function onAdd(map, $state, $mdSidenav) {
 	google.maps.event.addDomListener(div, 'mousedown', function(e) {
 		e.stopPropagation();
 		e.preventDefault();
-		setTimeout(() => $state.go('root.withSidenav.goods', {gid : this.good.gid}))
+		setTimeout(() => $state.go('root.withSidenav.goods', {gid : this.good.gid}));
 
 		map.panTo(this.good.marker.getPosition());
 		$mdSidenav('left').toggle();
@@ -62,6 +62,15 @@ function onRemove() {
 		this.element = null;
 		this.good.marker.setVisible(true);
 	}
+}
+
+function postfixImageUrl(url) {
+	if (typeof(url) !== 'string') return url;
+
+	url = url.split('.');
+	url[url.length - 2] += '-250';
+
+	return url.join('.');
 }
 
 module.exports = GoodsOverlay;

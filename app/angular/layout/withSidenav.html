@@ -5,12 +5,15 @@
 		md-is-open="true"
 		md-is-locked-open="$mdMedia('min-width: 1280px')"
 	>
-		<md-toolbar hide-lg hide-gt-lg>
-			<div class="md-toolbar-tools md-medium-tall navbar">
-				ExchangeWorld
-			</div>
+		<md-toolbar hide-gt-md>
 		</md-toolbar>
-		<md-content class="xmas" flex resize ng-style="resizeWithOffset(56)" style="overflow-y: scroll;">
+		
+		<md-content 
+			class="xmas" 
+			flex 
+			resize ng-style="resizeWithOffset(56)" 
+			style="overflow-y: scroll;"
+		>
 			<div ui-view></div>
 		</md-content>
 	</md-sidenav>

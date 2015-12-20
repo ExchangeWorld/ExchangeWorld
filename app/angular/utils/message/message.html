@@ -1,19 +1,49 @@
 <md-dialog aria-label="message">
+
 	<md-toolbar>
-		<div flex class="md-toolbar-tools" layout layout-align="center center">
-			<h2 class="md-display-1" style="padding-left: 12px;">{{vm.msg.user.name}}</h2>
+		<div 
+			flex 
+			class="md-toolbar-tools" 
+			layout layout-align="center center"
+		>
+			<h2 class="md-display-1" style="padding-left: 12px;">
+				{{vm.msg.user.name}}
+			</h2>
+
 			<span flex></span>
+
 			<md-button class="md-icon-button" ng-click="vm.cancel()">
-				<md-icon md-font-set="material-icons" aria-label="Close dialog">close</md-icon>
+				<md-icon 
+					md-font-set="material-icons" 
+					aria-label="Close dialog"
+				>
+					close
+				</md-icon>
 			</md-button>
 		</div>
 	</md-toolbar>
-	<md-dialog-content style="max-width:800px;max-height:610px; padding: 5px 20px 16px 20px;">
-		<div flex flex-sm layout="row">
+
+	<md-dialog-content 
+		style="max-width:800px; max-height:610px; padding: 5px 20px 16px 20px;"
+	>
+		<div flex flex-xs layout="row">
 			<div flex>
-				<ul id="chatbox" class="discussion message" upward-scroll="vm.loadMore()" scroll="vm.newMsgs.length">
-					<li ng-class="{true: 'self', false: 'other'}[history.sender_uid === {{ vm.msg.receiver_uid }}]" ng-repeat="history in vm.history">
-						<div class="avatar" ng-click="vm.onClickUser(history.sender_uid)" ng-show="(history.sender_uid !== {{ vm.msg.receiver_uid }})" style="cursor:pointer;">
+				<ul 
+					id="chatbox" 
+					class="discussion message" 
+					upward-scroll="vm.loadMore()" 
+					scroll="vm.newMsgs.length"
+				>
+					<li 
+						ng-class="{true: 'self', false: 'other'}[history.sender_uid === {{ vm.msg.receiver_uid }}]" 
+						ng-repeat="history in vm.history"
+					>
+						<div 
+							class="avatar" 
+							ng-click="vm.onClickUser(history.sender_uid)" 
+							ng-show="(history.sender_uid !== {{ vm.msg.receiver_uid }})" 
+							style="cursor:pointer;"
+						>
 							<img ng-src="{{vm.msg.user.photo_path}}" />
 						</div>
 						<div class="messages">
@@ -22,13 +52,31 @@
 						</div>
 					</li>
 				</ul>
+
 				<div layout="row" layout-algin="center center">
-					<md-input-container flex="70" flex-sm="55" style="padding: 0 2px;">
-						<label>回覆訊息...</label>
-						<textarea type="string" ng-model="vm.contents" ng-keyup="vm.keyup($event)" ng-keydown="vm.keydown($event)" columns="10" md-maxlength="1000"></textarea>
+					<md-input-container flex="70" flex-xs="55" style="padding: 0 2px;">
+						<label style="margin-top: -20px; color: black;" >回覆訊息...</label>
+						<textarea 
+							type="string" 
+							ng-model="vm.contents" 
+							ng-keyup="vm.keyup($event)" 
+							ng-keydown="vm.keydown($event)" 
+							columns="10" md-maxlength="1000"
+						>
+						</textarea>
 					</md-input-container>
-					<div flex="30" flex-sm="45" layout layout-align="center end">
-						<input flex class="md-button md-primary md-raised" ng-disabled="!vm.contents.length" ng-click="vm.submit(vm.contents)" value="送出" style="height:45px; top:6px; left:2px;"></input>
+
+					<div 
+						flex="30" flex-xs="45" 
+						layout layout-align="center start"
+					>
+						<input 
+							flex 
+							class="md-button md-primary md-raised" 
+							ng-disabled="!vm.contents.length" 
+							ng-click="vm.submit(vm.contents)" 
+							value="送出" style="height:45px; top:6px; left:2px;"
+						></input>
 					</div>
 				</div>
 			</div>

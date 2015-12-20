@@ -20,7 +20,6 @@ function m_messageboxController(message, $state, $localStorage) {
 			$state.go('root.404');
 		}
 		updateMessagebox();
-
 	}
 
 	function onClickMessage(msg, ev) {
@@ -37,7 +36,7 @@ function m_messageboxController(message, $state, $localStorage) {
 		message
 			.getMessage(vm.user.uid)
 			.then((msgs) => {
-				console.log(msgs);
+				// console.log(msgs);
 				vm.messages = _.unique(msgs, 'sender_uid');
 				vm.messages.forEach(function(msg) {
 					msg.timestamp = moment(msg.timestamp.slice(0, -1)).calendar();

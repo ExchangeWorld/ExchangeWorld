@@ -96,7 +96,7 @@ function message(Restangular, $q, exception, $localStorage, $mdDialog) {
 
 	function showMessagebox(ev, msg, callback) {
 		$mdDialog.show({
-			clickOutsideToClose : true,
+			clickOutsideToClose : false,
 			templateUrl : 'utils/message/message.html',
 			controllerAs : 'vm',
 			controller : DialogController,

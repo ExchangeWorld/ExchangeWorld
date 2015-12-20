@@ -1,13 +1,31 @@
 <div flex>
 	<div>
-		<md-toolbar class="md-primary md-hue-2" layout layout-align="center center" style="min-height: 48px;">
+		<md-toolbar 
+			class="md-primary md-hue-2" 
+			layout layout-align="center center" 
+			style="min-height: 48px;"
+		>
 			<span>{{vm.msg.user.name}}</span>
 		</md-toolbar>
 	</div>
+
 	<div>
-		<ul id="chatbox" class="discussion m_message" upward-scroll="vm.loadMore()" scroll="vm.newMsgs.length">
-			<li ng-class="{true: 'self', false: 'other'}[history.sender_uid === {{ vm.msg.receiver_uid }}]" ng-repeat="history in vm.history">
-				<div class="avatar" ng-click="vm.onClickUser(history.sender_uid)" ng-show="(history.sender_uid !== {{ vm.msg.receiver_uid }})" style="cursor:pointer;">
+		<ul 
+			id="chatbox" 
+			class="discussion m_message" 
+			upward-scroll="vm.loadMore()" 
+			scroll="vm.newMsgs.length"
+		>
+			<li 
+				ng-class="{true: 'self', false: 'other'}[history.sender_uid === {{ vm.msg.receiver_uid }}]" 
+				ng-repeat="history in vm.history"
+			>
+				<div 
+					class="avatar" 
+					ng-click="vm.onClickUser(history.sender_uid)" 
+					ng-show="(history.sender_uid !== {{ vm.msg.receiver_uid }})" 
+					style="cursor:pointer;"
+				>
 					<img ng-src="{{vm.msg.user.photo_path}}" />
 				</div>
 				<div class="messages">
@@ -17,16 +35,23 @@
 			</li>
 		</ul>
 	</div>
+
 	<div style="display: inline-block;">
 		<div style="height:61px; bottom:0; position:fixed;  width:60%;">
 			<md-input-container style="padding: 0 0 0 15px;">
-				<label>回覆訊息...</label>
+				<label style="margin-top: -20px;">回覆訊息...</label>
 				<textarea type="string" ng-model="vm.contents" columns="10"></textarea>
 			</md-input-container>
 		</div>
-		<div style="width:40%; position:fixed;bottom: 0;right: -20px;">
-			<input class="md-button md-primary md-raised" ng-disabled="!vm.contents.length" ng-click="vm.submit(vm.contents)" value="送出" style="height:45px; width:70%;"></input>
+		<div style="width: 40%; position: fixed; bottom: 0; right: -20px;">
+			<input 
+				class="md-button md-primary md-raised" 
+				ng-disabled="!vm.contents.length" 
+				ng-click="vm.submit(vm.contents)" 
+				value="送出" 
+				style="height:45px; width:70%;"
+			></input>
 		</div>
 	</div>
-</div>
+</div>w
 

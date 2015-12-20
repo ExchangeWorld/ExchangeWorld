@@ -1,21 +1,41 @@
-<div ng-show="vm.loading" class="md-scroll-mask" style="z-index: 100; background-color: rgba(0, 0, 0, 0.10); bottom:-200px;" aria-hidden="true">
-	<md-progress-circular class="md-primary" md-mode='indeterminate' style="margin:200px auto;"></md-progress-circular>
+<div 
+	ng-show="vm.loading" 
+	class="md-scroll-mask" 
+	style="z-index: 100; background-color: rgba(0, 0, 0, 0.10); bottom:-200px;" 
+	aria-hidden="true"
+>
+	<md-progress-circular 
+		class="md-primary" 
+		md-mode='indeterminate' 
+		style="margin:200px auto;"
+	></md-progress-circular>
 	<div class="md-scroll-mask-bar"></div>
 </div>
+
 <md-list ng-show="!vm.loading">
-	<md-list-item style="padding: 0;">
-		<div offset="5" flex>
+	<md-list-item style="padding: 0; width: 100%">
+		<div style="padding-left: 10px;">
 			<p class="md-subhead">訊息</p>
 		</div>
 		<md-divider></md-divider>
 	</md-list-item>
+
 	<md-list-item ng-show="vm.messages.length === 0">
 		<div flex>
 			<p class="md-body-2 note">目前沒有任何訊息</p>
 		</div>
 	</md-list-item>
-	<md-list-item ng-repeat="msg in vm.messages" ng-style="msg.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickMessage(msg, $event)">
-		<img flex style="max-height:50px; max-width:50px;" ng-src="{{ msg.user.photo_path }}" />
+
+	<md-list-item 
+		ng-repeat="msg in vm.messages" 
+		ng-style="msg.unread && {'background-color':'#E9F3FF'}" 
+		ng-click="vm.onClickMessage(msg, $event)"
+	>
+		<img 
+			flex 
+			style="max-height:50px; max-width:50px;" 
+			ng-src="{{ msg.user.photo_path }}" 
+		/>
 		<div offset="5" flex>
 			<p class="md-subhead note msg-user">{{ msg.user.name }}</p>
 			<p class="md-body-2 note msg-content">{{msg.content}}</p>

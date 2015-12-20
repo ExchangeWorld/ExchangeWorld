@@ -31,7 +31,7 @@ function SeekController(
 	vm.onMouseOut      = onMouseOut;
 	vm.postfixImageUrl = postfixImageUrl;
 	vm.postfixImageUrl = postfixImageUrl;
-	vm.loading             = false;
+	vm.loading             = true;
 
 	////////////////
 	

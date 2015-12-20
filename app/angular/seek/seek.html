@@ -130,18 +130,17 @@
 
 </md-content>
 
-<div
-	ng-show="vm.loading"
-	class="md-scroll-mask"
-	style="z-index: 100; bottom:-30%"
-	aria-hidden="true"
+
+<div 
+	ng-show="vm.loading" 
+	class="md-scroll-mask" 
+	style="z-index: 100; bottom:-50%" 
 >
 	<md-progress-circular
 		class="md-primary"
-		md-mode='indeterminate'
-		style="margin:200px auto;"
-	>
-	</md-progress-circular>
+		md-mode="indeterminate"
+		style="margin:150px auto;"
+	></md-progress-circular>
 
 	<div class="md-scroll-mask-bar"></div>
 </div>

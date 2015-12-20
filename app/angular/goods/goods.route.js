@@ -29,9 +29,7 @@ function getStates() {
 									$state.go('root.404');
 								}
 								return data[0];
-							}, (error) => {
-								$state.go('root.404');
-							});
+							}, error => $state.go('root.404'));
 					},
 				},
 			}
@@ -49,7 +47,7 @@ function getStates() {
 							.then(function(data) {
 								return _.isArray(data) ? data[0].owner_uid: data.owner_uid;
 							})
-							.catch(function() { return undefined; });
+							.catch( () => undefined );
 					},
 					/** @ngInject */
 					myGoods: (goodsService, $localStorage)=> {
@@ -63,9 +61,7 @@ function getStates() {
 							});
 					},
 					/** @ngInject */
-					queuing_goods_gid: ($stateParams)=>{
-						return parseInt($stateParams.gid, 10); 
-					}
+					queuing_goods_gid: $stateParams => parseInt($stateParams.gid, 10),
 				},
 				/** @ngInject */
 				onEnter: (goodsService, myGoods, host_uid, queuing_goods_gid, $rootScope)=> {
@@ -94,7 +90,7 @@ function getStates() {
 					},
 				},
 				/** @ngInject */
-				onEnter: (goodsService, queuingGoods, host_goods_gid, $rootScope)=> {
+				onEnter: (goodsService, queuingGoods, host_goods_gid, $rootScope) => {
 					$rootScope.historyCounter++;
 					goodsService.showQueuingBox(null, queuingGoods, host_goods_gid);
 				}

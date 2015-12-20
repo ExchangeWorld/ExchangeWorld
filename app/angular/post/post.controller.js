@@ -29,6 +29,7 @@ function PostController(
 	vm.onSubmit          = onSubmit;
 	vm.loading           = false;
 	vm.availableCategory = AvailableCategory.slice(1);
+	vm.onCategoryChanged = onCategoryChanged;
 	$scope.$on('positionMarked', positionMarked);
 
 
@@ -40,6 +41,7 @@ function PostController(
 	}
 
 	$scope.$watch('vm.imgSelect', ()=> {
+		console.log(vm.imgSelect);
 		if(!vm.imgSelect) return;
 		if(!vm.imgEncoded.length) vm.imgEncoded = vm.imgSelect;
 		else {
@@ -47,6 +49,37 @@ function PostController(
 			vm.imgEncoded = vm.imgEncoded.concat(vm.imgSelect);
 		}
 	});
+
+	function onCategoryChanged(category) {
+		// console.log(category);
+		if (
+			category === 'Christmas' &&
+			vm.imgEncoded.length === 0
+		) {
+			// console.log();
+			getBase64FromImageUrl('../../images/Gift.jpg');
+		}
+	}
+
+	function getBase64FromImageUrl(url) {
+		let img = new Image();
+		img.setAttribute('crossOrigin', 'anonymous');
+
+		img.onload = function () {
+			var canvas = document.createElement("canvas");
+			canvas.width = this.width;
+			canvas.height = this.height;
+
+			var ctx = canvas.getContext("2d");
+			ctx.drawImage(this, 0, 0);
+
+			var dataURL = canvas.toDataURL("image/png");
+
+			vm.imgEncoded.push({base64: dataURL.replace(/^data:image\/(png|jpg);base64,/, "")});
+		};
+
+		img.src = url;
+	}
 
 	function onSubmit() {
 		if(!$localStorage.user) {
@@ -96,7 +129,7 @@ function PostController(
 						.title('未上傳圖片')
 						.content('請上傳一張或多張物品的相片.')
 						.ok('知道了!')
-					);
+				);
 			} else {
 				vm.loading = true;
 				/**

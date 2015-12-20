@@ -29,10 +29,10 @@ function getStates() {
 					},
 					/** @ngInject */
 					mapSize: function($window) {
-						if($window.innerWidth > 960) {
-							return `${parseInt($window.innerWidth*0.25)}x${parseInt(($window.innerHeight-56)*0.3)}`;
+						if ($window.innerWidth > 960) {
+							return `${parseInt($window.innerWidth*0.25, 10)}x${parseInt(($window.innerHeight-56)*0.3, 10)}`;
 						} else {
-							return `${parseInt($window.innerWidth)}x200`;
+							return `${parseInt($window.innerWidth, 10)}x200`;
 						}
 					}
 				},

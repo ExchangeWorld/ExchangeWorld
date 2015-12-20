@@ -1,3 +1,5 @@
+/* global byuserGen */
+
 'use strict';
 
 const exchangeModule = require('./exchange.module');

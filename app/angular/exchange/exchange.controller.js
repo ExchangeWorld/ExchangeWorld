@@ -83,8 +83,7 @@ function ExchangeController(
 		}
 	}
 
-	var timer;
-	timer = $interval(updateChat, 5000);
+	var timer = $interval(updateChat, 5000);
 	function updateChat() {
 		if(!vm.exchange) return;
 		exchangeService
@@ -93,7 +92,7 @@ function ExchangeController(
 	}
 
 	function loadMore() {
-		var deferred = $q.defer();
+		const deferred = $q.defer();
 		offset += amount;
 
 		exchangeService
@@ -112,8 +111,12 @@ function ExchangeController(
 		offset = 0;
 		vm.exchange = vm.exchangeList[index];
 
-		vm.meDesc          = $sce.trustAsHtml(marked(vm.exchange.details.goods[vm.exchange.lookupTable.me].description));
-		vm.otherDesc       = $sce.trustAsHtml(marked(vm.exchange.details.goods[vm.exchange.lookupTable.other].description));
+		vm.meDesc = $sce.trustAsHtml(
+			marked(vm.exchange.details.goods[vm.exchange.lookupTable.me].description)
+		);
+		vm.otherDesc = $sce.trustAsHtml(
+			marked(vm.exchange.details.goods[vm.exchange.lookupTable.other].description)
+		);
 
 		updateChat();
 		agreed();
@@ -126,9 +129,7 @@ function ExchangeController(
 
 	function onClickComplete(ev) {
 		exchangeService
-			.showCompleteExchange(ev, vm.exchange, vm.myid, ()=> { 
-				$state.reload();
-			});
+			.showCompleteExchange(ev, vm.exchange, vm.myid, () => $state.reload());
 		//agreed();
 	}
 
@@ -138,8 +139,9 @@ function ExchangeController(
 			.content('您確定要放棄這個交易嗎？<br/>此動作無法恢復！')
 			.ariaLabel('Delete Exchange')
 			.ok('確定')
-			.cancel('取消')
-			.targetEvent(ev);
+			.cancel('取消');
+			// .targetEvent(ev);
+
 		if (confirm) {
 			$mdDialog
 				.show(confirm)
@@ -180,7 +182,7 @@ function ExchangeController(
 	function dominateColor(goods, who) {
 		// console.log(goods);
 		var image = document.getElementById(`img_${who}`);
-		image.onload = ()=> {
+		image.onload = () => {
 			var pallete = ct.getPalette(image, 2);
 			goods.bgStyle = {
 				"background-color": `rgb(${pallete[0][0]}, ${pallete[0][1]}, ${pallete[0][2]})`,

@@ -30,11 +30,13 @@ out '[5] Copying the builts to Master ...'
 job 'cp -rf css/       ' + path.resolve(working_path, '../../ExchangeWorld/build'),         {cwd: path.resolve(working_path, './build/')}
 job 'cp -rf js/        ' + path.resolve(working_path, '../../ExchangeWorld/build'),         {cwd: path.resolve(working_path, './build/')}
 job 'cp -rf index.html ' + path.resolve(working_path, '../../ExchangeWorld/build'),         {cwd: path.resolve(working_path, './build/')}
+job 'cp -rf xmas-share.html ' + path.resolve(working_path, '../../ExchangeWorld/build'),         {cwd: path.resolve(working_path, './build/')}
 job 'cp -rf images/*   ' + path.resolve(working_path, '../../ExchangeWorld/images_global'), {cwd: path.resolve(working_path, './build/')}
 job 'rm -rf            ' + path.resolve(working_path, '../../ExchangeWorld/build/js/main.js.map')
 job 'cp -rf css/       ' + path.resolve(working_path, '../../ExchangeWorld/build'),         {cwd: path.resolve(working_path, './build/')}
 job 'cp -rf js/        ' + path.resolve(working_path, '../../ExchangeWorld/build'),         {cwd: path.resolve(working_path, './build/')}
 job 'cp -rf index.html ' + path.resolve(working_path, '../../ExchangeWorld/build'),         {cwd: path.resolve(working_path, './build/')}
+job 'cp -rf xmas-share.html ' + path.resolve(working_path, '../../ExchangeWorld/build'),         {cwd: path.resolve(working_path, './build/')}
 job 'cp -rf images/*   ' + path.resolve(working_path, '../../ExchangeWorld/images_global'), {cwd: path.resolve(working_path, './build/')}
 job 'rm -rf            ' + path.resolve(working_path, '../../ExchangeWorld/build/js/main.js.map')
 out ''

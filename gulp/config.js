@@ -29,6 +29,7 @@ module.exports = {
 	'views': {
 		'watch': [
 			'app/index.html',
+			'app/xmas-share.html',
 			'app/angular/**/*.html'
 		],
 		'src': 'app/angular/**/*.html',

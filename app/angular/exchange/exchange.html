@@ -135,6 +135,15 @@
 						</div>
 					</md-button>
 					<p class="vertical isDown" ng-show="vm.agreed">已確認交換</p>
+					<a 
+						ng-show="vm.agreed && vm.exchange.details.goods[vm.exchange.lookupTable.other].category === 'Christmas'"
+						class="md-button white-btn btn-rwd" href="#" 
+						socialshare socialshare-provider="facebook"
+						socialshare-url="http://exwd.csie.org/xmas-share.html"
+					>
+						<md-icon md-font-set="material-icons">share</md-icon>
+						<span hide-sm>分享</span>
+					</a>
 				</div>
 				<md-card flex="40" flex-sm="35" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].bgStyle">
 					<div layout="column">

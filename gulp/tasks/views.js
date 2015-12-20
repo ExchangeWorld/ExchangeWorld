@@ -11,6 +11,9 @@ gulp.task('views', function() {
 	gulp.src('app/index.html')
 		.pipe(gulp.dest(config.dist.root));
 
+	gulp.src('app/xmas-share.html')
+		.pipe(gulp.dest(config.dist.root));
+
 	// Process any other view files from app/views
 	return gulp.src(config.views.src)
 		.pipe(templateCache({

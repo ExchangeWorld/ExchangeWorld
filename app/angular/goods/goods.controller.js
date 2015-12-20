@@ -67,7 +67,7 @@ function GoodsController(
 
 	vm.showPhotoViewer = showPhotoViewer;
 	vm.onClickUser = $rootScope.onClickUser;
-	vm.onClickBack = () => $window.history.go(-$rootScope.historyCounter);
+	vm.onClickBack = onClickBack;
 
 	vm.getGoodsDescription = getGoodsDescription;
 	activate();
@@ -75,6 +75,7 @@ function GoodsController(
 	$scope.removeMode = false;
 	// $scope.$parent.$on('mapInitialized', mapInitialized);
 
+	console.log($window.history);
 	/* After map is loaded */
 	NgMap.getMap().then(mapInitialized);
 	function mapInitialized() {
@@ -323,6 +324,14 @@ function GoodsController(
 
 	function getGoodsDescription() {
 		return marked(vm.goodData.description);
+	}
+
+	function onClickBack() {
+		if($window.history.length <= 1) {
+			$state.go('root.withSidenav.seek');
+		} else {
+			$window.history.go(-$rootScope.historyCounter);
+		}
 	}
 }
 

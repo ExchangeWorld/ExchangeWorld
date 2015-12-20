@@ -92,7 +92,7 @@ function NavbarController(
 				$state.includes("root.withSidenav.goods") ||
 				$state.includes("root.oneCol.goods")
 			) {
-				// consol	
+				$state.go('root.withSidenav.' + state[contentIndex]);
 			} else {
 				$state.go('root.withSidenav.' + state[contentIndex]);
 			}

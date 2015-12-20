@@ -28,10 +28,10 @@
 					</div>
 				</div>
 
-				<div layout="row" layout-sm="column" layout-align="center center">
+				<div layout="row" layout-xs="column" layout-align="center center">
 					<div 
 						layout="column" 
-						layout-sm="row" layout-align="center center" 
+						layout-xs="row" layout-align="center center" 
 						class="note profile"
 					>
 						<p class="md-title text-ex follow reset-follow xmas-font">追隨中</p>
@@ -44,7 +44,7 @@
 					</div>
 					<div 
 						layout="column" 
-						layout-sm="row" layout-align="center center" 
+						layout-xs="row" layout-align="center center" 
 						class="note profile"
 					>
 						<p class="md-title text-ex follow reset-follow xmas-font">被追蹤</p>
@@ -72,11 +72,11 @@
 				>
 					<div ng-show="!vm.isFollowed">
 						<md-icon md-font-set="material-icons">person_add</md-icon>
-						<span hide-sm>&nbsp;追隨</span>
+						<span hide-sm hide-xs>&nbsp;追隨</span>
 					</div>
 					<div ng-show="vm.isFollowed">
 						<md-icon md-font-set="material-icons">remove_circle</md-icon>
-						<span hide-sm>&nbsp;取消追隨</span>
+						<span hide-sm hide-xs>&nbsp;取消追隨</span>
 					</div>
 				</md-button>
 				<md-button 
@@ -87,7 +87,7 @@
 					ng-click="vm.onClickSendMsg($event, vm.profile.uid)"
 				>
 					<md-icon md-font-set="material-icons">chat</md-icon>
-					<span hide-sm>&nbsp;送訊息</span>
+					<span hide-sm hide-xs>&nbsp;送訊息</span>
 				</md-button>
 				<span flex="10"></span>
 			</div>
@@ -114,7 +114,7 @@
 									請於下方輸入您想要的物品
 								</p>
 								<md-input-container style="margin-top: 10px;">
-									<label>您想要的物品</label>
+									<label style="margin-top: -20px">您想要的物品</label>
 									<textarea 
 										ng-model="vm.profile.wishlist" 
 										ng-disabled="vm.isReadOnly" style="color:white;"
@@ -153,6 +153,7 @@
 				</div>
 			</md-content>
 		</md-tab>
+
 		<md-tab label="等待交換({{ vm.myGoodsPending.length }})">
 			<md-content class="xmas" layout-padding>
 				<div 
@@ -162,15 +163,16 @@
 				>
 					<img class="img-null" src="../../images/emoji_null.png">
 				</div>
+
 				<div layout="column" layout-align="center center">
 					<md-card 
 						class="md-whiteframe-z3 item-profile xmas-card" 
 						ng-repeat="goods in vm.myGoodsPending" 
 						ng-click="vm.onClickGoods(goods.gid)"
 					>
-						<md-card-content layout-gt-sm="row">
+						<md-card-content layout-gt-xs="row">
 							<div 
-								flex-gt-sm="40" 
+								flex-gt-xs="40" 
 								layout layout-align="center center" 
 								style=" height:200px; width:auto; border-radius:10px;" 
 								ng-style="goods.bgStyle"
@@ -190,7 +192,8 @@
 									ng-show="goods.category === 'Christmas'" 
 								/>
 							</div>
-							<div offset-gt-sm="5" flex-gt-sm="55" layout-gt-sm="column">
+
+							<div offset-gt-xs="5" flex-gt-xs="55" layout-gt-xs="column">
 								<div layout layout-align="center center">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
@@ -235,14 +238,19 @@
 									style="max-width: 100%; max-height:100%; cursor:pointer;" 
 								/>
 							</div>
-							<div offset-gt-sm="5" flex-gt-xs="55" layout-gt-xs="column">
+							<div 
+								offset-gt-xs="5" flex-gt-xs="55" 
+								layout-gt-xs="column"
+							>
 								<div layout="row" layout-align="center center">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
+
 								<div flex layout layout-align="center center">
 									<div ng-bind-html="vm.getHTMLDesc(goods.description)">
 									</div>
 								</div>
+
 								<div layout layout-align="center start">
 									<div ng-repeat="n in vm.getNumber(goods.rate) track by $index">
 										<img src="../../images/star-on.svg" />
@@ -251,6 +259,7 @@
 										<img src="../../images/star-off.svg" />
 									</div>
 								</div>
+								
 							</div>
 						</md-card-content>
 					</md-card>
@@ -260,17 +269,43 @@
 
 		<md-tab label="關注的物品({{ vm.myStar.length }})">
 			<md-content class="xmas" layout-padding>
-				<div flex layout layout-align="center center" ng-show="vm.myStar.length === 0">
+				<div 
+					flex 
+					layout layout-align="center center" 
+					ng-show="vm.myStar.length === 0"
+				>
 					<img class="img-null" src="../../images/emoji_null.png">
 				</div>
+
 				<div layout="column" layout-align="center center">
-					<md-card class="md-whiteframe-z3 item-profile xmas-card" ng-repeat="goods in vm.myStar" ng-click="vm.onClickGoods(goods.gid)">
-						<md-card-content layout-gt-sm="row">
-							<div flex-gt-sm="40" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
-								<img id="img_{{goods.gid}}" crossorigin="anonymous" ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" ng-show="goods.category !== 'Christmas'" />
-								<img id="img_{{goods.gid}}" crossorigin="anonymous" src="./../images/Gift(Small).jpg" style="max-width: 100%; max-height:100%; cursor:pointer;" ng-show="goods.category === 'Christmas'" />
+					<md-card 
+						class="md-whiteframe-z3 item-profile xmas-card" 
+						ng-repeat="goods in vm.myStar" 
+						ng-click="vm.onClickGoods(goods.gid)"
+					>
+						<md-card-content layout-gt-xs="row">
+							<div 
+								flex-gt-xs="40" 
+								layout layout-align="center center" 
+								style=" height:200px; width:auto; border-radius:10px;" 
+								ng-style="goods.bgStyle"
+							>
+								<img 
+									id="img_{{goods.gid}}" 
+									crossorigin="anonymous" 
+									ng-src="{{ goods.photo_path[0] }}" 
+									style="max-width: 100%; max-height:100%; cursor:pointer;" 
+									ng-show="goods.category !== 'Christmas'" 
+								/>
+								<img 
+									id="img_{{goods.gid}}" 
+									crossorigin="anonymous" 
+									src="./../images/Gift(Small).jpg" 
+									style="max-width: 100%; max-height:100%; cursor:pointer;" 
+									ng-show="goods.category === 'Christmas'" 
+								/>
 							</div>
-							<div offset-gt-sm="5" flex-gt-sm="55" layout-gt-sm="column">
+							<div offset-gt-xs="5" flex-gt-xs="55" layout-gt-xs="column">
 								<div layout layout-align="center center">
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>

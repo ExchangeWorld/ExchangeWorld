@@ -72,9 +72,7 @@ function ProfileController(
 	
 		profileService
 			.getFavoriteSum($stateParams.uid) 
-			.then(function(data) { 
-				vm.favSum = data;
-			});
+			.then(data => vm.favSum = data);
 			
 		/**
 		 * only do this is desktop mode.
@@ -82,16 +80,21 @@ function ProfileController(
 		 */
 		if($state.current.name === 'root.withSidenav.profile') {
 			$timeout(function(){
-				[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
-					dominateColor(goods);
-				});
+				[
+					...vm.myStar, 
+					...vm.myGoodsPending, 
+					...vm.myGoodsExchanged
+
+				].forEach(goods => ()=> dominateColor(goods));
+
 			}, 500);
 		} else {
-			[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
-				goods.bgStyle = {
-					"background-color": 'rgb(0, 0, 0)'
-				};
-			});
+			[
+				...vm.myStar, 
+				...vm.myGoodsPending, 
+				...vm.myGoodsExchanged
+
+			].forEach( goods => goods.bgStyle = {"background-color": 'rgb(0, 0, 0)'});
 		}
 		$rootScope.$broadcast('goodsChanged', vm.myGoodsPending);
 	}
@@ -129,19 +132,15 @@ function ProfileController(
 		if(!vm.isReadOnly) {
 			profileService
 				.editProfile(vm.profile)
-				.then(function(data) {
-					logger.success('更新成功', data, 'EDIT');
-				})
-				.catch(function(err) { 
-					logger.error('錯誤', err, 'Error');
-				});
+				.then(data => logger.success('更新成功', data, 'EDIT'))
+				.catch(err => logger.error('錯誤', err, 'Error'));
 		}
 		vm.isReadOnly = !vm.isReadOnly;
 	}
 	
 	function dominateColor(goods) {
 		var image = document.getElementById(`img_${goods.gid}`);
-		image.onload = ()=> {
+		image.onload = () => {
 			var color = ct.getColor(image); 
 			goods.bgStyle = {
 				"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`

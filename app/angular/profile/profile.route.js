@@ -14,10 +14,8 @@ var resolve = {
 	profile : function (profileService, $state, $stateParams) {
 		return profileService
 			.getProfile($stateParams.uid)
-			.then(function(data) { 
-				return data; 
-			})
-			.catch(function() { return undefined; });
+			.then(data => data)
+			.catch(() => undefined);
 	},
 	/** @ngInject */
 	myGoods : function($stateParams, profileService) {
@@ -36,7 +34,9 @@ var resolve = {
 			.getMyFavorite($stateParams.uid)
 			.then(function(data) {
 				return data.map(function(g) {
-					if (_.isString(g.good.photo_path)) g.good.photo_path = JSON.parse(g.good.photo_path);
+					if (_.isString(g.good.photo_path)) {
+						g.good.photo_path = JSON.parse(g.good.photo_path);
+					}
 					return g.good;
 				});
 			});

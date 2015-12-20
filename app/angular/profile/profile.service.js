@@ -1,3 +1,4 @@
+/* global byuserGen */
 'use strict';
 
 const profileModule = require('./profile.module');
@@ -32,7 +33,7 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 				} else if (_.isObject(data)) {
 					defer.resolve(data);
 				}
-			}, (error)=> {
+			},  error => {
 				defer.reject({ error: error });
 				exception.catcher('[Profiles Service] getProfile error: ')(error);
 			});
@@ -46,11 +47,8 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 		Restangular
 			.all('star/toOwner')
 			.getList({ owner_uid: uid })
-			.then(function(data) {
-				defer.resolve(data);
-			}, (error) => {
-				return exception.catcher('[Profiles Service] getFavoriteSum error: ')(error);
-			});
+			.then(data => defer.resolve(data))
+			.catch(error => exception.catcher('[profiles Service] getFavoriteSum error: ')(error));
 
 		return defer.promise;
 	}
@@ -63,12 +61,9 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 
 		profile
 			.put()
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[profiles Service] updateprofile error: ')(error);
-			});
+			.then(data => defer.resolve(data))
+			.catch(error => exception.catcher('[profiles Service] updateprofile error: ')(error));
+
 		return defer.promise;
 	}
 
@@ -118,9 +113,8 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 					});
 					defer.resolve(data);
 				}
-			}, (error)=> {
-				return exception.catcher('[profile Service] getProfile error: ')(error);
-			});
+			}, error => exception.catcher('[profile Service] getProfile error: ')(error));
+			
 		return defer.promise;
 	}
 

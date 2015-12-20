@@ -275,7 +275,8 @@
 									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
 								</div>
 								<div flex layout layout-align="center center">
-									<p>{{ goods.description }}</p>
+									<div ng-bind-html="vm.getHTMLDesc(goods.description)">
+									</div>
 								</div>
 							</div>
 						</md-card-content>

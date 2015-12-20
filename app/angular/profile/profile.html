@@ -1,30 +1,75 @@
-<md-content class="xmas" resize ng-style="resizeWithOffset(56)">
-	<div layout="row" class="profile-top" layout-align="center center">
-		<div layout layout-align="center center" class="img-profile" ng-style="{'background-image':'url({{ vm.profile.photo_path }})'}" style="border: 2px solid #ff2222;">
+<md-content class="xmas" resize ng-style="resizeWithOffset(56)" style="overflow-y: scroll;">
+
+	<div 
+		layout="row" layout-align="center center"
+		class="profile-top" 
+	>
+		<div 
+			layout layout-align="center center" 
+			class="img-profile" 
+			ng-style="{'background-image':'url({{ vm.profile.photo_path }})'}" 
+			style="border: 2px solid #ff2222;"
+		>
 		</div>
+
 		<div flex-gt-sm="60" flex-sm="50" layout="column">
 			<div layout="column">
 				<div layout="column" layout-align="center center">
-					<h4 class="md-headline xmas-font" style="margin:8px 0; text-align: center;">{{ vm.profile.name }}</h4>
+					<h4 
+						class="md-headline xmas-font" 
+						style="margin:8px 0; text-align: center;"
+					>
+						{{ vm.profile.name }}
+					</h4>
 					<div layout="row" layout-align="center center">
 						<md-tooltip>被關注總量</md-tooltip>
 						<i class="material-icons heart-seek">favorite</i>
 						<span class="md-subhead xmas-font">{{ vm.favSum.length }}</span>
 					</div>
 				</div>
+
 				<div layout="row" layout-sm="column" layout-align="center center">
-					<div layout="column" layout-sm="row" layout-align="center center" class="note profile">
+					<div 
+						layout="column" 
+						layout-sm="row" layout-align="center center" 
+						class="note profile"
+					>
 						<p class="md-title text-ex follow reset-follow xmas-font">追隨中</p>
-						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'following')">{{ vm.profile.followings.length }}</a>
+						<a 
+							class="profile" 
+							ng-click="vm.onClickFollow(vm.profile.uid, 'following')"
+						>
+							{{ vm.profile.followings.length }}
+						</a>
 					</div>
-					<div layout="column" layout-sm="row" layout-align="center center" class="note profile">
+					<div 
+						layout="column" 
+						layout-sm="row" layout-align="center center" 
+						class="note profile"
+					>
 						<p class="md-title text-ex follow reset-follow xmas-font">被追蹤</p>
-						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'follower')">{{ vm.followerCount }}</a>
+						<a 
+							class="profile" 
+							ng-click="vm.onClickFollow(vm.profile.uid, 'follower')"
+						>
+							{{ vm.followerCount }}
+						</a>
 					</div>
 				</div>
 			</div>
-			<div offset="10" layout="row" layout-align="center center" style="margin-top: 10px;">
-				<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
+
+			<div 
+				offset="10" 
+				layout="row" layout-align="center center" 
+				style="margin-top: 10px;"
+			>
+				<md-button 
+					flex 
+					class="md-raised md-primary btn-rwd" 
+					ng-show="!vm.isMe" 
+					ng-disabled="!vm.isLoggedIn" 
+					ng-click="vm.onClickAddFollowing(vm.profile.uid)"
+				>
 					<div ng-show="!vm.isFollowed">
 						<md-icon md-font-set="material-icons">person_add</md-icon>
 						<span hide-sm>&nbsp;追隨</span>
@@ -34,7 +79,13 @@
 						<span hide-sm>&nbsp;取消追隨</span>
 					</div>
 				</md-button>
-				<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)">
+				<md-button 
+					flex 
+					class="md-raised md-primary btn-rwd" 
+					ng-show="!vm.isMe" 
+					ng-disabled="!vm.isLoggedIn" 
+					ng-click="vm.onClickSendMsg($event, vm.profile.uid)"
+				>
 					<md-icon md-font-set="material-icons">chat</md-icon>
 					<span hide-sm>&nbsp;送訊息</span>
 				</md-button>
@@ -42,6 +93,7 @@
 			</div>
 		</div>
 	</div>
+
 	<md-divider class="info_container for_input small" style="margin-bottom: 0px"></md-divider>
 	<md-tabs md-dynamic-height md-center-tabs md-swipe-content md-no-ink>
 		<md-tab label="願望清單">

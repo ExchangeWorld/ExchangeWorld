@@ -41,7 +41,6 @@ function PostController(
 	}
 
 	$scope.$watch('vm.imgSelect', ()=> {
-		console.log(vm.imgSelect);
 		if(!vm.imgSelect) return;
 		if(!vm.imgEncoded.length) vm.imgEncoded = vm.imgSelect;
 		else {

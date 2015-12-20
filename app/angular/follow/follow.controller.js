@@ -25,12 +25,8 @@ function FollowController($state, followService, $stateParams, $rootScope) {
 			
 			followService
 				.getFollow($stateParams.uid, $stateParams.type)
-				.then(function(data) {
-					vm.followData = data;
-				})
-				.catch(function() {
-					vm.followData = undefined;
-				});
+				.then(data => vm.followData = data)
+				.catch(() => vm.followData = undefined);
 		}
 	}
 }

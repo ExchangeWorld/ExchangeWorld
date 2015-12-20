@@ -1,6 +1,6 @@
 <md-content 
 	class="xmas" 
-	style="overflow-y: hidden; padding: 0 20px;"
+	style="overflow-y: auto; padding: 0 20px;"
 >
 	<div 
 		layout="row" layout-align="center center" 
@@ -38,11 +38,19 @@
 		</div>
 		<div flex flex-sm="25" layout layout-align="center center">
 			<md-button 
-				class="white-btn btn-rwd" 
+				class="md-primary" 
 				ng-disabled="!vm.isLoggedIn" 
 				ng-click="vm.onClickQueue($event)"
+				style="background-color: rgb(67,160,71); color: white"
 			>
-				<md-icon md-font-set="material-icons">remove_red_eye</md-icon>
+				<!-- <md-icon md-font-set="material-icons">
+					remove_red_eye
+				</md-icon> -->
+				<img 
+					src="../../images/Logo(ex).png" 
+					style="width: 24px; height: 24px; vertical-align: middle;"
+				/>
+
 				<span hide-sm hide-xs>{{ vm.isMe ? '看誰排' : '我要排' }} </span>
 				<span>{{vm.queuingList.length}}</span>
 			</md-button>

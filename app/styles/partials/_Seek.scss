@@ -5,11 +5,11 @@
 
 .grid__columns {
 	-webkit-column-gap: 10px;
-	-webkit-column-fill: auto;
+	// -webkit-column-fill: auto;
 	-moz-column-gap: 10px;
-	-moz-column-fill: auto;
+	// -moz-column-fill: auto;
 	column-gap: 10px;
-	column-fill: auto;
+	// column-fill: auto;
 	.card {
 		-webkit-column-break-inside: avoid;
 		-moz-column-break-inside: avoid;

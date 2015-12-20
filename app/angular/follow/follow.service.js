@@ -25,9 +25,8 @@ function followService(Restangular, $q, exception) {
 				if (_.isArray(data)) {
 					defer.resolve(data);
 				} 
-			}, (error)=> {
-				return exception.catcher('[Follow Service] getFollow error: ')(error);
-			});
+			}, error => exception.catcher('[Follow Service] getFollow error: ')(error));
+			
 		return defer.promise;
 	}
 }

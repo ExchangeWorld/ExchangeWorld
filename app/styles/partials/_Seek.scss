@@ -15,7 +15,7 @@
 		-moz-column-break-inside: avoid;
 		column-break-inside: avoid;
 		display: inline-block;
-		width: 100%;
+		width: 95%;
 		margin: 0 auto;
 		margin-bottom: 10px;
 		box-shadow: 0 3px 3px 0 rgba(0,0,0,0.15);
@@ -42,7 +42,7 @@
 
 @media screen and (min-width: 960px) {
 	.grid__columns {
-		padding-left: 0;
+		padding-left: 1%;
 		column-count: 3;
 		-moz-column-count: 3;
 		-webkit-column-count: 3;

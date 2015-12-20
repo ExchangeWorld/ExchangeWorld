@@ -12,6 +12,7 @@ mapModule.controller('MapCtrl', MapController);
 /** @ngInject */
 function MapController(
 	NgMap,
+	$window,
 	$scope,
 	$rootScope,
 	geolocation,
@@ -379,6 +380,7 @@ function MapController(
 		if ($state.current.title === 'post') {
 			if (vm.marker) {
 				vm.marker.setPosition(e.latLng);
+				vm.infowindow.setPosition(e.latLng);
 			} else {
 				vm.marker = new google.maps.Marker({
 					position: e.latLng,
@@ -386,9 +388,28 @@ function MapController(
 					animation: google.maps.Animation.DROP,
 					map: map,
 				});
+				// console.log($window.innerWidth);
+
+				if ( $window.innerWidth <= 960 ) {
+					global.toggleSidenav = () => $mdSidenav('left').toggle();
+					vm.infowindow = new google.maps.InfoWindow({
+						content: [
+							'<button ',
+								'class="md-raised md-warn md-button" ',
+								'onclick="toggleSidenav()"',
+							'>',
+								'放置此處',
+							'</button>',
+						].join(''),
+					});
+
+					vm.infowindow.open(map, vm.marker);
+				}
+				
 
 				google.maps.event.addListener(vm.marker, 'click', function(e) {
 					$rootScope.$broadcast('positionMarked', e.latLng);
+					vm.infowindow.open(map, vm.marker);
 				});
 			}
 			$rootScope.$broadcast('positionMarked', e.latLng);

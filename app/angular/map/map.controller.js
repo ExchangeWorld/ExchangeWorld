@@ -380,6 +380,7 @@ function MapController(
 		if ($state.current.title === 'post') {
 			if (vm.marker) {
 				vm.marker.setPosition(e.latLng);
+				vm.infowindow.open(map, vm.marker);
 				vm.infowindow.setPosition(e.latLng);
 			} else {
 				vm.marker = new google.maps.Marker({

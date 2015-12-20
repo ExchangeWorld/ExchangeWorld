@@ -26,6 +26,7 @@
 					<label>物品類別</label>
 					<md-select 
 						ng-model="vm.goodsCategory" 
+						ng-change="vm.onCategoryChanged(vm.goodsCategory)"
 						aria-label="good.cate"
 					>
 						<md-option

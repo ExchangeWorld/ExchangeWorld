@@ -129,6 +129,7 @@ function GoodsController(
 				.then(function(data) {
 					goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
 					logger.success('更新成功！', data, 'Edit');
+					$state.reload();
 				})
 				.catch(function(err) { 
 					logger.error('錯誤', err, 'Error');

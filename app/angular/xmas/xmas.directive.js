@@ -15,12 +15,15 @@ function mapBlock() {
   return directive;
 }
 
-function snowing(scope, element) {
+function snowing(scope, element, attr) {
   var canvas = element[0].children[0];
   var ctx = canvas.getContext('2d');
   
   //canvas dimensions
   var W = window.innerWidth > 960 ? window.innerWidth * 0.5 : window.innerWidth * 0.8;
+  if (attr.hasOwnProperty('fullWidth')) {
+    W = window.innerWidth;
+  }
   var H = window.innerHeight;
   canvas.width = W;
   canvas.height = H;

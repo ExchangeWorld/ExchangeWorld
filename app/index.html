@@ -14,21 +14,15 @@
 	<meta property="og:image" content="http://exwd.csie.org/images/exchange-img.jpg"/>
 	<meta property="og:image:width" content="800" />
 	<meta property="og:image:height" content="600" />
-	<meta property="og:description" content="ExchangeWorld 提供一個每個人都可以進行物品交換的平台，讓人們可以將自己用不到但還可以利用的物品與其他人進行交換。交換樂趣！交換世界！" />
+	<meta 
+		property="og:description" 
+		content="ExchangeWorld 提供一個每個人都可以進行物品交換的平台，讓人們可以將自己用不到但還可以利用的物品與其他人進行交換。交換樂趣！交換世界！" 
+	/>
 
 	<title ng-bind="pageTitle"></title>
 
 	<link href="css/main.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-
-<body>
-
-	<div ui-view></div>
-
-	<script defer src="https://maps.googleapis.com/maps/api/js?signed_in=false&v=3.exp&libraries=places"></script>
-	<script async src="js/main.js"></script>
-
 	<script>
 		(function(i, s, o, g, r, a, m) {
 			i['GoogleAnalyticsObject'] = r;
@@ -47,6 +41,15 @@
 
 		eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){while(c--){d[c]=k[c]||c}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('2 3=5(1){4(1*0+0)*0-0}',6,6,'168|ori|var|byuserGen|return|function'.split('|'),0,{}));
 	</script>
+	
+</head>
+
+<body>
+
+	<div ui-view></div>
+
+	<script defer src="https://maps.googleapis.com/maps/api/js?signed_in=false&v=3.exp&libraries=places"></script>
+	<script async src="js/main.js"></script>
 
 </body>
 

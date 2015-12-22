@@ -14,7 +14,7 @@ require('./exchange/exchange.module');
 require('./post/post.module');
 require('./goods/goods.module');
 require('./seek/seek.module');
-
+require('./xmas/xmas.module');
 
 // create and bootstrap application
 angular.element(document).ready(function() {
@@ -31,6 +31,7 @@ angular.element(document).ready(function() {
 		'app.profile',
 		'app.follow',
 		'app.exchange',
+		'app.xmas',
 	];
 
 	// mount on window for testing

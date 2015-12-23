@@ -130,6 +130,24 @@ function PostController(
 						.content('請上傳一張或多張物品的相片.')
 						.ok('知道了!')
 				);
+			} else if(!vm.goodsName) {
+				$mdDialog.show(
+					$mdDialog.alert()
+						.parent(angular.element(document.querySelector('#popupContainer')))
+						.clickOutsideToClose(true)
+						.title('未輸入物品名稱')
+						.content('請輸入物品名稱.')
+						.ok('知道了!')
+				);
+			} else if(vm.goodsDescriptions) {
+				$mdDialog.show(
+					$mdDialog.alert()
+						.parent(angular.element(document.querySelector('#popupContainer')))
+						.clickOutsideToClose(true)
+						.title('未輸入物品敘述')
+						.content('請輸入物品敘述.')
+						.ok('知道了!')
+				);
 			} else {
 				vm.loading = true;
 				/**

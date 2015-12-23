@@ -136,7 +136,7 @@
 					</md-button>
 					<p class="vertical isDown" ng-show="vm.agreed">已確認交換</p>
 					<a 
-						ng-show="vm.agreed && vm.exchange.details.goods[vm.exchange.lookupTable.other].category === 'Christmas'"
+						ng-disabled="!vm.agreed"
 						class="md-button md-fab white-btn" href="#" 
 						socialshare socialshare-provider="facebook"
 						socialshare-url="http://exwd.csie.org/xmas-share.html"
@@ -180,7 +180,7 @@
 										ng-bind-html="vm.otherDesc"
 										ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].fontcolor[1]"
 										class="md-subhead text-ex ex-story" 
-										style="color:#7f8588; max-width: 100%; font-size:18px;"
+										style="max-width: 100%; font-size:14px;"
 									>
 									</div>
 								</div>

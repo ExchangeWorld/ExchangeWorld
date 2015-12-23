@@ -139,7 +139,7 @@ function PostController(
 						.content('請輸入物品名稱.')
 						.ok('知道了!')
 				);
-			} else if(vm.goodsDescriptions) {
+			} else if(!vm.goodsDescriptions) {
 				$mdDialog.show(
 					$mdDialog.alert()
 						.parent(angular.element(document.querySelector('#popupContainer')))

@@ -18,16 +18,27 @@
 	<div layout="column" layout-gt-md="row" class="layout-ex">
 		<div hide-gt-md>
 			<div layout layout-align="center center" style="margin-top: 20px;">
-				<md-button class="md-icon-button md-primary" ng-click="vm.openLeftMenu()">
+				<md-button class="md-icon-button md-primary md-hue-1" ng-click="vm.openLeftMenu()">
 					<div layout layout-align="center">
 						<i class="material-icons md-36">dns</i>
 					</div>
 				</md-button>
-				<md-button class="md-icon-button md-primary" ng-click="vm.openRightMenu()" ng-show="vm.exchange !== undefined">
+				<md-button class="md-icon-button md-primary md-hue-1" ng-click="vm.openRightMenu()" ng-show="vm.exchange !== undefined">
 					<div layout layout-align="center">
 						<i class="material-icons md-36">chat</i>
 					</div>
 				</md-button>
+				<a 
+					ng-disabled="!vm.agreed"
+					ng-show="vm.exchange !== undefined"
+					class="md-button md-fab white-btn" href="#" 
+					socialshare socialshare-provider="facebook"
+					socialshare-url="http://exwd.csie.org/xmas-share.html"
+	  				style="min-width:40px;"
+				>
+					<md-icon md-font-set="material-icons">share</md-icon>
+					<md-tooltip>分享...</md-tooltip>
+				</a>
 			</div>
 			<md-sidenav md-component-id="left" class="md-sidenav-left">
 				<div class="event-btn" layout="row" layout-algin="center center" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index); vm.closeleft()">
@@ -66,7 +77,7 @@
 		<div ng-show="vm.exchange !== undefined" flex-gt-md="50" style="height:100%; max-height: 100%;" layout-gt-md="row" layout-align="center center">
 			<div layout="row" flex="100" layout-wrap class="info_container layout-ex center">
 				<span flex="5" flex-gt-md="0"></span>
-				<md-card flex="40" flex-sm="35" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].bgStyle">
+				<md-card flex="40" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].bgStyle">
 					<div layout="column">
 						<md-card ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].bgStyle">
 							<div layout layout-align="center center" style="height:250px; width:auto;">
@@ -94,13 +105,14 @@
 						<md-card-content style="padding: 0;">
 							<div flex layout-fill layout="column">
 								<div layout="column" layout-align="center center">
-									<h2 class="md-title" style="padding: 7px; text-align: center;" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].fontcolor[0]">{{ vm.exchange.details.goods[vm.exchange.lookupTable.me].name}}</h2>
+									<h2 class="md-title ex-title" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].fontcolor[0]">{{ vm.exchange.details.goods[vm.exchange.lookupTable.me].name}}</h2>
 
 									<div 
 										ng-bind-html="vm.meDesc"
 										ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.me].fontcolor[1]"
 										class="md-subhead text-ex ex-story" 
 										style="color:#7f8588; max-width: 100%; font-size:14px;"
+										hide-sm
 									>
 									</div>
 								</div>
@@ -118,7 +130,7 @@
 						</md-card-content>
 					</div>
 				</md-card>
-				<div flex="10" flex-sm="15" layout="column" layout-align="start center" style="padding-top:10%;">
+				<div flex="10" flex-sm="10" layout="column" layout-align="start center" style="padding-top:10%;">
 					<p class="vertical isUp" ng-show="!vm.agreed">確認交換</p>
 					<md-button class="md-fab ex-confirm" ng-show="!vm.agreed" ng-click="vm.onClickComplete($event)">
 						<div layout layout-align="center center">
@@ -141,12 +153,13 @@
 						socialshare socialshare-provider="facebook"
 						socialshare-url="http://exwd.csie.org/xmas-share.html"
 	  					style="min-width:40px;"
+	  					hide-sm hide-md
 					>
 						<md-icon md-font-set="material-icons">share</md-icon>
 						<md-tooltip>分享...</md-tooltip>
 					</a>
 				</div>
-				<md-card flex="40" flex-sm="35" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].bgStyle">
+				<md-card flex="40" flex-sm="40" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].bgStyle">
 					<div layout="column">
 						<md-card ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].bgStyle">
 							<div layout layout-align="center center" style="height:250px; width:auto;">
@@ -174,13 +187,14 @@
 						<md-card-content style="padding: 0;">
 							<div flex layout-fill layout="column">
 								<div layout="column" layout-align="center center">
-									<h2 class="md-title" style="padding: 7px; text-align: center;" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].fontcolor[0]">{{ vm.exchange.details.goods[vm.exchange.lookupTable.other].name}}</h2>
+									<h2 class="md-title ex-title" ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].fontcolor[0]">{{ vm.exchange.details.goods[vm.exchange.lookupTable.other].name}}</h2>
 
 									<div 
 										ng-bind-html="vm.otherDesc"
 										ng-style="vm.exchange.details.goods[vm.exchange.lookupTable.other].fontcolor[1]"
 										class="md-subhead text-ex ex-story" 
 										style="max-width: 100%; font-size:14px;"
+										hide-sm
 									>
 									</div>
 								</div>

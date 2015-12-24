@@ -224,6 +224,12 @@ a:hover {
 			margin-right: 0;
 		}
 	}
+	.ex-title {
+		padding: 7px;
+		text-align: center;
+		margin-bottom: 50px;
+		color: rgb(233, 230, 232);
+	}
 }
 
 @media screen and (min-width: 600px) {
@@ -234,10 +240,15 @@ a:hover {
 	}
 }
 
-
 @media screen and (min-width: 960px) {
 	.ex-story {
 		font-size: 16px;
 		line-height: 30px;
+	}
+	.ex-title {
+		padding: 7px;
+		text-align: center;
+		margin-bottom: 0;
+		color: rgb(233, 230, 232);
 	}
 }

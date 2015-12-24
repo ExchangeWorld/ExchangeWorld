@@ -130,7 +130,7 @@ function PostController(
 						.content('請上傳一張或多張物品的相片.')
 						.ok('知道了!')
 				);
-			} else if(!vm.goodsName) {
+			} else if( vm.goodsCategory != 'Christmas' && !vm.goodsName) {
 				$mdDialog.show(
 					$mdDialog.alert()
 						.parent(angular.element(document.querySelector('#popupContainer')))
@@ -139,7 +139,7 @@ function PostController(
 						.content('請輸入物品名稱.')
 						.ok('知道了!')
 				);
-			} else if(!vm.goodsDescriptions) {
+			} else if( vm.goodsCategory != 'Christmas' && !vm.goodsDescriptions) {
 				$mdDialog.show(
 					$mdDialog.alert()
 						.parent(angular.element(document.querySelector('#popupContainer')))

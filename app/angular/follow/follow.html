@@ -7,7 +7,7 @@
 		<p class="md-display-1" ng-if="vm.type === 'follower'">被追蹤</p>
 	</div>
 	<div layout="row" layout-align="center center" layout-wrap>
-		<div flex="30" class="item follow" ng-repeat="follow in vm.followData">
+		<div flex="30" class="item follow" ng-repeat="follow in vm.followData" style="z-index:100;">
 			<div layout="column" layout-align="center center">
 				<img flex ng-src="{{ follow.user.photo_path }}" ng-click="vm.onClickUser(follow.user.uid)" style="width: 100%;" />
 				<p class="md-body-1">{{ follow.user.name }}</p>

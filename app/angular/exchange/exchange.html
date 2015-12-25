@@ -41,7 +41,7 @@
 				</a>
 			</div>
 			<md-sidenav md-component-id="left" class="md-sidenav-left">
-				<div class="event-btn" layout="row" layout-algin="center center" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index); vm.closeleft()" ng-class="{'agreed-btn': goods1_agree && goods2_agree}">
+				<div class="event-btn" layout="row" layout-algin="center center" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index); vm.closeleft()" ng-class="{'agreed-btn': exchange.goods1_agree && exchange.goods2_agree}">
 					<div flex="25" layout layout-align="center center">
 						<img class="circle exchange" ng-src="{{exchange.details.goods[exchange.lookupTable.other].user.photo_path}}" />
 					</div>
@@ -56,7 +56,7 @@
 			</md-sidenav>
 		</div>
 		<div class="sidebar-ex" flex-gt-md="20" layout="row" layout-gt-md="column" layout-align-sm="center center" style="max-height:100%; overflow-y: auto;" hide-sm hide-md>
-			<div class="event-btn hvr-bubble-float-left" layout="row" layout-algin="center center" flex-sm="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index)" ng-class="{'agreed-btn': goods1_agree && goods2_agree}">
+			<div class="event-btn hvr-bubble-float-left" layout="row" layout-algin="center center" flex-sm="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange($index)" ng-class="{'agreed-btn': exchange.goods1_agree && exchange.goods2_agree}">
 				<div flex="55" flex-md="70" flex-sm="70" layout="column" layout-align="center center">
 					<p class="md-body-1 note goods-1">{{ exchange.details.goods[exchange.lookupTable.me].name }}</p>
 					<p class="md-body-1 note goods-2">{{ exchange.details.goods[exchange.lookupTable.other].name }}</p>

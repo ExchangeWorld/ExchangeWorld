@@ -319,6 +319,13 @@ div.md-open-menu-container {
 		overflow-y: auto;
 		background-color: #f5f5f5;
 	}
+	.info_container{
+		&.for_input{
+			&.post{
+				margin: 2% 1.5%;
+			}
+		}
+	}
 }
 
 @media screen and (min-width: 600px) {
@@ -420,6 +427,13 @@ div.md-open-menu-container {
 		overflow-y: hidden;
 		background-color: #f5f5f5;
 	}
+	.info_container{
+		&.for_input{
+			&.post{
+				margin: 2.8% 1.5%;
+			}
+		}
+	}
 }
 
 @media screen and (min-width: 1400px) {
@@ -436,6 +450,13 @@ div.md-open-menu-container {
 		max-height: 90%;
 		max-width: 90%;
 		padding-top: 25%;
+	}
+	.info_container{
+		&.for_input{
+			&.post{
+				margin: 8.5% 1.5%;
+			}
+		}
 	}
 }
 

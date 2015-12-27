@@ -75,7 +75,6 @@ function GoodsController(
 	$scope.removeMode = false;
 	// $scope.$parent.$on('mapInitialized', mapInitialized);
 
-	console.log($window.history);
 	/* After map is loaded */
 	NgMap.getMap().then(mapInitialized);
 	function mapInitialized() {
@@ -292,6 +291,7 @@ function GoodsController(
 	function onClickQueue(ev) {
 		const types = ['want_to_queue', 'see_who_queue'];
 		var type = vm.isMe ? 'see_who_queue' : 'want_to_queue';
+		if(goodData.status === 1) return;
 
 		if(type === types[0]) {
 			/**

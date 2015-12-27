@@ -14,11 +14,12 @@
 			</md-button>
 		</div>
 		<div flex flex-sm="25" layout layout-align="center center">
-			<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickQueue($event)">
+			<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn || vm.goodData.status === 1" ng-click="vm.onClickQueue($event)">
 				<md-icon md-font-set="material-icons">remove_red_eye</md-icon>
 				<span hide-sm>{{ vm.isMe ? '看誰排' : '我要排' }} </span>
 				<span>{{vm.queuingList.length}}</span>
 			</md-button>
+				<md-tooltip ng-show="vm.goodData.status === 1">此物已被交換囉～！</md-tooltip>
 		</div>
 		<div flex layout layout-align="center center">
 			<a class="md-button white-btn btn-rwd" href="#" socialshare socialshare-provider="facebook" socialshare-url="http://exwd.csie.org/seek/{{vm.goodData.gid}}">

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>routers/queue.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <script src="http://yui.yahooapis.com/combo?3.8.0pr2/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">undefined: routers/queue.js</a></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div class="yui3-g">
+
+        <div id="sidebar" class="yui3-u">
+            <div id="modules" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Modules</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="classes" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Classes</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="../classes/Authenticate.html">Authenticate</a></li>
+                            <li><a href="../classes/Chatroom.html">Chatroom</a></li>
+                            <li><a href="../classes/Comment.html">Comment</a></li>
+                            <li><a href="../classes/Exchange.html">Exchange</a></li>
+                            <li><a href="../classes/Follow.html">Follow</a></li>
+                            <li><a href="../classes/Goods.html">Goods</a></li>
+                            <li><a href="../classes/Message.html">Message</a></li>
+                            <li><a href="../classes/Notification.html">Notification</a></li>
+                            <li><a href="../classes/Queue.html">Queue</a></li>
+                            <li><a href="../classes/Search.html">Search</a></li>
+                            <li><a href="../classes/Star.html">Star</a></li>
+                            <li><a href="../classes/Upload.html">Upload</a></li>
+                            <li><a href="../classes/User.html">User</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="elements" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Elements</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            <div id="fileTree" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Files</h2>
+                </div>
+                <div class="bd">
+                    <ul><li>routers/<ul><li><a href="../files/routers_authenticate.js.html">authenticate.js</a></li><li><a href="../files/routers_chatroom.js.html">chatroom.js</a></li><li><a href="../files/routers_comment.js.html">comment.js</a></li><li><a href="../files/routers_exchange.js.html">exchange.js</a></li><li><a href="../files/routers_follow.js.html">follow.js</a></li><li><a href="../files/routers_goods.js.html">goods.js</a></li><li><a href="../files/routers_goods.search.js.html">goods.search.js</a></li><li><a href="../files/routers_message.js.html">message.js</a></li><li><a href="../files/routers_notification.js.html">notification.js</a></li><li><a href="../files/routers_queue.js.html">queue.js</a></li><li><a href="../files/routers_star.js.html">star.js</a></li><li><a href="../files/routers_upload.js.html">upload.js</a></li><li><a href="../files/routers_user.js.html">user.js</a></li></ul></li></ul>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="main" class="yui3-u">
+            <div class="content"><h4>routers/queue.js</h4>
+
+<pre class="code prettyprint linenums">
+/**
+ * Provides some methods related to queues
+ * (queuer_goods -[queue]-&gt; host_goods)
+ *
+ * @class Queue
+ */
+
+&#x27;use strict&#x27;;
+
+var express = require(&#x27;express&#x27;);
+var router = express.Router();
+
+// Including tables
+var queues = require(&#x27;../ORM/Queues&#x27;);
+var goods = require(&#x27;../ORM/Goods&#x27;);
+var users = require(&#x27;../ORM/Users&#x27;);
+
+/**
+ * Get goods are queueing on given host_goods
+ * (If queuer_goods is in another exchange, it will not be returned)
+ *
+ * @method GET api/queue/of/goods
+ * @param  {Integer} host_goods_gid
+ * @return {JSON} The queues including goods and owners (ASC)
+ */
+router.get(&#x27;/of/goods&#x27;, (req, res) =&gt; {
+	var _owner_uid;
+	var _host_goods_gid = parseInt(req.query.host_goods_gid, 10);
+
+	// REQ EXWD CHECK
+	if (req.exwd.anonymous) {
+		res.send({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	} else if (req.exwd.registered) {
+		_owner_uid = req.exwd.uid;
+	} else {
+		res.send({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
+	var queryGoodsTmp = (req.exwd.admin ? {
+		exchanged: {
+			$in: [0, 2]
+		},
+		deleted: 0
+	} : {
+		exchanged: {
+			$in: [0, 2]
+		},
+		deleted: 0,
+		owner_uid: _owner_uid
+	});
+
+	queues
+		.findAll({
+			where: {
+				host_goods_gid: _host_goods_gid
+			},
+			include: [{
+				model: goods,
+				as: &#x27;host_goods&#x27;,
+				where: queryGoodsTmp,
+				attributes: [&#x27;gid&#x27;]
+			}, {
+				model: goods,
+				as: &#x27;queuer_goods&#x27;,
+				where: {
+					exchanged: {
+						$in: [0, 2]
+					},
+					deleted: 0
+				},
+				include: [{
+					model: users,
+					as: &#x27;owner&#x27;,
+					attributes: [&#x27;uid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;]
+				}],
+				attributes: [&#x27;gid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;, &#x27;category&#x27;, &#x27;description&#x27;]
+			}],
+			order: [
+				[&#x27;qid&#x27;, &#x27;ASC&#x27;]
+			]
+		})
+		.then(result =&gt; {
+			res.json(result);
+		})
+		.catch(err =&gt; {
+			res.send({
+				error: err
+			});
+		});
+});
+
+/**
+ * Get goods are queued by given queuer_goods
+ *
+ * @method GET api/queue/by/goods
+ * @param  {Integer} queuer_goods_gid
+ * @return {JSON} The queues including goods and owners (DESC)
+ */
+router.get(&#x27;/by/goods&#x27;, (req, res) =&gt; {
+	var _owner_uid;
+	var _queuer_goods_gid = parseInt(req.query.queuer_goods_gid, 10);
+
+	// REQ EXWD CHECK
+	if (req.exwd.anonymous) {
+		res.send({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	} else if (req.exwd.registered) {
+		_owner_uid = req.exwd.uid;
+	} else {
+		res.send({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
+	var queryGoodsTmp = (req.exwd.admin ? {
+		exchanged: {
+			$in: [0, 2]
+		},
+		deleted: 0
+	} : {
+		exchanged: {
+			$in: [0, 2]
+		},
+		deleted: 0,
+		owner_uid: _owner_uid
+	});
+
+	queues
+		.findAll({
+			where: {
+				queuer_goods_gid: _queuer_goods_gid
+			},
+			include: [{
+				model: goods,
+				as: &#x27;host_goods&#x27;,
+				where: {
+					exchanged: {
+						$in: [0, 2]
+					},
+					deleted: 0
+				},
+				include: [{
+					model: users,
+					as: &#x27;owner&#x27;,
+					attributes: [&#x27;uid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;]
+				}],
+				attributes: [&#x27;gid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;, &#x27;category&#x27;, &#x27;description&#x27;]
+			}, {
+				model: goods,
+				as: &#x27;queuer_goods&#x27;,
+				where: queryGoodsTmp,
+				attributes: [&#x27;gid&#x27;]
+			}],
+			order: [
+				[&#x27;qid&#x27;, &#x27;DESC&#x27;]
+			]
+		})
+		.then(result =&gt; {
+			res.json(result);
+		})
+		.catch(err =&gt; {
+			res.send({
+				error: err
+			});
+		});
+});
+
+/**
+ * Get goods are queueing on someone&#x27;s goods
+ *
+ * @method GET api/queue/of/person
+ * @param  {Integer} host_user_uid Who owns the host_goods
+ * @return {JSON} The queues including goods and owners
+ */
+router.get(&#x27;/of/person&#x27;, (req, res) =&gt; {
+	var _host_user_uid;
+
+	// REQ EXWD CHECK
+	if (req.exwd.admin) {
+		_host_user_uid = parseInt(req.query.host_user_uid, 10);
+	} else if (req.exwd.anonymous) {
+		res.send({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	} else if (req.exwd.registered) {
+		_host_user_uid = req.exwd.uid;
+	} else {
+		res.send({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
+	queues
+		.findAll({
+			include: [{
+				model: goods,
+				as: &#x27;host_goods&#x27;,
+				where: {
+					owner_uid: _host_user_uid,
+					exchanged: {
+						$in: [0, 2]
+					},
+					deleted: 0
+				},
+				attributes: [&#x27;gid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;, &#x27;category&#x27;, &#x27;description&#x27;]
+			}, {
+				model: goods,
+				as: &#x27;queuer_goods&#x27;,
+				where: {
+					exchanged: {
+						$in: [0, 2]
+					},
+					deleted: 0
+				},
+				include: [{
+					model: users,
+					as: &#x27;owner&#x27;,
+					attributes: [&#x27;uid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;]
+				}],
+				attributes: [&#x27;gid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;, &#x27;category&#x27;, &#x27;description&#x27;]
+			}]
+		})
+		.then(result =&gt; {
+			res.json(result);
+		})
+		.catch(err =&gt; {
+			res.json({
+				error: err
+			});
+		});
+});
+
+/**
+ * Get goods are queued by someone&#x27;s goods
+ *
+ * @method GET api/queue/by/person
+ * @param  {Integer} queuer_user_uid Who owns the queuer_goods
+ * @return {JSON} The queues including goods and owners
+ */
+router.get(&#x27;/by/person&#x27;, (req, res) =&gt; {
+	var _queuer_user_uid;
+
+	// REQ EXWD CHECK
+	if (req.exwd.admin) {
+		_queuer_user_uid = parseInt(req.query.queuer_user_uid, 10);
+	} else if (req.exwd.anonymous) {
+		res.send({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	} else if (req.exwd.registered) {
+		_queuer_user_uid = req.exwd.uid;
+	} else {
+		res.send({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
+	queues
+		.findAll({
+			include: [{
+				model: goods,
+				as: &#x27;host_goods&#x27;,
+				where: {
+					exchanged: {
+						$in: [0, 2]
+					},
+					deleted: 0
+				},
+				include: [{
+					model: users,
+					as: &#x27;owner&#x27;,
+					attributes: [&#x27;uid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;]
+				}],
+				attributes: [&#x27;gid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;, &#x27;category&#x27;, &#x27;description&#x27;]
+			}, {
+				model: goods,
+				as: &#x27;queuer_goods&#x27;,
+				where: {
+					owner_uid: _queuer_user_uid,
+					exchanged: {
+						$in: [0, 2]
+					},
+					deleted: 0
+				},
+				attributes: [&#x27;gid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;, &#x27;category&#x27;, &#x27;description&#x27;]
+			}]
+		})
+		.then(result =&gt; {
+			res.json(result);
+		})
+		.catch(err =&gt; {
+			res.json({
+				error: err
+			});
+		});
+});
+
+/**
+ * Post a queue
+ * (queuer_goods -[queue]-&gt; host_goods)
+ * (If queuer_goods is in another exchange return {})
+ *
+ * @method POST api/queue/post
+ * @param  {Integer} host_goods_gid Which is queued
+ * @param  {Integer} queuer_goods_gid Which is queueing
+ * @return {JSON|Nothing} New created queue object, already created one or {}
+ */
+router.post(&#x27;/post&#x27;, (req, res) =&gt; {
+	var _queuer_user_uid;
+	var _host_goods_gid = parseInt(req.body.host_goods_gid, 10);
+	var _queuer_goods_gid = parseInt(req.body.queuer_goods_gid, 10);
+
+	// REQ EXWD CHECK
+	if (req.exwd.admin) {
+		_queuer_user_uid = null;
+	} else if (req.exwd.anonymous) {
+		res.send({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	} else if (req.exwd.registered) {
+		_queuer_user_uid = req.exwd.uid;
+	} else {
+		res.send({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
+	var queryGoodsTmp = (req.exwd.admin ? {
+		where: {
+			gid: _queuer_goods_gid,
+			exchanged: 0,
+			deleted: 0
+		}
+	} : {
+		where: {
+			gid: _queuer_goods_gid,
+			owner_uid: _queuer_user_uid,
+			exchanged: 0,
+			deleted: 0
+		}
+	});
+
+	goods
+		.findOne(queryGoodsTmp)
+		.then(result =&gt; {
+			if (result === null) {
+				return &#x27;&#x27;;
+			}
+			return queues
+				.findOrCreate({
+					where: {
+						host_goods_gid: _host_goods_gid,
+						queuer_goods_gid: _queuer_goods_gid
+					}
+				});
+		})
+		.then(result =&gt; {
+			if (result === &#x27;&#x27;) {
+				res.send({
+					error: &#x27;The goods cannot be queued&#x27;
+				});
+			} else {
+				res.json(result[0]);
+			}
+		})
+		.catch(err =&gt; {
+			res.send({
+				error: err
+			});
+		});
+});
+
+/**
+ * Delete a queue
+ *
+ * @method DELETE api/queue/delete
+ * @param  {Integer} host_goods_gid Which is queued
+ * @param  {Integer} queuer_goods_gid Which is queueing
+ * @return {JSON} Number of deleted queues
+ */
+router.delete(&#x27;/delete&#x27;, (req, res) =&gt; {
+	var _queuer_user_uid;
+	var _host_goods_gid = parseInt(req.query.host_goods_gid, 10);
+	var _queuer_goods_gid = parseInt(req.query.queuer_goods_gid, 10);
+
+	// REQ EXWD CHECK
+	if (req.exwd.admin) {
+		_queuer_user_uid = null;
+	} else if (req.exwd.anonymous) {
+		res.send({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	} else if (req.exwd.registered) {
+		_queuer_user_uid = req.exwd.uid;
+	} else {
+		res.send({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
+	var queryGoodsTmp = (req.exwd.admin ? {
+		gid: _queuer_goods_gid
+	} : {
+		owner_uid: _queuer_user_uid
+	});
+
+	queues
+		.findOne({
+			where: {
+				host_goods_gid: _host_goods_gid,
+				queuer_goods_gid: _queuer_goods_gid
+			},
+			include: [{
+				model: goods,
+				as: &#x27;host_goods&#x27;,
+				attributes: [&#x27;gid&#x27;]
+			}, {
+				model: goods,
+				as: &#x27;queuer_goods&#x27;,
+				attributes: [&#x27;gid&#x27;],
+				where: queryGoodsTmp,
+				required: true
+			}]
+		})
+		.then(result =&gt; {
+			if (result === null) {
+				res.json(0);
+			} else if (result.queuer_goods === null) {
+				res.send({
+					error: &#x27;Opertaion denied, not your goods&#x27;
+				});
+			} else {
+				result.destroy().then(_tmp =&gt; res.json(1));
+			}
+		})
+		.catch(err =&gt; {
+			res.send({
+				error: err
+			});
+		});
+});
+
+module.exports = router;
+
+</pre>
+
+</div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/js/tabs.js"></script>
+</body>
+</html>

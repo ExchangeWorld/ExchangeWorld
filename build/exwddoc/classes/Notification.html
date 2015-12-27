@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Notification</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <script src="http://yui.yahooapis.com/combo?3.8.0pr2/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">undefined: Notification</a></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div class="yui3-g">
+
+        <div id="sidebar" class="yui3-u">
+            <div id="modules" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Modules</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="classes" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Classes</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="../classes/Authenticate.html">Authenticate</a></li>
+                            <li><a href="../classes/Chatroom.html">Chatroom</a></li>
+                            <li><a href="../classes/Comment.html">Comment</a></li>
+                            <li><a href="../classes/Exchange.html">Exchange</a></li>
+                            <li><a href="../classes/Follow.html">Follow</a></li>
+                            <li><a href="../classes/Goods.html">Goods</a></li>
+                            <li><a href="../classes/Message.html">Message</a></li>
+                            <li><a href="../classes/Notification.html">Notification</a></li>
+                            <li><a href="../classes/Queue.html">Queue</a></li>
+                            <li><a href="../classes/Search.html">Search</a></li>
+                            <li><a href="../classes/Star.html">Star</a></li>
+                            <li><a href="../classes/Upload.html">Upload</a></li>
+                            <li><a href="../classes/User.html">User</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="elements" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Elements</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="methods-on-page" class="sidebox on-page">
+                <div class="hd">
+                    <h2 class="no-toc">Methods On Page</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="#methods_GET api/notification">GET api/notification</a></li>
+                            <li><a href="#methods_GET api/notification/belongsTo">GET api/notification/belongsTo</a></li>
+                            <li><a href="#methods_POST api/notification/post">POST api/notification/post</a></li>
+                            <li><a href="#methods_PUT api/notification/read">PUT api/notification/read</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+            
+            
+            <div id="fileTree" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Files</h2>
+                </div>
+                <div class="bd">
+                    <ul><li>routers/<ul><li><a href="../files/routers_authenticate.js.html">authenticate.js</a></li><li><a href="../files/routers_chatroom.js.html">chatroom.js</a></li><li><a href="../files/routers_comment.js.html">comment.js</a></li><li><a href="../files/routers_exchange.js.html">exchange.js</a></li><li><a href="../files/routers_follow.js.html">follow.js</a></li><li><a href="../files/routers_goods.js.html">goods.js</a></li><li><a href="../files/routers_goods.search.js.html">goods.search.js</a></li><li><a href="../files/routers_message.js.html">message.js</a></li><li><a href="../files/routers_notification.js.html">notification.js</a></li><li><a href="../files/routers_queue.js.html">queue.js</a></li><li><a href="../files/routers_star.js.html">star.js</a></li><li><a href="../files/routers_upload.js.html">upload.js</a></li><li><a href="../files/routers_user.js.html">user.js</a></li></ul></li></ul>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="main" class="yui3-u">
+            <div class="content"><h4>Class Notification</h4>
+<span class="foundat">Class defined in: <a href="../files/routers_notification.js.html#l1"><code>routers&#x2F;notification.js:1</code></a></span>
+<div class="intro"><p>Provides some methods related to notifications</p>
+</div>
+
+
+<div id="classdocs">
+    <ul>
+        <li><a href="#methods">Methods</a></li>
+    </ul>
+    <div>
+            <div id="methods">
+<a name="methods_GET api/notification"></a>
+<div class="method item">
+    JSON <strong class="name"><code>GET api&#x2F;notification</code></strong>( <code>nid </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_notification.js.html#l64"><code>routers&#x2F;notification.js:64</code></a>
+    </span><br>
+    <p>Get notification by given nid</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>nid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The ID of notification</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>A notification including receiver and sender</p>
+</div>
+</div>
+<a name="methods_GET api/notification/belongsTo"></a>
+<div class="method item">
+    JSON <strong class="name"><code>GET api&#x2F;notification&#x2F;belongsTo</code></strong>( <code>receiver_uid, from, number </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_notification.js.html#l16"><code>routers&#x2F;notification.js:16</code></a>
+    </span><br>
+    <p>Get notifications belong to a user</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>receiver_uid</code> <strong>&lt;Integer&gt;</strong>
+         
+        </li>
+        <li>
+            <code>from</code> <strong>&lt;Integer=0&gt;</strong>
+         
+        </li>
+        <li>
+            <code>number</code> <strong>&lt;Integer=10&gt;</strong>
+         
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>The notifications including receiver and sender</p>
+</div>
+</div>
+<a name="methods_POST api/notification/post"></a>
+<div class="method item">
+    JSON <strong class="name"><code>POST api&#x2F;notification&#x2F;post</code></strong>( <code>sender_uid, receiver_uid, trigger_url, content </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_notification.js.html#l100"><code>routers&#x2F;notification.js:100</code></a>
+    </span><br>
+    <p>Emit notification</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>sender_uid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The user trigger the notification</p>
+
+        </li>
+        <li>
+            <code>receiver_uid</code> <strong>&lt;Integer&gt;</strong>
+        <p>Target user</p>
+
+        </li>
+        <li>
+            <code>trigger_url</code> <strong>&lt;String&gt;</strong>
+        <p>The trigger object's URL</p>
+
+        </li>
+        <li>
+            <code>content</code> <strong>&lt;String&gt;</strong>
+        <p>The content of the notification</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>A notification including receiver and sender</p>
+</div>
+</div>
+<a name="methods_PUT api/notification/read"></a>
+<div class="method item">
+    JSON <strong class="name"><code>PUT api&#x2F;notification&#x2F;read</code></strong>( <code>nid </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_notification.js.html#l134"><code>routers&#x2F;notification.js:134</code></a>
+    </span><br>
+    <p>Read a notification</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>nid</code> <strong>&lt;Integer&gt;</strong>
+         
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>Updated notification object</p>
+</div>
+</div>
+            </div>
+    </div>
+</div>
+</div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/js/tabs.js"></script>
+</body>
+</html>

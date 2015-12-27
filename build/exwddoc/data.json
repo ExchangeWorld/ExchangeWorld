@@ -1,0 +1,1579 @@
+{
+    "project": {},
+    "files": {
+        "routers/authenticate.js": {
+            "name": "routers/authenticate.js",
+            "modules": {},
+            "classes": {
+                "Authenticate": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "routers/chatroom.js": {
+            "name": "routers/chatroom.js",
+            "modules": {},
+            "classes": {
+                "Chatroom": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "routers/comment.js": {
+            "name": "routers/comment.js",
+            "modules": {},
+            "classes": {
+                "Comment": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "routers/exchange.js": {
+            "name": "routers/exchange.js",
+            "modules": {},
+            "classes": {
+                "Exchange": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "routers/follow.js": {
+            "name": "routers/follow.js",
+            "modules": {},
+            "classes": {
+                "Follow": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "routers/goods.js": {
+            "name": "routers/goods.js",
+            "modules": {},
+            "classes": {
+                "Goods": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "routers/goods.search.js": {
+            "name": "routers/goods.search.js",
+            "modules": {},
+            "classes": {
+                "Search": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "routers/message.js": {
+            "name": "routers/message.js",
+            "modules": {},
+            "classes": {
+                "Message": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "routers/notification.js": {
+            "name": "routers/notification.js",
+            "modules": {},
+            "classes": {
+                "Notification": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "routers/queue.js": {
+            "name": "routers/queue.js",
+            "modules": {},
+            "classes": {
+                "Queue": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "routers/star.js": {
+            "name": "routers/star.js",
+            "modules": {},
+            "classes": {
+                "Star": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "routers/upload.js": {
+            "name": "routers/upload.js",
+            "modules": {},
+            "classes": {
+                "Upload": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "routers/user.js": {
+            "name": "routers/user.js",
+            "modules": {},
+            "classes": {
+                "User": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "Authenticate": {
+            "name": "Authenticate",
+            "shortname": "Authenticate",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "routers/authenticate.js",
+            "line": 1,
+            "description": "Provides some methods related to any authentications"
+        },
+        "Chatroom": {
+            "name": "Chatroom",
+            "shortname": "Chatroom",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "routers/chatroom.js",
+            "line": 1,
+            "description": "Provides some methods related to chatrooms"
+        },
+        "Comment": {
+            "name": "Comment",
+            "shortname": "Comment",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "routers/comment.js",
+            "line": 1,
+            "description": "Provides some methods related to comments"
+        },
+        "Exchange": {
+            "name": "Exchange",
+            "shortname": "Exchange",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "routers/exchange.js",
+            "line": 1,
+            "description": "Provides some methods related to EXCHANGES"
+        },
+        "Follow": {
+            "name": "Follow",
+            "shortname": "Follow",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "routers/follow.js",
+            "line": 1,
+            "description": "Provides some methods related to follows\n(follower -[follow]-> followed)"
+        },
+        "Goods": {
+            "name": "Goods",
+            "shortname": "Goods",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "routers/goods.js",
+            "line": 1,
+            "description": "Provides some methods related to goods"
+        },
+        "Search": {
+            "name": "Search",
+            "shortname": "Search",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "routers/goods.search.js",
+            "line": 1,
+            "description": "Provides some methods related to Search"
+        },
+        "Message": {
+            "name": "Message",
+            "shortname": "Message",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "routers/message.js",
+            "line": 1,
+            "description": "Provides some methods related to Messages"
+        },
+        "Notification": {
+            "name": "Notification",
+            "shortname": "Notification",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "routers/notification.js",
+            "line": 1,
+            "description": "Provides some methods related to notifications"
+        },
+        "Queue": {
+            "name": "Queue",
+            "shortname": "Queue",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "routers/queue.js",
+            "line": 1,
+            "description": "Provides some methods related to queues\n(queuer_goods -[queue]-> host_goods)"
+        },
+        "Star": {
+            "name": "Star",
+            "shortname": "Star",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "routers/star.js",
+            "line": 1,
+            "description": "Provides some methods related to stars"
+        },
+        "Upload": {
+            "name": "Upload",
+            "shortname": "Upload",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "routers/upload.js",
+            "line": 1,
+            "description": "Provides some methods related to uploads"
+        },
+        "User": {
+            "name": "User",
+            "shortname": "User",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "routers/user.js",
+            "line": 1,
+            "description": "Provides some methods related to users"
+        }
+    },
+    "elements": {},
+    "classitems": [
+        {
+            "file": "routers/authenticate.js",
+            "line": 39,
+            "description": "Register a new user",
+            "itemtype": "method",
+            "name": "POST api/authenticate/register",
+            "params": [
+                {
+                    "name": "fb",
+                    "description": "If the registeration is with FB",
+                    "type": "Boolean=false"
+                },
+                {
+                    "name": "identity",
+                    "description": "The user ID. If it's with FB, fb_id as identity",
+                    "type": "String"
+                },
+                {
+                    "name": "password",
+                    "description": "Password. If it's with FB, password will be generated by hash",
+                    "type": "String=''"
+                },
+                {
+                    "name": "name",
+                    "description": "The displaying name",
+                    "type": "String"
+                },
+                {
+                    "name": "email",
+                    "description": "The email",
+                    "type": "String=''"
+                },
+                {
+                    "name": "photo_path",
+                    "description": "The photo path of user face photo",
+                    "type": "String=''"
+                }
+            ],
+            "return": {
+                "description": "New created user object",
+                "type": "JSON"
+            },
+            "class": "Authenticate"
+        },
+        {
+            "file": "routers/authenticate.js",
+            "line": 112,
+            "description": "Login",
+            "itemtype": "method",
+            "name": "POST api/authenticate/login",
+            "params": [
+                {
+                    "name": "fb",
+                    "description": "If the login is with FB",
+                    "type": "Boolean=false"
+                },
+                {
+                    "name": "identity",
+                    "description": "The user ID. If it's with FB, fb_id as identity",
+                    "type": "String"
+                },
+                {
+                    "name": "password",
+                    "description": "Password. If it's with FB, password will be checked by hash",
+                    "type": "String=''"
+                }
+            ],
+            "return": {
+                "description": "Token",
+                "type": "JSON"
+            },
+            "example": [
+                "\n<pre>\n{\n\tauthentication: 'success',\n\ttoken: token\n}\n</pre>",
+                "\n<pre>\n{\n\tauthentication: 'fail',\n\ttoken: null\n}\n</pre>"
+            ],
+            "class": "Authenticate"
+        },
+        {
+            "file": "routers/authenticate.js",
+            "line": 194,
+            "description": "Token validation",
+            "itemtype": "method",
+            "name": "GET *?token=...",
+            "params": [
+                {
+                    "name": "TOKEN",
+                    "description": "",
+                    "type": "String=''"
+                }
+            ],
+            "return": {
+                "description": "If failed, return JSON",
+                "type": "JSON|Nothing"
+            },
+            "example": [
+                "\n<pre>\n{\n\tauthentication: 'fail',\n\ttoken: null\n}\n</pre>"
+            ],
+            "class": "Authenticate"
+        },
+        {
+            "file": "routers/chatroom.js",
+            "line": 17,
+            "description": "Get chatroom's messages of an Exchange",
+            "itemtype": "method",
+            "name": "GET api/chatroom/exchange",
+            "params": [
+                {
+                    "name": "eid",
+                    "description": "The ID of exchange",
+                    "type": "Integer"
+                },
+                {
+                    "name": "from",
+                    "description": "From what number of messages",
+                    "type": "Integer=0"
+                },
+                {
+                    "name": "number",
+                    "description": "How many messages to get",
+                    "type": "Integer=10"
+                }
+            ],
+            "return": {
+                "description": "Messages including `sender`",
+                "type": "JSON"
+            },
+            "class": "Chatroom"
+        },
+        {
+            "file": "routers/chatroom.js",
+            "line": 74,
+            "description": "Post a chatroom's message of an Exchange",
+            "itemtype": "method",
+            "name": "POST api/chatroom/exchange",
+            "params": [
+                {
+                    "name": "eid",
+                    "description": "The ID of exchange",
+                    "type": "Integer"
+                },
+                {
+                    "name": "sender_uid",
+                    "description": "Who post the message",
+                    "type": "Integer"
+                },
+                {
+                    "name": "content",
+                    "description": "The content of the message",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "New created message object",
+                "type": "JSON"
+            },
+            "class": "Chatroom"
+        },
+        {
+            "file": "routers/chatroom.js",
+            "line": 116,
+            "description": "Read a chatroom's message",
+            "itemtype": "method",
+            "name": "PUT api/chatroom/read",
+            "params": [
+                {
+                    "name": "cid",
+                    "description": "The ID of chatroom",
+                    "type": "Integer"
+                },
+                {
+                    "name": "receiver_uid",
+                    "description": "Who received the message (Not sender!)",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Updated message object",
+                "type": "JSON"
+            },
+            "class": "Chatroom"
+        },
+        {
+            "file": "routers/comment.js",
+            "line": 17,
+            "description": "Get comments of a goods",
+            "itemtype": "method",
+            "name": "GET api/comment/of/goods",
+            "params": [
+                {
+                    "name": "goods_gid",
+                    "description": "The commented goods",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Comments including `commenter`",
+                "type": "JSON"
+            },
+            "class": "Comment"
+        },
+        {
+            "file": "routers/comment.js",
+            "line": 52,
+            "description": "Get comments of a user",
+            "itemtype": "method",
+            "name": "GET api/comment/of/user",
+            "params": [
+                {
+                    "name": "commenter_uid",
+                    "description": "The commenter's uid",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Comments including `goods`, and they are not deleted",
+                "type": "JSON"
+            },
+            "class": "Comment"
+        },
+        {
+            "file": "routers/comment.js",
+            "line": 107,
+            "description": "Post a comment to a goods",
+            "itemtype": "method",
+            "name": "POST api/comment/post",
+            "params": [
+                {
+                    "name": "goods_gid",
+                    "description": "The commented goods",
+                    "type": "Integer"
+                },
+                {
+                    "name": "commenter_uid",
+                    "description": "The commenter's uid",
+                    "type": "Integer"
+                },
+                {
+                    "name": "content",
+                    "description": "The content of the comment",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "New created comment",
+                "type": "JSON"
+            },
+            "class": "Comment"
+        },
+        {
+            "file": "routers/comment.js",
+            "line": 154,
+            "description": "Edit a comment",
+            "itemtype": "method",
+            "name": "PUT api/comment/edit",
+            "params": [
+                {
+                    "name": "cid",
+                    "description": "The ID of the comment",
+                    "type": "Integer"
+                },
+                {
+                    "name": "content",
+                    "description": "The NEW content of the comment",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Updated comment",
+                "type": "JSON"
+            },
+            "class": "Comment"
+        },
+        {
+            "file": "routers/comment.js",
+            "line": 212,
+            "description": "Delete a comment",
+            "itemtype": "method",
+            "name": "DELETE api/comment/delete",
+            "params": [
+                {
+                    "name": "cid",
+                    "description": "The ID of the comment",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Number of deleted comments",
+                "type": "JSON"
+            },
+            "class": "Comment"
+        },
+        {
+            "file": "routers/exchange.js",
+            "line": 24,
+            "description": "Get all of exchanges",
+            "itemtype": "method",
+            "name": "GET api/exchange/all",
+            "return": {
+                "description": "Exchanges including goods and owners",
+                "type": "JSON"
+            },
+            "class": "Exchange"
+        },
+        {
+            "file": "routers/exchange.js",
+            "line": 78,
+            "description": "Get all exchanges of a user",
+            "itemtype": "method",
+            "name": "GET api/exchange/of/user/all",
+            "params": [
+                {
+                    "name": "owner_uid",
+                    "description": "The owner",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Exchanges incluing goods( owner_goods, other_goods )",
+                "type": "JSON"
+            },
+            "class": "Exchange"
+        },
+        {
+            "file": "routers/exchange.js",
+            "line": 127,
+            "description": "Get an exchanges of a user",
+            "itemtype": "method",
+            "name": "GET api/exchange/of/user/one",
+            "params": [
+                {
+                    "name": "eid",
+                    "description": "The ID of the exchange",
+                    "type": "Integer"
+                },
+                {
+                    "name": "owner_uid",
+                    "description": "The owner",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "An exchange object including goods( owner_goods, other_goods )",
+                "type": "JSON"
+            },
+            "class": "Exchange"
+        },
+        {
+            "file": "routers/exchange.js",
+            "line": 182,
+            "description": "Get an exchange simply by given eid",
+            "itemtype": "method",
+            "name": "GET api/exchange/",
+            "params": [
+                {
+                    "name": "eid",
+                    "description": "The ID of exchange",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "An exchange incluing goods and owners",
+                "type": "JSON"
+            },
+            "class": "Exchange"
+        },
+        {
+            "file": "routers/exchange.js",
+            "line": 237,
+            "description": "Create an exchange",
+            "itemtype": "method",
+            "name": "POST api/exchange/create",
+            "params": [
+                {
+                    "name": "goods_one_gid",
+                    "description": "One of goods in new exchange",
+                    "type": "Integer"
+                },
+                {
+                    "name": "goods_two_gid",
+                    "description": "Other goods in new exchange",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "If (goods_one, goods_two) pair exists return that one, or return new created exchange",
+                "type": "JSON"
+            },
+            "class": "Exchange"
+        },
+        {
+            "file": "routers/exchange.js",
+            "line": 397,
+            "description": "Drop an exchange",
+            "itemtype": "method",
+            "name": "PUT api/exchange/drop",
+            "params": [
+                {
+                    "name": "eid",
+                    "description": "The ID of an exchange",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Updated exchange object",
+                "type": "JSON"
+            },
+            "class": "Exchange"
+        },
+        {
+            "file": "routers/exchange.js",
+            "line": 464,
+            "description": "Accept an exchange by a user\nAnd if two owners accept, then the exchange will be set status='completed'\nWhen completed, other exchanges include goods_one or goods_two will be set to status='dropped'\nAnd the goods that not goods_one or goods_two in the exchange will be set to exchanged=0",
+            "itemtype": "method",
+            "name": "PUT api/exchange/agree",
+            "params": [
+                {
+                    "name": "eid",
+                    "description": "The ID of an exchange",
+                    "type": "Integer"
+                },
+                {
+                    "name": "owner_uid",
+                    "description": "Who wants to accept this exchange",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Updated exchange object",
+                "type": "JSON"
+            },
+            "class": "Exchange"
+        },
+        {
+            "file": "routers/follow.js",
+            "line": 17,
+            "description": "Get who follow the given followed_uid\n(follower -[follow]-> followed)",
+            "itemtype": "method",
+            "name": "GET api/follow/followers/of",
+            "params": [
+                {
+                    "name": "followed_uid",
+                    "description": "The one be followed",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Users following given followed_uid",
+                "type": "JSON"
+            },
+            "class": "Follow"
+        },
+        {
+            "file": "routers/follow.js",
+            "line": 53,
+            "description": "Get who are followed by the given follower_uid\n(follower -[follow]-> followed)",
+            "itemtype": "method",
+            "name": "GET api/follow/followed/by",
+            "params": [
+                {
+                    "name": "follower_uid",
+                    "description": "The follower",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Users followed by given follower_uid",
+                "type": "JSON"
+            },
+            "class": "Follow"
+        },
+        {
+            "file": "routers/follow.js",
+            "line": 89,
+            "description": "Post a follow\n(follower -[follow]-> followed)",
+            "itemtype": "method",
+            "name": "POST api/follow/post",
+            "params": [
+                {
+                    "name": "follower_uid",
+                    "description": "The follower",
+                    "type": "Integer"
+                },
+                {
+                    "name": "followed_uid",
+                    "description": "The followed",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "New created follow object, or if there is already one, return that one",
+                "type": "JSON"
+            },
+            "class": "Follow"
+        },
+        {
+            "file": "routers/follow.js",
+            "line": 147,
+            "description": "Delete a follow\n(follower -[follow]-> followed)",
+            "itemtype": "method",
+            "name": "DELETE api/follow/delete",
+            "params": [
+                {
+                    "name": "follower_uid",
+                    "description": "The follower",
+                    "type": "Integer"
+                },
+                {
+                    "name": "followed_uid",
+                    "description": "The followed",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Number of deleted follows",
+                "type": "JSON"
+            },
+            "class": "Follow"
+        },
+        {
+            "file": "routers/goods.js",
+            "line": 20,
+            "description": "Get a goods by given gid",
+            "itemtype": "method",
+            "name": "GET api/goods/",
+            "params": [
+                {
+                    "name": "gid",
+                    "description": "The ID of goods",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "A goods including users, comments and stars",
+                "type": "JSON"
+            },
+            "class": "Goods"
+        },
+        {
+            "file": "routers/goods.js",
+            "line": 66,
+            "description": "Get all goods of given owner_uid",
+            "itemtype": "method",
+            "name": "GET api/goods/of",
+            "params": [
+                {
+                    "name": "owner_uid",
+                    "description": "The owner",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "The goods including comments and stars",
+                "type": "JSON"
+            },
+            "class": "Goods"
+        },
+        {
+            "file": "routers/goods.js",
+            "line": 106,
+            "description": "Post a goods",
+            "itemtype": "method",
+            "name": "POST api/goods/post",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "description",
+                    "description": "",
+                    "type": "String=''"
+                },
+                {
+                    "name": "photo_path",
+                    "description": "",
+                    "type": "String=''"
+                },
+                {
+                    "name": "position_x",
+                    "description": "",
+                    "type": "Float"
+                },
+                {
+                    "name": "position_y",
+                    "description": "",
+                    "type": "Float"
+                },
+                {
+                    "name": "owner_uid",
+                    "description": "",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "New created goods object",
+                "type": "JSON"
+            },
+            "class": "Goods"
+        },
+        {
+            "file": "routers/goods.js",
+            "line": 166,
+            "description": "Edit a goods",
+            "itemtype": "method",
+            "name": "PUT api/goods/edit",
+            "params": [
+                {
+                    "name": "gid",
+                    "description": "",
+                    "type": "Integer"
+                },
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "category",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "description",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "photo_path",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "position_x",
+                    "description": "",
+                    "type": "Float"
+                },
+                {
+                    "name": "position_y",
+                    "description": "",
+                    "type": "Float"
+                }
+            ],
+            "return": {
+                "description": "Updated goods object",
+                "type": "JSON"
+            },
+            "class": "Goods"
+        },
+        {
+            "file": "routers/goods.js",
+            "line": 240,
+            "description": "Rate a goods",
+            "itemtype": "method",
+            "name": "PUT api/goods/rate",
+            "params": [
+                {
+                    "name": "gid",
+                    "description": "The ID of goods",
+                    "type": "Integer"
+                },
+                {
+                    "name": "rate",
+                    "description": "The rate point!",
+                    "type": "Float"
+                }
+            ],
+            "return": {
+                "description": "Updated goods object",
+                "type": "JSON"
+            },
+            "class": "Goods"
+        },
+        {
+            "file": "routers/goods.js",
+            "line": 294,
+            "description": "Delete a goods (but not really)\nor if the goods is still in an exchange, this req will be ignored",
+            "itemtype": "method",
+            "name": "Delete api/goods/delete",
+            "params": [
+                {
+                    "name": "gid",
+                    "description": "The ID of goods",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Updated goods object",
+                "type": "JSON"
+            },
+            "class": "Goods"
+        },
+        {
+            "file": "routers/goods.search.js",
+            "line": 17,
+            "description": "Get goods by given query",
+            "itemtype": "method",
+            "name": "GET api/goods/search",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String=''"
+                },
+                {
+                    "name": "wishlist",
+                    "description": "",
+                    "type": "String=''"
+                },
+                {
+                    "name": "category",
+                    "description": "",
+                    "type": "String=''"
+                },
+                {
+                    "name": "position_x",
+                    "description": "",
+                    "type": "Float=-1.0"
+                },
+                {
+                    "name": "position_y",
+                    "description": "",
+                    "type": "Float=-1.0"
+                },
+                {
+                    "name": "from",
+                    "description": "",
+                    "type": "Integer=-1"
+                },
+                {
+                    "name": "to",
+                    "description": "",
+                    "type": "Integer=-1"
+                }
+            ],
+            "return": {
+                "description": "The goods including users and stars",
+                "type": "JSON"
+            },
+            "class": "Search"
+        },
+        {
+            "file": "routers/message.js",
+            "line": 16,
+            "description": "Get messages by given receiver_uid and sender_uid",
+            "itemtype": "method",
+            "name": "GET api/message",
+            "params": [
+                {
+                    "name": "receiver_uid",
+                    "description": "",
+                    "type": "Integer"
+                },
+                {
+                    "name": "sender_uid",
+                    "description": "It can be not provided, will ignore sender",
+                    "type": "Integer"
+                },
+                {
+                    "name": "from",
+                    "description": "",
+                    "type": "Integer=0"
+                },
+                {
+                    "name": "number",
+                    "description": "",
+                    "type": "Integer=10"
+                }
+            ],
+            "return": {
+                "description": "The messages including two users",
+                "type": "JSON"
+            },
+            "class": "Message"
+        },
+        {
+            "file": "routers/message.js",
+            "line": 105,
+            "description": "Get messages between two users",
+            "itemtype": "method",
+            "name": "GET api/message/between",
+            "params": [
+                {
+                    "name": "user1_uid",
+                    "description": "",
+                    "type": "Integer"
+                },
+                {
+                    "name": "user2_uid",
+                    "description": "",
+                    "type": "Integer"
+                },
+                {
+                    "name": "from",
+                    "description": "",
+                    "type": "Integer=0"
+                },
+                {
+                    "name": "number",
+                    "description": "",
+                    "type": "Integer=10"
+                }
+            ],
+            "return": {
+                "description": "The messages including two users",
+                "type": "JSON"
+            },
+            "class": "Message"
+        },
+        {
+            "file": "routers/message.js",
+            "line": 164,
+            "description": "Post messages by given receiver and sender",
+            "itemtype": "method",
+            "name": "POST api/message/post",
+            "params": [
+                {
+                    "name": "receiver_uid",
+                    "description": "The receiver",
+                    "type": "Integer"
+                },
+                {
+                    "name": "sender_uid",
+                    "description": "The sender",
+                    "type": "Integer"
+                },
+                {
+                    "name": "content",
+                    "description": "The content",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "New created message object",
+                "type": "JSON"
+            },
+            "class": "Message"
+        },
+        {
+            "file": "routers/message.js",
+            "line": 196,
+            "description": "Read a message",
+            "itemtype": "method",
+            "name": "PUT api/message/read",
+            "params": [
+                {
+                    "name": "mid",
+                    "description": "The ID of message",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Updated message object",
+                "type": "JSON"
+            },
+            "class": "Message"
+        },
+        {
+            "file": "routers/notification.js",
+            "line": 16,
+            "description": "Get notifications belong to a user",
+            "itemtype": "method",
+            "name": "GET api/notification/belongsTo",
+            "params": [
+                {
+                    "name": "receiver_uid",
+                    "description": "",
+                    "type": "Integer"
+                },
+                {
+                    "name": "from",
+                    "description": "",
+                    "type": "Integer=0"
+                },
+                {
+                    "name": "number",
+                    "description": "",
+                    "type": "Integer=10"
+                }
+            ],
+            "return": {
+                "description": "The notifications including receiver and sender",
+                "type": "JSON"
+            },
+            "class": "Notification"
+        },
+        {
+            "file": "routers/notification.js",
+            "line": 64,
+            "description": "Get notification by given nid",
+            "itemtype": "method",
+            "name": "GET api/notification",
+            "params": [
+                {
+                    "name": "nid",
+                    "description": "The ID of notification",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "A notification including receiver and sender",
+                "type": "JSON"
+            },
+            "class": "Notification"
+        },
+        {
+            "file": "routers/notification.js",
+            "line": 100,
+            "description": "Emit notification",
+            "itemtype": "method",
+            "name": "POST api/notification/post",
+            "params": [
+                {
+                    "name": "sender_uid",
+                    "description": "The user trigger the notification",
+                    "type": "Integer"
+                },
+                {
+                    "name": "receiver_uid",
+                    "description": "Target user",
+                    "type": "Integer"
+                },
+                {
+                    "name": "trigger_url",
+                    "description": "The trigger object's URL",
+                    "type": "String"
+                },
+                {
+                    "name": "content",
+                    "description": "The content of the notification",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "A notification including receiver and sender",
+                "type": "JSON"
+            },
+            "class": "Notification"
+        },
+        {
+            "file": "routers/notification.js",
+            "line": 134,
+            "description": "Read a notification",
+            "itemtype": "method",
+            "name": "PUT api/notification/read",
+            "params": [
+                {
+                    "name": "nid",
+                    "description": "",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Updated notification object",
+                "type": "JSON"
+            },
+            "class": "Notification"
+        },
+        {
+            "file": "routers/queue.js",
+            "line": 18,
+            "description": "Get goods are queueing on given host_goods\n(If queuer_goods is in another exchange, it will not be returned)",
+            "itemtype": "method",
+            "name": "GET api/queue/of/goods",
+            "params": [
+                {
+                    "name": "host_goods_gid",
+                    "description": "",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "The queues including goods and owners (ASC)",
+                "type": "JSON"
+            },
+            "class": "Queue"
+        },
+        {
+            "file": "routers/queue.js",
+            "line": 98,
+            "description": "Get goods are queued by given queuer_goods",
+            "itemtype": "method",
+            "name": "GET api/queue/by/goods",
+            "params": [
+                {
+                    "name": "queuer_goods_gid",
+                    "description": "",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "The queues including goods and owners (DESC)",
+                "type": "JSON"
+            },
+            "class": "Queue"
+        },
+        {
+            "file": "routers/queue.js",
+            "line": 177,
+            "description": "Get goods are queueing on someone's goods",
+            "itemtype": "method",
+            "name": "GET api/queue/of/person",
+            "params": [
+                {
+                    "name": "host_user_uid",
+                    "description": "Who owns the host_goods",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "The queues including goods and owners",
+                "type": "JSON"
+            },
+            "class": "Queue"
+        },
+        {
+            "file": "routers/queue.js",
+            "line": 244,
+            "description": "Get goods are queued by someone's goods",
+            "itemtype": "method",
+            "name": "GET api/queue/by/person",
+            "params": [
+                {
+                    "name": "queuer_user_uid",
+                    "description": "Who owns the queuer_goods",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "The queues including goods and owners",
+                "type": "JSON"
+            },
+            "class": "Queue"
+        },
+        {
+            "file": "routers/queue.js",
+            "line": 311,
+            "description": "Post a queue\n(queuer_goods -[queue]-> host_goods)\n(If queuer_goods is in another exchange return {})",
+            "itemtype": "method",
+            "name": "POST api/queue/post",
+            "params": [
+                {
+                    "name": "host_goods_gid",
+                    "description": "Which is queued",
+                    "type": "Integer"
+                },
+                {
+                    "name": "queuer_goods_gid",
+                    "description": "Which is queueing",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "New created queue object, already created one or {}",
+                "type": "JSON|Nothing"
+            },
+            "class": "Queue"
+        },
+        {
+            "file": "routers/queue.js",
+            "line": 388,
+            "description": "Delete a queue",
+            "itemtype": "method",
+            "name": "DELETE api/queue/delete",
+            "params": [
+                {
+                    "name": "host_goods_gid",
+                    "description": "Which is queued",
+                    "type": "Integer"
+                },
+                {
+                    "name": "queuer_goods_gid",
+                    "description": "Which is queueing",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Number of deleted queues",
+                "type": "JSON"
+            },
+            "class": "Queue"
+        },
+        {
+            "file": "routers/star.js",
+            "line": 17,
+            "description": "Get users who star the goods",
+            "itemtype": "method",
+            "name": "GET api/star/to",
+            "params": [
+                {
+                    "name": "goods_gid",
+                    "description": "The goods starred by a user",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "The stars including users",
+                "type": "JSON"
+            },
+            "class": "Star"
+        },
+        {
+            "file": "routers/star.js",
+            "line": 48,
+            "description": "Get goods that a user stars",
+            "itemtype": "method",
+            "name": "GET api/star/by",
+            "params": [
+                {
+                    "name": "starring_user_uid",
+                    "description": "Who star the goods",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "The stars including goods",
+                "type": "JSON"
+            },
+            "class": "Star"
+        },
+        {
+            "file": "routers/star.js",
+            "line": 82,
+            "description": "Post a star",
+            "itemtype": "method",
+            "name": "POST api/star/post",
+            "params": [
+                {
+                    "name": "goods_gid",
+                    "description": "The goods starred by the user",
+                    "type": "Integer"
+                },
+                {
+                    "name": "starring_user_uid",
+                    "description": "Who star the goods",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "New created star object or already created one",
+                "type": "JSON"
+            },
+            "class": "Star"
+        },
+        {
+            "file": "routers/star.js",
+            "line": 128,
+            "description": "Delete a star",
+            "itemtype": "method",
+            "name": "DELETE api/star/delete",
+            "params": [
+                {
+                    "name": "goods_gid",
+                    "description": "The goods starred by the user",
+                    "type": "Integer"
+                },
+                {
+                    "name": "starring_user_uid",
+                    "description": "Who star the goods",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Number of deleted stars",
+                "type": "JSON"
+            },
+            "class": "Star"
+        },
+        {
+            "file": "routers/upload.js",
+            "line": 26,
+            "description": "Post an image",
+            "itemtype": "method",
+            "name": "POST api/upload/image",
+            "params": [
+                {
+                    "name": "filesize",
+                    "description": "",
+                    "type": "Integer"
+                },
+                {
+                    "name": "filename",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "base64",
+                    "description": "Encoded imgData from request body",
+                    "type": "String"
+                },
+                {
+                    "name": "filetype",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Image's src",
+                "type": "URL"
+            },
+            "class": "Upload"
+        },
+        {
+            "file": "routers/user.js",
+            "line": 18,
+            "description": "Get a user by given uid or identity",
+            "itemtype": "method",
+            "name": "GET api/user",
+            "params": [
+                {
+                    "name": "uid",
+                    "description": "The ID of user",
+                    "type": "Integer"
+                },
+                {
+                    "name": "identity",
+                    "description": "User's identity",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The user including many things",
+                "type": "JSON"
+            },
+            "class": "User"
+        },
+        {
+            "file": "routers/user.js",
+            "line": 85,
+            "description": "Edit a user's profile",
+            "itemtype": "method",
+            "name": "PUT api/user/edit",
+            "params": [
+                {
+                    "name": "uid",
+                    "description": "",
+                    "type": "Integer"
+                },
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "email",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "introduction",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "wishlist",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Updated user object, or if not found, return null",
+                "type": "JSON|Nothing"
+            },
+            "class": "User"
+        },
+        {
+            "file": "routers/user.js",
+            "line": 144,
+            "description": "Update a user's photo_path\nIf same as the one in DB, nothing changed",
+            "itemtype": "method",
+            "name": "PUT api/user/photo",
+            "params": [
+                {
+                    "name": "uid",
+                    "description": "The ID of user",
+                    "type": "Integer"
+                },
+                {
+                    "name": "photo_path",
+                    "description": "The path of user's photo",
+                    "type": "String=''"
+                }
+            ],
+            "return": {
+                "description": "Updated user object",
+                "type": "JSON"
+            },
+            "class": "User"
+        }
+    ],
+    "warnings": []
+}

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>routers/message.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <script src="http://yui.yahooapis.com/combo?3.8.0pr2/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">undefined: routers/message.js</a></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div class="yui3-g">
+
+        <div id="sidebar" class="yui3-u">
+            <div id="modules" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Modules</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="classes" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Classes</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="../classes/Authenticate.html">Authenticate</a></li>
+                            <li><a href="../classes/Chatroom.html">Chatroom</a></li>
+                            <li><a href="../classes/Comment.html">Comment</a></li>
+                            <li><a href="../classes/Exchange.html">Exchange</a></li>
+                            <li><a href="../classes/Follow.html">Follow</a></li>
+                            <li><a href="../classes/Goods.html">Goods</a></li>
+                            <li><a href="../classes/Message.html">Message</a></li>
+                            <li><a href="../classes/Notification.html">Notification</a></li>
+                            <li><a href="../classes/Queue.html">Queue</a></li>
+                            <li><a href="../classes/Search.html">Search</a></li>
+                            <li><a href="../classes/Star.html">Star</a></li>
+                            <li><a href="../classes/Upload.html">Upload</a></li>
+                            <li><a href="../classes/User.html">User</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="elements" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Elements</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            <div id="fileTree" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Files</h2>
+                </div>
+                <div class="bd">
+                    <ul><li>routers/<ul><li><a href="../files/routers_authenticate.js.html">authenticate.js</a></li><li><a href="../files/routers_chatroom.js.html">chatroom.js</a></li><li><a href="../files/routers_comment.js.html">comment.js</a></li><li><a href="../files/routers_exchange.js.html">exchange.js</a></li><li><a href="../files/routers_follow.js.html">follow.js</a></li><li><a href="../files/routers_goods.js.html">goods.js</a></li><li><a href="../files/routers_goods.search.js.html">goods.search.js</a></li><li><a href="../files/routers_message.js.html">message.js</a></li><li><a href="../files/routers_notification.js.html">notification.js</a></li><li><a href="../files/routers_queue.js.html">queue.js</a></li><li><a href="../files/routers_star.js.html">star.js</a></li><li><a href="../files/routers_upload.js.html">upload.js</a></li><li><a href="../files/routers_user.js.html">user.js</a></li></ul></li></ul>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="main" class="yui3-u">
+            <div class="content"><h4>routers/message.js</h4>
+
+<pre class="code prettyprint linenums">
+/**
+ * Provides some methods related to Messages
+ *
+ * @class Message
+ */
+
+&#x27;use strict&#x27;;
+
+var express = require(&#x27;express&#x27;);
+var router = express.Router();
+
+// Including tables
+var messages = require(&#x27;../ORM/Messages&#x27;);
+var users = require(&#x27;../ORM/Users&#x27;);
+
+/**
+ * Get messages by given receiver_uid and sender_uid
+ *
+ * @method GET api/message
+ * @param  {Integer} receiver_uid
+ * @param  {Integer} sender_uid It can be not provided, will ignore sender
+ * @param  {Integer=0} from
+ * @param  {Integer=10} number
+ * @return {JSON} The messages including two users
+ */
+router.get(&#x27;/&#x27;, (req, res) =&gt; {
+
+	var _receiver_uid = parseInt(req.query.receiver_uid, 10);
+	var _sender_uid = parseInt(req.query.sender_uid, 10);
+	var _from = parseInt(req.query.from, 10);
+	var _number = parseInt(req.query.number, 10);
+
+	_sender_uid = (_sender_uid == _sender_uid ? _sender_uid : null);
+	_from = (_from == _from ? _from : 0);
+	_number = (_number == _number ? _number : 10);
+
+	if (_sender_uid == null) {
+		messages
+			.findAll({
+				where: {
+					receiver_uid: _receiver_uid,
+					chatroom_cid: 0
+				},
+				order: [
+					[&#x27;mid&#x27;, &#x27;DESC&#x27;]
+				],
+				include: [{
+					model: users,
+					as: &#x27;sender&#x27;,
+					required: true
+				}, {
+					model: users,
+					as: &#x27;receiver&#x27;,
+					required: true
+				}],
+				// logging: true,
+				offset: _from,
+				limit: _number
+			})
+			.then(result =&gt; {
+				res.json(result);
+			})
+			.catch(err =&gt; {
+				res.send({
+					error: err
+				});
+			});
+	} else {
+		messages
+			.findAll({
+				where: {
+					receiver_uid: _receiver_uid,
+					sender_uid: _sender_uid,
+					chatroom_cid: 0
+				},
+				order: [
+					[&#x27;mid&#x27;, &#x27;DESC&#x27;]
+				],
+				include: [{
+					model: users,
+					as: &#x27;sender&#x27;,
+					attributes: [&#x27;name&#x27;],
+					required: true
+				}, {
+					model: users,
+					as: &#x27;receiver&#x27;,
+					attributes: [&#x27;name&#x27;],
+					required: true
+				}],
+				// logging: true,
+				offset: _from,
+				limit: _number
+			})
+			.then(result =&gt; {
+				res.json(result);
+			})
+			.catch(err =&gt; {
+				res.send({
+					error: err
+				});
+			});
+	}
+});
+
+/**
+ * Get messages between two users
+ *
+ * @method GET api/message/between
+ * @param  {Integer} user1_uid
+ * @param  {Integer} user2_uid
+ * @param  {Integer=0} from
+ * @param  {Integer=10} number
+ * @return {JSON} The messages including two users
+ */
+router.get(&#x27;/between&#x27;, (req, res) =&gt; {
+
+	var _user1_uid = parseInt(req.query.user1_uid, 10);
+	var _user2_uid = parseInt(req.query.user2_uid, 10);
+	var _from = parseInt(req.query.from, 10);
+	var _number = parseInt(req.query.number, 10);
+
+	_from = (_from == _from ? _from : 0);
+	_number = (_number == _number ? _number : 10);
+
+	messages
+		.findAll({
+			where: {
+				$or: [{
+					receiver_uid: _user1_uid,
+					sender_uid: _user2_uid
+				}, {
+					receiver_uid: _user2_uid,
+					sender_uid: _user1_uid
+				}],
+				chatroom_cid: 0
+			},
+			order: [
+				[&#x27;mid&#x27;, &#x27;DESC&#x27;]
+			],
+			include: [{
+				model: users,
+				as: &#x27;sender&#x27;,
+				attributes: [&#x27;name&#x27;],
+				required: true
+			}, {
+				model: users,
+				as: &#x27;receiver&#x27;,
+				attributes: [&#x27;name&#x27;],
+				required: true
+			}],
+			offset: _from,
+			limit: _number
+		})
+		.then(result =&gt; {
+			res.json(result);
+		})
+		.catch(err =&gt; {
+			res.send({
+				error: err
+			});
+		});
+});
+
+/**
+ * Post messages by given receiver and sender
+ *
+ * @method POST api/message/post
+ * @param  {Integer} receiver_uid The receiver
+ * @param  {Integer} sender_uid The sender
+ * @param  {String} content The content
+ * @return {JSON} New created message object
+ */
+router.post(&#x27;/post&#x27;, (req, res) =&gt; {
+
+	var _receiver_uid = parseInt(req.body.receiver_uid, 10);
+	var _sender_uid = parseInt(req.body.sender_uid, 10);
+	var _content = req.body.content;
+
+	messages
+		.create({
+			receiver_uid: _receiver_uid,
+			sender_uid: _sender_uid,
+			content: _content,
+			chatroom_cid: 0
+		})
+		.then(result =&gt; {
+			res.json(result);
+		})
+		.catch(err =&gt; {
+			res.send({
+				error: err
+			});
+		});
+});
+
+/**
+ * Read a message
+ *
+ * @method PUT api/message/read
+ * @param  {Integer} mid The ID of message
+ * @return {JSON} Updated message object
+ */
+router.put(&#x27;/read&#x27;, (req, res) =&gt; {
+
+	var _mid = parseInt(req.body.mid, 10);
+
+	messages
+		.update({
+			unread: false
+		}, {
+			where: {
+				mid: _mid
+			}
+		})
+		.then(result =&gt; {
+			res.json(result);
+		})
+		.catch(err =&gt; {
+			res.send({
+				error: err
+			});
+		});
+});
+
+module.exports = router;
+
+</pre>
+
+</div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/js/tabs.js"></script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Exchange</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <script src="http://yui.yahooapis.com/combo?3.8.0pr2/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">undefined: Exchange</a></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div class="yui3-g">
+
+        <div id="sidebar" class="yui3-u">
+            <div id="modules" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Modules</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="classes" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Classes</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="../classes/Authenticate.html">Authenticate</a></li>
+                            <li><a href="../classes/Chatroom.html">Chatroom</a></li>
+                            <li><a href="../classes/Comment.html">Comment</a></li>
+                            <li><a href="../classes/Exchange.html">Exchange</a></li>
+                            <li><a href="../classes/Follow.html">Follow</a></li>
+                            <li><a href="../classes/Goods.html">Goods</a></li>
+                            <li><a href="../classes/Message.html">Message</a></li>
+                            <li><a href="../classes/Notification.html">Notification</a></li>
+                            <li><a href="../classes/Queue.html">Queue</a></li>
+                            <li><a href="../classes/Search.html">Search</a></li>
+                            <li><a href="../classes/Star.html">Star</a></li>
+                            <li><a href="../classes/Upload.html">Upload</a></li>
+                            <li><a href="../classes/User.html">User</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="elements" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Elements</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="methods-on-page" class="sidebox on-page">
+                <div class="hd">
+                    <h2 class="no-toc">Methods On Page</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="#methods_GET api/exchange/">GET api/exchange/</a></li>
+                            <li><a href="#methods_GET api/exchange/all">GET api/exchange/all</a></li>
+                            <li><a href="#methods_GET api/exchange/of/user/all">GET api/exchange/of/user/all</a></li>
+                            <li><a href="#methods_GET api/exchange/of/user/one">GET api/exchange/of/user/one</a></li>
+                            <li><a href="#methods_POST api/exchange/create">POST api/exchange/create</a></li>
+                            <li><a href="#methods_PUT api/exchange/agree">PUT api/exchange/agree</a></li>
+                            <li><a href="#methods_PUT api/exchange/drop">PUT api/exchange/drop</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+            
+            
+            <div id="fileTree" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Files</h2>
+                </div>
+                <div class="bd">
+                    <ul><li>routers/<ul><li><a href="../files/routers_authenticate.js.html">authenticate.js</a></li><li><a href="../files/routers_chatroom.js.html">chatroom.js</a></li><li><a href="../files/routers_comment.js.html">comment.js</a></li><li><a href="../files/routers_exchange.js.html">exchange.js</a></li><li><a href="../files/routers_follow.js.html">follow.js</a></li><li><a href="../files/routers_goods.js.html">goods.js</a></li><li><a href="../files/routers_goods.search.js.html">goods.search.js</a></li><li><a href="../files/routers_message.js.html">message.js</a></li><li><a href="../files/routers_notification.js.html">notification.js</a></li><li><a href="../files/routers_queue.js.html">queue.js</a></li><li><a href="../files/routers_star.js.html">star.js</a></li><li><a href="../files/routers_upload.js.html">upload.js</a></li><li><a href="../files/routers_user.js.html">user.js</a></li></ul></li></ul>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="main" class="yui3-u">
+            <div class="content"><h4>Class Exchange</h4>
+<span class="foundat">Class defined in: <a href="../files/routers_exchange.js.html#l1"><code>routers&#x2F;exchange.js:1</code></a></span>
+<div class="intro"><p>Provides some methods related to EXCHANGES</p>
+</div>
+
+
+<div id="classdocs">
+    <ul>
+        <li><a href="#methods">Methods</a></li>
+    </ul>
+    <div>
+            <div id="methods">
+<a name="methods_GET api/exchange/"></a>
+<div class="method item">
+    JSON <strong class="name"><code>GET api&#x2F;exchange&#x2F;</code></strong>( <code>eid </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_exchange.js.html#l182"><code>routers&#x2F;exchange.js:182</code></a>
+    </span><br>
+    <p>Get an exchange simply by given eid</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>eid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The ID of exchange</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>An exchange incluing goods and owners</p>
+</div>
+</div>
+<a name="methods_GET api/exchange/all"></a>
+<div class="method item">
+    JSON <strong class="name"><code>GET api&#x2F;exchange&#x2F;all</code></strong>( <code>  </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_exchange.js.html#l24"><code>routers&#x2F;exchange.js:24</code></a>
+    </span><br>
+    <p>Get all of exchanges</p>
+
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>Exchanges including goods and owners</p>
+</div>
+</div>
+<a name="methods_GET api/exchange/of/user/all"></a>
+<div class="method item">
+    JSON <strong class="name"><code>GET api&#x2F;exchange&#x2F;of&#x2F;user&#x2F;all</code></strong>( <code>owner_uid </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_exchange.js.html#l78"><code>routers&#x2F;exchange.js:78</code></a>
+    </span><br>
+    <p>Get all exchanges of a user</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>owner_uid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The owner</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>Exchanges incluing goods( owner_goods, other_goods )</p>
+</div>
+</div>
+<a name="methods_GET api/exchange/of/user/one"></a>
+<div class="method item">
+    JSON <strong class="name"><code>GET api&#x2F;exchange&#x2F;of&#x2F;user&#x2F;one</code></strong>( <code>eid, owner_uid </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_exchange.js.html#l127"><code>routers&#x2F;exchange.js:127</code></a>
+    </span><br>
+    <p>Get an exchanges of a user</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>eid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The ID of the exchange</p>
+
+        </li>
+        <li>
+            <code>owner_uid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The owner</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>An exchange object including goods( owner_goods, other_goods )</p>
+</div>
+</div>
+<a name="methods_POST api/exchange/create"></a>
+<div class="method item">
+    JSON <strong class="name"><code>POST api&#x2F;exchange&#x2F;create</code></strong>( <code>goods_one_gid, goods_two_gid </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_exchange.js.html#l237"><code>routers&#x2F;exchange.js:237</code></a>
+    </span><br>
+    <p>Create an exchange</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>goods_one_gid</code> <strong>&lt;Integer&gt;</strong>
+        <p>One of goods in new exchange</p>
+
+        </li>
+        <li>
+            <code>goods_two_gid</code> <strong>&lt;Integer&gt;</strong>
+        <p>Other goods in new exchange</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>If (goods_one, goods_two) pair exists return that one, or return new created exchange</p>
+</div>
+</div>
+<a name="methods_PUT api/exchange/agree"></a>
+<div class="method item">
+    JSON <strong class="name"><code>PUT api&#x2F;exchange&#x2F;agree</code></strong>( <code>eid, owner_uid </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_exchange.js.html#l464"><code>routers&#x2F;exchange.js:464</code></a>
+    </span><br>
+    <p>Accept an exchange by a user
+And if two owners accept, then the exchange will be set status='completed'
+When completed, other exchanges include goods_one or goods_two will be set to status='dropped'
+And the goods that not goods_one or goods_two in the exchange will be set to exchanged=0</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>eid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The ID of an exchange</p>
+
+        </li>
+        <li>
+            <code>owner_uid</code> <strong>&lt;Integer&gt;</strong>
+        <p>Who wants to accept this exchange</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>Updated exchange object</p>
+</div>
+</div>
+<a name="methods_PUT api/exchange/drop"></a>
+<div class="method item">
+    JSON <strong class="name"><code>PUT api&#x2F;exchange&#x2F;drop</code></strong>( <code>eid </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_exchange.js.html#l397"><code>routers&#x2F;exchange.js:397</code></a>
+    </span><br>
+    <p>Drop an exchange</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>eid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The ID of an exchange</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>Updated exchange object</p>
+</div>
+</div>
+            </div>
+    </div>
+</div>
+</div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/js/tabs.js"></script>
+</body>
+</html>

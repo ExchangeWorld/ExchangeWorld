@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Chatroom</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <script src="http://yui.yahooapis.com/combo?3.8.0pr2/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">undefined: Chatroom</a></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div class="yui3-g">
+
+        <div id="sidebar" class="yui3-u">
+            <div id="modules" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Modules</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="classes" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Classes</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="../classes/Authenticate.html">Authenticate</a></li>
+                            <li><a href="../classes/Chatroom.html">Chatroom</a></li>
+                            <li><a href="../classes/Comment.html">Comment</a></li>
+                            <li><a href="../classes/Exchange.html">Exchange</a></li>
+                            <li><a href="../classes/Follow.html">Follow</a></li>
+                            <li><a href="../classes/Goods.html">Goods</a></li>
+                            <li><a href="../classes/Message.html">Message</a></li>
+                            <li><a href="../classes/Notification.html">Notification</a></li>
+                            <li><a href="../classes/Queue.html">Queue</a></li>
+                            <li><a href="../classes/Search.html">Search</a></li>
+                            <li><a href="../classes/Star.html">Star</a></li>
+                            <li><a href="../classes/Upload.html">Upload</a></li>
+                            <li><a href="../classes/User.html">User</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="elements" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Elements</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="methods-on-page" class="sidebox on-page">
+                <div class="hd">
+                    <h2 class="no-toc">Methods On Page</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="#methods_GET api/chatroom/exchange">GET api/chatroom/exchange</a></li>
+                            <li><a href="#methods_POST api/chatroom/exchange">POST api/chatroom/exchange</a></li>
+                            <li><a href="#methods_PUT api/chatroom/read">PUT api/chatroom/read</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+            
+            
+            <div id="fileTree" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Files</h2>
+                </div>
+                <div class="bd">
+                    <ul><li>routers/<ul><li><a href="../files/routers_authenticate.js.html">authenticate.js</a></li><li><a href="../files/routers_chatroom.js.html">chatroom.js</a></li><li><a href="../files/routers_comment.js.html">comment.js</a></li><li><a href="../files/routers_exchange.js.html">exchange.js</a></li><li><a href="../files/routers_follow.js.html">follow.js</a></li><li><a href="../files/routers_goods.js.html">goods.js</a></li><li><a href="../files/routers_goods.search.js.html">goods.search.js</a></li><li><a href="../files/routers_message.js.html">message.js</a></li><li><a href="../files/routers_notification.js.html">notification.js</a></li><li><a href="../files/routers_queue.js.html">queue.js</a></li><li><a href="../files/routers_star.js.html">star.js</a></li><li><a href="../files/routers_upload.js.html">upload.js</a></li><li><a href="../files/routers_user.js.html">user.js</a></li></ul></li></ul>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="main" class="yui3-u">
+            <div class="content"><h4>Class Chatroom</h4>
+<span class="foundat">Class defined in: <a href="../files/routers_chatroom.js.html#l1"><code>routers&#x2F;chatroom.js:1</code></a></span>
+<div class="intro"><p>Provides some methods related to chatrooms</p>
+</div>
+
+
+<div id="classdocs">
+    <ul>
+        <li><a href="#methods">Methods</a></li>
+    </ul>
+    <div>
+            <div id="methods">
+<a name="methods_GET api/chatroom/exchange"></a>
+<div class="method item">
+    JSON <strong class="name"><code>GET api&#x2F;chatroom&#x2F;exchange</code></strong>( <code>eid, from, number </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_chatroom.js.html#l17"><code>routers&#x2F;chatroom.js:17</code></a>
+    </span><br>
+    <p>Get chatroom's messages of an Exchange</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>eid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The ID of exchange</p>
+
+        </li>
+        <li>
+            <code>from</code> <strong>&lt;Integer=0&gt;</strong>
+        <p>From what number of messages</p>
+
+        </li>
+        <li>
+            <code>number</code> <strong>&lt;Integer=10&gt;</strong>
+        <p>How many messages to get</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>Messages including <code>sender</code></p>
+</div>
+</div>
+<a name="methods_POST api/chatroom/exchange"></a>
+<div class="method item">
+    JSON <strong class="name"><code>POST api&#x2F;chatroom&#x2F;exchange</code></strong>( <code>eid, sender_uid, content </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_chatroom.js.html#l74"><code>routers&#x2F;chatroom.js:74</code></a>
+    </span><br>
+    <p>Post a chatroom's message of an Exchange</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>eid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The ID of exchange</p>
+
+        </li>
+        <li>
+            <code>sender_uid</code> <strong>&lt;Integer&gt;</strong>
+        <p>Who post the message</p>
+
+        </li>
+        <li>
+            <code>content</code> <strong>&lt;String&gt;</strong>
+        <p>The content of the message</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>New created message object</p>
+</div>
+</div>
+<a name="methods_PUT api/chatroom/read"></a>
+<div class="method item">
+    JSON <strong class="name"><code>PUT api&#x2F;chatroom&#x2F;read</code></strong>( <code>cid, receiver_uid </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_chatroom.js.html#l116"><code>routers&#x2F;chatroom.js:116</code></a>
+    </span><br>
+    <p>Read a chatroom's message</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>cid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The ID of chatroom</p>
+
+        </li>
+        <li>
+            <code>receiver_uid</code> <strong>&lt;Integer&gt;</strong>
+        <p>Who received the message (Not sender!)</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>Updated message object</p>
+</div>
+</div>
+            </div>
+    </div>
+</div>
+</div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/js/tabs.js"></script>
+</body>
+</html>

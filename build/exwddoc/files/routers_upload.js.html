@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>routers/upload.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <script src="http://yui.yahooapis.com/combo?3.8.0pr2/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">undefined: routers/upload.js</a></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div class="yui3-g">
+
+        <div id="sidebar" class="yui3-u">
+            <div id="modules" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Modules</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="classes" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Classes</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="../classes/Authenticate.html">Authenticate</a></li>
+                            <li><a href="../classes/Chatroom.html">Chatroom</a></li>
+                            <li><a href="../classes/Comment.html">Comment</a></li>
+                            <li><a href="../classes/Exchange.html">Exchange</a></li>
+                            <li><a href="../classes/Follow.html">Follow</a></li>
+                            <li><a href="../classes/Goods.html">Goods</a></li>
+                            <li><a href="../classes/Message.html">Message</a></li>
+                            <li><a href="../classes/Notification.html">Notification</a></li>
+                            <li><a href="../classes/Queue.html">Queue</a></li>
+                            <li><a href="../classes/Search.html">Search</a></li>
+                            <li><a href="../classes/Star.html">Star</a></li>
+                            <li><a href="../classes/Upload.html">Upload</a></li>
+                            <li><a href="../classes/User.html">User</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="elements" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Elements</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            <div id="fileTree" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Files</h2>
+                </div>
+                <div class="bd">
+                    <ul><li>routers/<ul><li><a href="../files/routers_authenticate.js.html">authenticate.js</a></li><li><a href="../files/routers_chatroom.js.html">chatroom.js</a></li><li><a href="../files/routers_comment.js.html">comment.js</a></li><li><a href="../files/routers_exchange.js.html">exchange.js</a></li><li><a href="../files/routers_follow.js.html">follow.js</a></li><li><a href="../files/routers_goods.js.html">goods.js</a></li><li><a href="../files/routers_goods.search.js.html">goods.search.js</a></li><li><a href="../files/routers_message.js.html">message.js</a></li><li><a href="../files/routers_notification.js.html">notification.js</a></li><li><a href="../files/routers_queue.js.html">queue.js</a></li><li><a href="../files/routers_star.js.html">star.js</a></li><li><a href="../files/routers_upload.js.html">upload.js</a></li><li><a href="../files/routers_user.js.html">user.js</a></li></ul></li></ul>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="main" class="yui3-u">
+            <div class="content"><h4>routers/upload.js</h4>
+
+<pre class="code prettyprint linenums">
+/**
+ * Provides some methods related to uploads
+ *
+ * @class Upload
+ */
+
+&#x27;use strict&#x27;;
+
+var express = require(&#x27;express&#x27;);
+var fs = require(&#x27;fs&#x27;);
+var router = express.Router();
+
+// Including tables for photoPath
+// var goods = require(&#x27;../ORM/Goods&#x27;);
+
+// Hashcode generation function
+var getSHA256 = strToEncrypt =&gt; {
+	var crypto = require(&#x27;crypto&#x27;);
+	var sha256 = crypto.createHash(&#x27;sha256&#x27;);
+
+	sha256.update(strToEncrypt, &#x27;utf8&#x27;);
+
+	return sha256.digest(&#x27;hex&#x27;);
+};
+
+/**
+ * Post an image
+ *
+ * @method POST api/upload/image
+ * @param  {Integer} filesize
+ * @param  {String} filename
+ * @param  {String} base64 Encoded imgData from request body
+ * @param  {String} filetype
+ * @return {URL} Image&#x27;s src
+ */
+router.post(&#x27;/image&#x27;, (req, res) =&gt; {
+	// Get file size
+	// var imgSize = req.body.filesize;
+
+	// Get filename
+	// var imgName = req.body.filename;
+
+	// Get base64 encoded imgData from request body
+	var imgData = req.body.base64;
+
+	// Get image format type, like jpg or png
+	var imgFormat = req.body.filetype;
+
+	// Remove annotations and fix space to +
+	// And become pure base64 string
+	var base64Data = imgData.replace(/^data:image\/\w+;base64,/, &#x27;&#x27;).replace(/\s/g, &#x27;+&#x27;);
+
+	// Open a buffer stream
+	var dataBuffer = new Buffer(base64Data, &#x27;base64&#x27;);
+
+	// Get a sha256 hash from its base64data
+	var hashData = getSHA256(base64Data);
+
+	// The file path pointing to the image file
+	var filePath = &#x27;../ExchangeWorld/images_global/&#x27; + hashData + &#x27;.&#x27; + imgFormat.replace(/image\//, &#x27;&#x27;);
+
+	// Write to file with the filePath
+	// And if there is another person who uploaded a same base64 image,
+	// The things are still going right because that means same image, why not treat them same?
+	// Finally, send the &quot;static file path&quot; back
+	fs.writeFile(filePath, dataBuffer, err =&gt; {
+		if (err) {
+			res.send({
+				error: err
+			});
+		} else {
+			// res.send(&#x27;images/&#x27; + hashData + &#x27;.&#x27; + imgFormat.replace(/image\//, &#x27;&#x27;));
+			res.send(&#x27;http://exwd.csie.org/images/&#x27; + hashData + &#x27;.&#x27; + imgFormat.replace(/image\//, &#x27;&#x27;));
+		}
+	});
+});
+
+module.exports = router;
+
+</pre>
+
+</div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/js/tabs.js"></script>
+</body>
+</html>

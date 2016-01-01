@@ -118,12 +118,12 @@
 			<div class="comment" ng-repeat="comment in vm.goodComments">
 				<a class="avatar" ng-click="vm.onClickUser(comment.user.uid)"> <img ng-src="{{ comment.user.photo_path }}"> </a>
 				<div class="content" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
-					<a class="author" style="color:#C5E1A5;" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
+					<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
 					<div class="metadata">
-						<div flex class="date" style="color:#C5CAE9">{{ comment.timestamp}}</div>
+						<div flex class="date">{{ comment.timestamp}}</div>
 					</div>
 					<div ng-show="comment.isMe && removeMode" ng-click="vm.onDeleteComment(comment.cid)" class="cross">X</div>
-					<div class="text" style="color:lemonchiffon;">
+					<div class="text">
 						{{ comment.content }}
 					</div>
 				</div>
@@ -131,7 +131,7 @@
 			<form ng-submit="vm.onSubmitComment()">
 				<md-input-container style="padding-bottom: 15px;">
 					<label>留言...</label>
-					<input style="border-bottom-color: lemonchiffon; color:white;	"type="text" ng-model="vm.comment" name="text" />
+					<input type="text" ng-model="vm.comment" name="text" />
 				</md-input-container>
 				<input type="submit" id="submit" value="Submit" ng-show="false" />
 			</form>

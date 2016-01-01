@@ -289,7 +289,7 @@ div.md-open-menu-container {
 		width: 90%;
 	}
 	.btn-rwd {
-		min-width: 42px;
+		min-width: 46px;
 	}
 	.profile-top {
 		margin: 4% 0 2% 0;
@@ -373,6 +373,13 @@ div.md-open-menu-container {
 	}
 	.switch {
 		padding-left: 10px;
+	}
+	.info_container{
+		&.for_input{
+			&.post{
+				margin: 10% 1.5%;
+			}
+		}
 	}
 }
 

@@ -1,24 +1,24 @@
-<md-content class="xmas" resize ng-style="resizeWithOffset(56)" style="overflow-y: scroll;">
+<md-content resize ng-style="resizeWithOffset(56)" style="overflow-y: scroll;">
 	<div layout="row" class="profile-top" layout-align="center center">
 		<div layout layout-align="center center" class="img-profile" ng-style="{'background-image':'url({{ vm.profile.photo_path }})'}" style="border: 2px solid #90A4AE;">
 		</div>
 		<div flex-gt-sm="60" flex-sm="50" layout="column">
 			<div layout="column">
 				<div layout="column" layout-align="center center">
-					<h4 class="md-headline xmas-font" style="margin:8px 0; text-align: center;">{{ vm.profile.name }}</h4>
+					<h4 class="md-headline" style="margin:8px 0; text-align: center;">{{ vm.profile.name }}</h4>
 					<div layout="row" layout-align="center center">
 						<md-tooltip>被關注總量</md-tooltip>
 						<i class="material-icons heart-seek">favorite</i>
-						<span class="md-subhead xmas-font">{{ vm.favSum.length }}</span>
+						<span class="md-subhead">{{ vm.favSum.length }}</span>
 					</div>
 				</div>
 				<div layout="row" layout-sm="column" layout-align="center center">
 					<div layout="column" layout-sm="row" layout-align="center center" class="note profile">
-						<p class="md-title text-ex follow reset-follow xmas-font">追隨中</p>
+						<p class="md-title text-ex follow reset-follow">追隨中</p>
 						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'following')">{{ vm.profile.followings.length }}</a>
 					</div>
 					<div layout="column" layout-sm="row" layout-align="center center" class="note profile">
-						<p class="md-title text-ex follow reset-follow xmas-font">被追蹤</p>
+						<p class="md-title text-ex follow reset-follow">被追蹤</p>
 						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'follower')">{{ vm.followerCount }}</a>
 					</div>
 				</div>
@@ -45,7 +45,7 @@
 	<md-divider class="info_container for_input small" style="margin-bottom: 0px"></md-divider>
 	<md-tabs md-dynamic-height md-center-tabs md-swipe-content md-no-ink>
 		<md-tab label="願望清單">
-			<md-content class="xmas" layout-padding style="margin-top: 10px;">
+			<md-content layout-padding style="margin-top: 10px;">
 				<div layout="row" style="padding-top: 4%;">
 					<div flex="65" offset="5">
 						<form name="userForm">
@@ -72,12 +72,12 @@
 			</md-content>
 		</md-tab>
 		<md-tab label="等待交換({{ vm.myGoodsPending.length }})">
-			<md-content class="xmas" layout-padding>
+			<md-content layout-padding>
 				<div flex layout layout-align="center center" ng-show="vm.myGoodsPending.length === 0">
 					<img class="img-null" src="../../images/emoji_null.png">
 				</div>
 				<div layout="column" layout-align="center center">
-					<md-card class="md-whiteframe-z3 item-profile xmas-card" ng-repeat="goods in vm.myGoodsPending" ng-click="vm.onClickGoods(goods.gid)">
+					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myGoodsPending" ng-click="vm.onClickGoods(goods.gid)">
 						<md-card-content layout-gt-sm="row">
 							<div flex-gt-sm="40" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
 								<img id="img_{{goods.gid}}" crossorigin="anonymous" ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" ng-show="goods.category !== 'Christmas'" />
@@ -98,12 +98,12 @@
 			</md-content>
 		</md-tab>
 		<md-tab label="已交換({{ vm.myGoodsExchanged.length }})">
-			<md-content class="xmas" layout-padding>
+			<md-content layout-padding>
 				<div flex layout layout-align="center center" ng-show="vm.myGoodsExchanged.length === 0">
 					<img class="img-null" src="../../images/emoji_null.png">
 				</div>
 				<div layout="column" layout-align="center center">
-					<md-card class="md-whiteframe-z3 item-profile xmas-card" ng-repeat="goods in vm.myGoodsExchanged" ng-click="vm.onClickGoods(goods.gid)">
+					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myGoodsExchanged" ng-click="vm.onClickGoods(goods.gid)">
 						<md-card-content layout-gt-sm="row">
 							<div flex-gt-sm="40" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
 								<img id="img_{{goods.gid}}" crossorigin="anonymous" ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
@@ -131,12 +131,12 @@
 			</md-content>
 		</md-tab>
 		<md-tab label="關注的物品({{ vm.myStar.length }})">
-			<md-content class="xmas" layout-padding>
+			<md-content layout-padding>
 				<div flex layout layout-align="center center" ng-show="vm.myStar.length === 0">
 					<img class="img-null" src="../../images/emoji_null.png">
 				</div>
 				<div layout="column" layout-align="center center">
-					<md-card class="md-whiteframe-z3 item-profile xmas-card" ng-repeat="goods in vm.myStar" ng-click="vm.onClickGoods(goods.gid)">
+					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myStar" ng-click="vm.onClickGoods(goods.gid)">
 						<md-card-content layout-gt-sm="row">
 							<div flex-gt-sm="40" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
 								<img id="img_{{goods.gid}}" crossorigin="anonymous" ng-src="{{ goods.photo_path[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" ng-show="goods.category !== 'Christmas'" />

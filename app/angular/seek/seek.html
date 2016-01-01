@@ -10,7 +10,7 @@
 			<input ng-model="vm.searchGoodsName" aria-label="goodsName">
 		</md-input-container>
 		<md-input-container flex>
-			<label class="xmas-font">種類</label>
+			<label>種類</label>
 			<md-select ng-model="vm.searchGoodsCategory" aria-label="cate">
 				<md-option
 					ng-repeat="cate in vm.availableCategory"
@@ -42,7 +42,7 @@
 	</div>
 </md-toolbar>
 
-<md-content class="xmas" resize ng-style="resizeWithOffset(132)">
+<md-content resize ng-style="resizeWithOffset(132)">
 	<div class="md-padding"></div>
 	<div
 		layout layout-align="center center"

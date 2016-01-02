@@ -1,4 +1,4 @@
-<md-toolbar class="md-primary md-hue-2 md-whiteframe-z2" style="height: 76px;">
+<md-toolbar class="md-primary md-hue-3 md-whiteframe-z2" style="height: 76px;">
 	<!-- search input bar & button -->
 	<div layout="row" layout-align="start center">
 		<md-input-container
@@ -7,10 +7,10 @@
 			style="padding-left: 10px;"
 		>
 			<label style="top:2px;">搜索</label>
-			<input style="border-color: green;" ng-model="vm.searchGoodsName" aria-label="goodsName">
+			<input ng-model="vm.searchGoodsName" aria-label="goodsName">
 		</md-input-container>
 		<md-input-container flex>
-			<label class="xmas-font">種類</label>
+			<label>種類</label>
 			<md-select ng-model="vm.searchGoodsCategory" aria-label="cate">
 				<md-option
 					ng-repeat="cate in vm.availableCategory"
@@ -42,7 +42,7 @@
 	</div>
 </md-toolbar>
 
-<md-content class="xmas" resize ng-style="resizeWithOffset(132)">
+<md-content resize ng-style="resizeWithOffset(132)">
 	<div class="md-padding"></div>
 	<div
 		layout layout-align="center center"
@@ -55,7 +55,7 @@
 	<div class="grid-wrapper">
 		<div class="grid__columns">
 			<div ng-repeat="card in vm.goods">
-				<md-card class="md-whiteframe-z3 item card">
+				<md-card class="md-whiteframe-z4 item card">
 					<a
 						ng-href="/seek/{{card.gid}}"
 						ng-mouseenter="onMouseOver(card.gid)"

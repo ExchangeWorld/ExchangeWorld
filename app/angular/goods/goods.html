@@ -1,4 +1,4 @@
-<md-content class="xmas" resize ng-style="resizeWithOffset(56)" style="overflow-y: auto; overflow-x: hidden; padding: 0 20px;">
+<md-content resize ng-style="resizeWithOffset(56)" style="overflow-y: auto; overflow-x: hidden; padding: 0 8px;">
 	<div layout="row" layout-align="center center" style="padding:20px 0 0 5px; margin-bottom: 15px;">
 		<div flex layout layout-align="center center">
 			<md-button ng-click="vm.onClickBack()" class="md-raised md-accent md-hue-1 btn-rwd" style="margin-left:0;">
@@ -6,14 +6,14 @@
 				<span hide-sm>回列表</span>
 			</md-button>
 		</div>
-		<div flex flex-sm="25" layout layout-align="center center">
+		<div flex flex-sm="20" layout layout-align="center center">
 			<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
 				<md-icon md-font-set="material-icons" ng-class="{'heart-goods': vm.starred}">favorite</md-icon>
 				<span hide-sm>{{vm.starred ? '已關注' : '關注'}} </span>
 				<span>{{vm.stars.length}}</span>
 			</md-button>
 		</div>
-		<div flex flex-sm="25" layout layout-align="center center">
+		<div flex flex-sm="20" layout layout-align="center center">
 			<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn || vm.goodData.status === 1" ng-click="vm.onClickQueue($event)">
 				<md-icon md-font-set="material-icons">remove_red_eye</md-icon>
 				<span hide-sm>{{ vm.isMe ? '看誰排' : '我要排' }} </span>
@@ -27,8 +27,11 @@
 				<span hide-sm>分享</span>
 			</a>
 		</div>
-		<div flex ng-show="vm.isMe" ng-click="vm.onDelete(vm.goodData.gid)" layout layout-align="center center">
-			<i class="material-icons delete xmas-icon">delete</i>
+		<div flex layout layout-align="center center" ng-show="vm.isMe">
+			<md-button class="white-btn btn-rwd" ng-click="vm.onDelete(vm.goodData.gid)" layout layout-align="center center">
+				<md-icon md-font-set="material-icons">delete</md-icon>
+				<span hide-sm>刪除</span>		
+			</md-button>
 		</div>
 	</div>
 	</div>
@@ -72,17 +75,17 @@
 			</div>
 			<div flex="40" layout="column" layout-align="center center">
 				<img ng-click="vm.onClickUser(vm.goodData.user.uid)" class="circular goods with_border anchor" src="{{ vm.goodData.user.photo_path }}" />
-				<p class="md-tiltle xmas-font">{{ vm.goodData.user.name }}</p>
+				<p class="md-tiltle">{{ vm.goodData.user.name }}</p>
 			</div>
 			<div flex="55" layout="column" layout-align="start center" ng-show="!vm.edit">
-				<h3 class="goods-name xmas-font">{{ vm.goodData.name }}</h3>
+				<h3 class="goods-name">{{ vm.goodData.name }}</h3>
 
 				<div style="color:#7f8588;" layout="row" layout-align="center center">
 					<img 
 						data-ng-src="../../images/icon/{{vm.goodData.category}}.svg"
 						style="height:24px; width:auto;"
 					/>
-					<span class="xmas-font" style="margin-left: 5px;">{{ vm.goodData.category_alias }}</span>
+					<span style="margin-left: 5px;">{{ vm.goodData.category_alias }}</span>
 				</div>
 			</div>
 			<div flex="55" layout="column" layout-align="start center" ng-show="vm.edit">
@@ -118,12 +121,12 @@
 			<div class="comment" ng-repeat="comment in vm.goodComments">
 				<a class="avatar" ng-click="vm.onClickUser(comment.user.uid)"> <img ng-src="{{ comment.user.photo_path }}"> </a>
 				<div class="content" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
-					<a class="author" style="color:#C5E1A5;" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
+					<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
 					<div class="metadata">
-						<div flex class="date" style="color:#C5CAE9">{{ comment.timestamp}}</div>
+						<div flex class="date">{{ comment.timestamp}}</div>
 					</div>
 					<div ng-show="comment.isMe && removeMode" ng-click="vm.onDeleteComment(comment.cid)" class="cross">X</div>
-					<div class="text" style="color:lemonchiffon;">
+					<div class="text">
 						{{ comment.content }}
 					</div>
 				</div>
@@ -131,7 +134,7 @@
 			<form ng-submit="vm.onSubmitComment()">
 				<md-input-container style="padding-bottom: 15px;">
 					<label>留言...</label>
-					<input style="border-bottom-color: lemonchiffon; color:white;	"type="text" ng-model="vm.comment" name="text" />
+					<input type="text" ng-model="vm.comment" name="text" />
 				</md-input-container>
 				<input type="submit" id="submit" value="Submit" ng-show="false" />
 			</form>

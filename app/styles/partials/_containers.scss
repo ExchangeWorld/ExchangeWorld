@@ -122,7 +122,7 @@ md-input-container {
 	display: block;
 	border-radius: 50%;
 	&.with_border {
-		border: 3px solid #ff2222;
+		border: 3px solid #90A4AE;
 	}
 	&.profile {
 		max-width: 125%;
@@ -137,12 +137,12 @@ md-input-container {
 }
 
 .home_container1 {
-	//background-color: #ECEFF1;
+	background-color: #ECEFF1;
 	padding: 30px 0px;
 }
 
 .home_container2 {
-	//background-color: #E5E5ED;
+	background-color: #E5E5ED;
 	padding-top: 30px;
 }
 
@@ -176,10 +176,10 @@ md-input-container {
 }
 
 .item {
-	background: #F5F5F5;
+	background: #ECEFF1;
 	margin: 5px 5px 10px 5px;
 	box-sizing: border-box;
-	//box-shadow: 2px 2px 4px 2px #ccc;
+	// box-shadow: 2px 2px 4px 2px #607D8B;
 	border-radius: 8px;
 	img {
 		max-width: 100%;
@@ -212,7 +212,7 @@ div.md-open-menu-container {
 	height: 50px;
 	width: 50px;
 	border-radius: 50%;
-	border: 2px solid #ff2222;
+	border: 2px solid #90A4AE;
 	&.profile {
 		position: absolute;
 		right: 0;
@@ -289,7 +289,7 @@ div.md-open-menu-container {
 		width: 90%;
 	}
 	.btn-rwd {
-		min-width: 42px;
+		min-width: 46px;
 	}
 	.profile-top {
 		margin: 4% 0 2% 0;
@@ -373,6 +373,13 @@ div.md-open-menu-container {
 	}
 	.switch {
 		padding-left: 10px;
+	}
+	.info_container{
+		&.for_input{
+			&.post{
+				margin: 10% 1.5%;
+			}
+		}
 	}
 }
 

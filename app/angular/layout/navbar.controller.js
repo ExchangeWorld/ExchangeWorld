@@ -140,6 +140,7 @@ function NavbarController(
 		if(!$state.includes("root.oneCol") && !$mdSidenav('left').isOpen() ) {
 			$mdSidenav('left').toggle();
 		}
+		vm.closeMenu();
 	}
 
 	function onClickMessage(msg, ev) {
@@ -148,6 +149,7 @@ function NavbarController(
 		message
 			.updateMessage(msg)
 			.then(updateNotification);
+		vm.closeMenu();
 	}
 
 

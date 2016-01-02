@@ -1,3 +1,4 @@
+
 input,
 textarea {
 	font-family: inherit;
@@ -5,10 +6,10 @@ textarea {
 
 strong {
 	color: rgba(0, 163, 244, 0.66);
-	// &.map-font {
-	// 	color: #000;
-	// 	margin-right: 20px;
-	// }
+	&.map-font {
+		color: #000;
+		margin-right: 20px;
+	}
 }
 
 p,
@@ -198,7 +199,7 @@ a:hover {
 	height: 0;
 	border-style: solid;
 	border-width: 20px 0 20px 25px;
-	border-color: transparent transparent transparent white;
+	border-color: transparent transparent transparent rgb(96,125,139);
 }
 
 .vertical {

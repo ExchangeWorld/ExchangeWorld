@@ -41,13 +41,11 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		}
 
 		Restangular
-			.all('goods')
-			.getList({ gid : gid })
+			.oneUrl(`goods?gid=${gid}`)
+			.get()
 			.then(function(data) {
-				if (_.isArray(data)) {
-					data.forEach(function(goods) {
-						if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
-					});
+				if (data) {
+					if (_.isString(data.photo_path)) data.photo_path = JSON.parse(data.photo_path);
 					defer.resolve(data);
 				}
 			}, (error)=> {

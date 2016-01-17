@@ -28,7 +28,7 @@ function getStates() {
 								if(data.length === 0) {
 									$state.go('root.404');
 								}
-								return data[0];
+								return data;
 							}, (error) => {
 								$state.go('root.404');
 							});

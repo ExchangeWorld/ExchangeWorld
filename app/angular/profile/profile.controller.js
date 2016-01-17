@@ -57,7 +57,7 @@ function ProfileController(
 
 	function activate() {
 		if (vm.isLoggedIn) {
-			if (_.findWhere(profile.followers, { follower_uid: $localStorage.user.uid })) {
+			if (_.findWhere(profile.follows_followed, { fid: $localStorage.user.uid })) {
 				vm.isFollowed = true;
 			}
 		}

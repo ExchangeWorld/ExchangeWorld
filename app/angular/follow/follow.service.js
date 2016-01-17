@@ -17,10 +17,14 @@ function followService(Restangular, $q, exception) {
 
 	function getFollow(uid, type) {
 		const defer = $q.defer();
+		let url = type === 'follower' ? 'follow/followers/of' : 'follow/followed/by';
 
 		Restangular
-			.all('user/profile/' + type)
-			.getList({ my_uid: uid })
+			.all(url)
+			.getList({
+				follower_uid: uid, 
+				followed_uid: uid, 
+			})
 			.then(function(data) {
 				if (_.isArray(data)) {
 					defer.resolve(data);

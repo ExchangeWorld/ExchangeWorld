@@ -69,32 +69,27 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 
 	function addFollowing(my_uid, following_uid) {
 		Restangular
-			.all('user/profile/following/post')
+			.all('follow/post')
 			.post({
-				my_uid        : my_uid,
-				following_uid : following_uid,
-			});
-		Restangular
-			.all('user/profile/follower/post')
-			.post({
-				my_uid       : following_uid,
 				follower_uid : my_uid,
+				followed_uid : following_uid,
+			})
+			.then(function() {
+				logger.success('成功追隨', {}, 'DONE');
 			});
-		logger.success('成功追隨', {}, 'DONE');
 	}
 
 	function deleteFollowing(my_uid, following_uid) {
 		Restangular
-			.all('user/profile/following/delete')
-			.remove({
-				my_uid        : my_uid,
-				following_uid : following_uid,
-			});
-		Restangular
-			.all('user/profile/follower/delete')
-			.remove({
-				my_uid       : following_uid,
-				follower_uid : my_uid,
+			.all('follow/followers/of')
+			.getList({
+				followed_uid : following_uid,
+			})
+			.then(function(followers) {
+				let followed_by_me = followers.filter(function(f) { return f.fid === my_uid; });
+				followed_by_me[0].route = 'follow/delete';
+				followed_by_me[0].followed_uid = following_uid;
+				followed_by_me[0].remove();
 			});
 	}
 

@@ -54,26 +54,29 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 
 		$q.
 			all([
-				Restangular.all('user').getList({ fb_id: user.id }),
+				Restangular.oneUrl(`user?identity=${user.id}`).get(),
 				getLargePicture(user.id)
 			])
 			.then(function(results) {
+				//console.log(results);
 				var member = results[0];
 				var largePic = results[1];
 
-				if (member.length === 0) {
+				if (!member) {
 					me({ fields: 'id, name, email, picture' })
 						.then(function(user_data) {
 
 							Restangular
-								.all('user/register')
+								.all('authenticate/register')
 								.post({
-									fb_id        : user_data.id,
-									name         : user_data.name,
-									photo_path   : largePic.data.url,
-									email        : user_data.email,
+									fb         : true,
+									identity   : user_data.id,
+									name       : user_data.name,
+									photo_path : largePic.data.url,
+									email      : user_data.email,
 								})
 								.then(function(data) {
+									console.log(data);
 									if (data) {
 										defer.resolve(data);
 										$localStorage.user = data;
@@ -83,11 +86,11 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 								});
 						});
 				} else {
-					member[0].route = 'user/photo';
-					member[0].photo_path = largePic.data.url;
-					member[0].put();
-					defer.resolve(member[0]);
-					$localStorage.user = member[0];
+					member.route = 'user/photo';
+					member.photo_path = largePic.data.url;
+					member.put();
+					defer.resolve(member);
+					$localStorage.user = member;
 				}
 			});
 		return defer.promise;

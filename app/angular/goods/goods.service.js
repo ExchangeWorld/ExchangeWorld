@@ -165,7 +165,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 	function getQueue(host_goods_gid) {
 		const defer = $q.defer();
 		Restangular
-			.all('queue/of')
+			.all('queue/of/goods')
 			.getList({host_goods_gid: host_goods_gid})
 			.then(function(data) {
 				if (_.isArray(data)) {

@@ -45,7 +45,6 @@ function ProfileController(
 	vm.onClickFollow       = $rootScope.onClickFollow;
 	vm.onClickAddFollowing = onClickAddFollowing;
 	vm.onClickSendMsg      = onClickSendMsg;
-	vm.followerCount       = profile.followers.length;
 	vm.isFollowed          = false;
 	vm.isReadOnly          = true;
 	vm.onClickEdit         = onClickEdit;

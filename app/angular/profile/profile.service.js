@@ -24,14 +24,10 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 		const defer = $q.defer();
 
 		Restangular
-			.all('user/profile')
-			.getList({ uid : _uid })
+			.oneUrl(`user?uid=${_uid}`)
+			.get()
 			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data[0]);
-				} else if (_.isObject(data)) {
-					defer.resolve(data);
-				}
+				defer.resolve(data);
 			}, (error)=> {
 				defer.reject({ error: error });
 				exception.catcher('[Profiles Service] getProfile error: ')(error);
@@ -44,8 +40,8 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 		const defer = $q.defer();
 
 		Restangular
-			.all('star/toOwner')
-			.getList({ owner_uid: uid })
+			.all('star/by')
+			.getList({ starring_user_uid: uid })
 			.then(function(data) {
 				defer.resolve(data);
 			}, (error) => {

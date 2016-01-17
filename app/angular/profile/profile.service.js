@@ -103,9 +103,7 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 
 		Restangular
 			.all('goods/of')
-			.getList({
-				owner_uid: uid,
-			})
+			.getList({ owner_uid: uid })
 			.then(function(data) {
 				if (_.isArray(data)) {
 					data.forEach(function(goods) {

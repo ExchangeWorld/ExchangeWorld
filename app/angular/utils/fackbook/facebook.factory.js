@@ -76,7 +76,6 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 									email      : user_data.email,
 								})
 								.then(function(data) {
-									console.log(data);
 									if (data) {
 										defer.resolve(data);
 										$localStorage.user = data;
@@ -89,8 +88,18 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 					member.route = 'user/photo';
 					member.photo_path = largePic.data.url;
 					member.put();
-					defer.resolve(member);
-					$localStorage.user = member;
+
+					Restangular
+						.all('authenticate/login')
+						.post({
+							fb       : true,
+							identity : member.identity
+						})
+						.then(function(token) {
+							member.token = token.token;
+							defer.resolve(member);
+							$localStorage.user = member;
+						});
 				}
 			});
 		return defer.promise;

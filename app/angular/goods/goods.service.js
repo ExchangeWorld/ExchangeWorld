@@ -73,15 +73,14 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		return defer.promise;
 	}
 
-	function editGood(gid, name, cate, des) {
+	function editGood(newValue) {
 		const defer = $q.defer();
 
-		getGood(gid)
+		getGood(newValue.gid)
 			.then(function(goods) {
-				goods             = goods[0];
-				goods.name        = name;
-				goods.category    = cate;
-				goods.description = des;
+				goods.name        = newValue.name;
+				goods.category    = newValue.category;
+				goods.description = newValue.description;
 				goods.route       = 'goods/edit';
 				goods.photo_path = JSON.stringify(goods.photo_path);
 

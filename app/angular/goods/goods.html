@@ -119,11 +119,11 @@
 		<!-- comments -->
 		<div class="comments">
 			<div class="comment" ng-repeat="comment in vm.goodComments">
-				<a class="avatar" ng-click="vm.onClickUser(comment.commenter_uid)"> <img ng-src="{{ comment.owner.photo_path }}"> </a>
+				<a class="avatar" ng-click="vm.onClickUser(comment.commenter_uid)"> <img ng-src="{{ comment.commenter.photo_path }}"> </a>
 				<div class="content" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
-					<a class="author" ng-click="vm.onClickUser(comment.owner.uid)">{{ comment.owner.name}}</a>
+					<a class="author" ng-click="vm.onClickUser(comment.commenter_uid)">{{ comment.commenter.name}}</a>
 					<div class="metadata">
-						<div flex class="date">{{ comment.timestamp}}</div>
+						<div flex class="date">{{ comment.timestamp }}</div>
 					</div>
 					<div ng-show="comment.isMe && removeMode" ng-click="vm.onDeleteComment(comment.cid)" class="cross">X</div>
 					<div class="text">

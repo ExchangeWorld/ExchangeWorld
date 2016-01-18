@@ -23,6 +23,7 @@ function GoodsController(
 	auth,
 	NgMap,
 	goodData,
+	comments,
 	AvailableCategory,
 	goodsService,
 	notification,
@@ -51,7 +52,7 @@ function GoodsController(
 	vm.bordercolor       = ['',''];
 
 	vm.comment         = '';
-	vm.goodComments    = [];
+	vm.goodComments    = comments;
 	vm.onSubmitComment = onSubmitComment;
 	vm.onDeleteComment = onDeleteComment;
 
@@ -168,7 +169,7 @@ function GoodsController(
 				var data = vm.goodComments.map(function(comment) {
 					if (vm.isLoggedIn)
 						comment.isMe = (comment.commenter_uid === $localStorage.user.uid);
-					comment.timestamp = moment(comment.timestamp.slice(0, -1)).fromNow();
+					comment.timestamp = moment(comment.created_at.slice(0, -1)).fromNow();
 					return comment;
 				});
 				vm.goodComments = data;

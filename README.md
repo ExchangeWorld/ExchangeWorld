@@ -10,12 +10,12 @@
 3. Now that `gulp dev` is running, the server is up as well and serving files from the `/build` directory. Any changes in the `/app` directory will be automatically processed by Gulp and the changes will be injected to any open browsers pointed at the proxy address.
 
 ### Simple Version
-1. in terminal:
-```
-~$ npm install
-~$ npm install -g gulp
-~$ gulp
-```
+1. in terminal:  
+  ```
+  ExchangeWorld~$ npm install
+  ExchangeWorld~$ gulp
+  ```
+  
 2. gulp will open `localhost:3000` in browser for you. ヽ(✿ﾟ▽ﾟ)ノ
 3. start coding...
 

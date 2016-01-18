@@ -45,7 +45,6 @@ function ProfileController(
 	vm.onClickFollow       = $rootScope.onClickFollow;
 	vm.onClickAddFollowing = onClickAddFollowing;
 	vm.onClickSendMsg      = onClickSendMsg;
-	vm.followerCount       = profile.followers.length;
 	vm.isFollowed          = false;
 	vm.isReadOnly          = true;
 	vm.onClickEdit         = onClickEdit;
@@ -58,7 +57,7 @@ function ProfileController(
 
 	function activate() {
 		if (vm.isLoggedIn) {
-			if (_.findWhere(profile.followers, { follower_uid: $localStorage.user.uid })) {
+			if (_.findWhere(profile.follows_followed, { fid: $localStorage.user.uid })) {
 				vm.isFollowed = true;
 			}
 		}

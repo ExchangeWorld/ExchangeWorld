@@ -23,6 +23,7 @@ function GoodsController(
 	auth,
 	NgMap,
 	goodData,
+	comments,
 	AvailableCategory,
 	goodsService,
 	notification,
@@ -51,7 +52,7 @@ function GoodsController(
 	vm.bordercolor       = ['',''];
 
 	vm.comment         = '';
-	vm.goodComments    = [];
+	vm.goodComments    = comments;
 	vm.onSubmitComment = onSubmitComment;
 	vm.onDeleteComment = onDeleteComment;
 
@@ -122,19 +123,26 @@ function GoodsController(
 	}
 
 	function onEdit(gid) {
-		if(vm.edit) {
-			goodsService
-				.editGood(gid, vm.goodData.name, vm.goodData.category, vm.goodData.description)
-				.then(function(data) {
-					goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
-					logger.success('更新成功！', data, 'Edit');
-					$state.reload();
-				})
-				.catch(function(err) { 
-					logger.error('錯誤', err, 'Error');
-				});
-		}
 		vm.edit = !vm.edit;
+		if(vm.edit) return;
+
+		let newValue = {
+			gid         : gid,
+			name        : vm.goodData.name,
+			category    : vm.goodData.category,
+			description : vm.goodData.description
+		};
+
+		goodsService
+			.editGood(newValue) 
+			.then(function(data) {
+				goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
+				logger.success('更新成功！', data, 'Edit');
+				$state.reload();
+			})
+			.catch(function(err) { 
+				logger.error('錯誤', err, 'Error');
+			});
 	}
 
 	function onDelete(gid) {
@@ -168,7 +176,7 @@ function GoodsController(
 				var data = vm.goodComments.map(function(comment) {
 					if (vm.isLoggedIn)
 						comment.isMe = (comment.commenter_uid === $localStorage.user.uid);
-					comment.timestamp = moment(comment.timestamp.slice(0, -1)).fromNow();
+					comment.timestamp = moment(comment.created_at.slice(0, -1)).fromNow();
 					return comment;
 				});
 				vm.goodComments = data;

@@ -24,14 +24,10 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 		const defer = $q.defer();
 
 		Restangular
-			.all('user/profile')
-			.getList({ uid : _uid })
+			.oneUrl(`user?uid=${_uid}`)
+			.get()
 			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data[0]);
-				} else if (_.isObject(data)) {
-					defer.resolve(data);
-				}
+				defer.resolve(data);
 			}, (error)=> {
 				defer.reject({ error: error });
 				exception.catcher('[Profiles Service] getProfile error: ')(error);
@@ -44,8 +40,8 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 		const defer = $q.defer();
 
 		Restangular
-			.all('star/toOwner')
-			.getList({ owner_uid: uid })
+			.all('star/by')
+			.getList({ starring_user_uid: uid })
 			.then(function(data) {
 				defer.resolve(data);
 			}, (error) => {
@@ -58,8 +54,7 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 	function editProfile(profile) {
 		const defer = $q.defer();
 
-		profile.route = 'user/profile/edit';
-		profile.byuser = byuserGen(profile.uid); 
+		profile.route = 'user/edit';
 
 		profile
 			.put()
@@ -74,32 +69,27 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 
 	function addFollowing(my_uid, following_uid) {
 		Restangular
-			.all('user/profile/following/post')
+			.all('follow/post')
 			.post({
-				my_uid        : my_uid,
-				following_uid : following_uid,
-			});
-		Restangular
-			.all('user/profile/follower/post')
-			.post({
-				my_uid       : following_uid,
 				follower_uid : my_uid,
+				followed_uid : following_uid,
+			})
+			.then(function() {
+				logger.success('成功追隨', {}, 'DONE');
 			});
-		logger.success('成功追隨', {}, 'DONE');
 	}
 
 	function deleteFollowing(my_uid, following_uid) {
 		Restangular
-			.all('user/profile/following/delete')
-			.remove({
-				my_uid        : my_uid,
-				following_uid : following_uid,
-			});
-		Restangular
-			.all('user/profile/follower/delete')
-			.remove({
-				my_uid       : following_uid,
-				follower_uid : my_uid,
+			.all('follow/followers/of')
+			.getList({
+				followed_uid : following_uid,
+			})
+			.then(function(followers) {
+				let followed_by_me = followers.filter(function(f) { return f.fid === my_uid; });
+				followed_by_me[0].route = 'follow/delete';
+				followed_by_me[0].followed_uid = following_uid;
+				followed_by_me[0].remove();
 			});
 	}
 
@@ -108,9 +98,7 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 
 		Restangular
 			.all('goods/of')
-			.getList({
-				owner_uid: uid,
-			})
+			.getList({ owner_uid: uid })
 			.then(function(data) {
 				if (_.isArray(data)) {
 					data.forEach(function(goods) {

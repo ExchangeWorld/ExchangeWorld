@@ -41,13 +41,11 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		}
 
 		Restangular
-			.all('goods')
-			.getList({ gid : gid })
+			.oneUrl(`goods?gid=${gid}`)
+			.get()
 			.then(function(data) {
-				if (_.isArray(data)) {
-					data.forEach(function(goods) {
-						if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
-					});
+				if (data) {
+					if (_.isString(data.photo_path)) data.photo_path = JSON.parse(data.photo_path);
 					defer.resolve(data);
 				}
 			}, (error)=> {
@@ -75,18 +73,16 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		return defer.promise;
 	}
 
-	function editGood(gid, name, cate, des) {
+	function editGood(newValue) {
 		const defer = $q.defer();
 
-		getGood(gid)
+		getGood(newValue.gid)
 			.then(function(goods) {
-				goods             = goods[0];
-				goods.name        = name;
-				goods.category    = cate;
-				goods.description = des;
+				goods.name        = newValue.name;
+				goods.category    = newValue.category;
+				goods.description = newValue.description;
 				goods.route       = 'goods/edit';
 				goods.photo_path = JSON.stringify(goods.photo_path);
-				goods.byuser = byuserGen(goods.owner_uid);
 
 				goods
 					.put()
@@ -167,7 +163,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 	function getQueue(host_goods_gid) {
 		const defer = $q.defer();
 		Restangular
-			.all('queue/of')
+			.all('queue/of/goods')
 			.getList({host_goods_gid: host_goods_gid})
 			.then(function(data) {
 				if (_.isArray(data)) {

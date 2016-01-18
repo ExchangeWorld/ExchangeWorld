@@ -74,8 +74,8 @@
 				</md-button>
 			</div>
 			<div flex="40" layout="column" layout-align="center center">
-				<img ng-click="vm.onClickUser(vm.goodData.user.uid)" class="circular goods with_border anchor" src="{{ vm.goodData.user.photo_path }}" />
-				<p class="md-tiltle">{{ vm.goodData.user.name }}</p>
+				<img ng-click="vm.onClickUser(vm.goodData.owner.uid)" class="circular goods with_border anchor" src="{{ vm.goodData.owner.photo_path }}" />
+				<p class="md-tiltle">{{ vm.goodData.owner.name }}</p>
 			</div>
 			<div flex="55" layout="column" layout-align="start center" ng-show="!vm.edit">
 				<h3 class="goods-name">{{ vm.goodData.name }}</h3>
@@ -119,11 +119,11 @@
 		<!-- comments -->
 		<div class="comments">
 			<div class="comment" ng-repeat="comment in vm.goodComments">
-				<a class="avatar" ng-click="vm.onClickUser(comment.user.uid)"> <img ng-src="{{ comment.user.photo_path }}"> </a>
+				<a class="avatar" ng-click="vm.onClickUser(comment.commenter_uid)"> <img ng-src="{{ comment.commenter.photo_path }}"> </a>
 				<div class="content" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
-					<a class="author" ng-click="vm.onClickUser(comment.user.uid)">{{ comment.user.name}}</a>
+					<a class="author" ng-click="vm.onClickUser(comment.commenter_uid)">{{ comment.commenter.name}}</a>
 					<div class="metadata">
-						<div flex class="date">{{ comment.timestamp}}</div>
+						<div flex class="date">{{ comment.timestamp }}</div>
 					</div>
 					<div ng-show="comment.isMe && removeMode" ng-click="vm.onDeleteComment(comment.cid)" class="cross">X</div>
 					<div class="text">

@@ -25,8 +25,8 @@ var resolve = {
 			.getMyGoods($stateParams.uid)
 			.then(function(data) {
 				return {
-					myGoodsPending   : data.filter(function(g) { return g.status === 0; }),
-					myGoodsExchanged : data.filter(function(g) { return g.status === 1; })
+					myGoodsPending   : data.filter(function(g) { return g.exchanged === 0; }),
+					myGoodsExchanged : data.filter(function(g) { return g.exchanged === 1; })
 				};
 			});
 	},

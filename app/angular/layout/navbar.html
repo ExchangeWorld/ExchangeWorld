@@ -1,9 +1,9 @@
 <md-toolbar ng-click="vm.closeMenu()" class="md-whiteframe-z2" style="overflow-x: hidden; overflow-y: hidden; background-color:transparent;">
 	<div class="md-toolbar-tools md-medium-tall navbar" style="height: 56px;">
-		<span flex="15" hide-sm hide-md>
+		<span flex="5" hide-sm hide-md>
 			<md-button ng-click="vm.onClick(0)" style="text-transform: none;" aria-label="logo">
 				<div layout layout-align="center center">
-					<img src="../../images/Ex-Logo-white (Century Gothic).png" style="height:40px; width:auto;">
+					<img src="../../images/logo(48).png" style="height:40px; width:auto;">
 				</div>
 			</md-button>
 		</span>
@@ -34,7 +34,7 @@
 				</div>
 			</md-button>
 		</div>
-		<span flex-gt-sm="20"></span>
+		<span flex-gt-sm="30"></span>
 		<!-- show fake btn for small sceen -->
 		<div hide-gt-sm flex="10" flex-md="20" flex-sm="30" offset="10" offset-md="5" offset-sm="15" layout="row" layout-align="center center">
 			<md-button ng-click="vm.onClick(5)" ng-show="vm.isLoggedIn">
@@ -56,7 +56,7 @@
 					<md-icon class="material-icons">forum</md-icon>
 					<p class="notification md-caption" ng-show="vm.unreadMsg !== 0">{{ vm.unreadMsg }}</p>
 				</md-button>
-				<md-menu-content width="5550" style="padding:0; max-width:400px;">
+				<md-menu-content width="48" style="padding:0; max-width:400px;">
 					<md-menu-item style="min-height: 30px; height:30px">
 						<p class="md-body-1">訊息</p>
 					</md-menu-item>

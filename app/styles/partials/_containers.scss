@@ -304,6 +304,7 @@ div.md-open-menu-container {
 		height: auto;
 	}
 	.home-row {
+		border-radius: 8px;
 		height: 250px;
 		background-position: center;
 		background-size: cover;
@@ -367,10 +368,11 @@ div.md-open-menu-container {
 			}
 		}
 	}
+	.img-home{
+		max-height: 350px;
+	}
 	.home-row {
 		height: 300px;
-		background-position: center;
-		background-size: cover;
 		&.column-left {
 			margin: 2.5% 10% 2.5% 0;
 		}
@@ -445,8 +447,6 @@ div.md-open-menu-container {
 	}
 	.home-row {
 		height: 280px;
-		background-position: center;
-		background-size: cover;
 		&.column-left {
 			margin: 2.5% 1.25% 2.5% 0;
 		}
@@ -455,6 +455,11 @@ div.md-open-menu-container {
 		}
 		&.column-right {
 			margin: 2.5% 0 2.5% 1.25%;
+		}
+		&:hover{
+			cursor:pointer;
+			filter: brightness(70%);
+			transition: 0.5s;
 		}
 	}
 }

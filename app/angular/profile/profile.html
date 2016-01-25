@@ -1,45 +1,45 @@
 <md-content resize ng-style="resizeWithOffset(56)" style="overflow-y: scroll;">
-	<div layout="row" class="profile-top" layout-align="center center">
-		<div layout layout-align="center center" class="img-profile" ng-style="{'background-image':'url({{ vm.profile.photo_path }})'}" style="border: 2px solid #90A4AE;">
+	<div layout="row" class="profile-top" layout-align="center center" ng-style="{'background-image':'url({{ vm.profile.photo_path }})'}">
+	</div>
+	<div layout layout-align="center center" class="img-profile" ng-style="{'background-image':'url({{ vm.profile.photo_path }})'}">
+	</div>
+	<div class="profile-name" flex-gt-sm="60" flex-sm="50" layout="column">
+		<div layout="column">
+			<div layout="column" layout-align="center center">
+				<h4 class="md-headline" style="margin:8px 0; text-align: center; color:white;">{{ vm.profile.name }}</h4>
+				<div layout="row" layout-align="center center">
+					<md-tooltip>被關注總量</md-tooltip>
+					<i class="material-icons heart-seek">favorite</i>
+					<span class="md-subhead" style="color:white;">{{ vm.favSum.length }}</span>
+				</div>
+			</div>
+			<div layout="row" layout-sm="column" layout-align="center center">
+				<div layout="column" layout-sm="row" layout-align="center center" class="note profile">
+					<p class="md-title text-ex follow reset-follow">追隨中</p>
+					<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'following')">{{ vm.profile.followings.length }}</a>
+				</div>
+				<div layout="column" layout-sm="row" layout-align="center center" class="note profile">
+					<p class="md-title text-ex follow reset-follow">被追蹤</p>
+					<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'follower')">{{ vm.followerCount }}</a>
+				</div>
+			</div>
 		</div>
-		<div flex-gt-sm="60" flex-sm="50" layout="column">
-			<div layout="column">
-				<div layout="column" layout-align="center center">
-					<h4 class="md-headline" style="margin:8px 0; text-align: center;">{{ vm.profile.name }}</h4>
-					<div layout="row" layout-align="center center">
-						<md-tooltip>被關注總量</md-tooltip>
-						<i class="material-icons heart-seek">favorite</i>
-						<span class="md-subhead">{{ vm.favSum.length }}</span>
-					</div>
+		<div offset="10" layout="row" layout-align="center center" style="margin-top: 10px;">
+			<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
+				<div ng-show="!vm.isFollowed">
+					<md-icon md-font-set="material-icons">person_add</md-icon>
+					<span hide-sm>&nbsp;追隨</span>
 				</div>
-				<div layout="row" layout-sm="column" layout-align="center center">
-					<div layout="column" layout-sm="row" layout-align="center center" class="note profile">
-						<p class="md-title text-ex follow reset-follow">追隨中</p>
-						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'following')">{{ vm.profile.followings.length }}</a>
-					</div>
-					<div layout="column" layout-sm="row" layout-align="center center" class="note profile">
-						<p class="md-title text-ex follow reset-follow">被追蹤</p>
-						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'follower')">{{ vm.followerCount }}</a>
-					</div>
+				<div ng-show="vm.isFollowed">
+					<md-icon md-font-set="material-icons">remove_circle</md-icon>
+					<span hide-sm>&nbsp;取消追隨</span>
 				</div>
-			</div>
-			<div offset="10" layout="row" layout-align="center center" style="margin-top: 10px;">
-				<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
-					<div ng-show="!vm.isFollowed">
-						<md-icon md-font-set="material-icons">person_add</md-icon>
-						<span hide-sm>&nbsp;追隨</span>
-					</div>
-					<div ng-show="vm.isFollowed">
-						<md-icon md-font-set="material-icons">remove_circle</md-icon>
-						<span hide-sm>&nbsp;取消追隨</span>
-					</div>
-				</md-button>
-				<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)">
-					<md-icon md-font-set="material-icons">chat</md-icon>
-					<span hide-sm>&nbsp;送訊息</span>
-				</md-button>
-				<span flex="10"></span>
-			</div>
+			</md-button>
+			<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)">
+				<md-icon md-font-set="material-icons">chat</md-icon>
+				<span hide-sm>&nbsp;送訊息</span>
+			</md-button>
+			<span flex="10"></span>
 		</div>
 	</div>
 	<md-divider class="info_container for_input small" style="margin-bottom: 0px"></md-divider>

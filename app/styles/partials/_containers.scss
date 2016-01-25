@@ -262,7 +262,11 @@ div.md-open-menu-container {
 		min-width: 46px;
 	}
 	.profile-top {
-		margin: 4% 0 2% 0;
+		margin: 0;
+		background-repeat: no-repeat;
+		height: 50%;
+		background-size: 100%;
+		filter: grayscale(100%) blur(3px);
 	}
 	.map-size {
 		height: 250px;
@@ -303,6 +307,23 @@ div.md-open-menu-container {
 		border-radius: 8px;
 		height: auto;
 	}
+	.img-profile {
+		width: 100px;
+		height: 100px;
+		position: absolute;
+		bottom: 65%;
+		left: 10%;
+		background-repeat: no-repeat;
+		background-position: center;
+		border-radius: 50%;
+		background-size: contain;
+		border: 2px solid #90A4AE;
+	}
+	.profile-name {
+		position: absolute;
+		bottom: 57%;
+		right: 10%;
+	}
 	.home-row {
 		border-radius: 8px;
 		height: 250px;
@@ -341,9 +362,6 @@ div.md-open-menu-container {
 	.btn-rwd {
 		min-width: 80px;
 	}
-	.profile-top {
-		margin: 6% 0;
-	}
 	.map-size {
 		height: 300px;
 		width: 100%;
@@ -368,8 +386,18 @@ div.md-open-menu-container {
 			}
 		}
 	}
-	.img-home{
+	.img-home {
 		max-height: 350px;
+	}
+	.img-profile {
+		width: 120px;
+		height: 120px;
+		bottom: 65%;
+		left: 15%;
+	}
+	.profile-name {
+		bottom: 60%;
+		right: 15%;
 	}
 	.home-row {
 		height: 300px;
@@ -408,9 +436,6 @@ div.md-open-menu-container {
 	}
 	.btn-rwd {
 		min-width: 88px;
-	}
-	.profile-top {
-		margin: 9% 0;
 	}
 	.goods-lg {
 		margin: 24px 0 40px 0;
@@ -456,9 +481,9 @@ div.md-open-menu-container {
 		&.column-right {
 			margin: 2.5% 0 2.5% 1.25%;
 		}
-		&:hover{
-			cursor:pointer;
-			filter: brightness(70%);
+		&:hover {
+			cursor: pointer;
+			filter: brightness(50%);
 			transition: 0.5s;
 		}
 	}
@@ -470,9 +495,6 @@ div.md-open-menu-container {
 		&.center {
 			height: 82%;
 		}
-	}
-	.profile-top {
-		margin: 10% 0;
 	}
 	.img-null {
 		max-height: 90%;
@@ -560,15 +582,6 @@ div.md-open-menu-container {
 	height: 520px;
 	background-color: #000;
 	overflow: hidden;
-}
-
-.img-profile {
-	width: 120px;
-	height: 120px;
-	background-repeat: no-repeat;
-	background-position: center;
-	border-radius: 50%;
-	background-size: contain;
 }
 
 .img-goods {

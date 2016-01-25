@@ -262,7 +262,7 @@ div.md-open-menu-container {
 		min-width: 46px;
 	}
 	.profile-top {
-		margin: 0;
+		margin: 5px 3px 5px 0;
 		background-repeat: no-repeat;
 		height: 50%;
 		background-size: 100%;
@@ -311,7 +311,7 @@ div.md-open-menu-container {
 		width: 100px;
 		height: 100px;
 		position: absolute;
-		bottom: 65%;
+		bottom: 68%;
 		left: 10%;
 		background-repeat: no-repeat;
 		background-position: center;
@@ -321,7 +321,7 @@ div.md-open-menu-container {
 	}
 	.profile-name {
 		position: absolute;
-		bottom: 57%;
+		bottom: 60%;
 		right: 10%;
 	}
 	.home-row {
@@ -469,6 +469,9 @@ div.md-open-menu-container {
 		width: 86%;
 		border-radius: 8px;
 		height: auto;
+	}
+	.profile-top {
+		margin: 10px 3px 10px 0;
 	}
 	.home-row {
 		height: 280px;

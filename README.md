@@ -1,5 +1,9 @@
 # ExchangeWorld Web
 
+[![Build Status](https://travis-ci.com/ExchangeWorld/ExchangeWorld.svg?token=8tYLCfpuSpDfBxuNFbbS&branch=master)](https://travis-ci.com/ExchangeWorld/ExchangeWorld)
+
+
+
 ### How to run the project
 1. Install node modules (`ExchangeWorld~$ npm install`)
 2. run ExchangeWorld

@@ -1,5 +1,4 @@
 "use strict";
-const _         = require('lodash');
 const mapModule = require('./map.module');
 mapModule.factory('geolocation', geolocation);
 

@@ -1,0 +1,23 @@
+language: node_js
+
+sudo: required
+dist: trusty
+
+node_js:
+  - "4"
+
+cache:
+  apt: true
+  directories:
+    - node_modules
+
+before_install:
+  - sudo apt-get -yq update
+  - sudo apt-get install -yq --no-install-suggests --no-install-recommends --force-yes
+
+install:
+  - npm install
+
+script:
+  - npm run lint
+  - npm run jscs

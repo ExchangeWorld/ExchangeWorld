@@ -31,7 +31,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 	function getGood(id) {
 		const defer = $q.defer();
 
-		var gid = parseInt(id);
+		var gid = parseInt(id, 10);
 		if(!gid) {
 			defer.reject({
 				error: true,

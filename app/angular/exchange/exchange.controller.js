@@ -83,8 +83,7 @@ function ExchangeController(
 		}
 	}
 
-	var timer;
-	timer = $interval(updateChat, 5000);
+	var timer = $interval(updateChat, 5000); // eslint-disable-line
 	function updateChat() {
 		if(!vm.exchange) return;
 		exchangeService

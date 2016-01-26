@@ -1,7 +1,6 @@
 "use strict";
-const _         = require('lodash');
 const mapModule = require('./map.module');
-mapModule.factory('geolocation', geolocation)
+mapModule.factory('geolocation', geolocation);
 
 /** @ngInject */
 function geolocation($q, $rootScope, $window, exception) {

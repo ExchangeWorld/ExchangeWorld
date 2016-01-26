@@ -90,7 +90,7 @@ function routerHelperProvider($locationProvider, $stateProvider, $urlRouterProvi
 		}
 
 		function stateChanged() {
-			$rootScope.$on('$stateChangeSuccess', function(event, toState) {
+			$rootScope.$on('$stateChangeSuccess', function() {
 					stateCounts.changes++;
 					handlingStateChangeError = false;
 					$window.ga('send', 'pageview', $location.path());

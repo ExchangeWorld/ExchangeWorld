@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /*!
  * JIC JavaScript Library v1.1.1
  * https://github.com/brunobar79/J-I-C/

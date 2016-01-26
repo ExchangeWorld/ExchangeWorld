@@ -1,0 +1,14 @@
+{
+    "fileExtensions": [".js"],
+
+    "requireSemicolons": true,
+    "requireParenthesesAroundIIFE": true,
+    "validateLineBreaks": "LF",
+    "validateIndentation": "\t",
+    "disallowTrailingComma": false,
+    "disallowUnusedParams": true,
+
+    "disallowImplicitTypeConversion": ["string"],
+
+    "excludeFiles": ["node_modules/**", "script/**", "ssl/**", "gulp/**", "test/**", "app/angular/templates.js", "app/angular/main.js"]
+}

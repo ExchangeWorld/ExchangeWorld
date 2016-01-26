@@ -4,14 +4,14 @@ const exchangeModule = require('./exchange.module');
 // const _              = require('lodash');
 const marked = require('marked');
 marked.setOptions({
-  renderer: new marked.Renderer(),
-  gfm: false,
-  tables: false,
-  breaks: true,
-  pedantic: false,
-  sanitize: false,
-  smartLists: false,
-  smartypants: false
+	renderer: new marked.Renderer(),
+	gfm: false,
+	tables: false,
+	breaks: true,
+	pedantic: false,
+	sanitize: false,
+	smartLists: false,
+	smartypants: false
 });
 
 
@@ -83,8 +83,7 @@ function ExchangeController(
 		}
 	}
 
-	var timer;
-	timer = $interval(updateChat, 5000);
+	var timer = $interval(updateChat, 5000); // eslint-disable-line
 	function updateChat() {
 		if(!vm.exchange) return;
 		exchangeService

@@ -81,7 +81,8 @@
   "scripts": {
     "pretest": "npm install",
     "test": "karma start test/karma.conf.js",
-    "lint": "eslint app/angular/**/*.js",
+    "jscs": "jscs --config config/.jscsrc .",
+    "lint": "eslint --config config/.eslintrc --ignore-path config/.eslintignore app/angular/**/*.js",
     "preprotractor": "npm run update-webdriver",
     "protractor": "npm run protractor test/protractor.conf.js"
   },
@@ -100,6 +101,7 @@
     "angularjs-facebook": "~0.2.3",
     "async": "~1.5.0",
     "color": "~0.10.1",
+    "jscs": "^2.9.0",
     "lodash": "~3.10.1",
     "marked": "~0.3.5",
     "moment": "~2.10.6",

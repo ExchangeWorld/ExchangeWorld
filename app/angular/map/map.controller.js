@@ -33,7 +33,7 @@ function MapController(
 	vm.coords = $localStorage.position
 		? $localStorage.position
 		: [25.05517828690749, 121.54136714595292];
-		// 政大 [24.98918974905472, 121.57591535186772];
+	// 政大 [24.98918974905472, 121.57591535186772];
 
 	vm.zoom            = 12;
 	vm.draggableCursor = 'default';
@@ -84,15 +84,15 @@ function MapController(
 			const coord = OpenLocationCode.decode($stateParams.olc.replace(' ','+'));
 			vm.coords = [coord.latitudeCenter, coord.longitudeCenter];
 			// map.panTo({
-				// lat : coord.latitudeCenter,
-				// lng : coord.longitudeCenter,
+			// lat : coord.latitudeCenter,
+			// lng : coord.longitudeCenter,
 			// });
-		// } else if ($stateParams.hasOwnProperty('olc')) {
-		// 	geolocation
-		// 		.getLocation({maximumAge:60000, timeout:5000, enableHighAccuracy:true})
-		// 		.then(function(data) {
-		// 			$localStorage.position = vm.coords = [data.latitude, data.longitude];
-		// 		});
+			// } else if ($stateParams.hasOwnProperty('olc')) {
+			// 	geolocation
+			// 		.getLocation({maximumAge:60000, timeout:5000, enableHighAccuracy:true})
+			// 		.then(function(data) {
+			// 			$localStorage.position = vm.coords = [data.latitude, data.longitude];
+			// 		});
 		}
 		if (!isNaN($stateParams.z)) {
 			vm.zoom = parseInt($stateParams.z, 10);
@@ -242,7 +242,7 @@ function MapController(
 	 * When state go to new olc or zoom, move map to proper position.
 	 * (This event will not trigger after reloading page)
 	 */
-	function urlChanged(event, toState, toParams, fromState, fromParams) {
+	function urlChanged(event, toState, toParams) {
 		if (
 			toState.title === 'seek' &&
 			!toParams.olc

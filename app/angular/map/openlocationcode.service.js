@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Copyright 2014 Google Inc. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the 'License');
@@ -110,7 +111,7 @@ function OpenLocationCode() {
 	 */
 	function getAlphabet() {
 		return CODE_ALPHABET_;
-	};
+	}
 
 	/**
 		Determines if a code is valid.
@@ -173,7 +174,7 @@ function OpenLocationCode() {
 			}
 		}
 		return true;
-	};
+	}
 
 	/**
 		Determines if a code is a valid short code.
@@ -192,7 +193,7 @@ function OpenLocationCode() {
 			return true;
 		}
 		return false;
-	};
+	}
 
 	/**
 		Determines if a code is a valid full Open Location Code.
@@ -228,7 +229,7 @@ function OpenLocationCode() {
 			}
 		}
 		return true;
-	};
+	}
 
 	/**
 		Encode a location into an Open Location Code.
@@ -270,7 +271,7 @@ function OpenLocationCode() {
 					latitude, longitude, codeLength - PAIR_CODE_LENGTH_);
 		}
 		return code;
-	};
+	}
 
 	/**
 		Decodes an Open Location Code into the location coordinates.
@@ -306,7 +307,7 @@ function OpenLocationCode() {
 			codeArea.latitudeLo + gridArea.latitudeHi,
 			codeArea.longitudeLo + gridArea.longitudeHi,
 			codeArea.codeLength + gridArea.codeLength);
-	};
+	}
 
 	/**
 		Recover the nearest matching code to a specified location.
@@ -392,7 +393,7 @@ function OpenLocationCode() {
 
 		return encode(
 				codeArea.latitudeCenter, codeArea.longitudeCenter, codeArea.codeLength);
-	};
+	}
 
 	/**
 		Remove characters from the start of an OLC code.
@@ -423,7 +424,7 @@ function OpenLocationCode() {
 		if (code.indexOf(PADDING_CHARACTER_) != -1) {
 			throw 'ValueError: Cannot shorten padded codes: ' + code;
 		}
-		var code = code.toUpperCase();
+		code = code.toUpperCase();
 		var codeArea = decode(code);
 		if (codeArea.codeLength < MIN_TRIMMABLE_CODE_LEN_) {
 			throw 'ValueError: Code length must be at least ' +
@@ -446,7 +447,7 @@ function OpenLocationCode() {
 			}
 		}
 		return code;
-	};
+	}
 
 	/**
 		Clip a latitude into the range -90 to 90.
@@ -455,7 +456,7 @@ function OpenLocationCode() {
 	 */
 	function clipLatitude(latitude) {
 		return Math.min(90, Math.max(-90, latitude));
-	};
+	}
 
 	/**
 		Compute the latitude precision value for a given code length. Lengths <=
@@ -468,7 +469,7 @@ function OpenLocationCode() {
 			return Math.pow(20, Math.floor(codeLength / -2 + 2));
 		}
 		return Math.pow(20, -3) / Math.pow(GRID_ROWS_, codeLength - 10);
-	};
+	}
 
 	/**
 		Normalize a longitude into the range -180 to 180, not including 180.
@@ -483,7 +484,7 @@ function OpenLocationCode() {
 			longitude = longitude - 360;
 		}
 		return longitude;
-	};
+	}
 
 	/**
 		Encode a location into a sequence of OLC lat/lng pairs.
@@ -531,7 +532,7 @@ function OpenLocationCode() {
 			code = code + SEPARATOR_;
 		}
 		return code;
-	};
+	}
 
 	/**
 		Encode a location using the grid refinement method into an OLC string.
@@ -562,7 +563,7 @@ function OpenLocationCode() {
 			code += CODE_ALPHABET_.charAt(row * GRID_COLUMNS_ + col);
 		}
 		return code;
-	};
+	}
 
 	/**
 		Decode an OLC code made up of lat/lng pairs.
@@ -584,7 +585,7 @@ function OpenLocationCode() {
 				latitude[1] - LATITUDE_MAX_,
 				longitude[1] - LONGITUDE_MAX_,
 				code.length);
-	};
+	}
 
 	/**
 		Decode either a latitude or longitude sequence.
@@ -609,7 +610,7 @@ function OpenLocationCode() {
 			i += 1;
 		}
 		return [value, value + PAIR_RESOLUTIONS_[i - 1]];
-	};
+	}
 
 	/**
 		Decode the grid refinement portion of an OLC code.
@@ -639,7 +640,7 @@ function OpenLocationCode() {
 		return CodeArea(
 				latitudeLo, longitudeLo, latitudeLo + latPlaceValue,
 				longitudeLo + lngPlaceValue, code.length);
-	};
+	}
 
 	/**
 		Coordinates of a decoded Open Location Code.
@@ -658,7 +659,7 @@ function OpenLocationCode() {
 	 */
 	function CodeArea(latitudeLo, longitudeLo, latitudeHi, longitudeHi, codeLength) {
 		return new CodeArea.fn.init(latitudeLo, longitudeLo, latitudeHi, longitudeHi, codeLength);
-	};
+	}
 	CodeArea.fn = CodeArea.prototype = {
 		init: function(
 				latitudeLo, longitudeLo, latitudeHi, longitudeHi, codeLength) {

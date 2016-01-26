@@ -339,6 +339,9 @@ div.md-open-menu-container {
 			margin: 10px 10% 10px 0;
 		}
 	}
+	md-toolbar:not(.md-menu-toolbar) {
+		background-color: #FAFAFA;
+	}
 }
 
 @media screen and (min-width: 600px) {
@@ -392,11 +395,11 @@ div.md-open-menu-container {
 	.img-profile {
 		width: 120px;
 		height: 120px;
-		bottom: 65%;
+		bottom: 68%;
 		left: 15%;
 	}
 	.profile-name {
-		bottom: 60%;
+		bottom: 65%;
 		right: 15%;
 	}
 	.home-row {
@@ -489,6 +492,9 @@ div.md-open-menu-container {
 			filter: brightness(50%);
 			transition: 0.5s;
 		}
+	}
+	md-toolbar:not(.md-menu-toolbar) {
+		background-color: transparent;
 	}
 }
 

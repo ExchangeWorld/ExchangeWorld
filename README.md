@@ -52,7 +52,24 @@ Create folders named for the feature they represent. When a folder grows to cont
 ```
 #### Coding Style
 - All angularjs related code should follow the [coding style guide](https://github.com/johnpapa/angular-styleguide)
-- We use **ONE HARD-TAB** for indention
+
+- Run ESLint.
+
+  ``` bash
+  $ npm run lint
+  
+  # Auto fix
+  $ npm run lint -- --fix
+  ```
+
+- Run JSCS.
+
+  ``` bash
+  $ npm run jscs
+  
+  # Auto fix
+  $ npm run jscs -- --fix
+  ```
 
 #### Dependency injection
 

@@ -4,14 +4,14 @@ const exchangeModule = require('./exchange.module');
 // const _              = require('lodash');
 const marked = require('marked');
 marked.setOptions({
-  renderer: new marked.Renderer(),
-  gfm: false,
-  tables: false,
-  breaks: true,
-  pedantic: false,
-  sanitize: false,
-  smartLists: false,
-  smartypants: false
+	renderer: new marked.Renderer(),
+	gfm: false,
+	tables: false,
+	breaks: true,
+	pedantic: false,
+	sanitize: false,
+	smartLists: false,
+	smartypants: false
 });
 
 

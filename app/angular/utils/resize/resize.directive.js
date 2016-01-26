@@ -15,7 +15,7 @@ function resize($window)  {
 				'h': window.innerHeight,
 				'w': window.innerWidth
 			};
-		}, function (newValue, oldValue) {
+		}, function (newValue) {
 			scope.windowHeight = newValue.h;
 			scope.windowWidth = newValue.w;
 

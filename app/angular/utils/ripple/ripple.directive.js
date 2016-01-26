@@ -12,7 +12,7 @@ function ripple() {
 
 	return directive;
 
-	function link(scope, element, attrs) {
+	function link(scope, element) {
 		var x;
 		var y;
 		var size;

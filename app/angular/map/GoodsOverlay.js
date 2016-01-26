@@ -34,7 +34,7 @@ function onAdd(map, $state, $mdSidenav) {
 	google.maps.event.addDomListener(div, 'mousedown', function(e) {
 		e.stopPropagation();
 		e.preventDefault();
-		setTimeout(() => $state.go('root.withSidenav.goods', {gid : this.good.gid}))
+		setTimeout(() => $state.go('root.withSidenav.goods', {gid : this.good.gid}));
 
 		map.panTo(this.good.marker.getPosition());
 		$mdSidenav('left').toggle();

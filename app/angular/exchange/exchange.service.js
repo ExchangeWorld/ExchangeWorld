@@ -201,7 +201,7 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 				myid: myid,
 			}
 		});
-		function onCompleteController($mdDialog, logger, exchangeService, thisExchange, myid, $state) {
+		function onCompleteController($mdDialog, logger, exchangeService, thisExchange, myid) {
 			const vm        = this;
 			vm.thisExchange = thisExchange;
 			vm.myuid        = parseInt(myid, 10);

@@ -128,7 +128,7 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 	 * drop exchange
 	 * one of the user reject the exchage.
 	 */
-	function deleteExchange(eid, uid) {
+	function deleteExchange(eid) {
 		const defer = $q.defer();
 
 		Restangular

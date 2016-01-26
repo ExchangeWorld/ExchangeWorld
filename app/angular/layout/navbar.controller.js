@@ -74,7 +74,7 @@ function NavbarController(
 		e.preventDefault();
 		e.stopPropagation();
 		$mdOpenMenu(e);
-    }
+	}
 
 	function onClick(contentIndex) {
 		if ([0, 5, 6].indexOf(contentIndex) !== -1) {

@@ -28,7 +28,7 @@ function auth(facebookService, $q, $localStorage, $mdDialog) {
 
 		facebookService
 			.login() // login to facebook.
-			.then(function(loginStatus) {
+			.then(function() {
 				fetchMe()
 					.then(function(data) {
 						currentUser = data;
@@ -113,7 +113,7 @@ function auth(facebookService, $q, $localStorage, $mdDialog) {
 }
 
 /** @ngInject */
-function DialogController(user, profileService, $mdDialog, logger, $state) {
+function DialogController(user, profileService, $mdDialog, logger) {
 	const vm  = this;
 	vm.email = '';
 	vm.cancel = onCancel;

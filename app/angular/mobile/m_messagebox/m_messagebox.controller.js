@@ -23,7 +23,7 @@ function m_messageboxController(message, $state, $localStorage) {
 
 	}
 
-	function onClickMessage(msg, ev) {
+	function onClickMessage(msg) {
 		message
 			.updateMessage(msg)
 			.then(() => {

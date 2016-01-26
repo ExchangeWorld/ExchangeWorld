@@ -40,7 +40,7 @@ function onAdd(category, onClick) {
 	this.getPanes().overlayMouseTarget.appendChild(div);
 }
 
-function draw(latlng, zoom) {
+function draw(latlng) {
 	const origin = this.getProjection().fromLatLngToDivPixel(latlng);
 	const width = 50;
 	
@@ -94,7 +94,7 @@ function setVisible(visible) {
 	}
 }
 
-function onResize(zoom) {
+function onResize() {
 
 }
 

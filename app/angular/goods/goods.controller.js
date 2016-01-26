@@ -5,14 +5,14 @@ const _           = require('lodash');
 const moment      = require('moment');
 const marked = require('marked');
 marked.setOptions({
-  renderer: new marked.Renderer(),
-  gfm: false,
-  tables: false,
-  breaks: true,
-  pedantic: false,
-  sanitize: false,
-  smartLists: false,
-  smartypants: false
+	renderer: new marked.Renderer(),
+	gfm: false,
+	tables: false,
+	breaks: true,
+	pedantic: false,
+	sanitize: false,
+	smartLists: false,
+	smartypants: false
 });
 
 
@@ -296,7 +296,7 @@ function GoodsController(
 	/**
 	 * user use a goods to queue the host goods
 	 */
-	function onClickQueue(ev) {
+	function onClickQueue() {
 		const types = ['want_to_queue', 'see_who_queue'];
 		var type = vm.isMe ? 'see_who_queue' : 'want_to_queue';
 		if(goodData.status === 1) return;
@@ -314,7 +314,7 @@ function GoodsController(
 		}
 	}
 
-	function showPhotoViewer(ev) {
+	function showPhotoViewer() {
 		$mdDialog.show({	
 			clickOutsideToClose: true,
 			templateUrl: 'goods/goods.photoViewer.html',

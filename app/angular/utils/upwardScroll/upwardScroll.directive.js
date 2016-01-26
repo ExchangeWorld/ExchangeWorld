@@ -5,10 +5,10 @@ upwardsScollModule.directive('upwardScroll', upwardScroll);
 
 /** @ngInject */
 function upwardScroll($timeout) {
-	return function(scope, elem, attr, ctrl) {
-			var raw = elem[0];
+	return function(scope, elem, attr) {
+		var raw = elem[0];
 
-			elem.bind('scroll', function() {
+		elem.bind('scroll', function() {
 				if (raw.scrollTop <= 0) {
 					var sh = raw.scrollHeight;
 					scope

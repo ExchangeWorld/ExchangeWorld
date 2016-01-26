@@ -1,6 +1,6 @@
-<md-toolbar ng-click="vm.closeMenu()" class="md-whiteframe-z2" style="overflow-x: hidden; overflow-y: hidden; background-color:transparent;">
+<md-toolbar ng-click="vm.closeMenu()" class="md-whiteframe-z2" style="overflow-x: hidden; overflow-y: hidden;">
 	<div class="md-toolbar-tools md-medium-tall navbar" style="height: 56px;">
-		<span flex="5" hide-sm hide-md>
+		<span flex="10" flex-gt-md="5" hide-sm>
 			<md-button ng-click="vm.onClick(0)" style="text-transform: none;" aria-label="logo">
 				<div layout layout-align="center center">
 					<img src="../../images/logo(48).png" style="height:40px; width:auto;">
@@ -8,23 +8,23 @@
 			</md-button>
 		</span>
 		<!-- <span flex="10" hide-md hide-sm></span> -->
-		<div flex="30" flex-md="40" flex-sm="40" layout="row" layout-align="center center">
-			<md-button flex flex-sm="15" ng-click="vm.onClick(1)" ng-class="{'active': vm.contentIs(1)}">
+		<div flex="30" flex-md="40" flex-sm="30" layout="row" layout-align="center center">
+			<md-button flex flex-sm="15" hide-sm ng-click="vm.onClick(1)" ng-class="{'active': vm.contentIs(1)}">
 				<div layout layout-align="center center">
 					<!-- <i class="material-icons toolbar">dashboard</i> -->
-					<span class="toolbar-span" hide-sm>探索</span>
+					<span class="toolbar-span">探索</span>
 				</div>
 			</md-button>
-			<md-button flex flex-sm="15" ng-click="vm.onClick(2)" ng-class="{'active': vm.contentIs(2)}">
+			<md-button flex flex-sm="15" hide-sm ng-click="vm.onClick(2)" ng-class="{'active': vm.contentIs(2)}">
 				<div layout layout-align="center center">
 					<!-- <i class="material-icons toolbar">add</i> -->
-					<span class="toolbar-span" hide-sm>發佈</span>
+					<span class="toolbar-span">發佈</span>
 				</div>
 			</md-button>
 			<md-button flex flex-sm="15" hide-sm ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">
 				<div layout layout-align="center center">
 					<!-- <i class="material-icons toolbar">shuffle</i> -->
-					<span class="toolbar-span" hide-sm>交換</span>
+					<span class="toolbar-span">交換</span>
 				</div>
 			</md-button>
 			<md-button hide-md hide-sm flex flex-sm="15" ng-click="vm.report()">
@@ -34,7 +34,7 @@
 				</div>
 			</md-button>
 		</div>
-		<span flex-gt-sm="30"></span>
+		<span flex-gt-sm="30" flex-md="15"></span>
 		<!-- show fake btn for small sceen -->
 		<div hide-gt-sm flex="10" flex-md="20" flex-sm="30" offset="10" offset-md="5" offset-sm="15" layout="row" layout-align="center center">
 			<md-button ng-click="vm.onClick(5)" ng-show="vm.isLoggedIn">
@@ -50,7 +50,7 @@
 				</div>
 			</md-button>
 		</div>
-		<div hide-sm flex="10" flex-md="20" flex-sm="30" offset="10" offset-md="5" offset-sm="15" layout="row" layout-align="center center">
+		<div hide-sm flex="10" flex-md="20" flex-sm="30" offset="10" offset-md="5" offset-sm="20" layout="row" layout-align="center center">
 			<md-menu flex flex-sm md-offset="-200 61" ng-show="vm.isLoggedIn">
 				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)">
 					<md-icon class="material-icons">forum</md-icon>
@@ -108,8 +108,10 @@
 				</md-menu-content>
 			</md-menu>
 		</div>
-		<div flex="15" flex-md flex-sm layout="row" layout-align="center center">
-			<md-button ng-hide="vm.isLoggedIn" ng-click="vm.onLogin()">登入</md-button>
+		<div flex="15" layout="row" layout-align="center center">
+			<md-button ng-hide="vm.isLoggedIn" ng-click="vm.onLogin()">
+				<span class="toolbar-span">登入</span>
+			</md-button>
 			<md-menu flex flex-sm="70" md-offset="-10 64">
 				<md-button ng-show="vm.isLoggedIn" ng-click="vm.openMenu($mdOpenMenu, $event)" style="max-width: 100%;">
 					<div ng-show="vm.isLoggedIn" layout="row" layout-align="center center">
@@ -119,17 +121,23 @@
 					</div>
 				</md-button>
 				<md-menu-content width="3">
-					<md-menu-item>
-						<md-button ng-click="vm.onClick(4)">個人資料</md-button>
+					<md-menu-item hide-gt-sm>
+						<md-button ng-click="vm.onClick(1)">探索</md-button>
+					</md-menu-item>
+					<md-menu-item hide-gt-sm>
+						<md-button ng-click="vm.onClick(2)">發佈</md-button>
 					</md-menu-item>
 					<md-menu-item ng-show="vm.isLoggedIn" hide-gt-sm>
 						<md-button ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">交換</md-button>
 					</md-menu-item>
-					<md-menu-divider></md-menu-divider>
 					<md-menu-item>
+						<md-button ng-click="vm.onClick(4)">個人資料</md-button>
+					</md-menu-item>
+					<!-- <md-menu-divider></md-menu-divider> -->
+					<md-menu-item hide-sm hide-md>
 						<a ng-href="https://goo.gl/ObSQOm" target="_blank">粉絲專頁</a>
 					</md-menu-item>
-					<md-menu-divider></md-menu-divider>
+					<!-- <md-menu-divider></md-menu-divider> -->
 					<md-menu-item ng-show="vm.isLoggedIn">
 						<md-button ng-click="vm.onLogout()">登出</md-button>
 					</md-menu-item>

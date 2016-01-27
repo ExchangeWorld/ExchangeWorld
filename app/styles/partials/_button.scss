@@ -20,8 +20,6 @@
 	}
 }
 
-
-
 .md-button:not([disabled]):hover {
 	background-color: rgba(158, 158, 158, 0.2);
 	color: #293D66;
@@ -66,17 +64,6 @@
 	min-width: 40px;
 }
 
-.notification {
-	position: absolute;
-	right: 13px;
-	top: -2px;
-	background-color: #FF8F00;
-	line-height: 20px;
-	width: 18px;
-	height: 18px;
-	border-radius: 50%;
-}
-
 .event-btn {
 	padding: 0;
 	margin: 15px 10px 10px 0;
@@ -103,4 +90,25 @@
 
 .anchor:hover {
 	cursor: pointer;
+}
+
+@media screen and (min-width: 300px) {
+	.notification {
+		position: absolute;
+		right: 13px;
+		top: 7px;
+		background-color: #FF8F00;
+		line-height: 20px;
+		width: 18px;
+		height: 18px;
+		border-radius: 50%;
+		padding-left: 10px;
+	}
+}
+
+@media screen and (min-width: 600px) {
+	.notification {
+		padding-left: 0;
+		top: -2px;
+	}
 }

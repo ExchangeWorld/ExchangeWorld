@@ -321,7 +321,7 @@ div.md-open-menu-container {
 	}
 	.profile-name {
 		position: absolute;
-		bottom: 60%;
+		bottom: 57%;
 		right: 10%;
 	}
 	.home-row {
@@ -340,7 +340,7 @@ div.md-open-menu-container {
 		}
 	}
 	md-toolbar:not(.md-menu-toolbar) {
-		background-color: #FAFAFA;
+		background-color: #ECEFF1;
 	}
 }
 
@@ -475,6 +475,12 @@ div.md-open-menu-container {
 	}
 	.profile-top {
 		margin: 10px 3px 10px 0;
+	}
+	.img-profile {
+		bottom: 63%;
+	}
+	.profile-name {
+		bottom: 60%;
 	}
 	.home-row {
 		height: 280px;

@@ -113,13 +113,13 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 
 	/** get facebook login status */
 	function getLoginStatus() {
-		return Facebook.getLoginStatus(function(response) {
-			if (response.status === 'connected') {
-				return true;
-			} else {
-				return false;
-			}
+		const defer = $q.defer();
+
+		Facebook.getLoginStatus(function(response) {
+			defer.resolve(response.status === 'connected');
 		});
+
+		return defer.promise;
 	}
 
 }

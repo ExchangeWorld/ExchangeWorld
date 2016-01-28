@@ -21,3 +21,6 @@ install:
 script:
   - npm run lint
   - npm run jscs
+  
+notifications:
+  slack: exchangeworld:8hBOT17abdMs80vasq0d4KNP

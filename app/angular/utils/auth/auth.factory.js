@@ -1,14 +1,11 @@
 'use strict';
 
 const authModule = require('./auth.module');
-const _          = require('lodash');
-const co         = require('co');
 
 authModule.factory('auth', auth);
 
 /** @ngInject */
 function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
-	var token       = '';
 	var currentUser = null;
 
 	const service = {
@@ -17,51 +14,43 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 		fetchMe,
 		isLoggedIn,
 		getLoginState,
-		currentUser : () => currentUser,
 		showEmailBox,
+		currentUser: () => currentUser,
 	};
 	return service;
 
 	/////////////
 
-	function login() {
+	async function login() {
 		const defer = $q.defer();
 
-		co(function *(){
-			yield facebookService.login(); // login to facebook.
-			let data = yield fetchMe();
-			//let token = yield getAccessToken(data.id, null, true);//fetchMe();
-			currentUser = data;
-			defer.resolve(currentUser);
-		});
+		//TODO: login with id, password
+		await facebookService.login(); // login to facebook.
+		currentUser = await fetchMe();
+		defer.resolve(currentUser);
 
 		return defer.promise;
 	}
 
-	function logout() {
+	async function logout() {
 		const defer = $q.defer();
 
-		co(function *(){
-			yield facebookService.logout();
-			currentUser = null;
-			delete $localStorage.user;
-			defer.resolve();
-		});
+		await facebookService.logout();
+		currentUser = null;
+		delete $localStorage.user;
+		defer.resolve();
 
 		return defer.promise;
 	}
 
-	function fetchMe() {
+	async function fetchMe() {
 		const defer = $q.defer();
 
-		co(function *(){
-			let response = yield facebookService.me({ fields: 'id' }); // get user facebook id.
-			let userdata = yield facebookService.register(response); // Call API for create/get new EXWD user. 
+		let response = await facebookService.me({ fields: 'id' }); // get user facebook id.
+		currentUser = await facebookService.register(response); // Call API for create/get new EXWD user. 
 
-			currentUser = userdata;
-			defer.resolve(currentUser);
-		});
-		
+		defer.resolve(currentUser);
+
 		return defer.promise;
 	}
 
@@ -69,21 +58,16 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 		return Boolean(currentUser);
 	}
 
-	function getLoginState() {
+	async function getLoginState() {
 		const defer = $q.defer();
 
-		co(function *() {
-			let state = yield facebookService.getLoginStatus();
-			if(state) {
-				currentUser = yield fetchMe();//data;
+		let state = await facebookService.getLoginStatus();
+		currentUser = state ? await fetchMe() : null;
 
-				// let user fill email if email is empty
-				if(currentUser.email.length === 0) showEmailBox(currentUser);
-			} else {
-				currentUser = null;
-			}
-			defer.resolve(currentUser);
-		});
+		// let user fill email if email is empty
+		if (currentUser && currentUser.email.length === 0) showEmailBox(currentUser);
+
+		defer.resolve(currentUser);
 
 		return defer.promise;
 	}
@@ -100,10 +84,10 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 
 	function showEmailBox(user) {
 		$mdDialog.show({
-			templateUrl : 'utils/auth/fillEmail.html',
-			controllerAs : 'vm',
-			controller : DialogController,
-			locals : {
+			templateUrl: 'utils/auth/fillEmail.html',
+			controllerAs: 'vm',
+			controller: DialogController,
+			locals: {
 				user: user
 			}
 		});
@@ -112,13 +96,13 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 
 /** @ngInject */
 function DialogController(user, profileService, $mdDialog, logger) {
-	const vm  = this;
+	const vm = this;
 	vm.email = '';
 	vm.cancel = onCancel;
 	vm.submit = onSubmit;
 
 	function onSubmit() {
-		if(vm.email) {
+		if (vm.email) {
 			user.email = vm.email;
 			profileService
 				.editProfile(user)

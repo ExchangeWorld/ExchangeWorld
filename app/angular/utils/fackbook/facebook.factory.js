@@ -1,7 +1,6 @@
 'use strict';
 
 const facebookModule = require('./facebook.module');
-const _              = require('lodash');
 
 facebookModule.factory('facebookService', facebook);
 
@@ -38,7 +37,7 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 			if (response.status === 'connected') {
 				return me();
 			} else {
-				console.error('FB login ERROR.');
+				//console.error('FB login ERROR.');
 				return {};
 			}
 		});
@@ -49,64 +48,50 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 		return Facebook.logout();
 	}
 
-	function register(user) {
+	async function register(user) {
 		const defer = $q.defer();
 
-		$q.
-			all([
-				Restangular.oneUrl(`user?identity=${user.id}`).get(),
-				getLargePicture(user.id)
-			])
-			.then(function(results) {
-				//console.log(results);
-				var member = results[0];
-				var largePic = results[1];
+		let [member, largePic] = await Promise.all([
+					Restangular.oneUrl(`user?identity=${user.id}`).get(),
+					getLargePicture(user.id)
+		]);
 
-				if (!member) {
-					me({ fields: 'id, name, email, picture' })
-						.then(function(user_data) {
+		try {
+			if (member) {
+				member.route = 'user/photo';
+				member.photo_path = largePic.data.url;
+				member.put();
 
-							Restangular
-								.all('authenticate/register')
-								.post({
-									fb         : true,
-									identity   : user_data.id,
-									name       : user_data.name,
-									photo_path : largePic.data.url,
-									email      : user_data.email,
-								})
-								.then(function(data) {
-									if (data) {
-										defer.resolve(data);
-										$localStorage.user = data;
-									}
-								}, (error)=> {
-									return exception.catcher('[Facebook Service] register error: ')(error);
-								});
-						});
-				} else {
-					member.route = 'user/photo';
-					member.photo_path = largePic.data.url;
-					member.put();
+				let token = await Restangular.all('authenticate/login').post({ fb: true, identity: member.identity });
+				member.token = token.token;
 
-					Restangular
-						.all('authenticate/login')
-						.post({
-							fb       : true,
-							identity : member.identity
-						})
-						.then(function(token) {
-							member.token = token.token;
-							defer.resolve(member);
-							$localStorage.user = member;
-						});
-				}
-			});
+				defer.resolve(member);
+				$localStorage.user = member;
+				return defer.promise;
+			}
+
+			let userData = await me({ fields: 'id, name, email, picture' });
+			let registerData = Restangular
+			.all('authenticate/register')
+                .post({
+	fb         : true,
+	identity   : userData.id,
+	name       : userData.name,
+	photo_path : largePic.data.url,
+	email      : userData.email,
+                });
+
+			defer.resolve(registerData);
+			$localStorage.user = registerData;
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+		}
+
 		return defer.promise;
 	}
 
-	function getLargePicture(fb_id) {
-		return Facebook.api('/'+fb_id+'/picture?width=320&height=320', function(response) {
+	function getLargePicture(fbId) {
+		return Facebook.api('/'+fbId+'/picture?width=320&height=320', function(response) {
 			return response;
 		});
 	}

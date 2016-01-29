@@ -24,3 +24,4 @@ script:
   
 notifications:
   slack: exchangeworld:8hBOT17abdMs80vasq0d4KNP
+  email: false

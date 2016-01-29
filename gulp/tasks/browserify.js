@@ -36,13 +36,14 @@ function buildScript(file) {
 	}
 
 	var transforms = [
-		babelify,
+		//babelify,
 		// debowerify,
 		ngAnnotate,
 		'brfs',
 		'bulkify'
 	];
 
+    bundler.transform(babelify, {presets: ["es2015"], plugins: ["syntax-async-functions", "transform-regenerator"]});
 	transforms.forEach(function(transform) {
 		bundler.transform(transform);
 	});

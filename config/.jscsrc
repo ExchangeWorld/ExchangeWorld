@@ -1,4 +1,5 @@
 {
+    "esnext": true,
     "fileExtensions": [".js"],
 
     "requireSemicolons": true,
@@ -10,5 +11,5 @@
 
     "disallowImplicitTypeConversion": ["string"],
 
-    "excludeFiles": ["node_modules/**", "script/**", "ssl/**", "gulp/**", "test/**", "app/angular/templates.js", "app/angular/main.js"]
+    "excludeFiles": ["node_modules/**", "script/**", "ssl/**", "gulp/**", "test/**", "build/**", "app/angular/templates.js", "app/angular/main.js"]
 }

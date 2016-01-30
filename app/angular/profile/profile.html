@@ -6,11 +6,11 @@
 	<div class="profile-name" flex-gt-sm="60" flex-sm="50" layout="column">
 		<div layout="column">
 			<div layout="column" layout-align="center center">
-				<h4 class="md-headline" style="margin:8px 0; text-align: center; color:#455A64;">{{ vm.profile.name }}</h4>
+				<h4 class="md-headline" style="margin:8px 0; text-align: center; color:#F5F5F5;">{{ vm.profile.name }}</h4>
 				<div layout="row" layout-align="center center">
 					<md-tooltip>被關注總量</md-tooltip>
 					<i class="material-icons heart-seek">favorite</i>
-					<span class="md-subhead" style="color:#455A64;">{{ vm.favSum.length }}</span>
+					<span class="md-subhead" style="color:#F5F5F5;">{{ vm.favSum.length }}</span>
 				</div>
 			</div>
 			<div layout="row" layout-sm="column" layout-align="center center">
@@ -26,18 +26,20 @@
 		</div>
 		<div offset="10" layout="row" layout-align="center center" style="margin-top: 10px;">
 			<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
-				<div ng-show="!vm.isFollowed">
-					<md-icon md-font-set="material-icons">person_add</md-icon>
+				<div layout="row" layout-align="center center" ng-show="!vm.isFollowed">
+					<i class="material-icons">person_add</i>
 					<span hide-sm>&nbsp;追隨</span>
 				</div>
-				<div ng-show="vm.isFollowed">
-					<md-icon md-font-set="material-icons">remove_circle</md-icon>
+				<div layout="row" layout-align="center center" ng-show="vm.isFollowed">
+					<i class="material-icons">remove_circle</i>
 					<span hide-sm>&nbsp;取消追隨</span>
 				</div>
 			</md-button>
 			<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)">
-				<md-icon md-font-set="material-icons">chat</md-icon>
-				<span hide-sm>&nbsp;送訊息</span>
+				<div layout="row" layout-align="center center">
+					<i class="material-icons">chat</i>
+					<span hide-sm>&nbsp;送訊息</span>
+				</div>
 			</md-button>
 			<span flex="10"></span>
 		</div>

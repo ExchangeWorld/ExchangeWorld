@@ -35,7 +35,7 @@ a {
 	text-decoration: none;
 	cursor: pointer;
 	&.profile {
-		color: #2196F3;
+		color: #F5F5F5;
 	}
 }
 
@@ -107,6 +107,7 @@ a:hover {
 	}
 	&.follow {
 		padding: 0 10px;
+		color: #F5F5F5;
 	}
 }
 
@@ -119,7 +120,7 @@ a:hover {
 	filter: opacity(0.5);
 	&:hover {
 		/*opacity: 0.5;*/
-		-webkit-filter: brightness(150%);
+		filter: brightness(150%);
 	}
 }
 

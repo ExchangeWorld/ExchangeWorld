@@ -71,20 +71,21 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 			}
 
 			let userData = await me({ fields: 'id, name, email, picture' });
-			let registerData = Restangular
-			.all('authenticate/register')
-                .post({
-	fb         : true,
-	identity   : userData.id,
-	name       : userData.name,
-	photo_path : largePic.data.url,
-	email      : userData.email,
-                });
+			let newUser = {
+					fb         : true,
+					identity   : userData.id,
+					name       : userData.name,
+					photo_path : largePic.data.url,
+					email      : userData.email,
+				};
 
-			defer.resolve(registerData);
+			let registerData = Restangular.all('authenticate/register').post(newUser);
+
 			$localStorage.user = registerData;
+			defer.resolve(registerData);
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
 		}
 
 		return defer.promise;

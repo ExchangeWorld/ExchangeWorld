@@ -7,14 +7,14 @@
 			</md-button>
 		</div>
 		<div flex layout layout-align="center center">
-			<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickStar()">
+			<md-button class="white-btn btn-rwd" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickStar()">
 				<md-icon md-font-set="material-icons" ng-class="{'heart-goods': vm.starred}">favorite</md-icon>
 				<span hide-sm>{{vm.starred ? '已關注' : '關注'}} </span>
 				<span>{{vm.stars.length}}</span>
 			</md-button>
 		</div>
 		<div flex layout layout-align="center center">
-			<md-button class="white-btn btn-rwd" ng-disabled="!vm.isLoggedIn || vm.goodData.status === 1" ng-click="vm.onClickQueue($event)">
+			<md-button class="white-btn btn-rwd" ng-disabled="!$root.isLoggedIn || vm.goodData.status === 1" ng-click="vm.onClickQueue($event)">
 				<md-icon md-font-set="material-icons">remove_red_eye</md-icon>
 				<span hide-sm>{{ vm.isMe ? '看誰排' : '我要排' }} </span>
 				<span>{{vm.queuingList.length}}</span>
@@ -74,7 +74,7 @@
 				</md-button>
 			</div>
 			<div flex="40" layout="column" layout-align="center center">
-				<img ng-click="vm.onClickUser(vm.goodData.owner.uid)" class="circular goods with_border anchor" src="{{ vm.goodData.owner.photo_path }}" />
+				<img ng-click="$root.onClickUser(vm.goodData.owner.uid)" class="circular goods with_border anchor" src="{{ vm.goodData.owner.photo_path }}" />
 				<p class="md-tiltle">{{ vm.goodData.owner.name }}</p>
 			</div>
 			<div flex="55" layout="column" layout-align="start center" ng-show="!vm.edit">
@@ -119,9 +119,9 @@
 		<!-- comments -->
 		<div class="comments">
 			<div class="comment" ng-repeat="comment in vm.goodComments">
-				<a class="avatar" ng-click="vm.onClickUser(comment.commenter_uid)"> <img ng-src="{{ comment.commenter.photo_path }}"> </a>
+				<a class="avatar" ng-click="$root.onClickUser(comment.commenter_uid)"> <img ng-src="{{ comment.commenter.photo_path }}"> </a>
 				<div class="content" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
-					<a class="author" ng-click="vm.onClickUser(comment.commenter_uid)">{{ comment.commenter.name}}</a>
+					<a class="author" ng-click="$root.onClickUser(comment.commenter_uid)">{{ comment.commenter.name}}</a>
 					<div class="metadata">
 						<div flex class="date">{{ comment.timestamp }}</div>
 					</div>

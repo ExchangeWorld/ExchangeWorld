@@ -8,6 +8,7 @@ function appRun(routerHelper, $rootScope, AppSettings) {
 	routerHelper.configureStates(getStates(), '/404');
 
 	$rootScope.pageTitle = AppSettings.appTitle;
+    $rootScope.isLoggedIn = false;
 }
 
 function getStates() {

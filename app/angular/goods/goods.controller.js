@@ -3,7 +3,7 @@
 const goodsModule = require('./goods.module');
 const _           = require('lodash');
 const moment      = require('moment');
-const marked = require('marked');
+const marked      = require('marked');
 marked.setOptions({
 	renderer: new marked.Renderer(),
 	gfm: false,
@@ -43,8 +43,7 @@ function GoodsController(
 ) {
 	const vm = this;
 
-	vm.isLoggedIn        = Boolean($localStorage.user);
-	vm.isMe              = vm.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
+	vm.isMe              = $rootScope.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
 	vm.goodData          = goodData;
 	vm.goodDesc          = $sce.trustAsHtml(marked(goodData.description));
 	vm.availableCategory = AvailableCategory;
@@ -67,7 +66,6 @@ function GoodsController(
 	vm.onClickQueue  = onClickQueue;
 
 	vm.showPhotoViewer = showPhotoViewer;
-	vm.onClickUser = $rootScope.onClickUser;
 	vm.onClickBack = onClickBack;
 
 	vm.getGoodsDescription = getGoodsDescription;
@@ -96,12 +94,13 @@ function GoodsController(
 			vm.isMe = (goodData.owner_uid === $localStorage.user.uid);
 		} else {
 			vm.isMe = false;
-			vm.isLoggedIn = false;
+			$rootScope.isLoggedIn = false;
 		}
 
 		goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
 
-		goodsService.getQueue($stateParams.gid)
+		goodsService
+			.getQueue($stateParams.gid)
 			.then(function(data) {
 				vm.queuingList = data;
 			});

@@ -28,7 +28,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 	return service;
 
 
-	function getGood(id) {
+	async function getGood(id) {
 		const defer = $q.defer();
 
 		var gid = parseInt(id, 10);
@@ -40,26 +40,27 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			return defer.promise;
 		}
 
-		Restangular
-			.oneUrl(`goods?gid=${gid}`)
-			.get()
-			.then(function(data) {
-				if (data) {
-					if (_.isString(data.photo_path)) data.photo_path = JSON.parse(data.photo_path);
-					defer.resolve(data);
-				}
-			}, (error)=> {
-				return exception.catcher('[Goods Service] getGood error: ')(error);
-			});
+		try {
+			let goods = await Restangular.oneUrl(`goods?gid=2${gid}`).get();
+			if (!goods) throw 'goods is null or undefined.';
+			if (!_.isString(goods.photo_path)) throw 'photo_path is not JSON.';
+
+			goods.photo_path = JSON.parse(goods.photo_path);
+			defer.resolve(goods);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 
-	function getUserGoods(owner_uid) {
+	function getUserGoods(ownerUid) {
 		const defer = $q.defer();
 
 		Restangular
 			.all('goods/of')
-			.getList({ owner_uid : owner_uid })
+			.getList({ owner_uid : ownerUid })
 			.then(function(data) {
 				if (_.isArray(data)) {
 					data.forEach(function(goods) {

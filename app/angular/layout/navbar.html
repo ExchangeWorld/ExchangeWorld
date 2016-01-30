@@ -8,26 +8,26 @@
 			</md-button>
 		</span>
 		<!-- <span flex="10" hide-md hide-sm></span> -->
-		<div flex="30" flex-md="40" flex-sm="30" layout="row" layout-align="center center">
-			<md-button flex flex-sm="15" hide-sm ng-click="vm.onClick(1)" ng-class="{'active': vm.contentIs(1)}">
+		<div flex="30" flex-md="40" flex-sm="0" layout="row" layout-align="center center">
+			<md-button flex hide-sm ng-click="vm.onClick(1)" ng-class="{'active': vm.contentIs(1)}">
 				<div layout layout-align="center center">
 					<!-- <i class="material-icons toolbar">dashboard</i> -->
 					<span class="toolbar-span">探索</span>
 				</div>
 			</md-button>
-			<md-button flex flex-sm="15" hide-sm ng-click="vm.onClick(2)" ng-class="{'active': vm.contentIs(2)}">
+			<md-button flex hide-sm ng-click="vm.onClick(2)" ng-class="{'active': vm.contentIs(2)}">
 				<div layout layout-align="center center">
 					<!-- <i class="material-icons toolbar">add</i> -->
 					<span class="toolbar-span">發佈</span>
 				</div>
 			</md-button>
-			<md-button flex flex-sm="15" hide-sm ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">
+			<md-button flex hide-sm ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">
 				<div layout layout-align="center center">
 					<!-- <i class="material-icons toolbar">shuffle</i> -->
 					<span class="toolbar-span">交換</span>
 				</div>
 			</md-button>
-			<md-button hide-md hide-sm flex flex-sm="15" ng-click="vm.report()">
+			<md-button hide-md hide-sm flex ng-click="vm.report()">
 				<div layout layout-align="center center">
 					<!-- <i class="material-icons toolbar">error_outline</i> -->
 					<span class="toolbar-span">回報</span>
@@ -50,7 +50,7 @@
 				</div>
 			</md-button>
 		</div> -->
-		<div hide-sm flex="10" flex-md="20" flex-sm="30" offset="10" offset-md="5" offset-sm="20" layout="row" layout-align="center center">
+		<div hide-sm flex="10" flex-md="20" offset="10" offset-md="5" layout="row" layout-align="center center">
 			<md-menu flex flex-sm md-offset="-200 61" ng-show="vm.isLoggedIn">
 				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)">
 					<md-icon class="material-icons">forum</md-icon>
@@ -108,7 +108,7 @@
 				</md-menu-content>
 			</md-menu>
 		</div>
-		<div flex="15" offset-sm="50" layout="row" layout-align="center center">
+		<div flex="15" layout="row" layout-align="center center">
 			<md-button ng-hide="vm.isLoggedIn" ng-click="vm.onLogin()">
 				<span class="toolbar-span">登入</span>
 			</md-button>

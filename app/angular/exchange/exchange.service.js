@@ -23,13 +23,13 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 	return service;
 
 	/** get exchange data */
-	function getAllExchange(owner_uid) {
+	function getAllExchange(ownerUid) {
 		const defer = $q.defer();
 
 		Restangular
 			.all('exchange/of')
 			.getList({
-				owner_uid: owner_uid
+				owner_uid: ownerUid
 			})
 			.then(function(data) {
 				if (_.isArray(data)) {

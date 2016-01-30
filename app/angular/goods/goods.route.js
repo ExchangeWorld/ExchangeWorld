@@ -54,7 +54,7 @@ function getStates() {
 			templateUrl: 'goods/goods.queue.html',
 			resolve: {
 				/** @ngInject */
-				host_uid: (goodsService, $stateParams) => {
+				hostUid: (goodsService, $stateParams) => {
 					return goodsService
 						.getGood($stateParams.gid)
 						.then(function(data) {
@@ -76,14 +76,14 @@ function getStates() {
 						});
 				},
 				/** @ngInject */
-				queuing_goods_gid: ($stateParams) => {
+				queuingGoodsGid: ($stateParams) => {
 					return parseInt($stateParams.gid, 10);
 				}
 			},
 			/** @ngInject */
-			onEnter: (goodsService, myGoods, host_uid, queuing_goods_gid, $rootScope) => {
+			onEnter: (goodsService, myGoods, hostUid, queuingGoodsGid, $rootScope) => {
 				$rootScope.historyCounter++;
-				goodsService.showQueueBox(null, myGoods, queuing_goods_gid, host_uid);
+				goodsService.showQueueBox(null, myGoods, queuingGoodsGid, hostUid);
 			}
 		}
 	}, {
@@ -93,7 +93,7 @@ function getStates() {
 			templateUrl: 'goods/goods.queuing.html',
 			resolve: {
 				/** @ngInject */
-				host_goods_gid: ($stateParams) => {
+				hostGoodsGid: ($stateParams) => {
 					return parseInt($stateParams.gid, 10);
 				},
 				/** @ngInject */
@@ -106,9 +106,9 @@ function getStates() {
 				},
 			},
 			/** @ngInject */
-			onEnter: (goodsService, queuingGoods, host_goods_gid, $rootScope) => {
+			onEnter: (goodsService, queuingGoods, hostGoodsGid, $rootScope) => {
 				$rootScope.historyCounter++;
-				goodsService.showQueuingBox(null, queuingGoods, host_goods_gid);
+				goodsService.showQueuingBox(null, queuingGoods, hostGoodsGid);
 			}
 		}
 	}];

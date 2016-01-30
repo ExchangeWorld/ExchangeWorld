@@ -52,9 +52,10 @@ function NavbarController(
 
 	//////////////
 
-	$rootScope.$on('$stateChangeSuccess', function() {
-		updateNotification();
-	});
+	//TODO : 
+	//$rootScope.$on('$stateChangeSuccess', function() {
+	//updateNotification();
+	//});
 
 	activate();
 
@@ -68,7 +69,7 @@ function NavbarController(
 				$rootScope.isLoggedIn = Boolean(data);
 			});
 
-		updateNotification();
+		//updateNotification();
 	}
 
 	function openMenu($mdOpenMenu, e) {

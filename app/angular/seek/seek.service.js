@@ -36,9 +36,9 @@ function seekService(Restangular, $q, exception, $localStorage, favorite) {
 					if($localStorage.user){
 						favorite
 							.getMyFavorite($localStorage.user.uid)
-							.then(function(f_array) {
+							.then(function(fArray) {
 								data.forEach(function(g) {
-									if (_.findWhere(f_array, { goods_gid: g.gid })) g.favorited = true;
+									if (_.findWhere(fArray, { goods_gid: g.gid })) g.favorited = true;
 									else g.favorited = false;
 								});
 								defer.resolve(data);

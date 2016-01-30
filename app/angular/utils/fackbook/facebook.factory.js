@@ -52,8 +52,8 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 		const defer = $q.defer();
 
 		let [member, largePic] = await Promise.all([
-					Restangular.oneUrl(`user?identity=${user.id}`).get(),
-					getLargePicture(user.id)
+			Restangular.oneUrl(`user?identity=${user.id}`).get(),
+			getLargePicture(user.id)
 		]);
 
 		try {
@@ -80,6 +80,8 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 				};
 
 			let registerData = Restangular.all('authenticate/register').post(newUser);
+			let token = await Restangular.all('authenticate/login').post({ fb: true, identity: member.identity });
+			registerData.token = token.token;
 
 			$localStorage.user = registerData;
 			defer.resolve(registerData);

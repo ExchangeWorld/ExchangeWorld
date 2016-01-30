@@ -21,7 +21,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		showQueuingBox,
 		getQueue,
 		postQueue,
-		deleteQueue,
+		//deleteQueue,
 
 		postExchange,
 	};
@@ -41,7 +41,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		}
 
 		try {
-			let goods = await Restangular.oneUrl(`goods?gid=2${gid}`).get();
+			let goods = await Restangular.oneUrl(`goods?gid=${gid}`).get();
 			if (!goods) throw 'goods is null or undefined.';
 			if (!_.isString(goods.photo_path)) throw 'photo_path is not JSON.';
 
@@ -161,11 +161,11 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		return defer.promise;
 	}
 
-	function getQueue(host_goods_gid) {
+	function getQueue(hostGoodsGid) {
 		const defer = $q.defer();
 		Restangular
 			.all('queue/of/goods')
-			.getList({host_goods_gid: host_goods_gid})
+			.getList({host_goods_gid: hostGoodsGid})
 			.then(function(data) {
 				if (_.isArray(data)) {
 					data.forEach(function(goods) {
@@ -182,14 +182,14 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		return defer.promise;
 	}
 
-	function postQueue(host_goods_gid, queuer_goods_gid) {
+	function postQueue(hostGoodsGid, queuerGoodsGid) {
 		const defer = $q.defer();
 
 		Restangular
 			.all('queue/post')
 			.post({
-				host_goods_gid   : host_goods_gid,
-				queuer_goods_gid : queuer_goods_gid,
+				host_goods_gid   : hostGoodsGid,
+				queuer_goods_gid : queuerGoodsGid,
 			})
 			.then(function(data) {
 				defer.resolve(data);
@@ -201,14 +201,15 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		return defer.promise;
 	}
 	
-	function deleteQueue(host_goods_gid, queuer_goods_gid) {
+	/* should done by server
+	function deleteQueue(hostGoodsGid, queuerGoodsGid) {
 		const defer = $q.defer();
 
 		Restangular
 			.all('queue/delete')
 			.remove({
-				host_goods_gid   : host_goods_gid,
-				queuer_goods_gid : queuer_goods_gid,
+				host_goods_gid   : hostGoodsgid,
+				queuer_goods_gid : queuerGoodsGid,
 			})
 			.then(function(data) {
 				defer.resolve(data);
@@ -218,19 +219,20 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			});
 		return defer.promise;
 	}
+	*/
 
-	function postExchange(goods1_gid, goods2_gid) {
+	function postExchange(goods1Gid, goods2Gid) {
 		const defer = $q.defer();
 
 		Restangular
 			.all('exchange/create')
 			.post({
-				goods1_gid : goods1_gid,
-				goods2_gid : goods2_gid,
+				goods1_gid : goods1Gid,
+				goods2_gid : goods2Gid,
 			})
 			.then(function(data) {
-				deleteAllQueues(goods1_gid);
-				deleteAllQueues(goods2_gid);
+				//deleteAllQueues(goods1_gid);
+				//deleteAllQueues(goods2_gid);
 				defer.resolve(data);
 			})
 			.catch(function(error) {
@@ -242,7 +244,6 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 	/**
 	 * When goodsA & goodsB publish an exchange,
 	 * must delete all queuing list of goodsA & goodsB
-	 */
 	function deleteAllQueues(gid) {
 		Restangular
 			.all('queue/by')
@@ -258,45 +259,37 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 				return exception.catcher('[Goods Service] getQueue error: ')(error);
 			});
 	}
+	 */
 
-	function showQueueBox(ev, myGoods, queuing_goods_gid, host_uid) {
+	function showQueueBox(ev, myGoods, queuingGoodsGid, hostUid) {
 		$mdDialog.show({
 			templateUrl: 'goods/goods.queue.html',
 			controllerAs: 'vm',
 			controller: QueueController,
 			locals: {
 				myGoods           : myGoods,
-				queuing_goods_gid : queuing_goods_gid,
-				host_uid          : host_uid,
+				queuingGoodsGid : queuingGoodsGid,
+				hostUid          : hostUid,
 			}
 		});
-		function QueueController($mdDialog, logger, myGoods, queuing_goods_gid, host_uid, notification, $state) {
+		function QueueController($mdDialog, logger, myGoods, queuingGoodsGid, hostUid, notification, $state) {
 			const vm             = this;
 			vm.myGoods           = myGoods;
-			vm.queuing_goods_gid = queuing_goods_gid;
+			vm.queuingGoodsGid = queuingGoodsGid;
 			vm.confirm           = onConfirm;
 			vm.cancel            = onCancel;
 			vm.onClickGoods      = gid => $state.go('root.withSidenav.goods', { gid });
 
-			function onConfirm(selected_gid) {
-				$mdDialog
-					.hide(selected_gid)
-					.then(function() {
-						postQueue(vm.queuing_goods_gid, selected_gid)
-							.then(function(data) {
-								logger.success('成功發出排請求', data, 'DONE');
-								notification
-									.postNotification({
-										sender_uid   : vm.myGoods[0].owner_uid,
-										receiver_uid : host_uid, 
-										trigger_url  : `/seek/${queuing_goods_gid}/queuing`,
-										content      : '有人排了你的物品',
-									});
-							});
-						if($state.current.name === 'root.withSidenav.goods.queue') {
-							$state.go('^');
-						}
-					});
+			async function onConfirm(selectedGid) {
+				await $mdDialog.hide(selectedGid);
+
+				let newQueue = await postQueue(vm.queuingGoodsGid, selectedGid);
+
+				logger.success('成功發出排請求', newQueue, 'DONE');
+
+				if($state.current.name === 'root.withSidenav.goods.queue') {
+					$state.go('^');
+				}
 			}
 			function onCancel() {
 				$mdDialog.cancel();
@@ -307,44 +300,34 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		}
 	}
 
-	function showQueuingBox(ev, queuingGoods, host_goods_gid) {
+	function showQueuingBox(ev, queuingGoods, hostGoodsGid) {
 		$mdDialog.show({
 			templateUrl: 'goods/goods.queuing.html',
 			controllerAs: 'vm',
 			controller: QueuingController,
 			locals: {
-				queuingGoods   : queuingGoods,
-				host_goods_gid : host_goods_gid,
+				queuingGoods: queuingGoods,
+				hostGoodsGid: hostGoodsGid,
 			}
 		});
-		function QueuingController($mdDialog, logger, queuingGoods, host_goods_gid, $localStorage, notification, $state) {
-			const vm          = this;
-			vm.queuingGoods   = queuingGoods;
-			vm.host_goods_gid = host_goods_gid;
-			vm.confirm        = onConfirm;
-			vm.cancel         = onCancel;
-			vm.onClickGoods   = gid=> { $state.go('root.withSidenav.goods', {gid: gid}); };
+		function QueuingController($mdDialog, logger, queuingGoods, hostGoodsGid, $localStorage, notification, $state) {
+			const vm        = this;
+			vm.queuingGoods = queuingGoods;
+			vm.hostGoodsGid = hostGoodsGid;
+			vm.confirm      = onConfirm;
+			vm.cancel       = onCancel;
+			vm.onClickGoods = gid => { $state.go('root.withSidenav.goods', {gid: gid}); };
 
-			function onConfirm(selected_goods) {
-				selected_goods = JSON.parse(selected_goods);
-				$mdDialog
-					.hide(selected_goods)
-					.then(function(selected_goods) {
-						postExchange(selected_goods.gid, host_goods_gid)
-							.then(function(data) {
-								logger.success('成功接受一個排', data, 'DONE');
-								notification
-									.postNotification({
-										sender_uid   : $localStorage.user.uid,
-										receiver_uid : selected_goods.owner_uid, 
-										trigger_url  : `/manage/${selected_goods.owner_uid}/exchange`,
-										content      : '有人接受了你的排，進入交換階段',
-									});
-							});
-						if($state.current.name === 'root.withSidenav.goods.queuing') {
-							$state.go('^');
-						}
-					});
+			async function onConfirm(selectedGoods) {
+				selectedGoods = JSON.parse(selectedGoods);
+				await $mdDialog.hide(selectedGoods);
+				
+				let newExchange = await postExchange(selectedGoods.gid, hostGoodsGid);
+				logger.success('成功接受一個排', newExchange, 'DONE');
+
+				if($state.current.name === 'root.withSidenav.goods.queuing') {
+					$state.go('^');
+				}
 			}
 			function onCancel() {
 				$mdDialog.cancel();

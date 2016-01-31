@@ -11,27 +11,21 @@ function appRun(routerHelper) {
 
 var resolve = {
 	/** @ngInject */
-	profile : function (profileService, $state, $stateParams) {
+	profile: function (profileService, $state, $stateParams) {
 		return profileService
 			.getProfile($stateParams.uid)
 			.then(function(data) { 
+                data.goods.forEach(function(goods) {
+                    if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
+                });
+                data.myGoodsPending = data.goods.filter(function(g) { return g.exchanged === 0; });
+                data.myGoodsExchanged = data.goods.filter(function(g) { return g.exchanged === 1; });
 				return data; 
 			})
 			.catch(function() { return undefined; });
 	},
 	/** @ngInject */
-	myGoods : function($stateParams, profileService) {
-		return profileService
-			.getMyGoods($stateParams.uid)
-			.then(function(data) {
-				return {
-					myGoodsPending   : data.filter(function(g) { return g.exchanged === 0; }),
-					myGoodsExchanged : data.filter(function(g) { return g.exchanged === 1; })
-				};
-			});
-	},
-	/** @ngInject */
-	myFavorite : function($stateParams, favorite) {
+	myFavorite: function($stateParams, favorite) {
 		return favorite
 			.getMyFavorite($stateParams.uid)
 			.then(function(data) {

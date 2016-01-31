@@ -19,7 +19,6 @@ profileModule.controller('ProfileController', ProfileController);
 /** @ngInject */
 function ProfileController(
 	profile,
-	myGoods,
 	myFavorite,
 	profileService,
 	auth,
@@ -36,13 +35,11 @@ function ProfileController(
 	var vm                 = this;
 	var ct                 = new colorThief.ColorThief();
 	vm.profile             = profile;
-	vm.isLoggedIn          = Boolean($localStorage.user);
-	vm.isMe                = vm.isLoggedIn && (profile.uid === $localStorage.user.uid);
+	vm.isMe                = $rootScope.isLoggedIn && (profile.uid === $localStorage.user.uid);
 	vm.favSum              = '';
 	vm.myStar              = myFavorite;
-	vm.myGoodsPending      = myGoods.myGoodsPending;
-	vm.myGoodsExchanged    = myGoods.myGoodsExchanged;
-	vm.onClickFollow       = $rootScope.onClickFollow;
+	vm.myGoodsPending      = profile.myGoodsPending;
+	vm.myGoodsExchanged    = profile.myGoodsExchanged;
 	vm.onClickAddFollowing = onClickAddFollowing;
 	vm.onClickSendMsg      = onClickSendMsg;
 	vm.isFollowed          = false;
@@ -56,7 +53,7 @@ function ProfileController(
 	activate();
 
 	function activate() {
-		if (vm.isLoggedIn) {
+		if ($rootScope.isLoggedIn) {
 			if (_.findWhere(profile.follows_followed, { fid: $localStorage.user.uid })) {
 				vm.isFollowed = true;
 			}
@@ -66,7 +63,7 @@ function ProfileController(
 			vm.isMe = (profile.uid === $localStorage.user.uid);
 		} else {
 			vm.isMe = false;
-			vm.isLoggedIn = false;
+			$rootScope.isLoggedIn = false;
 		}
 
 		profileService

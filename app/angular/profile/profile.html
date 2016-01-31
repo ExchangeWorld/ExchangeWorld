@@ -15,16 +15,16 @@
 				<div layout="row" layout-sm="column" layout-align="center center">
 					<div layout="column" layout-sm="row" layout-align="center center" class="note profile">
 						<p class="md-title text-ex follow reset-follow">追隨中</p>
-						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'following')">{{ vm.profile.follows_followed.length }}</a>
+						<a class="profile" ng-click="$root.onClickFollow(vm.profile.uid, 'following')">{{ vm.profile.follows_followed.length }}</a>
 					</div>
 					<div layout="column" layout-sm="row" layout-align="center center" class="note profile">
 						<p class="md-title text-ex follow reset-follow">被追蹤</p>
-						<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'follower')">{{ vm.profile.follows_follower.length }}</a>
+						<a class="profile" ng-click="$root.onClickFollow(vm.profile.uid, 'follower')">{{ vm.profile.follows_follower.length }}</a>
 					</div>
 				</div>
 			</div>
 			<div offset="10" layout="row" layout-align="center center" style="margin-top: 10px;">
-				<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
+				<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
 					<div ng-show="!vm.isFollowed">
 						<md-icon md-font-set="material-icons">person_add</md-icon>
 						<span hide-sm>&nbsp;追隨</span>
@@ -34,7 +34,7 @@
 						<span hide-sm>&nbsp;取消追隨</span>
 					</div>
 				</md-button>
-				<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)">
+				<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)">
 					<md-icon md-font-set="material-icons">chat</md-icon>
 					<span hide-sm>&nbsp;送訊息</span>
 				</md-button>

@@ -12,11 +12,11 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		getUserGoods,
 		editGood,
 		deleteGoods,
-		
+
 		getComment,
 		postComment,
 		deleteComment,
-		
+
 		showQueueBox,
 		showQueuingBox,
 		getQueue,
@@ -32,7 +32,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		const defer = $q.defer();
 
 		var gid = parseInt(id, 10);
-		if(!gid) {
+		if (!gid) {
 			defer.reject({
 				error: true,
 				msg: 'invalid gid'
@@ -55,152 +55,144 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		return defer.promise;
 	}
 
-	function getUserGoods(ownerUid) {
+	async function getUserGoods(ownerUid) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('goods/of')
-			.getList({ owner_uid : ownerUid })
-			.then(function(data) {
-				if (_.isArray(data)) {
-					data.forEach(function(goods) {
-						if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
-					});
-					defer.resolve(data);
-				}
-			}, (error)=> {
-				return exception.catcher('[Goods Service] getuserGood error: ')(error);
+		try {
+			let goods = await Restangular.all('goods/of').getList({	owner_uid: ownerUid	});
+			if (!_.isArray(goods)) throw 'goods not array';
+
+			goods.forEach(function(g) {
+				if (_.isString(g.photo_path)) g.photo_path = JSON.parse(g.photo_path);
 			});
-		return defer.promise;
-	}
-
-	function editGood(newValue) {
-		const defer = $q.defer();
-
-		getGood(newValue.gid)
-			.then(function(goods) {
-				goods.name        = newValue.name;
-				goods.category    = newValue.category;
-				goods.description = newValue.description;
-				goods.route       = 'goods/edit';
-				goods.photo_path = JSON.stringify(goods.photo_path);
-
-				goods
-					.put()
-					.then(function(data) {
-						defer.resolve(data);
-					})
-					.catch(function(error) {
-						return exception.catcher('[goods Service] updategoods error: ')(error);
-					});
-			});
+			defer.resolve(goods);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
 
 		return defer.promise;
 	}
 
-	function deleteGoods(gid) {
+	async function editGood(newValue) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('goods/delete')
-			.remove({ gid: gid })
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[Goods Service] deleteGoods error: ')(error);
-			});
+		try {
+			let goods = await getGood(newValue.gid);
+			goods.name = newValue.name;
+			goods.category = newValue.category;
+			goods.description = newValue.description;
+			goods.route = 'goods/edit';
+			goods.photo_path = JSON.stringify(goods.photo_path);
+
+			let editedGoods = await goods.put();
+
+			defer.resolve(editedGoods);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
 
 		return defer.promise;
 	}
 
-	function getComment(gid) {
+	async function deleteGoods(gid) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('comment/of/goods')
-			.getList({ goods_gid : gid })
-			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data);
-				}
-			}, (error)=> {
-				return exception.catcher('[Goods Service] getComments error: ')(error);
-			});
-		return defer.promise;
-	}
-
-	function postComment(newComment) {
-		const defer = $q.defer();
-
-		Restangular
-			.all('comment/post')
-			.post(newComment)
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[Goods Service] postComments error: ')(error);
-			});
-		return defer.promise;
-	}
-
-	function deleteComment(comment) {
-		const defer = $q.defer();
-
-		Restangular
-			.all('comment/delete')
-			.remove({ cid: comment.cid })
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[Goods Service] deleteComment error: ')(error);
-			});
+		try {
+			let data = await Restangular.all('goods/delete').remove({ gid: gid });
+			defer.resolve(data);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
 
 		return defer.promise;
 	}
 
-	function getQueue(hostGoodsGid) {
+	async function getComment(gid) {
 		const defer = $q.defer();
-		Restangular
-			.all('queue/of/goods')
-			.getList({host_goods_gid: hostGoodsGid})
-			.then(function(data) {
-				if (_.isArray(data)) {
-					data.forEach(function(goods) {
-						if (_.isString(goods.good.photo_path)) goods.good.photo_path = JSON.parse(goods.good.photo_path);
-						return goods;
-					});
-					defer.resolve(data);
-				} else {
-					defer.reject(data);
-				}
-			}, (error)=> {
-				return exception.catcher('[Goods Service] getQueue error: ')(error);
-			});
+
+		try {
+			let comments = await Restangular.all('comment/of/goods').getList({ goods_gid: gid	});
+
+			if (!_.isArray(comments)) throw 'comments not array.';
+			defer.resolve(comments);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 
-	function postQueue(hostGoodsGid, queuerGoodsGid) {
+	async function postComment(newComment) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('queue/post')
-			.post({
-				host_goods_gid   : hostGoodsGid,
-				queuer_goods_gid : queuerGoodsGid,
-			})
-			.then(function(data) {
-				defer.resolve(data);
+		try {
+			let comment = await Restangular.all('comment/post').post(newComment);
+			defer.resolve(comment);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
 
-			})
-			.catch(function(error) {
-				return exception.catcher('[Goods Service] postQueue error: ')(error);
-			});
 		return defer.promise;
 	}
-	
+
+	async function deleteComment(comment) {
+		const defer = $q.defer();
+
+		try {
+			let res = await Restangular.all('comment/delete').remove({ cid: comment.cid });
+			defer.resolve(res);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
+	async function getQueue(hostGoodsGid) {
+		const defer = $q.defer();
+
+		try {
+			let goods = await Restangular.all('queue/of/goods').getList({ host_goods_gid: hostGoodsGid });
+			if (!_.isArray(goods)) throw 'goods not array.';
+
+			goods.forEach(function(g) {
+				if (_.isString(g.good.photo_path)) g.good.photo_path = JSON.parse(g.good.photo_path);
+			});
+
+			defer.resolve(goods);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
+	async function postQueue(hostGoodsGid, queuerGoodsGid) {
+		const defer = $q.defer();
+
+		try {
+			let newQueue = {
+				host_goods_gid: hostGoodsGid,
+				queuer_goods_gid: queuerGoodsGid,
+			};
+			let res = await Restangular.all('queue/post').post({ newQueue });
+
+			defer.resolve(res);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
 	/* should done by server
 	function deleteQueue(hostGoodsGid, queuerGoodsGid) {
 		const defer = $q.defer();
@@ -221,23 +213,21 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 	}
 	*/
 
-	function postExchange(goods1Gid, goods2Gid) {
+	async function postExchange(goods1Gid, goods2Gid) {
 		const defer = $q.defer();
+		try {
+			let newExchange = {
+				goods1_gid: goods1Gid,
+				goods2_gid: goods2Gid,
+			};
+			let res = await Restangular.all('exchange/create').post({ newExchange });
 
-		Restangular
-			.all('exchange/create')
-			.post({
-				goods1_gid : goods1Gid,
-				goods2_gid : goods2Gid,
-			})
-			.then(function(data) {
-				//deleteAllQueues(goods1_gid);
-				//deleteAllQueues(goods2_gid);
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[Goods Service] postExchang error: ')(error);
-			});
+			defer.resolve(res);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 
@@ -267,11 +257,12 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			controllerAs: 'vm',
 			controller: QueueController,
 			locals: {
-				myGoods           : myGoods,
-				queuingGoodsGid : queuingGoodsGid,
-				hostUid          : hostUid,
+				myGoods: myGoods,
+				queuingGoodsGid: queuingGoodsGid,
+				hostUid: hostUid,
 			}
 		});
+
 		function QueueController($mdDialog, logger, myGoods, queuingGoodsGid, hostUid, notification, $state) {
 			const vm             = this;
 			vm.myGoods           = myGoods;
@@ -310,28 +301,30 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 				hostGoodsGid: hostGoodsGid,
 			}
 		});
+
 		function QueuingController($mdDialog, logger, queuingGoods, hostGoodsGid, $localStorage, notification, $state) {
 			const vm        = this;
 			vm.queuingGoods = queuingGoods;
 			vm.hostGoodsGid = hostGoodsGid;
 			vm.confirm      = onConfirm;
 			vm.cancel       = onCancel;
-			vm.onClickGoods = gid => { $state.go('root.withSidenav.goods', {gid: gid}); };
+			vm.onClickGoods = gid => $state.go('root.withSidenav.goods', { gid: gid });
 
 			async function onConfirm(selectedGoods) {
 				selectedGoods = JSON.parse(selectedGoods);
 				await $mdDialog.hide(selectedGoods);
-				
+
 				let newExchange = await postExchange(selectedGoods.gid, hostGoodsGid);
 				logger.success('成功接受一個排', newExchange, 'DONE');
 
-				if($state.current.name === 'root.withSidenav.goods.queuing') {
+				if ($state.current.name === 'root.withSidenav.goods.queuing') {
 					$state.go('^');
 				}
 			}
+
 			function onCancel() {
 				$mdDialog.cancel();
-				if($state.current.name === 'root.withSidenav.goods.queuing') {
+				if ($state.current.name === 'root.withSidenav.goods.queuing') {
 					$state.go('^');
 				}
 			}
@@ -339,6 +332,3 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 	}
 
 }
-
-
-

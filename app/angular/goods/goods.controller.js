@@ -105,20 +105,7 @@ function GoodsController(
 				vm.queuingList = data;
 			});
 
-		var ct = new colorThief.ColorThief();
-		var image = document.getElementById('img');
-		image.onload = ()=> {
-			var pallete = ct.getPalette(image, 2);
-			vm.bgStyle = {
-				"background-color": `rgb(${pallete[0][0]}, ${pallete[0][1]}, ${pallete[0][2]})`,
-				"border-radius": "20px"
-			};
-			vm.bordercolor = [{
-				"border": `rgb(${pallete[1][0]}, ${pallete[1][1]}, ${pallete[1][2]}) solid 2px`
-			},{
-				"border": `rgb(${pallete[2][0]}, ${pallete[2][1]}, ${pallete[2][2]}) solid 2px`
-			}];
-		};
+        getBackgroundColor();
 	}
 
 	function onEdit(gid) {
@@ -173,7 +160,7 @@ function GoodsController(
 			})
 			.then(function() {
 				var data = vm.goodComments.map(function(comment) {
-					if (vm.isLoggedIn)
+					if ($rootScope.isLoggedIn)
 						comment.isMe = (comment.commenter_uid === $localStorage.user.uid);
 					comment.timestamp = moment(comment.created_at.slice(0, -1)).fromNow();
 					return comment;
@@ -188,7 +175,7 @@ function GoodsController(
 				.login()
 				.then(function(user) {
 					vm.user = user;
-					vm.isLoggedIn = Boolean(user);
+					$rootScope.isLoggedIn = Boolean(user);
 					$state.reload();
 				});
 		}
@@ -211,16 +198,6 @@ function GoodsController(
 					updateComment();
 				});
 
-			/**
-			 * Send notification to host
-			 */
-			notification
-				.postNotification({
-					sender_uid   : commentData.user_uid,
-					receiver_uid : vm.goodData.owner_uid,
-					trigger_url  : $location.url(),
-					content      : '有人對你的物品留言',
-				});
 		}
 	}
 
@@ -235,9 +212,7 @@ function GoodsController(
 		if (confirm) {
 			$mdDialog.show(confirm).then(function() {
 				goodsService
-					.deleteComment({
-						cid: cid
-					})
+					.deleteComment({ cid: cid })
 					.then(updateComment);
 			});
 		}
@@ -255,15 +230,6 @@ function GoodsController(
 				.then(function() {
 					updateStar();
 				});
-
-			notification
-				.postNotification({
-					sender_uid   : star.starring_user_uid,
-					receiver_uid : vm.goodData.owner_uid,
-					trigger_url  : $location.url(),
-					content      : '有人關注你的物品',
-				});
-
 		} else {
 			favorite
 				.deleteFavorite(star)
@@ -280,7 +246,7 @@ function GoodsController(
 				vm.stars = data;
 
 				if (
-					vm.isLoggedIn &&
+					$rootScope.isLoggedIn &&
 					_.findWhere(data, {
 						starring_user_uid: $localStorage.user.uid
 					})
@@ -341,6 +307,23 @@ function GoodsController(
 			$window.history.go(-$rootScope.historyCounter);
 		}
 	}
+
+    function getBackgroundColor() {
+		var ct = new colorThief.ColorThief();
+		var image = document.getElementById('img');
+		image.onload = ()=> {
+			var pallete = ct.getPalette(image, 2);
+			vm.bgStyle = {
+				"background-color": `rgb(${pallete[0][0]}, ${pallete[0][1]}, ${pallete[0][2]})`,
+				"border-radius": "20px"
+			};
+			vm.bordercolor = [{
+				"border": `rgb(${pallete[1][0]}, ${pallete[1][1]}, ${pallete[1][2]}) solid 2px`
+			},{
+				"border": `rgb(${pallete[2][0]}, ${pallete[2][1]}, ${pallete[2][2]}) solid 2px`
+			}];
+		};
+    }
 }
 
 

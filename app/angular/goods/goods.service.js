@@ -114,7 +114,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		const defer = $q.defer();
 
 		try {
-			let comments = await Restangular.all('comment/of/goods').getList({ goods_gid: gid	});
+			let comments = await Restangular.all('comment/of/goods').getList({ goods_gid: gid });
 
 			if (!_.isArray(comments)) throw 'comments not array.';
 			defer.resolve(comments);

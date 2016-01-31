@@ -105,7 +105,7 @@ function GoodsController(
 				vm.queuingList = data;
 			});
 
-        getBackgroundColor();
+		getBackgroundColor();
 	}
 
 	function onEdit(gid) {
@@ -308,7 +308,7 @@ function GoodsController(
 		}
 	}
 
-    function getBackgroundColor() {
+	function getBackgroundColor() {
 		var ct = new colorThief.ColorThief();
 		var image = document.getElementById('img');
 		image.onload = ()=> {
@@ -323,7 +323,7 @@ function GoodsController(
 				"border": `rgb(${pallete[2][0]}, ${pallete[2][1]}, ${pallete[2][2]}) solid 2px`
 			}];
 		};
-    }
+	}
 }
 
 

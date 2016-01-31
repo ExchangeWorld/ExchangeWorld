@@ -15,11 +15,11 @@ var resolve = {
 		return profileService
 			.getProfile($stateParams.uid)
 			.then(function(data) { 
-                data.goods.forEach(function(goods) {
-                    if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
-                });
-                data.myGoodsPending = data.goods.filter(function(g) { return g.exchanged === 0; });
-                data.myGoodsExchanged = data.goods.filter(function(g) { return g.exchanged === 1; });
+				data.goods.forEach(function(goods) {
+					if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
+				});
+				data.myGoodsPending = data.goods.filter(function(g) { return g.exchanged === 0; });
+				data.myGoodsExchanged = data.goods.filter(function(g) { return g.exchanged === 1; });
 				return data; 
 			})
 			.catch(function() { return undefined; });

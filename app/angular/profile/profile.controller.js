@@ -68,13 +68,13 @@ function ProfileController(
 			vm.isMe = false;
 			vm.isLoggedIn = false;
 		}
-	
+
 		profileService
-			.getFavoriteSum($stateParams.uid) 
-			.then(function(data) { 
+			.getFavoriteSum($stateParams.uid)
+			.then(function(data) {
 				vm.favSum = data;
 			});
-			
+
 		/**
 		 * only do this is desktop mode.
 		 * if goods fetching time more than 500ms, skip colorThief feature.
@@ -102,13 +102,7 @@ function ProfileController(
 			vm.isFollowed = false;
 		} else {
 			profileService.addFollowing($localStorage.user.uid, profile.uid);
-			notification
-				.postNotification({
-					sender_uid   : $localStorage.user.uid,
-					receiver_uid : vm.profile.uid, 
-					trigger      : '/profile/'+$localStorage.user.uid,
-					content      : '有人跟隨你',
-				});
+
 			vm.followerCount++;
 			vm.isFollowed = true;
 		}
@@ -131,17 +125,17 @@ function ProfileController(
 				.then(function(data) {
 					logger.success('更新成功', data, 'EDIT');
 				})
-				.catch(function(err) { 
+				.catch(function(err) {
 					logger.error('錯誤', err, 'Error');
 				});
 		}
 		vm.isReadOnly = !vm.isReadOnly;
 	}
-	
+
 	function dominateColor(goods) {
 		var image = document.getElementById(`img_${goods.gid}`);
 		image.onload = ()=> {
-			var color = ct.getColor(image); 
+			var color = ct.getColor(image);
 			goods.bgStyle = {
 				"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`
 			};

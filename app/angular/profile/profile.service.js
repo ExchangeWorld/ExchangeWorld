@@ -19,51 +19,48 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 	return service;
 
 	//////////
-	
-	function getProfile(_uid) {
+
+	async function getProfile(_uid) {
 		const defer = $q.defer();
 
-		Restangular
-			.oneUrl(`user?uid=${_uid}`)
-			.get()
-			.then(function(data) {
-				defer.resolve(data);
-			}, (error)=> {
-				defer.reject({ error: error });
-				exception.catcher('[Profiles Service] getProfile error: ')(error);
-			});
+		try {
+			let data = await Restangular.oneUrl(`user?uid=${_uid}`).get();
+			defer.resolve(data);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
 
 		return defer.promise;
 	}
 
-	function getFavoriteSum(uid) {
+	async function getFavoriteSum(uid) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('star/by')
-			.getList({ starring_user_uid: uid })
-			.then(function(data) {
-				defer.resolve(data);
-			}, (error) => {
-				return exception.catcher('[Profiles Service] getFavoriteSum error: ')(error);
-			});
+		try {
+			let data = await Restangular.all('star/by').getList({ starring_user_uid: uid });
+			defer.resolve(data);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
 
 		return defer.promise;
 	}
 
-	function editProfile(profile) {
+	async function editProfile(profile) {
 		const defer = $q.defer();
 
-		profile.route = 'user/edit';
+		try {
+			profile.route = 'user/edit';
+			let data = await profile.put();
 
-		profile
-			.put()
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[profiles Service] updateprofile error: ')(error);
-			});
+			defer.resolve(data);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 
@@ -96,19 +93,19 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 	function getMyGoods(uid) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('goods/of')
-			.getList({ owner_uid: uid })
-			.then(function(data) {
-				if (_.isArray(data)) {
-					data.forEach(function(goods) {
-						if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
-					});
-					defer.resolve(data);
-				}
-			}, (error)=> {
-				return exception.catcher('[profile Service] getProfile error: ')(error);
+		try {
+			let data = Restangular.all('goods/of').getList({ owner_uid: uid });
+			if (!_.isArray(data)) throw 'data not array';
+
+			data.forEach(function(goods) {
+				if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
 			});
+			defer.resolve(data);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 

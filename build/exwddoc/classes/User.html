@@ -111,7 +111,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/routers_user.js.html#l18"><code>routers&#x2F;user.js:18</code></a>
+        <a href="../files/routers_user.js.html#l20"><code>routers&#x2F;user.js:20</code></a>
     </span><br>
     <p>Get a user by given uid or identity</p>
 
@@ -130,6 +130,28 @@
     </ul>
     <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>The user including many things</p>
 </div>
+        <h5>Example</h5>
+        <pre>
+{
+ "uid": 8,
+ "identity": "1234",
+ "name": "假帳號",
+ "email": "",
+ "photo_path": "hahaha",
+ "introduction": null,
+ "wishlist": null,
+ "created_at": "2016-01-18T02:36:29.740Z",
+ "updated_at": "2016-01-18T02:36:29.740Z",
+ "goods": [],
+ "follows_followed": [
+   {
+     "fid": 1
+   }
+ ],
+ "follows_follower": [],
+ "star_starring_user": []
+}
+</pre>
 </div>
 <a name="methods_PUT api/user/edit"></a>
 <div class="method item">
@@ -137,9 +159,9 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/routers_user.js.html#l85"><code>routers&#x2F;user.js:85</code></a>
+        <a href="../files/routers_user.js.html#l114"><code>routers&#x2F;user.js:114</code></a>
     </span><br>
-    <p>Edit a user's profile</p>
+    <p>Edit a user's profile, need token</p>
 
     <strong>Parameters:</strong>
     <ul class="params">
@@ -173,7 +195,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/routers_user.js.html#l144"><code>routers&#x2F;user.js:144</code></a>
+        <a href="../files/routers_user.js.html#l173"><code>routers&#x2F;user.js:173</code></a>
     </span><br>
     <p>Update a user's photo_path
 If same as the one in DB, nothing changed</p>

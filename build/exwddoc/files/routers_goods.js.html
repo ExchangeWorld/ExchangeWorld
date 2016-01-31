@@ -92,16 +92,18 @@
 
 &#x27;use strict&#x27;;
 
+var path = require(&#x27;path&#x27;);
+
 var express = require(&#x27;express&#x27;);
 var router = express.Router();
 
 // Including tables
-var goods = require(&#x27;../ORM/Goods&#x27;);
-var users = require(&#x27;../ORM/Users&#x27;);
-var comments = require(&#x27;../ORM/Comments&#x27;);
-var stars = require(&#x27;../ORM/Stars&#x27;);
-var exchanges = require(&#x27;../ORM/Exchanges&#x27;);
-var queues = require(&#x27;../ORM/Queues&#x27;);
+var goods = require(path.resolve(__dirname, &#x27;../ORM/Goods&#x27;));
+var users = require(path.resolve(__dirname, &#x27;../ORM/Users&#x27;));
+var comments = require(path.resolve(__dirname, &#x27;../ORM/Comments&#x27;));
+var stars = require(path.resolve(__dirname, &#x27;../ORM/Stars&#x27;));
+var exchanges = require(path.resolve(__dirname, &#x27;../ORM/Exchanges&#x27;));
+var queues = require(path.resolve(__dirname, &#x27;../ORM/Queues&#x27;));
 
 /**
  * Get a goods by given gid
@@ -112,6 +114,13 @@ var queues = require(&#x27;../ORM/Queues&#x27;);
  */
 router.get(&#x27;/&#x27;, (req, res) =&gt; {
 	var _gid = parseInt(req.query.gid, 10);
+
+	if (!_gid) {
+		res.status(400).json({
+			error: &#x27;gid is not given&#x27;
+		});
+		return;
+	}
 
 	// Emit a find operation with orm model in table &#x60;goods&#x60;
 	goods
@@ -140,10 +149,10 @@ router.get(&#x27;/&#x27;, (req, res) =&gt; {
 			}]
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -158,6 +167,13 @@ router.get(&#x27;/&#x27;, (req, res) =&gt; {
  */
 router.get(&#x27;/of&#x27;, (req, res) =&gt; {
 	var _owner_uid = parseInt(req.query.owner_uid, 10);
+
+	if (!_owner_uid) {
+		res.status(400).json({
+			error: &#x27;owner_uid is not given&#x27;
+		});
+		return;
+	}
 
 	// Emit a find operation with orm model in table &#x60;goods&#x60;
 	goods
@@ -180,10 +196,10 @@ router.get(&#x27;/of&#x27;, (req, res) =&gt; {
 			}]
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -215,14 +231,14 @@ router.post(&#x27;/post&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_owner_uid = parseInt(req.body.owner_uid, 10);
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_owner_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -240,10 +256,10 @@ router.post(&#x27;/post&#x27;, (req, res) =&gt; {
 			owner_uid: _owner_uid
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(201).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -276,14 +292,14 @@ router.put(&#x27;/edit&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_owner_uid = null;
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_owner_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -305,7 +321,7 @@ router.put(&#x27;/edit&#x27;, (req, res) =&gt; {
 		.findOne(queryGoodsTmp)
 		.then(result =&gt; {
 			if (result === null) {
-				res.json(null);
+				res.status(404).json(null);
 			} else {
 				result.name = _name;
 				result.category = _category;
@@ -313,11 +329,11 @@ router.put(&#x27;/edit&#x27;, (req, res) =&gt; {
 				result.photo_path = _photo_path;
 				result.position_x = _position_x;
 				result.position_y = _position_y;
-				result.save().then(() =&gt; res.json(result));
+				result.save().then(() =&gt; res.status(200).json(result));
 			}
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -340,14 +356,14 @@ router.put(&#x27;/rate&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		rater_uid = null;
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		rater_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -363,15 +379,15 @@ router.put(&#x27;/rate&#x27;, (req, res) =&gt; {
 				}
 			})
 			.then(_goods =&gt; {
-				res.json(_goods);
+				res.status(200).json(_goods);
 			})
 			.catch(err =&gt; {
-				res.send({
+				res.status(500).json({
 					error: err
 				});
 			});
 	} else {
-		res.send({
+		res.status(400).json({
 			error: &#x27;rate is NaN&#x27;
 		});
 	}
@@ -393,14 +409,14 @@ router.delete(&#x27;/delete&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_owner_uid = null;
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_owner_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -437,11 +453,12 @@ router.delete(&#x27;/delete&#x27;, (req, res) =&gt; {
 						deleted: 1
 					}, queryGoodsTmp)
 					.then(result =&gt; {
-						res.json(result);
+						res.status(200).json(result);
 						return result;
 					})
 					.then(result =&gt; {
-						queues
+						console.log(&#x27;After checking exchange, delete queue&#x27;);
+						return queues
 							.destroy({
 								where: {
 									$or: [{
@@ -453,12 +470,12 @@ router.delete(&#x27;/delete&#x27;, (req, res) =&gt; {
 							});
 					})
 					.catch(err =&gt; {
-						res.send({
+						res.status(500).json({
 							error: err
 						});
 					});
 			} else {
-				res.send({
+				res.status(403).json({
 					error: &#x27;Exchange &#x27; + result.eid + &#x27; is in process or it is already exchanged&#x27;
 				});
 			}

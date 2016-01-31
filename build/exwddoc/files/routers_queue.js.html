@@ -93,13 +93,15 @@
 
 &#x27;use strict&#x27;;
 
+var path = require(&#x27;path&#x27;);
+
 var express = require(&#x27;express&#x27;);
 var router = express.Router();
 
 // Including tables
-var queues = require(&#x27;../ORM/Queues&#x27;);
-var goods = require(&#x27;../ORM/Goods&#x27;);
-var users = require(&#x27;../ORM/Users&#x27;);
+var queues = require(path.resolve(__dirname, &#x27;../ORM/Queues&#x27;));
+var goods = require(path.resolve(__dirname, &#x27;../ORM/Goods&#x27;));
+var users = require(path.resolve(__dirname, &#x27;../ORM/Users&#x27;));
 
 /**
  * Get goods are queueing on given host_goods
@@ -115,14 +117,14 @@ router.get(&#x27;/of/goods&#x27;, (req, res) =&gt; {
 
 	// REQ EXWD CHECK
 	if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_owner_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -172,10 +174,10 @@ router.get(&#x27;/of/goods&#x27;, (req, res) =&gt; {
 			]
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -194,14 +196,14 @@ router.get(&#x27;/by/goods&#x27;, (req, res) =&gt; {
 
 	// REQ EXWD CHECK
 	if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_owner_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -251,10 +253,10 @@ router.get(&#x27;/by/goods&#x27;, (req, res) =&gt; {
 			]
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -274,14 +276,14 @@ router.get(&#x27;/of/person&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_host_user_uid = parseInt(req.query.host_user_uid, 10);
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_host_user_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -318,10 +320,10 @@ router.get(&#x27;/of/person&#x27;, (req, res) =&gt; {
 			}]
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.json({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -341,14 +343,14 @@ router.get(&#x27;/by/person&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_queuer_user_uid = parseInt(req.query.queuer_user_uid, 10);
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_queuer_user_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -385,10 +387,10 @@ router.get(&#x27;/by/person&#x27;, (req, res) =&gt; {
 			}]
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.json({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -413,14 +415,14 @@ router.post(&#x27;/post&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_queuer_user_uid = null;
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_queuer_user_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -457,15 +459,15 @@ router.post(&#x27;/post&#x27;, (req, res) =&gt; {
 		})
 		.then(result =&gt; {
 			if (result === &#x27;&#x27;) {
-				res.send({
+				res.status(403).json({
 					error: &#x27;The goods cannot be queued&#x27;
 				});
 			} else {
-				res.json(result[0]);
+				res.status(200).json(result[0]);
 			}
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -488,14 +490,14 @@ router.delete(&#x27;/delete&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_queuer_user_uid = null;
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_queuer_user_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -527,17 +529,17 @@ router.delete(&#x27;/delete&#x27;, (req, res) =&gt; {
 		})
 		.then(result =&gt; {
 			if (result === null) {
-				res.json(0);
+				res.status(404).json(0);
 			} else if (result.queuer_goods === null) {
-				res.send({
+				res.status(403).json({
 					error: &#x27;Opertaion denied, not your goods&#x27;
 				});
 			} else {
-				result.destroy().then(_tmp =&gt; res.json(1));
+				result.destroy().then(_tmp =&gt; res.status(200).json(1));
 			}
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});

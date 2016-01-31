@@ -101,24 +101,20 @@ var redis = require(path.resolve(__dirname, &#x27;../libs/redis&#x27;));
 var router = express.Router();
 
 // Including tables
-var users = require(&#x27;../ORM/Users&#x27;);
-var auths = require(&#x27;../ORM/Auths&#x27;);
+var users = require(path.resolve(__dirname, &#x27;../ORM/Users&#x27;));
+var auths = require(path.resolve(__dirname, &#x27;../ORM/Auths&#x27;));
 
 // Hashcode generation functions
 var getSHA256 = strToEncrypt =&gt; {
 	var sha256 = crypto.createHash(&#x27;sha256&#x27;);
-
 	sha256.update(strToEncrypt, &#x27;utf8&#x27;);
-
 	return sha256.digest(&#x27;hex&#x27;);
 };
 
 // Faster
 var getSHA1 = strToEncrypt =&gt; {
 	var sha1 = crypto.createHash(&#x27;sha1&#x27;);
-
 	sha1.update(strToEncrypt, &#x27;utf8&#x27;);
-
 	return sha1.digest(&#x27;hex&#x27;);
 };
 
@@ -150,7 +146,7 @@ router.post(&#x27;/register&#x27;, (req, res) =&gt; {
 
 	// Check if the _id is not valid
 	if (_id === &#x27;&#x27;) {
-		res.send({
+		res.status(400).json({
 			error: &#x27;ID must be specified&#x27;
 		});
 
@@ -178,7 +174,7 @@ router.post(&#x27;/register&#x27;, (req, res) =&gt; {
 					user_uid: result.uid
 				})
 				.catch(err =&gt; {
-					res.send({
+					res.status(500).json({
 						error: err
 					});
 				});
@@ -186,10 +182,10 @@ router.post(&#x27;/register&#x27;, (req, res) =&gt; {
 			return result;
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(201).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -223,6 +219,13 @@ var login_function = (req, res) =&gt; {
 	var _id = req.body.identity;
 	var _password = req.body.password || &#x27;&#x27;;
 
+	if (!_id) {
+		res.status(400).json({
+			error: &#x27;identity not given&#x27;
+		});
+		return;
+	}
+
 	if (_fb === true) {
 		var id_length = _id.length;
 		_password = getSHA256(_id.substring(id_length - 2, id_length) + &#x27; and this is still a fucking hash with &#x27; + _id.substring(0, id_length - 2));
@@ -243,7 +246,7 @@ var login_function = (req, res) =&gt; {
 		})
 		.then(test_user =&gt; {
 			if (test_user === &#x27;not a user&#x27; || test_user.user_uid === null) {
-				res.json({
+				res.status(401).json({
 					authentication: &#x27;fail&#x27;,
 					token: null
 				});
@@ -253,15 +256,15 @@ var login_function = (req, res) =&gt; {
 
 				redis.pipeline().set(tmpToken, test_user.user_uid).expire(tmpToken, 1200).exec((err, result) =&gt; {
 					if (err) {
-						res.send({
+						res.status(500).json({
 							error: err
 						});
 					} else if (result[0][0] || result[1][0]) {
-						res.send({
+						res.status(500).json({
 							error: [result[0][0], result[1][0]]
 						});
 					} else {
-						res.json({
+						res.status(201).json({
 							authentication: &#x27;success&#x27;,
 							token: tmpToken
 						});
@@ -270,7 +273,7 @@ var login_function = (req, res) =&gt; {
 			}
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -307,18 +310,18 @@ var token_function = (req, res, next) =&gt; {
 	} else {
 		redis.get(_token, (err, result) =&gt; {
 			if (err) {
-				res.send({
+				res.status(500).json({
 					error: err
 				});
 			} else if (result === null) {
-				res.json({
+				res.status(401).json({
 					authentication: &#x27;fail&#x27;,
 					token: null
 				});
 			} else {
 				redis.pipeline().set(_token, result).expire(_token, 1200).exec((err, res) =&gt; {
 					if (err) {
-						res.send({
+						res.status(500).json({
 							error: err
 						});
 					} else {

@@ -92,14 +92,16 @@
 
 &#x27;use strict&#x27;;
 
+var path = require(&#x27;path&#x27;);
+
 var express = require(&#x27;express&#x27;);
 var router = express.Router();
 
 // Including tables
-var users = require(&#x27;../ORM/Users&#x27;);
-var goods = require(&#x27;../ORM/Goods&#x27;);
-var follows = require(&#x27;../ORM/Follows&#x27;);
-var stars = require(&#x27;../ORM/Stars&#x27;);
+var users = require(path.resolve(__dirname, &#x27;../ORM/Users&#x27;));
+var goods = require(path.resolve(__dirname, &#x27;../ORM/Goods&#x27;));
+var follows = require(path.resolve(__dirname, &#x27;../ORM/Follows&#x27;));
+var stars = require(path.resolve(__dirname, &#x27;../ORM/Stars&#x27;));
 
 /**
  * Get a user by given uid or identity
@@ -108,6 +110,28 @@ var stars = require(&#x27;../ORM/Stars&#x27;);
  * @param  {Integer} uid The ID of user
  * @param  {String} identity User&#x27;s identity
  * @return {JSON} The user including many things
+ * @example
+&lt;pre&gt;
+{
+  &quot;uid&quot;: 8,
+  &quot;identity&quot;: &quot;1234&quot;,
+  &quot;name&quot;: &quot;假帳號&quot;,
+  &quot;email&quot;: &quot;&quot;,
+  &quot;photo_path&quot;: &quot;hahaha&quot;,
+  &quot;introduction&quot;: null,
+  &quot;wishlist&quot;: null,
+  &quot;created_at&quot;: &quot;2016-01-18T02:36:29.740Z&quot;,
+  &quot;updated_at&quot;: &quot;2016-01-18T02:36:29.740Z&quot;,
+  &quot;goods&quot;: [],
+  &quot;follows_followed&quot;: [
+    {
+      &quot;fid&quot;: 1
+    }
+  ],
+  &quot;follows_follower&quot;: [],
+  &quot;star_starring_user&quot;: []
+}
+&lt;/pre&gt;
  */
 router.get(&#x27;/&#x27;, (req, res) =&gt; {
 	var _uid = parseInt(req.query.uid, 10);
@@ -164,12 +188,17 @@ router.get(&#x27;/&#x27;, (req, res) =&gt; {
 			}]
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
+		})
+		.catch(err =&gt; {
+			res.status(500).json({
+				error: err
+			});
 		});
 });
 
 /**
- * Edit a user&#x27;s profile
+ * Edit a user&#x27;s profile, need token
  *
  * @method PUT api/user/edit
  * @param  {Integer} uid
@@ -190,14 +219,14 @@ router.put(&#x27;/edit&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_uid = parseInt(req.body._uid, 10);
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -211,17 +240,17 @@ router.put(&#x27;/edit&#x27;, (req, res) =&gt; {
 		})
 		.then(result =&gt; {
 			if (result === null) {
-				res.json(null);
+				res.status(404).json(null);
 			} else {
 				result.name = _name;
 				result.email = _email;
 				result.introduction = _introduction;
 				result.wishlist = _wishlist;
-				result.save().then(() =&gt; res.json(result));
+				result.save().then(() =&gt; res.status(200).json(result));
 			}
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -260,10 +289,10 @@ router.put(&#x27;/photo&#x27;, (req, res) =&gt; {
 			return result;
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});

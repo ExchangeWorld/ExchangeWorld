@@ -92,23 +92,49 @@
 
 &#x27;use strict&#x27;;
 
+var path = require(&#x27;path&#x27;);
 var express = require(&#x27;express&#x27;);
 var router = express.Router();
 
 // Including tables
-var comments = require(&#x27;../ORM/Comments&#x27;);
-var users = require(&#x27;../ORM/Users&#x27;);
-var goods = require(&#x27;../ORM/Goods&#x27;);
+var comments = require(path.resolve(__dirname, &#x27;../ORM/Comments&#x27;));
+var users = require(path.resolve(__dirname, &#x27;../ORM/Users&#x27;));
+var goods = require(path.resolve(__dirname, &#x27;../ORM/Goods&#x27;));
 
 /**
  * Get comments of a goods
  *
  * @method GET api/comment/of/goods
  * @param  {Integer} goods_gid The commented goods
- * @return {JSON} Comments including &#x60;commenter&#x60;
+ * @return {Array} Comments including &#x60;commenter&#x60;
+ * @example
+&lt;pre&gt;
+[
+  {
+    &quot;cid&quot;: 1,
+    &quot;content&quot;: &quot;jjj&quot;,
+    &quot;created_at&quot;: &quot;2016-01-18T01:51:52.778Z&quot;,
+    &quot;updated_at&quot;: &quot;2016-01-18T01:51:52.778Z&quot;,
+    &quot;goods_gid&quot;: 3,
+    &quot;commenter_uid&quot;: 1,
+    &quot;commenter&quot;: {
+      &quot;uid&quot;: 1,
+      &quot;name&quot;: &quot;許書軒&quot;,
+      &quot;photo_path&quot;: &quot;https://scontent.xx.fbcdn.net/hprofile-xpa1/v/t1.0-1/c0.31.320.320/p320x320/1655895_607733372646261_973096312_n.jpg?oh=c0147be7e1838a34b761b5a6e1e8f723&amp;oe=573B37D5&quot;
+    }
+  }
+]
+&lt;/pre&gt;
  */
 router.get(&#x27;/of/goods&#x27;, (req, res) =&gt; {
 	var _goods_gid = parseInt(req.query.goods_gid, 10);
+
+	if (!_goods_gid) {
+		res.status(400).json({
+			error: &#x27;goods_gid not given or it is wrong&#x27;
+		});
+		return;
+	}
 
 	comments
 		.findAll({
@@ -126,10 +152,10 @@ router.get(&#x27;/of/goods&#x27;, (req, res) =&gt; {
 			]
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -140,7 +166,25 @@ router.get(&#x27;/of/goods&#x27;, (req, res) =&gt; {
  *
  * @method GET api/comment/of/user
  * @param  {Integer} commenter_uid The commenter&#x27;s uid
- * @return {JSON} Comments including &#x60;goods&#x60;, and they are not deleted
+ * @return {Array} Comments including &#x60;goods&#x60;, and they are not deleted
+ * @example
+&lt;pre&gt;
+ [
+  {
+    &quot;cid&quot;: 1,
+    &quot;content&quot;: &quot;jjj&quot;,
+    &quot;created_at&quot;: &quot;2016-01-18T01:51:52.778Z&quot;,
+    &quot;updated_at&quot;: &quot;2016-01-18T01:51:52.778Z&quot;,
+    &quot;goods_gid&quot;: 3,
+    &quot;commenter_uid&quot;: 1,
+    &quot;goods&quot;: {
+      &quot;gid&quot;: 3,
+      &quot;name&quot;: &quot;mm&quot;,
+      &quot;photo_path&quot;: &quot;[\&quot;http://exwd.csie.org/images/ab1bc08bc7737995cc788881bc7d168bf6f774c9f4d40aaf2abae1a16fc7d3b9.jpeg\&quot;]&quot;
+    }
+  }
+]
+&lt;/pre&gt;
  */
 router.get(&#x27;/of/user&#x27;, (req, res) =&gt; {
 	var _commenter_uid;
@@ -149,15 +193,22 @@ router.get(&#x27;/of/user&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_commenter_uid = parseInt(req.query.commenter_uid, 10);
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_commenter_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
+	if (!_commenter_uid) {
+		res.status(400).json({
+			error: &#x27;_commenter_uid not given or it is wrong&#x27;
 		});
 		return;
 	}
@@ -181,10 +232,10 @@ router.get(&#x27;/of/user&#x27;, (req, res) =&gt; {
 			]
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -208,15 +259,22 @@ router.post(&#x27;/post&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_commenter_uid = parseInt(req.body.commenter_uid, 10);
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_commenter_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
+	if ((!_goods_gid) || (!_commenter_uid) || (!_content)) {
+		res.status(400).json({
+			error: &#x27;goods_gid, commenter_uid or content wrong&#x27;
 		});
 		return;
 	}
@@ -228,10 +286,10 @@ router.post(&#x27;/post&#x27;, (req, res) =&gt; {
 			content: _content
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(201).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -254,15 +312,22 @@ router.put(&#x27;/edit&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_commenter_uid = parseInt(req.body.commenter_uid, 10);
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_commenter_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
+	if ((!_cid) || (!_commenter_uid) || (!_content)) {
+		res.status(400).json({
+			error: &#x27;cid, commenter_uid or content wrong&#x27;
 		});
 		return;
 	}
@@ -282,14 +347,14 @@ router.put(&#x27;/edit&#x27;, (req, res) =&gt; {
 		.findOne(queryTmp)
 		.then(result =&gt; {
 			if (result === null) {
-				res.json(null);
+				res.status(404).json(null);
 			} else {
 				result.content = _content;
-				result.save().then(() =&gt; res.json(result));
+				result.save().then(() =&gt; res.status(200).json(result));
 			}
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -310,15 +375,22 @@ router.delete(&#x27;/delete&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_commenter_uid = parseInt(req.query.commenter_uid, 10);
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_commenter_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
+	if ((!_cid) || (!_commenter_uid)) {
+		res.status(400).json({
+			error: &#x27;cid or commenter_uid wrong&#x27;
 		});
 		return;
 	}
@@ -337,10 +409,10 @@ router.delete(&#x27;/delete&#x27;, (req, res) =&gt; {
 	comments
 		.destroy(queryTmp)
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});

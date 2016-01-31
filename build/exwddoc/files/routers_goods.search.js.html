@@ -92,13 +92,15 @@
 
 &#x27;use strict&#x27;;
 
+var path = require(&#x27;path&#x27;);
+
 var express = require(&#x27;express&#x27;);
 var router = express.Router();
 
 // Including tables
-var goods = require(&#x27;../ORM/Goods&#x27;);
-var users = require(&#x27;../ORM/Users&#x27;);
-var stars = require(&#x27;../ORM/Stars&#x27;);
+var goods = require(path.resolve(__dirname, &#x27;../ORM/Goods&#x27;));
+var users = require(path.resolve(__dirname, &#x27;../ORM/Users&#x27;));
+var stars = require(path.resolve(__dirname, &#x27;../ORM/Stars&#x27;));
 
 /**
  * Get goods by given query
@@ -176,10 +178,10 @@ router.get(&#x27;/&#x27;, (req, res) =&gt; {
 			]
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});

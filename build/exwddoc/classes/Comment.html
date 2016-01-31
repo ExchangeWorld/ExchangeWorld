@@ -113,7 +113,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/routers_comment.js.html#l212"><code>routers&#x2F;comment.js:212</code></a>
+        <a href="../files/routers_comment.js.html#l277"><code>routers&#x2F;comment.js:277</code></a>
     </span><br>
     <p>Delete a comment</p>
 
@@ -130,11 +130,11 @@
 </div>
 <a name="methods_GET api/comment/of/goods"></a>
 <div class="method item">
-    JSON <strong class="name"><code>GET api&#x2F;comment&#x2F;of&#x2F;goods</code></strong>( <code>goods_gid </code> ) 
+    Array <strong class="name"><code>GET api&#x2F;comment&#x2F;of&#x2F;goods</code></strong>( <code>goods_gid </code> ) 
     <br>
     <span class="foundat">
         
-        <a href="../files/routers_comment.js.html#l17"><code>routers&#x2F;comment.js:17</code></a>
+        <a href="../files/routers_comment.js.html#l18"><code>routers&#x2F;comment.js:18</code></a>
     </span><br>
     <p>Get comments of a goods</p>
 
@@ -146,16 +146,34 @@
 
         </li>
     </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>Comments including <code>commenter</code></p>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Array&gt; <p>Comments including <code>commenter</code></p>
 </div>
+        <h5>Example</h5>
+        <pre>
+[
+ {
+   "cid": 1,
+   "content": "jjj",
+   "created_at": "2016-01-18T01:51:52.778Z",
+   "updated_at": "2016-01-18T01:51:52.778Z",
+   "goods_gid": 3,
+   "commenter_uid": 1,
+   "commenter": {
+     "uid": 1,
+     "name": "許書軒",
+     "photo_path": "https://scontent.xx.fbcdn.net/hprofile-xpa1/v/t1.0-1/c0.31.320.320/p320x320/1655895_607733372646261_973096312_n.jpg?oh=c0147be7e1838a34b761b5a6e1e8f723&oe=573B37D5"
+   }
+ }
+]
+</pre>
 </div>
 <a name="methods_GET api/comment/of/user"></a>
 <div class="method item">
-    JSON <strong class="name"><code>GET api&#x2F;comment&#x2F;of&#x2F;user</code></strong>( <code>commenter_uid </code> ) 
+    Array <strong class="name"><code>GET api&#x2F;comment&#x2F;of&#x2F;user</code></strong>( <code>commenter_uid </code> ) 
     <br>
     <span class="foundat">
         
-        <a href="../files/routers_comment.js.html#l52"><code>routers&#x2F;comment.js:52</code></a>
+        <a href="../files/routers_comment.js.html#l78"><code>routers&#x2F;comment.js:78</code></a>
     </span><br>
     <p>Get comments of a user</p>
 
@@ -167,8 +185,26 @@
 
         </li>
     </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>Comments including <code>goods</code>, and they are not deleted</p>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Array&gt; <p>Comments including <code>goods</code>, and they are not deleted</p>
 </div>
+        <h5>Example</h5>
+        <pre>
+[
+ {
+   "cid": 1,
+   "content": "jjj",
+   "created_at": "2016-01-18T01:51:52.778Z",
+   "updated_at": "2016-01-18T01:51:52.778Z",
+   "goods_gid": 3,
+   "commenter_uid": 1,
+   "goods": {
+     "gid": 3,
+     "name": "mm",
+     "photo_path": "[\"http://exwd.csie.org/images/ab1bc08bc7737995cc788881bc7d168bf6f774c9f4d40aaf2abae1a16fc7d3b9.jpeg\"]"
+   }
+ }
+]
+</pre>
 </div>
 <a name="methods_POST api/comment/post"></a>
 <div class="method item">
@@ -176,7 +212,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/routers_comment.js.html#l107"><code>routers&#x2F;comment.js:107</code></a>
+        <a href="../files/routers_comment.js.html#l158"><code>routers&#x2F;comment.js:158</code></a>
     </span><br>
     <p>Post a comment to a goods</p>
 
@@ -207,7 +243,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/routers_comment.js.html#l154"><code>routers&#x2F;comment.js:154</code></a>
+        <a href="../files/routers_comment.js.html#l212"><code>routers&#x2F;comment.js:212</code></a>
     </span><br>
     <p>Edit a comment</p>
 

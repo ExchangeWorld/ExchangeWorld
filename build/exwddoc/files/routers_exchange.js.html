@@ -115,7 +115,7 @@ var exchanges_of_user_one = require(path.resolve(__dirname, &#x27;../queries/exc
  */
 router.get(&#x27;/all&#x27;, (req, res) =&gt; {
 	if (!req.exwd.admin) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -152,10 +152,10 @@ router.get(&#x27;/all&#x27;, (req, res) =&gt; {
 			]
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -175,20 +175,20 @@ router.get(&#x27;/of/user/all&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_owner_uid = parseInt(req.query.owner_uid, 10);
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_owner_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	}
 
-	exchanges_of_user_all(_owner_uid, (result =&gt; res.json(result.map(r =&gt; {
+	exchanges_of_user_all(_owner_uid, (result =&gt; res.status(200).json(result.map(r =&gt; {
 		if (r.goods_one.owner.uid === _owner_uid) {
 			r.owner_goods = r.goods_one;
 			r.other_goods = r.goods_two;
@@ -226,14 +226,14 @@ router.get(&#x27;/of/user/one&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_owner_uid = parseInt(req.query.owner_uid, 10);
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_owner_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -258,9 +258,9 @@ router.get(&#x27;/of/user/one&#x27;, (req, res) =&gt; {
 			r[0].goods_one_agree = undefined;
 			r[0].goods_two_agree = undefined;
 
-			res.json(r[0]);
+			res.status(200).json(r[0]);
 		} else {
-			res.json(null);
+			res.status(404).json(null);
 		}
 	});
 });
@@ -277,7 +277,7 @@ router.get(&#x27;/&#x27;, (req, res) =&gt; {
 
 	// REQ EXWD CHECK
 	if (!req.exwd.admin) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -311,10 +311,10 @@ router.get(&#x27;/&#x27;, (req, res) =&gt; {
 			}]
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -342,15 +342,22 @@ router.post(&#x27;/create&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_owner_uid = null;
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_owner_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
+	if ((!_goods_one_gid) || (!_goods_two_gid) || (!_owner_uid)) {
+		res.status(400).json({
+			error: &#x27;goods_one and _two are wrong&#x27;
 		});
 		return;
 	}
@@ -387,7 +394,7 @@ router.post(&#x27;/create&#x27;, (req, res) =&gt; {
 		.then(isThereAlready =&gt; {
 			if (isThereAlready) {
 				if (isThereAlready.status === &#x27;completed&#x27;) {
-					res.send({
+					res.status(403).json({
 						error: &#x27;The exchange was completed before&#x27;
 					});
 				} else if (isThereAlready.status === &#x27;dropped&#x27;) {
@@ -399,16 +406,16 @@ router.post(&#x27;/create&#x27;, (req, res) =&gt; {
 								isThereAlready.status = &#x27;initiated&#x27;;
 								isThereAlready.goods_one_agree = false;
 								isThereAlready.goods_two_agree = false;
-								g1.save().then(() =&gt; g2.save().then(() =&gt; isThereAlready.save().then(() =&gt; res.json(isThereAlready))));
+								g1.save().then(() =&gt; g2.save().then(() =&gt; isThereAlready.save().then(() =&gt; res.status(200).json(isThereAlready))));
 							} else {
-								res.send({
-									error: &#x27;The exchange cannot be created&#x27;
+								res.status(403).json({
+									error: &#x27;The exchange cannot be created, one of goods is not available&#x27;
 								});
 							}
 						});
 					});
 				} else {
-					res.json(isThereAlready);
+					res.status(200).json(isThereAlready);
 				}
 			} else {
 				// Check two goods&#x27; status
@@ -437,36 +444,36 @@ router.post(&#x27;/create&#x27;, (req, res) =&gt; {
 													chatroom_cid: the_chatroom.cid
 												})
 												.then(the_exchange =&gt; {
-													res.json(the_exchange);
+													res.status(201).json(the_exchange);
 												})
 												.catch(err =&gt; {
 													console.log(err);
-													res.send({
+													res.status(500).json({
 														error: err
 													});
 												});
 										})
 										.catch(err =&gt; {
 											console.log(err);
-											res.send({
+											res.status(500).json({
 												error: err
 											});
 										});
 								} else {
-									res.send({
+									res.status(403).json({
 										error: &#x27;The exchange cannot be created&#x27;
 									});
 								}
 							});
 						} else {
-							res.send({
+							res.status(403).json({
 								error: &#x27;The exchange cannot be created&#x27;
 							});
 						}
 					})
 					.catch(err =&gt; {
 						console.log(err);
-						res.send({
+						res.status(500).json({
 							error: err
 						});
 					});
@@ -474,7 +481,7 @@ router.post(&#x27;/create&#x27;, (req, res) =&gt; {
 		})
 		.catch(err =&gt; {
 			console.log(err);
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -495,14 +502,14 @@ router.put(&#x27;/drop&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_owner_uid = null;
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_owner_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -526,22 +533,22 @@ router.put(&#x27;/drop&#x27;, (req, res) =&gt; {
 							result.goods_one_agree = false;
 							result.goods_two_agree = false;
 							g1.save().then(() =&gt; g2.save().then(() =&gt; {
-								result.save().then(() =&gt; res.json(result));
+								result.save().then(() =&gt; res.status(200).json(result));
 							}));
 						} else {
-							res.send({
+							res.status(403).json({
 								error: &#x27;Permission denied&#x27;
 							});
 						}
 					});
 				});
 			} else {
-				res.json(result);
+				res.status(404).json(result);
 			}
 		})
 		.catch(err =&gt; {
 			console.log(err);
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -566,14 +573,14 @@ router.put(&#x27;/agree&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_owner_uid = null;
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_owner_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -655,37 +662,37 @@ router.put(&#x27;/agree&#x27;, (req, res) =&gt; {
 															}
 														}
 													})
-													.then(uuu =&gt; res.json(result))
+													.then(uuu =&gt; res.status(200).json(result))
 													.catch(err =&gt; {
 														console.log(err);
-														res.send({
+														res.status(500).json({
 															error: err
 														});
 													});
 											} else {
-												res.json(result);
+												res.status(200).json(result);
 											}
 										})
 										.catch(err =&gt; {
 											console.log(err);
-											res.send({
+											res.status(500).json({
 												error: err
 											});
 										});
 								})));
 							} else {
-								res.json(result);
+								res.status(200).json(result);
 							}
 						});
 					});
 				});
 			} else {
-				res.json(result);
+				res.status(404).json(result);
 			}
 		})
 		.catch(err =&gt; {
 			console.log(err);
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});

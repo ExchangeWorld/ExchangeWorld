@@ -92,13 +92,15 @@
 
 &#x27;use strict&#x27;;
 
+var path = require(&#x27;path&#x27;);
+
 var express = require(&#x27;express&#x27;);
 var router = express.Router();
 
 // Including tables
-var stars = require(&#x27;../ORM/Stars&#x27;);
-var goods = require(&#x27;../ORM/Goods&#x27;);
-var users = require(&#x27;../ORM/Users&#x27;);
+var stars = require(path.resolve(__dirname, &#x27;../ORM/Stars&#x27;));
+var goods = require(path.resolve(__dirname, &#x27;../ORM/Goods&#x27;));
+var users = require(path.resolve(__dirname, &#x27;../ORM/Users&#x27;));
 
 /**
  * Get users who star the goods
@@ -122,10 +124,10 @@ router.get(&#x27;/to&#x27;, (req, res) =&gt; {
 			}]
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -156,10 +158,10 @@ router.get(&#x27;/by&#x27;, (req, res) =&gt; {
 			}]
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -181,14 +183,14 @@ router.post(&#x27;/post&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_starring_user_uid = parseInt(req.body.starring_user_uid, 10);
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_starring_user_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -202,10 +204,10 @@ router.post(&#x27;/post&#x27;, (req, res) =&gt; {
 			}
 		})
 		.then((result, created) =&gt; {
-			res.json(result[0]);
+			res.status(201).json(result[0]);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});
@@ -227,14 +229,14 @@ router.delete(&#x27;/delete&#x27;, (req, res) =&gt; {
 	if (req.exwd.admin) {
 		_starring_user_uid = parseInt(req.query.starring_user_uid, 10);
 	} else if (req.exwd.anonymous) {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
 	} else if (req.exwd.registered) {
 		_starring_user_uid = req.exwd.uid;
 	} else {
-		res.send({
+		res.status(403).json({
 			error: &#x27;Permission denied&#x27;
 		});
 		return;
@@ -248,10 +250,10 @@ router.delete(&#x27;/delete&#x27;, (req, res) =&gt; {
 			}
 		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
 				error: err
 			});
 		});

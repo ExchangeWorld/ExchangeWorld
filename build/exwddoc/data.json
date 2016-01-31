@@ -282,7 +282,7 @@
     "classitems": [
         {
             "file": "routers/authenticate.js",
-            "line": 39,
+            "line": 35,
             "description": "Register a new user",
             "itemtype": "method",
             "name": "POST api/authenticate/register",
@@ -326,7 +326,7 @@
         },
         {
             "file": "routers/authenticate.js",
-            "line": 112,
+            "line": 108,
             "description": "Login",
             "itemtype": "method",
             "name": "POST api/authenticate/login",
@@ -359,7 +359,7 @@
         },
         {
             "file": "routers/authenticate.js",
-            "line": 194,
+            "line": 197,
             "description": "Token validation",
             "itemtype": "method",
             "name": "GET *?token=...",
@@ -463,7 +463,7 @@
         },
         {
             "file": "routers/comment.js",
-            "line": 17,
+            "line": 18,
             "description": "Get comments of a goods",
             "itemtype": "method",
             "name": "GET api/comment/of/goods",
@@ -476,13 +476,16 @@
             ],
             "return": {
                 "description": "Comments including `commenter`",
-                "type": "JSON"
+                "type": "Array"
             },
+            "example": [
+                "\n<pre>\n[\n {\n   \"cid\": 1,\n   \"content\": \"jjj\",\n   \"created_at\": \"2016-01-18T01:51:52.778Z\",\n   \"updated_at\": \"2016-01-18T01:51:52.778Z\",\n   \"goods_gid\": 3,\n   \"commenter_uid\": 1,\n   \"commenter\": {\n     \"uid\": 1,\n     \"name\": \"許書軒\",\n     \"photo_path\": \"https://scontent.xx.fbcdn.net/hprofile-xpa1/v/t1.0-1/c0.31.320.320/p320x320/1655895_607733372646261_973096312_n.jpg?oh=c0147be7e1838a34b761b5a6e1e8f723&oe=573B37D5\"\n   }\n }\n]\n</pre>"
+            ],
             "class": "Comment"
         },
         {
             "file": "routers/comment.js",
-            "line": 52,
+            "line": 78,
             "description": "Get comments of a user",
             "itemtype": "method",
             "name": "GET api/comment/of/user",
@@ -495,13 +498,16 @@
             ],
             "return": {
                 "description": "Comments including `goods`, and they are not deleted",
-                "type": "JSON"
+                "type": "Array"
             },
+            "example": [
+                "\n<pre>\n[\n {\n   \"cid\": 1,\n   \"content\": \"jjj\",\n   \"created_at\": \"2016-01-18T01:51:52.778Z\",\n   \"updated_at\": \"2016-01-18T01:51:52.778Z\",\n   \"goods_gid\": 3,\n   \"commenter_uid\": 1,\n   \"goods\": {\n     \"gid\": 3,\n     \"name\": \"mm\",\n     \"photo_path\": \"[\\\"http://exwd.csie.org/images/ab1bc08bc7737995cc788881bc7d168bf6f774c9f4d40aaf2abae1a16fc7d3b9.jpeg\\\"]\"\n   }\n }\n]\n</pre>"
+            ],
             "class": "Comment"
         },
         {
             "file": "routers/comment.js",
-            "line": 107,
+            "line": 158,
             "description": "Post a comment to a goods",
             "itemtype": "method",
             "name": "POST api/comment/post",
@@ -530,7 +536,7 @@
         },
         {
             "file": "routers/comment.js",
-            "line": 154,
+            "line": 212,
             "description": "Edit a comment",
             "itemtype": "method",
             "name": "PUT api/comment/edit",
@@ -554,7 +560,7 @@
         },
         {
             "file": "routers/comment.js",
-            "line": 212,
+            "line": 277,
             "description": "Delete a comment",
             "itemtype": "method",
             "name": "DELETE api/comment/delete",
@@ -671,7 +677,7 @@
         },
         {
             "file": "routers/exchange.js",
-            "line": 397,
+            "line": 404,
             "description": "Drop an exchange",
             "itemtype": "method",
             "name": "PUT api/exchange/drop",
@@ -690,7 +696,7 @@
         },
         {
             "file": "routers/exchange.js",
-            "line": 464,
+            "line": 471,
             "description": "Accept an exchange by a user\nAnd if two owners accept, then the exchange will be set status='completed'\nWhen completed, other exchanges include goods_one or goods_two will be set to status='dropped'\nAnd the goods that not goods_one or goods_two in the exchange will be set to exchanged=0",
             "itemtype": "method",
             "name": "PUT api/exchange/agree",
@@ -714,7 +720,7 @@
         },
         {
             "file": "routers/follow.js",
-            "line": 17,
+            "line": 19,
             "description": "Get who follow the given followed_uid\n(follower -[follow]-> followed)",
             "itemtype": "method",
             "name": "GET api/follow/followers/of",
@@ -733,7 +739,7 @@
         },
         {
             "file": "routers/follow.js",
-            "line": 53,
+            "line": 62,
             "description": "Get who are followed by the given follower_uid\n(follower -[follow]-> followed)",
             "itemtype": "method",
             "name": "GET api/follow/followed/by",
@@ -752,7 +758,7 @@
         },
         {
             "file": "routers/follow.js",
-            "line": 89,
+            "line": 105,
             "description": "Post a follow\n(follower -[follow]-> followed)",
             "itemtype": "method",
             "name": "POST api/follow/post",
@@ -776,7 +782,7 @@
         },
         {
             "file": "routers/follow.js",
-            "line": 147,
+            "line": 170,
             "description": "Delete a follow\n(follower -[follow]-> followed)",
             "itemtype": "method",
             "name": "DELETE api/follow/delete",
@@ -800,7 +806,7 @@
         },
         {
             "file": "routers/goods.js",
-            "line": 20,
+            "line": 22,
             "description": "Get a goods by given gid",
             "itemtype": "method",
             "name": "GET api/goods/",
@@ -819,7 +825,7 @@
         },
         {
             "file": "routers/goods.js",
-            "line": 66,
+            "line": 75,
             "description": "Get all goods of given owner_uid",
             "itemtype": "method",
             "name": "GET api/goods/of",
@@ -838,7 +844,7 @@
         },
         {
             "file": "routers/goods.js",
-            "line": 106,
+            "line": 122,
             "description": "Post a goods",
             "itemtype": "method",
             "name": "POST api/goods/post",
@@ -887,7 +893,7 @@
         },
         {
             "file": "routers/goods.js",
-            "line": 166,
+            "line": 182,
             "description": "Edit a goods",
             "itemtype": "method",
             "name": "PUT api/goods/edit",
@@ -936,7 +942,7 @@
         },
         {
             "file": "routers/goods.js",
-            "line": 240,
+            "line": 256,
             "description": "Rate a goods",
             "itemtype": "method",
             "name": "PUT api/goods/rate",
@@ -960,7 +966,7 @@
         },
         {
             "file": "routers/goods.js",
-            "line": 294,
+            "line": 310,
             "description": "Delete a goods (but not really)\nor if the goods is still in an exchange, this req will be ignored",
             "itemtype": "method",
             "name": "Delete api/goods/delete",
@@ -979,7 +985,7 @@
         },
         {
             "file": "routers/goods.search.js",
-            "line": 17,
+            "line": 19,
             "description": "Get goods by given query",
             "itemtype": "method",
             "name": "GET api/goods/search",
@@ -1245,7 +1251,7 @@
         },
         {
             "file": "routers/queue.js",
-            "line": 18,
+            "line": 20,
             "description": "Get goods are queueing on given host_goods\n(If queuer_goods is in another exchange, it will not be returned)",
             "itemtype": "method",
             "name": "GET api/queue/of/goods",
@@ -1264,7 +1270,7 @@
         },
         {
             "file": "routers/queue.js",
-            "line": 98,
+            "line": 100,
             "description": "Get goods are queued by given queuer_goods",
             "itemtype": "method",
             "name": "GET api/queue/by/goods",
@@ -1283,7 +1289,7 @@
         },
         {
             "file": "routers/queue.js",
-            "line": 177,
+            "line": 179,
             "description": "Get goods are queueing on someone's goods",
             "itemtype": "method",
             "name": "GET api/queue/of/person",
@@ -1302,7 +1308,7 @@
         },
         {
             "file": "routers/queue.js",
-            "line": 244,
+            "line": 246,
             "description": "Get goods are queued by someone's goods",
             "itemtype": "method",
             "name": "GET api/queue/by/person",
@@ -1321,7 +1327,7 @@
         },
         {
             "file": "routers/queue.js",
-            "line": 311,
+            "line": 313,
             "description": "Post a queue\n(queuer_goods -[queue]-> host_goods)\n(If queuer_goods is in another exchange return {})",
             "itemtype": "method",
             "name": "POST api/queue/post",
@@ -1345,7 +1351,7 @@
         },
         {
             "file": "routers/queue.js",
-            "line": 388,
+            "line": 390,
             "description": "Delete a queue",
             "itemtype": "method",
             "name": "DELETE api/queue/delete",
@@ -1369,7 +1375,7 @@
         },
         {
             "file": "routers/star.js",
-            "line": 17,
+            "line": 19,
             "description": "Get users who star the goods",
             "itemtype": "method",
             "name": "GET api/star/to",
@@ -1388,7 +1394,7 @@
         },
         {
             "file": "routers/star.js",
-            "line": 48,
+            "line": 50,
             "description": "Get goods that a user stars",
             "itemtype": "method",
             "name": "GET api/star/by",
@@ -1407,7 +1413,7 @@
         },
         {
             "file": "routers/star.js",
-            "line": 82,
+            "line": 84,
             "description": "Post a star",
             "itemtype": "method",
             "name": "POST api/star/post",
@@ -1431,7 +1437,7 @@
         },
         {
             "file": "routers/star.js",
-            "line": 128,
+            "line": 130,
             "description": "Delete a star",
             "itemtype": "method",
             "name": "DELETE api/star/delete",
@@ -1489,7 +1495,7 @@
         },
         {
             "file": "routers/user.js",
-            "line": 18,
+            "line": 20,
             "description": "Get a user by given uid or identity",
             "itemtype": "method",
             "name": "GET api/user",
@@ -1509,12 +1515,15 @@
                 "description": "The user including many things",
                 "type": "JSON"
             },
+            "example": [
+                "\n<pre>\n{\n \"uid\": 8,\n \"identity\": \"1234\",\n \"name\": \"假帳號\",\n \"email\": \"\",\n \"photo_path\": \"hahaha\",\n \"introduction\": null,\n \"wishlist\": null,\n \"created_at\": \"2016-01-18T02:36:29.740Z\",\n \"updated_at\": \"2016-01-18T02:36:29.740Z\",\n \"goods\": [],\n \"follows_followed\": [\n   {\n     \"fid\": 1\n   }\n ],\n \"follows_follower\": [],\n \"star_starring_user\": []\n}\n</pre>"
+            ],
             "class": "User"
         },
         {
             "file": "routers/user.js",
-            "line": 85,
-            "description": "Edit a user's profile",
+            "line": 114,
+            "description": "Edit a user's profile, need token",
             "itemtype": "method",
             "name": "PUT api/user/edit",
             "params": [
@@ -1552,7 +1561,7 @@
         },
         {
             "file": "routers/user.js",
-            "line": 144,
+            "line": 173,
             "description": "Update a user's photo_path\nIf same as the one in DB, nothing changed",
             "itemtype": "method",
             "name": "PUT api/user/photo",

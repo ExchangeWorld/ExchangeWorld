@@ -41,7 +41,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		}
 
 		try {
-			let goods = await Restangular.oneUrl(`goods?gid=${gid}`).get();
+			let goods = await Restangular.one('goods', id).get();
 			if (!goods) throw 'goods is null or undefined.';
 			if (!_.isString(goods.photo_path)) throw 'photo_path is not JSON.';
 
@@ -158,7 +158,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		const defer = $q.defer();
 
 		try {
-			let goods = await Restangular.all('queue/of/goods').getList({ host_goods_gid: hostGoodsGid });
+			let goods = await Restangular.one('goods', hostGoodsGid).getList('queue');
 			if (!_.isArray(goods)) throw 'goods not array.';
 
 			goods.forEach(function(g) {

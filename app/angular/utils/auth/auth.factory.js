@@ -37,8 +37,8 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 
 		await facebookService.logout();
 		currentUser = null;
-		delete $localStorage.user;
-		defer.resolve();
+		$localStorage.user = {};
+		defer.resolve(null);
 
 		return defer.promise;
 	}

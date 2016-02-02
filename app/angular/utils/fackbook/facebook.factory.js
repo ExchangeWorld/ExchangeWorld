@@ -76,11 +76,11 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 					identity   : userData.id,
 					name       : userData.name,
 					photo_path : largePic.data.url,
-					email      : userData.email,
+					email      : userData.email
 				};
 
-			let registerData = Restangular.all('authenticate/register').post(newUser);
-			let token = await Restangular.all('authenticate/login').post({ fb: true, identity: member.identity });
+			let registerData = await Restangular.all('authenticate/register').post(newUser);
+			let token = await Restangular.all('authenticate/login').post({ fb: true, identity: registerData.identity });
 			registerData.token = token.token;
 
 			$localStorage.user = registerData;

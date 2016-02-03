@@ -60,6 +60,17 @@
 	}
 }
 
+.home-btn {
+	position: absolute;
+	border: 2px white solid;
+	color: white;
+	font-size: 24px;
+	width: 130px;
+	height: 60px;
+	top: 70%;
+	left: 45%;
+}
+
 .seek_btn {
 	min-width: 40px;
 }
@@ -104,11 +115,39 @@
 		border-radius: 50%;
 		padding-left: 10px;
 	}
+	.home-btn {
+		position: absolute;
+		border: 2px white solid;
+		color: white;
+		font-size: 18px;
+		min-height: 30px;
+		width: 28%;
+		height: 40px;
+		top: 130px;
+		left: 33%;
+	}
 }
 
 @media screen and (min-width: 600px) {
 	.notification {
 		padding-left: 0;
 		top: -2px;
+	}
+	.home-btn {
+		font-size: 20px;
+		width: 16%;
+		height: 48px;
+		top: 270px;
+		left: 40%;
+	}
+}
+
+@media screen and (min-width: 960px) {
+	.home-btn {
+		font-size: 24px;
+		width: 13%;
+		height: 60px;
+		top: 420px;
+		left: 42%;
 	}
 }

@@ -1,10 +1,10 @@
 'use strict';
 
-var gulp   	= require('gulp');
-var config 	= require('../config');
-var tar 	 	= require('tar-fs');
-var zlib 		= require('zlib');
-var fs 			= require('fs');
+var gulp   = require('gulp');
+var config = require('../config');
+var tar    = require('tar-fs');
+var zlib   = require('zlib');
+var fs     = require('fs');
 
 gulp.task('zlib', function() {
 

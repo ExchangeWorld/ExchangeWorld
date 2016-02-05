@@ -5,7 +5,7 @@ const profileModule = require('./profile.module');
 profileModule.service('profileService', profileService);
 
 /** @ngInject */
-function profileService(Restangular, $q, facebookService, exception, logger) {
+function profileService(Restangular, $q, facebookService, exception) {
 	var service = {
 		getProfile,
 		getFavoriteSum,
@@ -21,7 +21,6 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 
 		try {
 			let data = await Restangular.one('user', _uid).get();
-			console.log(data.goods);
 			data.goods.forEach(function(goods) {
 				try {
 					goods.photoPath = JSON.parse(goods.photo_path);

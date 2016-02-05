@@ -1,7 +1,6 @@
 'use strict';
 
 const profileModule = require('./profile.module');
-const _             = require('lodash');
 profileModule.run(appRun);
 
 /** @ngInject */
@@ -27,7 +26,11 @@ var resolve = {
 			.getMyFavorite($stateParams.uid)
 			.then(function(data) {
 				return data.map(function(g) {
-					if (_.isString(g.good.photo_path)) g.good.photo_path = JSON.parse(g.good.photo_path);
+					try {
+						g.photo_path = JSON.parse(g.photo_path);
+					} catch (err) {
+						g.photo_path = '';
+					}
 					return g.good;
 				});
 			});

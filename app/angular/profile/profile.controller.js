@@ -52,7 +52,6 @@ function ProfileController(
 	/////////////
 
 	activate();
-	console.log($localStorage.user);
 
 	function activate() {
 		if ($rootScope.isLoggedIn) {

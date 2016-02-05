@@ -1,7 +1,6 @@
 'use strict';
 
 const seekModule = require('./seek.module');
-const _          = require('lodash');
 
 seekModule.factory('seekService', seekService);
 
@@ -23,12 +22,10 @@ function seekService(Restangular, $q, exception) {
 			.getList(filter)
 			.then(function(data) {
 				data.forEach(function(goods) {
-
-					if (
-						_.isString(goods.photo_path) &&
-						goods.photo_path.indexOf('error') === -1
-					) {
+					try {
 						goods.photo_path = JSON.parse(goods.photo_path);
+					} catch (err) {
+						goods.photo_path = '';
 					}
 				});
 

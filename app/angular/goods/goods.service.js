@@ -43,9 +43,13 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		try {
 			let goods = await Restangular.one('goods', id).get();
 			if (!goods) throw 'goods is null or undefined.';
-			if (!_.isString(goods.photo_path)) throw 'photo_path is not JSON.';
 
-			goods.photo_path = JSON.parse(goods.photo_path);
+			try {
+				goods.photo_path = JSON.parse(goods.photo_path);
+			} catch (err) {
+				goods.photo_path = '';
+			}
+
 			defer.resolve(goods);
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);
@@ -62,8 +66,13 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			let goods = await Restangular.all('goods/of').getList({	owner_uid: ownerUid	});
 			if (!_.isArray(goods)) throw 'goods not array';
 
-			goods.forEach(function(g) {
-				if (_.isString(g.photo_path)) g.photo_path = JSON.parse(g.photo_path);
+			goods.forEach(function() {
+
+				try {
+					goods.photo_path = JSON.parse(goods.photo_path);
+				} catch (err) {
+					goods.photo_path = '';
+				}            
 			});
 			defer.resolve(goods);
 		} catch (err) {
@@ -161,8 +170,12 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			let goods = await Restangular.one('goods', hostGoodsGid).getList('queue');
 			if (!_.isArray(goods)) throw 'goods not array.';
 
-			goods.forEach(function(g) {
-				if (_.isString(g.good.photo_path)) g.good.photo_path = JSON.parse(g.good.photo_path);
+			goods.forEach(function() {
+				try {
+					goods.photo_path = JSON.parse(goods.photo_path);
+				} catch (err) {
+					goods.photo_path = '';
+				}
 			});
 
 			defer.resolve(goods);

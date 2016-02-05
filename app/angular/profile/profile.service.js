@@ -10,8 +10,6 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 		getProfile,
 		getFavoriteSum,
 		editProfile,
-		addFollowing,
-		deleteFollowing,
 	};
 
 	return service;
@@ -23,6 +21,16 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 
 		try {
 			let data = await Restangular.one('user', _uid).get();
+			console.log(data.goods);
+			data.goods.forEach(function(goods) {
+				try {
+					goods.photoPath = JSON.parse(goods.photo_path);
+				} catch (err) {
+					goods.photoPath = '';
+				}
+			});
+			data.myGoodsPending = data.goods.filter(function(g) { return g.exchanged === 0; });
+			data.myGoodsExchanged = data.goods.filter(function(g) { return g.exchanged === 1; });
 			defer.resolve(data);
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);
@@ -62,30 +70,5 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 		return defer.promise;
 	}
 
-	function addFollowing(myUid, followingUid) {
-		Restangular
-			.all('follow/post')
-			.post({
-				follower_uid : myUid,
-				followed_uid : followingUid,
-			})
-			.then(function() {
-				logger.success('成功追隨', {}, 'DONE');
-			});
-	}
-
-	function deleteFollowing(myUid, followingUid) {
-		Restangular
-			.all('follow/followers/of')
-			.getList({
-				followed_uid : followingUid,
-			})
-			.then(function(followers) {
-				let followedByMe = followers.filter(function(f) { return f.fid === myUid; });
-				followedByMe[0].route = 'follow/delete';
-				followedByMe[0].followedUid = followingUid;
-				followedByMe[0].remove();
-			});
-	}
 
 }

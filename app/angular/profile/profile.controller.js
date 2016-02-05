@@ -21,6 +21,7 @@ function ProfileController(
 	profile,
 	myFavorite,
 	profileService,
+	followService,
 	auth,
 	notification,
 	colorThief,
@@ -51,6 +52,7 @@ function ProfileController(
 	/////////////
 
 	activate();
+	console.log($localStorage.user);
 
 	function activate() {
 		if ($rootScope.isLoggedIn) {
@@ -91,11 +93,12 @@ function ProfileController(
 
 	function onClickAddFollowing() {
 		if (vm.isFollowed) {
-			profileService.deleteFollowing($localStorage.user.uid, profile.uid);
+			followService.deleteFollowing($localStorage.user.uid, profile.uid);
+
 			vm.followerCount--;
 			vm.isFollowed = false;
 		} else {
-			profileService.addFollowing($localStorage.user.uid, profile.uid);
+			followService.addFollowing($localStorage.user.uid, profile.uid);
 
 			vm.followerCount++;
 			vm.isFollowed = true;

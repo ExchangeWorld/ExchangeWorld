@@ -73,15 +73,12 @@ function ProfileController(
 			});
 
 		/**
-		 * only do this is desktop mode.
-		 * if goods fetching time more than 500ms, skip colorThief feature.
+		 * only do this on desktop mode.
 		 */
 		if($state.current.name === 'root.withSidenav.profile') {
-			$timeout(function(){
-				[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
-					dominateColor(goods);
-				});
-			}, 500);
+			[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
+				dominateColor(goods);
+			});
 		} else {
 			[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
 				goods.bgStyle = {
@@ -89,7 +86,7 @@ function ProfileController(
 				};
 			});
 		}
-		$rootScope.$broadcast('goodsChanged', vm.myGoodsPending);
+		$rootScope.$broadcast('goodsChanged', vm.profile.goods);
 	}
 
 	function onClickAddFollowing() {
@@ -130,6 +127,7 @@ function ProfileController(
 	}
 
 	function dominateColor(goods) {
+		if (!goods.length) return;
 		var image = document.getElementById(`img_${goods.gid}`);
 		image.onload = ()=> {
 			var color = ct.getColor(image);

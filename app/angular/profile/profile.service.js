@@ -1,7 +1,6 @@
 'use strict';
 
 const profileModule = require('./profile.module');
-const _             = require('lodash');
 
 profileModule.service('profileService', profileService);
 
@@ -13,7 +12,6 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 		editProfile,
 		addFollowing,
 		deleteFollowing,
-		getMyGoods,
 	};
 
 	return service;
@@ -24,7 +22,7 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 		const defer = $q.defer();
 
 		try {
-			let data = await Restangular.oneUrl(`user?uid=${_uid}`).get();
+			let data = await Restangular.one('user', _uid).get();
 			defer.resolve(data);
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);
@@ -52,7 +50,7 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 		const defer = $q.defer();
 
 		try {
-			profile.route = 'user/edit';
+			profile.route = `user/${profile.uid}`;
 			let data = await profile.put();
 
 			defer.resolve(data);
@@ -88,25 +86,6 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 				followedByMe[0].followedUid = followingUid;
 				followedByMe[0].remove();
 			});
-	}
-
-	function getMyGoods(uid) {
-		const defer = $q.defer();
-
-		try {
-			let data = Restangular.all('goods/of').getList({ owner_uid: uid });
-			if (!_.isArray(data)) throw 'data not array';
-
-			data.forEach(function(goods) {
-				if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
-			});
-			defer.resolve(data);
-		} catch (err) {
-			exception.catcher('唉呀出錯了！')(err);
-			defer.reject(err);
-		}
-
-		return defer.promise;
 	}
 
 }

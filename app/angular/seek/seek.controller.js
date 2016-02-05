@@ -99,9 +99,9 @@ function SeekController(
 			if (!goods.star_goods.length) {
 				favorite
 					.postFavorite(star)
-					.then(function(data) {
+					.then(function() {
 						var idx = _.indexOf(vm.goods, goods);
-						vm.goods[idx].star_goods.push(data);
+						vm.goods[idx].starredByUser = true;
 					});
 
 			} else {
@@ -109,7 +109,7 @@ function SeekController(
 					.deleteFavorite(star)
 					.then(function() {
 						var idx = _.indexOf(vm.goods, goods);
-						vm.goods[idx].star_goods = [];
+						vm.goods[idx].starredByUser = false;
 					});
 			}
 		}

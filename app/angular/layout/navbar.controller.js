@@ -15,6 +15,7 @@ function NavbarController(
 	$rootScope,
 	$localStorage,
 	$location,
+	$interval,
 	$window,
 	$q,
 	auth,
@@ -52,10 +53,10 @@ function NavbarController(
 
 	//////////////
 
-	//TODO : 
-	//$rootScope.$on('$stateChangeSuccess', function() {
-	//updateNotification();
-	//});
+	// reTake access token 
+	$interval(function() {
+		auth.getAccessToken($localStorage.user.identity, null, true);
+	}, 1140000);
 
 	activate();
 

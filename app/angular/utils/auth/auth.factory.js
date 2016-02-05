@@ -14,6 +14,7 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 		fetchMe,
 		isLoggedIn,
 		getLoginState,
+		getAccessToken,
 		showEmailBox,
 		currentUser: () => currentUser,
 	};
@@ -73,14 +74,11 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 		return defer.promise;
 	}
 
-	function getAccessToken(id, pwd, fb) {
-		return Restangular
-			.all('authenticate/login')
-			.post({
-				fb: fb,
-				identity: id,
-				password: pwd
-			});
+	async function getAccessToken(id, pwd, fb) {
+		let token = await Restangular.all('authenticate/login').post({ fb: fb, identity: id, password: pwd });
+		$localStorage.user.token = token.token;
+
+		return { msg: 'success' };
 	}
 
 	function showEmailBox(user) {

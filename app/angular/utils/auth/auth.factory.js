@@ -67,6 +67,7 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 		// let user fill email if email is empty
 		if (currentUser && currentUser.email.length === 0) showEmailBox(currentUser);
 
+		Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {token: currentUser.token});
 		defer.resolve(currentUser);
 
 		return defer.promise;

@@ -16,6 +16,7 @@ before_install:
   - sudo apt-get install -yq --no-install-suggests --no-install-recommends --force-yes
 
 install:
+  - npm set progress=false
   - npm install
 
 script:

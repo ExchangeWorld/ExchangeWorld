@@ -22,31 +22,17 @@ function seekService(Restangular, $q, exception, $localStorage, favorite) {
 			.all('goods/search')
 			.getList(filter)
 			.then(function(data) {
-				if (_.isArray(data)) {
-					data.forEach(function(goods) {
+				data.forEach(function(goods) {
 
-						if (
-							_.isString(goods.photo_path) &&
-							goods.photo_path.indexOf('error') === -1
-						) {
-							goods.photo_path = JSON.parse(goods.photo_path);
-						}
-					});
-
-					if($localStorage.user){
-						favorite
-							.getMyFavorite($localStorage.user.uid)
-							.then(function(fArray) {
-								data.forEach(function(g) {
-									if (_.findWhere(fArray, { goods_gid: g.gid })) g.favorited = true;
-									else g.favorited = false;
-								});
-								defer.resolve(data);
-							});
-					} else {
-						defer.resolve(data);
+					if (
+						_.isString(goods.photo_path) &&
+						goods.photo_path.indexOf('error') === -1
+					) {
+						goods.photo_path = JSON.parse(goods.photo_path);
 					}
-				}
+				});
+
+				defer.resolve(data);
 			}, (error)=> {
 				return exception.catcher('[Seek Service] getSeek error: ')(error);
 			});

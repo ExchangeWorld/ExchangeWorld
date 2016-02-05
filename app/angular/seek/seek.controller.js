@@ -9,7 +9,6 @@ function SeekController(
 	auth,
 	seekService,
 	favorite,
-	notification,
 	AvailableCategory,
 	$state,
 	$scope,
@@ -30,7 +29,7 @@ function SeekController(
 	$scope.onMouseOver     = onMouseOver;
 	$scope.onMouseOut      = onMouseOut;
 	$scope.postfixImageUrl = postfixImageUrl;
-	vm.postfixImageUrl = postfixImageUrl;
+	vm.postfixImageUrl     = postfixImageUrl;
 	vm.loading             = true;
 
 	////////////////
@@ -88,7 +87,7 @@ function SeekController(
 			auth
 				.login()
 				.then(function(user) {
-					vm.isLoggedIn = Boolean(user);
+					$rootScope.isLoggedIn = Boolean(user);
 					$state.reload();
 				});
 		} else {
@@ -97,27 +96,20 @@ function SeekController(
 				goods_gid: goods.gid,
 			};
 
-			if (!goods.favorited) {
+			if (!goods.star_goods.length) {
 				favorite
 					.postFavorite(star)
-					.then(function() {
+					.then(function(data) {
 						var idx = _.indexOf(vm.goods, goods);
-						vm.goods[idx].favorited = true;
+						vm.goods[idx].star_goods.push(data);
 					});
 
-				notification
-					.postNotification({
-						sender_uid   : $localStorage.user.uid,
-						receiver_uid : goods.owner_uid,
-						trigger_url  : '/seek/' + goods.gid,
-						content      : '有人關注你的物品',
-					});
 			} else {
 				favorite
 					.deleteFavorite(star)
 					.then(function() {
 						var idx = _.indexOf(vm.goods, goods);
-						vm.goods[idx].favorited = false;
+						vm.goods[idx].star_goods = [];
 					});
 			}
 		}

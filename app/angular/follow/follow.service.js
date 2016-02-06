@@ -24,6 +24,12 @@ function followService(Restangular, $q, exception, logger) {
 				? await Restangular.one('follow/user', uid).getList()
 				: await Restangular.one('user', uid).getList('follow');
 
+			peoples.forEach((people) => {
+				people.details = (type === 'follower')
+					? people.follower
+					: people.followed;
+			});
+
 			defer.resolve(peoples);
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);

@@ -48,7 +48,8 @@ function ProfileController(
 	vm.onClickEdit         = onClickEdit;
 	vm.getNumber           = number => new Array(number);
 	vm.onClickGoods        = gid => $state.go('root.withSidenav.goods', { gid : gid });
-	vm.getHTMLDesc = getHTMLDesc;
+	vm.getHTMLDesc         = getHTMLDesc;
+	vm.followerCount       = profile.follows_followed.length;
 	/////////////
 
 	activate();

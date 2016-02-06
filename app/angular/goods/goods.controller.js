@@ -56,7 +56,6 @@ function GoodsController(
 	vm.onDeleteComment = onDeleteComment;
 
 	vm.stars       = [];
-	vm.starred     = false;
 	vm.edit        = false;
 	vm.onEdit      = onEdit;
 	vm.onDelete    = onDelete;
@@ -224,17 +223,17 @@ function GoodsController(
 			goods_gid: vm.goodData.gid,
 		};
 
-		if (!vm.starred) {
+		if (!vm.goodData.starredByUser) {
 			favorite
 				.postFavorite(star)
 				.then(function() {
-					updateStar();
+					vm.goodData.starredByUser = true;
 				});
 		} else {
 			favorite
 				.deleteFavorite(star)
 				.then(function() {
-					updateStar();
+					vm.goodData.starredByUser = false;
 				});
 		}
 	}
@@ -244,17 +243,6 @@ function GoodsController(
 			.getFavorites(vm.goodData.gid)
 			.then(function(data) {
 				vm.stars = data;
-
-				if (
-					$rootScope.isLoggedIn &&
-					_.findWhere(data, {
-						starring_user_uid: $localStorage.user.uid
-					})
-				) {
-					vm.starred = true;
-				} else {
-					vm.starred = false;
-				}
 			});
 	}
 

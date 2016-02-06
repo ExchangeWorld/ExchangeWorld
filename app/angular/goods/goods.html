@@ -8,8 +8,8 @@
 		</div>
 		<div flex layout layout-align="center center">
 			<md-button class="white-btn btn-rwd" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickStar()">
-				<md-icon md-font-set="material-icons" ng-class="{'heart-goods': vm.starred}">favorite</md-icon>
-				<span hide-sm>{{vm.starred ? '已關注' : '關注'}} </span>
+				<md-icon md-font-set="material-icons" ng-class="{'heart-goods': vm.goodData.starredByUser}">favorite</md-icon>
+				<span hide-sm>{{vm.goodData.starredByUser ? '已關注' : '關注'}} </span>
 				<span>{{vm.stars.length}}</span>
 			</md-button>
 		</div>

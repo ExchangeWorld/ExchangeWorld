@@ -63,7 +63,7 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 		const defer = $q.defer();
 
 		let state = await facebookService.getLoginStatus();
-		currentUser = state ? await fetchMe() : null;
+		currentUser = state ? await fetchMe() : {};
 
 		// let user fill email if email is empty
 		if (currentUser && currentUser.email.length === 0) showEmailBox(currentUser);

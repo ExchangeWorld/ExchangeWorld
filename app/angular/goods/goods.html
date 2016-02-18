@@ -90,7 +90,7 @@
 			</div>
 			<div flex="55" layout="column" layout-align="start center" ng-show="vm.edit">
 				<md-input-container>
-					<input style="color:white;"ng-model="vm.goodData.name" aria-label="goodsname">
+					<input ng-model="vm.goodData.name" aria-label="goodsname">
 				</md-input-container>
 				<md-input-container>
 					<md-select ng-model="vm.goodData.category" aria-label="cate">
@@ -102,13 +102,13 @@
 			<div flex="70" flex-sm="80" ng-show="!vm.edit" layout layout-align="center center">
 				<div 
 					ng-bind-html="vm.goodDesc"
-					style="max-width: 100%; font-size:18px; color:white;"
+					style="max-width: 100%; font-size:18px;"
 				>
 				</div>
 			</div>
 			<div flex="70" flex-sm="80" ng-show="vm.edit" layout layout-align="center center">
 				<md-input-container>
-					<textarea style="color:white;" type="string" ng-model="vm.goodData.description" columns="10" md-maxlength="100" aria-label="desc"></textarea>
+					<textarea type="string" ng-model="vm.goodData.description" columns="10" md-maxlength="100" aria-label="desc"></textarea>
 				</md-input-container>
 			</div>
 			<span flex="15" flex-sm="10"></span>

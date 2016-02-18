@@ -108,12 +108,12 @@
 				</md-menu-content>
 			</md-menu>
 		</div>
-		<div flex="15" layout="row" layout-align="center center">
+		<div flex layout="row" layout-align="center center">
 			<md-button ng-hide="vm.isLoggedIn" ng-click="vm.onLogin()">
 				<span class="toolbar-span">登入</span>
 			</md-button>
 			<md-menu flex flex-sm="70" md-offset="-10 64">
-				<md-button ng-show="vm.isLoggedIn" ng-click="vm.openMenu($mdOpenMenu, $event)" style="max-width: 100%;">
+				<md-button ng-show="vm.isLoggedIn" ng-click="vm.openMenu($mdOpenMenu, $event)" style="width: 100%;">
 					<div ng-show="vm.isLoggedIn" layout="row" layout-align="center center">
 						<img hide-sm hide-md class="img-navbar" ng-src="{{ vm.user.photo_path }}"></img>
 						<span hide-sm hide-md class="nav-user toolbar-span">{{ vm.user.name }}</span>

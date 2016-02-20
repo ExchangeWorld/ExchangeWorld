@@ -1,68 +1,69 @@
 .grid-wrapper {
-    width: 95%;
-    margin: 10px auto;
+	width: 95%;
+	margin: 10px auto;
 }
 
 .grid__columns {
-    -webkit-column-gap: 10px;
-    // -webkit-column-fill: auto;
-    -moz-column-gap: 10px;
-    // -moz-column-fill: auto;
-    column-gap: 15px;
-    // column-fill: auto;
-    .card {
-        -webkit-column-break-inside: avoid;
-        -moz-column-break-inside: avoid;
-        column-break-inside: avoid;
-        display: inline-block;
-        width: 95%;
-        margin: 0 auto;
-        margin-bottom: 10px;
-        box-shadow: 3px 2px 3px 0 rgba(0, 0, 0, 0.3);
-    }
+	-webkit-column-gap: 10px;
+	// -webkit-column-fill: auto;
+	-moz-column-gap: 10px;
+	// -moz-column-fill: auto;
+	column-gap: 15px;
+	// column-fill: auto;
+	.card {
+		-webkit-column-break-inside: avoid;
+		-moz-column-break-inside: avoid;
+		column-break-inside: avoid;
+		display: inline-block;
+		width: 95%;
+		margin: 0 auto;
+		margin-bottom: 10px;
+		box-shadow: 3px 2px 3px 0 rgba(0, 0, 0, 0.3);
+	}
 }
 
 @media screen and (min-width: 300px) {
-    .grid__columns {
-        padding-left: 5%;
-        column-count: 1;
-        -moz-column-count: 1;
-        -webkit-column-count: 1;
-    }
+	.grid__columns {
+		padding-left: 5%;
+		column-count: 1;
+		-moz-column-count: 1;
+		-webkit-column-count: 1;
+	}
 }
 
 @media screen and (min-width: 600px) {
-    .grid__columns {
-        padding-left: 3%;
-        column-count: 2;
-        -moz-column-count: 2;
-        -webkit-column-count: 2;
-    }
+	.grid__columns {
+		padding-left: 3%;
+		column-count: 2;
+		-moz-column-count: 2;
+		-webkit-column-count: 2;
+	}
 }
 
 @media screen and (min-width: 960px) {
-    .grid__columns {
-        padding-left: 1%;
-        column-count: 3;
-        -moz-column-count: 3;
-        -webkit-column-count: 3;
-    }
+	.grid__columns {
+		padding-left: 1%;
+		column-count: 3;
+		-moz-column-count: 3;
+		-webkit-column-count: 3;
+	}
 }
 
 .cate-btn {
-    font-size: 14px;
-    padding: 6px;
-    color: #000;
-    border: 1px #000 solid;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-    &:hover {
-        background-color: #80CBC4;
-    }
-    &:focus,:active {
-        border-color: #fff;
-        background-color: #000;
-        color: #fff;
-    }
+	font-size: 14px;
+	padding: 6px;
+	color: #000;
+	border: 1px #000 solid;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: 0.3s;
+	&:hover {
+		background-color: #80CBC4;
+	}
+	&:focus,
+	:active {
+		border-color: #fff;
+		background-color: #000;
+		color: #fff;
+	}
 }

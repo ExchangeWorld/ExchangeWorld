@@ -69,9 +69,6 @@ function getStates() {
 					return goodsService
 						.getUserGoods($localStorage.user.uid)
 						.then(function(myGoods) {
-							myGoods = myGoods.filter(function(g) {
-								return (g.status === 0 && g.deleted === 0);
-							});
 							return myGoods;
 						});
 				},

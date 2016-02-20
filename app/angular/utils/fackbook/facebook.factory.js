@@ -61,7 +61,7 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 				let token = await Restangular.all('authenticate/login').post({ fb: true, identity: member.identity });
 				member.token = token.token;
 
-				if (member.photo_path !== largePic.url) {
+				if (member.photo_path !== largePic.data.url) {
 					member.route = 'user/photo';
 					member.photo_path = largePic.data.url;
 					member.put();

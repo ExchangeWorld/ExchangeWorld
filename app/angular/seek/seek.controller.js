@@ -96,20 +96,19 @@ function SeekController(
 				goods_gid: goods.gid,
 			};
 
-			if (!goods.star_goods.length) {
-				favorite
-					.postFavorite(star)
-					.then(function() {
-						var idx = _.indexOf(vm.goods, goods);
-						vm.goods[idx].starredByUser = true;
-					});
-
-			} else {
+			if (goods.starredByUser) {
 				favorite
 					.deleteFavorite(star)
 					.then(function() {
 						var idx = _.indexOf(vm.goods, goods);
 						vm.goods[idx].starredByUser = false;
+					});
+			} else {
+				favorite
+					.postFavorite(star)
+					.then(function() {
+						var idx = _.indexOf(vm.goods, goods);
+						vm.goods[idx].starredByUser = true;
 					});
 			}
 		}

@@ -10,10 +10,10 @@ exchangeModule.service('exchangeService', exchangeService);
 function exchangeService(Restangular, $q, $mdDialog, exception) {
 	var service = {
 		getExchange,
-		getAllExchange,
+		getExchanges,
 		deleteExchange,
 		agreeExchange,
-		completeExchange,
+		//completeExchange,
 		showCompleteExchange,
 		rating,
 
@@ -22,127 +22,82 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 	};
 	return service;
 
-	/** get exchange data */
-	function getAllExchange(ownerUid) {
+	async function getExchanges(ownerUid) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('exchange/of')
-			.getList({
-				owner_uid: ownerUid
-			})
-			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data);
-				}
-			}, (error)=> {
-				return exception.catcher('[Exchange Service] getAllExchange error: ')(error);
-			});
-		return defer.promise;
-	}
-
-	function getExchange(eid) {
-		const defer = $q.defer();
-
-		Restangular
-			.all('exchange')
-			.getList({eid: eid})
-			.then(function(data) {
-				data = _.isArray(data) ? data[0] : data;
-				data.goods.forEach(function(goods) {
-					if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
-				});
-				defer.resolve(data);
-			}, (error)=> {
-				return exception.catcher('[Exchange Service] getExchange error: ')(error);
-			});
-		return defer.promise;
-	}
-
-	function rating(gid, rate) {
-		const defer = $q.defer();
-
-		Restangular
-			.all('goods')
-			.getList({gid: gid})
-			.then(function(data) {
-				if(_.isArray(data)) {
-					data[0].route = 'goods/rate';
-					data[0].rate = rate;
-					data[0].put();
-				}
-			}, (error)=> {
-				return exception.catcher('[Exchange Service] rating error: ')(error);
-			});
-		return defer.promise;
-	}
-
-	function agreeExchange(exchange, gid) {
-		const defer = $q.defer();
-
-		exchange.route = 'exchange/agree';
-		exchange.goods_gid = (gid === exchange.goods1_gid) 
-			? exchange.goods1_gid 
-			: exchange.goods2_gid;
-
-		exchange.agree = 'true';
-
-		exchange
-			.put()
-			.then(function(data) {
-				defer.resolve(data);
-				if (
-					data.goods1_agree && 
-					data.goods2_agree
-				) {
-					completeExchange(exchange);
-				}
-			})
-			.catch(function(error) {
-				return exception.catcher('[exchange Service] agreeExchange error: ')(error);
-			});
-		return defer.promise;
-	}
-
-	/**
-	 * complete exchange
-	 */
-	function completeExchange(exchange) {
-		const defer = $q.defer();
-
-		exchange.route = 'exchange/complete'; // PUT of "complete" is "api/exchange/complete"
-
-		exchange
-			.put()
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[exchange Service] completeExchange error: ')(error);
-			});
+		try {
+			let exchanges = await Restangular.one('user', ownerUid).getList('exchange');
+			defer.resolve(exchanges);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
 
 		return defer.promise;
 	}
 
-	/**
-	 * drop exchange
-	 * one of the user reject the exchage.
-	 */
-	function deleteExchange(eid) {
+	async function getExchange(ownerUid, eid) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('exchange')
-			.getList({eid: eid})
-			.then(function(data) {
-				if (_.isArray(data)) {
-					var exchange = data[0];
-					exchange.route = 'exchange/drop'; // PUT of "drop" is "api/exchange/drop"
-					exchange.put();
-				}
-			}, (error)=> {
-				return exception.catcher('[Exchange Service] deleteExchange error: ')(error);
-			});
+		try {
+			let exchange = await Restangular.one('user', ownerUid).one('exchange', eid).get();
+
+			try {
+				exchange.other_goods.photoPath = JSON.parse(exchange.other_goods.photo_path);
+				exchange.owner_goods.photoPath = JSON.parse(exchange.owner_goods.photo_path);
+			} catch (err) {
+				exchange.other_goods.photoPath = '';
+				exchange.owner_goods.photoPath = '';
+			}            
+			defer.resolve(exchange);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
+	async function rating(goods, rate) {
+		const defer = $q.defer();
+
+		try {
+			goods.route = `goods/${goods.gid}/rate`;
+			goods.rate = rate;
+			await goods.put();
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
+	async function agreeExchange(exchange) {
+		const defer = $q.defer();
+
+		try {
+			exchange.route = `exchange/${exchange.eid}/agree`;
+			await exchange.put();
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
+	async function deleteExchange(exchange) {
+		const defer = $q.defer();
+
+		try {
+			exchange.route = `exchange/${exchange.eid}/drop`;
+			await exchange.put();
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 

@@ -3,7 +3,7 @@
 const goodsModule = require('./goods.module');
 const _           = require('lodash');
 const moment      = require('moment');
-const marked = require('marked');
+const marked      = require('marked');
 marked.setOptions({
 	renderer: new marked.Renderer(),
 	gfm: false,
@@ -23,6 +23,7 @@ function GoodsController(
 	auth,
 	NgMap,
 	goodData,
+	comments,
 	AvailableCategory,
 	goodsService,
 	notification,
@@ -42,8 +43,7 @@ function GoodsController(
 ) {
 	const vm = this;
 
-	vm.isLoggedIn        = Boolean($localStorage.user);
-	vm.isMe              = vm.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
+	vm.isMe              = $rootScope.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
 	vm.goodData          = goodData;
 	vm.goodDesc          = $sce.trustAsHtml(marked(goodData.description));
 	vm.availableCategory = AvailableCategory;
@@ -51,12 +51,11 @@ function GoodsController(
 	vm.bordercolor       = ['',''];
 
 	vm.comment         = '';
-	vm.goodComments    = [];
+	vm.goodComments    = comments;
 	vm.onSubmitComment = onSubmitComment;
 	vm.onDeleteComment = onDeleteComment;
 
 	vm.stars       = [];
-	vm.starred     = false;
 	vm.edit        = false;
 	vm.onEdit      = onEdit;
 	vm.onDelete    = onDelete;
@@ -66,7 +65,6 @@ function GoodsController(
 	vm.onClickQueue  = onClickQueue;
 
 	vm.showPhotoViewer = showPhotoViewer;
-	vm.onClickUser = $rootScope.onClickUser;
 	vm.onClickBack = onClickBack;
 
 	vm.getGoodsDescription = getGoodsDescription;
@@ -95,46 +93,41 @@ function GoodsController(
 			vm.isMe = (goodData.owner_uid === $localStorage.user.uid);
 		} else {
 			vm.isMe = false;
-			vm.isLoggedIn = false;
+			$rootScope.isLoggedIn = false;
 		}
 
 		goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
 
-		goodsService.getQueue($stateParams.gid)
+		goodsService
+			.getQueue($stateParams.gid)
 			.then(function(data) {
 				vm.queuingList = data;
 			});
 
-		var ct = new colorThief.ColorThief();
-		var image = document.getElementById('img');
-		image.onload = ()=> {
-			var pallete = ct.getPalette(image, 2);
-			vm.bgStyle = {
-				"background-color": `rgb(${pallete[0][0]}, ${pallete[0][1]}, ${pallete[0][2]})`,
-				"border-radius": "20px"
-			};
-			vm.bordercolor = [{
-				"border": `rgb(${pallete[1][0]}, ${pallete[1][1]}, ${pallete[1][2]}) solid 2px`
-			},{
-				"border": `rgb(${pallete[2][0]}, ${pallete[2][1]}, ${pallete[2][2]}) solid 2px`
-			}];
-		};
+		getBackgroundColor();
 	}
 
 	function onEdit(gid) {
-		if(vm.edit) {
-			goodsService
-				.editGood(gid, vm.goodData.name, vm.goodData.category, vm.goodData.description)
-				.then(function(data) {
-					goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
-					logger.success('更新成功！', data, 'Edit');
-					$state.reload();
-				})
-				.catch(function(err) { 
-					logger.error('錯誤', err, 'Error');
-				});
-		}
 		vm.edit = !vm.edit;
+		if(vm.edit) return;
+
+		let newValue = {
+			gid         : gid,
+			name        : vm.goodData.name,
+			category    : vm.goodData.category,
+			description : vm.goodData.description
+		};
+
+		goodsService
+			.editGood(newValue) 
+			.then(function(data) {
+				goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
+				logger.success('更新成功！', data, 'Edit');
+				$state.reload();
+			})
+			.catch(function(err) { 
+				logger.error('錯誤', err, 'Error');
+			});
 	}
 
 	function onDelete(gid) {
@@ -166,9 +159,9 @@ function GoodsController(
 			})
 			.then(function() {
 				var data = vm.goodComments.map(function(comment) {
-					if (vm.isLoggedIn)
+					if ($rootScope.isLoggedIn)
 						comment.isMe = (comment.commenter_uid === $localStorage.user.uid);
-					comment.timestamp = moment(comment.timestamp.slice(0, -1)).fromNow();
+					comment.timestamp = moment(comment.created_at.slice(0, -1)).fromNow();
 					return comment;
 				});
 				vm.goodComments = data;
@@ -181,7 +174,7 @@ function GoodsController(
 				.login()
 				.then(function(user) {
 					vm.user = user;
-					vm.isLoggedIn = Boolean(user);
+					$rootScope.isLoggedIn = Boolean(user);
 					$state.reload();
 				});
 		}
@@ -204,16 +197,6 @@ function GoodsController(
 					updateComment();
 				});
 
-			/**
-			 * Send notification to host
-			 */
-			notification
-				.postNotification({
-					sender_uid   : commentData.user_uid,
-					receiver_uid : vm.goodData.owner_uid,
-					trigger_url  : $location.url(),
-					content      : '有人對你的物品留言',
-				});
 		}
 	}
 
@@ -228,9 +211,7 @@ function GoodsController(
 		if (confirm) {
 			$mdDialog.show(confirm).then(function() {
 				goodsService
-					.deleteComment({
-						cid: cid
-					})
+					.deleteComment({ cid: cid })
 					.then(updateComment);
 			});
 		}
@@ -242,26 +223,17 @@ function GoodsController(
 			goods_gid: vm.goodData.gid,
 		};
 
-		if (!vm.starred) {
+		if (!vm.goodData.starredByUser) {
 			favorite
 				.postFavorite(star)
 				.then(function() {
-					updateStar();
+					vm.goodData.starredByUser = true;
 				});
-
-			notification
-				.postNotification({
-					sender_uid   : star.starring_user_uid,
-					receiver_uid : vm.goodData.owner_uid,
-					trigger_url  : $location.url(),
-					content      : '有人關注你的物品',
-				});
-
 		} else {
 			favorite
 				.deleteFavorite(star)
 				.then(function() {
-					updateStar();
+					vm.goodData.starredByUser = false;
 				});
 		}
 	}
@@ -271,17 +243,6 @@ function GoodsController(
 			.getFavorites(vm.goodData.gid)
 			.then(function(data) {
 				vm.stars = data;
-
-				if (
-					vm.isLoggedIn &&
-					_.findWhere(data, {
-						starring_user_uid: $localStorage.user.uid
-					})
-				) {
-					vm.starred = true;
-				} else {
-					vm.starred = false;
-				}
 			});
 	}
 
@@ -333,6 +294,23 @@ function GoodsController(
 		} else {
 			$window.history.go(-$rootScope.historyCounter);
 		}
+	}
+
+	function getBackgroundColor() {
+		var ct = new colorThief.ColorThief();
+		var image = document.getElementById('img');
+		image.onload = ()=> {
+			var pallete = ct.getPalette(image, 2);
+			vm.bgStyle = {
+				"background-color": `rgb(${pallete[0][0]}, ${pallete[0][1]}, ${pallete[0][2]})`,
+				"border-radius": "20px"
+			};
+			vm.bordercolor = [{
+				"border": `rgb(${pallete[1][0]}, ${pallete[1][1]}, ${pallete[1][2]}) solid 2px`
+			},{
+				"border": `rgb(${pallete[2][0]}, ${pallete[2][1]}, ${pallete[2][2]}) solid 2px`
+			}];
+		};
 	}
 }
 

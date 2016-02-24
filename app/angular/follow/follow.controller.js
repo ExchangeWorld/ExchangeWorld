@@ -11,7 +11,6 @@ function FollowController($state, followService, $stateParams, $rootScope) {
 	const types    = ['following', 'follower'];
 	vm.type        = '';
 	vm.followData  = [];
-	vm.onClickUser = $rootScope.onClickUser;
 	vm.onClickBack = $rootScope.onClickUser.bind(this, $stateParams.uid);
 
 	/////////////

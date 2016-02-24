@@ -1,7 +1,6 @@
 'use strict';
 
 const exchangeModule = require('./exchange.module');
-// const _              = require('lodash');
 const marked = require('marked');
 marked.setOptions({
 	renderer: new marked.Renderer(),
@@ -30,8 +29,7 @@ function ExchangeController(
 	$mdDialog,
 	$localStorage,
 	$q,
-	$mdSidenav,
-	$sce
+	$mdSidenav
 ) {
 	var vm             = this;
 	var ct             = new colorThief.ColorThief();
@@ -40,13 +38,13 @@ function ExchangeController(
 	vm.exchangeList    = exchangeList;
 	vm.exchange        = undefined;
 	vm.chatroom        = [];
-	vm.loadMore        = loadMore;
+	//vm.loadMore        = loadMore;
 	vm.chatContent     = '';
 	vm.onClickGoods    = (gid)=> $state.go('root.withSidenav.goods', { gid : gid });
 	vm.onClickExchange = onClickExchange;
 	vm.onClickComplete = onClickComplete;
 	vm.onClickDelete   = onClickDelete;
-	vm.onSubmitChat    = onSubmitChat;
+	//vm.onSubmitChat    = onSubmitChat;
 	vm.agreed          = false;
 	vm.map             = { size: mapSize };
 
@@ -61,66 +59,25 @@ function ExchangeController(
 	////////////
 	activate();
 	
-	var amount, offset;
 	function activate() {
 		if($stateParams.uid !== $localStorage.user.uid.toString()) {
 			$state.go('root.404');
-		} else {
-			if(vm.exchangeList.length) {
-				vm.exchangeList.forEach(function(exchange) {
-					exchangeService
-						.getExchange(exchange.eid)
-						.then(function(data) {
-							exchange.details = data;
-							exchange.lookupTable = {
-								me   : data.goods[0].owner_uid === vm.myid ? 0 : 1,
-								other: data.goods[1].owner_uid === vm.myid ? 0 : 1,
-							};
-						});
-				});
-				// agreed();
-			}
 		}
 	}
 
-	var timer = $interval(updateChat, 5000); // eslint-disable-line
-	function updateChat() {
-		if(!vm.exchange) return;
+	function onClickExchange(exchange) {
 		exchangeService
-			.getChat(vm.exchange.eid, amount+offset, 0)
-			.then((data)=> { vm.chatroom = data.reverse(); });
-	}
+			.getExchange($stateParams.uid, exchange.eid)
+			.then(function(data) {
+				vm.exchange = data;
+				dominateColor(vm.exchange.owner_goods.photoPath, 'other');
+				dominateColor(vm.exchange.other_goods.photoPath, 'me');
 
-	function loadMore() {
-		var deferred = $q.defer();
-		offset += amount;
-
-		exchangeService
-			.getChat(vm.exchange.eid, amount, offset)
-			.then((data)=> { 
-				vm.chatroom = [...data.reverse(), ...vm.chatroom];
-
-				deferred.resolve();
+				vm.map.marker = `${vm.exchange.other_goods.position_y},${vm.exchange.other_goods.position_x}`;
 			});
 
-		return deferred.promise;
-	}
-
-	function onClickExchange(index) {
-		amount = 20;
-		offset = 0;
-		vm.exchange = vm.exchangeList[index];
-
-		vm.meDesc          = $sce.trustAsHtml(marked(vm.exchange.details.goods[vm.exchange.lookupTable.me].description));
-		vm.otherDesc       = $sce.trustAsHtml(marked(vm.exchange.details.goods[vm.exchange.lookupTable.other].description));
-
-		updateChat();
-		agreed();
-		
-		dominateColor(vm.exchange.details.goods[vm.exchange.lookupTable.other], 'other');
-		dominateColor(vm.exchange.details.goods[vm.exchange.lookupTable.me], 'me');
-
-		vm.map.marker = `${vm.exchange.details.goods[vm.exchange.lookupTable.other].position_y},${vm.exchange.details.goods[vm.exchange.lookupTable.other].position_x}`;
+		//updateChat();
+		//agreed();
 	}
 
 	function onClickComplete(ev) {
@@ -149,33 +106,6 @@ function ExchangeController(
 		}
 	}
 
-	function onSubmitChat() {
-		const chat = vm.chatContent.trim();
-		if (chat) {
-			const newChat = {
-				eid        : vm.exchange.eid,
-				sender_uid : vm.myid,
-				content    : chat,
-			};
-			exchangeService
-				.postChat(newChat)
-				.then(function() {
-					vm.chatContent = '';
-					updateChat();
-				});
-		}
-	}
-
-	function agreed() {
-		if(vm.exchange.goods1_gid === vm.exchange.details.goods[vm.exchange.lookupTable.me].gid) {
-			vm.agreed = vm.exchange.goods1_agree ? true : false;
-		} else if(vm.exchange.goods2_gid === vm.exchange.details.goods[vm.exchange.lookupTable.me].gid){
-			vm.agreed = vm.exchange.goods2_agree ? true : false;
-		} else {
-			vm.agreed = false;
-		}
-	}
-	
 	function dominateColor(goods, who) {
 		// console.log(goods);
 		var image = document.getElementById(`img_${who}`);

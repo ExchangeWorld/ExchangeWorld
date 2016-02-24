@@ -1,13 +1,11 @@
 'use strict';
 
 const authModule = require('./auth.module');
-const _          = require('lodash');
 
 authModule.factory('auth', auth);
 
 /** @ngInject */
-function auth(facebookService, $q, $localStorage, $mdDialog) {
-	var token       = '';
+function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 	var currentUser = null;
 
 	const service = {
@@ -16,53 +14,44 @@ function auth(facebookService, $q, $localStorage, $mdDialog) {
 		fetchMe,
 		isLoggedIn,
 		getLoginState,
-		currentUser : () => currentUser,
+		getAccessToken,
 		showEmailBox,
+		currentUser: () => currentUser,
 	};
 	return service;
 
 	/////////////
 
-	function login() {
+	async function login() {
 		const defer = $q.defer();
 
-		facebookService
-			.login() // login to facebook.
-			.then(function() {
-				fetchMe()
-					.then(function(data) {
-						currentUser = data;
-						defer.resolve(data);
-					});
-			});
+		//TODO: login with id, password
+		await facebookService.login(); // login to facebook.
+		currentUser = await fetchMe();
+		defer.resolve(currentUser);
+
 		return defer.promise;
 	}
 
-	function logout() {
+	async function logout() {
 		const defer = $q.defer();
-		facebookService
-			.logout()
-			.then(function() {
-				currentUser = null;
-				delete $localStorage.user;
-				defer.resolve();
-			});
+
+		await facebookService.logout();
+		currentUser = null;
+		$localStorage.user = {};
+		defer.resolve(null);
+
 		return defer.promise;
 	}
 
-	function fetchMe() {
+	async function fetchMe() {
 		const defer = $q.defer();
-		facebookService
-			.me({ fields: 'id' }) // get user facebook id.
-			.then(function(response) {
-				/** Call API for create/get new EXWD user. */
-				facebookService
-					.register(response)
-					.then(function(userdata) {
-						currentUser = userdata;
-						defer.resolve(currentUser);
-					});
-			});
+
+		let response = await facebookService.me({ fields: 'id' }); // get user facebook id.
+		currentUser = await facebookService.register(response); // Call API for create/get new EXWD user. 
+
+		defer.resolve(currentUser);
+
 		return defer.promise;
 	}
 
@@ -70,42 +59,34 @@ function auth(facebookService, $q, $localStorage, $mdDialog) {
 		return Boolean(currentUser);
 	}
 
-	function getLoginState() {
+	async function getLoginState() {
 		const defer = $q.defer();
-		facebookService
-			.getLoginStatus()
-			.then(function(state) {
-				if(state.status === 'connected') {
-					fetchMe().then(function(data) {
-						currentUser = data;
 
-						// let user fill email if email is empty
-						if(data.email.length === 0) showEmailBox(data);
+		let state = await facebookService.getLoginStatus();
+		currentUser = state ? await fetchMe() : {};
 
-						defer.resolve(currentUser);
-					});
-				} else {
-					currentUser = null;
-					defer.resolve(currentUser);
-				}
-			});
+		// let user fill email if email is empty
+		if (currentUser && currentUser.email.length === 0) showEmailBox(currentUser);
+
+		Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {token: currentUser.token});
+		defer.resolve(currentUser);
+
 		return defer.promise;
 	}
 
-	function generateAccessToken() {
+	async function getAccessToken(id, pwd, fb) {
+		let token = await Restangular.all('authenticate/login').post({ fb: fb, identity: id, password: pwd });
+		$localStorage.user.token = token.token;
 
-	}
-
-	function getAccessToken() {
-		return token;
+		return { msg: 'success' };
 	}
 
 	function showEmailBox(user) {
 		$mdDialog.show({
-			templateUrl : 'utils/auth/fillEmail.html',
-			controllerAs : 'vm',
-			controller : DialogController,
-			locals : {
+			templateUrl: 'utils/auth/fillEmail.html',
+			controllerAs: 'vm',
+			controller: DialogController,
+			locals: {
 				user: user
 			}
 		});
@@ -114,13 +95,13 @@ function auth(facebookService, $q, $localStorage, $mdDialog) {
 
 /** @ngInject */
 function DialogController(user, profileService, $mdDialog, logger) {
-	const vm  = this;
+	const vm = this;
 	vm.email = '';
 	vm.cancel = onCancel;
 	vm.submit = onSubmit;
 
 	function onSubmit() {
-		if(vm.email) {
+		if (vm.email) {
 			user.email = vm.email;
 			profileService
 				.editProfile(user)

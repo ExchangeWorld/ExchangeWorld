@@ -15,10 +15,12 @@ function NavbarController(
 	$rootScope,
 	$localStorage,
 	$location,
+	$interval,
 	$window,
 	$q,
 	auth,
 	message,
+	exception,
 	notification,
 	AppSettings
 ) {
@@ -41,7 +43,6 @@ function NavbarController(
 	vm.onLogin             = onLogin;
 	vm.onLogout            = onLogout;
 	vm.user                = $localStorage.user;
-	vm.isLoggedIn          = Boolean($localStorage.user);
 	vm.notifications       = [];
 	vm.unreadMsg           = '';
 	vm.unreadNotify        = '';
@@ -52,21 +53,24 @@ function NavbarController(
 
 	//////////////
 
-	$rootScope.$on('$stateChangeSuccess', function() {
-		updateNotification();
-	});
+	// reTake access token 
+	$interval(function() {
+		auth.getAccessToken($localStorage.user.identity, null, true);
+	}, 1140000);
 
 	activate();
 
 	function activate() {
+		$rootScope.isLoggedIn = Boolean($localStorage.user);
+
 		auth
 			.getLoginState()
 			.then(function(data) {
 				vm.user = data;
-				vm.isLoggedIn = Boolean(data);
+				$rootScope.isLoggedIn = Boolean(data);
 			});
 
-		updateNotification();
+		//updateNotification();
 	}
 
 	function openMenu($mdOpenMenu, e) {
@@ -118,7 +122,7 @@ function NavbarController(
 			.login()
 			.then(function(user) {
 				vm.user = user;
-				vm.isLoggedIn = Boolean(user);
+				$rootScope.isLoggedIn = Boolean(user);
 				$state.reload();
 			});
 	}
@@ -130,7 +134,7 @@ function NavbarController(
 				$state.reload();
 			});
 		vm.user = null;
-		vm.isLoggedIn = false;
+		$rootScope.isLoggedIn = false;
 	}
 
 	function onClickNotification(notice) {
@@ -149,35 +153,38 @@ function NavbarController(
 		message
 			.updateMessage(msg)
 			.then(updateNotification);
+
 		vm.closeMenu();
 	}
 
 
-	function updateNotification() {
-		if(vm.isLoggedIn) {
-			$q
-				.all([
-					notification.getNotification(vm.user.uid),
-					message.getMessage(vm.user.uid),
-				])
-				.then(function(data) {
-					data[0].map(function(notice) {
-						notice.timestamp = moment(notice.timestamp.slice(0, -1)).fromNow();
-					});
-					vm.notifications = data[0];
+	async function updateNotification() {
+		if (!$rootScope.isLoggedIn) return;
 
-					vm.messages = _.unique(data[1], 'sender_uid');
-					vm.messages.forEach(function(msg) {
-						msg.timestamp = moment(msg.timestamp.slice(0, -1)).calendar();
-					});
+		try {
+			let [notifications, messages] = await Promise.all([
+				notification.getNotification(vm.user.uid),
+				message.getMessage(vm.user.uid),
+			]);
 
-					vm.unreadNotify = _.filter(vm.notifications, {unread : true}).length;
-					vm.unreadMsg = _.filter(vm.messages, {unread : true}).length;
+			vm.notifications = notifications.map(function(notice) {
+				notice.timestamp = moment(notice.timestamp.slice(0, -1)).fromNow();
+				return notice;
+			});
 
-					var unread = vm.unreadMsg + vm.unreadNotify;
-					if(unread) $rootScope.pageTitle = `(${unread}) ${AppSettings.appTitle}`;
-					else $rootScope.pageTitle = AppSettings.appTitle;
-				});
+			vm.messages = _.unique(messages, 'sender_uid');
+			vm.messages.forEach(function(msg) {
+				msg.timestamp = moment(msg.timestamp.slice(0, -1)).calendar();
+				return msg;
+			});
+
+			vm.unreadNotify = _.filter(vm.notifications, {unread : true}).length;
+			vm.unreadMsg = _.filter(vm.messages, {unread : true}).length;
+
+			var unread = vm.unreadMsg + vm.unreadNotify;
+			$rootScope.pageTitle = (unread) ? `(${unread}) ${AppSettings.appTitle}` : AppSettings.appTitle;
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
 		}
 	}
 

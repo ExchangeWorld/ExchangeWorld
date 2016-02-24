@@ -3,8 +3,9 @@
 		<md-icon md-font-set="material-icons">keyboard_backspace</md-icon>上一頁
 	</md-button>
 	<div layout layout-align="center center" style="height:80px; z-index: 100">
-		<p class="md-display-1" ng-show="vm.type === 'following'" style="z-index: 100;">追蹤中</p>
-		<p class="md-display-1" ng-show="vm.type === 'follower'" style="z-index: 100;">被追蹤</p>
+		<p class="md-display-1" ng-show="vm.type === 'follower'" style="z-index: 100;">
+			{{ vm.type === 'follower' ? '被追隨' : '追隨中' }}
+		</p>
 	</div>
 	<div layout="row" layout-align="center center" layout-wrap>
 		<div flex="30" layout="column" layout-align="center center" class="md-whiteframe-z4 item follow" ng-repeat="follow in vm.followData" style="z-index:100;">

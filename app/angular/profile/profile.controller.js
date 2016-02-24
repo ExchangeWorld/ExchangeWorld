@@ -19,9 +19,9 @@ profileModule.controller('ProfileController', ProfileController);
 /** @ngInject */
 function ProfileController(
 	profile,
-	myGoods,
 	myFavorite,
 	profileService,
+	followService,
 	auth,
 	notification,
 	colorThief,
@@ -36,29 +36,27 @@ function ProfileController(
 	var vm                 = this;
 	var ct                 = new colorThief.ColorThief();
 	vm.profile             = profile;
-	vm.isLoggedIn          = Boolean($localStorage.user);
-	vm.isMe                = vm.isLoggedIn && (profile.uid === $localStorage.user.uid);
+	vm.isMe                = $rootScope.isLoggedIn && (profile.uid === $localStorage.user.uid);
 	vm.favSum              = '';
 	vm.myStar              = myFavorite;
-	vm.myGoodsPending      = myGoods.myGoodsPending;
-	vm.myGoodsExchanged    = myGoods.myGoodsExchanged;
-	vm.onClickFollow       = $rootScope.onClickFollow;
+	vm.myGoodsPending      = profile.myGoodsPending;
+	vm.myGoodsExchanged    = profile.myGoodsExchanged;
 	vm.onClickAddFollowing = onClickAddFollowing;
 	vm.onClickSendMsg      = onClickSendMsg;
-	vm.followerCount       = profile.followers.length;
 	vm.isFollowed          = false;
 	vm.isReadOnly          = true;
 	vm.onClickEdit         = onClickEdit;
 	vm.getNumber           = number => new Array(number);
 	vm.onClickGoods        = gid => $state.go('root.withSidenav.goods', { gid : gid });
-	vm.getHTMLDesc = getHTMLDesc;
+	vm.getHTMLDesc         = getHTMLDesc;
+	vm.followerCount       = profile.follows_followed.length;
 	/////////////
 
 	activate();
 
 	function activate() {
-		if (vm.isLoggedIn) {
-			if (_.findWhere(profile.followers, { follower_uid: $localStorage.user.uid })) {
+		if ($rootScope.isLoggedIn) {
+			if (_.findWhere(profile.follows_followed, { fid: $localStorage.user.uid })) {
 				vm.isFollowed = true;
 			}
 		}
@@ -67,25 +65,22 @@ function ProfileController(
 			vm.isMe = (profile.uid === $localStorage.user.uid);
 		} else {
 			vm.isMe = false;
-			vm.isLoggedIn = false;
+			$rootScope.isLoggedIn = false;
 		}
-	
+
 		profileService
-			.getFavoriteSum($stateParams.uid) 
-			.then(function(data) { 
+			.getFavoriteSum($stateParams.uid)
+			.then(function(data) {
 				vm.favSum = data;
 			});
-			
+
 		/**
-		 * only do this is desktop mode.
-		 * if goods fetching time more than 500ms, skip colorThief feature.
+		 * only do this on desktop mode.
 		 */
 		if($state.current.name === 'root.withSidenav.profile') {
-			$timeout(function(){
-				[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
-					dominateColor(goods);
-				});
-			}, 500);
+			[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
+				dominateColor(goods);
+			});
 		} else {
 			[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
 				goods.bgStyle = {
@@ -93,23 +88,18 @@ function ProfileController(
 				};
 			});
 		}
-		$rootScope.$broadcast('goodsChanged', vm.myGoodsPending);
+		$rootScope.$broadcast('goodsChanged', vm.profile.goods);
 	}
 
 	function onClickAddFollowing() {
 		if (vm.isFollowed) {
-			profileService.deleteFollowing($localStorage.user.uid, profile.uid);
+			followService.deleteFollowing($localStorage.user.uid, profile.uid);
+
 			vm.followerCount--;
 			vm.isFollowed = false;
 		} else {
-			profileService.addFollowing($localStorage.user.uid, profile.uid);
-			notification
-				.postNotification({
-					sender_uid   : $localStorage.user.uid,
-					receiver_uid : vm.profile.uid, 
-					trigger      : '/profile/'+$localStorage.user.uid,
-					content      : '有人跟隨你',
-				});
+			followService.addFollowing($localStorage.user.uid, profile.uid);
+
 			vm.followerCount++;
 			vm.isFollowed = true;
 		}
@@ -132,17 +122,18 @@ function ProfileController(
 				.then(function(data) {
 					logger.success('更新成功', data, 'EDIT');
 				})
-				.catch(function(err) { 
+				.catch(function(err) {
 					logger.error('錯誤', err, 'Error');
 				});
 		}
 		vm.isReadOnly = !vm.isReadOnly;
 	}
-	
+
 	function dominateColor(goods) {
+		if (!goods.length) return;
 		var image = document.getElementById(`img_${goods.gid}`);
 		image.onload = ()=> {
-			var color = ct.getColor(image); 
+			var color = ct.getColor(image);
 			goods.bgStyle = {
 				"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`
 			};

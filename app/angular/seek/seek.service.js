@@ -1,12 +1,11 @@
 'use strict';
 
 const seekModule = require('./seek.module');
-const _          = require('lodash');
 
 seekModule.factory('seekService', seekService);
 
 /** @ngInject */
-function seekService(Restangular, $q, exception, $localStorage, favorite) {
+function seekService(Restangular, $q, exception) {
 	var service = {
 		getSeek: getSeek,
 	};
@@ -22,31 +21,15 @@ function seekService(Restangular, $q, exception, $localStorage, favorite) {
 			.all('goods/search')
 			.getList(filter)
 			.then(function(data) {
-				if (_.isArray(data)) {
-					data.forEach(function(goods) {
-
-						if (
-							_.isString(goods.photo_path) &&
-							goods.photo_path.indexOf('error') === -1
-						) {
-							goods.photo_path = JSON.parse(goods.photo_path);
-						}
-					});
-
-					if($localStorage.user){
-						favorite
-							.getMyFavorite($localStorage.user.uid)
-							.then(function(f_array) {
-								data.forEach(function(g) {
-									if (_.findWhere(f_array, { goods_gid: g.gid })) g.favorited = true;
-									else g.favorited = false;
-								});
-								defer.resolve(data);
-							});
-					} else {
-						defer.resolve(data);
+				data.forEach(function(goods) {
+					try {
+						goods.photo_path = JSON.parse(goods.photo_path);
+					} catch (err) {
+						goods.photo_path = '';
 					}
-				}
+				});
+
+				defer.resolve(data);
 			}, (error)=> {
 				return exception.catcher('[Seek Service] getSeek error: ')(error);
 			});

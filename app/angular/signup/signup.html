@@ -1,0 +1,29 @@
+<div>
+    <label for="">信箱</label>
+    <input ng-model="vm.form.id">
+
+    <br>
+    
+    <label for="">暱稱</label>
+    <input ng-model="vm.form.name">
+    <br>
+
+    <label for="">密碼</label>
+    <input type="password" name="password" ng-model="vm.form.pwd">
+    <br>
+    
+    <label for="">確認密碼</label>
+    <input type="password" name="password" ng-model="vm.form.pwd2" ng-keyup="$event.keyCode === 13 ? vm.signup() : null">
+    <br>
+
+    <button ng-click="vm.signup()">註冊</button>
+
+    <br>
+    <hr>
+    或
+    <br>
+
+    <button style="width:30%; background-color: #3B5998" ng-click="vm.signupFb()">
+        Facebook 快速註冊
+    </button>
+</div>

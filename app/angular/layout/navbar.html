@@ -109,6 +109,9 @@
 			</md-menu>
 		</div>
 		<div flex flex-sm="10" offset-sm="80" layout="row" layout-align="center center">
+			<md-button ng-hide="$root.isLoggedIn" ng-click="vm.onSignup()">
+				<span class="toolbar-span">註冊</span>
+			</md-button>
 			<md-button ng-hide="$root.isLoggedIn" ng-click="vm.onLogin()">
 				<span class="toolbar-span">登入</span>
 			</md-button>

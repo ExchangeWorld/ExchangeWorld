@@ -40,6 +40,7 @@ function NavbarController(
 	vm.closeMenu           = ()=> $mdMenu.hide();
 	vm.report              = report;
 	vm.onClick             = onClick;
+	vm.onSignup            = () => $state.go('root.oneCol.signup');
 	vm.onLogin             = () => $state.go('root.oneCol.login');
 	vm.onLogout            = onLogout;
 	vm.user                = $localStorage.user;

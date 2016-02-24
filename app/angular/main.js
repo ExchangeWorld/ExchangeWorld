@@ -15,6 +15,7 @@ require('./post/post.module');
 require('./goods/goods.module');
 require('./seek/seek.module');
 require('./login/login.module');
+require('./signup/signup.module');
 // require('./xmas/xmas.module');
 
 // create and bootstrap application
@@ -33,6 +34,7 @@ angular.element(document).ready(function() {
 		'app.follow',
 		'app.exchange',
 		'app.login',
+		'app.signup',
 		// 'app.xmas',
 	];
 

@@ -29,6 +29,5 @@ function LoginController(
 
 				$state.go('root.withSidenav.seek');
 			});
-	
 	}
 }

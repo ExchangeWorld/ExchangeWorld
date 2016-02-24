@@ -11,6 +11,7 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 	const service = {
 		login,
 		logout,
+		signup,
 		fetchMe,
 		isLoggedIn,
 		getLoginState,
@@ -53,6 +54,27 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 		currentUser = null;
 		$localStorage.user = null;
 		defer.resolve(null);
+
+		return defer.promise;
+	}
+
+	async function signup(form) {
+		const defer = $q.defer();
+
+		try {
+			let user = await Restangular.all('authenticate/register').post({
+				identity: form.id,
+				name: form.name,
+				email: form.id,
+				password: form.pwd
+			});
+
+			await login(false, user.identity, form.pwd);
+
+			defer.resolve(user);
+		} catch(err) {
+			defer.reject(err);
+		}
 
 		return defer.promise;
 	}

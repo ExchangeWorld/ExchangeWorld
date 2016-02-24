@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <label for="">信箱</label>
     <input ng-model="vm.form.id">
 
@@ -17,4 +17,29 @@
     <button style="width:30%; background-color: #3B5998" ng-click="vm.login(true)">
         Facebook 登入
     </button>
-</div>
+</div> -->
+<md-content resize ng-style="resizeWithOffset(56)">
+	<div layout="column" layout-align="center center" layout-fill>
+		<div layout="column" style="width:45%; padding:80px 20px; background-color:#ECEFF1; border-radius: 12px;">
+			<md-input-container>
+				<label style="color:#000;">帳號(電子郵件信箱)</label>
+				<input type="text" ng-model="vm.form.id" required>
+			</md-input-container>
+			<md-input-container>
+				<label style="color:#000;">密碼</label>
+				<input type="password" name="password" ng-model="vm.form.pwd" ng-keyup="$event.keyCode === 13 ? vm.login(false) : null" required>
+			</md-input-container>
+			<div layout layout-align="end end">
+				<md-button class="md-primary md-raised" ng-click="vm.login(false)">登入</md-button>
+			</div>
+			<div layout layout-align="center center">
+				<span>或</span>
+			</div>
+			<div layout layout-align="center center" style="margin-top:20px;">
+				<md-button style="width:50%;background-color: #3B5998; color:#fff;" ng-click="vm.login(true)">
+					<i class="fa fa-facebook"></i> Facebook 登入
+				</md-button>
+			</div>
+		</div>
+	</div>
+</md-content>

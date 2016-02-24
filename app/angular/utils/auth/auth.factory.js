@@ -13,10 +13,10 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 		logout,
 		signup,
 		fetchMe,
-		isLoggedIn,
 		getLoginState,
 		getAccessToken,
 		showEmailBox,
+		isLoggedIn: () => Boolean(currentUser),
 		currentUser: () => currentUser,
 	};
 	return service;
@@ -26,23 +26,29 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 	async function login(fb, identity, password) {
 		const defer = $q.defer();
 
-		//TODO: login with id, password
-		if (fb) {
-			await facebookService.login(); // login to facebook.
-			currentUser = await fetchMe();
-		} else {
-			let token = await Restangular
-				.all('/authenticate/login')
-				.post({
-					fb: false,
-					identity: identity,
-					password: password
+		try {
+			if (fb) {
+				await facebookService.login(); // login to facebook.
+				currentUser = await fetchMe();
+			} else {
+				let token = await Restangular
+					.all('/authenticate/login')
+					.post({
+						fb: false,
+						identity: identity,
+						password: password
+					});
+				$localStorage.token = token.token;
+				Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {
+					token: $localStorage.token
 				});
-			$localStorage.token = token.token;
 
-			currentUser = await Restangular.oneUrl('user/me').get();
+				currentUser = await Restangular.oneUrl('user/me').get();
+			}
+			defer.resolve(currentUser);
+		} catch (err) {
+			defer.reject(err);
 		}
-		defer.resolve(currentUser);
 
 		return defer.promise;
 	}
@@ -50,10 +56,14 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 	async function logout() {
 		const defer = $q.defer();
 
-		//await facebookService.logout();
-		currentUser = null;
-		$localStorage.user = null;
-		defer.resolve(null);
+		try {
+			//await facebookService.logout();
+			currentUser = null;
+			$localStorage.user = null;
+			defer.resolve(null);
+		} catch (err) {
+			defer.reject(err);
+		}
 
 		return defer.promise;
 	}
@@ -72,7 +82,7 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 			await login(false, user.identity, form.pwd);
 
 			defer.resolve(user);
-		} catch(err) {
+		} catch (err) {
 			defer.reject(err);
 		}
 
@@ -82,38 +92,52 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 	async function fetchMe() {
 		const defer = $q.defer();
 
-		let response = await facebookService.me({ fields: 'id' }); // get user facebook id.
-		currentUser = await facebookService.register(response); // Call API for create/get new EXWD user. 
+		try {
+			let response = await facebookService.me({
+				fields: 'id'
+			}); // get user facebook id.
+			currentUser = await facebookService.register(response); // Call API for create/get new EXWD user. 
 
-		defer.resolve(currentUser);
+			defer.resolve(currentUser);
+		} catch (err) {
+			defer.reject(err);
+		}
 
 		return defer.promise;
-	}
-
-	function isLoggedIn() {
-		return Boolean(currentUser);
 	}
 
 	async function getLoginState() {
 		const defer = $q.defer();
 
-		let state = await facebookService.getLoginStatus();
-		currentUser = state ? await fetchMe() : {};
+		try {
+			let state = await facebookService.getLoginStatus();
+			currentUser = state ? await fetchMe() : {};
 
-		// let user fill email if email is empty
-		if (currentUser && currentUser.email.length === 0) showEmailBox(currentUser);
+			// let user fill email if email is empty
+			if (currentUser && currentUser.email.length === 0) showEmailBox(currentUser);
 
-		Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {token: currentUser.token});
-		defer.resolve(currentUser);
+			Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {
+				token: $localStorage.token
+			});
+			defer.resolve(currentUser);
+		} catch (err) {
+			defer.reject(err);
+		}
 
 		return defer.promise;
 	}
 
 	async function getAccessToken(id, pwd, fb) {
-		let token = await Restangular.all('authenticate/login').post({ fb: fb, identity: id, password: pwd });
+		let token = await Restangular.all('authenticate/login').post({
+			fb: fb,
+			identity: id,
+			password: pwd
+		});
 		$localStorage.user.token = token.token;
 
-		return { msg: 'success' };
+		return {
+			msg: 'success'
+		};
 	}
 
 	function showEmailBox(user) {

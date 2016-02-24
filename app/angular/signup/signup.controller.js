@@ -22,7 +22,6 @@ function SignupController(
 		pwd2: ''
 	};
 
-	console.log('dlkdd');
 	async function signup() {
 		if (!checkForm()) {
 			return;
@@ -34,8 +33,9 @@ function SignupController(
 			$localStorage.user = user;
 
 			$state.go('root.withSidenav.seek');
-		} catch(err) {
-			exception.catcher('唉呀出錯了！')(err);
+		} catch (err) {
+			if (err.data.error === 'Email is wrong') exception.catcher('信箱格式有誤喔')(err);
+			else exception.catcher('唉呀出錯了！')(err);
 		}
 	}
 
@@ -46,7 +46,7 @@ function SignupController(
 			$localStorage.user = user;
 
 			$state.go('root.withSidenav.seek');
-		} catch(err) {
+		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);
 		}
 	}

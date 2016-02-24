@@ -76,7 +76,7 @@ function NavbarController(
 		if ([0, 5, 6].indexOf(contentIndex) !== -1) {
 			$state.go('root.oneCol.' + state[contentIndex]);
 		} else if(contentIndex === 3) {
-			if (!$localStorage.user) onLogin();
+			if (!$localStorage.user) vm.onLogin();
 			else  $state.go('root.oneCol.' + state[contentIndex], {uid: vm.user.uid});
 		} else {
 			const isFromOneCol = $state.includes("root.oneCol");

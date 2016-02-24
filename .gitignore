@@ -35,3 +35,5 @@ images_global
 
 # Database Authenication
 express/libs/DBLogin.js
+
+auto-fix.sh

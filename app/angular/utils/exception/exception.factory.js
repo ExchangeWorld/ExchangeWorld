@@ -20,7 +20,7 @@ function exception($q, logger) {
 			//newMessage = message + thrownDescription;
 			//}
 			//e.data.description = newMessage;
-			logger.error(message);
+			logger.error(message, e);
 			return $q.reject(e);
 		};
 	}

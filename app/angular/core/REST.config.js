@@ -9,7 +9,5 @@ function RestConfig(Restangular, $localStorage) {
 	Restangular.setBaseUrl('http://exwd.csie.org:43002/api');
 
 	// token will expire if idle 20min
-	if ($localStorage.user) {
-		Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {token: $localStorage.user.token});
-	}
+	Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {token: $localStorage.token});
 }

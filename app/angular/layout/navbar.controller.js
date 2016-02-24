@@ -40,7 +40,7 @@ function NavbarController(
 	vm.closeMenu           = ()=> $mdMenu.hide();
 	vm.report              = report;
 	vm.onClick             = onClick;
-	vm.onLogin             = onLogin;
+	vm.onLogin             = () => $state.go('root.oneCol.login');
 	vm.onLogout            = onLogout;
 	vm.user                = $localStorage.user;
 	vm.notifications       = [];
@@ -62,15 +62,6 @@ function NavbarController(
 
 	function activate() {
 		$rootScope.isLoggedIn = Boolean($localStorage.user);
-
-		auth
-			.getLoginState()
-			.then(function(data) {
-				vm.user = data;
-				$rootScope.isLoggedIn = Boolean(data);
-			});
-
-		//updateNotification();
 	}
 
 	function openMenu($mdOpenMenu, e) {
@@ -117,25 +108,14 @@ function NavbarController(
 		vm.closeMenu();
 	}
 
-	function onLogin() {
-		$state.go('root.oneCol.login');
-		auth
-			.login()
-			.then(function(user) {
-				vm.user = user;
-				$rootScope.isLoggedIn = Boolean(user);
-				$state.reload();
-			});
-	}
-
 	function onLogout() {
 		auth
 			.logout()
 			.then(function(){
 				$state.reload();
+				vm.user = null;
+				$rootScope.isLoggedIn = false;
 			});
-		vm.user = null;
-		$rootScope.isLoggedIn = false;
 	}
 
 	function onClickNotification(notice) {

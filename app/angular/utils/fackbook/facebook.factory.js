@@ -32,15 +32,19 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 	}
 
 	/** Login */
-	function login() {
-		return Facebook.login(function(response) {
-			if (response.status === 'connected') {
-				return me();
-			} else {
-				//console.error('FB login ERROR.');
-				return {};
-			}
-		});
+	async function login() {
+		if (await getLoginStatus()) {
+			return me();
+		} else {
+			return Facebook.login(function(response) {
+				if (response.status === 'connected') {
+					return me();
+				} else {
+					//console.error('FB login ERROR.');
+					return {};
+				}
+			});
+		}
 	}
 
 	/** Logout */
@@ -59,7 +63,7 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 
 			if (member) {
 				let token = await Restangular.all('authenticate/login').post({ fb: true, identity: member.identity });
-				member.token = token.token;
+				$localStorage.token = token.token;
 
 				if (member.photo_path !== largePic.data.url) {
 					member.route = 'user/photo';
@@ -83,7 +87,7 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 
 			let registerData = await Restangular.all('authenticate/register').post(newUser);
 			let token = await Restangular.all('authenticate/login').post({ fb: true, identity: registerData.identity });
-			registerData.token = token.token;
+			$localStorage.token = token.token;
 
 			$localStorage.user = registerData;
 			defer.resolve(registerData);

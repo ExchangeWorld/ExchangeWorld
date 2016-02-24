@@ -5,7 +5,7 @@ const authModule = require('./auth.module');
 authModule.factory('auth', auth);
 
 /** @ngInject */
-function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
+function auth(facebookService, $q, $localStorage, $mdDialog, Restangular, $rootScope) {
 	var currentUser = null;
 
 	const service = {
@@ -40,6 +40,7 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 					});
 
 				updateToken(token.token);
+				$rootScope.isLoggedIn = true;
 				currentUser = await Restangular.oneUrl('user/me').get();
 			}
 			defer.resolve(currentUser);
@@ -57,6 +58,7 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 			//await facebookService.logout();
 			currentUser = null;
 			$localStorage.user = null;
+			$rootScope.isLoggedIn = false;
 			updateToken(null);
 			defer.resolve(null);
 		} catch (err) {

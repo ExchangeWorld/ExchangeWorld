@@ -59,11 +59,6 @@ function NavbarController(
 		auth.getAccessToken($localStorage.user.identity, null, true);
 	}, 1140000);
 
-	activate();
-
-	function activate() {
-		$rootScope.isLoggedIn = Boolean($localStorage.user);
-	}
 
 	function openMenu($mdOpenMenu, e) {
 		vm.closeMenu();
@@ -113,9 +108,8 @@ function NavbarController(
 		auth
 			.logout()
 			.then(function(){
-				$state.reload();
+				$state.go('root.oneCol.home');
 				vm.user = null;
-				$rootScope.isLoggedIn = false;
 			});
 	}
 

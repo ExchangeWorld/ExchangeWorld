@@ -89,6 +89,7 @@ function GoodsController(
 		updateComment();
 		updateStar();
 
+        //TODO: use /api/user/me
 		if ($localStorage.user) {
 			vm.isMe = (goodData.owner_uid === $localStorage.user.uid);
 		} else {

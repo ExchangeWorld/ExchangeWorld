@@ -331,13 +331,13 @@ div.md-open-menu-container {
 		background-position: center;
 		background-size: cover;
 		&.column-left {
-			margin: 10px 10% 10px 0;
+			margin: 10px 0 10px 0;
 		}
 		&.column-center {
 			margin: 10px 0 10px 0;
 		}
 		&.column-right {
-			margin: 10px 10% 10px 0;
+			margin: 10px 0 10px 0;
 		}
 	}
 	md-toolbar:not(.md-menu-toolbar) {

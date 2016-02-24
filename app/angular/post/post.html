@@ -11,8 +11,8 @@
 			class="info_container for_input post" 
 			layout="row" layout-align="start center"
 		> -->
-		<div class="info_container for_input" layout="row" layout="center center">
-			<span style="padding-top: 10px; margin-right: 8px;">名稱</span>
+		<div class="info_container for_input" layout="row" layout-align="center center">
+			<span style="padding-bottom:13px;margin-right: 8px;">名稱</span>
 			<!-- <span>名稱</span> -->
 			<md-input-container flex>
 				<!-- <label>物品名稱</label> -->
@@ -21,7 +21,7 @@
 		</div>
 		<div class="info_container for_input" layout="row" layout-align="center center">
 			<!-- <i class="material-icons" hide-sm>list</i> -->
-			<span style="padding-bottom: 13px; margin-right: 8px;">類別</span>
+			<span style="padding-top: 7px; margin-right: 8px;">類別</span>
 			<md-input-container flex>
 				<!-- <label>物品類別</label> -->
 				<md-select ng-model="vm.goodsCategory" ng-change="vm.onCategoryChanged(vm.goodsCategory)" aria-label="good.cate">
@@ -32,7 +32,7 @@
 			</md-input-container>
 		</div>
 		<div class="info_container for_input" layout="row" layout-align="center center">
-			<span style="padding-bottom: 13px; margin-right: 8px;">敘述</span>
+			<span style="padding-bottom: 17px; margin-right: 8px;">敘述</span>
 			<md-input-container flex>
 				<!-- <label>物品敘述</label> -->
 				<textarea type="string" ng-model="vm.goodsDescriptions" columns="10" md-maxlength="100" required></textarea>

@@ -51,12 +51,13 @@
 
 .cate-btn {
 	font-size: 14px;
-	padding: 6px;
+	padding: 0 6px;
 	color: #000;
 	border: 1px #000 solid;
 	border-radius: 8px;
 	cursor: pointer;
 	transition: 0.3s;
+	text-align: center;
 	&:hover {
 		background-color: #80CBC4;
 	}

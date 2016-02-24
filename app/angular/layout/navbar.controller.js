@@ -191,13 +191,8 @@ function NavbarController(
 	function report() {
 		var confirm = $mdDialog.confirm()
 			.title('回報問題')
-			.content([
-				'<ul>',
-				'<li>有發現BUG嗎?</li>',
-				'<li>有什麼建議想跟我們說的嗎?</li>',
-				'<li>歡迎回報各種想法給我們吧!</li>',
-				'<ul>'
-			].join(''))
+			.textContent(
+				'有發現BUG嗎?有什麼建議想跟我們說的嗎?歡迎回報各種想法給我們吧!')
 			.ariaLabel('report')
 			.ok('確定')
 			.cancel('取消');

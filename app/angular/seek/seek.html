@@ -1,41 +1,36 @@
-<md-toolbar class="md-whiteframe-z2" style="height:160px; background-color: #bbe7f0; padding-bottom:20px;">
+<div layout="column" style="height:180px; background-color: #bbe7f0;">
 	<!-- search input bar & button -->
-	<div layout="column">
-		<div layout="row" layout-align="start center" layout-margin style="padding: 0 20px;">
-			<md-input-container flex="85" flex-sm="75" class="md-primary wtfsafari">
-				<label style="color:#000;">搜索</label>
-				<input ng-model="vm.searchGoodsName" aria-label="goodsName" style="border-bottom-color: #000;">
-			</md-input-container>
-			<md-button class="seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory, bound:vm.searchWithBound ? vm.mapBound : '', global:vm.searchWithBound ? 0 : 1})">
-				<md-icon md-font-set="material-icons">search</md-icon>
-				<!-- <span hide-sm>搜索!</span> -->
-			</md-button>
-		</div>
-		<div layout="row" layout-align="start center" layout-margin style="padding:0 20px;">
-			<md-input-container hide-gt-sm flex>
-				<label>種類</label>
-				<md-select ng-model="vm.searchGoodsCategory" aria-label="cate">
-					<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">
-						{{cate.alias}}
-					</md-option>
-				</md-select>
-			</md-input-container>
-			<div flex="85" layout="row" layout-align="center center" layout-wrap hide-sm>
-				<div class="cate-btn" flex="15" layout layout-align="center center" layout-margin ng-repeat="cate in vm.availableCategory"><span>{{cate.alias}}</span></div>
-				<!-- <div class="cate-btn" flex layout layout-align="center center" layout-margin><span>全部</span></div>
-				<div class="cate-btn" flex layout layout-align="center center" layout-margin><span>書籍</span></div>
-				<div class="cate-btn" flex layout layout-align="center center" layout-margin><span>服飾</span></div>
-				<div class="cate-btn" flex layout layout-align="center center" layout-margin><span>3C</span></div>
-				<div class="cate-btn" flex layout layout-align="center center" layout-margin><span>其他</span></div> -->
-			</div>
-			<md-switch class="switch" flex="15" flex-sm layout="column" layout-align="center center" ng-model="vm.searchWithBound" aria-label="searchWithBound" style="font-size: 10px;">
+	<div layout="row" layout-align="center center" style="padding: 0 20px; ">
+		<md-input-container flex class="md-primary wtfsafari" style="padding-top: 12px;margin-bottom: 0;">
+			<label style="color:#000; top:-12px;">搜索</label>
+			<input ng-model="vm.searchGoodsName" aria-label="goodsName" style="border-bottom-color: #000;">
+		</md-input-container>
+		<md-button class="seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory, bound:vm.searchWithBound ? vm.mapBound : '', global:vm.searchWithBound ? 0 : 1})">
+			<md-icon md-font-set="material-icons">search</md-icon>
+		</md-button>
+	</div>
+	<div layout="row" layout-align="start center" layout-margin style="padding-left:4px;">
+		<md-input-container flex="65" flex-gt-xs="85">
+			<label>種類</label>
+			<md-select ng-model="vm.searchGoodsCategory" aria-label="cate">
+				<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">
+					{{cate.alias}}
+				</md-option>
+			</md-select>
+		</md-input-container>
+		<!-- <div flex="85" layout="row" layout-wrap hide-xs>
+			<div class="cate-btn" flex="15" layout-margin layout="row" layout-align="center center" ng-repeat="cate in vm.availableCategory">{{cate.alias}}</div>
+			
+		</div> -->
+		<div flex="35" layout layout-align="center center">
+			<md-switch class="switch" ng-model="vm.searchWithBound" aria-label="searchWithBound" style="font-size: 10px;">
 				<md-tooltip>搜尋視界內物品/搜尋全世界</md-tooltip>
 				<span style="color:black;">{{ vm.searchWithBound ? '視界內' : '全域' }}</span>
 			</md-switch>
 		</div>
 	</div>
-</md-toolbar>
-<md-content resize ng-style="resizeWithOffset(216)" style="background-color: #EEEEEE;">
+</div>
+<md-content resize ng-style="resizeWithOffset(236)" style="background-color: #EEEEEE;">
 	<div class="md-padding"></div>
 	<div layout layout-align="center center" ng-show="vm.goods.length === 0 && !vm.loading" style="width:100%;height:90%">
 		<img class="img-null onseek" src="../../images/emoji_null.png">

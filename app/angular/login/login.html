@@ -1,0 +1,20 @@
+<div>
+    <label for="">信箱</label>
+    <input ng-model="vm.user">
+
+    <br>
+    
+    <label for="">密碼</label>
+    <input type="password" name="password" ng-model="vm.password" ng-keyup="$event.keyCode === 13 ? vm.loginSubmit() : null">
+    <br>
+    <button ng-click="loginSubmit()">登入</button>
+
+    <br>
+    <hr>
+    或
+    <br>
+
+    <button style="width:30%; background-color: #3B5998" ng-click="fb_login()">
+        Facebook 登入
+    </button>
+</div>

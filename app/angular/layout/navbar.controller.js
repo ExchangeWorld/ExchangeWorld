@@ -118,6 +118,7 @@ function NavbarController(
 	}
 
 	function onLogin() {
+		$state.go('root.oneCol.login');
 		auth
 			.login()
 			.then(function(user) {

@@ -40,7 +40,8 @@ function NavbarController(
 	vm.closeMenu           = ()=> $mdMenu.hide();
 	vm.report              = report;
 	vm.onClick             = onClick;
-	vm.onLogin             = onLogin;
+	vm.onSignup            = () => $rootScope.openSignupModal();//$state.go('root.oneCol.signup');
+	vm.onLogin             = () => $rootScope.openLoginModal();//$state.go('root.oneCol.login');
 	vm.onLogout            = onLogout;
 	vm.user                = $localStorage.user;
 	vm.notifications       = [];
@@ -62,15 +63,6 @@ function NavbarController(
 
 	function activate() {
 		$rootScope.isLoggedIn = Boolean($localStorage.user);
-
-		auth
-			.getLoginState()
-			.then(function(data) {
-				vm.user = data;
-				$rootScope.isLoggedIn = Boolean(data);
-			});
-
-		//updateNotification();
 	}
 
 	function openMenu($mdOpenMenu, e) {
@@ -84,7 +76,7 @@ function NavbarController(
 		if ([0, 5, 6].indexOf(contentIndex) !== -1) {
 			$state.go('root.oneCol.' + state[contentIndex]);
 		} else if(contentIndex === 3) {
-			if (!$localStorage.user) onLogin();
+			if (!$localStorage.user) vm.onLogin();
 			else  $state.go('root.oneCol.' + state[contentIndex], {uid: vm.user.uid});
 		} else {
 			const isFromOneCol = $state.includes("root.oneCol");
@@ -117,24 +109,14 @@ function NavbarController(
 		vm.closeMenu();
 	}
 
-	function onLogin() {
-		auth
-			.login()
-			.then(function(user) {
-				vm.user = user;
-				$rootScope.isLoggedIn = Boolean(user);
-				$state.reload();
-			});
-	}
-
 	function onLogout() {
 		auth
 			.logout()
 			.then(function(){
 				$state.reload();
+				vm.user = null;
+				$rootScope.isLoggedIn = false;
 			});
-		vm.user = null;
-		$rootScope.isLoggedIn = false;
 	}
 
 	function onClickNotification(notice) {

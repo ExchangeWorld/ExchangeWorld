@@ -28,7 +28,7 @@ function buildScript(file) {
 		fullPaths: true
 	}, watchify.args);
 
-	if ( !global.isProd ) {
+	if (!global.isProd) {
 		bundler = watchify(bundler);
 		bundler.on('update', function() {
 			rebundle();
@@ -43,7 +43,10 @@ function buildScript(file) {
 		'bulkify'
 	];
 
-    bundler.transform(babelify, {presets: ["es2015"], plugins: ["syntax-async-functions", "transform-regenerator"]});
+	bundler.transform(babelify, {
+		presets: ["es2015"],
+		plugins: ["syntax-async-functions", "transform-regenerator"]
+	});
 	transforms.forEach(function(transform) {
 		bundler.transform(transform);
 	});
@@ -59,11 +62,16 @@ function buildScript(file) {
 			.pipe(gulpif(createSourcemap, buffer()))
 			.pipe(gulpif(createSourcemap, sourcemaps.init()))
 			.pipe(gulpif(global.isProd, streamify(uglify({
-				compress: { drop_console: true }
+				compress: {
+					drop_console: true
+				}
 			}))))
 			.pipe(gulpif(createSourcemap, sourcemaps.write('./')))
 			.pipe(gulp.dest(config.scripts.dest))
-			.pipe(gulpif(browserSync.active, browserSync.reload({ stream: true, once: true })));
+			.pipe(gulpif(browserSync.active, browserSync.reload({
+				stream: true,
+				once: true
+			})));
 	}
 
 	return rebundle();

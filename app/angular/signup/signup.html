@@ -1,6 +1,6 @@
-<md-content resize ng-style="resizeWithOffset(56)">
+<md-content>
     <div layout="column" layout-align="center center" layout-fill>
-        <div layout="column" style="min-width:400px; width:65%; padding:80px 20px; background-color:#ECEFF1; border-radius: 12px;">
+        <div layout="column" style="min-width:600px; width:65%; padding:80px 20px; background-color:#ECEFF1; border-radius: 12px; margin:20px;">
             <div style="text-align:center; font-size:24px;">註冊 ExchangeWorld 帳號</div>
             <div layout layout-align="center center" style="margin-top:20px;">
                 <md-button style="width:80%;background-color: #3B5998; color:#fff;" ng-click="vm.signupFb()">
@@ -40,6 +40,10 @@
                 <md-button class="md-primary md-raised" style="width:80%;" ng-click="vm.signup()">
                     <i class="fa fa-user-plus"></i> 立即加入
                 </md-button>
+            </div>
+
+            <div ng-click="vm.goLogin()" layout layout-align="end end" style="padding-right:10%; cursor:pointer; font-size: 14px; color: #555; text-decoration: underline;">
+                已經有帳號
             </div>
         </div>
     </div>

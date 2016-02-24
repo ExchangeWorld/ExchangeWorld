@@ -36,11 +36,13 @@ function getStates() {
 }
 
 /** @ngInject */
-function setGlobalFunc($rootScope, $state, $window, message){
-	$rootScope.historyCounter = 1;
-	$rootScope.onClickUser    = onClickUser;
-	$rootScope.onClickFollow  = onClickFollow;
-	$rootScope.onClickMessage = onClickMessage;
+function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia){
+	$rootScope.historyCounter  = 1;
+	$rootScope.onClickUser     = onClickUser;
+	$rootScope.onClickFollow   = onClickFollow;
+	$rootScope.onClickMessage  = onClickMessage;
+	$rootScope.openSignupModal = openSignupModal;
+	$rootScope.openLoginModal  = openLoginModal;
 
 	function onClickUser(uid) {
 		if($window.innerWidth > 600) {
@@ -69,6 +71,40 @@ function setGlobalFunc($rootScope, $state, $window, message){
 			message.showMessagebox(ev, msg);
 		} else {
 			$state.go('root.oneCol.m_message', { msg: msg });
+		}
+	}
+
+	function openSignupModal() {
+		let fullscreen = ($mdMedia('sm') || $mdMedia('xs'));
+		if (fullscreen) {
+			$state.go('root.oneCol.signup');
+		} else {
+			let mdScope = $rootScope.$new();
+			mdScope.instance = $mdDialog.show({
+				templateUrl: 'signup/signup.html',
+				controllerAs: 'vm',
+				controller: 'SignupController',
+				clickOutsideToClose: true,
+				//fullscreen: true,//fullscreen,
+				scope: mdScope
+			});
+		}
+	}
+
+	function openLoginModal() {
+		let fullscreen = ($mdMedia('sm') || $mdMedia('xs'));
+		if (fullscreen) {
+			$state.go('root.oneCol.login');
+		} else {
+			let mdScope = $rootScope.$new();
+			mdScope.instance = $mdDialog.show({
+				templateUrl: 'login/login.html',
+				controllerAs: 'vm',
+				controller: 'LoginController',
+				clickOutsideToClose: true,
+				//fullscreen: true,//fullscreen,
+				scope: mdScope
+			});
 		}
 	}
 }

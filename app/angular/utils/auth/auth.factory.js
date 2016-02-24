@@ -38,11 +38,8 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 						identity: identity,
 						password: password
 					});
-				$localStorage.token = token.token;
-				Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {
-					token: $localStorage.token
-				});
 
+				updateToken(token.token);
 				currentUser = await Restangular.oneUrl('user/me').get();
 			}
 			defer.resolve(currentUser);
@@ -60,6 +57,7 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 			//await facebookService.logout();
 			currentUser = null;
 			$localStorage.user = null;
+			updateToken(null);
 			defer.resolve(null);
 		} catch (err) {
 			defer.reject(err);
@@ -116,9 +114,7 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 			// let user fill email if email is empty
 			if (currentUser && currentUser.email.length === 0) showEmailBox(currentUser);
 
-			Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {
-				token: $localStorage.token
-			});
+			updateToken($localStorage.token);
 			defer.resolve(currentUser);
 		} catch (err) {
 			defer.reject(err);
@@ -138,6 +134,13 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular) {
 		return {
 			msg: 'success'
 		};
+	}
+
+	function updateToken(token) {
+		$localStorage.token = token;
+		Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {
+			token: $localStorage.token
+		});
 	}
 
 	function showEmailBox(user) {

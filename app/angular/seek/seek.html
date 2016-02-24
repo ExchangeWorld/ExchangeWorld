@@ -1,81 +1,53 @@
-<md-toolbar class="md-primary md-hue-3 md-whiteframe-z2" style="height: 76px;">
+<md-toolbar class="md-whiteframe-z2" style="height:160px; background-color: #bbe7f0; padding-bottom:20px;">
 	<!-- search input bar & button -->
-	<div layout="row" layout-align="start center">
-		<md-input-container
-			flex="45" flex-sm="35"
-			class="md-primary wtfsafari"
-			style="padding-left: 10px;"
-		>
-			<label style="top:2px;">搜索</label>
-			<input ng-model="vm.searchGoodsName" aria-label="goodsName">
-		</md-input-container>
-		<md-input-container flex>
-			<label>種類</label>
-			<md-select ng-model="vm.searchGoodsCategory" aria-label="cate">
-				<md-option
-					ng-repeat="cate in vm.availableCategory"
-					value="{{cate.label}}"
-				>
-					{{cate.alias}}
-				</md-option>
-			</md-select>
-		</md-input-container>
-		<md-switch
-			class="switch"
-			flex="15"
-			ng-model="vm.searchWithBound"
-			aria-label="searchWithBound"
-			style="font-size: 10px;"
-			layout-sm="column"
-		>
-			<md-tooltip>搜尋視界內物品/搜尋全世界</md-tooltip>
-			<span>{{ vm.searchWithBound ? '視界內' : '全域' }}</span>
-		</md-switch>
-		<md-button
-			flex flex-sm="5"
-			class="md-accent md-raised md-hue-1 seek_btn"
-			ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory, bound:vm.searchWithBound ? vm.mapBound : '', global:vm.searchWithBound ? 0 : 1})"
-		>
-			<md-icon md-font-set="material-icons">search</md-icon>
-			<span hide-sm>搜索!</span>
-		</md-button>
+	<div layout="column">
+		<div layout="row" layout-align="start center" layout-margin style="padding: 0 20px;">
+			<md-input-container flex="85" flex-sm="75" class="md-primary wtfsafari">
+				<label style="color:#000;">搜索</label>
+				<input ng-model="vm.searchGoodsName" aria-label="goodsName" style="border-bottom-color: #000;">
+			</md-input-container>
+			<md-button class="seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory, bound:vm.searchWithBound ? vm.mapBound : '', global:vm.searchWithBound ? 0 : 1})">
+				<md-icon md-font-set="material-icons">search</md-icon>
+				<!-- <span hide-sm>搜索!</span> -->
+			</md-button>
+		</div>
+		<div layout="row" layout-align="start center" layout-margin style="padding:0 20px;">
+			<md-input-container hide-gt-sm flex>
+				<label>種類</label>
+				<md-select ng-model="vm.searchGoodsCategory" aria-label="cate">
+					<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">
+						{{cate.alias}}
+					</md-option>
+				</md-select>
+			</md-input-container>
+			<div flex="85" layout="row" layout-align="center center" layout-wrap hide-sm>
+				<div class="cate-btn" flex="15" layout layout-align="center center" layout-margin ng-repeat="cate in vm.availableCategory"><span>{{cate.alias}}</span></div>
+				<!-- <div class="cate-btn" flex layout layout-align="center center" layout-margin><span>全部</span></div>
+				<div class="cate-btn" flex layout layout-align="center center" layout-margin><span>書籍</span></div>
+				<div class="cate-btn" flex layout layout-align="center center" layout-margin><span>服飾</span></div>
+				<div class="cate-btn" flex layout layout-align="center center" layout-margin><span>3C</span></div>
+				<div class="cate-btn" flex layout layout-align="center center" layout-margin><span>其他</span></div> -->
+			</div>
+			<md-switch class="switch" flex="15" flex-sm layout="column" layout-align="center center" ng-model="vm.searchWithBound" aria-label="searchWithBound" style="font-size: 10px;">
+				<md-tooltip>搜尋視界內物品/搜尋全世界</md-tooltip>
+				<span style="color:black;">{{ vm.searchWithBound ? '視界內' : '全域' }}</span>
+			</md-switch>
+		</div>
 	</div>
 </md-toolbar>
-
-<md-content resize ng-style="resizeWithOffset(132)">
+<md-content resize ng-style="resizeWithOffset(216)" style="background-color: #EEEEEE;">
 	<div class="md-padding"></div>
-	<div
-		layout layout-align="center center"
-		ng-show="vm.goods.length === 0 && !vm.loading"
-		style="width:100%;height:90%"
-	>
+	<div layout layout-align="center center" ng-show="vm.goods.length === 0 && !vm.loading" style="width:100%;height:90%">
 		<img class="img-null onseek" src="../../images/emoji_null.png">
 	</div>
-
 	<div class="grid-wrapper">
 		<div class="grid__columns">
 			<div ng-repeat="card in vm.goods">
 				<md-card class="md-whiteframe-z4 item card">
-					<a
-						ng-href="/seek/{{card.gid}}"
-						ng-mouseenter="onMouseOver(card.gid)"
-						ng-mouseleave="onMouseOut(card.gid)"
-					>
+					<a ng-href="/seek/{{card.gid}}" ng-mouseenter="onMouseOver(card.gid)" ng-mouseleave="onMouseOut(card.gid)">
 						<!-- <photoslider images="card.photo_path" class="md-card-image"></photoslider> -->
-						<img
-							width="300"
-							data-ng-src="{{postfixImageUrl(card.photo_path[0])}}"
-							class="md-card-image"
-							ng-show="card.category !== 'Christmas'"
-						>
-
-						<img
-							width="300"
-							src="./../images/Gift(Small).jpg"
-							class="md-card-image"
-							ng-show="card.category === 'Christmas'"
-						>
-
+						<img width="300" data-ng-src="{{postfixImageUrl(card.photo_path[0])}}" class="md-card-image" ng-show="card.category !== 'Christmas'">
+						<img width="300" src="./../images/Gift(Small).jpg" class="md-card-image" ng-show="card.category === 'Christmas'">
 						<h2 class="md-title" style="margin:0; padding: 7px; text-align: center;">
 							{{card.name}}
 						</h2>
@@ -84,48 +56,24 @@
 						<div layout="column">
 							<div layout="row" style="margin:0 0 10px 0;">
 								<div flex layout="row" layout-align="center center">
-									<i
-										ng-click="onClickFavorite($event, card)"
-										class="material-icons heart-seek"
-										style="outline: 0"
-									>
-										{{ card.starredByUser ? 'favorite' : 'favorite_border' }}
+									<i ng-click="onClickFavorite($event, card)" class="material-icons heart-seek" style="outline: 0">
+										{{ card.favorited ? 'favorite' : 'favorite_border' }}
 									</i>
-
-									<img
-										data-ng-src="../../images/icon/{{card.category}}.svg"
-										style="height:24px; width:auto;"
-									/>
+									<img data-ng-src="../../images/icon/{{card.category}}.svg" style="height:24px; width:auto;" />
 								</div>
 								<div flex layout layout-align="center center">
-									<img
-										class="circle hvr-grow"
-										style="border-radius: 50%; cursor: pointer;"
-										data-ng-src="{{card.owner.photo_path}}"
-										ng-click="onClickUser($event, card.owner.uid)"
-									/>
+									<img class="circle hvr-grow" style="border-radius: 50%; cursor: pointer;" data-ng-src="{{card.user.photo_path}}" ng-click="onClickUser($event, card.user.uid)" />
 								</div>
 							</div>
 						</div>
 					</md-card-content>
 				</md-card>
+			</div>
 		</div>
-	</div>
-
 </md-content>
-
-
-<div 
-	ng-show="vm.loading" 
-	class="md-scroll-mask" 
-	style="z-index: 100;"
-	resize ng-style="resizeWithOffset(132)" 
->
+<div ng-show="vm.loading" class="md-scroll-mask" style="z-index: 100;" resize ng-style="resizeWithOffset(132)">
 	<div layout layout-fill layout-align="center center">
-		<md-progress-circular
-			class="md-primary"
-			md-mode='indeterminate'
-		></md-progress-circular>
+		<md-progress-circular class="md-primary" md-mode='indeterminate'></md-progress-circular>
 	</div>
 	<div class="md-scroll-mask-bar"></div>
 </div>

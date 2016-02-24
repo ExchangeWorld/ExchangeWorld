@@ -65,4 +65,11 @@
 		font-size: 48px;
 		color: rgb(84, 110, 122);
 	}
+	&.toolbar {
+		color: black;
+	}
+}
+
+md-toolbar:not(.md-menu-toolbar) md-icon {
+	color: #262626;
 }

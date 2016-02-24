@@ -23,7 +23,6 @@ function LoginController(
 	};
 
 	async function login(fb) {
-
 		try {
 			let user = await auth.login(fb, vm.form.id, vm.form.pwd);
 			$rootScope.isLoggedIn = Boolean(user);
@@ -44,14 +43,6 @@ function LoginController(
 			$rootScope.openSignupModal();
 		} else {
 			$state.go('root.oneCol.signup');
-		}
-	}
-	function goLogin() {
-		if ($scope.instance) {
-			$mdDialog.hide();
-			$rootScope.openLoginModal();
-		} else {
-			$state.go('root.oneCol.login');
 		}
 	}
 

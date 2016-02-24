@@ -40,8 +40,8 @@ function NavbarController(
 	vm.closeMenu           = ()=> $mdMenu.hide();
 	vm.report              = report;
 	vm.onClick             = onClick;
-	vm.onSignup            = () => $rootScope.openSignupModal();//$state.go('root.oneCol.signup');
-	vm.onLogin             = () => $rootScope.openLoginModal();//$state.go('root.oneCol.login');
+	vm.onSignup            = () => $state.go('root.oneCol.signup');
+	vm.onLogin             = () => $state.go('root.oneCol.login');
 	vm.onLogout            = onLogout;
 	vm.user                = $localStorage.user;
 	vm.notifications       = [];

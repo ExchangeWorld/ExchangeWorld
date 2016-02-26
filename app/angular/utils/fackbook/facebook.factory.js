@@ -88,6 +88,9 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 			let registerData = await Restangular.all('authenticate/register').post(newUser);
 			let token = await Restangular.all('authenticate/login').post({ fb: true, identity: registerData.identity });
 			$localStorage.token = token.token;
+			Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {
+				token: $localStorage.token
+			});
 
 			$localStorage.user = registerData;
 			defer.resolve(registerData);

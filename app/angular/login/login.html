@@ -1,0 +1,28 @@
+<md-content>
+	<div layout="column" layout-align="center center" layout-fill>
+		<div layout="column" style="min-width:400px; padding:60px 20px; background-color:#ECEFF1; border-radius: 12px; margin:20px;">
+			<md-input-container>
+				<label style="color:#000; top:-20px;">帳號(電子郵件信箱)</label>
+				<input type="text" ng-model="vm.form.id" required>
+			</md-input-container>
+			<md-input-container>
+				<label style="color:#000; top:-20px;">密碼</label>
+				<input type="password" name="password" ng-model="vm.form.pwd" ng-keyup="$event.keyCode === 13 ? vm.login(false) : null" required>
+			</md-input-container>
+			<div layout layout-align="end end">
+				<md-button class="md-primary md-raised" style="width:100%;" ng-click="vm.login(false)">
+					<i class="fa fa-sign-in"></i> 登入
+				</md-button>
+			</div>
+			<div layout layout-align="center center" style="margin-top:20px;">
+				<md-button style="width:100%;background-color: #3B5998; color:#fff;" ng-click="vm.login(true)">
+					<i class="fa fa-facebook"></i> Facebook 登入
+				</md-button>
+			</div>
+			<div ng-click="vm.goSignup()" layout layout-align="end end" style="padding-top: 3%;padding-right:1%; cursor:pointer; font-size: 14px; color: #555; text-decoration: underline;">
+				還沒有帳號
+			</div>
+			<!-- </div> -->
+		</div>
+	</div>
+</md-content>

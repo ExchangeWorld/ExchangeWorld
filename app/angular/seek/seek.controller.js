@@ -83,6 +83,8 @@ function SeekController(
 	function onClickFavorite(e, goods) {
 		e.preventDefault();
 		e.stopPropagation();
+        
+        //TODO: use /api/user/me
 		if (!$localStorage.user) {
 			auth
 				.login()

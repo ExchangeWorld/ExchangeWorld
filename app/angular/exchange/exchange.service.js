@@ -58,10 +58,11 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 		return defer.promise;
 	}
 
-	async function rating(goods, rate) {
+	async function rating(gid, rate) {
 		const defer = $q.defer();
 
 		try {
+			let goods = await Restangular.one('goods', gid).get();
 			goods.route = `goods/${goods.gid}/rate`;
 			goods.rate = rate;
 			await goods.put();
@@ -77,8 +78,8 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 		const defer = $q.defer();
 
 		try {
-			exchange.route = `exchange/${exchange.eid}/agree`;
-			await exchange.put();
+			await Restangular.one('exchange', exchange.eid).one('agree').put();
+			defer.resolve(null);
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);
 			defer.reject(err);
@@ -91,8 +92,8 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 		const defer = $q.defer();
 
 		try {
-			exchange.route = `exchange/${exchange.eid}/drop`;
-			await exchange.put();
+			await Restangular.one('exchange', exchange.eid).one('drop').put();
+			defer.resolve(null);
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);
 			defer.reject(err);
@@ -143,7 +144,7 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 		return defer.promise;
 	}
 
-	function showCompleteExchange(ev, thisExchange, myid, callback) {
+	function showCompleteExchange(ev, thisExchange, callback) {
 		$mdDialog.show({
 			clickOutsideToClose: true,
 			templateUrl: 'exchange/exchange.complete.html',
@@ -151,26 +152,16 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 			controller: onCompleteController,
 			locals: {
 				thisExchange: thisExchange,
-				myid: myid,
 			}
 		});
-		function onCompleteController($mdDialog, logger, exchangeService, thisExchange, myid) {
+
+		/** @ngInject */
+		function onCompleteController($mdDialog, logger, exchangeService, thisExchange) {
 			const vm        = this;
 			vm.thisExchange = thisExchange;
-			vm.myuid        = parseInt(myid, 10);
-			vm.mygid        = '';
-			vm.othersgid    = '';
 			vm.rating       = 3;
 			vm.confirm      = onConfirm;
 			vm.cancel       = onCancel;
-
-			activate();
-
-			function activate() {
-				vm.mygid     = vm.thisExchange.details.goods[vm.thisExchange.lookupTable.me].gid;
-				vm.othersgid = vm.thisExchange.details.goods[vm.thisExchange.lookupTable.other].gid;
-			}
-
 
 			function onConfirm(scores) {
 				$mdDialog
@@ -178,9 +169,9 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 					.then(function(scores) {
 						
 						exchangeService
-							.agreeExchange(thisExchange, vm.mygid)
+							.agreeExchange(thisExchange)
 							.then(function(data) {
-								exchangeService.rating(vm.othersgid, scores);
+								exchangeService.rating(vm.thisExchange.other_goods.gid, scores);
 								logger.success('成功評價此交易', data, 'DONE');
 								callback();
 							});

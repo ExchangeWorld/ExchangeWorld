@@ -9,51 +9,51 @@ function appRun(routerHelper) {
 }
 
 function getStates() {
-	return [
-		{
-			state : 'root',
-			config : {
-				abstract : true,
-				templateUrl : 'layout/layout.html',
-				onEnter: setGlobalFunc
-			}
-		},
-		{
-			state : 'root.withSidenav',
-			config : {
-				abstract : true,
-				templateUrl: 'layout/withSidenav.html',
-			},
-		},
-		{
-			state : 'root.oneCol',
-			config : {
-				abstract : true,
-				templateUrl: 'layout/oneColumn.html',
-			},
+	return [{
+		state: 'root',
+		config: {
+			abstract: true,
+			templateUrl: 'layout/layout.html',
+			onEnter: setGlobalFunc
 		}
-	];
+	}, {
+		state: 'root.withSidenav',
+		config: {
+			abstract: true,
+			templateUrl: 'layout/withSidenav.html',
+		},
+	}, {
+		state: 'root.oneCol',
+		config: {
+			abstract: true,
+			templateUrl: 'layout/oneColumn.html',
+		},
+	}];
 }
 
 /** @ngInject */
-function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia){
-	$rootScope.historyCounter  = 1;
-	$rootScope.onClickUser     = onClickUser;
-	$rootScope.onClickFollow   = onClickFollow;
-	$rootScope.onClickMessage  = onClickMessage;
+function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia) {
+	$rootScope.historyCounter = 1;
+	$rootScope.onClickUser = onClickUser;
+	$rootScope.onClickFollow = onClickFollow;
+	$rootScope.onClickMessage = onClickMessage;
 	$rootScope.openSignupModal = openSignupModal;
-	$rootScope.openLoginModal  = openLoginModal;
+	$rootScope.openLoginModal = openLoginModal;
 
 	function onClickUser(uid) {
-		if($window.innerWidth > 600) {
-			$state.go('root.withSidenav.profile', { uid: uid });
+		if ($window.innerWidth > 600) {
+			$state.go('root.withSidenav.profile', {
+				uid: uid
+			});
 		} else {
-			$state.go('root.oneCol.m_profile', { uid: uid });
+			$state.go('root.oneCol.m_profile', {
+				uid: uid
+			});
 		}
 	}
 
 	function onClickFollow(uid, type) {
-		if($window.innerWidth > 600) {
+		if ($window.innerWidth > 600) {
 			$state.go('root.withSidenav.follow', {
 				uid: uid,
 				type: type
@@ -67,10 +67,12 @@ function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia
 	}
 
 	function onClickMessage(ev, msg) {
-		if($window.innerWidth > 600) {
+		if ($window.innerWidth > 600) {
 			message.showMessagebox(ev, msg);
 		} else {
-			$state.go('root.oneCol.m_message', { msg: msg });
+			$state.go('root.oneCol.m_message', {
+				msg: msg
+			});
 		}
 	}
 

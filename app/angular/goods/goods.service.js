@@ -5,7 +5,7 @@ const _           = require('lodash');
 goodsModule.factory('goodsService', goodsService);
 
 /** @ngInject */
-function goodsService(Restangular, $q, exception, $mdDialog) {
+function goodsService(Restangular, $q, exception, $mdDialog, $mdMedia) {
 
 	const service = {
 		getGood,
@@ -209,10 +209,10 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 		const defer = $q.defer();
 		try {
 			let newExchange = {
-				goods1_gid: goods1Gid,
-				goods2_gid: goods2Gid,
+				goods_one_gid: goods1Gid,
+				goods_two_gid: goods2Gid,
 			};
-			let res = await Restangular.all('exchange/create').post({ newExchange });
+			let res = await Restangular.all('exchange/create').post(newExchange);
 
 			defer.resolve(res);
 		} catch (err) {
@@ -228,6 +228,7 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			templateUrl: 'goods/goods.queue.html',
 			controllerAs: 'vm',
 			controller: QueueController,
+			fullscreen: ($mdMedia('sm') || $mdMedia('xs')),
 			locals: {
 				myGoods: myGoods,
 				queuingGoodsGid: queuingGoodsGid,
@@ -268,13 +269,15 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			templateUrl: 'goods/goods.queuing.html',
 			controllerAs: 'vm',
 			controller: QueuingController,
+			fullscreen: ($mdMedia('sm') || $mdMedia('xs')),
 			locals: {
 				queuingGoods: queuingGoods,
 				hostGoodsGid: hostGoodsGid,
 			}
 		});
 
-		function QueuingController($mdDialog, logger, queuingGoods, hostGoodsGid, $localStorage, notification, $state) {
+		/** @ngInject */
+		function QueuingController($mdDialog, logger, queuingGoods, hostGoodsGid, $localStorage, notification, $state, exception) {
 			const vm        = this;
 			vm.queuingGoods = queuingGoods;
 			vm.hostGoodsGid = hostGoodsGid;
@@ -283,14 +286,18 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			vm.onClickGoods = gid => $state.go('root.withSidenav.goods', { gid: gid });
 
 			async function onConfirm(selectedGoods) {
-				selectedGoods = JSON.parse(selectedGoods);
-				await $mdDialog.hide(selectedGoods);
+				try {
+					selectedGoods = JSON.parse(selectedGoods);
+					await $mdDialog.hide(selectedGoods);
 
-				let newExchange = await postExchange(selectedGoods.gid, hostGoodsGid);
-				logger.success('成功接受一個排', newExchange, 'DONE');
+					let newExchange = await postExchange(selectedGoods.gid, hostGoodsGid);
+					logger.success('成功接受一個排', newExchange, 'DONE');
 
-				if ($state.current.name === 'root.withSidenav.goods.queuing') {
-					$state.go('^');
+					if ($state.current.name === 'root.withSidenav.goods.queuing') {
+						$state.go('^');
+					}
+				} catch (err) {
+					exception.catcher('唉呀出錯了！')(err);
 				}
 			}
 

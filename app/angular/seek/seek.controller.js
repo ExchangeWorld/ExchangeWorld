@@ -84,7 +84,7 @@ function SeekController(
 		e.preventDefault();
 		e.stopPropagation();
         
-        //TODO: use /api/user/me
+		//TODO: use /api/user/me
 		if (!$localStorage.user) {
 			auth
 				.login()

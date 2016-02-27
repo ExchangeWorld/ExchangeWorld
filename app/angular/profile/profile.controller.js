@@ -61,7 +61,7 @@ function ProfileController(
 			}
 		}
 
-        //TODO; use /api/user/me
+		//TODO; use /api/user/me
 		if ($localStorage.user) {
 			vm.isMe = (profile.uid === $localStorage.user.uid);
 		} else {

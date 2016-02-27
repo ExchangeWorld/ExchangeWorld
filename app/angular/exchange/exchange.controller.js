@@ -34,22 +34,16 @@ function ExchangeController(
 	var vm             = this;
 	var ct             = new colorThief.ColorThief();
 	vm.goSeek          = ()=> $state.go('root.withSidenav.seek');
-	vm.myid            = parseInt($stateParams.uid, 10);
 	vm.exchangeList    = exchangeList;
 	vm.exchange        = undefined;
 	vm.chatroom        = [];
 	//vm.loadMore        = loadMore;
 	vm.chatContent     = '';
-	vm.onClickGoods    = (gid)=> $state.go('root.withSidenav.goods', { gid : gid });
 	vm.onClickExchange = onClickExchange;
 	vm.onClickComplete = onClickComplete;
 	vm.onClickDelete   = onClickDelete;
 	//vm.onSubmitChat    = onSubmitChat;
-	vm.agreed          = false;
 	vm.map             = { size: mapSize };
-
-	vm.meDesc = '';
-	vm.otherDesc = '';
 
 	vm.openLeftMenu    = () => $mdSidenav('left').toggle();
 	vm.openRightMenu   = () => $mdSidenav('right').toggle();
@@ -70,44 +64,43 @@ function ExchangeController(
 			.getExchange($stateParams.uid, exchange.eid)
 			.then(function(data) {
 				vm.exchange = data;
-				dominateColor(vm.exchange.owner_goods.photoPath, 'other');
-				dominateColor(vm.exchange.other_goods.photoPath, 'me');
+				dominateColor(vm.exchange.owner_goods, 'other');
+				dominateColor(vm.exchange.other_goods, 'me');
 
 				vm.map.marker = `${vm.exchange.other_goods.position_y},${vm.exchange.other_goods.position_x}`;
 			});
 
-		//updateChat();
-		//agreed();
 	}
 
 	function onClickComplete(ev) {
 		exchangeService
-			.showCompleteExchange(ev, vm.exchange, vm.myid, ()=> { 
+			.showCompleteExchange(ev, vm.exchange, ()=> { 
 				$state.reload();
 			});
-		//agreed();
 	}
 
-	function onClickDelete(ev, eid) {
-		var confirm = $mdDialog.confirm()
+	function onClickDelete(ev) {
+		let confirm = $mdDialog.confirm()
 			.title('放棄這個交易')
 			.content('您確定要放棄這個交易嗎？<br/>此動作無法恢復！')
 			.ariaLabel('Delete Exchange')
 			.ok('確定')
 			.cancel('取消')
 			.targetEvent(ev);
+
 		if (confirm) {
-			$mdDialog
-				.show(confirm)
+			$mdDialog.show(confirm)
 				.then(function() {
-					exchangeService.deleteExchange(eid, vm.exchange.details.goods[vm.exchange.lookupTable.me].owner_uid);
-					$state.reload();
+					exchangeService
+						.deleteExchange(vm.exchange)
+						.then(function(){
+							$state.reload();
+						});
 				});
 		}
 	}
 
 	function dominateColor(goods, who) {
-		// console.log(goods);
 		var image = document.getElementById(`img_${who}`);
 		image.onload = ()=> {
 			var pallete = ct.getPalette(image, 2);

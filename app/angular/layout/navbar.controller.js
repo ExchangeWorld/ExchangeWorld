@@ -64,7 +64,6 @@ function NavbarController(
 	function activate() {
 		$rootScope.isLoggedIn = Boolean($localStorage.user);
 		if ($rootScope.isLoggedIn) $rootScope.user = $localStorage.user;
-		console.log($rootScope.isLoggedIn, $rootScope.user);
 	}
 
 
@@ -80,7 +79,7 @@ function NavbarController(
 			$state.go('root.oneCol.' + state[contentIndex]);
 		} else if(contentIndex === 3) {
 			if (!$localStorage.user) vm.onLogin();
-			else  $state.go('root.oneCol.' + state[contentIndex], {uid: vm.user.uid});
+			else  $state.go('root.oneCol.' + state[contentIndex], {uid: $localStorage.user.uid});
 		} else {
 			const isFromOneCol = $state.includes("root.oneCol");
 
@@ -117,7 +116,7 @@ function NavbarController(
 			.logout()
 			.then(function(){
 				$state.go('root.oneCol.home');
-				vm.user = null;
+				$localStorage.user = null;
 			});
 	}
 
@@ -147,8 +146,8 @@ function NavbarController(
 
 		try {
 			let [notifications, messages] = await Promise.all([
-				notification.getNotification(vm.user.uid),
-				message.getMessage(vm.user.uid),
+				notification.getNotification($localStorage.user.uid),
+				message.getMessage($localStorage.user.uid),
 			]);
 
 			vm.notifications = notifications.map(function(notice) {

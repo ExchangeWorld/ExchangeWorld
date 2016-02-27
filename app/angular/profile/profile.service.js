@@ -59,7 +59,7 @@ function profileService(Restangular, $q, facebookService, exception, logger) {
 		const defer = $q.defer();
 
 		profile.route = 'user/profile/edit';
-        profile.byuser = byUserGen(profile.uid);
+        profile.byuser = byuserGen(profile.uid);
 
 
 		profile

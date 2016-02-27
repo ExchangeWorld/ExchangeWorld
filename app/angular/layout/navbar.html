@@ -88,19 +88,19 @@
 				</md-menu-content>
 			</md-menu>
 		</div>
-		<div flex flex-sm="10" offset-sm="80" layout="row" layout-align="center center">
+		<div flex flex-xs="10" flex-offset-xs="80" layout="row" layout-align="center center">
 			<md-button ng-hide="$root.isLoggedIn" ng-click="vm.onSignup()">
 				<span class="toolbar-span">註冊</span>
 			</md-button>
 			<md-button ng-hide="$root.isLoggedIn" ng-click="vm.onLogin()">
 				<span class="toolbar-span">登入</span>
 			</md-button>
-			<md-menu flex flex-sm="70" md-offset="-10 64">
+			<md-menu flex flex-xs="70" md-offset="-10 64">
 				<md-button ng-show="$root.isLoggedIn" ng-click="vm.openMenu($mdOpenMenu, $event)" style="width: 100%;">
 					<div ng-show="$root.isLoggedIn" layout="row" layout-align="center center">
-						<img hide-sm hide-md class="img-navbar" ng-src="{{ $root.user.photo_path }}"></img>
-						<span hide-sm hide-md class="nav-user toolbar-span">{{ $root.user.name }}</span>
-						<md-icon hide-gt-lg hide-lg class="material-icons">menu</md-icon>
+						<img hide-xs hide-sm class="img-navbar" ng-src="{{ $root.user.photo_path }}"></img>
+						<span hide-xs hide-sm class="nav-user toolbar-span">{{ $root.user.name }}</span>
+						<md-icon hide-gt-sm class="material-icons">menu</md-icon>
 					</div>
 				</md-button>
 				<md-menu-content width="3">
@@ -116,7 +116,7 @@
 					<md-menu-item>
 						<md-button ng-click="vm.onClick(4)">個人資料</md-button>
 					</md-menu-item>
-					<md-menu-item hide-gt-sm>
+					<md-menu-item hide-gt-xs>
 						<md-button ng-click="vm.onClick(5)" ng-show="$root.isLoggedIn">
 							訊息
 							<div layout layout-align="center center">
@@ -124,7 +124,7 @@
 							</div>
 						</md-button>
 					</md-menu-item>
-					<md-menu-item hide-gt-sm>
+					<md-menu-item hide-gt-xs>
 						<md-button ng-click="vm.onClick(6)" ng-show="$root.isLoggedIn">
 							<div layout layout-align="start center">
 								通知
@@ -132,7 +132,7 @@
 							</div>
 						</md-button>
 					</md-menu-item>
-					<md-menu-item hide-xs hide-sm>
+					<md-menu-item hide-xs hide-xs>
 						<a ng-href="https://goo.gl/ObSQOm" target="_blank">粉絲專頁</a>
 					</md-menu-item>
 					<!-- <md-menu-divider></md-menu-divider> -->

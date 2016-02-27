@@ -28,20 +28,20 @@
 						<i class="material-icons md-36">chat</i>
 					</div>
 				</md-button>
-				<a 
-					ng-disabled="!vm.agreed"
-					ng-show="vm.exchange !== undefined"
-					class="md-button md-fab white-btn" href="#" 
-					socialshare socialshare-provider="facebook"
-					socialshare-url="http://exwd.csie.org/xmas-share.html"
-	  				style="min-width:40px;"
-				>
-					<md-icon md-font-set="material-icons">share</md-icon>
-					<md-tooltip>分享...</md-tooltip>
-				</a>
+				<!--<a -->
+					<!--ng-disabled="!vm.exchange.owner_agree"-->
+					<!--ng-show="vm.exchange !== undefined"-->
+					<!--class="md-button md-fab white-btn" href="#" -->
+					<!--socialshare socialshare-provider="facebook"-->
+					<!--socialshare-url="http://exwd.csie.org/xmas-share.html"-->
+					  <!--style="min-width:40px;"-->
+				<!-->-->
+					<!--<md-icon md-font-set="material-icons">share</md-icon>-->
+					<!--<md-tooltip>分享...</md-tooltip>-->
+				<!--</a>-->
 			</div>
 			<md-sidenav md-component-id="left" class="md-sidenav-left">
-				<div class="event-btn" layout="row" layout-algin="center center" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange); vm.closeleft()" ng-class="{'agreed-btn': exchange.goods1_agree && exchange.goods2_agree}">
+				<div class="event-btn" layout="row" layout-algin="center center" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange); vm.closeleft()" ng-class="{'exchange.owner_agree-btn': exchange.goods1_agree && exchange.goods2_agree}">
 					<div flex="25" layout layout-align="center center">
 						<img class="circle exchange" ng-src="{{exchange.other_goods.owner.photo_path}}" />
 					</div>
@@ -56,7 +56,7 @@
 			</md-sidenav>
 		</div>
 		<div class="sidebar-ex" flex-gt-md="20" layout="row" layout-gt-md="column" layout-align-xs="center center" style="max-height:100%; overflow-y: auto;" hide-xs hide-md>
-			<div class="event-btn hvr-bubble-float-left" layout="row" layout-algin="center center" flex-xs="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange)" ng-class="{'agreed-btn': exchange.goods1_agree && exchange.goods2_agree}">
+			<div class="event-btn hvr-bubble-float-left" layout="row" layout-algin="center center" flex-xs="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange)" ng-class="{'exchange.owner_agree-btn': exchange.goods1_agree && exchange.goods2_agree}">
 				<div flex="55" flex-sm="70" flex-xs="70" layout="column" layout-align="center center">
 					<p class="md-body-1 note goods-1">{{ exchange.other_goods.name }}</p>
 					<p class="md-body-1 note goods-2">{{ exchange.other_goods.owner.name }}</p>
@@ -80,7 +80,7 @@
 				<md-card flex="40" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.owner_goods.bgStyle">
 					<div layout="column">
 						<md-card ng-style="vm.exchange.owner_goods.bgStyle">
-							<div layout layout-align="center center" style="height:250px; width:auto;">
+							<a layout layout-align="center center" style="height:250px; width:auto;" ng-href="/seek/{{vm.exchange.owner_goods.gid}}">
 								<img 
 									id="img_me" 
 									crossorigin="anonymous" 
@@ -88,7 +88,7 @@
 									class="md-card-image" 
 									style="cursor:pointer; max-height: 100%; max-width: 100%; width:auto; "
 								/>
-							</div>
+							</a>
 						</md-card>
 						<md-card-content style="padding: 0;">
 							<div flex layout-fill layout="column">
@@ -119,24 +119,24 @@
 					</div>
 				</md-card>
 				<div flex="10" flex-xs="10" layout="column" layout-align="start center" style="padding-top:10%;">
-					<p class="vertical isUp" ng-show="!vm.agreed">確認交換</p>
-					<md-button class="md-fab ex-confirm" ng-show="!vm.agreed" ng-click="vm.onClickComplete($event)">
+					<p class="vertical isUp" ng-show="!vm.exchange.owner_agree">確認交換</p>
+					<md-button class="md-fab ex-confirm" ng-show="!vm.exchange.owner_agree" ng-click="vm.onClickComplete($event)">
 						<div layout layout-align="center center">
 							<img src="../../images/icon(48-48).png" />
 						</div>
 					</md-button>
-					<md-button class="md-fab white-btn" ng-show="!vm.agreed" ng-click="vm.onClickDelete($event, vm.exchange.eid)">
+					<md-button class="md-fab white-btn" ng-show="!vm.exchange.owner_agree" ng-click="vm.onClickDelete($event)">
 						<md-icon md-font-set="material-icons" style="color: #FFD54F">close</md-icon>
 					</md-button>
-					<p class="vertical isDown" ng-show="!vm.agreed">先不要換</p>
-					<md-button class="md-fab ex-confirm md-hue-1 md-accent" ng-show="vm.agreed" disabled="true">
+					<p class="vertical isDown" ng-show="!vm.exchange.owner_agree">先不要換</p>
+					<md-button class="md-fab ex-confirm md-hue-1 md-accent" ng-show="vm.exchange.owner_agree" disabled="true">
 						<div layout layout-align="center center">
 							<i class="material-icons confirm">done</i>
 						</div>
 					</md-button>
-					<p class="vertical isDown" ng-show="vm.agreed">已確認交換</p>
+					<p class="vertical isDown" ng-show="vm.exchange.owner_agree">已確認交換</p>
 					<a 
-						ng-disabled="!vm.agreed"
+						ng-disabled="!vm.owner_agree"
 						class="md-button md-fab white-btn" href="#" 
 						socialshare socialshare-provider="facebook"
 						socialshare-url="http://exwd.csie.org/xmas-share.html"
@@ -150,7 +150,7 @@
 				<md-card flex="40" flex-xs="40" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.other_goods.bgStyle">
 					<div layout="column">
 						<md-card ng-style="vm.exchange.other_goods.bgStyle">
-							<div layout layout-align="center center" style="height:250px; width:auto;">
+							<a layout layout-align="center center" style="height:250px; width:auto;" ng-href="/seek/{{vm.exchange.other_goods.gid}}">
 								<img 
 									id='img_other' 
 									crossorigin="anonymous" 
@@ -159,7 +159,7 @@
 									style="cursor:pointer; max-height: 100%; max-width: 100%; width:auto; "
 								>
 
-							</div>
+							</a>
 						</md-card>
 						<md-card-content style="padding: 0;">
 							<div flex layout-fill layout="column">

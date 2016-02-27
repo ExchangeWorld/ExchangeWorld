@@ -33,7 +33,8 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 
 	/** Login */
 	async function login() {
-		if (await getLoginStatus()) {
+		let loginStatus = await getLoginStatus();
+		if (loginStatus) {
 			return me();
 		} else {
 			return Facebook.login(function(response) {

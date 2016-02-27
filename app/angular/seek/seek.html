@@ -40,36 +40,27 @@
 			<div ng-repeat="card in vm.goods">
 				<md-card class="md-whiteframe-z4 item card" >
 					<a ng-href="/seek/{{card.gid}}" ng-mouseenter="onMouseOver(card.gid)" ng-mouseleave="onMouseOut(card.gid)">
-						<!-- <photoslider images="card.photo_path" class="md-card-image"></photoslider> -->
-						<img width="300" data-ng-src="{{postfixImageUrl(card.photo_path[0])}}" class="md-card-image" ng-show="card.category !== 'Christmas'">
-						<h2 style="margin:0; padding: 7px 10px 5px;">
+						<img width="300" data-ng-src="{{postfixImageUrl(card.photo_path[0])}}" class="md-card-image card-img" >
+						<h2 style="margin:0; padding: 15px 10px 0px;">
 							{{card.name}}
 						</h2>
-						<div layout="row" style="margin:0; padding: 0px 10px 5px;">
-							<div layout="row" class="card-info" ng-click="onClickFavorite($event, card)">
+						<div layout="row" style="margin:0; padding: 0px 10px 20px;">
+							<div class="card-info" ng-click="onClickFavorite($event, card)" style="align-items:center; display:flex;">
 								<img data-ng-src="../../images/icon/{{card.category}}.svg" style="height:20px; width:auto; margin-right:3px;" />
 								<span style="font-size: 14px;">{{ card.cate_alias }}</span>
 							</div>
-							<div class="card-info" ng-click="onClickFavorite($event, card)">
-								<i class="material-icons heart-seek" style="outline: 0; margin-right:0px; font-size:20px; vertical-align:middle;">
+							<div class="card-info" ng-click="onClickFavorite($event, card)" style="align-items:center; display:flex;">
+								<i class="material-icons heart-seek" style="outline: 0; margin-right:0px; font-size:20px;">
 									{{ card.favorited ? 'favorite' : 'favorite_border' }}
 								</i>
 								<span style="font-size: 14px;">{{ card.favorited ? '已關注' : '關注' }}</span>
 							</div>
-							<div class="card-info">
-								<i class="material-icons person" style="outline:0; margin-right:0px; font-size:20px; vertical-align:middle;">person</i>
+							<div class="card-info" style="align-items:center; display:flex;">
+								<i class="material-icons person" style="outline:0; margin-right:0px; font-size:20px;">person</i>
 								<span style="font-size: 14px;">fuck{{ card.owner.name }}</span>
 							</div>
 						</div>
 					</a>
-					<md-card-content style="padding: 0;">
-						<div layout="column">
-								<div flex layout="row" layout-align="center center">
-								</div>
-								<div flex layout layout-align="center center">
-								</div>
-						</div>
-					</md-card-content>
 				</md-card>
 			</div>
 		</div>

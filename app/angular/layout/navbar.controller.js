@@ -64,7 +64,6 @@ function NavbarController(
 	function activate() {
 		$rootScope.isLoggedIn = Boolean($localStorage.user);
 		if ($rootScope.isLoggedIn) $rootScope.user = $localStorage.user;
-		console.log($rootScope.isLoggedIn, $rootScope.user);
 	}
 
 

@@ -285,10 +285,8 @@ function goodsService(Restangular, $q, exception, $mdDialog, $mdMedia) {
 			vm.cancel       = onCancel;
 			vm.onClickGoods = gid => $state.go('root.withSidenav.goods', { gid: gid });
 
-			console.log(queuingGoods);
 			async function onConfirm(selectedGoods) {
 				try {
-					console.log(selectedGoods);
 					selectedGoods = JSON.parse(selectedGoods);
 					await $mdDialog.hide(selectedGoods);
 

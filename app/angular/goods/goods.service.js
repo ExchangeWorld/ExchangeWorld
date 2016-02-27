@@ -274,7 +274,8 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			}
 		});
 
-		function QueuingController($mdDialog, logger, queuingGoods, hostGoodsGid, $localStorage, notification, $state) {
+		/** @ngInject */
+		function QueuingController($mdDialog, logger, queuingGoods, hostGoodsGid, $localStorage, notification, $state, exception) {
 			const vm        = this;
 			vm.queuingGoods = queuingGoods;
 			vm.hostGoodsGid = hostGoodsGid;
@@ -283,14 +284,19 @@ function goodsService(Restangular, $q, exception, $mdDialog) {
 			vm.onClickGoods = gid => $state.go('root.withSidenav.goods', { gid: gid });
 
 			async function onConfirm(selectedGoods) {
-				selectedGoods = JSON.parse(selectedGoods);
-				await $mdDialog.hide(selectedGoods);
+				try {
+					console.log(selectedGoods);
+					selectedGoods = JSON.parse(selectedGoods);
+					await $mdDialog.hide(selectedGoods);
 
-				let newExchange = await postExchange(selectedGoods.gid, hostGoodsGid);
-				logger.success('成功接受一個排', newExchange, 'DONE');
+					let newExchange = await postExchange(selectedGoods.gid, hostGoodsGid);
+					logger.success('成功接受一個排', newExchange, 'DONE');
 
-				if ($state.current.name === 'root.withSidenav.goods.queuing') {
-					$state.go('^');
+					if ($state.current.name === 'root.withSidenav.goods.queuing') {
+						$state.go('^');
+					}
+				} catch (err) {
+					exception.catcher('唉呀出錯了！')(err);
 				}
 			}
 

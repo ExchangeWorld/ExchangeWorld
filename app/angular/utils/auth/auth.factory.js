@@ -29,6 +29,7 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular, $rootS
 		try {
 			if (fb) {
 				await facebookService.login(); // login to facebook.
+				await fetchMe();
 			} else {
 				let token = await Restangular
 					.all('/authenticate/login')

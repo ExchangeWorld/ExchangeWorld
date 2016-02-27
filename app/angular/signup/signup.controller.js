@@ -34,6 +34,7 @@ function SignupController(
 			let user = await auth.signup(vm.form);
 			$rootScope.isLoggedIn = Boolean(user);
 			$localStorage.user = user;
+			$rootScope.user = user;
 
 			$state.go('root.withSidenav.seek');
 			closePopup();

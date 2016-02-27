@@ -26,6 +26,7 @@ function LoginController(
 		try {
 			let user = await auth.login(fb, vm.form.id, vm.form.pwd);
 			$localStorage.user = user;
+			$rootScope.user = user;
 
 			$state.go('root.withSidenav.seek');
 

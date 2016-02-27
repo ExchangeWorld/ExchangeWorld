@@ -43,7 +43,6 @@ function NavbarController(
 	vm.onSignup            = () => $state.go('root.oneCol.signup');
 	vm.onLogin             = () => $state.go('root.oneCol.login');
 	vm.onLogout            = onLogout;
-	vm.user                = $localStorage.user;
 	vm.notifications       = [];
 	vm.unreadMsg           = '';
 	vm.unreadNotify        = '';
@@ -64,7 +63,8 @@ function NavbarController(
 
 	function activate() {
 		$rootScope.isLoggedIn = Boolean($localStorage.user);
-		vm.user = auth.currentUser();
+		if ($rootScope.isLoggedIn) $rootScope.user = $localStorage.user;
+		console.log($rootScope.isLoggedIn, $rootScope.user);
 	}
 
 

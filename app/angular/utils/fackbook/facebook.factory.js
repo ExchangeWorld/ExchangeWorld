@@ -65,6 +65,9 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 			if (member) {
 				let token = await Restangular.all('authenticate/login').post({ fb: true, identity: member.identity });
 				$localStorage.token = token.token;
+				Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {
+					token: $localStorage.token
+				});
 
 				if (member.photo_path !== largePic.data.url) {
 					member.route = 'user/photo';
@@ -89,6 +92,9 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 			let registerData = await Restangular.all('authenticate/register').post(newUser);
 			let token = await Restangular.all('authenticate/login').post({ fb: true, identity: registerData.identity });
 			$localStorage.token = token.token;
+			Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {
+				token: $localStorage.token
+			});
 
 			$localStorage.user = registerData;
 			defer.resolve(registerData);

@@ -34,7 +34,6 @@ function ExchangeController(
 	var vm             = this;
 	var ct             = new colorThief.ColorThief();
 	vm.goSeek          = ()=> $state.go('root.withSidenav.seek');
-	vm.myid            = parseInt($stateParams.uid, 10);
 	vm.exchangeList    = exchangeList;
 	vm.exchange        = undefined;
 	vm.chatroom        = [];
@@ -45,7 +44,6 @@ function ExchangeController(
 	vm.onClickComplete = onClickComplete;
 	vm.onClickDelete   = onClickDelete;
 	//vm.onSubmitChat    = onSubmitChat;
-	vm.agreed          = false;
 	vm.map             = { size: mapSize };
 
 	vm.meDesc = '';
@@ -70,8 +68,10 @@ function ExchangeController(
 			.getExchange($stateParams.uid, exchange.eid)
 			.then(function(data) {
 				vm.exchange = data;
-				dominateColor(vm.exchange.owner_goods.photoPath, 'other');
-				dominateColor(vm.exchange.other_goods.photoPath, 'me');
+				dominateColor(vm.exchange.owner_goods, 'other');
+				dominateColor(vm.exchange.other_goods, 'me');
+
+				console.log(vm.exchange);
 
 				vm.map.marker = `${vm.exchange.other_goods.position_y},${vm.exchange.other_goods.position_x}`;
 			});
@@ -107,8 +107,8 @@ function ExchangeController(
 	}
 
 	function dominateColor(goods, who) {
-		// console.log(goods);
 		var image = document.getElementById(`img_${who}`);
+		 console.log(image);
 		image.onload = ()=> {
 			var pallete = ct.getPalette(image, 2);
 			goods.bgStyle = {

@@ -76,6 +76,7 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular, $rootS
 				identity: form.id,
 				name: form.name,
 				email: form.id,
+				photo_path: 'http://exwd.csie.org/images/e59bae8cca73cd90ab5ab3a25e18ce4e612f931296e9b29227d2d5dea2b8ab7b.jpeg',
 				password: form.pwd
 			});
 

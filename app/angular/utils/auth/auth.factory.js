@@ -29,7 +29,6 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular, $rootS
 		try {
 			if (fb) {
 				await facebookService.login(); // login to facebook.
-				currentUser = await fetchMe();
 			} else {
 				let token = await Restangular
 					.all('/authenticate/login')
@@ -40,9 +39,9 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular, $rootS
 					});
 
 				updateToken(token.token);
-				$rootScope.isLoggedIn = true;
-				currentUser = await Restangular.oneUrl('user/me').get();
 			}
+			currentUser = await Restangular.oneUrl('user/me').get();
+			$rootScope.isLoggedIn = true;
 			defer.resolve(currentUser);
 		} catch (err) {
 			defer.reject(err);

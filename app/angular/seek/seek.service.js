@@ -1,11 +1,12 @@
 'use strict';
 
 const seekModule = require('./seek.module');
+const _ = require('lodash');
 
 seekModule.factory('seekService', seekService);
 
 /** @ngInject */
-function seekService(Restangular, $q, exception) {
+function seekService(Restangular, $q, exception, AvailableCategory) {
 	var service = {
 		getSeek: getSeek,
 	};
@@ -24,6 +25,7 @@ function seekService(Restangular, $q, exception) {
 				data.forEach(function(goods) {
 					try {
 						goods.photo_path = JSON.parse(goods.photo_path);
+						goods.cate_alias = _.result(_.find(AvailableCategory, { 'label': goods.category }), 'alias');
 					} catch (err) {
 						goods.photo_path = '';
 					}

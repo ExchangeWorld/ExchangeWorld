@@ -59,6 +59,14 @@ function NavbarController(
 	}, 1140000);
 
 
+	activate();
+
+	function activate() {
+		$rootScope.isLoggedIn = Boolean($localStorage.user);
+		vm.user = auth.currentUser();
+	}
+
+
 	function openMenu($mdOpenMenu, e) {
 		vm.closeMenu();
 		e.preventDefault();

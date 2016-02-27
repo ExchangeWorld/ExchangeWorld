@@ -15,26 +15,19 @@
 				<md-radio-group ng-model="queuing.group">
 					<div ng-repeat="queuing in vm.queuingGoods">
 						<div flex layout="row" layout-align="center center">
-							<md-radio-button value="{{queuing.good}}">
+							<md-radio-button value="{{queuing.queuer_goods}}">
 							</md-radio-button>
 							<md-card class="md-whiteframe-z3 item-profile name-queue">
 								<md-card-content layout="row" layout-sm="column">
 									<div flex="55" flex-sm="100" layout layout-align="center center" style=" height:150px; width:auto; border-radius:10px;">
 										<img 
-											ng-src="{{queuing.good.photo_path[0]}}" 
+											ng-src="{{queuing.queuer_goods.photo_path[0]}}" 
 											style="max-width: 100%; max-height:100%;"
-											ng-show="queuing.good.category !== 'Christmas'"
-										/>
-
-										<img 
-											src="./../images/Gift.jpg"
-											style="max-width: 100%; max-height:100%;"
-											ng-show="queuing.good.category === 'Christmas'"
 										/>
 									</div>
 									<div flex="45" flex-sm="100" layout="column" layout-align="center center">
 										<div layout="row">
-											<a ng-click="vm.onClickGoods(queuing.good.gid)">{{ queuing.good.name }}</a>
+											<a ng-click="vm.onClickGoods(queuing.queuer_goods.gid)">{{ queuing.queuer_goods.name }}</a>
 										</div>
 									</div>
 								</md-card-content>

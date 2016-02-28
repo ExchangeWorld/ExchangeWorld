@@ -7,9 +7,10 @@
         -webkit-transition: .3s ease-in-out;
         transition: .3s ease-in-out;
         border-width: 1px;
-        border-color: #aaa;
+        border-color: rgba(0,0,0,0);
         border-style: solid;
         border-radius: 2px;
+	min-width: 20px;
     }
     
     .goods-info:hover {
@@ -63,7 +64,7 @@
             <div>
                 <md-button class="goods-info" ng-click="$root.onClickUser(vm.goodData.owner.uid)">
                     <img src="{{ vm.goodData.owner.photo_path }}" class="user-img" />
-                    <span style="font-size: 14px;">{{ vm.goodData.owner.name }}</span>
+                    <span hide-xs style="font-size: 14px;">{{ vm.goodData.owner.name }}</span>
                 </md-button>
             </div>
             <div>
@@ -71,14 +72,14 @@
                     <i class="material-icons heart-seek" style="outline: 0; margin-right:0px; font-size:20px;">
                         {{ vm.goodData.starredByUser ? 'favorite' : 'favorite_border' }}
                     </i>
-                    <span hide-sm>{{vm.goodData.starredByUser ? '已關注' : '關注'}} </span>
+                    <span hide-xs>{{vm.goodData.starredByUser ? '已關注' : '關注'}} </span>
                     <!--<span>{{ vm.goodData.starredByUser ? vm.stars.length + 1 : vm.stars.length }}</span>-->
                 </md-button>
             </div>
             <div>
                 <md-button class="goods-info" ng-click="vm.onClickQueue($event)">
                     <i class="fa fa-hand-paper-o" style="outline:0; margin-right:0px; font-size:20px;"></i>
-                    <span hide-sm>我要排</span>
+                    <span hide-xs>我要排</span>
                     <!--<span>{{vm.queuingList.length}}</span>-->
                 </md-button>
                 <md-tooltip ng-show="vm.goodData.status === 1">此物已被交換囉～！</md-tooltip>
@@ -87,7 +88,7 @@
                 <md-button class="goods-info">
                     <a style="display:flex; align-items:center;" href="#" socialshare socialshare-provider="facebook" socialshare-url="http://exwd.csie.org/seek/{{vm.goodData.gid}}">
                         <i class="material-icons" style="outline:0; margin-right:0px; font-size:20px;">share</i>
-                        <span hide-sm>分享</span>
+                        <span hide-xs>分享</span>
                     </a>
                 </md-button>
             </div>
@@ -95,7 +96,7 @@
                 <md-menu ng-show="$root.user.uid === vm.goodData.owner.uid">
                     <md-button class="goods-info" ng-click="vm.openSetting($mdOpenMenu, $event)">
                         <i class="material-icons" style="outline:0; margin-right:0px; font-size:20px;">settings</i>
-                        <span hide-sm>更多</span>
+                        <span hide-xs>更多</span>
                     </md-button>
                     <md-menu-content width="3">
                         <md-menu-item>

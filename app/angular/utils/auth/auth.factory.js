@@ -132,7 +132,8 @@ function auth(facebookService, $q, $localStorage, $mdDialog, Restangular, $rootS
 			identity: id,
 			password: pwd
 		});
-		$localStorage.user.token = token.token;
+		$localStorage.token = token.token;
+		updateToken($localStorage.token);
 
 		return {
 			msg: 'success'

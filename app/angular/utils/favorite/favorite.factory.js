@@ -1,17 +1,15 @@
 'use strict';
 
 const favoriteModule = require('./favorite.module');
-const _              = require('lodash');
 
 favoriteModule.factory('favorite', favorite);
 
 /** @ngInject */
-function favorite(Restangular, $q, exception, logger) {
+function favorite(Restangular, $q, exception, logger, $rootScope) {
 	const service = {
 		getFavorites,
 		getMyFavorite,
-		postFavorite,
-		deleteFavorite,
+		favorite,
 	};
 
 	return service;
@@ -42,6 +40,30 @@ function favorite(Restangular, $q, exception, logger) {
 		}
 
 		return defer.promise;
+	}
+
+	async function favorite(goods) {
+		const defer = $q.defer();
+		const star = {
+			starring_user_uid: $rootScope.user.uid,
+			goods_gid: goods.gid,
+		};
+
+
+		try {
+			if (goods.starredByUser) {
+				await deleteFavorite(star);
+				defer.resolve(false);
+			} else {
+				await postFavorite(star);
+				defer.resolve(true);
+			}
+		} catch (err) {
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	
 	}
 
 	async function postFavorite(newFavorite) {

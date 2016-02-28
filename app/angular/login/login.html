@@ -1,3 +1,11 @@
+<md-toolbar ng-show="instance">
+	<div flex class="md-toolbar-tools" layout layout-align="center center">
+		<span flex></span>
+		<md-button class="md-icon-button" ng-click="vm.closePopup()">
+			<md-icon md-font-set="material-icons" aria-label="Close dialog">close</md-icon>
+		</md-button>
+	</div>
+</md-toolbar>
 <md-content style="overflow-x:hidden;">
 	<div layout="column" layout-align="center center" layout-fill>
 		<div layout="column" style="min-width:400px; padding:60px 20px; background-color:#ECEFF1; border-radius: 12px; margin:20px;">

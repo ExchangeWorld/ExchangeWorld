@@ -15,6 +15,7 @@ function LoginController(
 	$localStorage
 ) {
 	const vm = this;
+	vm.closePopup = closePopup;
 	vm.goSignup = goSignup;
 	vm.login = login;
 	vm.form = {

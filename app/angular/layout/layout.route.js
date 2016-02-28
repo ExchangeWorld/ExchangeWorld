@@ -78,35 +78,27 @@ function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia
 
 	function openSignupModal() {
 		let fullscreen = ($mdMedia('sm') || $mdMedia('xs'));
-		if (fullscreen) {
-			$state.go('root.oneCol.signup');
-		} else {
-			let mdScope = $rootScope.$new();
-			mdScope.instance = $mdDialog.show({
-				templateUrl: 'signup/signup.html',
-				controllerAs: 'vm',
-				controller: 'SignupController',
-				clickOutsideToClose: true,
-				//fullscreen: true,//fullscreen,
-				scope: mdScope
-			});
-		}
+		let mdScope = $rootScope.$new();
+		mdScope.instance = $mdDialog.show({
+			templateUrl: 'signup/signup.html',
+			controllerAs: 'vm',
+			controller: 'SignupController',
+			clickOutsideToClose: true,
+			fullscreen: fullscreen,
+			scope: mdScope
+		});
 	}
 
 	function openLoginModal() {
 		let fullscreen = ($mdMedia('sm') || $mdMedia('xs'));
-		if (fullscreen) {
-			$state.go('root.oneCol.login');
-		} else {
-			let mdScope = $rootScope.$new();
-			mdScope.instance = $mdDialog.show({
-				templateUrl: 'login/login.html',
-				controllerAs: 'vm',
-				controller: 'LoginController',
-				clickOutsideToClose: true,
-				//fullscreen: true,//fullscreen,
-				scope: mdScope
-			});
-		}
+		let mdScope = $rootScope.$new();
+		mdScope.instance = $mdDialog.show({
+			templateUrl: 'login/login.html',
+			controllerAs: 'vm',
+			controller: 'LoginController',
+			clickOutsideToClose: true,
+			fullscreen: fullscreen,
+			scope: mdScope
+		});
 	}
 }

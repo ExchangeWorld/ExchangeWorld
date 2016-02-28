@@ -15,6 +15,7 @@ function SignupController(
 	$mdDialog
 ) {
 	const vm = this;
+	vm.closePopup = closePopup;
 	vm.goLogin = goLogin;
 	vm.signup = signup;
 	vm.signupFb = signupFb;

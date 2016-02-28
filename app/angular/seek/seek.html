@@ -45,17 +45,17 @@
 							{{card.name}}
 						</h2>
 						<div layout="row" layout-align="center center" layout-wrap style="margin:0; padding: 10px 10px 20px;">
-							<div flex layout layout-align="center center" flex-gt-sm="40" class="card-info" ng-click="onClickFavorite($event, card)">
-								<img data-ng-src="../../images/icon/{{card.category}}.svg" style="height:20px; width:auto; margin-right:3px;" />
+							<div flex layout layout-align="center center" flex-gt-sm="33" class="card-info" ng-click="onClickFavorite($event, card)">
+								<img data-ng-src="../../images/icon/{{card.category}}.svg" style="height:20px; width:auto; margin-right:1px;" />
 								<span style="font-size: 14px;">{{ card.cate_alias }}</span>
 							</div>
-							<div flex flex-gt-sm="40" layout layout-align="center center"  class="card-info favorite" ng-click="onClickFavorite($event, card)" >
+							<div flex flex-gt-sm="27" layout layout-align="center center"  class="card-info favorite" ng-click="onClickFavorite($event, card)" >
 								<i class="material-icons heart-seek" style="outline: 0; font-size:20px;">
 									{{ card.starredByUser ? 'favorite' : 'favorite_border' }}
 								</i>
 								<span style="font-size: 14px;">{{ card.starredByUser ? '已關注' : '關注' }}</span>
 							</div>
-							<div flex layout layout-align="center center" flex-gt-sm="100" class="card-info"> 
+							<div flex layout layout-align="center center" flex-gt-sm="30" class="card-info"> 
 								<i class="material-icons person" style="outline:0; margin-right:0px; font-size:20px;">person</i>
 								<span style="font-size: 14px;">fuck{{ card.owner.name }}</span>
 							</div>

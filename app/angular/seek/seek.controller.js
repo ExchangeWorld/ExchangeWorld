@@ -30,7 +30,7 @@ function SeekController(
 	$scope.onMouseOut      = onMouseOut;
 	$scope.postfixImageUrl = postfixImageUrl;
 	vm.postfixImageUrl     = postfixImageUrl;
-	vm.loading             = true;
+	vm.loading             = false;
 
 	////////////////
 	
@@ -57,6 +57,7 @@ function SeekController(
 		});
 
 		try {
+			vm.loading = true;
 			vm.goods = await seekService.getSeek(filter);
 			$rootScope.$broadcast('goodsChanged', vm.goods);
 			vm.loading = false;

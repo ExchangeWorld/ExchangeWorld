@@ -43,7 +43,7 @@ function GoodsController(
 ) {
 	const vm = this;
 
-	vm.isMe              = $rootScope.isLoggedIn && (goodData.owner_uid === $localStorage.user.uid);
+	vm.openSetting       = ($mdOpenMenu, ev) => $mdOpenMenu(ev);
 	vm.goodData          = goodData;
 	vm.goodDesc          = $sce.trustAsHtml(marked(goodData.description));
 	vm.availableCategory = AvailableCategory;
@@ -56,7 +56,7 @@ function GoodsController(
 	vm.onDeleteComment = onDeleteComment;
 
 	vm.stars       = [];
-	vm.edit        = false;
+	vm.isEditing   = false;
 	vm.onEdit      = onEdit;
 	vm.onDelete    = onDelete;
 	vm.onClickStar = onClickStar;
@@ -108,12 +108,12 @@ function GoodsController(
 		getBackgroundColor();
 	}
 
-	function onEdit(gid) {
-		vm.edit = !vm.edit;
-		if(vm.edit) return;
+	function onEdit() {
+		vm.isEditing = !vm.isEditing;
+		if (vm.isEditing) return;
 
 		let newValue = {
-			gid         : gid,
+			gid         : vm.goodData.gid,
 			name        : vm.goodData.name,
 			category    : vm.goodData.category,
 			description : vm.goodData.description
@@ -131,24 +131,25 @@ function GoodsController(
 			});
 	}
 
-	function onDelete(gid) {
+	function onDelete() {
 		var confirm = $mdDialog.confirm()
 			.title('刪除物品')
 			.content('您確定要刪除這個物品嗎？')
 			.ariaLabel('Delete Goods')
 			.ok('確定')
 			.cancel('取消')
-			.targetEvent(gid);
-		if (confirm) {
-			$mdDialog.show(confirm).then(function() {
-				goodsService
-					.deleteGoods( gid )
-					.then(function(data) {
-						logger.success('刪除成功', data, 'DONE');
-						$state.go('root.withSidenav.seek');
-					});
-			});
-		}
+			.targetEvent();
+
+		if (!confirm) return;
+
+		$mdDialog.show(confirm).then(function() {
+			goodsService
+				.deleteGoods( vm.goodData.gid )
+				.then(function(data) {
+					logger.success('刪除成功', data, 'DONE');
+					$state.go('root.withSidenav.seek');
+				});
+		});
 	}
 
 	function updateComment() {
@@ -170,25 +171,21 @@ function GoodsController(
 	}
 
 	function onSubmitComment() {
-		if (!auth.currentUser()) {
-			auth
-				.login()
-				.then(function(user) {
-					vm.user = user;
-					$rootScope.isLoggedIn = Boolean(user);
-					$state.reload();
-				});
+		if (!$rootScope.isLoggedIn) {
+			$rootScope.openSignupModal();
+			return;
 		}
+
 		const mesg = vm.comment.trim();
 		if (mesg) {
 			const commentData = {
-				commenter_uid : auth.currentUser().uid,
+				commenter_uid : $rootScope.user.uid,
 				goods_gid     : goodData.gid,
 				content       : mesg,
 				date          : moment().startOf('second').fromNow(),
-				user_uid      : auth.currentUser().uid,
-				name          : auth.currentUser().name,
-				photo_path    : auth.currentUser().photo_path,
+				user_uid      : $rootScope.user.uid,
+				name          : $rootScope.user.name,
+				photo_path    : $rootScope.user.photo_path,
 			};
 			vm.goodComments.push(commentData);
 			goodsService
@@ -197,7 +194,6 @@ function GoodsController(
 					vm.comment = '';
 					updateComment();
 				});
-
 		}
 	}
 
@@ -208,35 +204,20 @@ function GoodsController(
 			.ariaLabel('Delete Comment')
 			.ok('確定')
 			.cancel('取消')
-			.targetEvent(cid);
-		if (confirm) {
-			$mdDialog.show(confirm).then(function() {
-				goodsService
-					.deleteComment({ cid: cid })
-					.then(updateComment);
-			});
-		}
+			.targetEvent();
+
+		if (!confirm) return;
+
+		$mdDialog.show(confirm).then(function() {
+			goodsService
+				.deleteComment({ cid: cid })
+				.then(updateComment);
+		});
 	}
 
-	function onClickStar() {
-		const star = {
-			starring_user_uid: $localStorage.user.uid,
-			goods_gid: vm.goodData.gid,
-		};
-
-		if (!vm.goodData.starredByUser) {
-			favorite
-				.postFavorite(star)
-				.then(function() {
-					vm.goodData.starredByUser = true;
-				});
-		} else {
-			favorite
-				.deleteFavorite(star)
-				.then(function() {
-					vm.goodData.starredByUser = false;
-				});
-		}
+	async function onClickStar() {
+		let isFavorite = await favorite.favorite(vm.goodData);
+		vm.goodData.starredByUser = isFavorite;
 	}
 
 	function updateStar() {
@@ -252,14 +233,10 @@ function GoodsController(
 	 */
 	function onClickQueue() {
 		const types = ['want_to_queue', 'see_who_queue'];
-		var type = vm.isMe ? 'see_who_queue' : 'want_to_queue';
+		var type = vm.goodData.owner.uid === $rootScope.user.uid ? 'see_who_queue' : 'want_to_queue';
 		if(goodData.status === 1) return;
 
 		if(type === types[0]) {
-			/**
-			 * TODO:
-			 *  1. restrict multi queue(?).
-			 */
 			$state.go('root.withSidenav.goods.queue', {}, {location:false});
 		} else if(type === types[1]) {
 			$state.go('root.withSidenav.goods.queuing',{}, {location:false});
@@ -304,7 +281,7 @@ function GoodsController(
 			var pallete = ct.getPalette(image, 2);
 			vm.bgStyle = {
 				"background-color": `rgb(${pallete[0][0]}, ${pallete[0][1]}, ${pallete[0][2]})`,
-				"border-radius": "20px"
+				"border-radius": "5px"
 			};
 			vm.bordercolor = [{
 				"border": `rgb(${pallete[1][0]}, ${pallete[1][1]}, ${pallete[1][2]}) solid 2px`

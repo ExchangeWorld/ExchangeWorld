@@ -86,12 +86,12 @@ function goodsService(Restangular, $q, exception, $mdDialog, $mdMedia) {
 		const defer = $q.defer();
 
 		try {
-			let goods = await getGood(newValue.gid);
-			goods.name = newValue.name;
-			goods.category = newValue.category;
+			let goods         = await getGood(newValue.gid);
+			goods.name        = newValue.name;
+			goods.category    = newValue.category;
 			goods.description = newValue.description;
-			goods.route = 'goods/edit';
-			goods.photo_path = JSON.stringify(goods.photo_path);
+			goods.route       = 'goods/edit';
+			goods.photo_path  = JSON.stringify(goods.photo_path);
 
 			let editedGoods = await goods.put();
 

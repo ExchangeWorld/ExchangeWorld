@@ -77,7 +77,6 @@ function ProfileController(
 
 		/**
 		 * only do this on desktop mode.
-		 */
 		if($state.current.name === 'root.withSidenav.profile') {
 			[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
 				dominateColor(goods);
@@ -89,6 +88,7 @@ function ProfileController(
 				};
 			});
 		}
+		 */
 		$rootScope.$broadcast('goodsChanged', vm.profile.goods);
 	}
 

@@ -91,8 +91,10 @@ function SeekController(
 		} 
 
 		let isFavorite = await favorite.favorite(goods);
-		let idx = _.indexOf(vm.goods, goods);
-		vm.goods[idx].starredByUser = isFavorite;
+		$timeout(()=> {
+			let idx = _.indexOf(vm.goods, goods);
+			vm.goods[idx].starredByUser = isFavorite;
+		});
 	}
 
 	function onClickUser(e, uid) {

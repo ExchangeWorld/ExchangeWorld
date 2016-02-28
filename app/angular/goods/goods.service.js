@@ -66,11 +66,11 @@ function goodsService(Restangular, $q, exception, $mdDialog, $mdMedia) {
 			let goods = await Restangular.one('user', ownerUid).getList('goods');
 			if (!_.isArray(goods)) throw 'goods not array';
 
-			goods.forEach(function() {
+			goods.forEach(function(g) {
 				try {
-					goods.photo_path = JSON.parse(goods.photo_path);
+					g.photo_path = JSON.parse(g.photo_path);
 				} catch (err) {
-					goods.photo_path = '';
+					g.photo_path = '';
 				}            
 			});
 			defer.resolve(goods);

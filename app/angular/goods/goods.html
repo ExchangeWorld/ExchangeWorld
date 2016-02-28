@@ -76,7 +76,7 @@
                     <!--<span>{{ vm.goodData.starredByUser ? vm.stars.length + 1 : vm.stars.length }}</span>-->
                 </md-button>
             </div>
-            <div>
+            <div ng-show="$root.user.uid !== vm.goodData.owner.uid">
                 <md-button class="goods-info" ng-click="vm.onClickQueue($event)">
                     <i class="fa fa-hand-paper-o" style="outline:0; margin-right:0px; font-size:20px;"></i>
                     <span hide-xs>我要排</span>

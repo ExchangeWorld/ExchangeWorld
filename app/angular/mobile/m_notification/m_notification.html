@@ -5,7 +5,7 @@
 	</div>
 	<md-list ng-show="!vm.loading">
 		<md-list-item style="padding: 0;">
-			<div offset="5" flex>
+			<div flex-offset="5" flex>
 				<p class="md-subhead">通知</p>
 			</div>
 			<md-divider></md-divider>
@@ -17,7 +17,7 @@
 		</md-list-item>
 		<md-list-item ng-repeat="notice in vm.notifications" ng-style="notice.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickNotification(notice)">
 			<img flex style="max-height:50px; max-width:50px;" ng-src="{{ notice.user.photo_path }}" />
-			<div offset="5" flex>
+			<div flex-offset="5" flex>
 				<p class="md-body-2 note">{{notice.content}}</p>
 				<p class="md-caption note" style="color: #BCBCBC;">{{ notice.timestamp }}</p>
 			</div>

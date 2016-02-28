@@ -35,7 +35,7 @@
 		</div>
 	</div>
 	</div>
-	<div class="goods-lg" flex="80" layout layout-align="center center" ng-style="vm.bgStyle">
+	<div class="goods-lg" flex="100" layout layout-align="center center" ng-style="vm.bgStyle">
 		<img 
 			id="img" 
 			crossorigin="anonymous" 
@@ -48,8 +48,7 @@
 			ng-mouseleave="$index=1"
 			ng-show="vm.goodData.category !== 'Christmas'"
 		/>
-
-		<img 
+		<!-- <img 
 			id="img"
 			crossorigin="anonymous"  
 			src="./../images/Gift.jpg"
@@ -60,7 +59,7 @@
 			ng-mouseover="$index=0" 
 			ng-mouseleave="$index=1"
 			ng-show="vm.goodData.category === 'Christmas'"
-		/>
+		/> -->
 	</div>
 	<div class="info_container" layout="column">
 		<div layout="row" layout-wrap>
@@ -132,8 +131,8 @@
 				</div>
 			</div>
 			<form ng-submit="vm.onSubmitComment()">
-				<md-input-container style="padding-bottom: 15px;">
-					<label>留言...</label>
+				<md-input-container layout layout-fill style="padding-bottom: 15px;">
+					<label style="top:-20px;">留言...</label>
 					<input type="text" ng-model="vm.comment" name="text" />
 				</md-input-container>
 				<input type="submit" id="submit" value="Submit" ng-show="false" />

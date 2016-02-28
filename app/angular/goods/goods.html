@@ -154,7 +154,7 @@
                         </div>
                     </div>
                 </div>
-                <form ng-submit="vm.onSubmitComment()" style="display:flex; align-items:center; margin:0.5em 0.4em 0em;">
+                <form ng-show="$root.isLoggedIn" ng-submit="vm.onSubmitComment()" style="display:flex; align-items:center; margin:0.5em 0.4em 0em;">
                     <img ng-src="{{ $root.user.photo_path }}" style="width:40px; height:40px; border-radius:5px;" />
                     <md-input-container style="width:100%; height:100%;">
                         <label>留言...</label>

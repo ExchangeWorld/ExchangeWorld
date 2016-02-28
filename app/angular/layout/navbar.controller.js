@@ -151,7 +151,7 @@ function NavbarController(
 			]);
 
 			vm.notifications = notifications.map(function(notice) {
-				notice.timestamp = moment(notice.timestamp.slice(0, -1)).fromNow();
+				notice.timestamp = moment(notice.timestamp.slice(0, -1)).add(8, 'h').fromNow();
 				return notice;
 			});
 

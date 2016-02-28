@@ -65,7 +65,6 @@ function GoodsController(
 	vm.onClickQueue  = onClickQueue;
 
 	vm.showPhotoViewer = showPhotoViewer;
-	vm.onClickBack = onClickBack;
 
 	vm.getGoodsDescription = getGoodsDescription;
 	activate();
@@ -89,21 +88,15 @@ function GoodsController(
 		updateComment();
 		updateStar();
 
-		//TODO: use /api/user/me
-		if ($localStorage.user) {
-			vm.isMe = (goodData.owner_uid === $localStorage.user.uid);
-		} else {
-			vm.isMe = false;
-			$rootScope.isLoggedIn = false;
+		if ($rootScope.isLoggedIn) {
+			goodsService
+				.getQueue($stateParams.gid)
+				.then(function(data) {
+					vm.queuingList = data;
+				});
 		}
 
 		goodData.category_alias = _.result(_.find(AvailableCategory, 'label', goodData.category), 'alias');
-
-		goodsService
-			.getQueue($stateParams.gid)
-			.then(function(data) {
-				vm.queuingList = data;
-			});
 
 		getBackgroundColor();
 	}
@@ -161,12 +154,11 @@ function GoodsController(
 			})
 			.then(function() {
 				var data = vm.goodComments.map(function(comment) {
-					if ($rootScope.isLoggedIn)
-						comment.isMe = (comment.commenter_uid === $localStorage.user.uid);
-					comment.timestamp = moment(comment.created_at.slice(0, -1)).fromNow();
+					if ($rootScope.isLoggedIn) comment.isMe = (comment.commenter_uid === $localStorage.user.uid);
+					comment.timestamp = moment(comment.created_at.slice(0, -1)).add(8, 'h').fromNow();
 					return comment;
 				});
-				vm.goodComments = data;
+				vm.goodComments = data.reverse();
 			});
 	}
 
@@ -182,10 +174,6 @@ function GoodsController(
 				commenter_uid : $rootScope.user.uid,
 				goods_gid     : goodData.gid,
 				content       : mesg,
-				date          : moment().startOf('second').fromNow(),
-				user_uid      : $rootScope.user.uid,
-				name          : $rootScope.user.name,
-				photo_path    : $rootScope.user.photo_path,
 			};
 			vm.goodComments.push(commentData);
 			goodsService
@@ -216,6 +204,10 @@ function GoodsController(
 	}
 
 	async function onClickStar() {
+		if (!$rootScope.isLoggedIn) {
+			$rootScope.openSignupModal();
+			return;
+		}
 		let isFavorite = await favorite.favorite(vm.goodData);
 		vm.goodData.starredByUser = isFavorite;
 	}
@@ -228,10 +220,11 @@ function GoodsController(
 			});
 	}
 
-	/**
-	 * user use a goods to queue the host goods
-	 */
 	function onClickQueue() {
+		if (!$rootScope.isLoggedIn) {
+			$rootScope.openSignupModal();
+			return;
+		}
 		const types = ['want_to_queue', 'see_who_queue'];
 		var type = vm.goodData.owner.uid === $rootScope.user.uid ? 'see_who_queue' : 'want_to_queue';
 		if(goodData.status === 1) return;
@@ -264,14 +257,6 @@ function GoodsController(
 
 	function getGoodsDescription() {
 		return marked(vm.goodData.description);
-	}
-
-	function onClickBack() {
-		if($window.history.length <= 1) {
-			$state.go('root.withSidenav.seek');
-		} else {
-			$window.history.go(-$rootScope.historyCounter);
-		}
 	}
 
 	function getBackgroundColor() {

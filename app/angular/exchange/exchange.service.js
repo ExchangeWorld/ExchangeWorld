@@ -115,7 +115,7 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 			.then(function(data) {
 				if (_.isArray(data)) {
 					data.forEach(function(m) {
-						m.time = moment(m.timestamp.slice(0, -1)).fromNow();
+						m.time = moment(m.timestamp.slice(0, -1)).add(8, 'h').fromNow();
 					});
 					defer.resolve(data);
 				}

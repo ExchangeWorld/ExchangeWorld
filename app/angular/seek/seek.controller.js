@@ -12,6 +12,7 @@ function SeekController(
 	AvailableCategory,
 	$state,
 	$scope,
+	$timeout,
 	$rootScope,
 	$localStorage,
 	$stateParams
@@ -59,8 +60,10 @@ function SeekController(
 		try {
 			vm.loading = true;
 			vm.goods = await seekService.getSeek(filter);
-			$rootScope.$broadcast('goodsChanged', vm.goods);
-			vm.loading = false;
+			$timeout(()=> {
+				$rootScope.$broadcast('goodsChanged', vm.goods);
+				vm.loading = false;
+			});
 		} catch (err) {
 			vm.goods = [];
 			vm.loading = false;

@@ -37,6 +37,7 @@
     <div style="margin:0px 20px 0px 20px;">
         <h1 ng-show="!vm.isEditing" style="margin:0px; padding-left:6px;">
             <img data-ng-src="../../images/icon/{{vm.goodData.category}}.svg" style="height:30px; width:auto;" />
+            <span ng-show="vm.goodData.exchanged === 1"> [已換出] </span>
             {{ vm.goodData.name }}
         </h1>
 
@@ -76,13 +77,12 @@
                     <!--<span>{{ vm.goodData.starredByUser ? vm.stars.length + 1 : vm.stars.length }}</span>-->
                 </md-button>
             </div>
-            <div ng-show="$root.user.uid !== vm.goodData.owner.uid">
+            <div ng-show="$root.user.uid !== vm.goodData.owner.uid && vm.goodData.exchanged !== 1">
                 <md-button class="goods-info" ng-click="vm.onClickQueue($event)">
                     <i class="fa fa-hand-paper-o" style="outline:0; margin-right:0px; font-size:20px;"></i>
                     <span hide-xs>我要排</span>
                     <!--<span>{{vm.queuingList.length}}</span>-->
                 </md-button>
-                <md-tooltip ng-show="vm.goodData.status === 1">此物已被交換囉～！</md-tooltip>
             </div>
             <div>
                 <md-button class="goods-info">
@@ -121,7 +121,6 @@
                     </md-menu-content >
                     <!--<span>{{vm.queuingList.length}}</span>-->
                 </md-menu>
-                <md-tooltip ng-show="vm.goodData.status === 1">此物已被交換囉～！</md-tooltip>
             </div>
         </div>
     </div>
@@ -129,7 +128,7 @@
     <div layout layout="row" style="margin:10px 20px 0px 20px;">
         <p ng-show="!vm.isEditing">{{ vm.goodData.description }}</p>
         <md-input-container ng-show="vm.isEditing" style="width:100%;">
-            <textarea type="string" ng-model="vm.goodData.description" columns="10" md-maxlength="300" required> </textarea>
+            <textarea type="string" ng-model="vm.goodData.description" columns="10" md-maxlength="500" required> </textarea>
         </md-input-container>
         <md-button class="md-raised md-primary" ng-show="vm.isEditing" ng-click="vm.onEdit()">
             儲存修改

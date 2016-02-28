@@ -24,6 +24,22 @@
 		.card-info {
 			margin-right: 8px;
 		}
+		.favorite {
+			-webkit-transition: .3s ease-in-out;
+			transition: .3s ease-in-out;
+			border-width: 1px;
+			border-color: rgba(0,0,0,0);
+			border-style: solid;
+			border-radius: 2px;
+		}
+		.favorite:hover {
+			color: #f00;
+			border-width: 1px;
+			border-color: #f00;
+			border-style: solid;
+			border-radius: 2px;
+		}
+
 		.card-img {
 			opacity: 1;
 			-webkit-transition: .3s ease-in-out;

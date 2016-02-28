@@ -15,26 +15,27 @@ function seekService(Restangular, $q, exception, AvailableCategory) {
 
 	//////////
 
-	function getSeek(filter) {
+	async function getSeek(filter) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('goods/search')
-			.getList(filter)
-			.then(function(data) {
-				data.forEach(function(goods) {
-					try {
-						goods.photo_path = JSON.parse(goods.photo_path);
-						goods.cate_alias = _.result(_.find(AvailableCategory, { 'label': goods.category }), 'alias');
-					} catch (err) {
-						goods.photo_path = '';
-					}
-				});
+		try {
+			let goods = await Restangular.all('goods').getList(filter);
 
-				defer.resolve(data);
-			}, (error)=> {
-				return exception.catcher('[Seek Service] getSeek error: ')(error);
+			goods.forEach(function(g) {
+				try {
+					g.photo_path = JSON.parse(g.photo_path);
+					g.cate_alias = _.result(_.find(AvailableCategory, { 'label': g.category }), 'alias');
+				} catch (err) {
+					g.photo_path = '';
+				}
 			});
+
+			defer.resolve(goods);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 

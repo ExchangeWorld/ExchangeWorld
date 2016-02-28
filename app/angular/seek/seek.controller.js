@@ -45,7 +45,7 @@ function SeekController(
 		});
 	});
 
-	function onSearch(filter) {
+	async function onSearch(filter) {
 		if(vm.searchGoodsCategory === 'all') {
 			filter.category = '';
 		}
@@ -56,64 +56,39 @@ function SeekController(
 			g     : filter.global ? 1 : 0,
 		});
 
-		seekService
-			.getSeek(filter)
-			.then(function(data) {
-				vm.goods = data;
-				$rootScope.$broadcast('goodsChanged', vm.goods);
-				vm.loading = false;
-			})
-			.catch(function() {
-				vm.goods = [];
-				vm.loading = false;
-			});
+		try {
+			vm.goods = await seekService.getSeek(filter);
+			$rootScope.$broadcast('goodsChanged', vm.goods);
+			vm.loading = false;
+		} catch (err) {
+			vm.goods = [];
+			vm.loading = false;
+		}
 	}
 
 	function onMouseOver(gid) {
 		// $rootScope.$broadcast('openGoodsOverlay', gid);
 		$rootScope.$broadcast('highlightMarker', gid);
-		
 	}
 
 	function onMouseOut(gid) {
 		$rootScope.$broadcast('highlightMarker', gid);
 		// $rootScope.$broadcast('closeGoodsOverlay');
 	}
-
-	function onClickFavorite(e, goods) {
+	
+	async function onClickFavorite(e, goods) {
 		e.preventDefault();
 		e.stopPropagation();
         
 		//TODO: use /api/user/me
-		if (!$localStorage.user) {
-			auth
-				.login()
-				.then(function(user) {
-					$rootScope.isLoggedIn = Boolean(user);
-					$state.reload();
-				});
-		} else {
-			const star = {
-				starring_user_uid: $localStorage.user.uid,
-				goods_gid: goods.gid,
-			};
+		if (!$rootScope.isLoggedIn) {
+			$rootScope.openSignupModal();
+			return;
+		} 
 
-			if (goods.starredByUser) {
-				favorite
-					.deleteFavorite(star)
-					.then(function() {
-						var idx = _.indexOf(vm.goods, goods);
-						vm.goods[idx].starredByUser = false;
-					});
-			} else {
-				favorite
-					.postFavorite(star)
-					.then(function() {
-						var idx = _.indexOf(vm.goods, goods);
-						vm.goods[idx].starredByUser = true;
-					});
-			}
-		}
+		let isFavorite = await favorite.favorite(goods);
+		let idx = _.indexOf(vm.goods, goods);
+		vm.goods[idx].starredByUser = isFavorite;
 	}
 
 	function onClickUser(e, uid) {

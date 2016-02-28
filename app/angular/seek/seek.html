@@ -49,11 +49,11 @@
 								<img data-ng-src="../../images/icon/{{card.category}}.svg" style="height:20px; width:auto; margin-right:3px;" />
 								<span style="font-size: 14px;">{{ card.cate_alias }}</span>
 							</div>
-							<div class="card-info" ng-click="onClickFavorite($event, card)" style="align-items:center; display:flex;">
+							<div class="card-info favorite" ng-click="onClickFavorite($event, card)" style="align-items:center; display:flex;">
 								<i class="material-icons heart-seek" style="outline: 0; margin-right:0px; font-size:20px;">
-									{{ card.favorited ? 'favorite' : 'favorite_border' }}
+									{{ card.starredByUser ? 'favorite' : 'favorite_border' }}
 								</i>
-								<span style="font-size: 14px;">{{ card.favorited ? '已關注' : '關注' }}</span>
+								<span style="font-size: 14px;">{{ card.starredByUser ? '已關注' : '關注' }}</span>
 							</div>
 							<div class="card-info" style="align-items:center; display:flex;">
 								<i class="material-icons person" style="outline:0; margin-right:0px; font-size:20px;">person</i>

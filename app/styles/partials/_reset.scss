@@ -19,7 +19,7 @@ img:focus {
   md-sidenav.md-locked-open,
   md-sidenav.md-closed.md-locked-open-add-active {
     min-width: 470px !important;
-    width: 50vw !important;
+    width: 48vw !important;
     max-width: none !important;
   }
 }
@@ -28,7 +28,8 @@ img:focus {
   md-sidenav,
   md-sidenav.md-locked-open,
   md-sidenav.md-closed.md-locked-open-add-active {
-    min-width: 80vw !important;
+    min-width: 90vw !important;
+    width: 93vw;
     max-width: none !important;
   }
 }

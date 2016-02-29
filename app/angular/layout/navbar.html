@@ -8,26 +8,34 @@
 			</md-button>
 		</span>
 		<div flex="30" flex-sm="40" flex-xs="0" layout="row" layout-align="center center">
-			<md-button flex hide-xs ng-click="vm.onClick(1)" ng-class="{'active': vm.contentIs(1)}">
-				<div layout layout-align="center center">
-					<span class="toolbar-span">探索</span>
-				</div>
-			</md-button>
-			<md-button flex hide-xs ng-click="vm.onClick(2)" ng-class="{'active': vm.contentIs(2)}">
-				<div layout layout-align="center center">
-					<span class="toolbar-span">發佈</span>
-				</div>
-			</md-button>
-			<md-button flex hide-xs ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">
-				<div layout layout-align="center center">
-					<span class="toolbar-span">交換</span>
-				</div>
-			</md-button>
-			<md-button hide-md hide-xs flex ng-click="vm.report()">
-				<div layout layout-align="center center">
-					<span class="toolbar-span">回報</span>
-				</div>
-			</md-button>
+			<div flex hide-xs>
+				<md-button  ng-click="vm.onClick(1)" ng-class="{'active': vm.contentIs(1)}">
+					<div layout layout-align="center center">
+						<span class="toolbar-span">探索</span>
+					</div>
+				</md-button>
+			</div>
+			<div flex hide-xs>
+				<md-button flex hide-xs ng-click="vm.onClick(2)" ng-class="{'active': vm.contentIs(2)}">
+					<div layout layout-align="center center">
+						<span class="toolbar-span">發佈</span>
+					</div>
+				</md-button>
+			</div>
+			<div flex hide-xs>
+				<md-button flex hide-xs ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">
+					<div layout layout-align="center center">
+						<span class="toolbar-span">交換</span>
+					</div>
+				</md-button>
+			</div>
+			<div flex hide-xs hide-sm>
+				<md-button ng-click="vm.report()">
+					<div layout layout-align="center center">
+						<span class="toolbar-span">回報</span>
+					</div>
+				</md-button>
+			</div>
 		</div>
 		<span flex-gt-xs="30" flex-sm="15"></span>
 		<div hide-xs flex="10" flex-sm="20" flex-offset="10" flex-offset-sm="5" layout="row" layout-align="center center">

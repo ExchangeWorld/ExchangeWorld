@@ -11,7 +11,7 @@
 				<input type="text" ng-model="vm.goodsName" required>
 			</md-input-container>
 		</div>
-		<div class="info_container for_input" layout="row" layout-align="center center" style="padding-top: 0;">
+		<div class="info_container for_input" layout="row" layout-align="center center" style="padding-top: 0;" layout-wrap>
 			<span style="padding-top: 7px; margin-right: 8px;">類別</span>
 			<md-input-container flex>
 				<md-select ng-model="vm.goodsCategory" ng-change="vm.onCategoryChanged(vm.goodsCategory)" aria-label="good.cate">
@@ -20,6 +20,9 @@
 					</md-option>
 				</md-select>
 			</md-input-container>
+			<md-switch flex="20" flex-xs="100" layout layout-align-gt-xs="center center" layout-align="start center" ng-model="vm.postType" aria-label="postSwitch" style="margin: 20px 0 10px 0;">
+				{{ vm.postType ? '贈送' : '交換' }}
+			</md-switch>
 		</div>
 		<div class="info_container for_input" layout="row" layout-align="center center">
 			<span style="padding-bottom: 17px; margin-right: 8px;">敘述</span>
@@ -61,10 +64,8 @@
 		</div>
 		<!-- Submit button -->
 		<div layout="row" style="margin:20px 0;">
-			<span flex="80" flex-sm="50"></span>
-			<div flex>
-				<input ng-show="!vm.loading" class="md-button md-primary md-raised" type="submit" id="submit" value="發佈物品！" style="width:100px;"></input>
-			</div>
+			<span flex></span>
+			<input ng-show="!vm.loading" class="md-button md-primary md-raised" type="submit" id="submit" value="發佈物品！" style="width:100px;"></input>
 		</div>
 		<div>
 		</div>

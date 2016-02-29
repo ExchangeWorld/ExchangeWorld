@@ -26,7 +26,7 @@
 		</div>
 	</div>
 </div>
-<md-content resize ng-style="resizeWithOffset(236)" style="background-color: #EEEEEE;">
+<md-content resize ng-style="resizeWithOffset(210)" style="background-color: #EEEEEE;">
 	<div class="md-padding"></div>
 	<div layout layout-align="center center" ng-show="vm.goods.length === 0 && !vm.loading" style="width:100%;height:90%">
 		<img class="img-null onseek" src="../../images/emoji_null.png">
@@ -34,9 +34,9 @@
 	<div class="grid-wrapper">
 		<div class="grid__columns">
 			<div ng-repeat="card in vm.goods">
-				<md-card class="md-whiteframe-z4 item card" >
+				<md-card class="md-whiteframe-z4 item card">
 					<a ng-href="/seek/{{card.gid}}" ng-mouseenter="onMouseOver(card.gid)" ng-mouseleave="onMouseOut(card.gid)">
-						<img width="300" data-ng-src="{{postfixImageUrl(card.photo_path[0])}}" class="md-card-image card-img" >
+						<img width="300" data-ng-src="{{postfixImageUrl(card.photo_path[0])}}" class="md-card-image card-img">
 						<h2 style="margin:0; padding: 15px 20px 0px;">
 							{{card.name}}
 						</h2>
@@ -45,15 +45,15 @@
 								<img data-ng-src="../../images/icon/{{card.category}}.svg" style="height:20px; width:auto; margin-right:1px;" />
 								<span style="font-size: 14px;">{{ card.cate_alias }}</span>
 							</div>
-							<div flex flex-gt-sm="27" layout layout-align="center center"  class="card-info favorite" ng-click="onClickFavorite($event, card)" >
+							<div flex flex-gt-sm="27" layout layout-align="center center" class="card-info favorite" ng-click="onClickFavorite($event, card)">
 								<i class="material-icons heart-seek" style="outline: 0; font-size:20px;">
 									{{ card.starredByUser ? 'favorite' : 'favorite_border' }}
 								</i>
 								<span style="font-size: 14px;">{{ card.starredByUser ? '已關注' : '關注' }}</span>
 							</div>
-							<div flex layout layout-align="center center" flex-gt-sm="30" class="card-info"> 
+							<div flex layout layout-align="center center" flex-gt-sm="30" class="card-info">
 								<i class="material-icons person" style="outline:0; margin-right:0px; font-size:20px;">person</i>
-								<span style="font-size: 14px;">fuck{{ card.owner.name }}</span>
+								<span style="font-size: 14px;text-overflow: ellipsis;display: inline-block;white-space: nowrap;overflow: hidden;">{{ card.owner.name }}</span>
 							</div>
 						</div>
 					</a>

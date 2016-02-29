@@ -46,7 +46,7 @@ function GoodsController(
 	vm.openSetting       = ($mdOpenMenu, ev) => $mdOpenMenu(ev);
 	vm.goodData          = goodData;
 	vm.goodDesc          = $sce.trustAsHtml(marked(goodData.description));
-	vm.availableCategory = AvailableCategory;
+	vm.availableCategory = AvailableCategory.slice(1);
 	vm.bgStyle           = '';
 	vm.bordercolor       = ['',''];
 

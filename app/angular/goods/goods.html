@@ -19,13 +19,13 @@
 			<input type="string" ng-model="vm.goodData.name" columns="10" required> </input>
 		</md-input-container>
 		<div flex layout="row" layout-align="start center" style="margin-top: 10px;">
-			<div flex layout layout-align="center center">
+			<div flex layout layout-align="start center">
 				<md-button class="goods-info" ng-click="$root.onClickUser(vm.goodData.owner.uid)">
 					<img src="{{ vm.goodData.owner.photo_path }}" class="user-img" />
 					<span hide-xs style="font-size: 14px;">{{ vm.goodData.owner.name }}</span>
 				</md-button>
 			</div>
-			<div flex layout layout-align="center center">
+			<div flex layout layout-align="start center">
 				<md-button class="goods-info" ng-click="vm.onClickStar()">
 					<i class="material-icons heart-seek" style="outline: 0; margin-right:0px; font-size:20px;">
                         {{ vm.goodData.starredByUser ? 'favorite' : 'favorite_border' }}
@@ -34,14 +34,14 @@
 					<!--<span>{{ vm.goodData.starredByUser ? vm.stars.length + 1 : vm.stars.length }}</span>-->
 				</md-button>
 			</div>
-			<div flex layout layout-align="center center" ng-show="$root.user.uid !== vm.goodData.owner.uid && vm.goodData.exchanged !== 1">
+			<div flex layout layout-align="start center" ng-show="$root.user.uid !== vm.goodData.owner.uid && vm.goodData.exchanged !== 1">
 				<md-button class="goods-info" ng-click="vm.onClickQueue($event)">
 					<i class="fa fa-hand-paper-o" style="outline:0; margin-right:0px; font-size:20px;"></i>
 					<span hide-xs>我要排</span>
 					<!--<span>{{vm.queuingList.length}}</span>-->
 				</md-button>
 			</div>
-			<div flex layout layout-align="center center">
+			<div flex layout layout-align="start center">
 				<md-button class="goods-info">
 					<a style="display:flex; align-items:center;" href="#" socialshare socialshare-provider="facebook" socialshare-url="http://exwd.csie.org/seek/{{vm.goodData.gid}}">
 						<i class="material-icons" style="outline:0; margin-right:0px; font-size:20px;">share</i>
@@ -49,7 +49,7 @@
 					</a>
 				</md-button>
 			</div>
-			<div flex layout layout-align="center center" ng-show="$root.user.uid === vm.goodData.owner.uid">
+			<div flex layout layout-align="start center" ng-show="$root.user.uid === vm.goodData.owner.uid">
 				<md-menu>
 					<md-button class="goods-info" ng-click="vm.openSetting($mdOpenMenu, $event)">
 						<i class="material-icons" style="outline:0; margin-right:0px; font-size:20px;">settings</i>

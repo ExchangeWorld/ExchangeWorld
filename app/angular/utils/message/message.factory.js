@@ -7,91 +7,48 @@ const moment        = require('moment');
 messageModule.factory('message', message);
 
 /** @ngInject */
-function message(Restangular, $q, exception, $localStorage, $mdDialog) {
+function message(Restangular, $q, exception, $mdDialog, $localStorage) {
 	const service = {
-		getMessage,
+		getMessageList,
 		getConversation,
 		postMessage,
-		updateMessage,
 		showMessagebox,
 	};
 
 	return service;
 
-	function getMessage(uid) {
+	async function getMessageList() {
 		const defer = $q.defer();
+		const user = $localStorage.user;
 
-		Restangular
-			.all('message')
-			.getList({ 
-				receiver_uid: uid,
-				number: 5,
-			})
-			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data);
-				}
-			}, (error)=> {
-				return exception.catcher('[message Service] getMessage error: ')(error);
-			});
+		if (!user) {
+			defer.reject({error: true});
+			return defer.promise;
+		}
+
+		try {
+			let list = await Restangular.one('user', user.uid).getList('chatroom');
+			defer.resolve(list);
+		} catch (err) {
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 
-	/**
-	 * Get two users conversations history. 
-	 */
-	function getConversation(uid1, uid2, number, offset) {
+	function getConversation(cid, number, offset) {
 		const defer = $q.defer();
-		Restangular
-			.all('message/between')
-			.getList({ 
-				user1_uid : uid1,
-				user2_uid : uid2,
-				from      : offset,
-				number    : number,
-			})
-			.then(function(data) {
-				if (_.isArray(data)) {
-					data.forEach(function(m) {
-						m.time = moment(m.timestamp.slice(0, -1)).add(8, 'h').fromNow();
-					});
-					defer.resolve(data);
-				}
-			}, (error)=> {
-				return exception.catcher('[message Service] getConversation error: ')(error);
-			});
+
+		try {
+			defer.resolve();
+		} catch (err) {
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 
 	function postMessage(newMessage) {
-		const defer = $q.defer();
-
-		Restangular
-			.all('message')
-			.post(newMessage)
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[message Service] postMessage error: ')(error);
-			});
-		return defer.promise;
-	}
-
-	function updateMessage(message) {
-		const defer = $q.defer();
-
-		message.route = 'message/read';
-
-		message
-			.put()
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[Messages Service] updateMessage error: ')(error);
-			});
-		return defer.promise;
 	}
 
 	function showMessagebox(ev, msg, callback) {

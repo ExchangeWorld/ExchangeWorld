@@ -1,4 +1,4 @@
-<md-dialog aria-label="Queue">
+<md-dialog aria-label="Queue" style="width:50%;">
 	<form>
 		<md-toolbar>
 			<div flex class="md-toolbar-tools">
@@ -9,7 +9,7 @@
 				</md-button>
 			</div>
 		</md-toolbar>
-		<md-dialog-content style="max-width:600px;max-height:410px;">
+		<md-dialog-content style="max-width:600px;">
 			<div layout="column" layout-align="start center">
 				<div flex ng-show="vm.queuingGoods.length === 0">目前沒有正在排的物品</div>
 				<md-radio-group ng-model="queuing.group">

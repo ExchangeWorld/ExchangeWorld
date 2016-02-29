@@ -30,7 +30,7 @@ function m_notificationController(
 				.getNotification($localStorage.user.uid)
 				.then(function(data) {
 					vm.notifications = data.map(function(notice) {
-						notice.timestamp = moment(notice.timestamp.slice(0, -1)).fromNow();
+						notice.timestamp = moment(notice.timestamp.slice(0, -1)).add(8, 'h').fromNow();
 						return notice;
 					});
 					vm.loading = false;

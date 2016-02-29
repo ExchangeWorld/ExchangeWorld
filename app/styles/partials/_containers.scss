@@ -446,7 +446,7 @@ div.md-open-menu-container {
 		min-width: 88px;
 	}
 	.goods-lg {
-		margin: 24px 0 40px 0;
+		margin: 20px;
 	}
 	.map-size {
 		height: 30%;
@@ -605,7 +605,7 @@ div.md-open-menu-container {
 }
 
 .img-goods {
-	max-height: 350px;
+	max-height: 500px;
 	max-width: 100%;
 	height: auto;
 	cursor: pointer;
@@ -691,4 +691,34 @@ div.md-open-menu-container {
 
 .fadeIn {
 	animation-name: fadeIn;
+}
+
+.goods-info {
+	display: flex;
+	align-items: center;
+	margin: 0px;
+	margin-right: 10px;
+	transition: .3s ease-in-out;
+	border-width: 1px;
+	border-color: rgba(0, 0, 0, 0);
+	border-style: solid;
+	border-radius: 2px;
+	min-width: 20px;
+}
+
+.goods-info:hover {
+	color: #f00;
+	border-width: 1px;
+	border-color: #f00;
+	border-style: solid;
+	border-radius: 2px;
+}
+
+.user-img {
+	background-position: center;
+	background-size: cover;
+	border-radius: 25%;
+	width: 25px;
+	height: 25px;
+	padding-right: 3px;
 }

@@ -27,6 +27,7 @@ require('../utils/upwardScroll/upwardScroll.module');
 require('../mobile/m_message/m_message.module');
 require('../mobile/m_messagebox/m_messagebox.module');
 require('../mobile/m_notification/m_notification.module');
+require('../mobile/m_exchange/m_exchange.module');
 
 const requires = [
 	'ui.router',
@@ -51,6 +52,7 @@ const requires = [
 	'm.message',
 	'm.messagebox',
 	'm.notification',
+	'm.exchange',
 ];
 
 module.exports = angular.module('app.core', requires);

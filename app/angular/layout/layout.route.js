@@ -32,13 +32,14 @@ function getStates() {
 }
 
 /** @ngInject */
-function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia) {
+function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia, $mdSidenav) {
 	$rootScope.historyCounter = 1;
 	$rootScope.onClickUser = onClickUser;
 	$rootScope.onClickFollow = onClickFollow;
 	$rootScope.onClickMessage = onClickMessage;
 	$rootScope.openSignupModal = openSignupModal;
 	$rootScope.openLoginModal = openLoginModal;
+	$rootScope.onSwipeLeft = onSwipeLeft;
 
 	function onClickUser(uid) {
 		if ($window.innerWidth > 600) {
@@ -100,5 +101,11 @@ function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia
 			fullscreen: fullscreen,
 			scope: mdScope
 		});
+	}
+
+	function onSwipeLeft() {
+		if ($mdSidenav('left').isOpen()) {
+			$mdSidenav('left').toggle();
+		}
 	}
 }

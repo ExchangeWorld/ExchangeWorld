@@ -1,4 +1,165 @@
-<div ng-repeat="exchange in vm.exchangeList">
-	{{ exchange }}
-</div>
-djsefkr4t;
+<md-content resize ng-style="resizeWithOffset(56)" ng-show="vm.exchangeList.length === 0">
+	<div layout="column" layout-align="center center" style="height:100%;">
+		<h2 class="md-display-1 xmas-font" style="margin:20px 0; text-align: center">你沒有正在交換的物品喔！</h2>
+		<div layout layout-align="center center" style="height:50%; width:auto;">
+			<img src="../../images/emoji.png" style="max-width:90%; max-height: 90%; ">
+		</div>
+		<p class="md-title info_container xmas-font" style="text-align: center;">
+			立即在探索頁面尋找您喜歡的物品吧
+		</p>
+		<div style="margin-top: 20px;">
+			<md-button class="md-raised md-accent" ng-click="vm.goSeek()">
+				<span style="color:#fff; font-weight: 500;">查看！</span>
+			</md-button>
+		</div>
+	</div>
+</md-content>
+<md-content resize ng-style="resizeWithOffset(56)" ng-show="vm.exchangeList.length !== 0">
+	<div layout layout-align="center center" style="margin-top: 20px;">
+		<md-button class="md-icon-button md-primary" ng-click="vm.openLeftMenu()">
+			<div layout layout-align="center">
+				<i class="material-icons md-24">dns</i>
+			</div>
+		</md-button>
+		<md-button class="md-icon-button md-primary" ng-click="vm.openRightMenu()" ng-show="vm.exchange !== undefined">
+			<div layout layout-align="center">
+				<i class="material-icons md-24">chat</i>
+			</div>
+		</md-button>
+		<a ng-disabled="!vm.exchange.owner_agree" ng-show="vm.exchange !== undefined" class="md-button md-fab white-btn" href="#" socialshare socialshare-provider="facebook" socialshare-url="http://exwd.csie.org/xmas-share.html" style="min-width:40px;">
+			<md-icon md-font-set="material-icons">share</md-icon>
+		</a>
+	</div>
+	<div ng-show="!vm.exchange" layout layout-align="center center">
+		<div flex="80">
+			<h2 class="md-display-1" hide-gt-sm style="text-align:center;">點擊上方清單觀看目前正在進行的交換</h2>
+		</div>
+	</div>
+	<div ng-show="vm.exchange">
+		<md-card class="md-whiteframe-z3 item-profile hvr-glow" ng-style="vm.exchange.owner_goods.bgStyle">
+			<md-card-content layout-gt-xs="row">
+				<div flex-gt-xs="40" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
+					<img id="img_me" crossorigin="anonymous" ng-src="{{vm.exchange.owner_goods.photoPath[0]}}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
+				</div>
+				<div flex-offset-gt-xs="5" flex-gt-xs="55" layout-gt-xs="column">
+					<div layout layout-align="center center">
+						<h2 style="margin: 10px 0;">{{ vm.exchange.owner_goods.name}}</h2>
+					</div>
+					<div layout="row" layout-align="start center">
+						<div layout layout-align="start center" layout-margin class="card-info" ng-click="onClickFavorite($event, card)">
+							<img data-ng-src="../../images/icon/{{vm.exchange.owner_goods.category}}.svg" style="height:20px; width:auto; margin-right:1px;" />
+							<span style="font-size: 14px;">{{vm.exchange.owner_goods.category}}</span>
+						</div>
+						<div layout layout-align="start center" layout-margin class="card-info">
+							<i class="material-icons person" style="outline:0; margin-right:0px; font-size:20px;">person</i>
+							<span style="font-size: 14px;text-overflow: ellipsis;display: inline-block;white-space: nowrap;overflow: hidden;">{{ vm.exchange.owner_goods.owner.name }}</span>
+						</div>
+					</div>
+					<div flex layout layout-align="center center">
+						<div ng-style="vm.exchange.owner_goods.fontcolor[1]" class="md-subhead text-ex ex-story" style="color:#7f8588; max-width: 100%; font-size:14px;">
+							{{ vm.exchange.owner_goods.description }}
+						</div>
+					</div>
+				</div>
+			</md-card-content>
+		</md-card>
+		<div layout="row" layout-align="center center">
+			<md-button class="md-fab ex-confirm" ng-show="!vm.exchange.owner_agree" ng-click="vm.onClickComplete($event)">
+				<div layout layout-align="center center">
+					<img src="../../images/icon(48-48).png" />
+				</div>
+			</md-button>
+			<md-button class="md-fab white-btn" ng-show="!vm.exchange.owner_agree" ng-click="vm.onClickDelete($event)">
+				<md-icon md-font-set="material-icons" style="color: #FFD54F">close</md-icon>
+			</md-button>
+			<md-button class="md-fab ex-confirm md-hue-1 md-accent" ng-show="vm.exchange.owner_agree" disabled="true">
+				<div layout layout-align="center center">
+					<i class="material-icons confirm">done</i>
+				</div>
+			</md-button>
+			<a ng-disabled="!vm.owner_agree" class="md-button md-fab white-btn" href="#" socialshare socialshare-provider="facebook" socialshare-url="http://exwd.csie.org/xmas-share.html" style="min-width:40px;" hide-xs hide-sm>
+				<md-icon md-font-set="material-icons">share</md-icon>
+			</a>
+		</div>
+		<md-card class="md-whiteframe-z3 item-profile hvr-glow" ng-style="vm.exchange.other_goods.bgStyle">
+			<md-card-content layout-gt-xs="row">
+				<div flex-gt-xs="40" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
+					<img id='img_other' crossorigin="anonymous" ng-src="{{vm.exchange.other_goods.photoPath[0]}}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
+				</div>
+				<div flex-offset-gt-xs="5" flex-gt-xs="55" layout-gt-xs="column">
+					<div layout layout-align="center center">
+						<h2 style="margin: 10px 0;">{{ vm.exchange.other_goods.name}}</h2>
+					</div>
+					<div layout="row" layout-align="start center">
+						<div layout layout-align="start center" layout-margin class="card-info" ng-click="onClickFavorite($event, card)">
+							<img data-ng-src="../../images/icon/{{vm.exchange.other_goods.category}}.svg" style="height:20px; width:auto; margin-right:1px;" />
+							<span style="font-size: 14px;">{{vm.exchange.other_goods.category}}</span>
+						</div>
+						<div layout layout-align="start center" layout-margin class="card-info">
+							<i class="material-icons person" style="outline:0; margin-right:0px; font-size:20px;">person</i>
+							<span style="font-size: 14px;text-overflow: ellipsis;display: inline-block;white-space: nowrap;overflow: hidden;">{{ vm.exchange.other_goods.owner.name }}</span>
+						</div>
+					</div>
+					<div flex layout layout-align="center center">
+						<div ng-style="vm.exchange.owner_goods.fontcolor[1]" class="md-subhead text-ex ex-story" style="color:#7f8588; max-width: 100%; font-size:14px;">
+							{{ vm.exchange.other_goods.description }}
+						</div>
+					</div>
+				</div>
+			</md-card-content>
+		</md-card>
+		<div flex="100" layout="column" ng-show="vm.exchange">
+			<div layout layout-align="center center" class="map-size">
+				<img border="0" ng-src="//maps.googleapis.com/maps/api/staticmap?size={{vm.map.size}}&markers={{vm.map.marker}}" />
+			</div>
+		</div>
+	</div>
+	<md-sidenav md-component-id="left" class="md-sidenav-left">
+		<div class="event-btn" layout="row" layout-algin="center center" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange); vm.closeleft()" ng-class="{'exchange.owner_agree-btn': exchange.goods1_agree && exchange.goods2_agree}">
+			<div flex="25" layout layout-align="center center">
+				<img class="circle exchange" ng-src="{{exchange.other_goods.owner.photo_path}}" />
+			</div>
+			<div flex="55" layout="column" layout-align="center center">
+				<p class="md-body-1 note goods-1">{{ exchange.owner_goods.name }}</p>
+				<p class="md-body-1 note goods-2">{{ exchange.other_goods.name }}</p>
+			</div>
+			<div flex="15" layout layout-align="center center">
+				<img style="max-height: 100%; max-width:100%;" src="../../images/Logo(ex).png" />
+			</div>
+		</div>
+	</md-sidenav>
+	<md-sidenav md-component-id="right" class="md-sidenav-right">
+		<div class="chat-layout">
+			<md-toolbar class="md-primary md-hue-2" layout layout-align="center center" style="min-height: 48px;">
+				<span>{{vm.exchange.other_goods.owner.name}}</span>
+			</md-toolbar>
+			<ul class="discussion chat-ex" scroll='vm.chatroom.length > 0' upward-scroll="vm.loadMore()">
+				<li ng-class="{true: 'other', false: 'self'}[chat.sender_uid !== {{ vm.myid }}]" ng-repeat="chat in vm.chatroom">
+					<div class="avatar" ng-show="(chat.sender_uid !== {{ vm.myid }})">
+						<div ng-show="(chat.sender_uid !== {{ vm.myid }})">
+							<img ng-src="{{vm.exchange.other_goods.owner.photo_path}}" />
+						</div>
+						<md-tooltip ng-show="(chat.sender_uid !== {{ vm.myid }})">
+							{{vm.exchange.other_goods.owner.name}}
+						</md-tooltip>
+					</div>
+					<div class="messages" layout layout-align="center center">
+						<p class="content">{{ chat.content }}</p>
+						<md-tooltip>
+							{{ chat.time }}
+						</md-tooltip>
+					</div>
+				</li>
+			</ul>
+			<ul class="discussion input">
+				<form ng-submit="vm.onSubmitChat()">
+					<md-input-container>
+						<label style="top:-20px;">輸入訊息...</label>
+						<input type="text" ng-model="vm.chatContent" name="text" />
+					</md-input-container>
+					<input type="submit" id="submit" value="Submit" ng-show="false" />
+				</form>
+			</ul>
+		</div>
+	</md-sidenav>
+</md-content>

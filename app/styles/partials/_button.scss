@@ -4,13 +4,13 @@
 		font-size: 1em;
 		padding: 0px 10px;
 		margin: 0px;
-		min-width: 80px;
+		min-width: 60px;
 		md-icon {
 			vertical-align: text-bottom;
 		}
 	}
 	.active {
-		background-color: rgba(190, 190, 190, 0.5);
+		background-color: $ripple-color;
 	}
 	a {
 		padding-top: 20px;
@@ -106,7 +106,7 @@
 @media screen and (min-width: 300px) {
 	.notification {
 		position: absolute;
-		right: 20px;
+		right: 13px;
 		top: 7px;
 		background-color: #FF8F00;
 		line-height: 20px;

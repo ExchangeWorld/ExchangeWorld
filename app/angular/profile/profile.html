@@ -25,26 +25,22 @@
 			</div>
 		</div>
 		<div flex-offset="10" layout="row" layout-align="center center" style="margin-top: 10px;">
-			<div flex layout-margin>
-				<md-button class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
-					<div layout="row" layout-align="center center" ng-show="!vm.isFollowed">
-						<i class="material-icons">person_add</i>
-						<span hide-xs>&nbsp;追隨</span>
-					</div>
-					<div layout="row" layout-align="center center" ng-show="vm.isFollowed">
-						<i class="material-icons">remove_circle</i>
-						<span hide-xs>&nbsp;取消追隨</span>
-					</div>
-				</md-button>
-			</div>
-			<div flex layout-margin>
-				<md-button class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)">
-					<div layout="row" layout-align="center center">
-						<i class="material-icons">chat</i>
-						<span hide-xs>&nbsp;送訊息</span>
-					</div>
-				</md-button>
-			</div>
+			<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
+				<div layout="row" layout-align="center center" ng-show="!vm.isFollowed">
+					<i class="material-icons">person_add</i>
+					<span hide-xs>&nbsp;追隨</span>
+				</div>
+				<div layout="row" layout-align="center center" ng-show="vm.isFollowed">
+					<i class="material-icons">remove_circle</i>
+					<span hide-xs>&nbsp;取消追隨</span>
+				</div>
+			</md-button>
+			<md-button flex class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)">
+				<div layout="row" layout-align="center center">
+					<i class="material-icons">chat</i>
+					<span hide-xs>&nbsp;送訊息</span>
+				</div>
+			</md-button>
 			<span flex="10"></span>
 		</div>
 	</div>
@@ -164,3 +160,4 @@
 		</md-tab>
 	</md-tabs>
 </md-content>
+

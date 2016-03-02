@@ -16,13 +16,13 @@
 			</md-select>
 		</md-input-container>
 		<md-input-container ng-show="vm.isEditing">
-			<input type="string" ng-model="vm.goodData.name" aria-label="goodsName" columns="10" md-maxlength="10" required> </input>
+			<input type="string" ng-model="vm.goodData.name" columns="10" required> </input>
 		</md-input-container>
 		<div flex layout="row" layout-align="start center" style="margin-top: 10px;">
 			<div flex layout layout-align="start center">
 				<md-button class="goods-info" ng-click="$root.onClickUser(vm.goodData.owner.uid)">
 					<img src="{{ vm.goodData.owner.photo_path }}" class="user-img" />
-					<span class="nav-user goods" hide-xs style="font-size: 14px;">{{ vm.goodData.owner.name }}</span>
+					<span hide-xs style="font-size: 14px;">{{ vm.goodData.owner.name }}</span>
 				</md-button>
 			</div>
 			<div flex layout layout-align="start center">
@@ -84,7 +84,7 @@
 	<div layout layout="row" style="margin:10px 20px 0px 20px;">
 		<p class="md-title" style="padding-left:10px;" ng-show="!vm.isEditing">{{ vm.goodData.description }}</p>
 		<md-input-container ng-show="vm.isEditing" style="width:100%;">
-			<textarea type="string" ng-model="vm.goodData.description" aria-label="goodsDescription" columns="10" md-maxlength="500" md-detect-hidden="true" required> </textarea>
+			<textarea type="string" ng-model="vm.goodData.description" columns="10" md-maxlength="500" required> </textarea>
 		</md-input-container>
 		<md-button class="md-raised md-primary" ng-show="vm.isEditing" ng-click="vm.onEdit()" style="max-height: 44px;">
 			儲存修改

@@ -15,27 +15,27 @@
 	</div>
 </md-content>
 <md-content resize ng-style="resizeWithOffset(56)" ng-show="vm.exchangeList.length !== 0" class="ex-bg">
-	<div layout-gt-sm="row" style="height:100%;">
-		<div flex-gt-sm="20" class="sidebar-ex" layout-fill hide-xs hide-sm>
-			<div class="event-btn hvr-bubble-float-left" layout="row" layout-algin="center center" flex-xs="45" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange)" ng-class="{'exchange.owner_agree-btn': exchange.goods1_agree && exchange.goods2_agree}">
+	<div layout="row" style="height:100%;">
+		<div flex="20" class="sidebar-ex" layout-fill>
+			<div class="event-btn hvr-bubble-float-left" layout="row" layout-algin="center center" ng-repeat="exchange in vm.exchangeList" ng-click="vm.onClickExchange(exchange)" ng-class="{'exchange.owner_agree-btn': exchange.goods1_agree && exchange.goods2_agree}">
 				<div flex layout layout-align="center center">
 					<img class="circle exchange" ng-src="{{exchange.other_goods.owner.photo_path}}" />
 				</div>
-				<div flex="70" flex-gt-sm="55" layout="column" layout-align="center center">
+				<div flex="55" layout="column" layout-align="center center">
 					<p class="md-body-1 note goods-1">{{ exchange.other_goods.name }}</p>
 					<p class="md-body-1 note goods-2">{{ exchange.other_goods.owner.name }}</p>
 				</div>
 				<span flex="5"></span>
 			</div>
 		</div>
-		<div ng-show="!vm.exchange" flex-gt-sm="80" layout layout-align="center center">
+		<div ng-show="!vm.exchange" flex="80" layout layout-align="center center">
 			<h2 class="md-display-1">點擊左側清單觀看目前正在進行的交換</h2>
 		</div>
-		<div flex-offset-gt-sm="5" flex-gt-sm="50" ng-show="vm.exchange" style="height: 100%;">
+		<div flex-offset="5" flex="50" ng-show="vm.exchange" style="height: 100%;">
 			<div layout="row" layout-xs="column" flex="100" class="info_container layout-ex center">
-				<md-card flex="100" flex-gt-sm="40" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.owner_goods.bgStyle">
+				<md-card flex="40" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.owner_goods.bgStyle">
 					<div layout="row" layout-gt-sm="column">
-						<md-card flex-xs="40" ng-style="vm.exchange.owner_goods.bgStyle">
+						<md-card ng-style="vm.exchange.owner_goods.bgStyle">
 							<a layout layout-align="center center" style="height:250px; width:auto;" ng-href="/seek/{{vm.exchange.owner_goods.gid}}">
 								<img id="img_me" crossorigin="anonymous" ng-src="{{vm.exchange.owner_goods.photoPath[0]}}" class="md-card-image" style="cursor:pointer; max-height: 100%; max-width: 100%; width:auto; " />
 							</a>
@@ -50,7 +50,7 @@
 								<span style="font-size: 14px;text-overflow: ellipsis;display: inline-block;white-space: nowrap;overflow: hidden;">{{ vm.exchange.owner_goods.owner.name }}</span>
 							</div>
 						</div>
-						<md-card-content flex-xs style="padding: 0;">
+						<md-card-content style="padding: 0;">
 							<div flex layout-fill layout="column">
 								<div layout="column" layout-align="center center">
 									<h2 class="md-title ex-title" ng-style="vm.exchange.owner_goods.fontcolor[0]">{{ vm.exchange.owner_goods.name}}</h2>
@@ -64,7 +64,7 @@
 						</md-card-content>
 					</div>
 				</md-card>
-				<div flex="10" flex-xs="100" layout="column" layout-xs="row" layout-align="start center" style="padding-top:10%;">
+				<div flex="10"  layout="column"  layout-align="start center" style="padding-top:10%;">
 					<p class="vertical isUp" ng-show="!vm.exchange.owner_agree">確認交換</p>
 					<md-button class="md-fab ex-confirm" ng-show="!vm.exchange.owner_agree" ng-click="vm.onClickComplete($event)">
 						<div layout layout-align="center center">
@@ -86,7 +86,7 @@
 						<md-tooltip>分享...</md-tooltip>
 					</a>
 				</div>
-				<md-card flex="100" flex-gt-sm="40" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.other_goods.bgStyle">
+				<md-card flex="40" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.other_goods.bgStyle">
 					<div layout="column">
 						<md-card ng-style="vm.exchange.other_goods.bgStyle">
 							<a layout layout-align="center center" style="height:250px; width:auto;" ng-href="/seek/{{vm.exchange.other_goods.gid}}">
@@ -119,7 +119,7 @@
 				</md-card>
 			</div>
 		</div>
-		<div ng-show="vm.exchange" flex-gt-sm style="height: 100%;" hide show-gt-sm>
+		<div ng-show="vm.exchange" flex style="height: 100%;">
 			<div class="map-size">
 				<img border="0" ng-src="//maps.googleapis.com/maps/api/staticmap?size={{vm.map.size}}&markers={{vm.map.marker}}" />
 			</div>

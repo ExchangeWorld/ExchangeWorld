@@ -21,8 +21,8 @@ function getStates() {
 				templateUrl : 'exchange/exchange.html',
 				/** @ngInject */
 				onEnter: function($state, $window, $timeout, $stateParams) {
-					if ($window.innerWidth < 600) {
-						$timeout(() => $state.go('root.oneCol.exchange', { uid: $stateParams.uid }));
+					if ($window.innerWidth < 960) {
+						$timeout(() => $state.go('root.oneCol.m_exchange', { uid: $stateParams.uid }));
 					}
 				},
 				resolve : {

@@ -191,6 +191,9 @@ a:hover {
 	width: calc(100% - 80px);
 	white-space: nowrap;
 	overflow: hidden;
+	&.goods {
+		width: 100%;
+	}
 }
 
 .tri {

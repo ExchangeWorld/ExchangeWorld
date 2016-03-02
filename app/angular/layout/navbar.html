@@ -1,13 +1,13 @@
 <md-toolbar ng-click="vm.closeMenu()" class="md-whiteframe-z2" style="overflow-x: hidden; overflow-y: hidden;">
 	<div class="md-toolbar-tools navbar" style="height: 56px; max-height:56px;">
-		<span flex="10" flex-gt-sm="5" hide-xs>
+		<div flex="10" flex-gt-sm="5" hide-xs>
 			<md-button ng-click="vm.onClick(0)" style="text-transform: none;" aria-label="logo">
-	<div layout layout-align="center center">
+				<div layout layout-align="center center">
 					<img src="../../images/logo(48).png" style="height:40px; width:auto;">
 				</div>
 			</md-button>
-		</span>
-		<div flex="30" flex-sm="40" flex-xs="0" layout="row" layout-align="start start">
+		</div>
+		<div flex="30" flex-sm="40" flex-xs="0" layout="row" layout-align="start start" style="padding-left:13px;">
 			<md-button hide-xs ng-click="vm.onClick(1)" ng-class="{'active': vm.contentIs(1)}">
 				<div layout layout-align="center center">
 					<span class="toolbar-span">探索</span>
@@ -88,7 +88,7 @@
 				</md-menu-content>
 			</md-menu>
 		</div>
-		<div flex flex-xs="10" flex-offset-xs="80" layout="row" layout-align="center center">
+		<div flex flex-offset-xs="75" layout="row" layout-align="center center">
 			<md-button ng-hide="$root.isLoggedIn" ng-click="vm.onSignup()">
 				<span class="toolbar-span">註冊</span>
 			</md-button>

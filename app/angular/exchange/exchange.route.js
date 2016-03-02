@@ -19,6 +19,12 @@ function getStates() {
 				controller : 'ExchangeController',
 				controllerAs: 'vm',
 				templateUrl : 'exchange/exchange.html',
+				/** @ngInject */
+				onEnter: function($state, $window, $timeout, $stateParams) {
+					if ($window.innerWidth < 600) {
+						$timeout(() => $state.go('root.oneCol.exchange', { uid: $stateParams.uid }));
+					}
+				},
 				resolve : {
 					/** @ngInject */
 					exchangeList : function (exchangeService, $stateParams) {

@@ -32,7 +32,6 @@
 			border-color: rgba(0, 0, 0, 0);
 			border-style: solid;
 			border-radius: 2px;
-			margin-left: 7px;
 		}
 		.favorite:hover {
 			color: #f00;
@@ -64,9 +63,8 @@
 		-webkit-column-count: 1;
 	}
 	.seek-title {
-		max-width: 70%;
+		max-width: 90%;
 		margin: 0;
-		padding: 15px 20px 0px;
 	}
 }
 

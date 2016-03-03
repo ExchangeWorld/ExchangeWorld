@@ -82,7 +82,6 @@ md-switch {
 	margin: 0px;
 	.md-label {
 		padding-top: 20px;
-		padding-right: 16%;
 	}
 }
 
@@ -290,6 +289,9 @@ div.md-open-menu-container {
 	}
 	.switch {
 		padding-left: 25px;
+		.md-label {
+			padding-left: 0%;
+		}
 	}
 	.ex-bg {
 		overflow-x: hidden;
@@ -389,6 +391,9 @@ div.md-open-menu-container {
 	}
 	.switch {
 		padding-left: 10px;
+		.md-label {
+			padding-right: 10px;
+		}
 	}
 	.info_container {
 		&.for_input {

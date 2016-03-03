@@ -80,6 +80,10 @@ md-list {
 
 md-switch {
 	margin: 0px;
+	.md-label {
+		padding-top: 20px;
+		padding-right: 16%;
+	}
 }
 
 md-dialog {
@@ -285,7 +289,7 @@ div.md-open-menu-container {
 		margin: 0;
 	}
 	.switch {
-		padding-left: 5px;
+		padding-left: 25px;
 	}
 	.ex-bg {
 		overflow-x: hidden;

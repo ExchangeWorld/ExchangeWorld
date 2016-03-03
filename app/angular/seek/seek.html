@@ -55,21 +55,23 @@
 				<md-card class="md-whiteframe-z4 item card">
 					<a ng-href="/seek/{{card.gid}}" ng-mouseenter="onMouseOver(card.gid)" ng-mouseleave="onMouseOut(card.gid)">
 						<img width="300" data-ng-src="{{postfixImageUrl(card.photo_path[0])}}" class="md-card-image card-img">
-						<h2 style="margin:0; padding: 15px 20px 0px;">
-							{{card.name}}
-						</h2>
-						<div layout="row" layout-align="center center" layout-wrap style="margin:0; padding: 10px 10px 20px;">
-							<div flex layout layout-align="center center" flex-gt-sm="33" class="card-info" ng-click="onClickFavorite($event, card)">
+						<div layout="row" layout-align="start center">					
+							<h2 class="seek-title">
+								{{card.name}}
+							</h2>	
+							<div flex layout layout-align="start center" flex-gt-sm="33" class="card-info" ng-click="onClickFavorite($event, card)" style="padding-top: 6px;">
 								<img data-ng-src="../../images/icon/{{card.category}}.svg" style="height:20px; width:auto; margin-right:1px;" />
 								<span style="font-size: 14px;">{{ card.cate_alias }}</span>
 							</div>
-							<div flex flex-gt-sm="27" layout layout-align="center center" class="card-info favorite" ng-click="onClickFavorite($event, card)">
+						</div>
+						<div layout="row" layout-align="start center" style="margin:0; padding: 10px 10px 20px;">
+							<div layout layout-align="start center" class="card-info favorite" ng-click="onClickFavorite($event, card)">
 								<i class="material-icons heart-seek" style="outline: 0; font-size:20px;">
 									{{ card.starredByUser ? 'favorite' : 'favorite_border' }}
 								</i>
 								<span style="font-size: 14px;">{{ card.starredByUser ? '已關注' : '關注' }}</span>
 							</div>
-							<div flex layout layout-align="center center" flex-gt-sm="30" class="card-info">
+							<div flex layout layout-align="start center" class="card-info">
 								<i class="material-icons person" style="outline:0; margin-right:0px; font-size:20px;">person</i>
 								<span style="font-size: 14px;text-overflow: ellipsis;display: inline-block;white-space: nowrap;overflow: hidden;">{{ card.owner.name }}</span>
 							</div>

@@ -20,20 +20,19 @@
 		margin: 0 auto;
 		margin-bottom: 10px;
 		box-shadow: 3px 6px 5px 0 rgba(0, 0, 0, 0.5);
-
 		.card-info {
 			margin-right: 8px;
 			margin-top: 10px;
-			/*max-height: 20px;*/
 			white-space: nowrap;
 		}
 		.favorite {
 			-webkit-transition: .3s ease-in-out;
 			transition: .3s ease-in-out;
 			border-width: 1px;
-			border-color: rgba(0,0,0,0);
+			border-color: rgba(0, 0, 0, 0);
 			border-style: solid;
 			border-radius: 2px;
+			margin-left: 7px;
 		}
 		.favorite:hover {
 			color: #f00;
@@ -42,7 +41,6 @@
 			border-style: solid;
 			border-radius: 2px;
 		}
-
 		.card-img {
 			opacity: 1;
 			-webkit-transition: .3s ease-in-out;
@@ -51,7 +49,7 @@
 		.card-img:hover {
 			opacity: .7;
 		}
-		a:hover{
+		a:hover {
 			color: #000;
 		}
 	}
@@ -64,6 +62,11 @@
 		column-count: 1;
 		-moz-column-count: 1;
 		-webkit-column-count: 1;
+	}
+	.seek-title {
+		max-width: 70%;
+		margin: 0;
+		padding: 15px 20px 0px;
 	}
 }
 

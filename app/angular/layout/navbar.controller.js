@@ -55,7 +55,7 @@ function NavbarController(
 
 	// reTake access token 
 	//$interval(function() {
-		//auth.getAccessToken($localStorage.user.identity, null, true);
+	//auth.getAccessToken($localStorage.user.identity, null, true);
 	//}, 1140000);
 
 

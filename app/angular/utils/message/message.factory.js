@@ -7,7 +7,7 @@ const moment = require('moment');
 messageModule.factory('message', message);
 
 /** @ngInject */
-function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScope) {
+function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScope, $mdMedia) {
 	var socket = new WebSocket(`ws://exwd.csie.org:43002/message?token=${$localStorage.token}`);
 	var dataStream = [];
 
@@ -46,11 +46,30 @@ function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScop
 		return defer.promise;
 	}
 
+	async function getChatroomInfo(cid) {
+		const defer = $q.defer();
+
+		if (!cid) {
+			defer.reject({
+				error: true
+			});
+			return defer.promise;
+		}
+
+		try {
+			let info = await Restangular.one('chatroom', cid).get();
+			defer.resolve(info);
+		} catch (err) {
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
 	async function getConversation(cid, number, offset) {
 		const defer = $q.defer();
 
 		try {
-			//let ws = new WebSocket(`ws://exwd.csie.org:43002/message?token=${$localStorage.token}`);
 			let history = await Restangular.one('chatroom', cid).all('message').getList({
 				offset: offset,
 				limit: number
@@ -77,15 +96,20 @@ function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScop
 		return defer.promise;
 	}
 
-	function showMessagebox(ev, msg, callback) {
-		$mdDialog.show({
+	function showMessagebox(ev, msg) {
+		let mdScope = $rootScope.$new();
+		mdScope.instance = $mdDialog.show({
 			clickOutsideToClose: true,
+			fullscreen: ($mdMedia('sm') || $mdMedia('xs')),
 			templateUrl: 'utils/message/message.html',
 			controllerAs: 'vm',
-			controller: DialogController,
-			locals: {
-				msg: msg,
-				callback: callback,
+			controller: 'm_messageController',
+			scope: mdScope,
+			resolve: {
+				info: function() {
+					console.log(msg);
+					return getChatroomInfo(msg.cid);
+				}
 			}
 		});
 	}
@@ -93,97 +117,11 @@ function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScop
 	const service = {
 		dataStream,
 		getMessageList,
+		getChatroomInfo,
 		getConversation,
 		postMessage,
 		showMessagebox,
 	};
 
 	return service;
-}
-
-/** @ngInject */
-function DialogController(msg, callback, $mdDialog, logger, message, $state, $q, $timeout, $rootScope) {
-	const vm = this;
-	vm.msg = msg;
-	vm.history = [];
-	vm.loadMore = loadMore;
-	vm.contents = '';
-	vm.onClickUser = onClickUser;
-	vm.cancel = onCancel;
-	vm.submit = onSubmit;
-	vm.keyup = keyup;
-	vm.keydown = keydown;
-	vm.newMsgs = [];
-
-	activate();
-	var shiftPressed = false;
-
-	var amount, offset;
-
-	function activate() {
-		amount = 10;
-		offset = 0;
-		loadMore();
-
-		// Sooooooooooo hack
-		// trigger the scrollBottom directive to work.
-		$timeout(function() {
-			vm.newMsgs.push('hack');
-		}, 100);
-	}
-
-	function loadMore() {
-		var deferred = $q.defer();
-
-		message
-			.getConversation(msg.sender_uid, msg.receiver_uid, amount, offset)
-			.then(function(data) {
-				vm.history = [...data.reverse(), ...vm.history];
-				offset += amount;
-
-				deferred.resolve();
-			});
-
-		return deferred.promise;
-	}
-
-	function onClickUser(uid) {
-		onCancel();
-		$rootScope.onClickUser(uid);
-	}
-
-	function onSubmit(msg_content) {
-		if (msg_content.trim().length === 0) return;
-		message.
-		postMessage({
-				receiver_uid: msg.sender_uid,
-				sender_uid: msg.receiver_uid,
-				content: msg_content,
-			})
-			.then(function(data) {
-				if (callback) callback();
-				vm.history.push(data);
-				vm.newMsgs.push(data);
-				vm.contents = '';
-			});
-	}
-
-	function onCancel() {
-		$mdDialog.cancel();
-	}
-
-	function keyup(ev) {
-		if (ev.keyCode === 16) {
-			shiftPressed = false;
-		}
-	}
-
-	function keydown(ev) {
-		if (ev.keyCode === 16) {
-			shiftPressed = true;
-		}
-		if (ev.keyCode === 13 && !shiftPressed) {
-			onSubmit(vm.contents);
-		}
-	}
 }

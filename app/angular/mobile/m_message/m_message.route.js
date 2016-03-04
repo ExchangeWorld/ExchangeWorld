@@ -18,6 +18,12 @@ function getStates() {
 				controller : 'm_messageController',
 				controllerAs: 'vm',
 				templateUrl : 'mobile/m_message/m_message.html',
+				resolve: {
+					/** @ngInject */
+					info: function($stateParams, message) {
+						return message.getChatroomInfo($stateParams.cid);
+					}
+				}
 			}
 		}
 	];

@@ -7,14 +7,17 @@ m_messageModule.controller('m_messageController', m_messageController);
 /** @ngInject */
 function m_messageController(
 	message,
+	info,
+	$scope,
 	$state,
 	$rootScope,
 	$q,
-	$stateParams,
+	$mdDialog,
 	$timeout
 ) {
 	const vm        = this;
-	const cid       = $stateParams.cid;
+	const cid       = info.cid;
+	vm.info = info;
 
 	vm.dataStream   = message.dataStream;
 	vm.history      = [];
@@ -25,34 +28,43 @@ function m_messageController(
 	vm.submit       = onSubmit;
 	vm.newMsgs      = [];
 
+
+	vm.cancel  = onCancel;
+	vm.submit  = onSubmit;
+	vm.keyup   = keyup;
+	vm.keydown = keydown;
+
 	activate();
 	var shiftPressed = false;
 
 	var amount, offset;
 
-	function activate() {
+	async function activate() {
 		amount = 30;
 		offset = 0;
-		loadMore();
+
+		await loadMore();
+		console.log(vm.info);
 
 		// Sooooooooooo hack
 		// trigger the scrollBottom directive to work.
 		$timeout(function() {
 			vm.newMsgs.push('hack');
-		}, 1000);
+		}, 10);
 	}
 
-	function loadMore() {
-		var deferred = $q.defer();
+	async function loadMore() {
+		let deferred = $q.defer();
 
-		message
-			.getConversation(cid, amount, offset)
-			.then(function(data) {
-				offset += amount;
-				vm.history = [...data, ...vm.history];
+		try {
+			let data = await message.getConversation(cid, amount, offset);
+			offset += amount;
+			vm.history = [...data, ...vm.history];
 
-				deferred.resolve(data);
-			});
+			deferred.resolve(data);
+		} catch (err) {
+			deferred.reject(err);
+		}
 
 		return deferred.promise;
 	}
@@ -67,9 +79,30 @@ function m_messageController(
 				created_at: new Date()
 			})
 			.then(function(data) {
-				console.log(data);
 				vm.dataStream.push(data);
+
+				// Sooooooooooo hack
+				// trigger the scrollBottom directive to work.
 				vm.newMsgs.push('hahaha');
 			});
+	}
+
+	function onCancel() {
+		if ($scope.instance) $mdDialog.hide();
+	}
+
+	function keyup(ev) {
+		if (ev.keyCode === 16) {
+			shiftPressed = false;
+		}
+	}
+
+	function keydown(ev) {
+		if (ev.keyCode === 16) {
+			shiftPressed = true;
+		}
+		if (ev.keyCode === 13 && !shiftPressed) {
+			onSubmit(vm.contents);
+		}
 	}
 }

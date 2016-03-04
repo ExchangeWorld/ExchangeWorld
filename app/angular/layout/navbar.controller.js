@@ -134,8 +134,6 @@ function NavbarController(
 
 	function onClickMessage(msg, ev) {
 		message.showMessagebox(ev, msg, function(){});
-
-
 		vm.closeMenu();
 	}
 

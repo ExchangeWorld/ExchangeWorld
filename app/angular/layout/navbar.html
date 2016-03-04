@@ -1,35 +1,35 @@
 <md-toolbar ng-click="vm.closeMenu()" class="md-whiteframe-z2" style="overflow-x: hidden; overflow-y: hidden;">
 	<div class="md-toolbar-tools navbar" style="height: 56px; max-height:56px;">
-		<span flex="10" flex-gt-sm="5" hide-xs>
+		<div flex="10" flex-gt-sm="5" hide-xs>
 			<md-button ng-click="vm.onClick(0)" style="text-transform: none;" aria-label="logo">
-	<div layout layout-align="center center">
+				<div layout layout-align="center center">
 					<img src="../../images/logo(48).png" style="height:40px; width:auto;">
 				</div>
 			</md-button>
-		</span>
-		<div flex="30" flex-sm="40" flex-xs="0" layout="row" layout-align="center center">
-			<md-button flex hide-xs ng-click="vm.onClick(1)" ng-class="{'active': vm.contentIs(1)}">
+		</div>
+		<div flex="30" flex-sm="40" flex-xs="0" layout="row" layout-align="start start" style="padding-left:13px;">
+			<md-button hide-xs ng-click="vm.onClick(1)" ng-class="{'active': vm.contentIs(1)}">
 				<div layout layout-align="center center">
 					<span class="toolbar-span">探索</span>
 				</div>
 			</md-button>
-			<md-button flex hide-xs ng-click="vm.onClick(2)" ng-class="{'active': vm.contentIs(2)}">
+			<md-button hide-xs ng-click="vm.onClick(2)" ng-class="{'active': vm.contentIs(2)}">
 				<div layout layout-align="center center">
 					<span class="toolbar-span">發佈</span>
 				</div>
 			</md-button>
-			<md-button flex hide-xs ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">
+			<md-button hide-xs ng-click="vm.onClick(3)" ng-class="{'active': vm.contentIs(3)}">
 				<div layout layout-align="center center">
 					<span class="toolbar-span">交換</span>
 				</div>
 			</md-button>
-			<md-button hide-md hide-xs flex ng-click="vm.report()">
+			<md-button hide-md hide-xs ng-click="vm.report()">
 				<div layout layout-align="center center">
 					<span class="toolbar-span">回報</span>
 				</div>
 			</md-button>
 		</div>
-		<span flex-gt-xs="30" flex-sm="15"></span>
+		<span flex-sm="15" flex-gt-sm="30" hide-xs></span>
 		<div hide-xs flex="10" flex-sm="20" flex-offset="10" flex-offset-sm="5" layout="row" layout-align="center center">
 			<md-menu flex flex-sm md-offset="-200 61" ng-show="$root.isLoggedIn">
 				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)">
@@ -90,14 +90,14 @@
 				</md-menu-content>
 			</md-menu>
 		</div>
-		<div flex flex-xs="10" flex-offset-xs="80" layout="row" layout-align="center center">
+		<div flex flex-offset-xs="75" layout="row" layout-align="center center">
 			<md-button ng-hide="$root.isLoggedIn" ng-click="vm.onSignup()">
 				<span class="toolbar-span">註冊</span>
 			</md-button>
 			<md-button ng-hide="$root.isLoggedIn" ng-click="vm.onLogin()">
 				<span class="toolbar-span">登入</span>
 			</md-button>
-			<md-menu flex flex-xs="70" md-offset="-10 64">
+			<md-menu flex flex-xs="70" md-offset="0 64">
 				<md-button ng-show="$root.isLoggedIn" ng-click="vm.openMenu($mdOpenMenu, $event)" style="width: 100%;">
 					<div ng-show="$root.isLoggedIn" layout="row" layout-align="center center">
 						<img hide-xs hide-sm class="img-navbar" ng-src="{{ $root.user.photo_path }}"></img>

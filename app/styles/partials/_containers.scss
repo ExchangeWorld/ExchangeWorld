@@ -80,6 +80,9 @@ md-list {
 
 md-switch {
 	margin: 0px;
+	.md-label {
+		padding-top: 20px;
+	}
 }
 
 md-dialog {
@@ -92,7 +95,7 @@ md-radio-button {
 
 md-input-container {
 	label {
-		top: 0;
+		top: -20px;
 	}
 	.md-input {
 		padding-bottom: 0;
@@ -285,7 +288,10 @@ div.md-open-menu-container {
 		margin: 0;
 	}
 	.switch {
-		padding-left: 5px;
+		padding-left: 25px;
+		.md-label {
+			padding-left: 0%;
+		}
 	}
 	.ex-bg {
 		overflow-x: hidden;
@@ -385,6 +391,9 @@ div.md-open-menu-container {
 	}
 	.switch {
 		padding-left: 10px;
+		.md-label {
+			padding-right: 10px;
+		}
 	}
 	.info_container {
 		&.for_input {

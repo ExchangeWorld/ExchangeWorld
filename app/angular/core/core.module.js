@@ -5,7 +5,6 @@ const bulk    = require('bulk-require');
 global._      = require("lodash"); //fix restangular dependency on lodash issue
 
 require('babel-polyfill');
-require('angular-touch');
 require('angular-material');
 require('angular-ui-router');
 require('restangular');
@@ -24,6 +23,7 @@ require('../utils/auth/auth.module');
 require('../utils/scroll/scroll.module');
 require('../utils/colorThief/colorThief.module');
 require('../utils/upwardScroll/upwardScroll.module');
+require('../utils/scrollHide/scrollHide.module');
 require('../mobile/m_message/m_message.module');
 require('../mobile/m_messagebox/m_messagebox.module');
 require('../mobile/m_notification/m_notification.module');
@@ -32,7 +32,6 @@ const requires = [
 	'ui.router',
 	'ngStorage',
 	'restangular',
-	'ngTouch',
 	'ngMaterial',
 	'720kb.socialshare',
 	'utils.photoSlider',
@@ -48,6 +47,7 @@ const requires = [
 	'utils.auth',
 	'utils.colorThief',
 	'utils.upwardScroll',
+	'utils.scrollHide',
 	'm.message',
 	'm.messagebox',
 	'm.notification',

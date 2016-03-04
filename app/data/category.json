@@ -3,7 +3,7 @@
 	alias: "全部"
 }, {
 	label: "Books",
-	alias: "書"
+	alias: "書籍"
 }, {
 	label: "Textbooks",
 	alias: "教科書"

@@ -13,61 +13,63 @@ function m_messageController(
 	$stateParams,
 	$timeout
 ) {
-	const vm       = this;
-	vm.msg         = $stateParams.msg;
-	vm.history     = [];
-	vm.loadMore    = loadMore;
-	vm.contents    = '';
-	vm.onClickUser = $rootScope.onClickUser;
-	vm.submit      = onSubmit;
-	vm.newMsgs     = [];
+	const vm        = this;
+	const cid       = $stateParams.cid;
+
+	vm.dataStream   = message.dataStream;
+	vm.history      = [];
+	
+	vm.loadMore     = loadMore;
+	vm.contents     = '';
+	vm.onClickUser  = $rootScope.onClickUser;
+	vm.submit       = onSubmit;
+	vm.newMsgs      = [];
 
 	activate();
 	var shiftPressed = false;
 
 	var amount, offset;
+
 	function activate() {
-		if(!vm.msg) {
-			$state.go('root.oneCol.home');
-		}
-		amount = 10;
+		amount = 30;
 		offset = 0;
 		loadMore();
 
 		// Sooooooooooo hack
 		// trigger the scrollBottom directive to work.
-		$timeout(function(){
+		$timeout(function() {
 			vm.newMsgs.push('hack');
-		}, 100);
+		}, 1000);
 	}
 
 	function loadMore() {
 		var deferred = $q.defer();
 
 		message
-			.getConversation(vm.msg.sender_uid, vm.msg.receiver_uid, amount, offset)
+			.getConversation(cid, amount, offset)
 			.then(function(data) {
-				vm.history = [...data.reverse(), ...vm.history];
 				offset += amount;
+				vm.history = [...data, ...vm.history];
 
-				deferred.resolve();
+				deferred.resolve(data);
 			});
 
 		return deferred.promise;
 	}
 
-	function onSubmit(msg_content) {
-		if(msg_content.trim().length === 0) return;
-		message.
-			postMessage({
-				receiver_uid : vm.msg.sender_uid,
-				sender_uid   : vm.msg.receiver_uid,
-				content      : msg_content,
+	function onSubmit() {
+		if (vm.contents.trim().length === 0) return;
+		message
+			.postMessage({
+				chatroom_cid: cid,
+				sender_uid: $rootScope.user.uid,
+				content: vm.contents,
+				created_at: new Date()
 			})
 			.then(function(data) {
-				vm.history.push(data);
-				vm.newMsgs.push(data);
-				vm.contents = '';
+				console.log(data);
+				vm.dataStream.push(data);
+				vm.newMsgs.push('hahaha');
 			});
 	}
 }

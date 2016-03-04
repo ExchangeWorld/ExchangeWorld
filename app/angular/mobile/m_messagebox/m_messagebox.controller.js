@@ -8,8 +8,8 @@ m_messageModule.controller('m_messageboxController', m_messageboxController);
 
 /** @ngInject */
 function m_messageboxController(message, $state, $rootScope, $localStorage, exception) {
-	const vm          = this;
-	vm.messages       = [];
+	const vm = this;
+	vm.messages = [];
 	vm.onClickMessage = onClickMessage;
 
 	activate();
@@ -26,12 +26,9 @@ function m_messageboxController(message, $state, $rootScope, $localStorage, exce
 	}
 
 	function onClickMessage(msg) {
-		message
-			.updateMessage(msg)
-			.then(() => {
-				updateMessagebox();
-				$state.go('root.oneCol.m_message', { msg: msg });
-			});
+		$state.go('root.oneCol.m_message', {
+			cid: msg.cid
+		});
 	}
 
 	async function updateMessagebox() {
@@ -40,7 +37,7 @@ function m_messageboxController(message, $state, $rootScope, $localStorage, exce
 		try {
 			vm.messages = await message.getMessageList();
 			//vm.messages.forEach(function(msg) {
-				//msg.updated_at = moment(msg.timestamp.slice(0, -1)).add(8, 'h').fromNow();//.calendar();
+			//msg.updated_at = moment(msg.timestamp.slice(0, -1)).add(8, 'h').fromNow();//.calendar();
 			//});
 			vm.loading = false;
 		} catch (err) {

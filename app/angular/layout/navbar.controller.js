@@ -79,7 +79,7 @@ function NavbarController(
 	function onClick(contentIndex) {
 		if ([0, 5, 6].indexOf(contentIndex) !== -1) {
 			$state.go('root.oneCol.' + state[contentIndex]);
-		} else if(contentIndex === 3) {
+		} else if (contentIndex === 3) {
 			if (!$localStorage.user) vm.onLogin();
 			else  $state.go('root.oneCol.' + state[contentIndex], {uid: $localStorage.user.uid});
 		} else {

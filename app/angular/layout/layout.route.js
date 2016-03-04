@@ -36,7 +36,6 @@ function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia
 	$rootScope.historyCounter = 1;
 	$rootScope.onClickUser = onClickUser;
 	$rootScope.onClickFollow = onClickFollow;
-	$rootScope.onClickMessage = onClickMessage;
 	$rootScope.openSignupModal = openSignupModal;
 	$rootScope.openLoginModal = openLoginModal;
 	$rootScope.onSwipeLeft = onSwipeLeft;
@@ -63,16 +62,6 @@ function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia
 			$state.go('root.oneCol.m_follow', {
 				uid: uid,
 				type: type
-			});
-		}
-	}
-
-	function onClickMessage(ev, msg) {
-		if ($window.innerWidth > 600) {
-			message.showMessagebox(ev, msg);
-		} else {
-			$state.go('root.oneCol.m_message', {
-				msg: msg
 			});
 		}
 	}

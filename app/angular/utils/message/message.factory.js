@@ -99,7 +99,28 @@ function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScop
 		return defer.promise;
 	}
 
-	function showMessagebox(ev, msg) {
+	async function createChatroom(members) {
+		const defer = $q.defer();
+
+		try {
+			let membersArray = JSON.stringify(members);
+			let chatroom = await Restangular.all('/chatroom/create').post({ members_json: membersArray });
+			defer.resolve(chatroom);
+		} catch (err) {
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
+
+	async function showMessagebox(ev, msg) {
+		let chatroom;
+		if (!msg.cid) {
+			chatroom = await createChatroom([msg.sender_uid, msg.receiver_uid]);
+			msg = chatroom;
+		}
+		
 		let mdScope = $rootScope.$new();
 		mdScope.instance = $mdDialog.show({
 			clickOutsideToClose: true,
@@ -110,7 +131,6 @@ function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScop
 			scope: mdScope,
 			resolve: {
 				info: function() {
-					console.log(msg);
 					return getChatroomInfo(msg.cid);
 				}
 			}

@@ -26,6 +26,7 @@ function ProfileController(
 	notification,
 	colorThief,
 	logger,
+	message,
 	$state,
 	$stateParams,
 	$rootScope,
@@ -49,16 +50,13 @@ function ProfileController(
 	vm.getNumber           = number => new Array(number);
 	vm.onClickGoods        = gid => $state.go('root.withSidenav.goods', { gid : gid });
 	vm.getHTMLDesc         = getHTMLDesc;
-	vm.followerCount       = profile.follows_followed.length;
 	/////////////
 
 	activate();
 
 	function activate() {
-		if ($rootScope.isLoggedIn) {
-			if (_.findWhere(profile.follows_followed, { fid: $localStorage.user.uid })) {
-				vm.isFollowed = true;
-			}
+		if (_.findWhere(profile.follows_followed, { fid: $localStorage.user.uid })) {
+			vm.isFollowed = true;
 		}
 
 		//TODO; use /api/user/me
@@ -95,13 +93,9 @@ function ProfileController(
 	function onClickAddFollowing() {
 		if (vm.isFollowed) {
 			followService.deleteFollowing($localStorage.user.uid, profile.uid);
-
-			vm.followerCount--;
 			vm.isFollowed = false;
 		} else {
 			followService.addFollowing($localStorage.user.uid, profile.uid);
-
-			vm.followerCount++;
 			vm.isFollowed = true;
 		}
 	}
@@ -109,11 +103,10 @@ function ProfileController(
 	function onClickSendMsg(ev, uid) {
 		var msg = {
 			sender_uid   : uid,
-			user         : profile,
 			receiver_uid : $localStorage.user.uid,
 			isNewMsg     : true,
 		};
-		$rootScope.onClickMessage(ev, msg);
+		message.showMessagebox(ev, msg);
 	}
 
 	function onClickEdit() {
@@ -144,5 +137,4 @@ function ProfileController(
 	function getHTMLDesc(desc) {
 		return $sce.trustAsHtml(marked(desc));
 	}
-
 }

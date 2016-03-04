@@ -36,9 +36,6 @@ function m_messageboxController(message, $state, $rootScope, $localStorage, exce
 
 		try {
 			vm.messages = await message.getMessageList();
-			//vm.messages.forEach(function(msg) {
-			//msg.updated_at = moment(msg.timestamp.slice(0, -1)).add(8, 'h').fromNow();//.calendar();
-			//});
 			vm.loading = false;
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);

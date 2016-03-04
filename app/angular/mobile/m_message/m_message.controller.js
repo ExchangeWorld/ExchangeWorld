@@ -44,13 +44,7 @@ function m_messageController(
 		offset = 0;
 
 		await loadMore();
-		console.log(vm.info);
-
-		// Sooooooooooo hack
-		// trigger the scrollBottom directive to work.
-		$timeout(function() {
-			vm.newMsgs.push('hack');
-		}, 10);
+		goButtom();
 	}
 
 	async function loadMore() {
@@ -80,10 +74,7 @@ function m_messageController(
 			})
 			.then(function(data) {
 				vm.dataStream.push(data);
-
-				// Sooooooooooo hack
-				// trigger the scrollBottom directive to work.
-				vm.newMsgs.push('hahaha');
+				goButtom();
 			});
 	}
 
@@ -104,5 +95,13 @@ function m_messageController(
 		if (ev.keyCode === 13 && !shiftPressed) {
 			onSubmit(vm.contents);
 		}
+	}
+	
+	function goButtom() {
+		// Sooooooooooo hack
+		// trigger the scrollBottom directive to work.
+		$timeout(function() {
+			vm.newMsgs.push('hack');
+		}, 10);
 	}
 }

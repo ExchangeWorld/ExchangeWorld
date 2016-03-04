@@ -38,6 +38,9 @@ function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScop
 
 		try {
 			let list = await Restangular.one('user', user.uid).getList('chatroom');
+			list.forEach(function(msg) {
+				msg.updated_at = moment(msg.updated_at.slice(0, -1)).add(8, 'h').fromNow();//.calendar();
+			});
 			defer.resolve(list);
 		} catch (err) {
 			defer.reject(err);

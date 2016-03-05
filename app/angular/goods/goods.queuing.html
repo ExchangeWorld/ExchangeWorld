@@ -1,7 +1,7 @@
 <md-dialog aria-label="Queue" style="width:50%;">
 	<form>
-		<md-toolbar>
-			<div flex class="md-toolbar-tools">
+		<md-toolbar class="md-whiteframe-2dp">
+			<div flex class="md-toolbar-tools" style="background-color: #b3e1d8;">
 				<h2 class="md-title">選擇一個物品接受「排」</h2>
 				<span flex></span>
 				<md-button class="md-icon-button" ng-click="vm.cancel()">
@@ -9,7 +9,7 @@
 				</md-button>
 			</div>
 		</md-toolbar>
-		<md-dialog-content style="max-width:600px;">
+		<md-dialog-content style="max-width:700px;">
 			<div layout="column" layout-align="start center">
 				<div flex ng-show="vm.queuingGoods.length === 0">目前沒有正在排的物品</div>
 				<md-radio-group ng-model="queuing.group">
@@ -27,7 +27,13 @@
 									</div>
 									<div flex="45" flex-sm="100" layout="column" layout-align="center center">
 										<div layout="row">
-											<a ng-click="vm.onClickGoods(queuing.queuer_goods.gid)">{{ queuing.queuer_goods.name }}</a>
+											<a layout="column" layout-align="end start " class="md-title" ng-click="vm.onClickGoods(goods.gid)">
+												<span class="md-display-1">{{ queuing.queuer_goods.name }}</span>
+												<div layout="row" layout-algin="center center">
+													<img data-ng-src="../../images/icon/{{ queuing.queuer_goods.category }}.svg" style="height:20px; width:auto;" />
+													<span>{{ queuing.queuer_goods.category }}</span>
+												</div>
+											</a>
 										</div>
 									</div>
 								</md-card-content>
@@ -37,13 +43,13 @@
 				</md-radio-group>
 			</div>
 		</md-dialog-content>
-		<div class="md-actions" layout="row">
+		<md-dialog-actions layout="row">
 			<span flex></span>
 			<md-button ng-click="vm.cancel()">取消</md-button>
 			<md-button ng-click="vm.confirm(queuing.group)" ng-disabled="queuing.group === undefined" style="margin-right:20px;">
 				完成
 			</md-button>
-		</div>
+		</md-dialog-actions>
 	</form>
 </md-dialog>
 

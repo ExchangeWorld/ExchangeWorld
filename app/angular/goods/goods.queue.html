@@ -1,8 +1,8 @@
 <md-dialog aria-label="Queue" style="width:50%;">
 	<form>
-		<md-toolbar>
-			<div flex class="md-toolbar-tools" layout layout-align="center center">
-				<h2 class="md-title">您想要拿來「排」的物品</h2>
+		<md-toolbar class="md-whiteframe-2dp">
+			<div flex class="md-toolbar-tools" style="background-color: #b3e1d8;">
+				<h2 class="md-title">想要拿來交換的物品</h2>
 				<span flex></span>
 				<md-button class="md-icon-button" ng-click="vm.cancel()">
 					<md-icon md-font-set="material-icons" aria-label="Close dialog">close</md-icon>
@@ -10,30 +10,29 @@
 			</div>
 		</md-toolbar>
 		<md-dialog-content style="max-width:700px;">
+			<div layout-padding></div>
 			<div layout="column" layout-align="start center">
-				<div flex ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西
+				<div flex layout-padding layout-margin ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西
 					<br/>趕快去ＰＯ一些吧！</div>
 				<md-radio-group ng-model="queue.group" layout-fill>
-					<div ng-repeat="goods in vm.myGoods">
+					<div ng-repeat="goods in vm.myGoods" style="margin:20px;">
 						<div flex layout="row" layout-align="center center">
 							<md-radio-button value="{{goods.gid}}">
 							</md-radio-button>
 							<md-card class="md-whiteframe-z3 item-profile name-queue">
 								<md-card-content layout="row" layout-sm="column">
-									<div 
-										flex="55" flex-sm="100" 
-										layout layout-align="center center" 
-										style=" height:150px; width:auto; border-radius:10px;"
-									>
-										<img 
-											ng-src="{{goods.photo_path[0]}}" 
-											style="max-width: 100%; max-height:100%;"
-										/>
-
+									<div flex="55" flex-sm="100" layout layout-align="center center" style=" height:150px; width:auto; border-radius:10px;">
+										<img ng-src="{{goods.photo_path[0]}}" style="max-width: 100%; max-height:100%;" />
 									</div>
-									<div flex="45" flex-sm="100" layout="column" layout-align="center center">
+									<div flex="45" flex-sm="100" layout="column" layout-align="end start">
 										<div layout="row">
-											<a ng-click="vm.onClickGoods(goods.gid)">{{ goods.name }}</a>
+											<a layout="column" layout-align="end start " class="md-title" ng-click="vm.onClickGoods(goods.gid)">
+												<span class="md-display-1">{{ goods.name }}</span>
+												<div layout="row" layout-algin="center center">
+													<img data-ng-src="../../images/icon/{{goods.category}}.svg" style="height:20px; width:auto;" />
+													<span>{{ goods.category }}</span>
+												</div>
+											</a>
 										</div>
 									</div>
 								</md-card-content>
@@ -43,11 +42,10 @@
 				</md-radio-group>
 			</div>
 		</md-dialog-content>
-		<div class="md-actions" layout="row">
+		<md-dialog-actions layout="row">
 			<span flex></span>
 			<md-button ng-click="vm.cancel()">取消</md-button>
 			<md-button ng-click="vm.confirm(queue.group)" style="margin-right:20px;" ng-show="vm.myGoods.length !== 0" ng-disabled="queue.group === undefined">完成</md-button>
-		</div>
+		</md-dialog-actions>
 	</form>
 </md-dialog>
-

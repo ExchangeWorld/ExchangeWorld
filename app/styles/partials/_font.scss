@@ -235,6 +235,12 @@ a:hover {
 	}
 }
 
+@media screen and (max-width: 350px) {
+	.hide-i5 {
+		display: none;
+	}
+}
+
 @media screen and (min-width: 600px) {
 	md-switch {
 		.md-container {

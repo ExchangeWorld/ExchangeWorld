@@ -298,13 +298,6 @@ div.md-open-menu-container {
 		overflow-y: auto;
 		background-color: #f5f5f5;
 	}
-	.info_container {
-		&.for_input {
-			&.post {
-				margin: 2% 1.5%;
-			}
-		}
-	}
 	.img-home {
 		max-width: 100%;
 		max-height: 200px;
@@ -348,6 +341,20 @@ div.md-open-menu-container {
 	}
 	md-toolbar:not(.md-menu-toolbar) {
 		background-color: #ECEFF1;
+	}
+	.input-post {
+		height: 16%;
+		&.cate {
+			padding-bottom: 14%;
+		}
+		&.desc {
+			padding-bottom: 4%;
+		}
+		&.img {
+			width: 70vw;
+			height: 35vw;
+			border: 2px #757575 dashed;
+		}
 	}
 }
 
@@ -395,13 +402,6 @@ div.md-open-menu-container {
 			padding-right: 10px;
 		}
 	}
-	.info_container {
-		&.for_input {
-			&.post {
-				margin: 0 1.5%;
-			}
-		}
-	}
 	.img-home {
 		height: 350px;
 		max-height: 350px;
@@ -426,6 +426,19 @@ div.md-open-menu-container {
 		}
 		&.column-right {
 			margin: 2.5% 0 2.5% 10%;
+		}
+	}
+	.input-post {
+		height: 13%;
+		&.cate {
+			padding-bottom: 10%;
+		}
+		&.desc {
+			padding-bottom: 4%;
+		}
+		&.img {
+			width: 40vw;
+			height: 22vw;
 		}
 	}
 }
@@ -473,13 +486,6 @@ div.md-open-menu-container {
 		overflow-y: hidden;
 		background-color: #f5f5f5;
 	}
-	.info_container {
-		&.for_input {
-			&.post {
-				margin: 2.8% 1.5%;
-			}
-		}
-	}
 	.img-home {
 		max-width: 86%;
 		max-height: 100%;
@@ -516,6 +522,13 @@ div.md-open-menu-container {
 	md-toolbar:not(.md-menu-toolbar) {
 		background-color: transparent;
 	}
+	.input-post {
+		height: 17%;
+		&.img {
+			width: 20vw;
+			height: 10vw;
+		}
+	}
 }
 
 @media screen and (min-width: 1400px) {
@@ -530,11 +543,11 @@ div.md-open-menu-container {
 		max-width: 90%;
 		padding-top: 25%;
 	}
-	.info_container {
-		&.for_input {
-			&.post {
-				margin: 0 1.5%;
-			}
+	.input-post {
+		height: 100px;
+		&.img {
+			width: 30vw;
+			height: 23vw;
 		}
 	}
 }

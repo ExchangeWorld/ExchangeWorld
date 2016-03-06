@@ -24,7 +24,6 @@ function ProfileController(
 	followService,
 	auth,
 	notification,
-	colorThief,
 	logger,
 	$state,
 	$stateParams,
@@ -34,7 +33,6 @@ function ProfileController(
 	$sce
 ) {
 	var vm                 = this;
-	var ct                 = new colorThief.ColorThief();
 	vm.profile             = profile;
 	vm.isMe                = $rootScope.isLoggedIn && (profile.uid === $localStorage.user.uid);
 	vm.favSum              = '';
@@ -49,7 +47,6 @@ function ProfileController(
 	vm.getNumber           = number => new Array(number);
 	vm.onClickGoods        = gid => $state.go('root.withSidenav.goods', { gid : gid });
 	vm.getHTMLDesc         = getHTMLDesc;
-	vm.followerCount       = profile.follows_followed.length;
 	/////////////
 
 	activate();
@@ -75,21 +72,6 @@ function ProfileController(
 				vm.favSum = data;
 			});
 
-		/**
-		 * only do this on desktop mode.
-		if($state.current.name === 'root.withSidenav.profile') {
-			[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
-				dominateColor(goods);
-			});
-		} else {
-			[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
-				goods.bgStyle = {
-					"background-color": 'rgb(0, 0, 0)'
-				};
-			});
-		}
-		 */
-		$rootScope.$broadcast('goodsChanged', vm.profile.goods);
 	}
 
 	function onClickAddFollowing() {
@@ -107,13 +89,6 @@ function ProfileController(
 	}
 
 	function onClickSendMsg(ev, uid) {
-		var msg = {
-			sender_uid   : uid,
-			user         : profile,
-			receiver_uid : $localStorage.user.uid,
-			isNewMsg     : true,
-		};
-		$rootScope.onClickMessage(ev, msg);
 	}
 
 	function onClickEdit() {
@@ -128,17 +103,6 @@ function ProfileController(
 				});
 		}
 		vm.isReadOnly = !vm.isReadOnly;
-	}
-
-	function dominateColor(goods) {
-		if (!goods.length) return;
-		var image = document.getElementById(`img_${goods.gid}`);
-		image.onload = ()=> {
-			var color = ct.getColor(image);
-			goods.bgStyle = {
-				"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`
-			};
-		};
 	}
 
 	function getHTMLDesc(desc) {

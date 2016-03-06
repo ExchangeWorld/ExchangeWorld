@@ -23,9 +23,9 @@ function profileService(Restangular, $q, facebookService, exception) {
 			let data = await Restangular.one('user', _uid).get();
 			data.goods.forEach(function(goods) {
 				try {
-					goods.photoPath = JSON.parse(goods.photo_path);
+					goods.photo_path = JSON.parse(goods.photo_path);
 				} catch (err) {
-					goods.photoPath = '';
+					goods.photo_path = '';
 				}
 			});
 			data.myGoodsPending = data.goods.filter(function(g) { return g.exchanged === 0; });

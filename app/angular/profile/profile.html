@@ -16,17 +16,17 @@
 			<div layout="row" layout-xs="column" layout-align="center center">
 				<div layout="column" layout-xs="row" layout-align="center center" class="note profile">
 					<p class="md-title text-ex follow reset-follow">追隨中</p>
-					<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'following')">{{ vm.profile.followings.length }}</a>
+					<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'following')">{{ vm.profile.follows_follower.length }}</a>
 				</div>
 				<div layout="column" layout-xs="row" layout-align="center center" class="note profile">
 					<p class="md-title text-ex follow reset-follow">被追蹤</p>
-					<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'follower')">{{ vm.followerCount }}</a>
+					<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'follower')">{{ vm.profile.follows_followed.length }}</a>
 				</div>
 			</div>
 		</div>
 		<div flex-offset="10" layout="row" layout-align="center center" style="margin-top: 10px;">
 			<div flex layout-margin>
-				<md-button class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
+				<md-button class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
 					<div layout="row" layout-align="center center" ng-show="!vm.isFollowed">
 						<i class="material-icons">person_add</i>
 						<span hide-xs>&nbsp;追隨</span>
@@ -38,7 +38,7 @@
 				</md-button>
 			</div>
 			<div flex layout-margin>
-				<md-button class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!vm.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)">
+				<md-button class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)">
 					<div layout="row" layout-align="center center">
 						<i class="material-icons">chat</i>
 						<span hide-xs>&nbsp;送訊息</span>
@@ -50,56 +50,62 @@
 	</div>
 	<md-divider class="info_container for_input small" style="margin: 0;"></md-divider>
 	<md-tabs md-dynamic-height md-center-tabs md-swipe-content md-no-ink>
-		<md-tab label="願望清單">
-			<md-content layout-padding style="margin-top: 10px;">
-				<div layout="row" style="padding-top: 4%;">
-					<div flex="65" flex-offset="5">
-						<form name="userForm">
-							<div layout="column">
-								<p class="fade md-subhead text-ex edit" ng-hide="vm.isReadOnly">請於下方輸入您想要的物品</p>
-								<md-input-container style="margin-top: 10px;">
-									<label style="top:-20px;">您想要的物品</label>
-									<textarea ng-model="vm.profile.wishlist" ng-disabled="vm.isReadOnly"></textarea>
-								</md-input-container>
-							</div>
-						</form>
+		<md-tab label="願望清單({{ vm.myStar.length }})">
+			<div class="grid-wrapper" style="max-width:700px; margin:0 auto;">
+				<div class="grid__columns">
+					<div ng-repeat="card in vm.myStar">
+						<md-card class="md-whiteframe-z4 item card">
+							<a ng-href="/seek/{{card.gid}}" ng-mouseenter="onMouseOver(card.gid)" ng-mouseleave="onMouseOut(card.gid)">
+								<img width="300" data-ng-src="{{card.photo_path[0]}}" class="md-card-image card-img">
+								<div layout="row" layout-align="start center">
+									<div style="padding-left:10px; padding-top:5px; width:100%;">
+										<img data-ng-src="../../images/icon/{{card.category}}.svg" style="height:24px; width:auto; position:relative; top:4px; float:left; margin-right:3px;" />
+										<h2 class="seek-title">
+										{{card.name}}
+									</h2>
+									</div>
+								</div>
+								<div layout="row" layout-align="start center" style="margin:0; padding-left: 10px; padding-bottom: 15px;">
+									<div flex layout layout-align="start center" class="card-info">
+										<i class="material-icons person" style="outline:0; margin-right:0px; font-size:20px;">person</i>
+										<span style="font-size: 14px;text-overflow: ellipsis;display: inline-block;white-space: nowrap;overflow: hidden;">{{ card.owner.name }}</span>
+									</div>
+								</div>
+							</a>
+						</md-card>
 					</div>
-					<span flex></span>
-					<div layout layout-align="center start">
-						<md-button class="md-fab md-primary md-hue-2" ng-show="vm.isMe" ng-click="vm.onClickEdit()">
-							<md-icon md-font-set="material-icons" ng-show="vm.isMe && vm.isReadOnly">edit</md-icon>
-							<md-icon md-font-set="material-icons" ng-hide="vm.isReadOnly">done</md-icon>
-							<md-tooltip ng-show="vm.isMe && vm.isReadOnly">編輯願望清單</md-tooltip>
-							<md-tooltip ng-hide="vm.isReadOnly">完成</md-tooltip>
-						</md-button>
-					</div>
-					<span flex="5"></span>
 				</div>
-			</md-content>
+			</div>
 		</md-tab>
 		<md-tab label="等待交換({{ vm.myGoodsPending.length }})">
 			<md-content layout-padding>
 				<div flex layout layout-align="center center" ng-show="vm.myGoodsPending.length === 0">
 					<img class="img-null" src="../../images/emoji_null.png">
 				</div>
-				<div layout="column" layout-align="center center">
-					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myGoodsPending" ng-click="vm.onClickGoods(goods.gid)">
-						<md-card-content layout-gt-xs="row">
-							<div flex-gt-xs="40" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
-								<img id="img_{{goods.gid}}" crossorigin="anonymous" ng-src="{{ goods.photoPath[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" ng-show="goods.category !== 'Christmas'" />
-								<img id="img_{{goods.gid}}" crossorigin="anonymous" src="./../images/Gift(Small).jpg" style="max-width: 100%; max-height:100%; cursor:pointer;" ng-show="goods.category === 'Christmas'" />
-							</div>
-							<div flex-offset-gt-xs="5" flex-gt-xs="55" layout-gt-xs="column">
-								<div layout layout-align="center center">
-									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
-								</div>
-								<div flex layout layout-align="center center">
-									<div ng-bind-html="vm.getHTMLDesc(goods.description)">
+				<div class="grid-wrapper" style="max-width:700px; margin:0 auto;">
+					<div class="grid__columns">
+						<div ng-repeat="card in vm.myGoodsPending">
+							<md-card class="md-whiteframe-z4 item card">
+								<a ng-href="/seek/{{card.gid}}" ng-mouseenter="onMouseOver(card.gid)" ng-mouseleave="onMouseOut(card.gid)">
+									<img width="300" data-ng-src="{{card.photo_path[0]}}" class="md-card-image card-img">
+									<div layout="row" layout-align="start center">
+										<div style="padding-left:10px; padding-top:5px; width:100%;">
+											<img data-ng-src="../../images/icon/{{card.category}}.svg" style="height:24px; width:auto; position:relative; top:4px; float:left; margin-right:3px;" />
+											<h2 class="seek-title">
+											{{card.name}}
+										</h2>
+										</div>
 									</div>
-								</div>
-							</div>
-						</md-card-content>
-					</md-card>
+									<div layout="row" layout-align="start center" style="margin:0; padding-left: 10px; padding-bottom: 15px;">
+										<div flex layout layout-align="start center" class="card-info">
+											<i class="material-icons description" style="outline:0; margin-right:0px; font-size:20px;">description</i>
+											<span style="font-size: 14px;text-overflow: ellipsis;display: inline-block;white-space: nowrap;overflow: hidden;">{{ card.description }}</span>
+										</div>
+									</div>
+								</a>
+							</md-card>
+						</div>
+					</div>
 				</div>
 			</md-content>
 		</md-tab>
@@ -108,57 +114,34 @@
 				<div flex layout layout-align="center center" ng-show="vm.myGoodsExchanged.length === 0">
 					<img class="img-null" src="../../images/emoji_null.png">
 				</div>
-				<div layout="column" layout-align="center center">
-					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myGoodsExchanged" ng-click="vm.onClickGoods(goods.gid)">
-						<md-card-content layout-gt-xs="row">
-							<div flex-gt-xs="40" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
-								<img id="img_{{goods.gid}}" crossorigin="anonymous" ng-src="{{ goods.photoPath[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
-							</div>
-							<div flex-offset-gt-xs="5" flex-gt-xs="55" layout-gt-xs="column">
-								<div layout="row" layout-align="center center">
-									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
-								</div>
-								<div flex layout layout-align="center center">
-									<div ng-bind-html="vm.getHTMLDesc(goods.description)">
+				<div class="grid-wrapper" style="max-width:700px; margin:0 auto;">
+					<div class="grid__columns">
+						<div ng-repeat="card in vm.myGoodsExchanged">
+							<md-card class="md-whiteframe-z4 item card">
+								<a ng-href="/seek/{{card.gid}}" ng-mouseenter="onMouseOver(card.gid)" ng-mouseleave="onMouseOut(card.gid)">
+									<img width="300" data-ng-src="{{card.photo_path[0]}}" class="md-card-image card-img">
+									<div layout="row" layout-align="start center">
+										<div style="padding-left:10px; padding-top:5px; width:100%;">
+											<img data-ng-src="../../images/icon/{{card.category}}.svg" style="height:24px; width:auto; position:relative; top:4px; float:left; margin-right:3px;" />
+											<h2 class="seek-title">
+											{{card.name}}
+										</h2>
+										</div>
 									</div>
-								</div>
-								<div layout layout-align="center start">
-									<div ng-repeat="n in vm.getNumber(goods.rate) track by $index">
-										<img src="../../images/star-on.svg" />
+									<div layout="row" layout-align="start center" style="margin:0; padding-left: 10px; padding-bottom: 15px;">
+										<div layout layout-align="center start">
+											<div ng-repeat="n in vm.getNumber(card.rate) track by $index">
+												<img src="../../images/star-on.svg" />
+											</div>
+											<div ng-repeat="n in vm.getNumber(5 - card.rate) track by $index">
+												<img src="../../images/star-off.svg" />
+											</div>
+										</div>
 									</div>
-									<div ng-repeat="n in vm.getNumber(5 - goods.rate) track by $index">
-										<img src="../../images/star-off.svg" />
-									</div>
-								</div>
-							</div>
-						</md-card-content>
-					</md-card>
-				</div>
-			</md-content>
-		</md-tab>
-		<md-tab label="關注的物品({{ vm.myStar.length }})">
-			<md-content layout-padding>
-				<div flex layout layout-align="center center" ng-show="vm.myStar.length === 0">
-					<img class="img-null" src="../../images/emoji_null.png">
-				</div>
-				<div layout="column" layout-align="center center">
-					<md-card class="md-whiteframe-z3 item-profile" ng-repeat="goods in vm.myStar" ng-click="vm.onClickGoods(goods.gid)">
-						<md-card-content layout-gt-xs="row">
-							<div flex-gt-xs="40" layout layout-align="center center" style=" height:200px; width:auto; border-radius:10px;" ng-style="goods.bgStyle">
-								<img id="img_{{goods.gid}}" crossorigin="anonymous" ng-src="{{ goods.photoPath[0] }}" style="max-width: 100%; max-height:100%; cursor:pointer;" ng-show="goods.category !== 'Christmas'" />
-								<img id="img_{{goods.gid}}" crossorigin="anonymous" src="./../images/Gift(Small).jpg" style="max-width: 100%; max-height:100%; cursor:pointer;" ng-show="goods.category === 'Christmas'" />
-							</div>
-							<div flex-offset-gt-xs="5" flex-gt-xs="55" layout-gt-xs="column">
-								<div layout layout-align="center center">
-									<h2 style="margin: 10px 0;">{{ goods.name }}</h2>
-								</div>
-								<div flex layout layout-align="center center">
-									<div ng-bind-html="vm.getHTMLDesc(goods.description)">
-									</div>
-								</div>
-							</div>
-						</md-card-content>
-					</md-card>
+								</a>
+							</md-card>
+						</div>
+					</div>
 				</div>
 			</md-content>
 		</md-tab>

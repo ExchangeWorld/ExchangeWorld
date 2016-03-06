@@ -49,17 +49,6 @@ function getStates() {
 				templateUrl : 'profile/profile.html',
 				resolve : resolve,
 			}
-		},
-		{
-			state : 'root.oneCol.m_profile',
-			config : {
-				url : '/m_profile/:uid',
-				bindToController: true,
-				controller : 'ProfileController',
-				controllerAs: 'vm',
-				templateUrl : 'profile/profile.html',
-				resolve : resolve,
-			}
 		}
 	];
 }

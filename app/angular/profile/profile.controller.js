@@ -53,7 +53,7 @@ function ProfileController(
 
 	function activate() {
 		if ($rootScope.isLoggedIn) {
-			if (_.findWhere(profile.follows_followed, { fid: $localStorage.user.uid })) {
+			if (_.findWhere(profile.follows_followed, { uid: $localStorage.user.uid })) {
 				vm.isFollowed = true;
 			}
 		}
@@ -78,12 +78,12 @@ function ProfileController(
 		if (vm.isFollowed) {
 			followService.deleteFollowing($localStorage.user.uid, profile.uid);
 
-			vm.followerCount--;
+			vm.profile.follows_followed.pop();
 			vm.isFollowed = false;
 		} else {
 			followService.addFollowing($localStorage.user.uid, profile.uid);
 
-			vm.followerCount++;
+			vm.profile.follows_followed.push({});
 			vm.isFollowed = true;
 		}
 	}

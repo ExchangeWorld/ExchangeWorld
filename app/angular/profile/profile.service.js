@@ -30,6 +30,12 @@ function profileService(Restangular, $q, facebookService, exception) {
 			});
 			data.myGoodsPending = data.goods.filter(function(g) { return g.exchanged === 0; });
 			data.myGoodsExchanged = data.goods.filter(function(g) { return g.exchanged === 1; });
+			
+			data.scores = 0;
+			data.myGoodsExchanged.forEach(function(g) {
+				data.scores += g.rate;
+			});
+
 			defer.resolve(data);
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);

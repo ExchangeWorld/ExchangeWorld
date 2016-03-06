@@ -2,18 +2,6 @@
 
 const profileModule = require('./profile.module');
 const _             = require('lodash');
-const marked = require('marked');
-marked.setOptions({
-	renderer: new marked.Renderer(),
-	gfm: false,
-	tables: false,
-	breaks: true,
-	pedantic: false,
-	sanitize: false,
-	smartLists: false,
-	smartypants: false
-});
-
 profileModule.controller('ProfileController', ProfileController);
 
 /** @ngInject */
@@ -52,15 +40,12 @@ function ProfileController(
 	activate();
 
 	function activate() {
-		if ($rootScope.isLoggedIn) {
-			if (_.findWhere(profile.follows_followed, { uid: $localStorage.user.uid })) {
-				vm.isFollowed = true;
-			}
-		}
-
 		//TODO; use /api/user/me
 		if ($localStorage.user) {
 			vm.isMe = (profile.uid === $localStorage.user.uid);
+			if (_.findWhere(profile.follows_followed, { follower_uid: $localStorage.user.uid })) {
+				vm.isFollowed = true;
+			}
 		} else {
 			vm.isMe = false;
 			$rootScope.isLoggedIn = false;

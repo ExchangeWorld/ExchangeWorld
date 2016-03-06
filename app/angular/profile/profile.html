@@ -4,24 +4,22 @@
         <div layout layout-align="center center" class="img-profile" ng-style="{'background-image':'url({{ vm.profile.photo_path }})'}"> </div>
         <div flex-gt-xs="60" flex-xs="50" layout="column">
             <div layout="column">
-                <div layout="column" layout-align="center center">
+                <div layout="row" layout-align="start center" style="margin-left:15px;">
                     <h4 class="md-headline" style="margin:8px 0; text-align: center; color:#F5F5F5;">{{ vm.profile.name }}</h4>
-                    <!--<div layout="row" layout-align="center center">-->
-                    <!--<md-tooltip>被關注總量</md-tooltip>-->
-                    <!--<i class="material-icons heart-seek">favorite</i>-->
-                    <!--<span class="md-subhead" style="color:#F5F5F5;">{{ vm.favSum.length }}</span>-->
-                    <!--</div>-->
+                    <div layout="row" layout-align="center center">
+                        <p class="md-title text-ex follow reset-follow">(積分：{{ vm.profile.scores }})</p>
+                    </div>
                 </div>
-                <!--<div layout="row" layout-xs="column" layout-align="center center">-->
-                <!--<div layout="column" layout-xs="row" layout-align="center center" class="note profile">-->
-                <!--<p class="md-title text-ex follow reset-follow">追隨中</p>-->
-                <!--<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'following')">{{ vm.profile.follows_follower.length }}</a>-->
-                <!--</div>-->
-                <!--<div layout="column" layout-xs="row" layout-align="center center" class="note profile">-->
-                <!--<p class="md-title text-ex follow reset-follow">被追蹤</p>-->
-                <!--<a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'follower')">{{ vm.profile.follows_followed.length }}</a>-->
-                <!--</div>-->
-                <!--</div>-->
+                <div layout="row" layout-xs="column" layout-align="start center" style="margin-left:15px;">
+                    <div layout="column" layout-xs="row" layout-align="center center" class="note profile">
+                        <p class="md-title text-ex follow reset-follow">追隨中</p>
+                        <a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'following')">{{ vm.profile.follows_follower.length }}</a>
+                    </div>
+                    <div layout="column" layout-xs="row" layout-align="center center" class="note profile">
+                        <p class="md-title text-ex follow reset-follow">被追蹤</p>
+                        <a class="profile" ng-click="vm.onClickFollow(vm.profile.uid, 'follower')">{{ vm.profile.follows_followed.length }}</a>
+                    </div>
+                </div>
             </div>
             <div flex-offset="10" layout="row" layout-align="center center" style="margin-top: 10px;">
                 <div flex layout-margin>

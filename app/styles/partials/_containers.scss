@@ -110,6 +110,9 @@ md-input-container {
 	.md-input {
 		padding-bottom: 0;
 	}
+	&.signup {
+		margin: 10px 0;
+	}
 }
 
 .md-toolbar-tools {

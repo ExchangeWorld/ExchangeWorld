@@ -28,7 +28,6 @@ function m_messageController(
 	vm.submit       = onSubmit;
 	vm.newMsgs      = [];
 
-
 	vm.cancel  = onCancel;
 	vm.submit  = onSubmit;
 	vm.keyup   = keyup;

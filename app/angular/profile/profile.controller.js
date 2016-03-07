@@ -101,12 +101,7 @@ function ProfileController(
 	}
 
 	function onClickSendMsg(ev, uid) {
-		var msg = {
-			sender_uid   : uid,
-			receiver_uid : $localStorage.user.uid,
-			isNewMsg     : true,
-		};
-		message.showMessagebox(ev, msg);
+		message.showMessagebox(ev, vm.profile.uid);
 	}
 
 	function onClickEdit() {

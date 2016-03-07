@@ -99,12 +99,11 @@ function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScop
 		return defer.promise;
 	}
 
-	async function createChatroom(members) {
+	async function createOrFindChatroom(withUid) {
 		const defer = $q.defer();
 
 		try {
-			let membersArray = JSON.stringify(members);
-			let chatroom = await Restangular.all('/chatroom/create').post({ members_json: membersArray });
+			let chatroom = await Restangular.one('chatroom').one('with', withUid).get();
 			defer.resolve(chatroom);
 		} catch (err) {
 			defer.reject(err);
@@ -114,12 +113,9 @@ function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScop
 	}
 
 
-	async function showMessagebox(ev, msg) {
-		let chatroom;
-		if (!msg.cid) {
-			chatroom = await createChatroom([msg.sender_uid, msg.receiver_uid]);
-			msg = chatroom;
-		}
+	async function showMessagebox(ev, uid, chat) {
+		let chatroom = Boolean(chat) ? chat : await createOrFindChatroom(uid);
+		console.log(chatroom);
 		
 		let mdScope = $rootScope.$new();
 		mdScope.instance = $mdDialog.show({
@@ -131,7 +127,7 @@ function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScop
 			scope: mdScope,
 			resolve: {
 				info: function() {
-					return getChatroomInfo(msg.cid);
+					return chatroom;
 				}
 			}
 		});
@@ -142,6 +138,7 @@ function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScop
 		getMessageList,
 		getChatroomInfo,
 		getConversation,
+		createOrFindChatroom,
 		postMessage,
 		showMessagebox,
 	};

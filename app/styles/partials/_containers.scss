@@ -98,6 +98,9 @@ md-dialog {
 
 md-radio-button {
 	margin: 10px;
+	.md-label {
+		width: 100%;
+	}
 }
 
 md-input-container {

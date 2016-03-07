@@ -9,35 +9,34 @@
 				</md-button>
 			</div>
 		</md-toolbar>
-		<md-dialog-content style="max-width:700px;">
+		<md-dialog-content>
+			<div layout-padding></div>
 			<div layout="column" layout-align="start center">
 				<div flex ng-show="vm.queuingGoods.length === 0">目前沒有正在排的物品</div>
 				<md-radio-group ng-model="queuing.group">
 					<div ng-repeat="queuing in vm.queuingGoods">
 						<div flex layout="row" layout-align="center center">
-							<md-radio-button value="{{queuing.queuer_goods}}">
-							</md-radio-button>
-							<md-card class="md-whiteframe-z3 item-profile name-queue">
-								<md-card-content layout="row" layout-sm="column">
-									<div flex="55" flex-sm="100" layout layout-align="center center" style=" height:150px; width:auto; border-radius:10px;">
-										<img 
-											ng-src="{{queuing.queuer_goods.photo_path[0]}}" 
-											style="max-width: 100%; max-height:100%;"
-										/>
-									</div>
-									<div flex="45" flex-sm="100" layout="column" layout-align="center center">
-										<div layout="row">
-											<a layout="column" layout-align="end start " class="md-title" ng-click="vm.onClickGoods(goods.gid)">
+							<md-radio-button flex="80" value="{{queuing.queuer_goods}}">
+								<md-card class="md-whiteframe-z3 item-profile name-queue">
+									<md-card-content layout="row" layout-xs="column">
+										<div flex="55" flex-xs="100" layout layout-align="center center" style=" height:150px; width:auto; border-radius:10px;">
+											<img ng-src="{{queuing.queuer_goods.photo_path[0]}}" style="max-width: 100%; max-height:100%;" />
+										</div>
+										<div flex="45" flex-xs="100" layout="column" layout-align="end start">
+											<div layout="column" layout-align="end start">
 												<span class="md-display-1">{{ queuing.queuer_goods.name }}</span>
 												<div layout="row" layout-algin="center center">
 													<img data-ng-src="../../images/icon/{{ queuing.queuer_goods.category }}.svg" style="height:20px; width:auto;" />
 													<span>{{ queuing.category_alias }}</span>
 												</div>
-											</a>
+											</div>
 										</div>
-									</div>
-								</md-card-content>
-							</md-card>
+									</md-card-content>
+								</md-card>
+							</md-radio-button>
+							<a flex class="md-button" ng-click="vm.onClickGoods(goods.gid)">
+								<md-icon md-font-set="material-icons">link</md-icon>
+							</a>
 						</div>
 					</div>
 				</md-radio-group>
@@ -52,4 +51,3 @@
 		</md-dialog-actions>
 	</form>
 </md-dialog>
-

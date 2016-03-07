@@ -95,13 +95,14 @@
 
 .messages {
 	background: white;
-	padding: 10px;
+	padding: 7px;
 	border-radius: 2px;
 	box-shadow: 0 1px 2px rgba(black, 0.2);
 	max-width: 145px;
 	display: flex;
 	white-space: pre-line;
 	word-break: break-all;
+	// height: 35px;
 	.content {
 		font-size: 14px;
 		margin: 0;

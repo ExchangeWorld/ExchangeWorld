@@ -173,9 +173,9 @@ function goodsService(Restangular, $q, exception, $mdDialog, $mdMedia, Available
 			goods.forEach(function(g) {
 				try {
 					g.category_alias = _.result(_.find(AvailableCategory, 'label', g.category), 'alias');
-					g.photo_path = JSON.parse(g.photo_path);
+					g.queuer_goods.photo_path = JSON.parse(g.queuer_goods.photo_path);
 				} catch (err) {
-					g.photo_path = '';
+					g.queuer_goods.photo_path = '';
 				}
 			});
 

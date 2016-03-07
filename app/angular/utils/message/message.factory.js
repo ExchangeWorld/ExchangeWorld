@@ -7,7 +7,7 @@ const moment = require('moment');
 messageModule.factory('message', message);
 
 /** @ngInject */
-function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage, $rootScope, $mdMedia) {
+function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage, $rootScope, $mdMedia, logger) {
 	var socket = new WebSocket(`ws://exwd.csie.org:43002/message?token=${$localStorage.token}`);
 	var dataStream = [];
 
@@ -20,8 +20,15 @@ function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage,
 	socket.onmessage = function(evt) {
 		console.log('receive', evt);
 		$timeout(()=> {
-			dataStream.push(JSON.parse(evt.data));
+			let data = JSON.parse(evt.data);
+			if (data.error) return;
+
+			dataStream.push(data);
 			$rootScope.$broadcast('chatroom:new', evt);
+
+			if (data.mid) {
+				logger.success('你有新訊息', null, 'NEWS');
+			}
 		});
 	};
 	socket.onerror = function(evt) {

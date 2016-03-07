@@ -54,16 +54,18 @@ function NavbarController(
 	//////////////
 
 	// reTake access token 
-	$interval(function() {
-		auth.getAccessToken($localStorage.user.identity, null, true);
-	}, 1140000);
+	//$interval(function() {
+	//auth.getAccessToken($localStorage.user.identity, null, true);
+	//}, 1140000);
 
 
 	activate();
 
-	function activate() {
+	async function activate() {
 		$rootScope.isLoggedIn = Boolean($localStorage.user);
 		if ($rootScope.isLoggedIn) $rootScope.user = $localStorage.user;
+
+		vm.messages = await message.getMessageList();
 	}
 
 
@@ -77,7 +79,7 @@ function NavbarController(
 	function onClick(contentIndex) {
 		if ([0, 5, 6].indexOf(contentIndex) !== -1) {
 			$state.go('root.oneCol.' + state[contentIndex]);
-		} else if(contentIndex === 3) {
+		} else if (contentIndex === 3) {
 			if (!$localStorage.user) vm.onLogin();
 			else  $state.go('root.oneCol.' + state[contentIndex], {uid: $localStorage.user.uid});
 		} else {
@@ -131,15 +133,10 @@ function NavbarController(
 	}
 
 	function onClickMessage(msg, ev) {
-		message.showMessagebox(ev, msg, updateNotification);
-
-		message
-			.updateMessage(msg)
-			.then(updateNotification);
-
+		console.log(msg);
+		message.showMessagebox(ev, msg, msg);
 		vm.closeMenu();
 	}
-
 
 	async function updateNotification() {
 		if (!$rootScope.isLoggedIn) return;

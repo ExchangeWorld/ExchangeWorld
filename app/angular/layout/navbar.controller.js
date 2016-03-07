@@ -68,7 +68,6 @@ function NavbarController(
 		vm.messages = await message.getMessageList();
 	}
 
-
 	function openMenu($mdOpenMenu, e) {
 		vm.closeMenu();
 		e.preventDefault();

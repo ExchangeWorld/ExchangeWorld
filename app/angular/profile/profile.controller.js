@@ -2,18 +2,6 @@
 
 const profileModule = require('./profile.module');
 const _             = require('lodash');
-const marked = require('marked');
-marked.setOptions({
-	renderer: new marked.Renderer(),
-	gfm: false,
-	tables: false,
-	breaks: true,
-	pedantic: false,
-	sanitize: false,
-	smartLists: false,
-	smartypants: false
-});
-
 profileModule.controller('ProfileController', ProfileController);
 
 /** @ngInject */
@@ -24,7 +12,6 @@ function ProfileController(
 	followService,
 	auth,
 	notification,
-	colorThief,
 	logger,
 	message,
 	$state,
@@ -35,7 +22,6 @@ function ProfileController(
 	$sce
 ) {
 	var vm                 = this;
-	var ct                 = new colorThief.ColorThief();
 	vm.profile             = profile;
 	vm.isMe                = $rootScope.isLoggedIn && (profile.uid === $localStorage.user.uid);
 	vm.favSum              = '';
@@ -55,13 +41,12 @@ function ProfileController(
 	activate();
 
 	function activate() {
-		if (_.findWhere(profile.follows_followed, { fid: $localStorage.user.uid })) {
-			vm.isFollowed = true;
-		}
-
 		//TODO; use /api/user/me
 		if ($localStorage.user) {
 			vm.isMe = (profile.uid === $localStorage.user.uid);
+			if (_.findWhere(profile.follows_followed, { follower_uid: $localStorage.user.uid })) {
+				vm.isFollowed = true;
+			}
 		} else {
 			vm.isMe = false;
 			$rootScope.isLoggedIn = false;
@@ -73,29 +58,18 @@ function ProfileController(
 				vm.favSum = data;
 			});
 
-		/**
-		 * only do this on desktop mode.
-		if($state.current.name === 'root.withSidenav.profile') {
-			[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
-				dominateColor(goods);
-			});
-		} else {
-			[...vm.myStar, ...vm.myGoodsPending, ...vm.myGoodsExchanged].forEach((goods)=> {
-				goods.bgStyle = {
-					"background-color": 'rgb(0, 0, 0)'
-				};
-			});
-		}
-		 */
-		$rootScope.$broadcast('goodsChanged', vm.profile.goods);
 	}
 
 	function onClickAddFollowing() {
 		if (vm.isFollowed) {
 			followService.deleteFollowing($localStorage.user.uid, profile.uid);
+
+			vm.profile.follows_followed.pop();
 			vm.isFollowed = false;
 		} else {
 			followService.addFollowing($localStorage.user.uid, profile.uid);
+
+			vm.profile.follows_followed.push({});
 			vm.isFollowed = true;
 		}
 	}
@@ -118,18 +92,6 @@ function ProfileController(
 		vm.isReadOnly = !vm.isReadOnly;
 	}
 
-	function dominateColor(goods) {
-		if (!goods.length) return;
-		var image = document.getElementById(`img_${goods.gid}`);
-		image.onload = ()=> {
-			var color = ct.getColor(image);
-			goods.bgStyle = {
-				"background-color": `rgb(${color[0]}, ${color[1]}, ${color[2]})`
-			};
-		};
-	}
-
 	function getHTMLDesc(desc) {
-		return $sce.trustAsHtml(marked(desc));
 	}
 }

@@ -41,15 +41,9 @@ function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia
 	$rootScope.onSwipeLeft = onSwipeLeft;
 
 	function onClickUser(uid) {
-		if ($window.innerWidth > 600) {
-			$state.go('root.withSidenav.profile', {
-				uid: uid
-			});
-		} else {
-			$state.go('root.oneCol.m_profile', {
-				uid: uid
-			});
-		}
+		$state.go('root.oneCol.profile', {
+			uid: uid
+		});
 	}
 
 	function onClickFollow(uid, type) {

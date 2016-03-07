@@ -13,7 +13,7 @@
 			<!-- <div layout-padding></div> -->
 			<div layout="column" layout-align="start center" style="height: 83%;">
 				<div layout layout-align="center center" ng-show="vm.queuingGoods.length === 0" style="height: 100%;">目前沒有正在排的物品</div>
-				<md-radio-group ng-model="queuing.group">
+				<md-radio-group ng-model="queuing.group" layout-fill>
 					<div ng-repeat="queuing in vm.queuingGoods">
 						<div flex layout="row" layout-align="center center">
 							<md-radio-button flex="80" value="{{queuing.queuer_goods}}">

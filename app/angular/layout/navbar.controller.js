@@ -12,10 +12,11 @@ function NavbarController(
 	$mdMenu,
 	$mdDialog,
 	$state,
+	$scope,
 	$rootScope,
 	$localStorage,
 	$location,
-	$interval,
+	$timeout,
 	$window,
 	$q,
 	auth,
@@ -44,8 +45,7 @@ function NavbarController(
 	vm.onLogin             = () => $state.go('root.oneCol.login');
 	vm.onLogout            = onLogout;
 	vm.notifications       = [];
-	vm.unreadMsg           = '';
-	vm.unreadNotify        = '';
+	vm.unread              = [0, 0];
 	vm.onClickNotification = onClickNotification;
 	vm.messages            = [];
 	vm.onClickMessage      = onClickMessage;
@@ -61,11 +61,16 @@ function NavbarController(
 
 	activate();
 
+	$scope.$on('chatroom:new', ()=> { 
+		$timeout(()=> { updateNotification(); });
+	});
+
 	async function activate() {
 		$rootScope.isLoggedIn = Boolean($localStorage.user);
 		if ($rootScope.isLoggedIn) $rootScope.user = $localStorage.user;
 
-		vm.messages = await message.getMessageList();
+		await updateNotification();
+
 	}
 
 	function openMenu($mdOpenMenu, e) {
@@ -132,35 +137,18 @@ function NavbarController(
 	}
 
 	function onClickMessage(msg, ev) {
-		console.log(msg);
 		message.showMessagebox(ev, msg, msg);
 		vm.closeMenu();
 	}
 
 	async function updateNotification() {
 		if (!$rootScope.isLoggedIn) return;
-
+		
 		try {
-			let [notifications, messages] = await Promise.all([
-				notification.getNotification($localStorage.user.uid),
-				message.getMessage($localStorage.user.uid),
-			]);
+			vm.messages = await message.getMessageList();
+			vm.unread[0] = vm.messages.filter((m)=> { return !m.read; }).length;
 
-			vm.notifications = notifications.map(function(notice) {
-				notice.timestamp = moment(notice.timestamp.slice(0, -1)).add(8, 'h').fromNow();
-				return notice;
-			});
-
-			vm.messages = _.unique(messages, 'sender_uid');
-			vm.messages.forEach(function(msg) {
-				msg.timestamp = moment(msg.timestamp.slice(0, -1)).calendar();
-				return msg;
-			});
-
-			vm.unreadNotify = _.filter(vm.notifications, {unread : true}).length;
-			vm.unreadMsg = _.filter(vm.messages, {unread : true}).length;
-
-			var unread = vm.unreadMsg + vm.unreadNotify;
+			let unread = vm.unread[0]+vm.unread[1];
 			$rootScope.pageTitle = (unread) ? `(${unread}) ${AppSettings.appTitle}` : AppSettings.appTitle;
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);

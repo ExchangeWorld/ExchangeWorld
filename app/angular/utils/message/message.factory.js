@@ -7,7 +7,7 @@ const moment = require('moment');
 messageModule.factory('message', message);
 
 /** @ngInject */
-function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScope, $mdMedia) {
+function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage, $rootScope, $mdMedia) {
 	var socket = new WebSocket(`ws://exwd.csie.org:43002/message?token=${$localStorage.token}`);
 	var dataStream = [];
 
@@ -19,7 +19,10 @@ function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScop
 	};
 	socket.onmessage = function(evt) {
 		console.log('receive', evt);
-		dataStream.push(JSON.parse(evt.data));
+		$timeout(()=> {
+			dataStream.push(JSON.parse(evt.data));
+			$rootScope.$broadcast('chatroom:new', evt);
+		});
 	};
 	socket.onerror = function(evt) {
 		console.log('error', evt);
@@ -39,6 +42,7 @@ function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScop
 		try {
 			let list = await Restangular.one('user', user.uid).getList('chatroom');
 			list.forEach(function(msg) {
+				msg.read = msg.read_members.indexOf(user.uid) !== -1;
 				msg.updated_at = moment(msg.updated_at.slice(0, -1)).add(8, 'h').fromNow();//.calendar();
 			});
 			defer.resolve(list);
@@ -112,10 +116,27 @@ function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScop
 		return defer.promise;
 	}
 
+	async function readMessage(cid) {
+		const defer = $q.defer();
+
+		let form = {
+			type: 'read',
+			read_chatroom: cid
+		};
+
+		try {
+			await socket.send(JSON.stringify(form));
+			$rootScope.$broadcast('chatroom:new', form);
+			defer.resolve(form);
+		} catch (err) {
+			defer.reject(err);
+		}
+	
+		return defer.promise;
+	}
 
 	async function showMessagebox(ev, uid, chat) {
 		let chatroom = Boolean(chat) ? chat : await createOrFindChatroom(uid);
-		console.log(chatroom);
 		
 		let mdScope = $rootScope.$new();
 		mdScope.instance = $mdDialog.show({
@@ -140,6 +161,7 @@ function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScop
 		getConversation,
 		createOrFindChatroom,
 		postMessage,
+		readMessage,
 		showMessagebox,
 	};
 

@@ -38,10 +38,13 @@ function m_messageController(
 
 	var amount, offset;
 
+	$scope.$on('chatroom:new', ()=> { goButtom(); });
+
 	async function activate() {
 		amount = 30;
 		offset = 0;
 
+		message.readMessage(vm.info.cid);
 		await loadMore();
 		goButtom();
 	}

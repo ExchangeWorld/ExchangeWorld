@@ -5,7 +5,7 @@ const _           = require('lodash');
 goodsModule.factory('goodsService', goodsService);
 
 /** @ngInject */
-function goodsService(Restangular, $q, exception, $mdDialog, $mdMedia) {
+function goodsService(Restangular, $q, exception, $mdDialog, $mdMedia, AvailableCategory) {
 
 	const service = {
 		getGood,
@@ -68,6 +68,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $mdMedia) {
 
 			goods.forEach(function(g) {
 				try {
+					g.category_alias = _.result(_.find(AvailableCategory, 'label', g.category), 'alias');
 					g.photo_path = JSON.parse(g.photo_path);
 				} catch (err) {
 					g.photo_path = '';
@@ -169,11 +170,12 @@ function goodsService(Restangular, $q, exception, $mdDialog, $mdMedia) {
 			let goods = await Restangular.one('goods', hostGoodsGid).getList('queue');
 			if (!_.isArray(goods)) throw 'goods not array.';
 
-			goods.forEach(function() {
+			goods.forEach(function(g) {
 				try {
-					goods.photo_path = JSON.parse(goods.photo_path);
+					g.category_alias = _.result(_.find(AvailableCategory, 'label', g.category), 'alias');
+					g.queuer_goods.photo_path = JSON.parse(g.queuer_goods.photo_path);
 				} catch (err) {
-					goods.photo_path = '';
+					g.queuer_goods.photo_path = '';
 				}
 			});
 

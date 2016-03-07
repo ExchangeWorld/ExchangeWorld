@@ -50,6 +50,13 @@ md-toolbar {
 	&:focus {
 		outline-width: 0;
 	}
+	div {
+		p,
+		h1,
+		h2 {
+			color: black;
+		}
+	}
 }
 
 @media only screen and (min-width: 0) and (max-width: 600px) and (orientation: portrait) {
@@ -91,6 +98,9 @@ md-dialog {
 
 md-radio-button {
 	margin: 10px;
+	.md-label {
+		width: 100%;
+	}
 }
 
 md-input-container {

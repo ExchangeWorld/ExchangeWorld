@@ -7,7 +7,7 @@ const moment = require('moment');
 messageModule.factory('message', message);
 
 /** @ngInject */
-function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScope, $mdMedia) {
+function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage, $rootScope, $mdMedia) {
 	var socket = new WebSocket(`ws://exwd.csie.org:43002/message?token=${$localStorage.token}`);
 	var dataStream = [];
 
@@ -19,7 +19,10 @@ function message(Restangular, $q, exception, $mdDialog, $localStorage, $rootScop
 	};
 	socket.onmessage = function(evt) {
 		console.log('receive', evt);
-		dataStream.push(JSON.parse(evt.data));
+		$timeout(()=> {
+			dataStream.push(JSON.parse(evt.data));
+			$rootScope.$broadcast('ct:new', evt);
+		});
 	};
 	socket.onerror = function(evt) {
 		console.log('error', evt);

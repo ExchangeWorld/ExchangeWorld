@@ -38,6 +38,10 @@ function m_messageController(
 
 	var amount, offset;
 
+	$scope.$on('ct:new', ()=> {
+		goButtom();
+	});
+
 	async function activate() {
 		amount = 30;
 		offset = 0;

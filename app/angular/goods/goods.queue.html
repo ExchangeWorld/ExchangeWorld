@@ -1,5 +1,5 @@
-<md-dialog aria-label="Queue" style="width:50%;">
-	<form>
+<md-dialog aria-label="Queue" style="width:50%; height: 100%;">
+	<form style="height: 112%;">
 		<md-toolbar class="md-whiteframe-2dp">
 			<div flex class="md-toolbar-tools" style="background-color: #b3e1d8;">
 				<h2 class="md-title">想要拿來交換的物品</h2>
@@ -9,10 +9,10 @@
 				</md-button>
 			</div>
 		</md-toolbar>
-		<md-dialog-content>
-			<div layout-padding></div>
-			<div layout="column" layout-align="start center">
-				<div flex layout-padding layout-margin ng-show="vm.myGoods.length === 0">你沒有可以拿來排的東西
+		<md-dialog-content style="height:100%;">
+			<!-- <div layout-padding></div> -->
+			<div layout="column" layout-align="start center" style="height: 83%;">
+				<div flex layout layout-align="center center" layout-fill ng-show="vm.myGoods.length === 0" style="height: 100%;">你沒有可以拿來排的東西
 					<br/>趕快去ＰＯ一些吧！</div>
 				<md-radio-group ng-model="queue.group" layout-fill>
 					<div ng-repeat="goods in vm.myGoods" style="margin:20px;">

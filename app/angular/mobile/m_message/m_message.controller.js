@@ -19,7 +19,7 @@ function m_messageController(
 	const cid       = info.cid;
 	vm.info = info;
 
-	vm.dataStream   = message.dataStream;
+	vm.dataStream   = [];
 	vm.history      = [];
 	
 	vm.loadMore     = loadMore;
@@ -38,7 +38,10 @@ function m_messageController(
 
 	var amount, offset;
 
-	$scope.$on('chatroom:new', ()=> { goButtom(); });
+	$scope.$on('chatroom:new', (data)=> { 
+		vm.dataStream.push(data);
+		goButtom(); 
+	});
 
 	async function activate() {
 		amount = 30;

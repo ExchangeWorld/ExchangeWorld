@@ -61,7 +61,7 @@ function NavbarController(
 
 	activate();
 
-	$scope.$on('chatroom:new', ()=> { 
+	$scope.$on('chatroom:updatelist', ()=> { 
 		$timeout(()=> { updateNotification(); });
 	});
 

@@ -23,12 +23,11 @@ function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage,
 			let data = JSON.parse(evt.data);
 			if (data.error) return;
 
-			dataStream.push(data);
-			$rootScope.$broadcast('chatroom:new', evt);
-
 			if (data.mid) {
+				$rootScope.$broadcast('chatroom:new', data);
 				logger.success('你有新訊息', null, 'NEWS');
 			}
+			$rootScope.$broadcast('chatroom:updatelist', data);
 		});
 	};
 	socket.onerror = function(evt) {
@@ -102,6 +101,7 @@ function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage,
 		try {
 			let chat = JSON.stringify(newMessage);
 			await socket.send(chat);
+			$rootScope.$broadcast('chatroom:updatelist', newMessage);
 			defer.resolve(newMessage);
 		} catch (err) {
 			defer.reject(err);
@@ -133,7 +133,7 @@ function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage,
 
 		try {
 			await socket.send(JSON.stringify(form));
-			$rootScope.$broadcast('chatroom:new', form);
+			$rootScope.$broadcast('chatroom:updatelist', form);
 			defer.resolve(form);
 		} catch (err) {
 			defer.reject(err);

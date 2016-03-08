@@ -25,24 +25,13 @@ function NavbarController(
 	notification,
 	AppSettings
 ) {
-	const vm               = this;
-	const state            = [
-		'home',
-		'seek',
-		'post',
-		'exchange',
-		'profile',
-		'm_messagebox',
-		'm_notification'
-	];
-	vm.stateIndex          = _.indexOf(state, $state.current.title);
-	vm.contentIs           = function(idx) { return vm.stateIndex === idx; };
+	const vm    = this;
+	vm.content             = $state.current.title;
+	vm.contentIs           = (title)=> { return title === vm.content; };
 	vm.openMenu            = openMenu;
 	vm.closeMenu           = ()=> $mdMenu.hide();
 	vm.report              = report;
-	vm.onClick             = onClick;
-	vm.onSignup            = () => $state.go('root.oneCol.signup');
-	vm.onLogin             = () => $state.go('root.oneCol.login');
+	vm.menu                = menu;
 	vm.onLogout            = onLogout;
 	vm.notifications       = [];
 	vm.unread              = [0, 0];
@@ -61,6 +50,11 @@ function NavbarController(
 
 	activate();
 
+	$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+		vm.content = toState.title;
+		console.log(vm.content);
+	});
+
 	$scope.$on('chatroom:updatelist', ()=> { 
 		$timeout(()=> { updateNotification(); });
 	});
@@ -70,7 +64,6 @@ function NavbarController(
 		if ($rootScope.isLoggedIn) $rootScope.user = $localStorage.user;
 
 		await updateNotification();
-
 	}
 
 	function openMenu($mdOpenMenu, e) {
@@ -80,40 +73,42 @@ function NavbarController(
 		$mdOpenMenu(e);
 	}
 
-	function onClick(contentIndex) {
-		if ([0, 5, 6].indexOf(contentIndex) !== -1) {
-			$state.go('root.oneCol.' + state[contentIndex]);
-		} else if (contentIndex === 3) {
-			if (!$localStorage.user) vm.onLogin();
-			else  $state.go('root.oneCol.' + state[contentIndex], {uid: $localStorage.user.uid});
-		} else {
-			const isFromOneCol = $state.includes("root.oneCol");
+	function menu(type) {
+		const isFromOneCol = $state.includes("root.oneCol");
 
-			if(contentIndex === 4) {
-				$rootScope.onClickUser($localStorage.user.uid);
-			} else if (
-				contentIndex === 1 &&
-				$state.includes("root.withSidenav.goods") ||
-				$state.includes("root.oneCol.goods")
-			) {
-				$state.go('root.withSidenav.' + state[contentIndex]);
-			} else {
-				$state.go('root.withSidenav.' + state[contentIndex]);
-			}
-			/**
-			 * When need to toggle the sidenav
-			 * 1. iff sidenav exists
-			 * 2. sidenav is close
-			 * 3. click the current content again
-			 */
-			if (
-				!isFromOneCol &&
-				( !$mdSidenav('left').isOpen() || ( $mdSidenav('left').isOpen() && vm.stateIndex === contentIndex))
-			) {
-				$mdSidenav('left').toggle();
-			}
+		switch (type) {
+			case 'seek':
+			case 'post':
+				$state.go(`root.withSidenav.${type}`);
+				break;
+
+			case 'profile':
+			case 'exchange':
+				$state.go(`root.oneCol.${type}`, {
+					uid: $localStorage.user.uid 
+				});
+				break;
+
+			case 'home':
+			case 'login':
+			case 'signup':
+			case 'm_messagebox':
+			case 'm_notification':
+				$state.go(`root.oneCol.${type}`);
+				break;
+
+			default:
+				$state.go('404');
+				break;
 		}
-		vm.stateIndex = contentIndex;
+		
+		if ( 
+			!isFromOneCol && 
+			(!$mdSidenav('left').isOpen() || ($mdSidenav('left').isOpen() && vm.contentIs(type)))
+		) {
+			$mdSidenav('left').toggle();
+		}
+
 		vm.closeMenu();
 	}
 

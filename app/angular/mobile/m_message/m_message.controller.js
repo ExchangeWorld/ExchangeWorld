@@ -38,7 +38,7 @@ function m_messageController(
 
 	var amount, offset;
 
-	$scope.$on('chatroom:new', (data)=> { 
+	$scope.$on('chatroom:new', (e, data)=> { 
 		vm.dataStream.push(data);
 		goButtom(); 
 	});

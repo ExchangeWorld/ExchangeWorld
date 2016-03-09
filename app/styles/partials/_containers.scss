@@ -321,19 +321,11 @@ div.md-open-menu-container {
 	.img-profile {
 		width: 100px;
 		height: 100px;
-		/*position: absolute;*/
-		/*top: 10%;*/
-		/*left: 33%;*/
 		background-repeat: no-repeat;
 		background-position: center;
 		border-radius: 50%;
 		background-size: contain;
 		border: 2px solid #90A4AE;
-	}
-	.profile-name {
-		position: absolute;
-		top: 10%;
-		right: 33%;
 	}
 	.home-row {
 		border-radius: 8px;
@@ -425,10 +417,6 @@ div.md-open-menu-container {
 		/*bottom: 68%;*/
 		/*left: 15%;*/
 	}
-	.profile-name {
-		/*bottom: 65%;*/
-		/*right: 15%;*/
-	}
 	.home-row {
 		height: 300px;
 		&.column-left {
@@ -507,10 +495,12 @@ div.md-open-menu-container {
 		height: 40%;
 	}
 	.img-profile {
+		height: 160px;
+		width: 160px;
 		/*bottom: 63%;*/
 	}
-	.profile-name {
-		/*bottom: 60%;*/
+	.profile-right {
+		margin-left: 20px;
 	}
 	.home-row {
 		height: 280px;

@@ -55,6 +55,11 @@
 }
 
 @media screen and (min-width: 300px) {
+	.grid-wrapper {
+		max-width: 85%;
+		margin: 0 auto;
+		padding: 20px 0;
+	}
 	.grid__columns {
 		padding-left: 5.5%;
 		padding-right: 2.5%;
@@ -69,6 +74,9 @@
 }
 
 @media screen and (min-width: 750px) {
+	.grid-wrapper {
+		max-width: 700px;
+	}
 	.grid__columns {
 		padding-left: 4.5%;
 		padding-right: 1.5%;
@@ -79,6 +87,9 @@
 }
 
 @media screen and (min-width: 1441px) {
+	.grid-wrapper {
+		max-width: 850px;
+	}
 	.grid__columns {
 		padding-left: 2.2%;
 		padding-right: .2%;

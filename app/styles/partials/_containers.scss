@@ -277,11 +277,8 @@ div.md-open-menu-container {
 		min-width: 46px;
 	}
 	.profile-top {
-		margin: 5px 3px 5px 0;
-		background-repeat: no-repeat;
-		height: 300px;
-		background-size: 100%;
-		filter: grayscale(100%) blur(3px) brightness(70%);
+		height: 40%;
+		background: linear-gradient(rgb(187, 231, 240), #E0E0E0);
 	}
 	.map-size {
 		height: 250px;
@@ -299,6 +296,7 @@ div.md-open-menu-container {
 	}
 	.reset-follow {
 		margin: 0;
+		padding: 0 10px 0 4px;
 	}
 	.switch {
 		padding-left: 25px;
@@ -323,19 +321,11 @@ div.md-open-menu-container {
 	.img-profile {
 		width: 100px;
 		height: 100px;
-		/*position: absolute;*/
-		/*top: 10%;*/
-		/*left: 33%;*/
 		background-repeat: no-repeat;
 		background-position: center;
 		border-radius: 50%;
 		background-size: contain;
 		border: 2px solid #90A4AE;
-	}
-	.profile-name {
-		position: absolute;
-		top: 10%;
-		right: 33%;
 	}
 	.home-row {
 		border-radius: 8px;
@@ -404,11 +394,13 @@ div.md-open-menu-container {
 	.img-null {
 		max-height: 90%;
 		max-width: 90%;
-		padding-top: 30%;
+		padding-top: 25%;
 	}
 	.reset-follow {
 		margin-bottom: 5px;
+		padding: 0 10px;
 	}
+	.profile-top {}
 	.switch {
 		padding-left: 10px;
 		.md-label {
@@ -424,10 +416,6 @@ div.md-open-menu-container {
 		height: 120px;
 		/*bottom: 68%;*/
 		/*left: 15%;*/
-	}
-	.profile-name {
-		/*bottom: 65%;*/
-		/*right: 15%;*/
 	}
 	.home-row {
 		height: 300px;
@@ -489,7 +477,7 @@ div.md-open-menu-container {
 	.img-null {
 		max-height: 90%;
 		max-width: 90%;
-		padding-top: 11%;
+		padding-top: 6%;
 	}
 	.ex-bg {
 		overflow-x: hidden;
@@ -504,13 +492,15 @@ div.md-open-menu-container {
 		height: 580px;
 	}
 	.profile-top {
-		margin: 10px 3px 10px 0;
+		height: 40%;
 	}
 	.img-profile {
+		height: 160px;
+		width: 160px;
 		/*bottom: 63%;*/
 	}
-	.profile-name {
-		/*bottom: 60%;*/
+	.profile-right {
+		margin-left: 20px;
 	}
 	.home-row {
 		height: 280px;
@@ -551,7 +541,7 @@ div.md-open-menu-container {
 	.img-null {
 		max-height: 90%;
 		max-width: 90%;
-		padding-top: 25%;
+		padding-top: 10%;
 	}
 	.input-post {
 		height: 100px;
@@ -677,7 +667,6 @@ div.md-open-menu-container {
 .sidebar-ex {
 	background-color: #CFD8DC;
 	padding-top: 5px;
-	//margin-top: 20px;
 }
 
 .file-field {

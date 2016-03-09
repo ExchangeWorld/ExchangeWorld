@@ -277,11 +277,8 @@ div.md-open-menu-container {
 		min-width: 46px;
 	}
 	.profile-top {
-		margin: 5px 3px 5px 0;
-		background-repeat: no-repeat;
-		height: 300px;
-		background-size: 100%;
-		filter: grayscale(100%) blur(3px) brightness(70%);
+		height: 40%;
+		background: linear-gradient(rgb(187, 231, 240), #E0E0E0);
 	}
 	.map-size {
 		height: 250px;
@@ -409,6 +406,7 @@ div.md-open-menu-container {
 	.reset-follow {
 		margin-bottom: 5px;
 	}
+	.profile-top {}
 	.switch {
 		padding-left: 10px;
 		.md-label {
@@ -504,7 +502,7 @@ div.md-open-menu-container {
 		height: 580px;
 	}
 	.profile-top {
-		margin: 10px 3px 10px 0;
+		height: 40%;
 	}
 	.img-profile {
 		/*bottom: 63%;*/
@@ -677,7 +675,6 @@ div.md-open-menu-container {
 .sidebar-ex {
 	background-color: #CFD8DC;
 	padding-top: 5px;
-	//margin-top: 20px;
 }
 
 .file-field {

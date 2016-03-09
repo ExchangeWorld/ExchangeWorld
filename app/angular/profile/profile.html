@@ -6,10 +6,10 @@
 				<div layout="row" layout-align="start center" layout-align-xs="center center" style="margin-left:25px;">
 					<h4 class="md-headline" style="margin:8px 0; text-align: center;">{{ vm.profile.name }}</h4>
 					<div layout="row" layout-align="center center">
-						<p class="md-title text-ex follow reset-follow">(積分：{{ vm.profile.scores }})</p>
+						<p class="md-title text-ex follow reset-follow hide-i5">(積分：{{ vm.profile.scores }})</p>
 					</div>
 				</div>
-				<div layout="row" layout-xs="column" layout-align="start center" style="margin-left:15px;">
+				<div layout="row" layout-xs="column" layout-align="start center" layout-align-xs="start start" style="margin-left:15px;">
 					<div layout="column" layout-xs="row" layout-align="center center" class="note profile">
 						<p class="md-title text-ex follow reset-follow">追隨中</p>
 						<a ng-click="vm.onClickFollow(vm.profile.uid, 'following')">{{ vm.profile.follows_follower.length }}</a>
@@ -20,24 +20,24 @@
 					</div>
 				</div>
 			</div>
-			<div flex-offset="10" layout="row" layout-align="center center" style="margin-top: 10px;">
-				<div flex layout-margin>
+			<div layout="row" layout-align="center center" style="margin-left:10px;margin-top: 10px;">
+				<div>
 					<md-button class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
 						<div layout="row" layout-align="center center" ng-show="!vm.isFollowed">
 							<i class="material-icons">person_add</i>
-							<span hide-xs>&nbsp;追隨</span>
+							<span>&nbsp;追隨</span>
 						</div>
 						<div layout="row" layout-align="center center" ng-show="vm.isFollowed">
 							<i class="material-icons">remove_circle</i>
-							<span hide-xs>&nbsp;取消追隨</span>
+							<span>&nbsp;取消追隨</span>
 						</div>
 					</md-button>
 				</div>
-				<div flex layout-margin>
+				<div>
 					<md-button class="md-raised md-primary btn-rwd" ng-show="!vm.isMe" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)">
 						<div layout="row" layout-align="center center">
 							<i class="material-icons">chat</i>
-							<span hide-xs>&nbsp;送訊息</span>
+							<span>&nbsp;送訊息</span>
 						</div>
 					</md-button>
 				</div>

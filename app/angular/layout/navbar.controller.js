@@ -1,8 +1,6 @@
 'use strict';
 
 const layoutModule = require('./layout.module');
-const _            = require('lodash');
-const moment       = require('moment');
 
 layoutModule.controller('NavbarController', NavbarController);
 
@@ -122,9 +120,7 @@ function NavbarController(
 	}
 
 	function onClickNotification(notice) {
-		notification.updateNotification(notice, false);
-
-		$location.path(notice.trigger_url);
+		$location.path(notice.url);
 		if(!$state.includes("root.oneCol") && !$mdSidenav('left').isOpen() ) {
 			$mdSidenav('left').toggle();
 		}
@@ -140,10 +136,17 @@ function NavbarController(
 		if (!$rootScope.isLoggedIn) return;
 		
 		try {
-			vm.messages = await message.getMessageList();
-			vm.unread[0] = vm.messages.filter((m)=> { return !m.read; }).length;
+			[vm.messages, vm.notifications] = await Promise.all([
+				message.getMessageList(),
+				notification.getNotification()
+			]);
+			vm.unread = [
+				vm.messages.filter((m)=> { return !m.read; }).length,
+				vm.notifications.filter((n)=> { return !n.read; }).length
+			];
+			console.log(vm.notifications);
 
-			let unread = vm.unread[0]+vm.unread[1];
+			let unread = vm.unread[0] + vm.unread[1];
 			$rootScope.pageTitle = (unread) ? `(${unread}) ${AppSettings.appTitle}` : AppSettings.appTitle;
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);

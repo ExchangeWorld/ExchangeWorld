@@ -1,67 +1,78 @@
 'use strict';
 
 const notificationModule = require('./notification.module');
-const _                  = require('lodash');
+const moment             = require('moment');
 
 notificationModule.factory('notification', notification);
 
 /** @ngInject */
-function notification(Restangular, $q, exception) {
+function notification(Restangular, $q, exception, $localStorage, $sce) {
 	const service = {
 		getNotification,
-		postNotification,
-		updateNotification,
 	};
 
 	return service;
 
-	function getNotification(uid) {
+	async function getNotification(uid) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('notification/belongsTo')
-			.getList({ receiver_uid: uid })
-			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data);
-				}
-			}, (error)=> {
-				return exception.catcher('[notification Service] getNotification error: ')(error);
+		try {
+			let notifyList = await Restangular.one('user', $localStorage.user.uid).one('notification').getList();
+			notifyList.forEach((n)=> {
+				n = parseNotify(n);
 			});
-		return defer.promise;
-	}
-
-	function postNotification(newNotice) {
-		const defer = $q.defer();
-
-		if(newNotice.sender_uid !== newNotice.receiver_uid) {
-			Restangular
-				.all('notification')
-				.post(newNotice)
-				.then(function(data) {
-					defer.resolve(data);
-				})
-				.catch(function(error) {
-					return exception.catcher('[Notification Service] postNotification error: ')(error);
-				});
+			defer.resolve(notifyList);
+		} catch (err) {
+			defer.reject(err);
 		}
+		
 		return defer.promise;
 	}
 
-	function updateNotification(notification, unread) {
-		const defer = $q.defer();
-
-		notification.route = 'notification';
-		notification.unread = unread;
-
-		notification
-			.put()
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[Notifications Service] updateNotification error: ')(error);
-			});
-		return defer.promise;
+	function parseNotify(n) {
+		switch (n.body.codeType) {
+			case 10001:
+				n.text = `你關注的<b>${n.body.payload.goods.owner.name}</b>發佈<b>${n.body.payload.goods.name}</b>，趕快去看看吧！`;
+				n.url = `/seek/${n.body.payload.goods.gid}`;
+				break;
+			case 10002:
+				//n.text = `<b>${n.body.payload.person.name}</b>關注了<b>${n.body.payload.goods.name}</b>，趕快去看看吧！`;
+				break;
+			case 10003:
+				//n.text = `<b>${n.body.payload.person.name}</b>追隨了<b>${n.body.payload.goods.name}</b>，趕快去看看吧！`;
+				break;
+			case 10004:
+				n.text = `<b>${n.body.payload.person.name}</b>追隨了你。`;
+				n.url = `/profile/${n.body.payload.person.uid}`;
+				break;
+			case 20001:
+				n.text = `你的<b>${n.body.payload.goods.name}</b>有新留言喔`;
+				n.url = `/seek/${n.body.payload.goods.gid}`;
+				break;
+			case 20002:
+				n.text = `有新的物品排了你的<b>${n.body.payload.goods.name}</b>`;
+				n.url = `/seek/${n.body.payload.goods.gid}/queuing`;
+				break;
+			case 20003:
+				n.text = `<b>${n.body.payload.person.name}</b>關注了你的<b>${n.body.payload.goods.name}</b>！`;
+				n.url = `/seek/${n.body.payload.goods.gid}`;
+				break;
+			case 20004:
+				n.text = `你關注的<b>${n.body.payload.goods.name}</b>有新的留言`;
+				n.url = `/seek/${n.body.payload.goods.gid}`;
+				break;
+			case 30001:
+				break;
+			case 30002:
+				break;
+			case 30003:
+				break;
+			default:
+				break;
+		}
+		n.textHtml = $sce.trustAsHtml(n.text);
+		n.updated_at = moment(n.updated_at.slice(0, -1)).add(8, 'h').fromNow();
+		
+		return n;
 	}
 }

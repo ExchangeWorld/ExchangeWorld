@@ -1,7 +1,7 @@
 'use strict';
 
-const exchangeModule = require('./exchange.module');
-exchangeModule.run(appRun);
+const m_exchangeModule = require('./m_exchange.module');
+m_exchangeModule.run(appRun);
 
 /** @ngInject */
 function appRun(routerHelper) {
@@ -11,20 +11,13 @@ function appRun(routerHelper) {
 function getStates() {
 	return [
 		{
-			state : 'root.oneCol.exchange',
+			state : 'root.oneCol.m_exchange',
 			config : {
-				title : 'exchange',
-				url : '/manage/:uid/exchange',
+				url : '/manage/:uid/m_exchange',
 				bindToController: true,
 				controller : 'ExchangeController',
 				controllerAs: 'vm',
-				templateUrl : 'exchange/exchange.html',
-				/** @ngInject */
-				onEnter: function($state, $window, $timeout, $stateParams) {
-					if ($window.innerWidth < 960) {
-						$timeout(() => $state.go('root.oneCol.m_exchange', { uid: $stateParams.uid }));
-					}
-				},
+				templateUrl : 'mobile/m_exchange/m_exchange.html',
 				resolve : {
 					/** @ngInject */
 					exchangeList : function (exchangeService, $stateParams) {

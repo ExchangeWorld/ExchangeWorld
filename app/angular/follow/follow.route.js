@@ -11,17 +11,6 @@ function appRun(routerHelper) {
 function getStates() {
 	return [
 		{
-			state : 'root.withSidenav.follow',
-			config : {
-				url : '/profile/:uid/:type',
-				bindToController: true,
-				scope: {},
-				controller : 'FollowController',
-				controllerAs: 'vm',
-				templateUrl : 'follow/follow.html',
-			}
-		},
-		{
 			state : 'root.oneCol.m_follow',
 			config : {
 				url : '/m_profile/:uid/:type',

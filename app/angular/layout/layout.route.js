@@ -32,24 +32,18 @@ function getStates() {
 }
 
 /** @ngInject */
-function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia) {
+function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia, $mdSidenav) {
 	$rootScope.historyCounter = 1;
 	$rootScope.onClickUser = onClickUser;
 	$rootScope.onClickFollow = onClickFollow;
-	$rootScope.onClickMessage = onClickMessage;
 	$rootScope.openSignupModal = openSignupModal;
 	$rootScope.openLoginModal = openLoginModal;
+	$rootScope.onSwipeLeft = onSwipeLeft;
 
 	function onClickUser(uid) {
-		if ($window.innerWidth > 600) {
-			$state.go('root.withSidenav.profile', {
-				uid: uid
-			});
-		} else {
-			$state.go('root.oneCol.m_profile', {
-				uid: uid
-			});
-		}
+		$state.go('root.oneCol.profile', {
+			uid: uid
+		});
 	}
 
 	function onClickFollow(uid, type) {
@@ -62,16 +56,6 @@ function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia
 			$state.go('root.oneCol.m_follow', {
 				uid: uid,
 				type: type
-			});
-		}
-	}
-
-	function onClickMessage(ev, msg) {
-		if ($window.innerWidth > 600) {
-			message.showMessagebox(ev, msg);
-		} else {
-			$state.go('root.oneCol.m_message', {
-				msg: msg
 			});
 		}
 	}
@@ -100,5 +84,11 @@ function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia
 			fullscreen: fullscreen,
 			scope: mdScope
 		});
+	}
+
+	function onSwipeLeft() {
+		if ($mdSidenav('left').isOpen()) {
+			$mdSidenav('left').toggle();
+		}
 	}
 }

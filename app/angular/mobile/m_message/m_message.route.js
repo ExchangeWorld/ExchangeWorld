@@ -13,12 +13,17 @@ function getStates() {
 		{
 			state : 'root.oneCol.m_message',
 			config : {
-				url : '/m_message/',
-				params: {msg: null},
+				url : '/m_message/:cid',
 				bindToController: true,
 				controller : 'm_messageController',
 				controllerAs: 'vm',
 				templateUrl : 'mobile/m_message/m_message.html',
+				resolve: {
+					/** @ngInject */
+					info: function($stateParams, message) {
+						return message.getChatroomInfo($stateParams.cid);
+					}
+				}
 			}
 		}
 	];

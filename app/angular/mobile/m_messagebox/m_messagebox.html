@@ -1,28 +1,30 @@
 <div resize ng-style="resizeWithOffset(56)">
-	<div ng-show="vm.loading" class="md-scroll-mask" style="z-index: 100; background-color: rgba(0, 0, 0, 0.10); bottom:-200px;" aria-hidden="true">
-		<md-progress-circular class="md-primary" md-mode='indeterminate' style="margin:200px auto;"></md-progress-circular>
-		<div class="md-scroll-mask-bar"></div>
-	</div>
-	<md-list ng-show="!vm.loading">
-		<md-list-item style="padding: 0;">
-			<div flex-offset="5" flex>
-				<p class="md-subhead">訊息</p>
-			</div>
-			<md-divider></md-divider>
-		</md-list-item>
-		<md-list-item ng-show="vm.messages.length === 0">
-			<div flex>
-				<p class="md-body-2 note">目前沒有任何訊息</p>
-			</div>
-		</md-list-item>
-		<md-list-item ng-repeat="msg in vm.messages" ng-style="msg.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickMessage(msg, $event)" style="width:100%;">
-			<img flex style="max-height:50px; max-width:50px;" ng-src="{{ msg.user.photo_path }}" />
-			<div flex-offset="5" flex style="width:70%;">
-				<p class="md-subhead note msg-user">{{ msg.user.name }}</p>
-				<p class="md-body-2 note msg-content">{{msg.content}}</p>
-				<p class="md-caption note time" style="color: #BCBCBC;">{{ msg.timestamp }}</p>
-			</div>
-			<md-divider></md-divider>
-		</md-list-item>
-	</md-list>
+    <div ng-show="vm.loading" class="md-scroll-mask" style="z-index: 100; background-color: rgba(0, 0, 0, 0.10); bottom:-200px;" aria-hidden="true">
+        <md-progress-circular class="md-primary" md-mode='indeterminate' style="margin:200px auto;"></md-progress-circular>
+        <div class="md-scroll-mask-bar"></div>
+    </div>
+    <md-list ng-show="!vm.loading">
+        <md-list-item style="padding: 0;width:100%;">
+            <div flex-offset="5" flex>
+                <p class="md-subhead">訊息</p>
+            </div>
+            <md-divider></md-divider>
+        </md-list-item>
+        <md-list-item ng-show="vm.messages.length === 0">
+            <div flex>
+                <p class="md-body-2 note">目前沒有任何訊息</p>
+            </div>
+        </md-list-item>
+        <md-list-item ng-repeat="msg in vm.messages" ng-style="msg.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickMessage(msg, $event)" style="width:100%;">
+            <img flex style="max-height:50px; max-width:50px;" ng-src="{{ msg.members_info[user].photo_path }}" ng-repeat="user in msg.members" ng-show="user !== $root.user.uid" />
+            <div flex-offset="5" flex>
+                <p class="md-subhead note msg-user" ng-repeat="user in msg.members" ng-show="user !== $root.user.uid">
+                    {{ msg.members_info[user].name }}
+                </p>
+                <p class="md-body-2 note msg-content">{{msg.last_message}}</p>
+                <p class="md-caption note time" style="color: #BCBCBC;">{{ msg.updated_at }}</p>
+            </div>
+            <md-divider></md-divider>
+        </md-list-item>
+    </md-list>
 </div>

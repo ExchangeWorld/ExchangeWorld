@@ -27,11 +27,11 @@ var resolve = {
 			.then(function(data) {
 				return data.map(function(g) {
 					try {
-						g.photo_path = JSON.parse(g.photo_path);
+						g.goods.photo_path = JSON.parse(g.goods.photo_path);
 					} catch (err) {
-						g.photo_path = '';
+						g.goods.photo_path = '';
 					}
-					return g.good;
+					return g.goods;
 				});
 			});
 	}
@@ -40,20 +40,9 @@ var resolve = {
 function getStates() {
 	return [
 		{
-			state : 'root.withSidenav.profile',
+			state : 'root.oneCol.profile',
 			config : {
 				url : '/profile/:uid',
-				bindToController: true,
-				controller : 'ProfileController',
-				controllerAs: 'vm',
-				templateUrl : 'profile/profile.html',
-				resolve : resolve,
-			}
-		},
-		{
-			state : 'root.oneCol.m_profile',
-			config : {
-				url : '/m_profile/:uid',
 				bindToController: true,
 				controller : 'ProfileController',
 				controllerAs: 'vm',

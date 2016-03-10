@@ -50,6 +50,13 @@ md-toolbar {
 	&:focus {
 		outline-width: 0;
 	}
+	div {
+		p,
+		h1,
+		h2 {
+			color: black;
+		}
+	}
 }
 
 @media only screen and (min-width: 0) and (max-width: 600px) and (orientation: portrait) {
@@ -80,6 +87,9 @@ md-list {
 
 md-switch {
 	margin: 0px;
+	.md-label {
+		padding-top: 20px;
+	}
 }
 
 md-dialog {
@@ -88,14 +98,20 @@ md-dialog {
 
 md-radio-button {
 	margin: 10px;
+	.md-label {
+		width: 100%;
+	}
 }
 
 md-input-container {
 	label {
-		top: 0;
+		top: -20px;
 	}
 	.md-input {
 		padding-bottom: 0;
+	}
+	&.signup {
+		margin: 10px 0;
 	}
 }
 
@@ -261,11 +277,8 @@ div.md-open-menu-container {
 		min-width: 46px;
 	}
 	.profile-top {
-		margin: 5px 3px 5px 0;
-		background-repeat: no-repeat;
-		height: 50%;
-		background-size: 100%;
-		filter: grayscale(100%) blur(3px) brightness(70%);
+		height: 40%;
+		background: linear-gradient(rgb(187, 231, 240), #E0E0E0);
 	}
 	.map-size {
 		height: 250px;
@@ -283,21 +296,18 @@ div.md-open-menu-container {
 	}
 	.reset-follow {
 		margin: 0;
+		padding: 0 10px 0 4px;
 	}
 	.switch {
-		padding-left: 5px;
+		padding-left: 25px;
+		.md-label {
+			padding-left: 0%;
+		}
 	}
 	.ex-bg {
 		overflow-x: hidden;
 		overflow-y: auto;
 		background-color: #f5f5f5;
-	}
-	.info_container {
-		&.for_input {
-			&.post {
-				margin: 2% 1.5%;
-			}
-		}
 	}
 	.img-home {
 		max-width: 100%;
@@ -311,19 +321,11 @@ div.md-open-menu-container {
 	.img-profile {
 		width: 100px;
 		height: 100px;
-		position: absolute;
-		bottom: 68%;
-		left: 10%;
 		background-repeat: no-repeat;
 		background-position: center;
 		border-radius: 50%;
 		background-size: contain;
 		border: 2px solid #90A4AE;
-	}
-	.profile-name {
-		position: absolute;
-		bottom: 57%;
-		right: 10%;
 	}
 	.home-row {
 		border-radius: 8px;
@@ -342,6 +344,20 @@ div.md-open-menu-container {
 	}
 	md-toolbar:not(.md-menu-toolbar) {
 		background-color: #ECEFF1;
+	}
+	.input-post {
+		height: 16%;
+		&.cate {
+			padding-bottom: 14%;
+		}
+		&.desc {
+			padding-bottom: 4%;
+		}
+		&.img {
+			width: 70vw;
+			height: 35vw;
+			border: 2px #757575 dashed;
+		}
 	}
 }
 
@@ -378,19 +394,17 @@ div.md-open-menu-container {
 	.img-null {
 		max-height: 90%;
 		max-width: 90%;
-		padding-top: 30%;
+		padding-top: 25%;
 	}
 	.reset-follow {
 		margin-bottom: 5px;
+		padding: 0 10px;
 	}
+	.profile-top {}
 	.switch {
 		padding-left: 10px;
-	}
-	.info_container {
-		&.for_input {
-			&.post {
-				margin: 0 1.5%;
-			}
+		.md-label {
+			padding-right: 10px;
 		}
 	}
 	.img-home {
@@ -400,12 +414,8 @@ div.md-open-menu-container {
 	.img-profile {
 		width: 120px;
 		height: 120px;
-		bottom: 68%;
-		left: 15%;
-	}
-	.profile-name {
-		bottom: 65%;
-		right: 15%;
+		/*bottom: 68%;*/
+		/*left: 15%;*/
 	}
 	.home-row {
 		height: 300px;
@@ -417,6 +427,19 @@ div.md-open-menu-container {
 		}
 		&.column-right {
 			margin: 2.5% 0 2.5% 10%;
+		}
+	}
+	.input-post {
+		height: 13%;
+		&.cate {
+			padding-bottom: 10%;
+		}
+		&.desc {
+			padding-bottom: 4%;
+		}
+		&.img {
+			width: 40vw;
+			height: 22vw;
 		}
 	}
 }
@@ -445,9 +468,6 @@ div.md-open-menu-container {
 	.btn-rwd {
 		min-width: 88px;
 	}
-	.goods-lg {
-		margin: 20px;
-	}
 	.map-size {
 		height: 30%;
 		width: auto;
@@ -457,19 +477,12 @@ div.md-open-menu-container {
 	.img-null {
 		max-height: 90%;
 		max-width: 90%;
-		padding-top: 11%;
+		padding-top: 6%;
 	}
 	.ex-bg {
 		overflow-x: hidden;
 		overflow-y: hidden;
 		background-color: #f5f5f5;
-	}
-	.info_container {
-		&.for_input {
-			&.post {
-				margin: 2.8% 1.5%;
-			}
-		}
 	}
 	.img-home {
 		max-width: 86%;
@@ -479,13 +492,15 @@ div.md-open-menu-container {
 		height: 580px;
 	}
 	.profile-top {
-		margin: 10px 3px 10px 0;
+		height: 40%;
 	}
 	.img-profile {
-		bottom: 63%;
+		height: 160px;
+		width: 160px;
+		/*bottom: 63%;*/
 	}
-	.profile-name {
-		bottom: 60%;
+	.profile-right {
+		margin-left: 20px;
 	}
 	.home-row {
 		height: 280px;
@@ -507,6 +522,13 @@ div.md-open-menu-container {
 	md-toolbar:not(.md-menu-toolbar) {
 		background-color: transparent;
 	}
+	.input-post {
+		height: 17%;
+		&.img {
+			width: 20vw;
+			height: 10vw;
+		}
+	}
 }
 
 @media screen and (min-width: 1400px) {
@@ -519,13 +541,13 @@ div.md-open-menu-container {
 	.img-null {
 		max-height: 90%;
 		max-width: 90%;
-		padding-top: 25%;
+		padding-top: 10%;
 	}
-	.info_container {
-		&.for_input {
-			&.post {
-				margin: 0 1.5%;
-			}
+	.input-post {
+		height: 100px;
+		&.img {
+			width: 30vw;
+			height: 23vw;
 		}
 	}
 }
@@ -564,6 +586,10 @@ div.md-open-menu-container {
 	width: 100%;
 	background-color: #E0E0E0;
 	margin-top: 10px;
+}
+
+.goods-lg {
+	margin: 5%;
 }
 
 .fade {
@@ -641,7 +667,6 @@ div.md-open-menu-container {
 .sidebar-ex {
 	background-color: #CFD8DC;
 	padding-top: 5px;
-	//margin-top: 20px;
 }
 
 .file-field {

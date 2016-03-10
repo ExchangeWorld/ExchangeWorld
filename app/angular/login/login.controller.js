@@ -29,7 +29,7 @@ function LoginController(
 			$localStorage.user = user;
 			$rootScope.user = user;
 
-			$state.go('root.withSidenav.seek');
+			$state.go('root.withSidenav.seek', {}, { reload: true });
 
 			closePopup();
 		} catch (err) {

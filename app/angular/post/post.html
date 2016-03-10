@@ -1,17 +1,12 @@
-<md-toolbar class="rounded-corners md-whiteframe-z3" style="background-color: #bbe7f0;">
-	<div flex class="md-toolbar-tools" layout="row" layout-align="center center">
-		<h2 class="md-headline" style="color:black;">你所擁有的東西</h2>
-	</div>
-</md-toolbar>
-<form novalidate ng-submit="vm.onSubmit()" resize ng-style="resizeWithOffset(112)" style="overflow-y: auto;">
-	<md-content layout-padding layout-margin style="overflow-x: hidden; display: block; background-color: #EEEEEE;">
-		<div class="info_container for_input" layout="row" layout-align="center center">
+<form novalidate ng-submit="vm.onSubmit()" resize ng-style="resizeWithOffset(56)" style="overflow-y: hidden;">
+	<md-content style="overflow: hidden; display: block; background-color: #EEEEEE; margin:8px; padding:8px; height: 100%;">
+		<div class="input-post" layout="row" layout-align="center center">
 			<span style="padding-bottom:13px;margin-right: 8px;">名稱</span>
 			<md-input-container flex>
-				<input type="text" ng-model="vm.goodsName" required>
+				<input type="text" ng-model="vm.goodsName" aria-label="goodsName" md-maxlength="10" required>
 			</md-input-container>
 		</div>
-		<div class="info_container for_input" layout="row" layout-align="center center" style="padding-top: 0;" layout-wrap>
+		<div class="input-post cate" layout="row" layout-align="center center">
 			<span style="padding-top: 7px; margin-right: 8px;">類別</span>
 			<md-input-container flex>
 				<md-select ng-model="vm.goodsCategory" ng-change="vm.onCategoryChanged(vm.goodsCategory)" aria-label="good.cate">
@@ -20,23 +15,17 @@
 					</md-option>
 				</md-select>
 			</md-input-container>
-			<md-switch flex="20" flex-xs="100" layout layout-align-gt-xs="center center" layout-align="start center" ng-model="vm.postType" aria-label="postSwitch" style="margin: 20px 0 10px 0;">
-				{{ vm.postType ? '贈送' : '交換' }}
-			</md-switch>
 		</div>
-		<div class="info_container for_input" layout="row" layout-align="center center">
+		<div class="input-post desc" layout="row" layout-align="center center" style="height:60px; ">
 			<span style="padding-bottom: 17px; margin-right: 8px;">敘述</span>
 			<md-input-container flex>
-				<!-- <label>物品敘述</label> -->
-				<textarea type="string" ng-model="vm.goodsDescriptions" columns="10" md-maxlength="500" required></textarea>
+				<textarea type="string" ng-model="vm.goodsDescriptions" aria-label="goodsDescriptions" columns="10" md-maxlength="500" required></textarea>
 			</md-input-container>
 		</div>
-		<!-- Insert Photo -->
-		<div class="info_container for_input" layout="row" layout-align="start center" style="margin-bottom: 0px;">
-			<!-- <i class="material-icons">insert_photo</i> -->
-			<p hide-sm>照片</p>
+		<div layout="row" layout-align="start center" style="margin-bottom: 0px; height: 20px;">
+			<p hide-xs>照片</p>
 		</div>
-		<div layout="row" layout-wrap layout-align="center center">
+		<div layout="row" layout-wrap layout-align="center center" style="margin: 10px 0;">
 			<div layout layout-align="center center" ng-repeat="preview in vm.imgEncoded" style="background-color: #F5F5F5; border: 1px; position: relative; height:100px; width:100px;" class="hvr-upload" ng-mouseover="vm.removeMode=true" ng-mouseleave="vm.removeMode=false">
 				<img class="img-preview" id="img_{{$index}}" data-ng-src="data:image/png;base64,{{preview.base64}}" />
 				<div class="cross onpost" ng-show="vm.removeMode" ng-click="vm.removeImg($index)">
@@ -44,7 +33,7 @@
 				</div>
 			</div>
 			<div class="file-field input-field">
-				<div class="md-button" style="width:35vw; height:35vw; border: 2px #757575 dashed">
+				<div class="md-button input-post img">
 					<div layout-fill layout layout-align="center center">
 						<i class="material-icons" style="font-size:64px;">add_a_photo</i>
 						<input type='file' ng-model='vm.imgSelect' base-sixty-four-input accept="image/*" multiple />
@@ -53,22 +42,19 @@
 			</div>
 		</div>
 		<!-- Location -->
-		<div class="info_container for_input post" layout="row" layout-align="end center">
+		<div layout="row" layout-align="end center">
 			<div layout="row" layout-align="center center">
 				<div class="md-subhead">
 					<strong class="map-font">在右邊的地圖定位你的物品吧！</strong>
 					<md-tooltip>使用滑鼠定位您的物品！</md-tooltip>
 				</div>
-				<div class="tri"></div>
+				<div class="tri hide-i5"></div>
 			</div>
 		</div>
 		<!-- Submit button -->
 		<div layout="row" style="margin:20px 0;">
 			<span flex></span>
-			<input ng-show="!vm.loading" class="md-button md-primary md-raised" type="submit" id="submit" value="發佈物品！" style="width:100px;"></input>
-		</div>
-		<div>
-		</div>
+			<input ng-show="!vm.loading" class="md-button" type="submit" id="submit" value="發佈物品！" style="width:100px; border:1px solid black;"></input>
 		</div>
 	</md-content>
 </form>

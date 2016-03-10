@@ -7,43 +7,40 @@ const moment          = require('moment');
 m_messageModule.controller('m_messageboxController', m_messageboxController);
 
 /** @ngInject */
-function m_messageboxController(message, $state, $localStorage) {
-	const vm          = this;
-	vm.user           = $localStorage.user;
-	vm.messages       = [];
+function m_messageboxController(message, $state, $rootScope, $localStorage, exception) {
+	const vm = this;
+	vm.messages = [];
 	vm.onClickMessage = onClickMessage;
 
 	activate();
 
-	function activate() {	
-		if(!vm.user) {
+	function activate() {
+		$rootScope.isLoggedIn = Boolean($localStorage.user);
+		if ($rootScope.isLoggedIn) $rootScope.user = $localStorage.user;
+		if (!$rootScope.isLoggedIn) {
 			$state.go('root.404');
+			return;
 		}
 		updateMessagebox();
 
 	}
 
 	function onClickMessage(msg) {
-		message
-			.updateMessage(msg)
-			.then(() => {
-				updateMessagebox();
-				$state.go('root.oneCol.m_message', { msg: msg });
-			});
+		$state.go('root.oneCol.m_message', {
+			cid: msg.cid
+		});
 	}
 
-	function updateMessagebox() {
+	async function updateMessagebox() {
 		vm.loading = true;
-		message
-			.getMessage(vm.user.uid)
-			.then((msgs) => {
-				console.log(msgs);
-				vm.messages = _.unique(msgs, 'sender_uid');
-				vm.messages.forEach(function(msg) {
-					msg.timestamp = moment(msg.timestamp.slice(0, -1)).calendar();
-				});
-				vm.loading = false;
-			});
+
+		try {
+			vm.messages = await message.getMessageList();
+			vm.loading = false;
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			vm.loading = false;
+		}
 	}
 
 }

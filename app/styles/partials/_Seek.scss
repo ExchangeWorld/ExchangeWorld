@@ -20,18 +20,16 @@
 		margin: 0 auto;
 		margin-bottom: 10px;
 		box-shadow: 3px 6px 5px 0 rgba(0, 0, 0, 0.5);
-
 		.card-info {
 			margin-right: 8px;
 			margin-top: 10px;
-			/*max-height: 20px;*/
 			white-space: nowrap;
 		}
 		.favorite {
 			-webkit-transition: .3s ease-in-out;
 			transition: .3s ease-in-out;
 			border-width: 1px;
-			border-color: rgba(0,0,0,0);
+			border-color: rgba(0, 0, 0, 0);
 			border-style: solid;
 			border-radius: 2px;
 		}
@@ -42,7 +40,6 @@
 			border-style: solid;
 			border-radius: 2px;
 		}
-
 		.card-img {
 			opacity: 1;
 			-webkit-transition: .3s ease-in-out;
@@ -51,25 +48,37 @@
 		.card-img:hover {
 			opacity: .7;
 		}
-		a:hover{
+		a:hover {
 			color: #000;
 		}
 	}
 }
 
 @media screen and (min-width: 300px) {
+	.grid-wrapper {
+		max-width: 85%;
+		margin: 0 auto;
+		padding: 20px 0;
+	}
 	.grid__columns {
-		padding-left: 2.5%;
+		padding-left: 5.5%;
 		padding-right: 2.5%;
 		column-count: 1;
 		-moz-column-count: 1;
 		-webkit-column-count: 1;
 	}
+	.seek-title {
+		max-width: 90%;
+		margin: 0;
+	}
 }
 
 @media screen and (min-width: 750px) {
+	.grid-wrapper {
+		max-width: 700px;
+	}
 	.grid__columns {
-		padding-left: 1.5%;
+		padding-left: 4.5%;
 		padding-right: 1.5%;
 		column-count: 2;
 		-moz-column-count: 2;
@@ -78,8 +87,11 @@
 }
 
 @media screen and (min-width: 1441px) {
+	.grid-wrapper {
+		max-width: 850px;
+	}
 	.grid__columns {
-		padding-left: .2%;
+		padding-left: 2.2%;
 		padding-right: .2%;
 		column-count: 3;
 		-moz-column-count: 3;

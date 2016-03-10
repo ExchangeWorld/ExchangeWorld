@@ -37,7 +37,7 @@ function SignupController(
 			$localStorage.user = user;
 			$rootScope.user = user;
 
-			$state.go('root.withSidenav.seek');
+			$state.go('root.withSidenav.seek', {}, { reload: true });
 			closePopup();
 		} catch (err) {
 			if (err.data.error === 'Email is wrong') exception.catcher('信箱格式有誤喔')(err);
@@ -51,7 +51,7 @@ function SignupController(
 			$rootScope.isLoggedIn = Boolean(user);
 			$localStorage.user = user;
 
-			$state.go('root.withSidenav.seek');
+			$state.go('root.withSidenav.seek', {}, { reload: true });
 			closePopup();
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);

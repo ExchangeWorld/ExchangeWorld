@@ -8,7 +8,7 @@ messageModule.factory('message', message);
 
 /** @ngInject */
 function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage, $rootScope, $mdMedia, logger) {
-	var socket = new WebSocket(`ws://exwd.csie.org:43002/message?token=${$localStorage.token}`);
+	var socket = new WebSocket(`ws://exwd.csie.org:43002?token=${$localStorage.token}`);
 	var dataStream = [];
 
 	socket.onopen = function(evt) {

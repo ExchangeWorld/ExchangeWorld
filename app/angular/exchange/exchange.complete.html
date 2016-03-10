@@ -9,11 +9,11 @@
 		</div>
 	</md-toolbar>
 	<md-dialog-content style="max-width:800px;max-height:810px; ">
-		<div flex flex-sm layout="column">
+		<div flex layout="column">
 			<div layout="column" layout-align="center center">
 				<p>為這一次的交易評個分吧！</p>
 			</div>
-			<div layout="column" layout-align="center center" layout-padding layout-margin>
+			<div layout="row" layout-align="center center">
 				<span class="starRating">
 					<input id="rating5" type="radio" ng-model="vm.rating" name="rating" value="5">
 					<label for="rating5">5</label>
@@ -28,12 +28,11 @@
 				</span>
 			</div>
 			<div layout="row" style="margin-top:20px;">
-				<span flex-gt-sm="40" flex-sm="10"></span>
-				<input flex-gt-sm="25" flex-sm="40" class="md-button md-primary md-raised" ng-click="vm.cancel()" value="取消"></input>
-				<input flex-gt-sm="25" flex-sm="40" class="md-button md-primary md-raised" ng-click="vm.confirm(vm.rating)" value="送出"></input>
-				<span flex="5" flex-sm="10"></span>
+				<span flex-gt-xs="40" flex-xs="10"></span>
+				<input flex-gt-xs="25" flex-xs="40" class="md-button" ng-click="vm.cancel()" value="取消"></input>
+				<input flex-gt-xs="25" flex-xs="40" class="md-button" ng-click="vm.confirm(vm.rating)" value="送出"></input>
+				<span flex="5" flex-xs="10"></span>
 			</div>
 		</div>
 	</md-dialog-content>
 </md-dialog>
-

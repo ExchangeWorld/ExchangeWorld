@@ -17,7 +17,7 @@ var resolve = {
 				return data; 
 			})
 			.catch(function() {
-				return undefined;
+				return {};
 			});
 	},
 	/** @ngInject */

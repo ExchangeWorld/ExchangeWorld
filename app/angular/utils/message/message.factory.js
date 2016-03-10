@@ -7,32 +7,18 @@ const moment = require('moment');
 messageModule.factory('message', message);
 
 /** @ngInject */
-function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage, $rootScope, $mdMedia, logger) {
-	var socket = new WebSocket(`ws://dream.cs.nccu.edu.tw:43002?token=${$localStorage.token}`);
-	var dataStream = [];
+function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage, $rootScope, $mdMedia, logger, socket) {
+	const service = {
+		getMessageList,
+		getChatroomInfo,
+		getConversation,
+		createOrFindChatroom,
+		postMessage,
+		readMessage,
+		showMessagebox,
+	};
 
-	socket.onopen = function(evt) {
-		console.log('connected', evt);
-	};
-	socket.onclose = function(evt) {
-		console.log('closed', evt);
-	};
-	socket.onmessage = function(evt) {
-		console.log('receive', evt);
-		$timeout(()=> {
-			let data = JSON.parse(evt.data);
-			if (data.error) return;
-
-			if (data.mid) {
-				$rootScope.$broadcast('chatroom:new', data);
-				logger.success('你有新訊息', null, 'NEWS');
-			}
-			$rootScope.$broadcast('chatroom:updatelist', data);
-		});
-	};
-	socket.onerror = function(evt) {
-		console.log('error', evt);
-	};
+	return service;
 
 	async function getMessageList() {
 		const defer = $q.defer();
@@ -101,7 +87,8 @@ function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage,
 		try {
 			let chat = JSON.stringify(newMessage);
 			await socket.send(chat);
-			$rootScope.$broadcast('chatroom:updatelist', newMessage);
+			$rootScope.$broadcast('chatroom:msgRead', newMessage);
+
 			defer.resolve(newMessage);
 		} catch (err) {
 			defer.reject(err);
@@ -133,7 +120,7 @@ function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage,
 
 		try {
 			await socket.send(JSON.stringify(form));
-			$rootScope.$broadcast('chatroom:updatelist', form);
+			$rootScope.$broadcast('chatroom:msgRead', form);
 			defer.resolve(form);
 		} catch (err) {
 			defer.reject(err);
@@ -160,17 +147,4 @@ function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage,
 			}
 		});
 	}
-
-	const service = {
-		dataStream,
-		getMessageList,
-		getChatroomInfo,
-		getConversation,
-		createOrFindChatroom,
-		postMessage,
-		readMessage,
-		showMessagebox,
-	};
-
-	return service;
 }

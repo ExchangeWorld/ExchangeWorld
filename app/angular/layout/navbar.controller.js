@@ -19,6 +19,7 @@ function NavbarController(
 	$q,
 	auth,
 	message,
+	logger,
 	exception,
 	notification,
 	AppSettings
@@ -52,8 +53,11 @@ function NavbarController(
 		vm.content = toState.title;
 		console.log(vm.content);
 	});
-
-	$scope.$on('chatroom:updatelist', ()=> { 
+	$scope.$on('chatroom:msgNew', ()=> { 
+		logger.success('你有新訊息', null, 'NEWS');
+		$timeout(()=> { updateNotification(); });
+	});
+	$scope.$on('chatroom:msgRead', ()=> { 
 		$timeout(()=> { updateNotification(); });
 	});
 
@@ -144,7 +148,6 @@ function NavbarController(
 				vm.messages.filter((m)=> { return !m.read; }).length,
 				vm.notifications.filter((n)=> { return !n.read; }).length
 			];
-			console.log(vm.notifications);
 
 			let unread = vm.unread[0] + vm.unread[1];
 			$rootScope.pageTitle = (unread) ? `(${unread}) ${AppSettings.appTitle}` : AppSettings.appTitle;

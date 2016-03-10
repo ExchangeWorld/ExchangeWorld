@@ -6,9 +6,10 @@ const moment             = require('moment');
 notificationModule.factory('notification', notification);
 
 /** @ngInject */
-function notification(Restangular, $q, exception, $localStorage, $sce) {
+function notification(Restangular, $q, exception, $localStorage, $sce, $location, $rootScope, socket) {
 	const service = {
 		getNotification,
+		click,
 	};
 
 	return service;
@@ -26,6 +27,25 @@ function notification(Restangular, $q, exception, $localStorage, $sce) {
 			defer.reject(err);
 		}
 		
+		return defer.promise;
+	}
+
+	async function click(n) {
+		let defer = $q.defer();
+		let form = {
+			type: 'read',
+			read_notification: n.nid
+		};
+
+		try {
+			await socket.send(JSON.stringify(form));
+			$location.path(n.url);
+			$rootScope.$broadcast('notify:notifyRead', form);
+			defer.resolve(form);
+		} catch (err) {
+			defer.reject(err);
+		}
+	
 		return defer.promise;
 	}
 

@@ -13,7 +13,6 @@ function NavbarController(
 	$scope,
 	$rootScope,
 	$localStorage,
-	$location,
 	$timeout,
 	$window,
 	$q,
@@ -33,9 +32,9 @@ function NavbarController(
 	vm.menu                = menu;
 	vm.onLogout            = onLogout;
 	vm.notifications       = [];
+	vm.messages            = [];
 	vm.unread              = [0, 0];
 	vm.onClickNotification = onClickNotification;
-	vm.messages            = [];
 	vm.onClickMessage      = onClickMessage;
 
 
@@ -55,17 +54,20 @@ function NavbarController(
 	});
 	$scope.$on('chatroom:msgNew', ()=> { 
 		logger.success('你有新訊息', null, 'NEWS');
-		$timeout(()=> { updateNotification(); });
+		$timeout(()=> { updateNews(); });
 	});
 	$scope.$on('chatroom:msgRead', ()=> { 
-		$timeout(()=> { updateNotification(); });
+		$timeout(()=> { updateNews(); });
+	});
+	$scope.$on('notify:notifyRead', ()=> { 
+		$timeout(()=> { updateNews(); });
 	});
 
 	async function activate() {
 		$rootScope.isLoggedIn = Boolean($localStorage.user);
 		if ($rootScope.isLoggedIn) $rootScope.user = $localStorage.user;
 
-		await updateNotification();
+		await updateNews();
 	}
 
 	function openMenu($mdOpenMenu, e) {
@@ -124,7 +126,7 @@ function NavbarController(
 	}
 
 	function onClickNotification(notice) {
-		$location.path(notice.url);
+		notification.click(notice);
 		if(!$state.includes("root.oneCol") && !$mdSidenav('left').isOpen() ) {
 			$mdSidenav('left').toggle();
 		}
@@ -136,7 +138,7 @@ function NavbarController(
 		vm.closeMenu();
 	}
 
-	async function updateNotification() {
+	async function updateNews() {
 		if (!$rootScope.isLoggedIn) return;
 		
 		try {

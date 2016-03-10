@@ -345,16 +345,16 @@ div.md-open-menu-container {
 		background-color: #ECEFF1;
 	}
 	.input-post {
-		height: 16%;
+		height: 60px;
 		&.cate {
-			padding-bottom: 14%;
+			padding-bottom: 7%;
 		}
 		&.desc {
-			padding-bottom: 4%;
+			padding-bottom: 0;
 		}
 		&.img {
-			width: 70vw;
-			height: 35vw;
+			width: 60vw;
+			height: 20vw;
 			border: 2px #757575 dashed;
 		}
 	}

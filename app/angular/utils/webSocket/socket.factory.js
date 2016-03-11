@@ -22,12 +22,10 @@ function socket($timeout, exception, $localStorage, $rootScope, $q) {
 	socket.onmessage = function(evt) {
 		console.log('receive', evt);
 		$timeout(()=> {
-			let data = JSON.parse(evt.data);
+			var data = JSON.parse(evt.data);
 			if (data.error) return;
 
-			if (data.mid) {
-				$rootScope.$broadcast('chatroom:msgNew', data);
-			}
+			broadcast(data);
 		});
 	};
 
@@ -46,6 +44,22 @@ function socket($timeout, exception, $localStorage, $rootScope, $q) {
 		}
 
 		return defer.promise;
+	}
+
+	function broadcast(data) {
+		switch (data.type) {
+			case 'message':
+				$rootScope.$broadcast('chatroom:msgNew', data);
+				break;
+			case 'read':
+				break;
+			case 'notification':
+				$rootScope.$broadcast('notify:notifyNew', data);
+				break;
+			default:
+				break;
+		}
+		
 	}
 
 	const service = {

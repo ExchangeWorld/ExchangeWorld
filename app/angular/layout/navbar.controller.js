@@ -52,15 +52,19 @@ function NavbarController(
 		vm.content = toState.title;
 		console.log(vm.content);
 	});
-	$scope.$on('chatroom:msgNew', ()=> { 
+	$scope.$on('chatroom:msgNew', (e)=> { 
 		logger.success('你有新訊息', null, 'NEWS');
 		$timeout(()=> { updateNews(); });
 	});
-	$scope.$on('chatroom:msgRead', ()=> { 
+	$scope.$on('chatroom:msgRead', (e)=> { 
 		$timeout(()=> { updateNews(); });
 	});
-	$scope.$on('notify:notifyRead', ()=> { 
+	$scope.$on('notify:notifyNew', (e, data)=> { 
 		$timeout(()=> { updateNews(); });
+	});
+	$scope.$on('notify:notifyRead', (e, idx)=> { 
+		logger.success(vm.notifications[idx].text, null, 'NEWS');
+		$timeout(()=> { onClickNotification(idx); });
 	});
 
 	async function activate() {
@@ -125,8 +129,10 @@ function NavbarController(
 			});
 	}
 
-	function onClickNotification(notice) {
-		notification.click(notice);
+	async function onClickNotification(idx) {
+		vm.notifications[idx] = await notification.click(vm.notifications[idx]);
+		updateIndicator();
+
 		if(!$state.includes("root.oneCol") && !$mdSidenav('left').isOpen() ) {
 			$mdSidenav('left').toggle();
 		}
@@ -146,16 +152,20 @@ function NavbarController(
 				message.getMessageList(),
 				notification.getNotification()
 			]);
-			vm.unread = [
-				vm.messages.filter((m)=> { return !m.read; }).length,
-				vm.notifications.filter((n)=> { return !n.read; }).length
-			];
-
-			let unread = vm.unread[0] + vm.unread[1];
-			$rootScope.pageTitle = (unread) ? `(${unread}) ${AppSettings.appTitle}` : AppSettings.appTitle;
+			updateIndicator();
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);
 		}
+	}
+
+	function updateIndicator() {
+		vm.unread = [
+			vm.messages.filter((m)=> { return !m.read; }).length,
+			vm.notifications.filter((n)=> { return !n.read; }).length
+		];
+
+		let unread = vm.unread[0] + vm.unread[1];
+		$rootScope.pageTitle = (unread) ? `(${unread}) ${AppSettings.appTitle}` : AppSettings.appTitle;
 	}
 
 	function report() {

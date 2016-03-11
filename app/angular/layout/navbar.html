@@ -78,11 +78,11 @@
 								<p class="md-body-2 note">目前沒有任何通知</p>
 							</div>
 						</md-list-item>
-						<md-list-item ng-repeat="notice in vm.notifications" ng-style="notice.unread && {'background-color':'#E9F3FF'}" ng-click="vm.onClickNotification(notice)">
-							<img flex style="max-height:50px; max-width:50px;" src="../../images/Logo(ex).png" />
+						<md-list-item ng-repeat="notice in vm.notifications" ng-style="!notice.read && {'background-color':'#E9F3FF'}" ng-click="vm.onClickNotification($index)">
+							<img flex style="max-height:50px; max-width:50px;" src="../../images/Gift(Small).jpg" />
 							<div flex-offset="5" flex>
 								<p class="md-body-2 note" ng-bind-html='notice.text'></p>
-								<p class="md-caption note time" style="color: #BCBCBC;">{{ notice.update_at }}</p>
+								<p class="md-caption note time" style="color: #BCBCBC;">{{ notice.created_at }}</p>
 							</div>
 							<md-divider></md-divider>
 						</md-list-item>

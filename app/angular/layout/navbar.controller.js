@@ -1,8 +1,6 @@
 'use strict';
 
 const layoutModule = require('./layout.module');
-const _            = require('lodash');
-const moment       = require('moment');
 
 layoutModule.controller('NavbarController', NavbarController);
 
@@ -15,12 +13,12 @@ function NavbarController(
 	$scope,
 	$rootScope,
 	$localStorage,
-	$location,
 	$timeout,
 	$window,
 	$q,
 	auth,
 	message,
+	logger,
 	exception,
 	notification,
 	AppSettings
@@ -34,9 +32,9 @@ function NavbarController(
 	vm.menu                = menu;
 	vm.onLogout            = onLogout;
 	vm.notifications       = [];
+	vm.messages            = [];
 	vm.unread              = [0, 0];
 	vm.onClickNotification = onClickNotification;
-	vm.messages            = [];
 	vm.onClickMessage      = onClickMessage;
 
 
@@ -54,16 +52,26 @@ function NavbarController(
 		vm.content = toState.title;
 		console.log(vm.content);
 	});
-
-	$scope.$on('chatroom:updatelist', ()=> { 
-		$timeout(()=> { updateNotification(); });
+	$scope.$on('chatroom:msgNew', (e)=> { 
+		logger.success('你有新訊息', null, 'NEWS');
+		$timeout(()=> { updateNews(); });
+	});
+	$scope.$on('chatroom:msgRead', (e)=> { 
+		$timeout(()=> { updateNews(); });
+	});
+	$scope.$on('notify:notifyNew', (e, data)=> { 
+		$timeout(()=> { updateNews(); });
+	});
+	$scope.$on('notify:notifyRead', (e, idx)=> { 
+		logger.success(vm.notifications[idx].text, null, 'NEWS');
+		$timeout(()=> { onClickNotification(idx); });
 	});
 
 	async function activate() {
 		$rootScope.isLoggedIn = Boolean($localStorage.user);
 		if ($rootScope.isLoggedIn) $rootScope.user = $localStorage.user;
 
-		await updateNotification();
+		await updateNews();
 	}
 
 	function openMenu($mdOpenMenu, e) {
@@ -121,10 +129,10 @@ function NavbarController(
 			});
 	}
 
-	function onClickNotification(notice) {
-		notification.updateNotification(notice, false);
+	async function onClickNotification(idx) {
+		vm.notifications[idx] = await notification.click(vm.notifications[idx]);
+		updateIndicator();
 
-		$location.path(notice.trigger_url);
 		if(!$state.includes("root.oneCol") && !$mdSidenav('left').isOpen() ) {
 			$mdSidenav('left').toggle();
 		}
@@ -136,18 +144,28 @@ function NavbarController(
 		vm.closeMenu();
 	}
 
-	async function updateNotification() {
+	async function updateNews() {
 		if (!$rootScope.isLoggedIn) return;
 		
 		try {
-			vm.messages = await message.getMessageList();
-			vm.unread[0] = vm.messages.filter((m)=> { return !m.read; }).length;
-
-			let unread = vm.unread[0]+vm.unread[1];
-			$rootScope.pageTitle = (unread) ? `(${unread}) ${AppSettings.appTitle}` : AppSettings.appTitle;
+			[vm.messages, vm.notifications] = await Promise.all([
+				message.getMessageList(),
+				notification.getNotification()
+			]);
+			updateIndicator();
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);
 		}
+	}
+
+	function updateIndicator() {
+		vm.unread = [
+			vm.messages.filter((m)=> { return !m.read; }).length,
+			vm.notifications.filter((n)=> { return !n.read; }).length
+		];
+
+		let unread = vm.unread[0] + vm.unread[1];
+		$rootScope.pageTitle = (unread) ? `(${unread}) ${AppSettings.appTitle}` : AppSettings.appTitle;
 	}
 
 	function report() {

@@ -10,6 +10,7 @@ require('angular-ui-router');
 require('restangular');
 require('ngstorage');
 require('angular-socialshare');
+require('../utils/webSocket/socket.module');
 require('../utils/photoSlider/photoSlider.module');
 require('../utils/exception/exception.module');
 require('../utils/fackbook/facebook.module');
@@ -35,6 +36,7 @@ const requires = [
 	'restangular',
 	'ngMaterial',
 	'720kb.socialshare',
+	'utils.socket',
 	'utils.photoSlider',
 	'utils.scroll',
 	'utils.facebook',

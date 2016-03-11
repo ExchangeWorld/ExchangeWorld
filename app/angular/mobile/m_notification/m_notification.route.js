@@ -14,6 +14,7 @@ function getStates() {
 			state : 'root.oneCol.m_notification',
 			config : {
 				url : '/m_notification',
+				title: 'm_notification',
 				bindToController: true,
 				controller : 'm_notificationController',
 				controllerAs: 'vm',

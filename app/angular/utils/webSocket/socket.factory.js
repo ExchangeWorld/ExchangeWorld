@@ -17,6 +17,10 @@ function socket($timeout, exception, $localStorage, $rootScope, $q) {
 	
 	socket.onclose = function(evt) {
 		console.log('closed', evt);
+		$timeout(()=> {
+			console.log('reconnecting...');
+			socket = new WebSocket(`ws://exwd.csie.org:43002?token=${$localStorage.token}`);
+		}, 200);
 	};
 	
 	socket.onmessage = function(evt) {

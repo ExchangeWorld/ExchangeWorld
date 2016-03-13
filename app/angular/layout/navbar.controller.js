@@ -53,7 +53,6 @@ function NavbarController(
 		console.log(vm.content);
 	});
 	$scope.$on('chatroom:msgNew', (e)=> { 
-		logger.success('你有新訊息', null, 'NEWS');
 		$timeout(()=> { updateNews(); });
 	});
 	$scope.$on('chatroom:msgRead', (e)=> { 

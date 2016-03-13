@@ -5,8 +5,8 @@
 			<div layout="column">
 				<div layout="row" layout-align="start center" style="margin-left:25px;">
 					<h4 class="md-headline" style="margin:8px 0; text-align: center;">{{ vm.profile.name }}</h4>
-					<div layout="row" layout-align="center center">
-						<p class="md-title text-ex reset-follow hide-i5">(積分：{{ vm.profile.scores }})</p>
+					<div layout="row" layout-align="end end">
+						<p class="md-subhead text-ex reset-follow hide-i5" style="padding-top:3px;">積分：{{ vm.profile.scores }}</p>
 					</div>
 				</div>
 				<div layout="row" layout-xs="column" layout-align="start center" layout-align-xs="start start" style="margin-left:15px;">
@@ -49,8 +49,8 @@
 		<md-tab label="願望清單({{ vm.myStar.length }})">
 			<md-divider></md-divider>
 			<div flex layout layout-align="center center" ng-show="vm.myStar.length === 0">
-					<img class="img-null" src="../../images/emoji_null.png">
-				</div>
+				<img class="img-null" src="../../images/emoji_null.png">
+			</div>
 			<div class="grid-wrapper">
 				<div class="grid__columns">
 					<div ng-repeat="card in vm.myStar">

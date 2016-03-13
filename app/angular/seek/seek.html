@@ -45,15 +45,15 @@
 							</div>
 						</div>
 						<div layout="row" layout-align="start center" style="margin:0; padding-left: 10px; padding-bottom: 15px;">
+							<div layout layout-align="start center" class="card-info">
+								<i class="material-icons person" style="outline:0; margin-right:0px; font-size:20px;">person</i>
+								<span style="font-size: 14px;text-overflow: ellipsis;display: inline-block;white-space: nowrap;overflow: hidden;">{{ card.owner.name }}</span>
+							</div>
 							<div layout layout-align="start center" class="card-info favorite" ng-click="onClickFavorite($event, card)">
 								<i class="material-icons heart-seek" style="outline: 0; font-size:20px;">
 									{{ card.starredByUser ? 'favorite' : 'favorite_border' }}
 								</i>
 								<span style="font-size: 14px;">{{ card.starredByUser ? '已關注' : '關注' }}</span>
-							</div>
-							<div flex layout layout-align="start center" class="card-info">
-								<i class="material-icons person" style="outline:0; margin-right:0px; font-size:20px;">person</i>
-								<span style="font-size: 14px;text-overflow: ellipsis;display: inline-block;white-space: nowrap;overflow: hidden;">{{ card.owner.name }}</span>
 							</div>
 						</div>
 					</a>

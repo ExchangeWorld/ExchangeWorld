@@ -92,7 +92,7 @@
     "angular": "~1.4.8",
     "angular-animate": "~1.4.8",
     "angular-aria": "~1.4.8",
-    "angular-base64-upload": "~0.1.13",
+    "angular-base64-upload": "^0.1.19",
     "angular-material": "1.0.5",
     "angular-resource": "~1.4.8",
     "angular-sanitize": "~1.4.8",

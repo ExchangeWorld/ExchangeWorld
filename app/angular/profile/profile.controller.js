@@ -36,6 +36,7 @@ function ProfileController(
 	vm.getNumber           = number => new Array(number);
 	vm.onClickGoods        = gid => $state.go('root.withSidenav.goods', { gid : gid });
 	vm.getHTMLDesc         = getHTMLDesc;
+	vm.editPhoto           = editPhoto;
 	/////////////
 
 	activate();
@@ -93,5 +94,11 @@ function ProfileController(
 	}
 
 	function getHTMLDesc(desc) {
+	}
+
+	function editPhoto() {
+		if (!vm.isMe) return;
+
+		profileService.uploadHeadPhoto(profile);
 	}
 }

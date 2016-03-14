@@ -69,12 +69,6 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 					token: $localStorage.token
 				});
 
-				if (member.photo_path !== largePic.data.url) {
-					member.route = 'user/photo';
-					member.photo_path = largePic.data.url;
-					member.put();
-				}
-
 				defer.resolve(member);
 				$localStorage.user = member;
 				return defer.promise;

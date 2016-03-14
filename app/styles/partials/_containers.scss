@@ -93,10 +93,10 @@ md-switch {
 	}
 }
 
-md-dialog {
-	max-height: 90%;
-}
-
+// md-dialog {
+// 	max-height: 90%;
+// 	overflow-x: hidden;
+// }
 md-radio-button {
 	margin: 10px;
 	.md-label {
@@ -253,6 +253,11 @@ div.md-open-menu-container {
 }
 
 @media screen and (min-width: 300px) {
+	md-dialog {
+		max-height: 100%;
+		overflow-x: hidden;
+		height: 100%;
+	}
 	.home-container {
 		margin: 0px;
 	}
@@ -439,6 +444,11 @@ div.md-open-menu-container {
 }
 
 @media screen and (min-width: 960px) {
+	md-dialog {
+		max-height: 90%;
+		overflow-x: hidden;
+		height: auto;
+	}
 	.layout-ex {
 		height: 100%;
 		&.right {
@@ -542,6 +552,9 @@ div.md-open-menu-container {
 		&.img {
 			width: 30vw;
 			height: 23vw;
+			&.profile {
+				height: 15vw;
+			}
 		}
 	}
 }

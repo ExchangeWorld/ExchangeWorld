@@ -9,16 +9,16 @@
 			<div layout="column">
 				<div layout="row" layout-align="start center" style="margin-left:25px;">
 					<h4 class="md-headline" style="margin:8px 0; text-align: center;">{{ vm.profile.name }}</h4>
-					<div layout="row" layout-align="end end">
+					<!-- <div layout="row" layout-align="end end">
 						<p class="md-subhead text-ex reset-follow hide-i5" style="padding-top:3px;">積分：{{ vm.profile.scores }}</p>
-					</div>
+					</div> -->
 				</div>
 				<div layout="row" layout-xs="column" layout-align="start center" layout-align-xs="start start" style="margin-left:15px;">
-					<div layout="column" layout-xs="row" layout-align="center center" class="note profile">
+					<div layout="row" layout-align="center center" class="note profile">
 						<p class="md-title text-ex follow reset-follow">追隨中</p>
 						<a ng-click="vm.onClickFollow(vm.profile.uid, 'following')">{{ vm.profile.follows_follower.length }}</a>
 					</div>
-					<div layout="column" layout-xs="row" layout-align="center center" class="note profile">
+					<div layout="row" layout-align="center center" class="note profile">
 						<p class="md-title text-ex follow reset-follow">被追蹤</p>
 						<a ng-click="vm.onClickFollow(vm.profile.uid, 'follower')">{{ vm.profile.follows_followed.length }}</a>
 					</div>

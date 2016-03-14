@@ -82,7 +82,7 @@ function profileService(Restangular, $q, facebookService, exception, $mdMedia, $
 			//clickOutsideToClose: true,
 			controllerAs: 'vm',
 			controller: HeadPhotoController,
-			fullscreen: ($mdMedia('sm') || $mdMedia('xs')),
+			fullscreen: ($mdMedia('sm')||$mdMedia('xs')),
 			locals: {
 				profile: profile
 			}

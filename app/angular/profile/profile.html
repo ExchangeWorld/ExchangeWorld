@@ -1,21 +1,7 @@
-<style>
-.uploadHead {
-	bottom:80px;
-	width:160px;
-	text-align:center;
-	display:block;
-	position: relative;
-	color: rgba(255, 255, 255, 0);
-}
-.uploadHead:hover {
-	color: rgba(255, 255, 255, 1);
-}
-</style>
 <md-content resize ng-style="resizeWithOffset(56)" style="overflow-y: scroll;">
 	<div layout="row" class="profile-top md-whiteframe-z1" layout-align="center center">
-		<div>
-			<div layout layout-align="center center" class="img-profile" ng-style="{'background-image':'url({{ vm.profile.photo_path }})'}"> </div>
-			<a ng-click="vm.editPhoto()" ng-show="vm.isMe" class="uploadHead">
+		<div layout layout-align="center center" class="img-profile" ng-style="{'background-image':'url({{ vm.profile.photo_path }})'}">
+			<a layout layout-align="center center" ng-click="vm.editPhoto()" ng-show="vm.isMe" class="uploadHead">
 				<i class="material-icons" style="font-size:64px;">camera_alt</i>
 			</a>
 		</div>

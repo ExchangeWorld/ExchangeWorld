@@ -362,6 +362,9 @@ div.md-open-menu-container {
 			width: 60vw;
 			height: 20vw;
 			border: 2px #757575 dashed;
+			&.profile {
+				height: 45vw;
+			}
 		}
 	}
 }
@@ -439,6 +442,9 @@ div.md-open-menu-container {
 		&.img {
 			width: 40vw;
 			height: 22vw;
+			&.profile {
+				height: 35vw;
+			}
 		}
 	}
 }
@@ -531,6 +537,9 @@ div.md-open-menu-container {
 		&.img {
 			width: 20vw;
 			height: 10vw;
+			&.profile {
+				height: 15vw;
+			}
 		}
 	}
 }

@@ -1,0 +1,20 @@
+<div layout="column" layout-align="center center" layout-fill>
+	<div class="file-field input-field" ng-show="!vm.imgSelect.base64" layout layout-align="center center">
+		<div class="md-button input-post img profile">
+			<div layout-fill layout layout-align="center center">
+				<i class="material-icons" style="font-size:64px;">add_a_photo</i>
+				<input type='file' ng-model='vm.imgSelect' base-sixty-four-input accept="image/*" />
+			</div>
+		</div>
+	</div>
+	<div class="cropArea" ng-show="vm.imgSelect.base64" style="margin:10px 0 0 0;">
+		<img-crop image="vm.dataUri" result-image="vm.myCroppedImage"></img-crop>
+	</div>
+	<!--<div>Cropped Image:</div>-->
+	<!--<div><img ng-src="{{vm.myCroppedImage}}" /></div>-->
+	<div layout="row">
+		<span flex></span>
+		<md-button ng-click="vm.onCancel()">取消</md-button>
+		<md-button ng-disabled="!vm.imgSelect.base64" ng-click="vm.submit()">更新</md-button>
+	</div>
+</div>

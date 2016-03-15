@@ -367,6 +367,18 @@ div.md-open-menu-container {
 			}
 		}
 	}
+	.item-profile {
+		margin: 20px auto;
+		cursor: pointer;
+		width: 95%;
+		background: #F5F5F5;
+		&.name-queue {
+			cursor: default;
+		}
+		&.exchange {
+			cursor: auto;
+		}
+	}
 }
 
 @media screen and (min-width: 600px) {
@@ -446,6 +458,9 @@ div.md-open-menu-container {
 				height: 35vw;
 			}
 		}
+	}
+	.item-profile {
+		width: 80%;
 	}
 }
 
@@ -541,6 +556,9 @@ div.md-open-menu-container {
 				height: 15vw;
 			}
 		}
+	}
+	.item-profile {
+		width: 50%;
 	}
 }
 
@@ -669,19 +687,6 @@ div.md-open-menu-container {
 	max-height: 100%;
 	max-width: 100%;
 	margin: 0 2px;
-}
-
-.item-profile {
-	margin: 20px auto;
-	cursor: pointer;
-	width: 50%;
-	background: #F5F5F5;
-	&.name-queue {
-		cursor: default;
-	}
-	&.exchange{
-		cursor: auto;
-	}
 }
 
 .sidebar-ex {

@@ -1,6 +1,12 @@
 <md-content class="animated fadeIn" resize ng-style="resizeWithOffset(56)">
 	<div class="home-container" layout="column" layout-align="center center">
-		<div class="img-home" style="background-image: url('../../images/home/slide.jpg')">
+		<div hide show-gt-sm class="img-home" style="background-image: url('../../images/home/slide.jpg')">
+			<md-button class="home-btn" href="/seek">
+				<div layout layout-align="center center" layout-fill>開始搜索</div>
+			</md-button>
+		</div>
+		<div hide-gt-sm class="img-home" style="background-image: url('../../images/home/slide2.jpg')">
+			<h2 class="home-title">ExchangeWorld</h2>
 			<md-button class="home-btn" href="/seek">
 				<div layout layout-align="center center" layout-fill>開始搜索</div>
 			</md-button>

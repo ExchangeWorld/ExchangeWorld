@@ -208,7 +208,7 @@ a:hover {
 	}
 }
 
-@media screen and (min-width: 320px) {
+@media screen and (min-width: 300px) {
 	.ex-story {
 		font-size: 14px;
 		line-height: 24px;
@@ -225,6 +225,11 @@ a:hover {
 		margin-bottom: 50px;
 		color: rgb(233, 230, 232);
 	}
+	.home-title {
+		color: #fff;
+		text-align: center;
+		margin-top: 64px;
+	}
 }
 
 @media screen and (max-width: 350px) {
@@ -238,6 +243,11 @@ a:hover {
 		.md-container {
 			margin-right: 8px;
 		}
+	}
+	.home-title {
+		color: #fff;
+		text-align: center;
+		margin-top: 140px;
 	}
 }
 
@@ -261,7 +271,7 @@ a:hover {
 }
 
 .home-span {
-	color: white;
+	color: #fff;
 	&.cate {
 		font-size: 24px;
 	}

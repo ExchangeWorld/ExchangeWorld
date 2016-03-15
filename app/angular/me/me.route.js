@@ -10,7 +10,7 @@ function appRun(routerHelper) {
 
 var resolve = {
 	/** @ngInject */
-	me: function (meService, $state, $stateParams) {
+	me: function (meService) {
 		return meService
 			.getProfile()
 			.then(function(data) { 

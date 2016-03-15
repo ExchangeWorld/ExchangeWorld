@@ -10,6 +10,11 @@ function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDia
 		getProfile,
 		editProfile,
 		uploadHeadPhoto,
+
+		getExchanges,
+		deleteExchange,
+		agreeExchange,
+		
 	};
 
 	return service;
@@ -130,6 +135,55 @@ function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDia
 				return defer.promise;
 			}
 		}
+	}
+
+	async function getExchanges(ownerUid) {
+		const defer = $q.defer();
+
+		try {
+			let exchanges = await Restangular.one('user', ownerUid).getList('exchange');
+			exchanges.forEach((e)=> {
+				try {
+					e.other_goods.photo_path = JSON.parse(e.other_goods.photo_path);
+				} catch (err) {
+					e.other_goods.photo_path = '';
+				}
+			});
+			defer.resolve(exchanges);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
+	async function agreeExchange(exchange) {
+		const defer = $q.defer();
+
+		try {
+			await Restangular.one('exchange', exchange.eid).one('agree').put();
+			defer.resolve(null);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
+	async function deleteExchange(exchange) {
+		const defer = $q.defer();
+
+		try {
+			await Restangular.one('exchange', exchange.eid).one('drop').put();
+			defer.resolve(null);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
 	}
 
 }

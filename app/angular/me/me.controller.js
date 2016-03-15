@@ -18,27 +18,25 @@ function MeController(
 	$timeout,
 	$sce
 ) {
-	var vm                 = this;
-	vm.me             = me;
-	vm.isMe                = $rootScope.isLoggedIn && (me.uid === $localStorage.user.uid);
-	vm.myGoodsPending      = me.myGoodsPending;
-	vm.myGoodsExchanged    = me.myGoodsExchanged;
-	vm.getNumber           = number => new Array(number);
-	vm.onClickGoods        = gid => $state.go('root.withSidenav.goods', { gid : gid });
-	vm.editPhoto           = editPhoto;
+	var vm              = this;
+	vm.me               = me;
+	vm.myExchanges      = [];
+	vm.myGoodsPending   = me.myGoodsPending;
+	vm.myGoodsExchanged = me.myGoodsExchanged;
+	vm.getNumber        = number => new Array(number);
+	vm.onClickGoods     = gid => $state.go('root.withSidenav.goods', { gid : gid });
+	vm.editPhoto        = editPhoto;
 	/////////////
 
 	activate();
 
-	function activate() {
-		//TODO; use /api/user/me
-		if ($localStorage.user) {
-			vm.isMe = (me.uid === $localStorage.user.uid);
-		} else {
-			vm.isMe = false;
+	async function activate() {
+		if (!$localStorage.user) {
 			$rootScope.isLoggedIn = false;
+			$state.reload();
 		}
 
+		vm.myExchanges = await meService.getExchanges(me.uid);
 	}
 
 	function editPhoto() {

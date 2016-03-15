@@ -12,6 +12,7 @@ function MeController(
 	logger,
 	message,
 	$state,
+	$scope,
 	$stateParams,
 	$rootScope,
 	$localStorage
@@ -25,6 +26,11 @@ function MeController(
 	vm.onClickGoods     = gid => $state.go('root.withSidenav.goods', { gid : gid });
 	vm.editPhoto        = editPhoto;
 	/////////////
+
+	$scope.$watch('vm.idx', function(current, old) {
+		if (current === undefined) return;
+		$state.go(`root.oneCol.me.tab${current+1}`);
+	});
 
 	activate();
 

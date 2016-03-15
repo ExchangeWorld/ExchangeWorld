@@ -1,0 +1,47 @@
+<md-divider>
+</md-divider>
+<md-card ng-repeat="card in vm.myExchanges" class="md-whiteframe-z3 item-profile exchange">
+    <md-card-content layout-gt-sm="column">
+        <div layout layout-align="start end" style=" height:120px; width:auto; border-radius:10px;">
+            <img ng-src="{{card.other_goods.photo_path[0]}}" style="max-width: 100%; max-height:100%; cursor:pointer;" />
+            <div layout="column" layout-align="start start" style="margin-left: 20px;">
+                <h2 style="margin: 10px 0;">{{card.other_goods.name}}</h2>
+                <div layout="row" layout-xs="column" layout-algin="center center">
+                    <div layout="row">
+                        <i class="material-icons person" style="outline:0; margin-right:0px; font-size:20px;">person</i>
+                        <p class="md-subhead" style="margin:0 5px 0 0;">LonSilent</p>
+                    </div>
+                    <div layout="row">
+                        <img data-ng-src="../../images/icon/Textbooks.svg" style="height:20px; width:auto; margin-right:3px;" />
+                        <p class="md-subhead" style="margin:0;">教科書</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div layout="column" offset-gt-sm="5" flex-gt-sm="55" layout-gt-sm="row">
+            <div flex="50" layout layout-align="center center">
+                <p class="md-subhead">{{ card.owner_goods.name }}</p>
+            </div>
+            <div flex="50" layout layout-align="center center">
+                <p>{{ vm.me.name }}</p>
+            </div>
+        </div>
+    </md-card-content>
+    <md-card-actions layout="row" layout-xs="column">
+        <span flex-gt-xs="5"></span>
+        <md-button>
+            <span class="md-title">交換成功，給個星評吧</span></md-button>
+        <span flex></span>
+        <div layout="row" layout-align="center center" style="margin:0; padding-left: 10px; padding-bottom: 15px;">
+            <div layout layout-align="center start">
+                <div ng-repeat="n in vm.getNumber(card.rate) track by $index">
+                    <img src="../../images/star-on.svg" />
+                </div>
+                <div ng-repeat="n in vm.getNumber(5 - card.rate) track by $index">
+                    <img src="../../images/star-off.svg" />
+                </div>
+            </div>
+        </div>
+        <span flex-gt-xs="10"></span>
+    </md-card-actions>
+</md-card>

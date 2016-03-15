@@ -166,12 +166,18 @@
 						</div>
 					</div>
 					<div layout="column" offset-gt-sm="5" flex-gt-sm="55" layout-gt-sm="row">
-						<div flex="100" flex-gt-sm="50" layout layout-align="center center">
-							<p class="md-subhead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint aut dolores nisi fugit cumque. Itaque quae, dolor sequi dolore voluptate totam, dolores, delectus, illum vel voluptatem fugit placeat officia harum!</p>
-						</div>
-						<div flex="100" flex-gt-sm="50" layout layout-align="center center">
-							<p>Annie Brown</p>
-						</div>
+						<md-radio-group ng-model="exchange.group" layout-fill layout="row" layout-xs="column">
+							<div flex="100" flex-gt-sm="50" layout layout-align="center center">
+								<p class="md-subhead">Lorem ipsum dolor sit amet!</p>
+							</div>
+							<div flex="100" flex-gt-sm="50" layout="row" layout-align="center center">
+								<div flex="70">
+									<p>Annie Brown</p>
+								</div>
+								<md-radio-button value="haha">
+								</md-radio-button>
+							</div>
+						</md-radio-group>
 					</div>
 				</md-card-content>
 				<md-card-actions layout="row">

@@ -25,18 +25,14 @@ function ProfileController(
 	vm.profile             = profile;
 	vm.isMe                = $rootScope.isLoggedIn && (profile.uid === $localStorage.user.uid);
 	vm.favSum              = '';
-	vm.myStar              = myFavorite;
+	vm.myStarGoods         = profile.myStarGoods;
 	vm.myGoodsPending      = profile.myGoodsPending;
 	vm.myGoodsExchanged    = profile.myGoodsExchanged;
 	vm.onClickAddFollowing = onClickAddFollowing;
 	vm.onClickSendMsg      = onClickSendMsg;
 	vm.isFollowed          = false;
-	vm.isReadOnly          = true;
-	vm.onClickEdit         = onClickEdit;
 	vm.getNumber           = number => new Array(number);
 	vm.onClickGoods        = gid => $state.go('root.withSidenav.goods', { gid : gid });
-	vm.getHTMLDesc         = getHTMLDesc;
-	vm.editPhoto           = editPhoto;
 	/////////////
 
 	activate();
@@ -52,12 +48,6 @@ function ProfileController(
 			vm.isMe = false;
 			$rootScope.isLoggedIn = false;
 		}
-
-		profileService
-			.getFavoriteSum($stateParams.uid)
-			.then(function(data) {
-				vm.favSum = data;
-			});
 
 	}
 
@@ -79,26 +69,4 @@ function ProfileController(
 		message.showMessagebox(ev, vm.profile.uid);
 	}
 
-	function onClickEdit() {
-		if(!vm.isReadOnly) {
-			profileService
-				.editProfile(vm.profile)
-				.then(function(data) {
-					logger.success('更新成功', data, 'EDIT');
-				})
-				.catch(function(err) {
-					logger.error('錯誤', err, 'Error');
-				});
-		}
-		vm.isReadOnly = !vm.isReadOnly;
-	}
-
-	function getHTMLDesc(desc) {
-	}
-
-	function editPhoto() {
-		if (!vm.isMe) return;
-
-		profileService.uploadHeadPhoto(profile);
-	}
 }

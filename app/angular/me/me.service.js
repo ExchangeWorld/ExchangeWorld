@@ -102,14 +102,14 @@ function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDia
 			async function submit() {
 				try {
 					me.photo_path = await upload();
-					me.route = 'user/photo';
+					me.route = `${me.uid}/photo`;
 					await me.put();
 
 					logger.success('更新成功', null, 'DONE');
+					onCancel();
 				} catch (err) {
 					exception.catcher('上傳失敗')(err);
 				}
-				onCancel();
 			}
 
 			async function upload() {

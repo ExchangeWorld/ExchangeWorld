@@ -48,6 +48,13 @@ function getStates() {
 				controllerAs: 'vm',
 				templateUrl : 'profile/profile.html',
 				resolve : resolve,
+				/** @ngInject */
+				onEnter: function($localStorage, $state, $stateParams, $timeout) {
+					if (parseInt($stateParams.uid, 10) === $localStorage.user.uid) {
+						$timeout(() => $state.go('root.oneCol.me'));
+						return;
+					}
+				}
 			}
 		}
 	];

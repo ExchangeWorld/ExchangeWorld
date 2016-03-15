@@ -5,7 +5,7 @@ const profileModule = require('./profile.module');
 profileModule.service('profileService', profileService);
 
 /** @ngInject */
-function profileService(Restangular, $q, facebookService, exception, $mdMedia, $mdDialog) {
+function profileService(Restangular, $q, facebookService, exception) {
 	var service = {
 		getProfile,
 	};

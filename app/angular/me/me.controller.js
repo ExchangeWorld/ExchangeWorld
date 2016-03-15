@@ -14,9 +14,7 @@ function MeController(
 	$state,
 	$stateParams,
 	$rootScope,
-	$localStorage,
-	$timeout,
-	$sce
+	$localStorage
 ) {
 	var vm              = this;
 	vm.me               = me;

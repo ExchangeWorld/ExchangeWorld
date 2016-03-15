@@ -19,21 +19,6 @@ var resolve = {
 			.catch(function() {
 				return {};
 			});
-	},
-	/** @ngInject */
-	myFavorite: function($stateParams, favorite) {
-		return favorite
-			.getMyFavorite($stateParams.uid)
-			.then(function(data) {
-				return data.map(function(g) {
-					try {
-						g.goods.photo_path = JSON.parse(g.goods.photo_path);
-					} catch (err) {
-						g.goods.photo_path = '';
-					}
-					return g.goods;
-				});
-			});
 	}
 };
 

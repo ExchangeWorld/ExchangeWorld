@@ -48,7 +48,7 @@ function NavbarController(
 
 	activate();
 
-	$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+	$scope.$on('$stateChangeSuccess', function(event, toState) {
 		vm.content = toState.title;
 		console.log(vm.content);
 	});

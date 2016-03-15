@@ -6,7 +6,7 @@ const moment             = require('moment');
 notificationModule.factory('notification', notification);
 
 /** @ngInject */
-function notification(Restangular, $q, exception, $localStorage, $sce, $location, $rootScope, socket) {
+function notification(Restangular, $q, exception, $localStorage, $sce, $location) {
 	const service = {
 		getNotification,
 		click,
@@ -14,7 +14,7 @@ function notification(Restangular, $q, exception, $localStorage, $sce, $location
 
 	return service;
 
-	async function getNotification(uid) {
+	async function getNotification() {
 		const defer = $q.defer();
 
 		try {

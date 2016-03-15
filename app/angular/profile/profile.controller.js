@@ -7,24 +7,18 @@ profileModule.controller('ProfileController', ProfileController);
 /** @ngInject */
 function ProfileController(
 	profile,
-	myFavorite,
 	profileService,
 	followService,
 	auth,
-	notification,
 	logger,
 	message,
 	$state,
 	$stateParams,
 	$rootScope,
-	$localStorage,
-	$timeout,
-	$sce
+	$localStorage
 ) {
 	var vm                 = this;
 	vm.profile             = profile;
-	vm.isMe                = $rootScope.isLoggedIn && (profile.uid === $localStorage.user.uid);
-	vm.favSum              = '';
 	vm.myStarGoods         = profile.myStarGoods;
 	vm.myGoodsPending      = profile.myGoodsPending;
 	vm.myGoodsExchanged    = profile.myGoodsExchanged;
@@ -38,17 +32,14 @@ function ProfileController(
 	activate();
 
 	function activate() {
-		//TODO; use /api/user/me
 		if ($localStorage.user) {
-			vm.isMe = (profile.uid === $localStorage.user.uid);
 			if (_.findWhere(profile.follows_followed, { follower_uid: $localStorage.user.uid })) {
 				vm.isFollowed = true;
 			}
 		} else {
-			vm.isMe = false;
 			$rootScope.isLoggedIn = false;
+			$state.reload();
 		}
-
 	}
 
 	function onClickAddFollowing() {
@@ -65,7 +56,7 @@ function ProfileController(
 		}
 	}
 
-	function onClickSendMsg(ev, uid) {
+	function onClickSendMsg(ev) {
 		message.showMessagebox(ev, vm.profile.uid);
 	}
 

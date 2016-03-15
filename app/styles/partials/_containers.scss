@@ -523,11 +523,6 @@ div.md-open-menu-container {
 		&.column-right {
 			margin: 2.5% 0 2.5% 1.25%;
 		}
-		&:hover {
-			cursor: pointer;
-			filter: brightness(50%);
-			transition: 0.5s;
-		}
 	}
 	md-toolbar:not(.md-menu-toolbar) {
 		background-color: transparent;

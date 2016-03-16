@@ -18,7 +18,14 @@ function getStates() {
 				controller : 'PostController',
 				controllerAs: 'vm',
 				templateUrl : 'post/post.html',
-				title : 'post'
+				title : 'post',
+				/** @ngInject */
+				onEnter: function($rootScope) {
+					if (!$rootScope.isLoggedIn) {
+						$rootScope.openSignupModal();
+						return;
+					} 
+				}
 			}
 		}
 	];

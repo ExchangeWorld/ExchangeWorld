@@ -1,11 +1,12 @@
 'use strict';
 
 const meModule = require('./me.module');
+const _        = require('lodash');
 
 meModule.service('meService', meService);
 
 /** @ngInject */
-function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDialog) {
+function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDialog, AvailableCategory) {
 	var service = {
 		getProfile,
 		editProfile,
@@ -34,8 +35,8 @@ function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDia
 					goods.photo_path = '';
 				}
 			});
-			data.myGoodsPending = data.goods.filter(function(g) { return g.exchanged === 0; });
-			data.myGoodsExchanged = data.goods.filter(function(g) { return g.exchanged === 1; });
+			data.myGoodsPending = data.goods.filter((g)=> { return g.exchanged === 0; });
+			data.myGoodsExchanged = data.goods.filter((g)=> { return g.exchanged === 1; });
 			data.myStarGoods = data.star_starring_user.map((g)=> {
 				try {
 					g.goods.photo_path = JSON.parse(g.goods.photo_path);
@@ -43,13 +44,10 @@ function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDia
 					g.goods.photo_path = '';
 				}
 				return g.goods;
-			
 			});
 			
 			data.scores = 0;
-			data.myGoodsExchanged.forEach(function(g) {
-				data.scores += g.rate;
-			});
+			data.myGoodsExchanged.forEach((g)=> { data.scores += g.rate; });
 
 			defer.resolve(data);
 		} catch (err) {
@@ -145,6 +143,7 @@ function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDia
 			let exchanges = await Restangular.one('user', ownerUid).getList('exchange');
 			exchanges.forEach((e)=> {
 				try {
+					e.other_goods.cate_alias = _.result(_.find(AvailableCategory, { 'label': e.other_goods.category }), 'alias');
 					e.other_goods.photo_path = JSON.parse(e.other_goods.photo_path);
 				} catch (err) {
 					e.other_goods.photo_path = '';

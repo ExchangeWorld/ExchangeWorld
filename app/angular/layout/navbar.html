@@ -7,7 +7,7 @@
 				</div>
 			</md-button>
 		</div>
-		<div flex="30" flex-sm="40" flex-xs="0" layout="row" layout-align="start start" style="padding-left:13px;">
+		<div flex="30" flex-sm="40" hide-xs layout="row" layout-align="start start" style="padding-left:13px;">
 			<md-button hide-xs ng-click="vm.menu('seek')" ng-class="{'active': vm.contentIs('seek')}">
 				<div layout layout-align="center center">
 					<span class="toolbar-span">探索</span>
@@ -94,7 +94,7 @@
 			<md-button ng-hide="$root.isLoggedIn" ng-click="vm.menu('signup')" hide show-gt-sm ng-class="{'active': vm.contentIs('signup')}">
 				<span class="toolbar-span">註冊</span>
 			</md-button>
-			<md-button ng-hide="$root.isLoggedIn" ng-click="vm.menu('login')" ng-class="{'active': vm.contentIs('login')}">
+			<md-button class="login-btn" ng-hide="$root.isLoggedIn" ng-click="vm.menu('login')" ng-class="{'active': vm.contentIs('login')}">
 				<span class="toolbar-span">登入</span>
 			</md-button>
 			<md-menu flex md-offset="0 64">

@@ -119,6 +119,11 @@
 		top: 100px;
 		left: 33%;
 	}
+	.md-button {
+		&.login-btn {
+			padding-left: 24px;
+		}
+	}
 }
 
 @media screen and (min-width: 600px) {
@@ -132,6 +137,11 @@
 		height: 48px;
 		top: 230px;
 		left: 40%;
+	}
+	.md-button {
+		&.login-btn {
+			padding-left: 10px;
+		}
 	}
 }
 

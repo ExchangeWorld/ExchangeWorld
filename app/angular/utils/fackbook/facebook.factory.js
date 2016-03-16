@@ -13,6 +13,7 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage, $http) {
 		register,
 		getLoginStatus,
 		getLargePicture,
+		updateAvatar,
 	};
 
 	return service;
@@ -113,6 +114,26 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage, $http) {
 		return Facebook.api('/'+fbId+'/picture?width=320&height=320', function(response) {
 			return response;
 		});
+	}
+
+	async function updateAvatar(fbId) {
+		const defer = $q.defer();
+
+		try {
+			let [member, largePic] = await Promise.all([
+				Restangular.oneUrl(`user?identity=${fbId}`).get(),
+				getLargePicture(fbId)
+			]);
+
+			member.photo_path = largePic.data.url;
+			member.route = `user/${member.uid}/photo`;
+			await member.put();
+			defer.resolve({success: true});
+		} catch (err) {
+			defer.reject(err);
+		}
+
+		return defer.promise;
 	}
 
 	/** get facebook login status */

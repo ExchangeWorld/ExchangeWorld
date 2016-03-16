@@ -50,7 +50,7 @@ function NavbarController(
 
 	$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
 		vm.content = toState.title;
-		console.log(vm.content);
+		//console.log(vm.content);
 	});
 	$scope.$on('chatroom:msgNew', (e)=> { 
 		$timeout(()=> { updateNews(); });
@@ -62,7 +62,7 @@ function NavbarController(
 		$timeout(()=> { updateNews(); });
 	});
 	$scope.$on('notify:notifyRead', (e, idx)=> { 
-		logger.success(vm.notifications[idx].text, null, 'NEWS');
+		//logger.success(vm.notifications[idx].text, null, 'NEWS');
 		$timeout(()=> { onClickNotification(idx); });
 	});
 

@@ -5,7 +5,7 @@ const facebookModule = require('./facebook.module');
 facebookModule.factory('facebookService', facebook);
 
 /** @ngInject */
-function facebook(Facebook, Restangular, $q, exception, $localStorage) {
+function facebook(Facebook, Restangular, $q, exception, $localStorage, $http) {
 	const service = {
 		me,
 		login,
@@ -69,6 +69,15 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 					token: $localStorage.token
 				});
 
+				try {
+					// refetch fb photo if url failed.
+					await $http.get(member.photo_path);
+				} catch (err) {
+					member.photo_path = largePic.data.url;
+					member.route = `user/${member.uid}/photo`;
+					await member.put();
+				}
+
 				defer.resolve(member);
 				$localStorage.user = member;
 				return defer.promise;
@@ -76,12 +85,12 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 
 			let userData = await me({ fields: 'id, name, email, picture' });
 			let newUser = {
-					fb         : true,
-					identity   : userData.id,
-					name       : userData.name,
-					photo_path : largePic.data.url,
-					email      : userData.email
-				};
+				fb         : true,
+				identity   : userData.id,
+				name       : userData.name,
+				photo_path : largePic.data.url,
+				email      : userData.email
+			};
 
 			let registerData = await Restangular.all('authenticate/register').post(newUser);
 			let token = await Restangular.all('authenticate/login').post({ fb: true, identity: registerData.identity });

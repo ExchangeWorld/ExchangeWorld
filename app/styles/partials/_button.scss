@@ -59,20 +59,16 @@
 			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.35);
 		}
 	}
+	&.new-btn {
+		border: 1px solid black;
+		font-weight: 600;
+		&.post {
+			width: 100px;
+		}
+	}
 	&.link {
 		margin-left: 15px;
 	}
-}
-
-.home-btn {
-	position: absolute;
-	border: 2px white solid;
-	color: white;
-	font-size: 24px;
-	width: 130px;
-	height: 60px;
-	top: 70%;
-	left: 45%;
 }
 
 .seek_btn {
@@ -127,8 +123,13 @@
 		min-height: 30px;
 		width: 28%;
 		height: 40px;
-		top: 130px;
+		top: 100px;
 		left: 33%;
+	}
+	.md-button {
+		&.login-btn {
+			padding-left: 24px;
+		}
 	}
 }
 
@@ -141,8 +142,13 @@
 		font-size: 20px;
 		width: 16%;
 		height: 48px;
-		top: 270px;
+		top: 230px;
 		left: 40%;
+	}
+	.md-button {
+		&.login-btn {
+			padding-left: 10px;
+		}
 	}
 }
 

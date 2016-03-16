@@ -7,7 +7,7 @@
 				</div>
 			</md-button>
 		</div>
-		<div flex="30" flex-sm="40" flex-xs="0" layout="row" layout-align="start start" style="padding-left:13px;">
+		<div flex="30" flex-sm="40" hide-xs layout="row" layout-align="start start" style="padding-left:13px;">
 			<md-button hide-xs ng-click="vm.menu('seek')" ng-class="{'active': vm.contentIs('seek')}">
 				<div layout layout-align="center center">
 					<span class="toolbar-span">探索</span>
@@ -79,7 +79,7 @@
 							</div>
 						</md-list-item>
 						<md-list-item ng-repeat="notice in vm.notifications" ng-style="!notice.read && {'background-color':'#E9F3FF'}" ng-click="vm.onClickNotification($index)">
-							<img flex style="max-height:50px; max-width:50px;" src="../../images/Gift(Small).jpg" />
+							<img flex style="max-height:50px; max-width:50px;" ng-src="{{ notice.icon }}" />
 							<div flex-offset="5" flex>
 								<p class="md-body-2 note" ng-bind-html='notice.text'></p>
 								<p class="md-caption note time" style="color: #BCBCBC;">{{ notice.created_at }}</p>
@@ -90,16 +90,16 @@
 				</md-menu-content>
 			</md-menu>
 		</div>
-		<div flex flex-offset-xs="75" layout="row" layout-align="center center">
+		<div flex flex-xs="10" layout="row" layout-align="center center">
 			<md-button ng-hide="$root.isLoggedIn" ng-click="vm.menu('signup')" hide show-gt-sm ng-class="{'active': vm.contentIs('signup')}">
 				<span class="toolbar-span">註冊</span>
 			</md-button>
-			<md-button ng-hide="$root.isLoggedIn" ng-click="vm.menu('login')" ng-class="{'active': vm.contentIs('login')}">
+			<md-button class="login-btn" ng-hide="$root.isLoggedIn" ng-click="vm.menu('login')" ng-class="{'active': vm.contentIs('login')}">
 				<span class="toolbar-span">登入</span>
 			</md-button>
-			<md-menu flex flex-xs="70" md-offset="0 64">
-				<md-button ng-show="$root.isLoggedIn" ng-click="vm.openMenu($mdOpenMenu, $event)" style="width: 100%;">
-					<div ng-show="$root.isLoggedIn" layout="row" layout-align="center center">
+			<md-menu flex md-offset="0 64">
+				<md-button ng-show="$root.isLoggedIn" ng-click="vm.openMenu($mdOpenMenu, $event)" style="width: 100%; min-width: 56px;">
+					<div layout="row" layout-align="center center">
 						<img hide-xs hide-sm class="img-navbar" ng-src="{{ $root.user.photo_path }}"></img>
 						<span hide-xs hide-sm class="nav-user toolbar-span">{{ $root.user.name }}</span>
 						<md-icon hide-gt-sm class="material-icons">menu</md-icon>
@@ -143,6 +143,11 @@
 					</md-menu-item>
 				</md-menu-content>
 			</md-menu>
+		</div>
+		<div hide-gt-xs flex-offset-xs="20">
+			<md-button ng-click="vm.menu('home')">
+				<span style="color:#000;">ExchangeWorld</span>
+			</md-button>
 		</div>
 	</div>
 </md-toolbar>

@@ -22,7 +22,7 @@
 			</div>
 			<div layout="row" layout-align="center center" style="margin-left:10px;margin-top: 10px;">
 				<div>
-					<md-button class="btn-rwd" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)" style="border: 1px solid black; font-weight: 600;">
+					<md-button class="btn-rwd new-btn" ng-show="!vm.isMe" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
 						<div layout="row" layout-align="center center" ng-show="!vm.isFollowed">
 							<i class="material-icons">person_add</i>
 							<span>&nbsp;追隨</span>
@@ -34,7 +34,7 @@
 					</md-button>
 				</div>
 				<div>
-					<md-button class="btn-rwd" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)" style="border: 1px solid black; font-weight: 600;">
+					<md-button class="btn-rwd new-btn" ng-show="!vm.isMe" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)" style="border: 1px solid black; font-weight: 600;">
 						<div layout="row" layout-align="center center">
 							<i class="material-icons">chat</i>
 							<span>&nbsp;送訊息</span>

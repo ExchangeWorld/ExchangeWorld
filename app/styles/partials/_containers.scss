@@ -57,6 +57,9 @@ md-toolbar {
 			color: black;
 		}
 	}
+	&:not(.md-menu-toolbar) {
+		color: #424242;
+	}
 }
 
 @media only screen and (min-width: 0) and (max-width: 600px) and (orientation: portrait) {
@@ -93,10 +96,6 @@ md-switch {
 	}
 }
 
-// md-dialog {
-// 	max-height: 90%;
-// 	overflow-x: hidden;
-// }
 md-radio-button {
 	margin: 10px;
 	.md-label {
@@ -116,8 +115,8 @@ md-input-container {
 	}
 }
 
-.md-toolbar-tools {
-	padding-left: 8px;
+md-menu-content{
+	max-height: 400px;
 }
 
 #autocomplete {
@@ -253,6 +252,9 @@ div.md-open-menu-container {
 }
 
 @media screen and (min-width: 300px) {
+	.md-toolbar-tools {
+		padding-left: 0;
+	}
 	md-dialog {
 		max-height: 100%;
 		overflow-x: hidden;
@@ -279,7 +281,8 @@ div.md-open-menu-container {
 		width: 100%;
 	}
 	.btn-rwd {
-		min-width: 46px;
+		min-width: 36px;
+		margin: 0 4px;
 	}
 	.profile-top {
 		height: 40%;
@@ -387,6 +390,9 @@ div.md-open-menu-container {
 }
 
 @media screen and (min-width: 600px) {
+	.md-toolbar-tools {
+		padding-left: 8px;
+	}
 	.home-container {
 		margin: 30px;
 	}
@@ -404,6 +410,7 @@ div.md-open-menu-container {
 	}
 	.btn-rwd {
 		min-width: 80px;
+		margin: 6px 8px;
 	}
 	.map-size {
 		height: 300px;
@@ -435,7 +442,7 @@ div.md-open-menu-container {
 		height: 120px;
 	}
 	.home-row {
-		height: 300px;
+		height: 35vw;
 		&.column-left {
 			margin: 2.5% 10% 2.5% 0;
 		}
@@ -528,7 +535,7 @@ div.md-open-menu-container {
 		height: 580px;
 	}
 	.profile-top {
-		height: 40%;
+		height: 250px;
 	}
 	.img-profile {
 		height: 160px;
@@ -539,7 +546,7 @@ div.md-open-menu-container {
 		margin-left: 20px;
 	}
 	.home-row {
-		height: 280px;
+		height: 19vw;
 		&.column-left {
 			margin: 2.5% 1.25% 2.5% 0;
 		}
@@ -548,11 +555,6 @@ div.md-open-menu-container {
 		}
 		&.column-right {
 			margin: 2.5% 0 2.5% 1.25%;
-		}
-		&:hover {
-			cursor: pointer;
-			filter: brightness(50%);
-			transition: 0.5s;
 		}
 	}
 	md-toolbar:not(.md-menu-toolbar) {
@@ -583,7 +585,7 @@ div.md-open-menu-container {
 	.img-null {
 		max-height: 90%;
 		max-width: 90%;
-		padding-top: 120px;
+		padding-top: 140px;
 	}
 	.input-post {
 		height: 100px;

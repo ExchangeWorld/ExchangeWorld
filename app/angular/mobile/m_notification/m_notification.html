@@ -6,7 +6,7 @@ md-list-item {
 </style>
 <div resize ng-style="resizeWithOffset(56)">
 	<div ng-show="vm.loading" class="md-scroll-mask" style="z-index: 100; background-color: rgba(0, 0, 0, 0.10); bottom:-200px;" aria-hidden="true">
-		<md-progress-circular class="md-primary" md-mode='indeterminate' style="margin:200px auto;"></md-progress-circular>
+		<md-progress-circular class="md-primary" md-mode='indeterminate' md-diameter="100" style="margin:200px auto;"></md-progress-circular>
 		<div class="md-scroll-mask-bar"></div>
 	</div>
 	<md-list ng-show="!vm.loading">
@@ -26,7 +26,7 @@ md-list-item {
 			ng-style="!notice.read && {'background-color':'#E9F3FF'}" 
 			ng-click="vm.onClickNotification($index)"
 		>
-			<img flex style="max-height:50px; max-width:50px;" src="../../../images/Gift(Small).jpg" />
+			<img flex style="max-height:50px; max-width:50px;" ng-src="{{ notice.icon }}" />
 			<div flex-offset="5" flex>
 				<p class="md-body-2 note" ng-bind-html="notice.textHtml"></p>
 				<p class="md-caption note" style="color: #BCBCBC;">{{ notice.created_at }}</p>

@@ -1,61 +1,67 @@
 <md-content class="animated fadeIn" resize ng-style="resizeWithOffset(56)">
-    <div class="home-container" layout="column" layout-align="center center">
-        <div class="img-home" style="background-image: url('../../images/home/slide.jpg')">
-            <md-button class="home-btn" href="/seek">
-                <div layout layout-align="center center" layout-fill>開始搜索</div>
-            </md-button>
-        </div>
-    </div>
-    <div class="home-container" layout="column" layout-align="center center" style="padding-top: 0; margin-bottom: 20px;">
-        <div style="width:86%;">
-            <p class="md-title">搜尋分類</p>
-        </div>
-        <div style="width:86%;" layout="row" layout-wrap>
-            <a href="/seek?cate=3C&g=1" class="home-row column-left" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/3C.jpg')">
-                <img src="../../images/home/icon1.png" style="height: 64px; width:64px;">
-                <h2 class="home-span cate">3C產品</h2>
-            </a>
-            <a href="/seek?cate=Books&g=1" class="home-row column-center" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/book.jpg')">
-                <img src="../../images/home/icon2.png" style="height: 64px; width:64px;">
-                <h2 class="home-span cate">書籍</h2>
-            </a>
-            <a href="/seek?cate=Clothes&g=1" class="home-row column-center" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/cloth.jpg')">
-                <img src="../../images/home/icon3.png" style="height: 64px; width:64px;">
-                <h2 class="home-span cate">流行服飾</h2>
-            </a>
-            <a href="/seek?cate=Cosmetic&g=1" class="home-row column-right" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/makeup.jpg')">
-                <img src="../../images/home/icon4.png" style="height: 64px; width:64px;">
-                <h2 class="home-span cate">美妝用品</h2>
-            </a>
-        </div>
-    </div>
-    <div class="home-container" layout="column" layout-align="center center" style="padding-top: 0; margin-top: 15px;">
-        <div style="width:86%;">
-            <p class="md-title" style="margin-top: 0;">搜尋地區</p>
-        </div>
-        <div style="width:86%;" layout="row" layout-wrap>
-            <a href="/seek?olc=7QQ33G4R%2B3G&g=0" class="home-row column-left" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/TP.jpg');">
-                <h2 class="home-span main">台北</h2>
-                <p class="home-span sub">Taipei</p>
-            </a>
-            <a href="/seek?olc=7QP24MXJ%2BG7&g=0" class="home-row column-center" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/TC.jpg'); ">
-                <h2 class="home-span main">台中</h2>
-                <p class="home-span sub">Taichung</p>
-            </a>
-            <a href="/seek?olc=7QJ2X6H8%2BMP&g=0" class="home-row column-center" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/TN.jpg');">
-                <h2 class="home-span main">台南</h2>
-                <p class="home-span sub">Tainan</p>
-            </a>
-            <a href="/seek?olc=7QJ2M82Q%2BW8&g=0" class="home-row column-right" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/K.jpg'); ">
-                <h2 class="home-span main">高雄</h2>
-                <p class="home-span sub">Kaohsiung</p>
-            </a>
-        </div>
-    </div>
-    <md-toolbar layout="row" layout-align="center center" style="height:76px; background-color: black;">
-        <div flex="80" layout layout-align="center center">
-            <h5 style="text-align: center;">©Copyright 2015-2016 - ExchangeWorld. All rights reserved.</h5>
-        </div>
-    </md-toolbar>
-    </div>
+	<div class="home-container" layout="column" layout-align="center center">
+		<div hide show-gt-sm class="img-home" style="background-image: url('../../images/home/slide.jpg')">
+			<md-button class="home-btn" href="/seek">
+				<div layout layout-align="center center" layout-fill>開始搜索</div>
+			</md-button>
+		</div>
+		<div hide-gt-sm class="img-home" style="background-image: url('../../images/home/slide2.jpg')">
+			<h2 class="home-title">ExchangeWorld</h2>
+			<md-button class="home-btn" href="/seek">
+				<div layout layout-align="center center" layout-fill>開始搜索</div>
+			</md-button>
+		</div>
+	</div>
+	<div class="home-container" layout="column" layout-align="center center" style="padding-top: 0; margin-bottom: 20px;">
+		<div style="width:86%;">
+			<p class="md-title">搜尋分類</p>
+		</div>
+		<div style="width:86%;" layout="row" layout-wrap>
+			<a href="/seek?cate=3C&g=1" class="home-row column-left hvr-grow" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/3C.jpg')">
+				<img src="../../images/home/icon1.png" style="height: 100px; width:100px;">
+				<h2 class="home-span cate">3C產品</h2>
+			</a>
+			<a href="/seek?cate=Books&g=1" class="home-row column-center hvr-grow" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/book.jpg')">
+				<img src="../../images/home/icon2.png" style="height: 100px; width:100px;">
+				<h2 class="home-span cate">書籍</h2>
+			</a>
+			<a href="/seek?cate=Clothes&g=1" class="home-row column-center hvr-grow" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/cloth.jpg')">
+				<img src="../../images/home/icon3.png" style="height: 100px; width:100px;">
+				<h2 class="home-span cate">流行服飾</h2>
+			</a>
+			<a href="/seek?cate=Cosmetic&g=1" class="home-row column-right hvr-grow" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/makeup.jpg')">
+				<img src="../../images/home/icon4.png" style="height: 100px; width:100px;">
+				<h2 class="home-span cate">美妝用品</h2>
+			</a>
+		</div>
+	</div>
+	<div class="home-container" layout="column" layout-align="center center" style="padding-top: 0; margin-top: 15px;">
+		<div style="width:86%;">
+			<p class="md-title" style="margin-top: 0;">搜尋地區</p>
+		</div>
+		<div style="width:86%;" layout="row" layout-wrap>
+			<a href="/seek?olc=7QQ33G4R%2B3G&g=0" class="home-row column-left hvr-grow" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/TP.jpg');">
+				<h2 class="home-span main">台北</h2>
+				<p class="home-span sub">Taipei</p>
+			</a>
+			<a href="/seek?olc=7QP24MXJ%2BG7&g=0" class="home-row column-center hvr-grow" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/TC.jpg'); ">
+				<h2 class="home-span main">台中</h2>
+				<p class="home-span sub">Taichung</p>
+			</a>
+			<a href="/seek?olc=7QJ2X6H8%2BMP&g=0" class="home-row column-center hvr-grow" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/TN.jpg');">
+				<h2 class="home-span main">台南</h2>
+				<p class="home-span sub">Tainan</p>
+			</a>
+			<a href="/seek?olc=7QJ2M82Q%2BW8&g=0" class="home-row column-right hvr-grow" layout="column" layout-align="center center" flex flex-sm="45" flex-xs="100" layout-padding style="background-image: url('../../images/home/K.jpg'); ">
+				<h2 class="home-span main">高雄</h2>
+				<p class="home-span sub">Kaohsiung</p>
+			</a>
+		</div>
+	</div>
+	<md-toolbar layout="row" layout-align="center center" style="height:76px; background-color: black;">
+		<div flex="80" layout layout-align="center center">
+			<h5 style="text-align: center;">©Copyright 2015-2016 - ExchangeWorld. All rights reserved.</h5>
+		</div>
+	</md-toolbar>
+	</div>
 </md-content>

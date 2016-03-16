@@ -1,8 +1,6 @@
 'use strict';
 
 const layoutModule = require('./layout.module');
-const _            = require('lodash');
-const moment       = require('moment');
 
 layoutModule.controller('NavbarController', NavbarController);
 
@@ -12,61 +10,67 @@ function NavbarController(
 	$mdMenu,
 	$mdDialog,
 	$state,
+	$scope,
 	$rootScope,
 	$localStorage,
-	$location,
+	$timeout,
 	$window,
 	$q,
 	auth,
 	message,
+	logger,
+	exception,
 	notification,
 	AppSettings
 ) {
-	const vm               = this;
-	const state            = [
-		'home',
-		'seek',
-		'post',
-		'exchange',
-		'profile',
-		'm_messagebox',
-		'm_notification'
-	];
-	vm.stateIndex          = _.indexOf(state, $state.current.title);
-	vm.contentIs           = function(idx) { return vm.stateIndex === idx; };
+	const vm    = this;
+	vm.content             = $state.current.title;
+	vm.contentIs           = (title)=> { return title === vm.content; };
 	vm.openMenu            = openMenu;
 	vm.closeMenu           = ()=> $mdMenu.hide();
 	vm.report              = report;
-	vm.onClick             = onClick;
-	vm.onLogin             = onLogin;
+	vm.menu                = menu;
 	vm.onLogout            = onLogout;
-	vm.user                = $localStorage.user;
-	vm.isLoggedIn          = Boolean($localStorage.user);
 	vm.notifications       = [];
-	vm.unreadMsg           = '';
-	vm.unreadNotify        = '';
-	vm.onClickNotification = onClickNotification;
 	vm.messages            = [];
+	vm.unread              = [0, 0];
+	vm.onClickNotification = onClickNotification;
 	vm.onClickMessage      = onClickMessage;
 
 
 	//////////////
 
-	$rootScope.$on('$stateChangeSuccess', function() {
-		updateNotification();
-	});
+	// reTake access token 
+	//$interval(function() {
+	//auth.getAccessToken($localStorage.user.identity, null, true);
+	//}, 1140000);
+
 
 	activate();
 
-	function activate() {
-		auth
-			.getLoginState()
-			.then(function(data) {
-				vm.user = data;
-				vm.isLoggedIn = Boolean(data);
-			});
+	$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+		vm.content = toState.title;
+		//console.log(vm.content);
+	});
+	$scope.$on('chatroom:msgNew', (e)=> { 
+		$timeout(()=> { updateNews(); });
+	});
+	$scope.$on('chatroom:msgRead', (e)=> { 
+		$timeout(()=> { updateNews(); });
+	});
+	$scope.$on('notify:notifyNew', (e, data)=> { 
+		$timeout(()=> { updateNews(); });
+	});
+	$scope.$on('notify:notifyRead', (e, idx)=> { 
+		//logger.success(vm.notifications[idx].text, null, 'NEWS');
+		$timeout(()=> { onClickNotification(idx); });
+	});
 
-		updateNotification();
+	async function activate() {
+		$rootScope.isLoggedIn = Boolean($localStorage.user);
+		if ($rootScope.isLoggedIn) $rootScope.user = $localStorage.user;
+
+		await updateNews();
 	}
 
 	function openMenu($mdOpenMenu, e) {
@@ -76,67 +80,58 @@ function NavbarController(
 		$mdOpenMenu(e);
 	}
 
-	function onClick(contentIndex) {
-		if ([0, 5, 6].indexOf(contentIndex) !== -1) {
-			$state.go('root.oneCol.' + state[contentIndex]);
-		} else if(contentIndex === 3) {
-			if (!$localStorage.user) onLogin();
-			else  $state.go('root.oneCol.' + state[contentIndex], {uid: vm.user.uid});
-		} else {
-			const isFromOneCol = $state.includes("root.oneCol");
+	function menu(type) {
+		const isFromOneCol = $state.includes("root.oneCol");
 
-			if(contentIndex === 4) {
-				$rootScope.onClickUser($localStorage.user.uid);
-			} else if (
-				contentIndex === 1 &&
-				$state.includes("root.withSidenav.goods") ||
-				$state.includes("root.oneCol.goods")
-			) {
-				$state.go('root.withSidenav.' + state[contentIndex]);
-			} else {
-				$state.go('root.withSidenav.' + state[contentIndex]);
-			}
-			/**
-			 * When need to toggle the sidenav
-			 * 1. iff sidenav exists
-			 * 2. sidenav is close
-			 * 3. click the current content again
-			 */
-			if (
-				!isFromOneCol &&
-				( !$mdSidenav('left').isOpen() || ( $mdSidenav('left').isOpen() && vm.stateIndex === contentIndex))
-			) {
-				$mdSidenav('left').toggle();
-			}
+		switch (type) {
+			case 'seek':
+			case 'post':
+				$state.go(`root.withSidenav.${type}`);
+				break;
+
+			case 'profile':
+			case 'exchange':
+				$state.go(`root.oneCol.${type}`, {
+					uid: $localStorage.user.uid 
+				});
+				break;
+
+			case 'home':
+			case 'login':
+			case 'signup':
+			case 'm_messagebox':
+			case 'm_notification':
+				$state.go(`root.oneCol.${type}`);
+				break;
+
+			default:
+				$state.go('404');
+				break;
 		}
-		vm.stateIndex = contentIndex;
-		vm.closeMenu();
-	}
+		
+		if ( 
+			!isFromOneCol && 
+			(!$mdSidenav('left').isOpen() || ($mdSidenav('left').isOpen() && vm.contentIs(type)))
+		) {
+			$mdSidenav('left').toggle();
+		}
 
-	function onLogin() {
-		auth
-			.login()
-			.then(function(user) {
-				vm.user = user;
-				vm.isLoggedIn = Boolean(user);
-				$state.reload();
-			});
+		vm.closeMenu();
 	}
 
 	function onLogout() {
 		auth
 			.logout()
 			.then(function(){
-				$state.reload();
+				$state.go('root.oneCol.home');
+				$localStorage.user = null;
 			});
-		vm.user = null;
-		vm.isLoggedIn = false;
 	}
 
-	function onClickNotification(notice) {
-		notification.updateNotification(notice, false);
+	async function onClickNotification(idx) {
+		vm.notifications[idx] = await notification.click(vm.notifications[idx]);
+		updateIndicator();
 
-		$location.path(notice.trigger_url);
 		if(!$state.includes("root.oneCol") && !$mdSidenav('left').isOpen() ) {
 			$mdSidenav('left').toggle();
 		}
@@ -144,53 +139,39 @@ function NavbarController(
 	}
 
 	function onClickMessage(msg, ev) {
-		message.showMessagebox(ev, msg, updateNotification);
-
-		message
-			.updateMessage(msg)
-			.then(updateNotification);
+		message.showMessagebox(ev, msg, msg);
 		vm.closeMenu();
 	}
 
-
-	function updateNotification() {
-		if(vm.isLoggedIn) {
-			$q
-				.all([
-					notification.getNotification(vm.user.uid),
-					message.getMessage(vm.user.uid),
-				])
-				.then(function(data) {
-					data[0].map(function(notice) {
-						notice.timestamp = moment(notice.timestamp.slice(0, -1)).fromNow();
-					});
-					vm.notifications = data[0];
-
-					vm.messages = _.unique(data[1], 'sender_uid');
-					vm.messages.forEach(function(msg) {
-						msg.timestamp = moment(msg.timestamp.slice(0, -1)).calendar();
-					});
-
-					vm.unreadNotify = _.filter(vm.notifications, {unread : true}).length;
-					vm.unreadMsg = _.filter(vm.messages, {unread : true}).length;
-
-					var unread = vm.unreadMsg + vm.unreadNotify;
-					if(unread) $rootScope.pageTitle = `(${unread}) ${AppSettings.appTitle}`;
-					else $rootScope.pageTitle = AppSettings.appTitle;
-				});
+	async function updateNews() {
+		if (!$rootScope.isLoggedIn) return;
+		
+		try {
+			[vm.messages, vm.notifications] = await Promise.all([
+				message.getMessageList(),
+				notification.getNotification()
+			]);
+			updateIndicator();
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
 		}
+	}
+
+	function updateIndicator() {
+		vm.unread = [
+			vm.messages.filter((m)=> { return !m.read; }).length,
+			vm.notifications.filter((n)=> { return !n.read; }).length
+		];
+
+		let unread = vm.unread[0] + vm.unread[1];
+		$rootScope.pageTitle = (unread) ? `(${unread}) ${AppSettings.appTitle}` : AppSettings.appTitle;
 	}
 
 	function report() {
 		var confirm = $mdDialog.confirm()
 			.title('回報問題')
-			.content([
-				'<ul>',
-				'<li>有發現BUG嗎?</li>',
-				'<li>有什麼建議想跟我們說的嗎?</li>',
-				'<li>歡迎回報各種想法給我們吧!</li>',
-				'<ul>'
-			].join(''))
+			.textContent(
+				'有發現BUG嗎?有什麼建議想跟我們說的嗎?歡迎回報各種想法給我們吧!')
 			.ariaLabel('report')
 			.ok('確定')
 			.cancel('取消');

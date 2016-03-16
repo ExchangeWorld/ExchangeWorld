@@ -4,12 +4,13 @@ const angular = require('angular');
 const bulk    = require('bulk-require');
 global._      = require("lodash"); //fix restangular dependency on lodash issue
 
-require('angular-touch');
+require('babel-polyfill');
 require('angular-material');
 require('angular-ui-router');
 require('restangular');
 require('ngstorage');
 require('angular-socialshare');
+require('../utils/webSocket/socket.module');
 require('../utils/photoSlider/photoSlider.module');
 require('../utils/exception/exception.module');
 require('../utils/fackbook/facebook.module');
@@ -23,17 +24,19 @@ require('../utils/auth/auth.module');
 require('../utils/scroll/scroll.module');
 require('../utils/colorThief/colorThief.module');
 require('../utils/upwardScroll/upwardScroll.module');
+require('../utils/scrollHide/scrollHide.module');
 require('../mobile/m_message/m_message.module');
 require('../mobile/m_messagebox/m_messagebox.module');
 require('../mobile/m_notification/m_notification.module');
+require('../mobile/m_exchange/m_exchange.module');
 
 const requires = [
 	'ui.router',
 	'ngStorage',
 	'restangular',
-	'ngTouch',
 	'ngMaterial',
 	'720kb.socialshare',
+	'utils.socket',
 	'utils.photoSlider',
 	'utils.scroll',
 	'utils.facebook',
@@ -47,9 +50,11 @@ const requires = [
 	'utils.auth',
 	'utils.colorThief',
 	'utils.upwardScroll',
+	'utils.scrollHide',
 	'm.message',
 	'm.messagebox',
 	'm.notification',
+	'm.exchange',
 ];
 
 module.exports = angular.module('app.core', requires);

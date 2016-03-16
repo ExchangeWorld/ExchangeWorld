@@ -1,86 +1,97 @@
 'use strict';
 
 const favoriteModule = require('./favorite.module');
-const _              = require('lodash');
 
 favoriteModule.factory('favorite', favorite);
 
 /** @ngInject */
-function favorite(Restangular, $q, exception, logger) {
+function favorite(Restangular, $q, exception, logger, $rootScope) {
 	const service = {
 		getFavorites,
 		getMyFavorite,
-		postFavorite,
-		deleteFavorite,
+		favorite,
 	};
 
 	return service;
 
-	function getFavorites(gid) {
+	async function getFavorites(gid) {
 		const defer = $q.defer();
-		Restangular
-			.all('star/to')
-			.getList({goods_gid: gid})
-			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data);
-				} else {
-					defer.reject(data);
-				}
-			}, (error)=> {
-				return exception.catcher('[favorite Service] getFavorites error: ')(error);
-			});
+
+		try {
+			let stars = await Restangular.one('goods', gid).getList('star');
+			defer.resolve(stars);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 
-	function getMyFavorite(uid) {
+	async function getMyFavorite(uid) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('star/by')
-			.getList({
-				starring_user_uid: uid,
-			})
-			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data);
-				}
-			}, (error)=> {
-				return exception.catcher('[favorite Service] getMyFavorite error: ')(error);
-			});
+		try {
+			let stars = await Restangular.one('user', uid).getList('star');
+			defer.resolve(stars);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
+	async function favorite(goods) {
+		const defer = $q.defer();
+		const star = {
+			starring_user_uid: $rootScope.user.uid,
+			goods_gid: goods.gid,
+		};
+
+
+		try {
+			if (goods.starredByUser) {
+				await deleteFavorite(star);
+				defer.resolve(false);
+			} else {
+				await postFavorite(star);
+				defer.resolve(true);
+			}
+		} catch (err) {
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	
 	}
-	function postFavorite(newFavorite) {
+
+	async function postFavorite(newFavorite) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('star/post')
-			.post(newFavorite)
-			.then(function(data) {
-				defer.resolve(data);
-				logger.success('已加到最愛', data, 'DONE');
-			}, (error)=> {
-				return exception.catcher('[favorite Service] postFavorite error: ')(error);
-			});
+		try {
+			let star = await Restangular.all('star').post(newFavorite);
+			defer.resolve(star);
+			logger.success('已加到最愛', star, 'DONE');
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 
-	function deleteFavorite(star) {
+	async function deleteFavorite(star) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('star/delete')
-			.remove({
-				goods_gid         : star.goods_gid,
-				starring_user_uid : star.starring_user_uid,
-			})
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[favorite Service] deleteStar error: ')(error);
-			});
+		try {
+			let data = await Restangular.one('star', star.starring_user_uid).one('to', star.goods_gid).remove();
+			defer.resolve(data);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 

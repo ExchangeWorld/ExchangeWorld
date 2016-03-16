@@ -1,4 +1,3 @@
-
 input,
 textarea {
 	font-family: inherit;
@@ -35,9 +34,6 @@ a {
 	color: #212121;
 	text-decoration: none;
 	cursor: pointer;
-	&.profile {
-		color: #2196F3;
-	}
 }
 
 a:hover {
@@ -99,15 +95,11 @@ a:hover {
 	line-height: 30px;
 	padding: 0 1em;
 	margin-top: 0;
-	margin-bottom: 60px;
 	&.message {
 		padding: 8px 1em 0 1em;
 	}
 	&.edit {
 		padding: 0 0 0 2px;
-	}
-	&.follow {
-		padding: 0 10px;
 	}
 }
 
@@ -120,7 +112,7 @@ a:hover {
 	filter: opacity(0.5);
 	&:hover {
 		/*opacity: 0.5;*/
-		-webkit-filter: brightness(150%);
+		filter: brightness(150%);
 	}
 }
 
@@ -188,10 +180,12 @@ a:hover {
 .nav-user {
 	text-overflow: ellipsis;
 	display: inline-block;
-	width: calc(100% - 20px);
-	//width: 100%;
+	width: calc(100% - 80px);
 	white-space: nowrap;
 	overflow: hidden;
+	&.goods {
+		width: 100%;
+	}
 }
 
 .tri {
@@ -199,7 +193,7 @@ a:hover {
 	height: 0;
 	border-style: solid;
 	border-width: 20px 0 20px 25px;
-	border-color: transparent transparent transparent rgb(96,125,139);
+	border-color: transparent transparent transparent rgb(96, 125, 139);
 }
 
 .vertical {
@@ -214,7 +208,7 @@ a:hover {
 	}
 }
 
-@media screen and (min-width: 320px) {
+@media screen and (min-width: 300px) {
 	.ex-story {
 		font-size: 14px;
 		line-height: 24px;
@@ -231,6 +225,18 @@ a:hover {
 		margin-bottom: 50px;
 		color: rgb(233, 230, 232);
 	}
+	.home-title {
+		color: #fff;
+		text-align: center;
+		margin-top: 64px;
+		font-size: 24px;
+	}
+}
+
+@media screen and (max-width: 350px) {
+	.hide-i5 {
+		display: none;
+	}
 }
 
 @media screen and (min-width: 600px) {
@@ -238,6 +244,12 @@ a:hover {
 		.md-container {
 			margin-right: 8px;
 		}
+	}
+	.home-title {
+		color: #fff;
+		text-align: center;
+		margin-top: 140px;
+		font-size: 30px;
 	}
 }
 
@@ -251,5 +263,27 @@ a:hover {
 		text-align: center;
 		margin-bottom: 0;
 		color: rgb(233, 230, 232);
+	}
+}
+
+.toolbar-span {
+	color: #262626;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.home-span {
+	color: #fff;
+	&.cate {
+		margin-top: 0;
+		font-size: 24px;
+	}
+	&.main {
+		margin-bottom: 0;
+		font-size: 30px;
+	}
+	&.sub {
+		margin-top: 0;
+		font-size: 16px;
 	}
 }

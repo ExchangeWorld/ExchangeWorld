@@ -1,34 +1,42 @@
 div:focus {
-  outline:0;
+	outline: 0;
 }
 
 img:focus {
-  outline:0;
+	outline: 0;
 }
 
-.navbar
-{
-  .dropdown-menu{
-    margin-top: -1px;
-    border-radius: 0;
-  }
+.navbar {
+	.dropdown-menu {
+		margin-top: -1px;
+		border-radius: 0;
+	}
 }
 
 @media (min-width: $md) {
-  md-sidenav,
-  md-sidenav.md-locked-open,
-  md-sidenav.md-closed.md-locked-open-add-active {
-    min-width: 470px !important;
-    width: 38.1966011vw !important;
-    max-width: none !important;
-  }
+	md-sidenav,
+	md-sidenav.md-locked-open,
+	md-sidenav.md-closed.md-locked-open-add-active {
+		min-width: 470px !important;
+		width: 48vw !important;
+		max-width: none !important;
+	}
 }
 
 @media (max-width: $md) {
-  md-sidenav,
-  md-sidenav.md-locked-open,
-  md-sidenav.md-closed.md-locked-open-add-active {
-    min-width: 80vw !important;
-    max-width: none !important;
-  }
+	md-sidenav,
+	md-sidenav.md-locked-open,
+	md-sidenav.md-closed.md-locked-open-add-active {
+		min-width: 90vw !important;
+		width: 93vw;
+		max-width: none !important;
+	}
+}
+
+@media (min-width: 480px) {
+	md-sidenav,
+	md-sidenav.md-locked-open,
+	md-sidenav.md-closed.md-locked-open-add-active {
+		width: 80vw;
+	}
 }

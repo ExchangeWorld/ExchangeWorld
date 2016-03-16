@@ -6,18 +6,18 @@ coreModule.config(materialTheme);
 function materialTheme($mdThemingProvider) {
 	$mdThemingProvider
 		.theme('default')
-		.primaryPalette('blue-grey', {
-			'default': '500', // by default use shade 600 from the teal palette for primary intentions
+		.primaryPalette('grey', {
+			'default': '600', // by default use shade 600 from the teal palette for primary intentions
 			'hue-1': '100', // use shade 400 for the <code>md-hue-1</code> class
 			'hue-2': '900', // use shade 900 for the <code>md-hue-2</code> class
-			'hue-3': '50' // use shade A100 for the <code>md-hue-3</code> class
+			'hue-3': '700' // use shade A100 for the <code>md-hue-3</code> class
 		})
 		// If you specify less than all of the keys, it will inherit from the
 		// default shades
-		.accentPalette('orange', {
-			'default': '400',
+		.accentPalette('blue-grey', {
+			'default': '700',
 			'hue-1': '500',
-			'hue-2': '900',
+			'hue-2': '300',
 			'hue-3': '100'
 		});
 }

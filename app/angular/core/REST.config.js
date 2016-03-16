@@ -1,12 +1,13 @@
 "use strict";
 
 const coreModule = require('./core.module');
-coreModule.config(RestConfig);
+coreModule.run(RestConfig);
 
-function RestConfig(RestangularProvider) {
+/** ngInject */
+function RestConfig(Restangular, $localStorage) {
 	//RestangularProvider.setBaseUrl('api');
-	RestangularProvider.setBaseUrl('http://exwd.csie.org:43001/api');
+	Restangular.setBaseUrl('http://exwd.csie.org:43002/api');
 
-	// set params for multiple methods at once
-	// Restangular.setDefaultRequestParams(['remove', 'post'], {accessToken: "secret key"});
+	// token will expire if idle 20min
+	Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {token: $localStorage.token});
 }

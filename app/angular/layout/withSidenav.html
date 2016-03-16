@@ -1,18 +1,18 @@
 <div id="container" layout="row">
 	<md-sidenav
-			flex="45"
 			class="md-sidenav-left md-whiteframe-z2"
 			style="z-index:70;"
 			md-component-id="left"
 			md-is-open="true"
-			md-is-locked-open="$mdMedia('gt-md')"
+			md-is-locked-open="$mdMedia('gt-sm')"
+			md-swipe-left="$root.onSwipeLeft()"
 	>
-		<md-toolbar hide-lg hide-gt-lg>
+		<md-toolbar class="md-primary md-hue-3" hide-gt-sm>
 			<div class="md-toolbar-tools md-medium-tall navbar">
-				ExchangeWorld
+				<!-- ExchangeWorld -->
 			</div>
 		</md-toolbar>
-		<md-content class="xmas" flex resize ng-style="resizeWithOffset(56)" style="overflow-x: hidden;">
+		<md-content flex resize ng-style="resizeWithOffset(56)" style="background-color: #EEEEEE;overflow: hidden;">
 			<div ui-view></div>
 		</md-content>
 	</md-sidenav>

@@ -9,10 +9,10 @@ function SeekController(
 	auth,
 	seekService,
 	favorite,
-	notification,
 	AvailableCategory,
 	$state,
 	$scope,
+	$timeout,
 	$rootScope,
 	$localStorage,
 	$stateParams
@@ -30,8 +30,8 @@ function SeekController(
 	$scope.onMouseOver     = onMouseOver;
 	$scope.onMouseOut      = onMouseOut;
 	$scope.postfixImageUrl = postfixImageUrl;
-	vm.postfixImageUrl = postfixImageUrl;
-	vm.loading             = true;
+	vm.postfixImageUrl     = postfixImageUrl;
+	vm.loading             = false;
 
 	////////////////
 	
@@ -46,7 +46,7 @@ function SeekController(
 		});
 	});
 
-	function onSearch(filter) {
+	async function onSearch(filter) {
 		if(vm.searchGoodsCategory === 'all') {
 			filter.category = '';
 		}
@@ -57,70 +57,44 @@ function SeekController(
 			g     : filter.global ? 1 : 0,
 		});
 
-		seekService
-			.getSeek(filter)
-			.then(function(data) {
-				vm.goods = data;
+		try {
+			vm.loading = true;
+			vm.goods = await seekService.getSeek(filter);
+			$timeout(()=> {
 				$rootScope.$broadcast('goodsChanged', vm.goods);
 				vm.loading = false;
-			})
-			.catch(function() {
-				vm.goods = [];
-				vm.loading = false;
 			});
+		} catch (err) {
+			vm.goods = [];
+			vm.loading = false;
+		}
 	}
 
 	function onMouseOver(gid) {
 		// $rootScope.$broadcast('openGoodsOverlay', gid);
 		$rootScope.$broadcast('highlightMarker', gid);
-		
 	}
 
 	function onMouseOut(gid) {
 		$rootScope.$broadcast('highlightMarker', gid);
 		// $rootScope.$broadcast('closeGoodsOverlay');
 	}
-
-	function onClickFavorite(e, goods) {
+	
+	async function onClickFavorite(e, goods) {
 		e.preventDefault();
 		e.stopPropagation();
-		if (!$localStorage.user) {
-			auth
-				.login()
-				.then(function(user) {
-					vm.isLoggedIn = Boolean(user);
-					$state.reload();
-				});
-		} else {
-			const star = {
-				starring_user_uid: $localStorage.user.uid,
-				goods_gid: goods.gid,
-			};
+        
+		//TODO: use /api/user/me
+		if (!$rootScope.isLoggedIn) {
+			$rootScope.openSignupModal();
+			return;
+		} 
 
-			if (!goods.favorited) {
-				favorite
-					.postFavorite(star)
-					.then(function() {
-						var idx = _.indexOf(vm.goods, goods);
-						vm.goods[idx].favorited = true;
-					});
-
-				notification
-					.postNotification({
-						sender_uid   : $localStorage.user.uid,
-						receiver_uid : goods.owner_uid,
-						trigger_url  : '/seek/' + goods.gid,
-						content      : '有人關注你的物品',
-					});
-			} else {
-				favorite
-					.deleteFavorite(star)
-					.then(function() {
-						var idx = _.indexOf(vm.goods, goods);
-						vm.goods[idx].favorited = false;
-					});
-			}
-		}
+		let isFavorite = await favorite.favorite(goods);
+		$timeout(()=> {
+			let idx = _.indexOf(vm.goods, goods);
+			vm.goods[idx].starredByUser = isFavorite;
+		});
 	}
 
 	function onClickUser(e, uid) {

@@ -1,12 +1,12 @@
 'use strict';
 
 const seekModule = require('./seek.module');
-const _          = require('lodash');
+const _ = require('lodash');
 
 seekModule.factory('seekService', seekService);
 
 /** @ngInject */
-function seekService(Restangular, $q, exception, $localStorage, favorite) {
+function seekService(Restangular, $q, exception, AvailableCategory) {
 	var service = {
 		getSeek: getSeek,
 	};
@@ -15,41 +15,27 @@ function seekService(Restangular, $q, exception, $localStorage, favorite) {
 
 	//////////
 
-	function getSeek(filter) {
+	async function getSeek(filter) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('goods/search')
-			.getList(filter)
-			.then(function(data) {
-				if (_.isArray(data)) {
-					data.forEach(function(goods) {
+		try {
+			let goods = await Restangular.all('goods').getList(filter);
 
-						if (
-							_.isString(goods.photo_path) &&
-							goods.photo_path.indexOf('error') === -1
-						) {
-							goods.photo_path = JSON.parse(goods.photo_path);
-						}
-					});
-
-					if($localStorage.user){
-						favorite
-							.getMyFavorite($localStorage.user.uid)
-							.then(function(f_array) {
-								data.forEach(function(g) {
-									if (_.findWhere(f_array, { goods_gid: g.gid })) g.favorited = true;
-									else g.favorited = false;
-								});
-								defer.resolve(data);
-							});
-					} else {
-						defer.resolve(data);
-					}
+			goods.forEach(function(g) {
+				try {
+					g.photo_path = JSON.parse(g.photo_path);
+					g.cate_alias = _.result(_.find(AvailableCategory, { 'label': g.category }), 'alias');
+				} catch (err) {
+					g.photo_path = '';
 				}
-			}, (error)=> {
-				return exception.catcher('[Seek Service] getSeek error: ')(error);
 			});
+
+			defer.resolve(goods);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 

@@ -1,6 +1,6 @@
 .grid-wrapper {
-	width: 95%;
-	margin: 10px auto;
+	/*width: 95%;*/
+	/*margin: 10px auto;*/
 }
 
 .grid__columns {
@@ -11,40 +11,110 @@
 	column-gap: 15px;
 	// column-fill: auto;
 	.card {
+		background-color: #D4D4D4;
 		-webkit-column-break-inside: avoid;
 		-moz-column-break-inside: avoid;
 		column-break-inside: avoid;
 		display: inline-block;
 		width: 95%;
 		margin: 0 auto;
-		margin-bottom: 10px;
-		box-shadow: 3px 2px 3px 0 rgba(0,0,0,0.3);
+		margin-bottom: 20px;
+		box-shadow: 3px 6px 5px 0 rgba(0, 0, 0, 0.5);
+		.card-info {
+			margin-right: 8px;
+			margin-top: 10px;
+			white-space: nowrap;
+		}
+		.favorite {
+			-webkit-transition: .3s ease-in-out;
+			transition: .3s ease-in-out;
+			border-width: 1px;
+			border-color: rgba(0, 0, 0, 0);
+			border-style: solid;
+			border-radius: 2px;
+		}
+		.favorite:hover {
+			color: #f00;
+			border-width: 1px;
+			border-color: #f00;
+			border-style: solid;
+			border-radius: 2px;
+		}
+		.card-img {
+			opacity: 1;
+			-webkit-transition: .3s ease-in-out;
+			transition: .3s ease-in-out;
+		}
+		.card-img:hover {
+			opacity: .7;
+		}
+		a:hover {
+			color: #000;
+		}
 	}
 }
 
 @media screen and (min-width: 300px) {
+	.grid-wrapper {
+		max-width: 85%;
+		margin: 0 auto;
+		padding: 20px 0;
+	}
 	.grid__columns {
-		padding-left: 5%;
+		padding-left: 5.5%;
+		padding-right: 2.5%;
 		column-count: 1;
 		-moz-column-count: 1;
 		-webkit-column-count: 1;
 	}
+	.seek-title {
+		max-width: 90%;
+		margin: 0;
+	}
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 750px) {
+	.grid-wrapper {
+		max-width: 700px;
+	}
 	.grid__columns {
-		padding-left: 3%;
+		padding-left: 4.5%;
+		padding-right: 1.5%;
 		column-count: 2;
 		-moz-column-count: 2;
 		-webkit-column-count: 2;
 	}
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 1441px) {
+	.grid-wrapper {
+		max-width: 850px;
+	}
 	.grid__columns {
-		padding-left: 1%;
+		padding-left: 2.2%;
+		padding-right: .2%;
 		column-count: 3;
 		-moz-column-count: 3;
 		-webkit-column-count: 3;
+	}
+}
+
+.cate-btn {
+	font-size: 14px;
+	padding: 0 6px;
+	color: #000;
+	border: 1px #000 solid;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: 0.3s;
+	text-align: center;
+	&:hover {
+		background-color: #80CBC4;
+	}
+	&:focus,
+	:active {
+		border-color: #fff;
+		background-color: #000;
+		color: #fff;
 	}
 }

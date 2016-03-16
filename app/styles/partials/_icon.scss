@@ -35,12 +35,12 @@
 		cursor: default;
 	}
 	&.heart-seek {
-		color: #ff1e52;
+		color: #f19ec2;
 		cursor: pointer;
-		margin-right: 5px;
+		/*margin-right: 5px;*/
 	}
 	&.heart-goods {
-		color: #ff1e52;
+		color: #f19ec2;
 		cursor: pointer;
 	}
 	&.blue {
@@ -65,4 +65,11 @@
 		font-size: 48px;
 		color: rgb(84, 110, 122);
 	}
+	&.toolbar {
+		color: black;
+	}
+}
+
+md-toolbar:not(.md-menu-toolbar) md-icon {
+	color: #262626;
 }

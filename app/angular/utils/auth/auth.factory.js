@@ -1,111 +1,158 @@
 'use strict';
 
 const authModule = require('./auth.module');
-const _          = require('lodash');
 
 authModule.factory('auth', auth);
 
 /** @ngInject */
-function auth(facebookService, $q, $localStorage, $mdDialog) {
-	var token       = '';
+function auth(facebookService, $q, $localStorage, $mdDialog, Restangular, $rootScope) {
 	var currentUser = null;
 
 	const service = {
 		login,
 		logout,
+		signup,
 		fetchMe,
-		isLoggedIn,
 		getLoginState,
-		currentUser : () => currentUser,
+		getAccessToken,
 		showEmailBox,
+		isLoggedIn: () => Boolean(currentUser),
+		currentUser: () => currentUser,
 	};
 	return service;
 
 	/////////////
 
-	function login() {
+	async function login(fb, identity, password) {
 		const defer = $q.defer();
 
-		facebookService
-			.login() // login to facebook.
-			.then(function() {
-				fetchMe()
-					.then(function(data) {
-						currentUser = data;
-						defer.resolve(data);
+		try {
+			if (fb) {
+				await facebookService.login(); // login to facebook.
+				await fetchMe();
+			} else {
+				let token = await Restangular
+					.all('/authenticate/login')
+					.post({
+						fb: false,
+						identity: identity,
+						password: password
 					});
-			});
+
+				updateToken(token.token);
+			}
+			currentUser = await Restangular.oneUrl('user/me').get();
+			$rootScope.isLoggedIn = true;
+			defer.resolve(currentUser);
+		} catch (err) {
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 
-	function logout() {
+	async function logout() {
 		const defer = $q.defer();
-		facebookService
-			.logout()
-			.then(function() {
-				currentUser = null;
-				delete $localStorage.user;
-				defer.resolve();
-			});
+
+		try {
+			//await facebookService.logout();
+			currentUser = null;
+			$localStorage.user = null;
+			$rootScope.isLoggedIn = false;
+			updateToken(null);
+			defer.resolve(null);
+		} catch (err) {
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 
-	function fetchMe() {
+	async function signup(form) {
 		const defer = $q.defer();
-		facebookService
-			.me({ fields: 'id' }) // get user facebook id.
-			.then(function(response) {
-				/** Call API for create/get new EXWD user. */
-				facebookService
-					.register(response)
-					.then(function(userdata) {
-						currentUser = userdata;
-						defer.resolve(currentUser);
-					});
+
+		try {
+			let user = await Restangular.all('authenticate/register').post({
+				identity: form.id,
+				name: form.name,
+				email: form.id,
+				photo_path: 'http://exwd.csie.org/images/e59bae8cca73cd90ab5ab3a25e18ce4e612f931296e9b29227d2d5dea2b8ab7b.jpeg',
+				password: form.pwd
 			});
+
+			await login(false, user.identity, form.pwd);
+
+			defer.resolve(user);
+		} catch (err) {
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 
-	function isLoggedIn() {
-		return Boolean(currentUser);
-	}
-
-	function getLoginState() {
+	async function fetchMe() {
 		const defer = $q.defer();
-		facebookService
-			.getLoginStatus()
-			.then(function(state) {
-				if(state.status === 'connected') {
-					fetchMe().then(function(data) {
-						currentUser = data;
 
-						// let user fill email if email is empty
-						if(data.email.length === 0) showEmailBox(data);
+		try {
+			let response = await facebookService.me({
+				fields: 'id'
+			}); // get user facebook id.
+			currentUser = await facebookService.register(response); // Call API for create/get new EXWD user. 
 
-						defer.resolve(currentUser);
-					});
-				} else {
-					currentUser = null;
-					defer.resolve(currentUser);
-				}
-			});
+			defer.resolve(currentUser);
+		} catch (err) {
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 
-	function generateAccessToken() {
+	async function getLoginState() {
+		const defer = $q.defer();
 
+		try {
+			let state = await facebookService.getLoginStatus();
+			currentUser = state ? await fetchMe() : {};
+
+			// let user fill email if email is empty
+			if (currentUser && currentUser.email.length === 0) showEmailBox(currentUser);
+
+			updateToken($localStorage.token);
+			defer.resolve(currentUser);
+		} catch (err) {
+			defer.reject(err);
+		}
+
+		return defer.promise;
 	}
 
-	function getAccessToken() {
-		return token;
+	async function getAccessToken(id, pwd, fb) {
+		let token = await Restangular.all('authenticate/login').post({
+			fb: fb,
+			identity: id,
+			password: pwd
+		});
+		$localStorage.token = token.token;
+		updateToken($localStorage.token);
+
+		return {
+			msg: 'success'
+		};
+	}
+
+	function updateToken(token) {
+		$localStorage.token = token;
+		Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {
+			token: $localStorage.token
+		});
 	}
 
 	function showEmailBox(user) {
 		$mdDialog.show({
-			templateUrl : 'utils/auth/fillEmail.html',
-			controllerAs : 'vm',
-			controller : DialogController,
-			locals : {
+			templateUrl: 'utils/auth/fillEmail.html',
+			controllerAs: 'vm',
+			controller: DialogController,
+			locals: {
 				user: user
 			}
 		});
@@ -114,13 +161,13 @@ function auth(facebookService, $q, $localStorage, $mdDialog) {
 
 /** @ngInject */
 function DialogController(user, profileService, $mdDialog, logger) {
-	const vm  = this;
+	const vm = this;
 	vm.email = '';
 	vm.cancel = onCancel;
 	vm.submit = onSubmit;
 
 	function onSubmit() {
-		if(vm.email) {
+		if (vm.email) {
 			user.email = vm.email;
 			profileService
 				.editProfile(user)

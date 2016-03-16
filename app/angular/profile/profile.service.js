@@ -1,128 +1,141 @@
 'use strict';
 
 const profileModule = require('./profile.module');
-const _             = require('lodash');
 
 profileModule.service('profileService', profileService);
 
 /** @ngInject */
-function profileService(Restangular, $q, facebookService, exception, logger) {
+function profileService(Restangular, $q, facebookService, exception, $mdMedia, $mdDialog) {
 	var service = {
 		getProfile,
 		getFavoriteSum,
 		editProfile,
-		addFollowing,
-		deleteFollowing,
-		getMyGoods,
+		uploadHeadPhoto,
 	};
 
 	return service;
 
 	//////////
-	
-	function getProfile(_uid) {
+
+	async function getProfile(_uid) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('user/profile')
-			.getList({ uid : _uid })
-			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data[0]);
-				} else if (_.isObject(data)) {
-					defer.resolve(data);
+		try {
+			let data = await Restangular.one('user', _uid).get();
+			data.goods.forEach(function(goods) {
+				try {
+					goods.photo_path = JSON.parse(goods.photo_path);
+				} catch (err) {
+					goods.photo_path = '';
 				}
-			}, (error)=> {
-				defer.reject({ error: error });
-				exception.catcher('[Profiles Service] getProfile error: ')(error);
 			});
+			data.myGoodsPending = data.goods.filter(function(g) { return g.exchanged === 0; });
+			data.myGoodsExchanged = data.goods.filter(function(g) { return g.exchanged === 1; });
+			
+			data.scores = 0;
+			data.myGoodsExchanged.forEach(function(g) {
+				data.scores += g.rate;
+			});
+
+			defer.resolve(data);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
 
 		return defer.promise;
 	}
 
-	function getFavoriteSum(uid) {
+	async function getFavoriteSum(uid) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('star/toOwner')
-			.getList({ owner_uid: uid })
-			.then(function(data) {
-				defer.resolve(data);
-			}, (error) => {
-				return exception.catcher('[Profiles Service] getFavoriteSum error: ')(error);
-			});
+		try {
+			let data = await Restangular.all('star/by').getList({ starring_user_uid: uid });
+			defer.resolve(data);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
 
 		return defer.promise;
 	}
 
-	function editProfile(profile) {
+	async function editProfile(profile) {
 		const defer = $q.defer();
 
-		profile.route = 'user/profile/edit';
-        profile.byuser = byuserGen(profile.uid);
+		try {
+			profile.route = `user/${profile.uid}`;
+			let data = await profile.put();
 
+			defer.resolve(data);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
 
-		profile
-			.put()
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[profiles Service] updateprofile error: ')(error);
-			});
 		return defer.promise;
 	}
 
-	function addFollowing(my_uid, following_uid) {
-		Restangular
-			.all('user/profile/following/post')
-			.post({
-				my_uid        : my_uid,
-				following_uid : following_uid,
-			});
-		Restangular
-			.all('user/profile/follower/post')
-			.post({
-				my_uid       : following_uid,
-				follower_uid : my_uid,
-			});
-		logger.success('成功追隨', {}, 'DONE');
-	}
+	function uploadHeadPhoto(profile) {
+		$mdDialog.show({
+			templateUrl: 'profile/headphotoModal.html',
+			//clickOutsideToClose: true,
+			controllerAs: 'vm',
+			controller: HeadPhotoController,
+			fullscreen: ($mdMedia('sm')||$mdMedia('xs')),
+			locals: {
+				profile: profile
+			}
+		});
 
-	function deleteFollowing(my_uid, following_uid) {
-		Restangular
-			.all('user/profile/following/delete')
-			.remove({
-				my_uid        : my_uid,
-				following_uid : following_uid,
-			});
-		Restangular
-			.all('user/profile/follower/delete')
-			.remove({
-				my_uid       : following_uid,
-				follower_uid : my_uid,
-			});
-	}
+		/** @ngInject */
+		function HeadPhotoController($state, $scope, profile, logger) {
+			const vm          = this;
+			vm.imgSelect      = {};
+			vm.myCroppedImage = '';
+			vm.onCancel       = onCancel;
+			vm.submit         = submit;
 
-	function getMyGoods(uid) {
-		const defer = $q.defer();
+			$scope.$watch('vm.imgSelect', ()=> {
+				vm.dataUri = `data:image/png;base64,${vm.imgSelect.base64}`;
+			});
 
-		Restangular
-			.all('goods/of')
-			.getList({
-				owner_uid: uid,
-			})
-			.then(function(data) {
-				if (_.isArray(data)) {
-					data.forEach(function(goods) {
-						if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
-					});
-					defer.resolve(data);
+			function onCancel() {
+				$mdDialog.cancel();
+				$state.reload();
+			}
+
+			async function submit() {
+				try {
+					profile.photo_path = await upload();
+					profile.route = 'user/photo';
+					await profile.put();
+
+					logger.success('更新成功', null, 'DONE');
+				} catch (err) {
+					exception.catcher('上傳失敗')(err);
 				}
-			}, (error)=> {
-				return exception.catcher('[profile Service] getProfile error: ')(error);
-			});
-		return defer.promise;
+				onCancel();
+			}
+
+			async function upload() {
+				const defer = $q.defer();
+
+				let img = {
+					base64   : vm.myCroppedImage,
+					filetype : 'png'
+				};
+
+				try {
+					let url = await Restangular.all('upload/image').post(img);
+					defer.resolve(url);
+				} catch (err) {
+					defer.reject(err);
+				}
+
+				return defer.promise;
+			}
+		}
 	}
 
 }

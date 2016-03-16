@@ -19,11 +19,17 @@ function getStates() {
 				controller : 'ExchangeController',
 				controllerAs: 'vm',
 				templateUrl : 'exchange/exchange.html',
+				/** @ngInject */
+				onEnter: function($state, $window, $timeout, $stateParams) {
+					if ($window.innerWidth < 960) {
+						$timeout(() => $state.go('root.oneCol.m_exchange', { uid: $stateParams.uid }));
+					}
+				},
 				resolve : {
 					/** @ngInject */
 					exchangeList : function (exchangeService, $stateParams) {
 						return exchangeService
-							.getAllExchange(parseInt($stateParams.uid, 10))
+							.getExchanges(parseInt($stateParams.uid, 10))
 							.then(function(data) { return data; })
 							.catch(function() { return []; });
 					},

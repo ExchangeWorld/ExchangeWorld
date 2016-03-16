@@ -6,8 +6,8 @@ out = func.out
 job = func.job
 working_path = func.working_path
 
-out '[1] Update repository [develop] ...'
-job 'git checkout develop'
+out '[1] Update repository [v2-api] ...'
+job 'git checkout v2-api'
 job 'git pull'
 out ''
 

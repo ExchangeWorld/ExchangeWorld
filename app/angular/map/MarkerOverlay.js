@@ -33,7 +33,7 @@ function onAdd(category, onClick) {
 	};
 
 	var img = document.createElement('img');
-	img.src = `../../images/mapMarker/${category}.svg`;
+	img.src = `../../images/icon/${category}.svg`;
 	div.appendChild(img);
 
 	this.element = div;

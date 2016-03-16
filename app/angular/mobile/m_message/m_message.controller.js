@@ -7,67 +7,106 @@ m_messageModule.controller('m_messageController', m_messageController);
 /** @ngInject */
 function m_messageController(
 	message,
+	info,
+	$scope,
 	$state,
 	$rootScope,
 	$q,
-	$stateParams,
+	$mdDialog,
 	$timeout
 ) {
-	const vm       = this;
-	vm.msg         = $stateParams.msg;
-	vm.history     = [];
-	vm.loadMore    = loadMore;
-	vm.contents    = '';
-	vm.onClickUser = $rootScope.onClickUser;
-	vm.submit      = onSubmit;
-	vm.newMsgs     = [];
+	const vm        = this;
+	const cid       = info.cid;
+	vm.info = info;
+
+	vm.dataStream   = [];
+	vm.history      = [];
+	
+	vm.loadMore     = loadMore;
+	vm.contents     = '';
+	vm.onClickUser  = $rootScope.onClickUser;
+	vm.submit       = onSubmit;
+	vm.newMsgs      = [];
+
+	vm.cancel  = onCancel;
+	vm.submit  = onSubmit;
+	vm.keyup   = keyup;
+	vm.keydown = keydown;
 
 	activate();
 	var shiftPressed = false;
 
 	var amount, offset;
-	function activate() {
-		if(!vm.msg) {
-			$state.go('root.oneCol.home');
-		}
-		amount = 10;
-		offset = 0;
-		loadMore();
 
-		// Sooooooooooo hack
-		// trigger the scrollBottom directive to work.
-		$timeout(function(){
-			vm.newMsgs.push('hack');
-		}, 100);
+	$scope.$on('chatroom:msgNew', (e, data)=> { 
+		vm.dataStream.push(data);
+		goButtom(); 
+	});
+
+	async function activate() {
+		amount = 30;
+		offset = 0;
+
+		message.readMessage(vm.info.cid);
+		await loadMore();
+		goButtom();
 	}
 
-	function loadMore() {
-		var deferred = $q.defer();
+	async function loadMore() {
+		let deferred = $q.defer();
 
-		message
-			.getConversation(vm.msg.sender_uid, vm.msg.receiver_uid, amount, offset)
-			.then(function(data) {
-				vm.history = [...data.reverse(), ...vm.history];
-				offset += amount;
+		try {
+			let data = await message.getConversation(cid, amount, offset);
+			offset += amount;
+			vm.history = [...data, ...vm.history];
 
-				deferred.resolve();
-			});
+			deferred.resolve(data);
+		} catch (err) {
+			deferred.reject(err);
+		}
 
 		return deferred.promise;
 	}
 
-	function onSubmit(msg_content) {
-		if(msg_content.trim().length === 0) return;
-		message.
-			postMessage({
-				receiver_uid : vm.msg.sender_uid,
-				sender_uid   : vm.msg.receiver_uid,
-				content      : msg_content,
+	function onSubmit() {
+		if (vm.contents.trim().length === 0) return;
+		message
+			.postMessage({
+				chatroom_cid: cid,
+				sender_uid: $rootScope.user.uid,
+				content: vm.contents,
+				created_at: new Date()
 			})
 			.then(function(data) {
-				vm.history.push(data);
-				vm.newMsgs.push(data);
-				vm.contents = '';
+				vm.dataStream.push(data);
+				goButtom();
 			});
+	}
+
+	function onCancel() {
+		if ($scope.instance) $mdDialog.hide();
+	}
+
+	function keyup(ev) {
+		if (ev.keyCode === 16) {
+			shiftPressed = false;
+		}
+	}
+
+	function keydown(ev) {
+		if (ev.keyCode === 16) {
+			shiftPressed = true;
+		}
+		if (ev.keyCode === 13 && !shiftPressed) {
+			onSubmit(vm.contents);
+		}
+	}
+	
+	function goButtom() {
+		// Sooooooooooo hack
+		// trigger the scrollBottom directive to work.
+		$timeout(function() {
+			vm.newMsgs.push('hack');
+		}, 10);
 	}
 }

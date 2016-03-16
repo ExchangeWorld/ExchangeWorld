@@ -1,12 +1,11 @@
 'use strict';
 
 const facebookModule = require('./facebook.module');
-const _              = require('lodash');
 
 facebookModule.factory('facebookService', facebook);
 
 /** @ngInject */
-function facebook(Facebook, Restangular, $q, exception, $localStorage) {
+function facebook(Facebook, Restangular, $q, exception, $localStorage, $http) {
 	const service = {
 		me,
 		login,
@@ -33,15 +32,20 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 	}
 
 	/** Login */
-	function login() {
-		return Facebook.login(function(response) {
-			if (response.status === 'connected') {
-				return me();
-			} else {
-				console.error('FB login ERROR.');
-				return {};
-			}
-		});
+	async function login() {
+		let loginStatus = await getLoginStatus();
+		if (loginStatus) {
+			return me();
+		} else {
+			return Facebook.login(function(response) {
+				if (response.status === 'connected') {
+					return me();
+				} else {
+					//console.error('FB login ERROR.');
+					return {};
+				}
+			});
+		}
 	}
 
 	/** Logout */
@@ -49,65 +53,77 @@ function facebook(Facebook, Restangular, $q, exception, $localStorage) {
 		return Facebook.logout();
 	}
 
-	function register(user) {
+	async function register(user) {
 		const defer = $q.defer();
 
-		$q.
-			all([
-				Restangular.all('user').getList({ fb_id: user.id }),
+		try {
+			let [member, largePic] = await Promise.all([
+				Restangular.oneUrl(`user?identity=${user.id}`).get(),
 				getLargePicture(user.id)
-			])
-			.then(function(results) {
-				var member = results[0];
-				var largePic = results[1];
+			]);
 
-				if (member.length === 0) {
-					me({ fields: 'id, name, email, picture' })
-						.then(function(user_data) {
+			if (member) {
+				let token = await Restangular.all('authenticate/login').post({ fb: true, identity: member.identity });
+				$localStorage.token = token.token;
+				Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {
+					token: $localStorage.token
+				});
 
-							Restangular
-								.all('user/register')
-								.post({
-									fb_id        : user_data.id,
-									name         : user_data.name,
-									photo_path   : largePic.data.url,
-									email        : user_data.email,
-								})
-								.then(function(data) {
-									if (data) {
-										defer.resolve(data);
-										$localStorage.user = data;
-									}
-								}, (error)=> {
-									return exception.catcher('[Facebook Service] register error: ')(error);
-								});
-						});
-				} else {
-					member[0].route = 'user/photo';
-					member[0].photo_path = largePic.data.url;
-					member[0].put();
-					defer.resolve(member[0]);
-					$localStorage.user = member[0];
+				try {
+					// refetch fb photo if url failed.
+					await $http.get(member.photo_path);
+				} catch (err) {
+					member.photo_path = largePic.data.url;
+					member.route = `user/${member.uid}/photo`;
+					await member.put();
 				}
+
+				defer.resolve(member);
+				$localStorage.user = member;
+				return defer.promise;
+			}
+
+			let userData = await me({ fields: 'id, name, email, picture' });
+			let newUser = {
+				fb         : true,
+				identity   : userData.id,
+				name       : userData.name,
+				photo_path : largePic.data.url,
+				email      : userData.email
+			};
+
+			let registerData = await Restangular.all('authenticate/register').post(newUser);
+			let token = await Restangular.all('authenticate/login').post({ fb: true, identity: registerData.identity });
+			$localStorage.token = token.token;
+			Restangular.setDefaultRequestParams(['get', 'remove', 'post', 'put', 'delete'], {
+				token: $localStorage.token
 			});
+
+			$localStorage.user = registerData;
+			defer.resolve(registerData);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 
-	function getLargePicture(fb_id) {
-		return Facebook.api('/'+fb_id+'/picture?width=320&height=320', function(response) {
+	function getLargePicture(fbId) {
+		return Facebook.api('/'+fbId+'/picture?width=320&height=320', function(response) {
 			return response;
 		});
 	}
 
 	/** get facebook login status */
 	function getLoginStatus() {
-		return Facebook.getLoginStatus(function(response) {
-			if (response.status === 'connected') {
-				return true;
-			} else {
-				return false;
-			}
+		const defer = $q.defer();
+
+		Facebook.getLoginStatus(function(response) {
+			defer.resolve(response.status === 'connected');
 		});
+
+		return defer.promise;
 	}
 
 }

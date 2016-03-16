@@ -1,37 +1,49 @@
 <md-dialog aria-label="message">
-	<md-toolbar>
+	<md-toolbar style="background-color: #ECEFF1;">
 		<div flex class="md-toolbar-tools" layout layout-align="center center">
-			<h2 class="md-display-1" style="padding-left: 12px;">{{vm.msg.user.name}}</h2>
+			<h2 class="md-display-1" style="padding-left: 12px;" ng-repeat="user in vm.info.members" ng-show="user !== $root.user.uid">
+                {{vm.info.members_info[user].name}}
+            </h2>
 			<span flex></span>
 			<md-button class="md-icon-button" ng-click="vm.cancel()">
 				<md-icon md-font-set="material-icons" aria-label="Close dialog">close</md-icon>
 			</md-button>
 		</div>
 	</md-toolbar>
-	<md-dialog-content style="max-width:800px;max-height:610px; padding: 5px 20px 16px 20px;">
-		<div flex flex-sm layout="row">
+	<md-dialog-content style="max-width:800px;max-height:610px; padding: 5px 20px 16px 20px; overflow-y:hidden;">
+		<div flex layout="row">
 			<div flex>
 				<ul id="chatbox" class="discussion message" upward-scroll="vm.loadMore()" scroll="vm.newMsgs.length">
-					<li ng-class="{true: 'self', false: 'other'}[history.sender_uid === {{ vm.msg.receiver_uid }}]" ng-repeat="history in vm.history">
-						<div class="avatar" ng-click="vm.onClickUser(history.sender_uid)" ng-show="(history.sender_uid !== {{ vm.msg.receiver_uid }})" style="cursor:pointer;">
-							<img ng-src="{{vm.msg.user.photo_path}}" />
+					<!-- history data -->
+					<li ng-class="{true: 'self', false: 'other'}[history.sender_uid === $root.user.uid ]" ng-repeat="history in vm.history">
+						<div class="avatar" ng-click="vm.onClickUser(history.sender_uid)" style="cursor:pointer;">
+							<img ng-src="{{vm.info.members_info[history.sender_uid].photo_path}}" />
 						</div>
 						<div class="messages">
 							<p class="content">{{ history.content }}</p>
 							<md-tooltip>{{ history.time }}</md-tooltip>
 						</div>
 					</li>
+					<!-- realtime data -->
+					<li ng-class="{true: 'self', false: 'other'}[stream.sender_uid === $root.user.uid ]" ng-repeat="stream in vm.dataStream">
+						<div class="avatar" ng-click="vm.onClickUser(stream.sender_uid)" style="cursor:pointer;">
+							<img ng-src="{{vm.info.members_info[stream.sender_uid].photo_path}}" />
+						</div>
+						<div class="messages">
+							<p class="content">{{ stream.content }}</p>
+							<md-tooltip>{{ stream.time }}</md-tooltip>
+						</div>
+					</li>
 				</ul>
 				<div layout="row" layout-algin="center center">
-					<md-input-container flex="70" flex-sm="55" style="padding: 0 2px;">
+					<md-input-container flex="70" flex-xs="55" style="padding: 0 2px; top:20px;">
 						<label>回覆訊息...</label>
 						<textarea type="string" ng-model="vm.contents" ng-keyup="vm.keyup($event)" ng-keydown="vm.keydown($event)" columns="10" md-maxlength="1000"></textarea>
 					</md-input-container>
-					<div flex="30" flex-sm="45" layout layout-align="center end">
+					<div flex="30" flex-xs="45" layout layout-align="center center">
 						<input flex class="md-button md-primary md-raised" ng-disabled="!vm.contents.length" ng-click="vm.submit(vm.contents)" value="送出" style="height:45px; top:6px; left:2px;"></input>
 					</div>
 				</div>
 			</div>
 	</md-dialog-content>
 </md-dialog>
-

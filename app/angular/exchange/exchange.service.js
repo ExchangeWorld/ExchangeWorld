@@ -10,10 +10,10 @@ exchangeModule.service('exchangeService', exchangeService);
 function exchangeService(Restangular, $q, $mdDialog, exception) {
 	var service = {
 		getExchange,
-		getAllExchange,
+		getExchanges,
 		deleteExchange,
 		agreeExchange,
-		completeExchange,
+		//completeExchange,
 		showCompleteExchange,
 		rating,
 
@@ -22,129 +22,83 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 	};
 	return service;
 
-	/** get exchange data */
-	function getAllExchange(owner_uid) {
+	async function getExchanges(ownerUid) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('exchange/of')
-			.getList({
-				owner_uid: owner_uid
-			})
-			.then(function(data) {
-				if (_.isArray(data)) {
-					defer.resolve(data);
-				}
-			}, (error)=> {
-				return exception.catcher('[Exchange Service] getAllExchange error: ')(error);
-			});
-		return defer.promise;
-	}
-
-	function getExchange(eid) {
-		const defer = $q.defer();
-
-		Restangular
-			.all('exchange')
-			.getList({eid: eid})
-			.then(function(data) {
-				data = _.isArray(data) ? data[0] : data;
-				data.goods.forEach(function(goods) {
-					if (_.isString(goods.photo_path)) goods.photo_path = JSON.parse(goods.photo_path);
-				});
-				defer.resolve(data);
-			}, (error)=> {
-				return exception.catcher('[Exchange Service] getExchange error: ')(error);
-			});
-		return defer.promise;
-	}
-
-	function rating(gid, rate) {
-		const defer = $q.defer();
-
-		Restangular
-			.all('goods')
-			.getList({gid: gid})
-			.then(function(data) {
-				if(_.isArray(data)) {
-					data[0].route = 'goods/rate';
-					data[0].rate = rate;
-                    data[0].byuser = byuserGen(data[0].owner_uid);
-					data[0].put();
-				}
-			}, (error)=> {
-				return exception.catcher('[Exchange Service] rating error: ')(error);
-			});
-		return defer.promise;
-	}
-
-	function agreeExchange(exchange, gid) {
-		const defer = $q.defer();
-
-		exchange.route = 'exchange/agree';
-		exchange.goods_gid = (gid === exchange.goods1_gid) 
-			? exchange.goods1_gid 
-			: exchange.goods2_gid;
-
-		exchange.agree = 'true';
-
-		exchange
-			.put()
-			.then(function(data) {
-				defer.resolve(data);
-				if (
-					data.goods1_agree && 
-					data.goods2_agree
-				) {
-					completeExchange(exchange);
-				}
-			})
-			.catch(function(error) {
-				return exception.catcher('[exchange Service] agreeExchange error: ')(error);
-			});
-		return defer.promise;
-	}
-
-	/**
-	 * complete exchange
-	 */
-	function completeExchange(exchange) {
-		const defer = $q.defer();
-
-		exchange.route = 'exchange/complete'; // PUT of "complete" is "api/exchange/complete"
-
-		exchange
-			.put()
-			.then(function(data) {
-				defer.resolve(data);
-			})
-			.catch(function(error) {
-				return exception.catcher('[exchange Service] completeExchange error: ')(error);
-			});
+		try {
+			let exchanges = await Restangular.one('user', ownerUid).getList('exchange');
+			defer.resolve(exchanges);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
 
 		return defer.promise;
 	}
 
-	/**
-	 * drop exchange
-	 * one of the user reject the exchage.
-	 */
-	function deleteExchange(eid) {
+	async function getExchange(ownerUid, eid) {
 		const defer = $q.defer();
 
-		Restangular
-			.all('exchange')
-			.getList({eid: eid})
-			.then(function(data) {
-				if (_.isArray(data)) {
-					var exchange = data[0];
-                    exchange.byuser = byuserGen(uid);
-					exchange.route = 'exchange/drop'; // PUT of "drop" is "api/exchange/drop"
-					exchange.put();
-				}
-			}, (error)=> {
-				return exception.catcher('[Exchange Service] deleteExchange error: ')(error);
-			});
+		try {
+			let exchange = await Restangular.one('user', ownerUid).one('exchange', eid).get();
+
+			try {
+				exchange.other_goods.photoPath = JSON.parse(exchange.other_goods.photo_path);
+				exchange.owner_goods.photoPath = JSON.parse(exchange.owner_goods.photo_path);
+			} catch (err) {
+				exchange.other_goods.photoPath = '';
+				exchange.owner_goods.photoPath = '';
+			}            
+			defer.resolve(exchange);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
+	async function rating(gid, rate) {
+		const defer = $q.defer();
+
+		try {
+			let goods = await Restangular.one('goods', gid).get();
+			goods.route = `goods/${goods.gid}/rate`;
+			goods.rate = rate;
+			await goods.put();
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
+	async function agreeExchange(exchange) {
+		const defer = $q.defer();
+
+		try {
+			await Restangular.one('exchange', exchange.eid).one('agree').put();
+			defer.resolve(null);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
+	async function deleteExchange(exchange) {
+		const defer = $q.defer();
+
+		try {
+			await Restangular.one('exchange', exchange.eid).one('drop').put();
+			defer.resolve(null);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
 		return defer.promise;
 	}
 
@@ -161,7 +115,7 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 			.then(function(data) {
 				if (_.isArray(data)) {
 					data.forEach(function(m) {
-						m.time = moment(m.timestamp.slice(0, -1)).fromNow();
+						m.time = moment(m.timestamp.slice(0, -1)).add(8, 'h').fromNow();
 					});
 					defer.resolve(data);
 				}
@@ -190,7 +144,7 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 		return defer.promise;
 	}
 
-	function showCompleteExchange(ev, thisExchange, myid, callback) {
+	function showCompleteExchange(ev, thisExchange, callback) {
 		$mdDialog.show({
 			clickOutsideToClose: true,
 			templateUrl: 'exchange/exchange.complete.html',
@@ -198,26 +152,16 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 			controller: onCompleteController,
 			locals: {
 				thisExchange: thisExchange,
-				myid: myid,
 			}
 		});
-		function onCompleteController($mdDialog, logger, exchangeService, thisExchange, myid) {
+
+		/** @ngInject */
+		function onCompleteController($mdDialog, logger, exchangeService, thisExchange) {
 			const vm        = this;
 			vm.thisExchange = thisExchange;
-			vm.myuid        = parseInt(myid, 10);
-			vm.mygid        = '';
-			vm.othersgid    = '';
 			vm.rating       = 3;
 			vm.confirm      = onConfirm;
 			vm.cancel       = onCancel;
-
-			activate();
-
-			function activate() {
-				vm.mygid     = vm.thisExchange.details.goods[vm.thisExchange.lookupTable.me].gid;
-				vm.othersgid = vm.thisExchange.details.goods[vm.thisExchange.lookupTable.other].gid;
-			}
-
 
 			function onConfirm(scores) {
 				$mdDialog
@@ -225,9 +169,9 @@ function exchangeService(Restangular, $q, $mdDialog, exception) {
 					.then(function(scores) {
 						
 						exchangeService
-							.agreeExchange(thisExchange, vm.mygid)
+							.agreeExchange(thisExchange)
 							.then(function(data) {
-								exchangeService.rating(vm.othersgid, scores);
+								exchangeService.rating(vm.thisExchange.other_goods.gid, scores);
 								logger.success('成功評價此交易', data, 'DONE');
 								callback();
 							});

@@ -9,49 +9,45 @@ function appRun(routerHelper) {
 }
 
 function getStates() {
-	return [
-		{
-			state : 'root',
-			config : {
-				abstract : true,
-				templateUrl : 'layout/layout.html',
-				onEnter: setGlobalFunc
-			}
-		},
-		{
-			state : 'root.withSidenav',
-			config : {
-				abstract : true,
-				templateUrl: 'layout/withSidenav.html',
-			},
-		},
-		{
-			state : 'root.oneCol',
-			config : {
-				abstract : true,
-				templateUrl: 'layout/oneColumn.html',
-			},
+	return [{
+		state: 'root',
+		config: {
+			abstract: true,
+			templateUrl: 'layout/layout.html',
+			onEnter: setGlobalFunc
 		}
-	];
+	}, {
+		state: 'root.withSidenav',
+		config: {
+			abstract: true,
+			templateUrl: 'layout/withSidenav.html',
+		},
+	}, {
+		state: 'root.oneCol',
+		config: {
+			abstract: true,
+			templateUrl: 'layout/oneColumn.html',
+		},
+	}];
 }
 
 /** @ngInject */
-function setGlobalFunc($rootScope, $state, $window, message){
+function setGlobalFunc($rootScope, $state, $window, message, $mdDialog, $mdMedia, $mdSidenav) {
 	$rootScope.historyCounter = 1;
-	$rootScope.onClickUser    = onClickUser;
-	$rootScope.onClickFollow  = onClickFollow;
-	$rootScope.onClickMessage = onClickMessage;
+	$rootScope.onClickUser = onClickUser;
+	$rootScope.onClickFollow = onClickFollow;
+	$rootScope.openSignupModal = openSignupModal;
+	$rootScope.openLoginModal = openLoginModal;
+	$rootScope.onSwipeLeft = onSwipeLeft;
 
 	function onClickUser(uid) {
-		if($window.innerWidth > 600) {
-			$state.go('root.withSidenav.profile', { uid: uid });
-		} else {
-			$state.go('root.oneCol.m_profile', { uid: uid });
-		}
+		$state.go('root.oneCol.profile', {
+			uid: uid
+		});
 	}
 
 	function onClickFollow(uid, type) {
-		if($window.innerWidth > 600) {
+		if ($window.innerWidth > 600) {
 			$state.go('root.withSidenav.follow', {
 				uid: uid,
 				type: type
@@ -64,11 +60,35 @@ function setGlobalFunc($rootScope, $state, $window, message){
 		}
 	}
 
-	function onClickMessage(ev, msg) {
-		if($window.innerWidth > 600) {
-			message.showMessagebox(ev, msg);
-		} else {
-			$state.go('root.oneCol.m_message', { msg: msg });
+	function openSignupModal() {
+		let fullscreen = ($mdMedia('sm') || $mdMedia('xs'));
+		let mdScope = $rootScope.$new();
+		mdScope.instance = $mdDialog.show({
+			templateUrl: 'signup/signup.html',
+			controllerAs: 'vm',
+			controller: 'SignupController',
+			clickOutsideToClose: true,
+			fullscreen: fullscreen,
+			scope: mdScope
+		});
+	}
+
+	function openLoginModal() {
+		let fullscreen = ($mdMedia('sm') || $mdMedia('xs'));
+		let mdScope = $rootScope.$new();
+		mdScope.instance = $mdDialog.show({
+			templateUrl: 'login/login.html',
+			controllerAs: 'vm',
+			controller: 'LoginController',
+			clickOutsideToClose: true,
+			fullscreen: fullscreen,
+			scope: mdScope
+		});
+	}
+
+	function onSwipeLeft() {
+		if ($mdSidenav('left').isOpen()) {
+			$mdSidenav('left').toggle();
 		}
 	}
 }

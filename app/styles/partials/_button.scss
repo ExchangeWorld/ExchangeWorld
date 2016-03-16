@@ -59,6 +59,13 @@
 			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.35);
 		}
 	}
+	&.new-btn {
+		border: 1px solid black;
+		font-weight: 600;
+		&.post {
+			width: 100px;
+		}
+	}
 	&.link {
 		margin-left: 15px;
 	}

@@ -275,6 +275,7 @@ a:hover {
 .home-span {
 	color: #fff;
 	&.cate {
+		margin-top: 0;
 		font-size: 24px;
 	}
 	&.main {
@@ -282,6 +283,7 @@ a:hover {
 		font-size: 30px;
 	}
 	&.sub {
+		margin-top: 0;
 		font-size: 16px;
 	}
 }

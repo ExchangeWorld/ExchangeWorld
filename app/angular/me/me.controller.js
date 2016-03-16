@@ -20,6 +20,7 @@ function MeController(
 	var vm              = this;
 	vm.me               = me;
 	vm.myExchanges      = [];
+	vm.myRequest        = [];
 	vm.myGoodsPending   = me.myGoodsPending;
 	vm.myGoodsExchanged = me.myGoodsExchanged;
 	vm.getNumber        = number => new Array(number);
@@ -45,6 +46,7 @@ function MeController(
 		}
 
 		vm.myExchanges = await meService.getExchanges(me.uid);
+		vm.myRequest = await meService.getMyRequest();
 	}
 
 	function editPhoto() {

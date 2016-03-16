@@ -12,11 +12,11 @@ function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDia
 		editProfile,
 		uploadHeadPhoto,
 
+		getMyRequest,
 		getExchanges,
 		deleteExchange,
 		agreeExchange,
 		showCompleteExchange,
-		
 	};
 
 	return service;
@@ -134,6 +134,19 @@ function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDia
 				return defer.promise;
 			}
 		}
+	}
+
+	async function getMyRequest() {
+		const defer = $q.defer();
+
+		try {
+			defer.resolve([]);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
 	}
 
 	async function getExchanges(ownerUid) {

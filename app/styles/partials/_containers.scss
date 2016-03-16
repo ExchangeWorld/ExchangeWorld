@@ -93,10 +93,6 @@ md-switch {
 	}
 }
 
-// md-dialog {
-// 	max-height: 90%;
-// 	overflow-x: hidden;
-// }
 md-radio-button {
 	margin: 10px;
 	.md-label {
@@ -114,10 +110,6 @@ md-input-container {
 	&.signup {
 		margin: 10px 0;
 	}
-}
-
-.md-toolbar-tools {
-	padding-left: 8px;
 }
 
 #autocomplete {
@@ -253,6 +245,9 @@ div.md-open-menu-container {
 }
 
 @media screen and (min-width: 300px) {
+	.md-toolbar-tools {
+		padding-left: 0;
+	}
 	md-dialog {
 		max-height: 100%;
 		overflow-x: hidden;
@@ -370,6 +365,9 @@ div.md-open-menu-container {
 }
 
 @media screen and (min-width: 600px) {
+	.md-toolbar-tools {
+		padding-left: 8px;
+	}
 	.home-container {
 		margin: 30px;
 	}

@@ -17,9 +17,7 @@ function ProfileController(
 	$state,
 	$stateParams,
 	$rootScope,
-	$localStorage,
-	$timeout,
-	$sce
+	$localStorage
 ) {
 	var vm                 = this;
 	vm.profile             = profile;
@@ -75,7 +73,7 @@ function ProfileController(
 		}
 	}
 
-	function onClickSendMsg(ev, uid) {
+	function onClickSendMsg(ev) {
 		message.showMessagebox(ev, vm.profile.uid);
 	}
 
@@ -93,7 +91,7 @@ function ProfileController(
 		vm.isReadOnly = !vm.isReadOnly;
 	}
 
-	function getHTMLDesc(desc) {
+	function getHTMLDesc() {
 	}
 
 	function editPhoto() {

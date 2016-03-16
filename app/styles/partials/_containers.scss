@@ -57,6 +57,9 @@ md-toolbar {
 			color: black;
 		}
 	}
+	&:not(.md-menu-toolbar) {
+		color: #424242;
+	}
 }
 
 @media only screen and (min-width: 0) and (max-width: 600px) and (orientation: portrait) {

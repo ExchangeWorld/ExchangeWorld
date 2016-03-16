@@ -11,9 +11,9 @@ function appRun(routerHelper) {
 function getStates() {
 	return [
 		{
-			state : 'root.oneCol.m_follow',
+			state : 'root.oneCol.follow',
 			config : {
-				url : '/m_profile/:uid/:type',
+				url : '/profile/:uid/:type',
 				bindToController: true,
 				scope: {},
 				controller : 'FollowController',

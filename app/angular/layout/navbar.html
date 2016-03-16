@@ -18,7 +18,7 @@
 					<span class="toolbar-span">發佈</span>
 				</div>
 			</md-button>
-			<md-button hide-xs ng-click="vm.menu('exchange')" ng-class="{'active': vm.contentIs('exchange')}">
+			<md-button hide-xs ng-click="vm.menu('exchange')" ng-class="{'active': vm.contentIs('exchange')}" ng-hide="!$root.isLoggedIn">
 				<div layout layout-align="center center">
 					<span class="toolbar-span">交換</span>
 				</div>

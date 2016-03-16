@@ -1,7 +1,6 @@
 'use strict';
 
 const m_messageModule = require('./m_message.module');
-const _               = require('lodash');
 m_messageModule.controller('m_messageController', m_messageController);
 
 /** @ngInject */
@@ -79,6 +78,7 @@ function m_messageController(
 			})
 			.then(function(data) {
 				vm.dataStream.push(data);
+				vm.contents = '';
 				goButtom();
 			});
 	}

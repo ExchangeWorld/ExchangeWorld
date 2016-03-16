@@ -379,6 +379,11 @@ div.md-open-menu-container {
 			cursor: auto;
 		}
 	}
+	.tab-history {
+		height: auto;
+		width: auto;
+		border-radius: 10px;
+	}
 }
 
 @media screen and (min-width: 600px) {
@@ -428,8 +433,6 @@ div.md-open-menu-container {
 	.img-profile {
 		width: 120px;
 		height: 120px;
-		/*bottom: 68%;*/
-		/*left: 15%;*/
 	}
 	.home-row {
 		height: 300px;
@@ -461,6 +464,14 @@ div.md-open-menu-container {
 	}
 	.item-profile {
 		width: 80%;
+	}
+	.tab-history {
+		height: 120px;
+	}
+	.margin-gt-xs {
+		&.left {
+			margin-left: 20px;
+		}
 	}
 }
 

@@ -79,6 +79,7 @@ function notification(Restangular, $q, exception, $localStorage, $sce, $location
 				case 20003:
 					n.text = `<b>${n.body.payload.person.name}</b>關注了你的物品`;
 					n.url = `/profile/${n.body.payload.person.uid}`;
+					n.icon += 'heart.svg';
 					break;
 				case 20004:
 					n.text = `你關注的<b>${n.body.payload.goods.name}</b>有新的留言`;

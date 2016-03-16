@@ -116,7 +116,7 @@
 						<md-button ng-click="vm.menu('exchange')" ng-class="{'active': vm.contentIs('exchange')}">交換</md-button>
 					</md-menu-item>
 					<md-menu-item>
-						<md-button ng-click="vm.menu('profile')">個人資料</md-button>
+						<a ng-href="/me">個人資料</a>
 					</md-menu-item>
 					<md-menu-item hide-gt-xs>
 						<md-button ng-click="vm.menu('m_messagebox')" ng-show="$root.isLoggedIn">

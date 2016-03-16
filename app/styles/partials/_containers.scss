@@ -365,6 +365,23 @@ div.md-open-menu-container {
 			}
 		}
 	}
+	.item-profile {
+		margin: 20px auto;
+		cursor: pointer;
+		width: 95%;
+		background: #F5F5F5;
+		&.name-queue {
+			cursor: default;
+		}
+		&.exchange {
+			cursor: auto;
+		}
+	}
+	.tab-history {
+		height: auto;
+		width: auto;
+		border-radius: 10px;
+	}
 }
 
 @media screen and (min-width: 600px) {
@@ -417,8 +434,6 @@ div.md-open-menu-container {
 	.img-profile {
 		width: 120px;
 		height: 120px;
-		/*bottom: 68%;*/
-		/*left: 15%;*/
 	}
 	.home-row {
 		height: 35vw;
@@ -446,6 +461,17 @@ div.md-open-menu-container {
 			&.profile {
 				height: 35vw;
 			}
+		}
+	}
+	.item-profile {
+		width: 80%;
+	}
+	.tab-history {
+		height: 120px;
+	}
+	.margin-gt-xs {
+		&.left {
+			margin-left: 20px;
 		}
 	}
 }
@@ -537,6 +563,9 @@ div.md-open-menu-container {
 				height: 15vw;
 			}
 		}
+	}
+	.item-profile {
+		width: 50%;
 	}
 }
 
@@ -665,15 +694,6 @@ div.md-open-menu-container {
 	max-height: 100%;
 	max-width: 100%;
 	margin: 0 2px;
-}
-
-.item-profile {
-	cursor: pointer;
-	width: 95%;
-	background: #F5F5F5;
-	&.name-queue {
-		cursor: default;
-	}
 }
 
 .sidebar-ex {

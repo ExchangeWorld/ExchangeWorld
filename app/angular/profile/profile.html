@@ -1,10 +1,6 @@
 <md-content resize ng-style="resizeWithOffset(56)" style="overflow-y: scroll;">
 	<div layout="row" class="profile-top md-whiteframe-z1" layout-align="center center">
-		<div layout layout-align="center center" class="img-profile" ng-style="{'background-image':'url({{ vm.profile.photo_path }})'}">
-			<a layout layout-align="center center" ng-click="vm.editPhoto()" ng-show="vm.isMe" class="uploadHead">
-				<i class="material-icons" style="font-size:64px;">camera_alt</i>
-			</a>
-		</div>
+		<div layout layout-align="center center" class="img-profile" ng-style="{'background-image':'url({{ vm.profile.photo_path }})'}"> </div>
 		<div layout="column" class="profile-right">
 			<div layout="column">
 				<div layout="row" layout-align="start center" style="margin-left:25px;">
@@ -26,7 +22,7 @@
 			</div>
 			<div layout="row" layout-align="center center" style="margin-left:10px;margin-top: 10px;">
 				<div>
-					<md-button class="btn-rwd" ng-show="!vm.isMe" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)" style="border: 1px solid black; font-weight: 600;">
+					<md-button class="btn-rwd" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)" style="border: 1px solid black; font-weight: 600;">
 						<div layout="row" layout-align="center center" ng-show="!vm.isFollowed">
 							<i class="material-icons">person_add</i>
 							<span>&nbsp;追隨</span>
@@ -38,7 +34,7 @@
 					</md-button>
 				</div>
 				<div>
-					<md-button class="btn-rwd" ng-show="!vm.isMe" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)" style="border: 1px solid black; font-weight: 600;">
+					<md-button class="btn-rwd" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)" style="border: 1px solid black; font-weight: 600;">
 						<div layout="row" layout-align="center center">
 							<i class="material-icons">chat</i>
 							<span>&nbsp;送訊息</span>
@@ -50,14 +46,14 @@
 		</div>
 	</div>
 	<md-tabs md-dynamic-height md-center-tabs md-swipe-content md-no-ink>
-		<md-tab label="願望清單({{ vm.myStar.length }})">
+		<md-tab label="願望清單({{ vm.myStarGoods.length }})">
 			<md-divider></md-divider>
-			<div flex layout layout-align="center center" ng-show="vm.myStar.length === 0">
+			<div flex layout layout-align="center center" ng-show="vm.myStarGoods.length === 0">
 				<img class="img-null" src="../../images/emoji_null.png">
 			</div>
 			<div class="grid-wrapper">
 				<div class="grid__columns">
-					<div ng-repeat="card in vm.myStar">
+					<div ng-repeat="card in vm.myStarGoods">
 						<md-card class="md-whiteframe-z4 item card">
 							<a ng-href="/seek/{{card.gid}}" ng-mouseenter="onMouseOver(card.gid)" ng-mouseleave="onMouseOut(card.gid)">
 								<img width="300" data-ng-src="{{card.photo_path[0]}}" class="md-card-image card-img">

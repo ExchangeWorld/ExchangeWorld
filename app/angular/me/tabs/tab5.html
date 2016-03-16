@@ -29,16 +29,16 @@
 	</md-card-content>
 	<md-card-actions layout="row" layout-xs="column">
 		<span flex-gt-xs="5"></span>
-		<md-button ng-click="vm.rateExchange($event, $index)">
+		<md-button ng-show="!card.other_goods.rate" ng-click="vm.rateExchange($event, $index)">
 			<span class="md-title">交換成功，給個星評吧</span>
 		</md-button>
 		<span flex></span>
-		<div layout="row" layout-align="center center" style="margin:0; padding-left: 10px; padding-bottom: 15px;">
+		<div layout="row" ng-show="card.other_goods.rate" layout-align="center center" style="margin:0; padding-left: 10px; padding-bottom: 15px;">
 			<div layout layout-align="center start">
-				<div ng-repeat="n in vm.getNumber(card.rate) track by $index">
+				<div ng-repeat="n in vm.getNumber(card.other_goods.rate) track by $index">
 					<img src="../../images/star-on.svg" />
 				</div>
-				<div ng-repeat="n in vm.getNumber(5 - card.rate) track by $index">
+				<div ng-repeat="n in vm.getNumber(5 - card.other_goods.rate) track by $index">
 					<img src="../../images/star-off.svg" />
 				</div>
 			</div>

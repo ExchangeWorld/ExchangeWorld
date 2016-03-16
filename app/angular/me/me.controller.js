@@ -23,7 +23,8 @@ function MeController(
 	vm.myGoodsPending   = me.myGoodsPending;
 	vm.myGoodsExchanged = me.myGoodsExchanged;
 	vm.getNumber        = number => new Array(number);
-	vm.onClickGoods     = gid => $state.go('root.withSidenav.goods', { gid : gid });
+	vm.onClickGoods     = gid => $state.go('root.withSidenav.goods', { gid });
+	vm.onClickFollow    = (uid, type)=> $state.go('root.oneCol.follow', { uid, type });
 	vm.editPhoto        = editPhoto;
 	vm.rateExchange     = rateExchange;
 

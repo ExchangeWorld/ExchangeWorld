@@ -136,20 +136,23 @@ router.get(&#x27;/&#x27;, (req, res) =&gt; {
 				attributes: [&#x27;uid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;]
 			}, {
 				model: comments,
-				as: &#x27;comments&#x27;
+				as: &#x27;comments&#x27;,
+				required: false
 			}, {
 				model: stars,
 				as: &#x27;star_goods&#x27;,
-				// include: [{
-				// 	model: users,
-				// 	as: &#x27;starring_user&#x27;,
-				// 	attributes: [&#x27;uid&#x27;]
-				// }],
-				attributes: [&#x27;sid&#x27;]
+				required: false
 			}]
 		})
 		.then(result =&gt; {
-			res.status(200).json(result);
+			var _result = result.toJSON();
+
+			// If the requester is registerrd
+			if (req.exwd.registered) {
+				_result.starredByUser = _result.star_goods.some(_star =&gt; _star.starring_user_uid === req.exwd.uid);
+			}
+
+			res.status(200).json(_result);
 		})
 		.catch(err =&gt; {
 			res.status(500).json({
@@ -163,7 +166,7 @@ router.get(&#x27;/&#x27;, (req, res) =&gt; {
  *
  * @method GET api/goods/of
  * @param  {Integer} owner_uid The owner
- * @return {JSON} The goods including comments and stars
+ * @return {Array} The goods including comments and stars
  */
 router.get(&#x27;/of&#x27;, (req, res) =&gt; {
 	var _owner_uid = parseInt(req.query.owner_uid, 10);
@@ -184,19 +187,26 @@ router.get(&#x27;/of&#x27;, (req, res) =&gt; {
 			},
 			include: [{
 				model: comments,
-				as: &#x27;comments&#x27;
+				as: &#x27;comments&#x27;,
+				required: false
 			}, {
 				model: stars,
 				as: &#x27;star_goods&#x27;,
-				include: [{
-					model: users,
-					as: &#x27;starring_user&#x27;,
-					attributes: [&#x27;uid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;]
-				}]
+				required: false
 			}]
 		})
 		.then(result =&gt; {
-			res.status(200).json(result);
+			var _result = result.map(_goods =&gt; _goods.toJSON());
+
+			// If the requester is registerrd, ADD starred property
+			if (req.exwd.registered) {
+				_result = _result.map(_goods =&gt; {
+					_goods.starredByUser = _goods.star_goods.some(_star =&gt; _star.starring_user_uid === req.exwd.uid);
+					return _goods;
+				});
+			}
+
+			res.status(200).json(_result);
 		})
 		.catch(err =&gt; {
 			res.status(500).json({
@@ -280,6 +290,9 @@ router.post(&#x27;/post&#x27;, (req, res) =&gt; {
  */
 router.put(&#x27;/edit&#x27;, (req, res) =&gt; {
 	var _gid = parseInt(req.body.gid, 10);
+	if (!_gid) {
+		_gid = parseInt(req.query.gid, 10);
+	}
 	var _name = req.body.name;
 	var _category = req.body.category;
 	var _description = req.body.description || &#x27;&#x27;;
@@ -350,6 +363,9 @@ router.put(&#x27;/edit&#x27;, (req, res) =&gt; {
 router.put(&#x27;/rate&#x27;, (req, res) =&gt; {
 	var rater_uid;
 	var _gid = parseInt(req.body.gid, 10);
+	if (!_gid) {
+		_gid = parseInt(req.query.gid, 10);
+	}
 	var _rate = parseFloat(req.body.rate);
 
 	// REQ EXWD CHECK

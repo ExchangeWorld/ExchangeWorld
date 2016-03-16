@@ -92,142 +92,521 @@
 
 &#x27;use strict&#x27;;
 
+var path = require(&#x27;path&#x27;);
+
 var express = require(&#x27;express&#x27;);
 var router = express.Router();
 
+var async = require(&#x27;async&#x27;);
+
 // Including tables
-var exchanges = require(&#x27;../ORM/Exchanges&#x27;);
-var messages = require(&#x27;../ORM/Messages&#x27;);
-var users = require(&#x27;../ORM/Users&#x27;);
+var chatrooms = require(path.resolve(__dirname, &#x27;../ORM/Chatrooms&#x27;));
+var users = require(path.resolve(__dirname, &#x27;../ORM/Users&#x27;));
 
 /**
- * Get chatroom&#x27;s messages of an Exchange
+ * Get chatrooms meta of a user
  *
- * @method GET api/chatroom/exchange
- * @param  {Integer} eid The ID of exchange
- * @param  {Integer=0} from From what number of messages
- * @param  {Integer=10} number How many messages to get
- * @return {JSON} Messages including &#x60;sender&#x60;
+ * @method GET api/chatroom/of/user
+ * @param  {Integer} user_uid The uid who wants the meta (But session-based, so not required in normal mode)
+ * @param  {Integer=0} offset Retrive from which number of chatrooms (Like database offset)
+ * @param  {Integer=20} limit How many chatrooms to retrive (Like database limit)
+ * @return {Array} Chatrooms meta
+ * @example
+&lt;pre&gt;
+[{
+	cid: 1,
+	lastmessage: &#x27;Hello?&#x27;,
+	members: [1, 3],
+	members_info : {
+		&#x27;1&#x27;: {
+			name: &#x27;Jhon&#x27;,
+			photo_path: &#x27;http://a.b.c/jhon.jpg&#x27;
+		},
+		&#x27;3&#x27;: {
+			name: &#x27;Bob&#x27;,
+			photo_path: &#x27;http://a.b.c/bob.jpg&#x27;
+		}
+	}
+}, {
+	cid: 2,
+	lastmessage: &#x27;Bye!&#x27;,
+	members: [2, 4, 6, 8],
+	members_info : {
+		&#x27;2&#x27;: {
+			name: &#x27;Kate&#x27;,
+			photo_path: &#x27;http://a.b.c/kate.jpg&#x27;
+		},
+		&#x27;4&#x27;: {
+			name: &#x27;George&#x27;,
+			photo_path: &#x27;http://a.b.c/george.jpg&#x27;
+		},
+		.....
+	}
+}];
+&lt;/pre&gt;
  */
-router.get(&#x27;/exchange&#x27;, (req, res) =&gt; {
+router.get(&#x27;/of/user&#x27;, (req, res) =&gt; {
+	var _user_uid;
+	var _offset = parseInt((req.query.offset || 0), 10);
+	var _limit = parseInt((req.query.limit || 20), 10);
 
-	var _eid = parseInt(req.query.eid, 10);
-	var _from = parseInt(req.query.from, 10);
-	var _number = parseInt(req.query.number, 10);
-
-	// default _from is 0 and _number is 10
-	// means you will get 10 latest messages in the chatroom
-	_from = (_from == _from ? _from : 0);
-	_number = (_number == _number ? _number : 10);
-
-	exchanges
-		.findOne({
-			where: {
-				eid: _eid
-			}
-		})
-		.then(_exchange =&gt; {
-			return messages
-				.findAll({
-					where: {
-						chatroom_cid: _exchange.chatroom_cid
-					},
-					order: [
-						[&#x27;mid&#x27;, &#x27;DESC&#x27;]
-					],
-					include: [{
-						model: users,
-						as: &#x27;sender&#x27;
-					}],
-					offset: _from,
-					limit: _number
-				});
-		})
-		.then(result =&gt; {
-			result
-				.then(r =&gt; {
-					res.json(r);
-				});
-		})
-		.catch(err =&gt; {
-			res.send({
-				error: err
-			});
+	// REQ EXWD CHECK
+	if (req.exwd.admin) {
+		_user_uid = parseInt(req.query.user_uid, 10);
+	} else if (req.exwd.anonymous) {
+		res.status(403).json({
+			error: &#x27;Permission denied&#x27;
 		});
+		return;
+	} else if (req.exwd.registered) {
+		_user_uid = req.exwd.uid;
+	} else {
+		res.status(403).json({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
 
+	if (!_user_uid) {
+		res.status(400).json({
+			error: &#x27;user_uid is not given&#x27;
+		});
+		return;
+	}
+
+	chatrooms
+		.findAll({
+			where: {
+				members: {
+					$contains: [_user_uid]
+				}
+			},
+			order: [
+				[&#x27;updated_at&#x27;, &#x27;DESC&#x27;]
+			],
+			limit: _limit,
+			offset: _offset
+		})
+		.then(_chatrooms =&gt; {
+
+			async
+			.map(_chatrooms.map(c =&gt; c.toJSON()),
+				(_chatroom, callback) =&gt; {
+					users
+						.findAll({
+							where: {
+								uid: {
+									$in: _chatroom.members
+								}
+							},
+							attributes: [&#x27;uid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;]
+						})
+						.then(_users =&gt; {
+							var members_info = {};
+
+							_users.forEach(_user =&gt; {
+								members_info[_user.uid] = {
+									name: _user.name,
+									photo_path: _user.photo_path
+								};
+							});
+
+							_chatroom.members_info = members_info;
+
+							return _chatroom;
+						})
+						.then(result =&gt; {
+							callback(null, result);
+						})
+						.catch(err =&gt; {
+							callback(err, null);
+						});
+				},
+				(err, results) =&gt; {
+					if (err) {
+						res.status(500).json({
+							error: err
+						});
+					}
+					res.status(200).json(results);
+				});
+		});
 });
 
 /**
- * Post a chatroom&#x27;s message of an Exchange
+ * Get a chatroom meta by given cid
  *
- * @method POST api/chatroom/exchange
- * @param  {Integer} eid The ID of exchange
- * @param  {Integer} sender_uid Who post the message
- * @param  {String} content The content of the message
- * @return {JSON} New created message object
+ * @method GET api/chatroom/one
+ * @param  {Integer} cid The chatroom&#x27;s cid
+ * @return {Json} Chatroom meta
+ * @example
+&lt;pre&gt;
+{
+	cid: 1,
+	lastmessage: &#x27;Hello?&#x27;,
+	members: [1, 3],
+	members_info : {
+		&#x27;1&#x27;: {
+			name: &#x27;Jhon&#x27;,
+			photo_path: &#x27;http://a.b.c/jhon.jpg&#x27;
+		},
+		&#x27;3&#x27;: {
+			name: &#x27;Bob&#x27;,
+			photo_path: &#x27;http://a.b.c/bob.jpg&#x27;
+		}
+	}
+}
+&lt;/pre&gt;
  */
-router.post(&#x27;/exchange&#x27;, (req, res) =&gt; {
+router.get(&#x27;/one&#x27;, (req, res) =&gt; {
+	var _user_uid;
+	var _cid = parseInt((req.query.cid || 0), 10);
 
-	var _eid = parseInt(req.body.eid, 10);
-	var _sender_uid = parseInt(req.body.sender_uid, 10);
-	var _content = req.body.content;
+	// REQ EXWD CHECK
+	if (req.exwd.admin) {
+		_user_uid = parseInt(req.query.user_uid, 10);
+	} else if (req.exwd.anonymous) {
+		res.status(403).json({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	} else if (req.exwd.registered) {
+		_user_uid = req.exwd.uid;
+	} else {
+		res.status(403).json({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
 
-	exchanges
+	if (!_cid) {
+		res.status(400).json({
+			error: &#x27;cid is not given&#x27;
+		});
+		return;
+	}
+
+	chatrooms
 		.findOne({
 			where: {
-				eid: _eid
-			}
-		})
-		.then(_exchange =&gt; {
-			return messages
-				.create({
-					sender_uid: _sender_uid,
-					chatroom_cid: _exchange.chatroom_cid,
-					content: _content
-				});
-		})
-		.then(result =&gt; {
-			result
-				.then(r =&gt; {
-					res.json(r);
-				});
-		})
-		.catch(err =&gt; {
-			res.send({
-				error: err
-			});
-		});
-});
-
-/**
- * Read a chatroom&#x27;s message
- *
- * @method PUT api/chatroom/read
- * @param  {Integer} cid The ID of chatroom
- * @param  {Integer} receiver_uid Who received the message (Not sender!)
- * @return {JSON} Updated message object
- */
-router.put(&#x27;/read&#x27;, (req, res) =&gt; {
-
-	var _cid = parseInt(req.body.cid, 10);
-	var _receiver_uid = parseInt(req.body.receiver_uid, 10);
-
-	messages
-		.update({
-			unread: false
-		}, {
-			where: {
-				chatroom_cid: _cid,
-				sender_uid: {
-					$ne: _receiver_uid
+				cid: _cid,
+				members: {
+					$contains: [_user_uid]
 				}
 			}
 		})
+		.then(_chatroom =&gt; {
+			if (_chatroom) {
+				var __chatroom = _chatroom.toJSON();
+
+				return users
+					.findAll({
+						where: {
+							uid: {
+								$in: _chatroom.members
+							}
+						},
+						attributes: [&#x27;uid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;]
+					})
+					.then(_users =&gt; {
+						var members_info = {};
+
+						_users.forEach(_user =&gt; {
+							members_info[_user.uid] = {
+								name: _user.name,
+								photo_path: _user.photo_path
+							};
+						});
+
+						__chatroom.members_info = members_info;
+
+						return __chatroom;
+					});
+			}
+
+			return null;
+		})
 		.then(result =&gt; {
-			res.json(result);
+			res.status(200).json(result);
 		})
 		.catch(err =&gt; {
-			res.send({
+			res.status(500).json({
+				error: err
+			});
+		});
+});
+
+/**
+ * Let a user join a chatroom
+ *
+ * @method PUT api/chatroom/join
+ * @param  {Integer} cid The id of the room wanna join
+ * @param  {Integer} user_uid The id of the user who will join the chatroom (Can be others! Like invitation, but a user cannot invite itself to the chatroom)
+ * @return {JSON} Modified chatroom object
+ */
+router.put(&#x27;/join&#x27;, (req, res) =&gt; {
+	var _cid = parseInt(req.body.cid, 10);
+	if (!_cid) {
+		_cid = parseInt(req.query.cid, 10);
+	}
+	var _user_uid = parseInt(req.body.user_uid, 10);
+	var _requester_uid;
+
+	if (!_cid) {
+		res.status(400).json({
+			error: &#x27;cid is not given&#x27;
+		});
+		return;
+	}
+
+	if (!_user_uid) {
+		res.status(400).json({
+			error: &#x27;user_uid is not given&#x27;
+		});
+		return;
+	}
+
+	// REQ EXWD CHECK
+	if (req.exwd.admin) {
+		console.log(&#x27;Nothing&#x27;);
+	} else if (req.exwd.anonymous) {
+		res.status(403).json({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	} else if (req.exwd.registered) {
+		_requester_uid = req.exwd.uid;
+	} else {
+		res.status(403).json({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
+	var queryTmp = (req.exwd.admin ? {
+		where: {
+			cid: _cid
+		}
+	} : {
+		where: {
+			cid: _cid,
+			members: {
+				$contains: [_requester_uid]
+			}
+		}
+	});
+
+	chatrooms
+		.findOne(queryTmp)
+		.then(result =&gt; {
+			if (result) {
+				let tmpSet = new Set(result.members);
+				tmpSet.add(_user_uid);
+				result.members = Array.from(tmpSet);
+				return result.save();
+			}
+			return result;
+		})
+		.then(result =&gt; {
+			res.status(200).json(result);
+		})
+		.catch(err =&gt; {
+			res.status(500).json({
+				error: err
+			});
+		});
+});
+
+/**
+ * Leave from a chatroom
+ *
+ * @method PUT api/chatroom/leave
+ * @param  {Integer} cid The id of the room wanna leave from
+ * @param  {Integer} user_uid The id of the user who will leave the chatroom
+ * @return {JSON} Modified chatroom object
+ */
+router.put(&#x27;/leave&#x27;, (req, res) =&gt; {
+	var _cid = parseInt(req.body.cid, 10);
+	if (!_cid) {
+		_cid = parseInt(req.query.cid, 10);
+	}
+	var _user_uid = parseInt(req.body.user_uid, 10);
+	var _requester_uid;
+
+	if (!_cid) {
+		res.status(400).json({
+			error: &#x27;cid is not given&#x27;
+		});
+		return;
+	}
+
+	if (!_user_uid) {
+		res.status(400).json({
+			error: &#x27;user_uid is not given&#x27;
+		});
+		return;
+	}
+
+	// REQ EXWD CHECK
+	if (req.exwd.admin) {
+		console.log(&#x27;Nothing&#x27;);
+	} else if (req.exwd.anonymous) {
+		res.status(403).json({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	} else if (req.exwd.registered) {
+		_requester_uid = req.exwd.uid;
+	} else {
+		res.status(403).json({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
+	var queryTmp = (req.exwd.admin ? {
+		where: {
+			cid: _cid
+		}
+	} : {
+		where: {
+			cid: _cid,
+			members: {
+				$contains: [_requester_uid]
+			}
+		}
+	});
+
+	chatrooms
+		.findOne(queryTmp)
+		.then(result =&gt; {
+			if (result) {
+				let tmpSet = new Set(result.members);
+				tmpSet.delete(_user_uid);
+				result.members = Array.from(tmpSet);
+				return result.save();
+			}
+			return result;
+		})
+		.then(result =&gt; {
+			res.status(200).json(result);
+		})
+		.catch(err =&gt; {
+			res.status(500).json({
+				error: err
+			});
+		});
+});
+
+/**
+ * Create a chatroom
+ *
+ * @method POST api/chatroom/create
+ * @param  {String} members_json A JSON-Stringified members array like &quot;[1,2,3,4]&quot;, at least two people
+ * @return {JSON} New created chatroom object
+ */
+router.post(&#x27;/create&#x27;, (req, res) =&gt; {
+	var _members_json = JSON.parse(req.body.members_json);
+
+	// REQ EXWD CHECK
+	if (req.exwd.admin) {
+		console.log(&#x27;Nothing&#x27;);
+	} else if (req.exwd.anonymous) {
+		res.status(403).json({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	} else if (req.exwd.registered) {
+		if (_members_json.indexOf(req.exwd.uid) === -1) {
+			_members_json.push(req.exwd.uid);
+		}
+	} else {
+		res.status(403).json({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
+	if (_members_json.length &lt; 2) {
+		res.status(400).json({
+			error: &#x27;members_json is too short, at least two&#x27;
+		});
+		return;
+	}
+
+	// Make it a Set !
+	var tmpSet = new Set(_members_json);
+	_members_json = Array.from(tmpSet);
+
+	chatrooms
+		.create({
+			members: _members_json
+		})
+		.then(result =&gt; {
+			res.status(201).json(result);
+		})
+		.catch(err =&gt; {
+			res.status(500).json({
+				error: err
+			});
+		});
+});
+
+/**
+ * Delete a chatroom
+ *
+ * @method DELETE api/chatroom/delete
+ * @param  {Integer} cid The id of the room going to be deleted
+ * @return {Integer} The number of processed chatroom(s) (Should be 1)
+ */
+router.delete(&#x27;/delete&#x27;, (req, res) =&gt; {
+	var _user_uid;
+	var _cid = parseInt(req.query.cid, 10);
+
+	// REQ EXWD CHECK
+	if (req.exwd.admin) {
+		console.log(&#x27;Nothing&#x27;);
+	} else if (req.exwd.anonymous) {
+		res.status(403).json({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	} else if (req.exwd.registered) {
+		_user_uid = req.exwd.uid;
+	} else {
+		res.status(403).json({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
+	if ((!_cid) || (!_user_uid)) {
+		res.status(400).json({
+			error: &#x27;cid or user_uid is wrong&#x27;
+		});
+		return;
+	}
+
+	var queryTmp = (req.exwd.admin ? {
+		where: {
+			cid: _cid
+		}
+	} : {
+		where: {
+			cid: _cid,
+			members: {
+				$contains: [_user_uid]
+			}
+		}
+	});
+
+	chatrooms
+		.destroy(queryTmp)
+		.then(result =&gt; {
+			res.status(200).json(result);
+		})
+		.catch(err =&gt; {
+			res.status(500).json({
 				error: err
 			});
 		});

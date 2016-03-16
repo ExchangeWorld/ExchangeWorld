@@ -111,7 +111,7 @@ var exchanges_of_user_one = require(path.resolve(__dirname, &#x27;../queries/exc
  * Get all of exchanges
  *
  * @method GET api/exchange/all
- * @return {JSON} Exchanges including goods and owners
+ * @return {Array} Exchanges including goods and owners
  */
 router.get(&#x27;/all&#x27;, (req, res) =&gt; {
 	if (!req.exwd.admin) {
@@ -166,7 +166,7 @@ router.get(&#x27;/all&#x27;, (req, res) =&gt; {
  *
  * @method GET api/exchange/of/user/all
  * @param  {Integer} owner_uid The owner
- * @return {JSON} Exchanges incluing goods( owner_goods, other_goods )
+ * @return {Array} Exchanges incluing goods( owner_goods, other_goods )
  */
 router.get(&#x27;/of/user/all&#x27;, (req, res) =&gt; {
 	var _owner_uid;
@@ -433,9 +433,7 @@ router.post(&#x27;/create&#x27;, (req, res) =&gt; {
 									g2.save();
 
 									chatrooms
-										.create({
-											members: &#x27;&#x27;
-										})
+										.create()
 										.then(the_chatroom =&gt; {
 											exchanges
 												.create({
@@ -496,6 +494,9 @@ router.post(&#x27;/create&#x27;, (req, res) =&gt; {
  */
 router.put(&#x27;/drop&#x27;, (req, res) =&gt; {
 	var _eid = parseInt(req.body.eid, 10);
+	if (!_eid) {
+		_eid = parseInt(req.query.eid, 10);
+	}
 	var _owner_uid;
 
 	// REQ EXWD CHECK
@@ -567,6 +568,9 @@ router.put(&#x27;/drop&#x27;, (req, res) =&gt; {
  */
 router.put(&#x27;/agree&#x27;, (req, res) =&gt; {
 	var _eid = parseInt(req.body.eid, 10);
+	if (!_eid) {
+		_eid = parseInt(req.query.eid, 10);
+	}
 	var _owner_uid;
 
 	// REQ EXWD CHECK

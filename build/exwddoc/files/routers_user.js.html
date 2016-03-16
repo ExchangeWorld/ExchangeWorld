@@ -197,6 +197,58 @@ router.get(&#x27;/&#x27;, (req, res) =&gt; {
 		});
 });
 
+router.get(&#x27;/me&#x27;, (req, res) =&gt; {
+	var myId = req.exwd.uid || -1;
+
+	// Emit a find operation with orm in table &#x60;users&#x60;
+	users
+		.findOne({
+			where: {
+				uid: myId
+			},
+			include: [{
+				model: goods,
+				as: &#x27;goods&#x27;,
+				where: {
+					deleted: 0
+				},
+				required: false
+			}, {
+				model: follows,
+				as: &#x27;follows_followed&#x27;,
+				required: false,
+				attributes: [&#x27;fid&#x27;]
+			}, {
+				model: follows,
+				as: &#x27;follows_follower&#x27;,
+				required: false,
+				attributes: [&#x27;fid&#x27;]
+			}, {
+				model: stars,
+				as: &#x27;star_starring_user&#x27;,
+				include: [{
+					model: goods,
+					as: &#x27;goods&#x27;,
+					where: {
+						deleted: 0
+					},
+					required: false,
+					attributes: [&#x27;gid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;, &#x27;category&#x27;]
+				}],
+				required: false,
+				attributes: [&#x27;sid&#x27;]
+			}]
+		})
+		.then(result =&gt; {
+			res.status(200).json(result);
+		})
+		.catch(err =&gt; {
+			res.status(500).json({
+				error: err
+			});
+		});
+});
+
 /**
  * Edit a user&#x27;s profile, need token
  *
@@ -218,6 +270,9 @@ router.put(&#x27;/edit&#x27;, (req, res) =&gt; {
 	// REQ EXWD CHECK
 	if (req.exwd.admin) {
 		_uid = parseInt(req.body._uid, 10);
+		if (!_uid) {
+			_uid = parseInt(req.query.uid, 10);
+		}
 	} else if (req.exwd.anonymous) {
 		res.status(403).json({
 			error: &#x27;Permission denied&#x27;

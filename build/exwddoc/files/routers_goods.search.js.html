@@ -111,19 +111,16 @@ var stars = require(path.resolve(__dirname, &#x27;../ORM/Stars&#x27;));
  * @param  {String=&#x27;&#x27;} category
  * @param  {Float=-1.0} position_x
  * @param  {Float=-1.0} position_y
- * @param  {Integer=-1} from
- * @param  {Integer=-1} to
- * @return {JSON} The goods including users and stars
+ * @param  {Integer=0} offset
+ * @param  {Integer=100} limit
+ * @return {Array} The goods including users and stars
  */
 router.get(&#x27;/&#x27;, (req, res) =&gt; {
 	var name = req.query.name || &#x27;&#x27;;
-	// var wishlist = req.query.wishlist || &#x27;&#x27;;
 	var category = req.query.category || &#x27;&#x27;;
-	// var position_x = parseFloat(req.query.position_x) || -1.0;
-	// var position_y = parseFloat(req.query.position_y) || -1.0;
 	var bound = req.query.bound || &#x27;-90,0,90,180&#x27;;
-	// var from = parseInt(req.query.from, 10) || -1;
-	// var to = parseInt(req.query.to, 10) || -1;
+	var offset = parseInt(req.query.offset || 0, 10);
+	var limit = parseInt(req.query.limit || 100, 10);
 
 	/*
 	 * [ lat_lo, lng_lo, lat_hi, lng_hi ] for this bounds,
@@ -166,19 +163,31 @@ router.get(&#x27;/&#x27;, (req, res) =&gt; {
 				model: users,
 				as: &#x27;owner&#x27;,
 				required: true,
-				attributes: [&#x27;uid&#x27;, &#x27;photo_path&#x27;]
+				attributes: [&#x27;uid&#x27;, &#x27;photo_path&#x27;, &#x27;name&#x27;]
 			}, {
 				model: stars,
 				as: &#x27;star_goods&#x27;,
 				attributes: [&#x27;sid&#x27;, &#x27;starring_user_uid&#x27;]
 			}],
-			attributes: [&#x27;gid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;, &#x27;category&#x27;],
+			attributes: [&#x27;gid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;, &#x27;category&#x27;, &#x27;position_x&#x27;, &#x27;position_y&#x27;],
 			order: [
 				[&#x27;gid&#x27;, &#x27;DESC&#x27;]
-			]
+			],
+			offset: offset,
+			limit: limit
 		})
 		.then(result =&gt; {
-			res.status(200).json(result);
+			var _result = result.map(_goods =&gt; _goods.toJSON());
+
+			// If the requester is registerrd, ADD starred property
+			if (req.exwd.registered) {
+				_result = _result.map(_goods =&gt; {
+					_goods.starredByUser = _goods.star_goods.some(_star =&gt; _star.starring_user_uid === req.exwd.uid);
+					return _goods;
+				});
+			}
+
+			res.status(200).json(_result);
 		})
 		.catch(err =&gt; {
 			res.status(500).json({

@@ -71,9 +71,12 @@
                 </div>
                 <div class="bd">
                     <ul>
-                            <li><a href="#methods_GET api/chatroom/exchange">GET api/chatroom/exchange</a></li>
-                            <li><a href="#methods_POST api/chatroom/exchange">POST api/chatroom/exchange</a></li>
-                            <li><a href="#methods_PUT api/chatroom/read">PUT api/chatroom/read</a></li>
+                            <li><a href="#methods_DELETE api/chatroom/delete">DELETE api/chatroom/delete</a></li>
+                            <li><a href="#methods_GET api/chatroom/of/user">GET api/chatroom/of/user</a></li>
+                            <li><a href="#methods_GET api/chatroom/one">GET api/chatroom/one</a></li>
+                            <li><a href="#methods_POST api/chatroom/create">POST api/chatroom/create</a></li>
+                            <li><a href="#methods_PUT api/chatroom/join">PUT api/chatroom/join</a></li>
+                            <li><a href="#methods_PUT api/chatroom/leave">PUT api/chatroom/leave</a></li>
                     </ul>
                 </div>
             </div>
@@ -105,92 +108,201 @@
     </ul>
     <div>
             <div id="methods">
-<a name="methods_GET api/chatroom/exchange"></a>
+<a name="methods_DELETE api/chatroom/delete"></a>
 <div class="method item">
-    JSON <strong class="name"><code>GET api&#x2F;chatroom&#x2F;exchange</code></strong>( <code>eid, from, number </code> ) 
+    Integer <strong class="name"><code>DELETE api&#x2F;chatroom&#x2F;delete</code></strong>( <code>cid </code> ) 
     <br>
     <span class="foundat">
         
-        <a href="../files/routers_chatroom.js.html#l17"><code>routers&#x2F;chatroom.js:17</code></a>
+        <a href="../files/routers_chatroom.js.html#l469"><code>routers&#x2F;chatroom.js:469</code></a>
     </span><br>
-    <p>Get chatroom's messages of an Exchange</p>
-
-    <strong>Parameters:</strong>
-    <ul class="params">
-        <li>
-            <code>eid</code> <strong>&lt;Integer&gt;</strong>
-        <p>The ID of exchange</p>
-
-        </li>
-        <li>
-            <code>from</code> <strong>&lt;Integer=0&gt;</strong>
-        <p>From what number of messages</p>
-
-        </li>
-        <li>
-            <code>number</code> <strong>&lt;Integer=10&gt;</strong>
-        <p>How many messages to get</p>
-
-        </li>
-    </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>Messages including <code>sender</code></p>
-</div>
-</div>
-<a name="methods_POST api/chatroom/exchange"></a>
-<div class="method item">
-    JSON <strong class="name"><code>POST api&#x2F;chatroom&#x2F;exchange</code></strong>( <code>eid, sender_uid, content </code> ) 
-    <br>
-    <span class="foundat">
-        
-        <a href="../files/routers_chatroom.js.html#l74"><code>routers&#x2F;chatroom.js:74</code></a>
-    </span><br>
-    <p>Post a chatroom's message of an Exchange</p>
-
-    <strong>Parameters:</strong>
-    <ul class="params">
-        <li>
-            <code>eid</code> <strong>&lt;Integer&gt;</strong>
-        <p>The ID of exchange</p>
-
-        </li>
-        <li>
-            <code>sender_uid</code> <strong>&lt;Integer&gt;</strong>
-        <p>Who post the message</p>
-
-        </li>
-        <li>
-            <code>content</code> <strong>&lt;String&gt;</strong>
-        <p>The content of the message</p>
-
-        </li>
-    </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>New created message object</p>
-</div>
-</div>
-<a name="methods_PUT api/chatroom/read"></a>
-<div class="method item">
-    JSON <strong class="name"><code>PUT api&#x2F;chatroom&#x2F;read</code></strong>( <code>cid, receiver_uid </code> ) 
-    <br>
-    <span class="foundat">
-        
-        <a href="../files/routers_chatroom.js.html#l116"><code>routers&#x2F;chatroom.js:116</code></a>
-    </span><br>
-    <p>Read a chatroom's message</p>
+    <p>Delete a chatroom</p>
 
     <strong>Parameters:</strong>
     <ul class="params">
         <li>
             <code>cid</code> <strong>&lt;Integer&gt;</strong>
-        <p>The ID of chatroom</p>
-
-        </li>
-        <li>
-            <code>receiver_uid</code> <strong>&lt;Integer&gt;</strong>
-        <p>Who received the message (Not sender!)</p>
+        <p>The id of the room going to be deleted</p>
 
         </li>
     </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>Updated message object</p>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Integer&gt; <p>The number of processed chatroom(s) (Should be 1)</p>
+</div>
+</div>
+<a name="methods_GET api/chatroom/of/user"></a>
+<div class="method item">
+    Array <strong class="name"><code>GET api&#x2F;chatroom&#x2F;of&#x2F;user</code></strong>( <code>user_uid, offset, limit </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_chatroom.js.html#l20"><code>routers&#x2F;chatroom.js:20</code></a>
+    </span><br>
+    <p>Get chatrooms meta of a user</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>user_uid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The uid who wants the meta (But session-based, so not required in normal mode)</p>
+
+        </li>
+        <li>
+            <code>offset</code> <strong>&lt;Integer=0&gt;</strong>
+        <p>Retrive from which number of chatrooms (Like database offset)</p>
+
+        </li>
+        <li>
+            <code>limit</code> <strong>&lt;Integer=20&gt;</strong>
+        <p>How many chatrooms to retrive (Like database limit)</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Array&gt; <p>Chatrooms meta</p>
+</div>
+        <h5>Example</h5>
+        <pre>
+[{
+    cid: 1,
+    lastmessage: 'Hello?',
+    members: [1, 3],
+    members_info : {
+        '1': {
+            name: 'Jhon',
+            photo_path: 'http://a.b.c/jhon.jpg'
+        },
+        '3': {
+            name: 'Bob',
+            photo_path: 'http://a.b.c/bob.jpg'
+        }
+    }
+}, {
+    cid: 2,
+    lastmessage: 'Bye!',
+    members: [2, 4, 6, 8],
+    members_info : {
+        '2': {
+            name: 'Kate',
+            photo_path: 'http://a.b.c/kate.jpg'
+        },
+        '4': {
+            name: 'George',
+            photo_path: 'http://a.b.c/george.jpg'
+        },
+        .....
+    }
+}];
+</pre>
+</div>
+<a name="methods_GET api/chatroom/one"></a>
+<div class="method item">
+    Json <strong class="name"><code>GET api&#x2F;chatroom&#x2F;one</code></strong>( <code>cid </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_chatroom.js.html#l150"><code>routers&#x2F;chatroom.js:150</code></a>
+    </span><br>
+    <p>Get a chatroom meta by given cid</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>cid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The chatroom's cid</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Json&gt; <p>Chatroom meta</p>
+</div>
+        <h5>Example</h5>
+        <pre>
+{
+    cid: 1,
+    lastmessage: 'Hello?',
+    members: [1, 3],
+    members_info : {
+        '1': {
+            name: 'Jhon',
+            photo_path: 'http://a.b.c/jhon.jpg'
+        },
+        '3': {
+            name: 'Bob',
+            photo_path: 'http://a.b.c/bob.jpg'
+        }
+    }
+}
+</pre>
+</div>
+<a name="methods_POST api/chatroom/create"></a>
+<div class="method item">
+    JSON <strong class="name"><code>POST api&#x2F;chatroom&#x2F;create</code></strong>( <code>members_json </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_chatroom.js.html#l415"><code>routers&#x2F;chatroom.js:415</code></a>
+    </span><br>
+    <p>Create a chatroom</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>members_json</code> <strong>&lt;String&gt;</strong>
+        <p>A JSON-Stringified members array like &quot;[1,2,3,4]&quot;, at least two people</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>New created chatroom object</p>
+</div>
+</div>
+<a name="methods_PUT api/chatroom/join"></a>
+<div class="method item">
+    JSON <strong class="name"><code>PUT api&#x2F;chatroom&#x2F;join</code></strong>( <code>cid, user_uid </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_chatroom.js.html#l253"><code>routers&#x2F;chatroom.js:253</code></a>
+    </span><br>
+    <p>Let a user join a chatroom</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>cid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The id of the room wanna join</p>
+
+        </li>
+        <li>
+            <code>user_uid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The id of the user who will join the chatroom (Can be others! Like invitation, but a user cannot invite itself to the chatroom)</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>Modified chatroom object</p>
+</div>
+</div>
+<a name="methods_PUT api/chatroom/leave"></a>
+<div class="method item">
+    JSON <strong class="name"><code>PUT api&#x2F;chatroom&#x2F;leave</code></strong>( <code>cid, user_uid </code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/routers_chatroom.js.html#l334"><code>routers&#x2F;chatroom.js:334</code></a>
+    </span><br>
+    <p>Leave from a chatroom</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>cid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The id of the room wanna leave from</p>
+
+        </li>
+        <li>
+            <code>user_uid</code> <strong>&lt;Integer&gt;</strong>
+        <p>The id of the user who will leave the chatroom</p>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>Modified chatroom object</p>
 </div>
 </div>
             </div>

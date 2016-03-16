@@ -107,7 +107,7 @@ var users = require(path.resolve(__dirname, &#x27;../ORM/Users&#x27;));
  *
  * @method GET api/star/to
  * @param  {Integer} goods_gid The goods starred by a user
- * @return {JSON} The stars including users
+ * @return {Array} The stars including users
  */
 router.get(&#x27;/to&#x27;, (req, res) =&gt; {
 	var _goods_gid = parseInt(req.query.goods_gid, 10);
@@ -138,7 +138,7 @@ router.get(&#x27;/to&#x27;, (req, res) =&gt; {
  *
  * @method GET api/star/by
  * @param  {Integer} starring_user_uid Who star the goods
- * @return {JSON} The stars including goods
+ * @return {Array} The stars including goods
  */
 router.get(&#x27;/by&#x27;, (req, res) =&gt; {
 	var _starring_user_uid = parseInt(req.query.starring_user_uid, 10);

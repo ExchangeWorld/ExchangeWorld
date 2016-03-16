@@ -109,7 +109,7 @@ var users = require(path.resolve(__dirname, &#x27;../ORM/Users&#x27;));
  *
  * @method GET api/queue/of/goods
  * @param  {Integer} host_goods_gid
- * @return {JSON} The queues including goods and owners (ASC)
+ * @return {Array} The queues including goods and owners (ASC)
  */
 router.get(&#x27;/of/goods&#x27;, (req, res) =&gt; {
 	var _owner_uid;
@@ -188,7 +188,7 @@ router.get(&#x27;/of/goods&#x27;, (req, res) =&gt; {
  *
  * @method GET api/queue/by/goods
  * @param  {Integer} queuer_goods_gid
- * @return {JSON} The queues including goods and owners (DESC)
+ * @return {Array} The queues including goods and owners (DESC)
  */
 router.get(&#x27;/by/goods&#x27;, (req, res) =&gt; {
 	var _owner_uid;
@@ -267,7 +267,7 @@ router.get(&#x27;/by/goods&#x27;, (req, res) =&gt; {
  *
  * @method GET api/queue/of/person
  * @param  {Integer} host_user_uid Who owns the host_goods
- * @return {JSON} The queues including goods and owners
+ * @return {Array} The queues including goods and owners
  */
 router.get(&#x27;/of/person&#x27;, (req, res) =&gt; {
 	var _host_user_uid;
@@ -334,7 +334,7 @@ router.get(&#x27;/of/person&#x27;, (req, res) =&gt; {
  *
  * @method GET api/queue/by/person
  * @param  {Integer} queuer_user_uid Who owns the queuer_goods
- * @return {JSON} The queues including goods and owners
+ * @return {Array} The queues including goods and owners
  */
 router.get(&#x27;/by/person&#x27;, (req, res) =&gt; {
 	var _queuer_user_uid;

@@ -1,0 +1,6 @@
+{
+  "name": "ExchangeWorld",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any"
+}

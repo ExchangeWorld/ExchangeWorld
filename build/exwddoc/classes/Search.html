@@ -105,7 +105,7 @@
             <div id="methods">
 <a name="methods_GET api/goods/search"></a>
 <div class="method item">
-    JSON <strong class="name"><code>GET api&#x2F;goods&#x2F;search</code></strong>( <code>name, wishlist, category, position_x, position_y, from, to </code> ) 
+    Array <strong class="name"><code>GET api&#x2F;goods&#x2F;search</code></strong>( <code>name, wishlist, category, position_x, position_y, offset, limit </code> ) 
     <br>
     <span class="foundat">
         
@@ -136,15 +136,15 @@
          
         </li>
         <li>
-            <code>from</code> <strong>&lt;Integer=-1&gt;</strong>
+            <code>offset</code> <strong>&lt;Integer=0&gt;</strong>
          
         </li>
         <li>
-            <code>to</code> <strong>&lt;Integer=-1&gt;</strong>
+            <code>limit</code> <strong>&lt;Integer=100&gt;</strong>
          
         </li>
     </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>The goods including users and stars</p>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Array&gt; <p>The goods including users and stars</p>
 </div>
 </div>
             </div>

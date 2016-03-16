@@ -282,7 +282,7 @@
     "classitems": [
         {
             "file": "routers/authenticate.js",
-            "line": 35,
+            "line": 40,
             "description": "Register a new user",
             "itemtype": "method",
             "name": "POST api/authenticate/register",
@@ -326,7 +326,7 @@
         },
         {
             "file": "routers/authenticate.js",
-            "line": 108,
+            "line": 141,
             "description": "Login",
             "itemtype": "method",
             "name": "POST api/authenticate/login",
@@ -359,7 +359,7 @@
         },
         {
             "file": "routers/authenticate.js",
-            "line": 197,
+            "line": 231,
             "description": "Token validation",
             "itemtype": "method",
             "name": "GET *?token=...",
@@ -381,83 +381,141 @@
         },
         {
             "file": "routers/chatroom.js",
-            "line": 17,
-            "description": "Get chatroom's messages of an Exchange",
+            "line": 20,
+            "description": "Get chatrooms meta of a user",
             "itemtype": "method",
-            "name": "GET api/chatroom/exchange",
+            "name": "GET api/chatroom/of/user",
             "params": [
                 {
-                    "name": "eid",
-                    "description": "The ID of exchange",
+                    "name": "user_uid",
+                    "description": "The uid who wants the meta (But session-based, so not required in normal mode)",
                     "type": "Integer"
                 },
                 {
-                    "name": "from",
-                    "description": "From what number of messages",
+                    "name": "offset",
+                    "description": "Retrive from which number of chatrooms (Like database offset)",
                     "type": "Integer=0"
                 },
                 {
-                    "name": "number",
-                    "description": "How many messages to get",
-                    "type": "Integer=10"
+                    "name": "limit",
+                    "description": "How many chatrooms to retrive (Like database limit)",
+                    "type": "Integer=20"
                 }
             ],
             "return": {
-                "description": "Messages including `sender`",
+                "description": "Chatrooms meta",
+                "type": "Array"
+            },
+            "example": [
+                "\n<pre>\n[{\n\tcid: 1,\n\tlastmessage: 'Hello?',\n\tmembers: [1, 3],\n\tmembers_info : {\n\t\t'1': {\n\t\t\tname: 'Jhon',\n\t\t\tphoto_path: 'http://a.b.c/jhon.jpg'\n\t\t},\n\t\t'3': {\n\t\t\tname: 'Bob',\n\t\t\tphoto_path: 'http://a.b.c/bob.jpg'\n\t\t}\n\t}\n}, {\n\tcid: 2,\n\tlastmessage: 'Bye!',\n\tmembers: [2, 4, 6, 8],\n\tmembers_info : {\n\t\t'2': {\n\t\t\tname: 'Kate',\n\t\t\tphoto_path: 'http://a.b.c/kate.jpg'\n\t\t},\n\t\t'4': {\n\t\t\tname: 'George',\n\t\t\tphoto_path: 'http://a.b.c/george.jpg'\n\t\t},\n\t\t.....\n\t}\n}];\n</pre>"
+            ],
+            "class": "Chatroom"
+        },
+        {
+            "file": "routers/chatroom.js",
+            "line": 150,
+            "description": "Get a chatroom meta by given cid",
+            "itemtype": "method",
+            "name": "GET api/chatroom/one",
+            "params": [
+                {
+                    "name": "cid",
+                    "description": "The chatroom's cid",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Chatroom meta",
+                "type": "Json"
+            },
+            "example": [
+                "\n<pre>\n{\n\tcid: 1,\n\tlastmessage: 'Hello?',\n\tmembers: [1, 3],\n\tmembers_info : {\n\t\t'1': {\n\t\t\tname: 'Jhon',\n\t\t\tphoto_path: 'http://a.b.c/jhon.jpg'\n\t\t},\n\t\t'3': {\n\t\t\tname: 'Bob',\n\t\t\tphoto_path: 'http://a.b.c/bob.jpg'\n\t\t}\n\t}\n}\n</pre>"
+            ],
+            "class": "Chatroom"
+        },
+        {
+            "file": "routers/chatroom.js",
+            "line": 253,
+            "description": "Let a user join a chatroom",
+            "itemtype": "method",
+            "name": "PUT api/chatroom/join",
+            "params": [
+                {
+                    "name": "cid",
+                    "description": "The id of the room wanna join",
+                    "type": "Integer"
+                },
+                {
+                    "name": "user_uid",
+                    "description": "The id of the user who will join the chatroom (Can be others! Like invitation, but a user cannot invite itself to the chatroom)",
+                    "type": "Integer"
+                }
+            ],
+            "return": {
+                "description": "Modified chatroom object",
                 "type": "JSON"
             },
             "class": "Chatroom"
         },
         {
             "file": "routers/chatroom.js",
-            "line": 74,
-            "description": "Post a chatroom's message of an Exchange",
+            "line": 334,
+            "description": "Leave from a chatroom",
             "itemtype": "method",
-            "name": "POST api/chatroom/exchange",
+            "name": "PUT api/chatroom/leave",
             "params": [
                 {
-                    "name": "eid",
-                    "description": "The ID of exchange",
+                    "name": "cid",
+                    "description": "The id of the room wanna leave from",
                     "type": "Integer"
                 },
                 {
-                    "name": "sender_uid",
-                    "description": "Who post the message",
+                    "name": "user_uid",
+                    "description": "The id of the user who will leave the chatroom",
                     "type": "Integer"
-                },
+                }
+            ],
+            "return": {
+                "description": "Modified chatroom object",
+                "type": "JSON"
+            },
+            "class": "Chatroom"
+        },
+        {
+            "file": "routers/chatroom.js",
+            "line": 415,
+            "description": "Create a chatroom",
+            "itemtype": "method",
+            "name": "POST api/chatroom/create",
+            "params": [
                 {
-                    "name": "content",
-                    "description": "The content of the message",
+                    "name": "members_json",
+                    "description": "A JSON-Stringified members array like \"[1,2,3,4]\", at least two people",
                     "type": "String"
                 }
             ],
             "return": {
-                "description": "New created message object",
+                "description": "New created chatroom object",
                 "type": "JSON"
             },
             "class": "Chatroom"
         },
         {
             "file": "routers/chatroom.js",
-            "line": 116,
-            "description": "Read a chatroom's message",
+            "line": 469,
+            "description": "Delete a chatroom",
             "itemtype": "method",
-            "name": "PUT api/chatroom/read",
+            "name": "DELETE api/chatroom/delete",
             "params": [
                 {
                     "name": "cid",
-                    "description": "The ID of chatroom",
-                    "type": "Integer"
-                },
-                {
-                    "name": "receiver_uid",
-                    "description": "Who received the message (Not sender!)",
+                    "description": "The id of the room going to be deleted",
                     "type": "Integer"
                 }
             ],
             "return": {
-                "description": "Updated message object",
-                "type": "JSON"
+                "description": "The number of processed chatroom(s) (Should be 1)",
+                "type": "Integer"
             },
             "class": "Chatroom"
         },
@@ -560,7 +618,7 @@
         },
         {
             "file": "routers/comment.js",
-            "line": 277,
+            "line": 280,
             "description": "Delete a comment",
             "itemtype": "method",
             "name": "DELETE api/comment/delete",
@@ -585,7 +643,7 @@
             "name": "GET api/exchange/all",
             "return": {
                 "description": "Exchanges including goods and owners",
-                "type": "JSON"
+                "type": "Array"
             },
             "class": "Exchange"
         },
@@ -604,7 +662,7 @@
             ],
             "return": {
                 "description": "Exchanges incluing goods( owner_goods, other_goods )",
-                "type": "JSON"
+                "type": "Array"
             },
             "class": "Exchange"
         },
@@ -677,7 +735,7 @@
         },
         {
             "file": "routers/exchange.js",
-            "line": 404,
+            "line": 402,
             "description": "Drop an exchange",
             "itemtype": "method",
             "name": "PUT api/exchange/drop",
@@ -696,7 +754,7 @@
         },
         {
             "file": "routers/exchange.js",
-            "line": 471,
+            "line": 472,
             "description": "Accept an exchange by a user\nAnd if two owners accept, then the exchange will be set status='completed'\nWhen completed, other exchanges include goods_one or goods_two will be set to status='dropped'\nAnd the goods that not goods_one or goods_two in the exchange will be set to exchanged=0",
             "itemtype": "method",
             "name": "PUT api/exchange/agree",
@@ -733,7 +791,7 @@
             ],
             "return": {
                 "description": "Users following given followed_uid",
-                "type": "JSON"
+                "type": "Array"
             },
             "class": "Follow"
         },
@@ -752,7 +810,7 @@
             ],
             "return": {
                 "description": "Users followed by given follower_uid",
-                "type": "JSON"
+                "type": "Array"
             },
             "class": "Follow"
         },
@@ -825,7 +883,7 @@
         },
         {
             "file": "routers/goods.js",
-            "line": 75,
+            "line": 78,
             "description": "Get all goods of given owner_uid",
             "itemtype": "method",
             "name": "GET api/goods/of",
@@ -838,13 +896,13 @@
             ],
             "return": {
                 "description": "The goods including comments and stars",
-                "type": "JSON"
+                "type": "Array"
             },
             "class": "Goods"
         },
         {
             "file": "routers/goods.js",
-            "line": 122,
+            "line": 132,
             "description": "Post a goods",
             "itemtype": "method",
             "name": "POST api/goods/post",
@@ -893,7 +951,7 @@
         },
         {
             "file": "routers/goods.js",
-            "line": 182,
+            "line": 192,
             "description": "Edit a goods",
             "itemtype": "method",
             "name": "PUT api/goods/edit",
@@ -942,7 +1000,7 @@
         },
         {
             "file": "routers/goods.js",
-            "line": 256,
+            "line": 269,
             "description": "Rate a goods",
             "itemtype": "method",
             "name": "PUT api/goods/rate",
@@ -966,7 +1024,7 @@
         },
         {
             "file": "routers/goods.js",
-            "line": 310,
+            "line": 326,
             "description": "Delete a goods (but not really)\nor if the goods is still in an exchange, this req will be ignored",
             "itemtype": "method",
             "name": "Delete api/goods/delete",
@@ -1016,135 +1074,48 @@
                     "type": "Float=-1.0"
                 },
                 {
-                    "name": "from",
+                    "name": "offset",
                     "description": "",
-                    "type": "Integer=-1"
+                    "type": "Integer=0"
                 },
                 {
-                    "name": "to",
+                    "name": "limit",
                     "description": "",
-                    "type": "Integer=-1"
+                    "type": "Integer=100"
                 }
             ],
             "return": {
                 "description": "The goods including users and stars",
-                "type": "JSON"
+                "type": "Array"
             },
             "class": "Search"
         },
         {
             "file": "routers/message.js",
-            "line": 16,
-            "description": "Get messages by given receiver_uid and sender_uid",
+            "line": 18,
+            "description": "Get messages in a chatroom",
             "itemtype": "method",
-            "name": "GET api/message",
+            "name": "GET api/message/of/chatroom",
             "params": [
                 {
-                    "name": "receiver_uid",
+                    "name": "chatroom_cid",
                     "description": "",
                     "type": "Integer"
                 },
                 {
-                    "name": "sender_uid",
-                    "description": "It can be not provided, will ignore sender",
-                    "type": "Integer"
-                },
-                {
-                    "name": "from",
+                    "name": "offset",
                     "description": "",
                     "type": "Integer=0"
                 },
                 {
-                    "name": "number",
+                    "name": "limit",
                     "description": "",
-                    "type": "Integer=10"
+                    "type": "Integer=20"
                 }
             ],
             "return": {
                 "description": "The messages including two users",
-                "type": "JSON"
-            },
-            "class": "Message"
-        },
-        {
-            "file": "routers/message.js",
-            "line": 105,
-            "description": "Get messages between two users",
-            "itemtype": "method",
-            "name": "GET api/message/between",
-            "params": [
-                {
-                    "name": "user1_uid",
-                    "description": "",
-                    "type": "Integer"
-                },
-                {
-                    "name": "user2_uid",
-                    "description": "",
-                    "type": "Integer"
-                },
-                {
-                    "name": "from",
-                    "description": "",
-                    "type": "Integer=0"
-                },
-                {
-                    "name": "number",
-                    "description": "",
-                    "type": "Integer=10"
-                }
-            ],
-            "return": {
-                "description": "The messages including two users",
-                "type": "JSON"
-            },
-            "class": "Message"
-        },
-        {
-            "file": "routers/message.js",
-            "line": 164,
-            "description": "Post messages by given receiver and sender",
-            "itemtype": "method",
-            "name": "POST api/message/post",
-            "params": [
-                {
-                    "name": "receiver_uid",
-                    "description": "The receiver",
-                    "type": "Integer"
-                },
-                {
-                    "name": "sender_uid",
-                    "description": "The sender",
-                    "type": "Integer"
-                },
-                {
-                    "name": "content",
-                    "description": "The content",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "New created message object",
-                "type": "JSON"
-            },
-            "class": "Message"
-        },
-        {
-            "file": "routers/message.js",
-            "line": 196,
-            "description": "Read a message",
-            "itemtype": "method",
-            "name": "PUT api/message/read",
-            "params": [
-                {
-                    "name": "mid",
-                    "description": "The ID of message",
-                    "type": "Integer"
-                }
-            ],
-            "return": {
-                "description": "Updated message object",
-                "type": "JSON"
+                "type": "Array"
             },
             "class": "Message"
         },
@@ -1264,7 +1235,7 @@
             ],
             "return": {
                 "description": "The queues including goods and owners (ASC)",
-                "type": "JSON"
+                "type": "Array"
             },
             "class": "Queue"
         },
@@ -1283,7 +1254,7 @@
             ],
             "return": {
                 "description": "The queues including goods and owners (DESC)",
-                "type": "JSON"
+                "type": "Array"
             },
             "class": "Queue"
         },
@@ -1302,7 +1273,7 @@
             ],
             "return": {
                 "description": "The queues including goods and owners",
-                "type": "JSON"
+                "type": "Array"
             },
             "class": "Queue"
         },
@@ -1321,7 +1292,7 @@
             ],
             "return": {
                 "description": "The queues including goods and owners",
-                "type": "JSON"
+                "type": "Array"
             },
             "class": "Queue"
         },
@@ -1388,7 +1359,7 @@
             ],
             "return": {
                 "description": "The stars including users",
-                "type": "JSON"
+                "type": "Array"
             },
             "class": "Star"
         },
@@ -1407,7 +1378,7 @@
             ],
             "return": {
                 "description": "The stars including goods",
-                "type": "JSON"
+                "type": "Array"
             },
             "class": "Star"
         },
@@ -1461,7 +1432,7 @@
         },
         {
             "file": "routers/upload.js",
-            "line": 26,
+            "line": 27,
             "description": "Post an image",
             "itemtype": "method",
             "name": "POST api/upload/image",
@@ -1522,7 +1493,7 @@
         },
         {
             "file": "routers/user.js",
-            "line": 114,
+            "line": 166,
             "description": "Edit a user's profile, need token",
             "itemtype": "method",
             "name": "PUT api/user/edit",
@@ -1561,7 +1532,7 @@
         },
         {
             "file": "routers/user.js",
-            "line": 173,
+            "line": 228,
             "description": "Update a user's photo_path\nIf same as the one in DB, nothing changed",
             "itemtype": "method",
             "name": "PUT api/user/photo",

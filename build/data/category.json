@@ -1,0 +1,40 @@
+[{
+	label: "all",
+	alias: "全部"
+}, {
+	label: "Books",
+	alias: "書籍"
+}, {
+	label: "Textbooks",
+	alias: "教科書"
+}, {
+	label: "3C",
+	alias: "電子產品"
+}, {
+	label: "3C_accessories",
+	alias: "3C配件"
+}, {
+	label: "Clothes",
+	alias: "服飾"
+}, {
+	label: "Cosmetic",
+	alias: "化妝品"
+}, {
+	label: "Accessories",
+	alias: "飾品"
+}, {
+	label: "Food",
+	alias: "食物"
+}, {
+	label: "Houseware",
+	alias: "家庭用品"
+}, {
+	label: "Sports",
+	alias: "體育用品"
+}, {
+	label: "Games",
+	alias: "電玩遊戲"
+}, {
+	label: "Others",
+	alias: "其他"
+}]

@@ -71,10 +71,7 @@
                 </div>
                 <div class="bd">
                     <ul>
-                            <li><a href="#methods_GET api/message">GET api/message</a></li>
-                            <li><a href="#methods_GET api/message/between">GET api/message/between</a></li>
-                            <li><a href="#methods_POST api/message/post">POST api/message/post</a></li>
-                            <li><a href="#methods_PUT api/message/read">PUT api/message/read</a></li>
+                            <li><a href="#methods_GET api/message/of/chatroom">GET api/message/of/chatroom</a></li>
                     </ul>
                 </div>
             </div>
@@ -106,121 +103,32 @@
     </ul>
     <div>
             <div id="methods">
-<a name="methods_GET api/message"></a>
+<a name="methods_GET api/message/of/chatroom"></a>
 <div class="method item">
-    JSON <strong class="name"><code>GET api&#x2F;message</code></strong>( <code>receiver_uid, sender_uid, from, number </code> ) 
+    Array <strong class="name"><code>GET api&#x2F;message&#x2F;of&#x2F;chatroom</code></strong>( <code>chatroom_cid, offset, limit </code> ) 
     <br>
     <span class="foundat">
         
-        <a href="../files/routers_message.js.html#l16"><code>routers&#x2F;message.js:16</code></a>
+        <a href="../files/routers_message.js.html#l18"><code>routers&#x2F;message.js:18</code></a>
     </span><br>
-    <p>Get messages by given receiver_uid and sender_uid</p>
+    <p>Get messages in a chatroom</p>
 
     <strong>Parameters:</strong>
     <ul class="params">
         <li>
-            <code>receiver_uid</code> <strong>&lt;Integer&gt;</strong>
+            <code>chatroom_cid</code> <strong>&lt;Integer&gt;</strong>
          
         </li>
         <li>
-            <code>sender_uid</code> <strong>&lt;Integer&gt;</strong>
-        <p>It can be not provided, will ignore sender</p>
-
-        </li>
-        <li>
-            <code>from</code> <strong>&lt;Integer=0&gt;</strong>
+            <code>offset</code> <strong>&lt;Integer=0&gt;</strong>
          
         </li>
         <li>
-            <code>number</code> <strong>&lt;Integer=10&gt;</strong>
+            <code>limit</code> <strong>&lt;Integer=20&gt;</strong>
          
         </li>
     </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>The messages including two users</p>
-</div>
-</div>
-<a name="methods_GET api/message/between"></a>
-<div class="method item">
-    JSON <strong class="name"><code>GET api&#x2F;message&#x2F;between</code></strong>( <code>user1_uid, user2_uid, from, number </code> ) 
-    <br>
-    <span class="foundat">
-        
-        <a href="../files/routers_message.js.html#l105"><code>routers&#x2F;message.js:105</code></a>
-    </span><br>
-    <p>Get messages between two users</p>
-
-    <strong>Parameters:</strong>
-    <ul class="params">
-        <li>
-            <code>user1_uid</code> <strong>&lt;Integer&gt;</strong>
-         
-        </li>
-        <li>
-            <code>user2_uid</code> <strong>&lt;Integer&gt;</strong>
-         
-        </li>
-        <li>
-            <code>from</code> <strong>&lt;Integer=0&gt;</strong>
-         
-        </li>
-        <li>
-            <code>number</code> <strong>&lt;Integer=10&gt;</strong>
-         
-        </li>
-    </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>The messages including two users</p>
-</div>
-</div>
-<a name="methods_POST api/message/post"></a>
-<div class="method item">
-    JSON <strong class="name"><code>POST api&#x2F;message&#x2F;post</code></strong>( <code>receiver_uid, sender_uid, content </code> ) 
-    <br>
-    <span class="foundat">
-        
-        <a href="../files/routers_message.js.html#l164"><code>routers&#x2F;message.js:164</code></a>
-    </span><br>
-    <p>Post messages by given receiver and sender</p>
-
-    <strong>Parameters:</strong>
-    <ul class="params">
-        <li>
-            <code>receiver_uid</code> <strong>&lt;Integer&gt;</strong>
-        <p>The receiver</p>
-
-        </li>
-        <li>
-            <code>sender_uid</code> <strong>&lt;Integer&gt;</strong>
-        <p>The sender</p>
-
-        </li>
-        <li>
-            <code>content</code> <strong>&lt;String&gt;</strong>
-        <p>The content</p>
-
-        </li>
-    </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>New created message object</p>
-</div>
-</div>
-<a name="methods_PUT api/message/read"></a>
-<div class="method item">
-    JSON <strong class="name"><code>PUT api&#x2F;message&#x2F;read</code></strong>( <code>mid </code> ) 
-    <br>
-    <span class="foundat">
-        
-        <a href="../files/routers_message.js.html#l196"><code>routers&#x2F;message.js:196</code></a>
-    </span><br>
-    <p>Read a message</p>
-
-    <strong>Parameters:</strong>
-    <ul class="params">
-        <li>
-            <code>mid</code> <strong>&lt;Integer&gt;</strong>
-        <p>The ID of message</p>
-
-        </li>
-    </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;JSON&gt; <p>Updated message object</p>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Array&gt; <p>The messages including two users</p>
 </div>
 </div>
             </div>

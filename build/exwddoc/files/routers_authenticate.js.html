@@ -97,6 +97,7 @@ var crypto = require(&#x27;crypto&#x27;);
 
 var express = require(&#x27;express&#x27;);
 var sec_ran = require(&#x27;secure-random&#x27;);
+var validator = require(&#x27;validator&#x27;);
 var redis = require(path.resolve(__dirname, &#x27;../libs/redis&#x27;));
 var router = express.Router();
 
@@ -118,6 +119,10 @@ var getSHA1 = strToEncrypt =&gt; {
 	return sha1.digest(&#x27;hex&#x27;);
 };
 
+
+// Token expire time
+const TOKEN_EXPIRE_TIME = 604800;
+
 /**
  * Register a new user
  *
@@ -131,10 +136,11 @@ var getSHA1 = strToEncrypt =&gt; {
  * @return {JSON} New created user object
  */
 router.post(&#x27;/register&#x27;, (req, res) =&gt; {
-	var _fb = ((req.body.fb || &#x27;&#x27;) === &#x27;true&#x27;);
+	var _tmpfb = (req.body.fb || &#x27;&#x27;);
+	var _fb = (_tmpfb === &#x27;true&#x27; || _tmpfb === true);
 	var _id = req.body.identity || &#x27;&#x27;;
 	var _password = req.body.password || &#x27;&#x27;;
-	var _name = req.body.name;
+	var _name = req.body.name || &#x27;&#x27;;
 	var _email = req.body.email || &#x27;&#x27;;
 	var _photo_path = req.body.photo_path || &#x27;&#x27;;
 
@@ -144,10 +150,37 @@ router.post(&#x27;/register&#x27;, (req, res) =&gt; {
 		_password = getSHA256(_id.substring(id_length - 2, id_length) + &#x27; and this is still a fucking hash with &#x27; + _id.substring(0, id_length - 2));
 	}
 
+	// Check if the _password is not valid
+	if (_password.length &lt; 4) {
+		res.status(400).json({
+			error: &#x27;Password must be specified and it must contain at least 4 characters&#x27;
+		});
+
+		return;
+	}
+
 	// Check if the _id is not valid
 	if (_id === &#x27;&#x27;) {
 		res.status(400).json({
 			error: &#x27;ID must be specified&#x27;
+		});
+
+		return;
+	}
+
+	// Check if the _id is not valid
+	if (_name === &#x27;&#x27;) {
+		res.status(400).json({
+			error: &#x27;Name must be specified&#x27;
+		});
+
+		return;
+	}
+
+	// Check Email
+	if (_email !== &#x27;&#x27; &amp;&amp; validator.isEmail(_email) === false) {
+		res.status(400).json({
+			error: &#x27;Email is wrong&#x27;
 		});
 
 		return;
@@ -215,7 +248,8 @@ router.post(&#x27;/register&#x27;, (req, res) =&gt; {
 &lt;/pre&gt;
  */
 var login_function = (req, res) =&gt; {
-	var _fb = ((req.body.fb || &#x27;&#x27;) === &#x27;true&#x27;);
+	var _tmpfb = (req.body.fb || &#x27;&#x27;);
+	var _fb = (_tmpfb === &#x27;true&#x27; || _tmpfb === true);
 	var _id = req.body.identity;
 	var _password = req.body.password || &#x27;&#x27;;
 
@@ -254,7 +288,7 @@ var login_function = (req, res) =&gt; {
 				var _salt = JSON.stringify(sec_ran.randomArray(7));
 				var tmpToken = getSHA1(test_user.user_identity + _salt);
 
-				redis.pipeline().set(tmpToken, test_user.user_uid).expire(tmpToken, 1200).exec((err, result) =&gt; {
+				redis.pipeline().set(tmpToken, test_user.user_uid).expire(tmpToken, TOKEN_EXPIRE_TIME).exec((err, result) =&gt; {
 					if (err) {
 						res.status(500).json({
 							error: err
@@ -314,12 +348,17 @@ var token_function = (req, res, next) =&gt; {
 					error: err
 				});
 			} else if (result === null) {
-				res.status(401).json({
-					authentication: &#x27;fail&#x27;,
-					token: null
-				});
+				// EXWD middleware &gt;w&lt;
+				req.exwd = {
+					admin: false,
+					anonymous: true,
+					uid: -1,
+					registered: false
+				};
+
+				next();
 			} else {
-				redis.pipeline().set(_token, result).expire(_token, 1200).exec((err, res) =&gt; {
+				redis.pipeline().set(_token, result).expire(_token, TOKEN_EXPIRE_TIME).exec((err, res) =&gt; {
 					if (err) {
 						res.status(500).json({
 							error: err
@@ -341,6 +380,19 @@ var token_function = (req, res, next) =&gt; {
 	}
 };
 router.get(&#x27;/&#x27;, token_function);
+router.get(&#x27;/check&#x27;, token_function, (req, res) =&gt; {
+	if (req.exwd.registered) {
+		res.status(200).json({
+			status: &#x27;alive&#x27;,
+			token: req.query.token
+		});
+	} else {
+		res.status(410).json({
+			status: &#x27;dead&#x27;,
+			token: null
+		});
+	}
+});
 
 module.exports = {
 	router: router,

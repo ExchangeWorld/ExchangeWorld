@@ -96,8 +96,9 @@ var express = require(&#x27;express&#x27;);
 var fs = require(&#x27;fs&#x27;);
 var router = express.Router();
 
-// Including tables for photoPath
-// var goods = require(&#x27;../ORM/Goods&#x27;);
+// Sharp lib
+var sharp = require(&#x27;sharp&#x27;);
+sharp.concurrency(2);
 
 // Hashcode generation function
 var getSHA256 = strToEncrypt =&gt; {
@@ -119,12 +120,27 @@ var getSHA256 = strToEncrypt =&gt; {
  * @param  {String} filetype
  * @return {URL} Image&#x27;s src
  */
-router.post(&#x27;/image&#x27;, (req, res) =&gt; {
+router.post(&#x27;/image&#x27;, function (req, res, next) {
+
+	/*
+	 * POST body looks like:
+	 * imgData   = /9j/2wCEAAgGBgcGBQgHBwcJC...
+	 * imgFormat = png
+	 */
+
+	// REQ EXWD CHECK
+	if (req.exwd.anonymous) {
+		res.status(403).json({
+			error: &#x27;Permission denied&#x27;
+		});
+		return;
+	}
+
 	// Get file size
-	// var imgSize = req.body.filesize;
+	var imgSize = req.body.filesize;
 
 	// Get filename
-	// var imgName = req.body.filename;
+	var imgName = req.body.filename;
 
 	// Get base64 encoded imgData from request body
 	var imgData = req.body.base64;
@@ -144,21 +160,45 @@ router.post(&#x27;/image&#x27;, (req, res) =&gt; {
 
 	// The file path pointing to the image file
 	var filePath = &#x27;../ExchangeWorld/images_global/&#x27; + hashData + &#x27;.&#x27; + imgFormat.replace(/image\//, &#x27;&#x27;);
+	var filePath500 = &#x27;../ExchangeWorld/images_global/&#x27; + hashData + &#x27;-500.&#x27; + imgFormat.replace(/image\//, &#x27;&#x27;);
+	var filePath250 = &#x27;../ExchangeWorld/images_global/&#x27; + hashData + &#x27;-250.&#x27; + imgFormat.replace(/image\//, &#x27;&#x27;);
+	// var filePath160 = &#x27;../ExchangeWorld/images_global/&#x27; + hashData + &#x27;-160.&#x27; + imgFormat.replace(/image\//, &#x27;&#x27;);
 
 	// Write to file with the filePath
 	// And if there is another person who uploaded a same base64 image,
 	// The things are still going right because that means same image, why not treat them same?
 	// Finally, send the &quot;static file path&quot; back
-	fs.writeFile(filePath, dataBuffer, err =&gt; {
-		if (err) {
-			res.send({
-				error: err
-			});
-		} else {
-			// res.send(&#x27;images/&#x27; + hashData + &#x27;.&#x27; + imgFormat.replace(/image\//, &#x27;&#x27;));
-			res.send(&#x27;http://exwd.csie.org/images/&#x27; + hashData + &#x27;.&#x27; + imgFormat.replace(/image\//, &#x27;&#x27;));
-		}
-	});
+	var pipeline = sharp(dataBuffer);
+
+	pipeline.clone()
+		.rotate()
+		.resize(500, null)
+		.withoutEnlargement()
+		.progressive()
+		.toFile(filePath500, null);
+
+	pipeline.clone()
+		.rotate()
+		.resize(250, null)
+		.withoutEnlargement()
+		.progressive()
+		.toFile(filePath250, null);
+
+	pipeline.clone()
+		.rotate()
+		.resize(1600, 1200)
+		.max()
+		.withoutEnlargement()
+		.progressive()
+		.toFile(filePath, (err, info) =&gt; {
+			if (err) {
+				res.status(500).json({
+					error: err
+				});
+			} else {
+				res.send(&#x27;http://exwd.csie.org/images/&#x27; + hashData + &#x27;.&#x27; + imgFormat.replace(/image\//, &#x27;&#x27;));
+			}
+		});
 });
 
 module.exports = router;

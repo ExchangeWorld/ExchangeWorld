@@ -108,7 +108,7 @@ var users = require(path.resolve(__dirname, &#x27;../ORM/Users&#x27;));
  *
  * @method GET api/follow/followers/of
  * @param  {Integer} followed_uid The one be followed
- * @return {JSON} Users following given followed_uid
+ * @return {Array} Users following given followed_uid
  */
 router.get(&#x27;/followers/of&#x27;, (req, res) =&gt; {
 	var _followed_uid = parseInt(req.query.followed_uid, 10);
@@ -128,7 +128,7 @@ router.get(&#x27;/followers/of&#x27;, (req, res) =&gt; {
 			},
 			include: [{
 				model: users,
-				as: &#x27;followed&#x27;,
+				as: &#x27;follower&#x27;,
 				attributes: [&#x27;uid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;]
 			}],
 			order: [
@@ -151,7 +151,7 @@ router.get(&#x27;/followers/of&#x27;, (req, res) =&gt; {
  *
  * @method GET api/follow/followed/by
  * @param  {Integer} follower_uid The follower
- * @return {JSON} Users followed by given follower_uid
+ * @return {Array} Users followed by given follower_uid
  */
 router.get(&#x27;/followed/by&#x27;, (req, res) =&gt; {
 	var _follower_uid = parseInt(req.query.follower_uid, 10);
@@ -171,7 +171,7 @@ router.get(&#x27;/followed/by&#x27;, (req, res) =&gt; {
 			},
 			include: [{
 				model: users,
-				as: &#x27;follower&#x27;,
+				as: &#x27;followed&#x27;,
 				attributes: [&#x27;uid&#x27;, &#x27;name&#x27;, &#x27;photo_path&#x27;]
 			}],
 			order: [

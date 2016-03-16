@@ -25,16 +25,19 @@ function MeController(
 	vm.getNumber        = number => new Array(number);
 	vm.onClickGoods     = gid => $state.go('root.withSidenav.goods', { gid : gid });
 	vm.editPhoto        = editPhoto;
-	/////////////
+	vm.rateExchange     = rateExchange;
+
+	activate();
 
 	$scope.$watch('vm.idx', function(current, old) {
 		if (current === undefined) return;
 		$state.go(`root.oneCol.me.tab${current+1}`);
 	});
 
-	activate();
-
 	async function activate() {
+		if ($state.current.name.indexOf('tab') !== -1) {
+			vm.idx = parseInt($state.current.name.split('tab')[1], 10) - 1;
+		}
 		if (!$localStorage.user) {
 			$rootScope.isLoggedIn = false;
 			$state.reload();
@@ -47,5 +50,12 @@ function MeController(
 		if (!vm.isMe) return;
 
 		meService.uploadHeadPhoto(me);
+	}
+
+	function rateExchange(ev, idx) {
+		meService
+			.showCompleteExchange(ev, vm.myExchanges[idx], ()=> { 
+				$state.reload();
+			});
 	}
 }

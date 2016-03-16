@@ -14,6 +14,7 @@ function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDia
 		getExchanges,
 		deleteExchange,
 		agreeExchange,
+		showCompleteExchange,
 		
 	};
 
@@ -186,4 +187,55 @@ function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDia
 		return defer.promise;
 	}
 
+	function showCompleteExchange(ev, thisExchange, callback) {
+		$mdDialog.show({
+			clickOutsideToClose: true,
+			templateUrl: 'me/rateExchange.html',
+			fullscreen: ($mdMedia('sm') || $mdMedia('xs')),
+			controllerAs: 'vm',
+			controller: onCompleteController,
+			locals: {
+				thisExchange: thisExchange,
+			}
+		});
+
+		/** @ngInject */
+		function onCompleteController($mdDialog, logger, exchangeService, thisExchange) {
+			const vm        = this;
+			vm.thisExchange = thisExchange;
+			vm.rating       = 3;
+			vm.confirm      = onConfirm;
+			vm.cancel       = onCancel;
+
+			async function onConfirm(scores) {
+				let score = await $mdDialog.hide(scores);
+				let data = exchangeService.agreeExchange(thisExchange);
+
+				rating(vm.thisExchange.other_goods.gid, score);
+				logger.success('成功評價此交易', data, 'DONE');
+				callback();
+			}
+			function onCancel() {
+				$mdDialog.cancel();
+			}
+
+			async function rating(gid, rate) {
+				const defer = $q.defer();
+
+				try {
+					let goods = await Restangular.one('goods', gid).get();
+					goods.route = `goods/${goods.gid}/rate`;
+					goods.rate = rate;
+					await goods.put();
+				} catch (err) {
+					exception.catcher('唉呀出錯了！')(err);
+					defer.reject(err);
+				}
+
+				return defer.promise;
+			}
+
+		}
+	
+	}
 }

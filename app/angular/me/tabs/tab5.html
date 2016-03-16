@@ -1,4 +1,4 @@
-<md-divider>
+<mefreshder>
 </md-divider>
 <md-card ng-repeat="card in vm.myExchanges" class="md-whiteframe-z3 item-profile exchange">
     <md-card-content layout-gt-sm="column">
@@ -9,7 +9,7 @@
                 <div layout="row" layout-xs="column" layout-algin="center center">
                     <div layout="row">
                         <i class="material-icons person" style="outline:0; margin-right:0px; font-size:20px;">person</i>
-                        <p class="md-subhead" style="margin:0 5px 0 0;">LonSilent</p>
+                        <p class="md-subhead" style="margin:0 5px 0 0;">{{ card.other_goods.owner.name }}</p>
                     </div>
                     <div layout="row">
                         <img data-ng-src="../../images/icon/Textbooks.svg" style="height:20px; width:auto; margin-right:3px;" />
@@ -29,8 +29,9 @@
     </md-card-content>
     <md-card-actions layout="row" layout-xs="column">
         <span flex-gt-xs="5"></span>
-        <md-button>
-            <span class="md-title">交換成功，給個星評吧</span></md-button>
+        <md-button ng-click="vm.rateExchange($event, $index)">
+            <span class="md-title" >交換成功，給個星評吧</span>
+        </md-button>
         <span flex></span>
         <div layout="row" layout-align="center center" style="margin:0; padding-left: 10px; padding-bottom: 15px;">
             <div layout layout-align="center start">

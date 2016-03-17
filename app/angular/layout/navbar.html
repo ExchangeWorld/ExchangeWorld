@@ -100,8 +100,8 @@
 			<md-menu flex hide-gt-sm md-offset="0 64">
 				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)" style="width: 100%; min-width: 56px;">
 					<div layout="row" layout-align="center center">
-						<img hide-xs hide-sm class="img-navbar" ng-src="{{ $root.user.photo_path }}"></img>
-						<span hide-xs hide-sm class="nav-user toolbar-span">{{ $root.user.name }}</span>
+						<img ng-show="$root.isLoggedIn" hide-xs hide-sm class="img-navbar" ng-src="{{ $root.user.photo_path }}"></img>
+						<span ng-show="$root.isLoggedIn" hide-xs hide-sm class="nav-user toolbar-span">{{ $root.user.name }}</span>
 						<md-icon hide-gt-sm class="material-icons">menu</md-icon>
 					</div>
 				</md-button>
@@ -141,8 +141,8 @@
 					<md-menu-item ng-show="$root.isLoggedIn">
 						<md-button ng-click="vm.onLogout()">登出</md-button>
 					</md-menu-item>
-					<md-menu-item ng-show="!$root.isLoggedIn"> 
-						<md-button  ng-click="vm.menu('login')">登入</md-button>
+					<md-menu-item ng-show="!$root.isLoggedIn">
+						<md-button ng-click="vm.menu('login')">登入</md-button>
 					</md-menu-item>
 				</md-menu-content>
 			</md-menu>
@@ -153,7 +153,7 @@
 			</md-button>
 		</div>
 		<div hide-gt-xs flex="15">
-			<md-button ng-hide="$root.isLoggedIn" ng-click="vm.menu('signup')" ng-class="{'active': vm.contentIs('signup')}">
+			<md-button ng-hide="$root.isLoggedIn" ng-click="vm.menu('signup')" ng-class="{'active': vm.contentIs('signup')}" style="padding-right:15px;">
 				<span class="toolbar-span">註冊</span>
 			</md-button>
 		</div>

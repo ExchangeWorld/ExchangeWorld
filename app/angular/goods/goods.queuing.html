@@ -2,7 +2,7 @@
 	<form style="height: 112%;">
 		<md-toolbar class="md-whiteframe-2dp">
 			<div flex class="md-toolbar-tools" style="background-color: #b3e1d8;">
-				<h2 class="md-title">選擇一個物品接受「排」</h2>
+				<h2 class="md-title" style="margin-left:15px;">選擇一個物品接受「排」</h2>
 				<span flex></span>
 				<md-button class="md-icon-button" ng-click="vm.cancel()">
 					<md-icon md-font-set="material-icons" aria-label="Close dialog">close</md-icon>
@@ -24,7 +24,7 @@
 										</div>
 										<div flex="100" flex-gt-xs="45" layout="column" layout-align="end start">
 											<div layout="column" layout-align="end start">
-												<span class="md-display-1">{{ queuing.queuer_goods.name }}</span>
+												<span class="md-headline">{{ queuing.queuer_goods.name }}</span>
 												<div layout="row" layout-algin="center center">
 													<img data-ng-src="../../images/icon/{{ queuing.queuer_goods.category }}.svg" style="height:20px; width:auto;" />
 													<span>{{ queuing.category_alias }}</span>

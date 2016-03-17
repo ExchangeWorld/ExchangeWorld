@@ -98,7 +98,7 @@
 				<span class="toolbar-span">登入</span>
 			</md-button>
 			<md-menu flex md-offset="0 64">
-				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)" style="width: 100%; min-width: 56px;">
+				<md-button ng-show="$root.isLoggedIn" ng-click="vm.openMenu($mdOpenMenu, $event)" style="width: 100%; min-width: 56px;">
 					<div layout="row" layout-align="center center">
 						<img hide-xs hide-sm class="img-navbar" ng-src="{{ $root.user.photo_path }}"></img>
 						<span hide-xs hide-sm class="nav-user toolbar-span">{{ $root.user.name }}</span>

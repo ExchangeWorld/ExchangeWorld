@@ -32,7 +32,7 @@
 		<span flex-sm="15" flex-gt-sm="30" hide-xs></span>
 		<div hide-xs flex="10" flex-sm="20" flex-offset="10" flex-offset-sm="5" layout="row" layout-align="center center">
 			<md-menu flex flex-sm md-offset="-200 61" ng-show="$root.isLoggedIn">
-				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)">
+				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)" style="min-width:68px;">
 					<md-icon class="material-icons">forum</md-icon>
 					<p class="notification md-caption" ng-show="vm.unread[0] !== 0">{{ vm.unread[0] }}</p>
 				</md-button>
@@ -63,7 +63,7 @@
 				</md-menu-content>
 			</md-menu>
 			<md-menu flex md-offset="-200 61" ng-show="$root.isLoggedIn">
-				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)">
+				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)" style="min-width:68px;">
 					<md-icon class="material-icons">notifications</md-icon>
 					<p class="notification md-caption" ng-show="vm.unread[1] !== 0">{{ vm.unread[1] }}</p>
 				</md-button>
@@ -91,10 +91,10 @@
 			</md-menu>
 		</div>
 		<div flex flex-xs="15" layout="row" layout-align="center center">
-			<md-button ng-hide="$root.isLoggedIn" ng-click="vm.menu('signup')" hide-xs hide-sm ng-class="{'active': vm.contentIs('signup')}">
+			<md-button ng-hide="$root.isLoggedIn" ng-click="vm.menu('signup')" hide show-gt-sm ng-class="{'active': vm.contentIs('signup')}">
 				<span class="toolbar-span">註冊</span>
 			</md-button>
-			<md-button class="login-btn" ng-hide="$root.isLoggedIn" ng-click="vm.menu('login')" hide-xs hide-sm ng-class="{'active': vm.contentIs('login')}">
+			<md-button class="login-btn" ng-hide="$root.isLoggedIn" ng-click="vm.menu('login')" hide show-gt-sm ng-class="{'active': vm.contentIs('login')}">
 				<span class="toolbar-span">登入</span>
 			</md-button>
 			<md-menu flex md-offset="0 64">

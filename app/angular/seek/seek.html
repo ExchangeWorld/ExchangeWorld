@@ -5,7 +5,7 @@
 			<label style="color:#000; top:-12px;">搜索</label>
 			<input ng-model="vm.searchGoodsName" aria-label="goodsName" style="border-bottom-color: #000;">
 		</md-input-container>
-		<md-input-container flex="25" flex-xs="20" style="padding-left: 10px; top:2px;">
+		<md-input-container flex="20" flex-gt-xs="25" style="padding-left: 10px; top:2px;">
 			<label>種類</label>
 			<md-select ng-model="vm.searchGoodsCategory" aria-label="cate">
 				<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}">
@@ -13,7 +13,7 @@
 				</md-option>
 			</md-select>
 		</md-input-container>
-		<div flex="20" flex-xs="30" layout layout-align="center center">
+		<div flex="30" flex-gt-xs="20" layout layout-align="center center">
 			<md-switch class="md-primary md-hue-3 switch" ng-model="vm.searchWithBound" aria-label="searchWithBound" style="font-size: 10px;" layout="column">
 				<md-tooltip>搜尋視界內物品/搜尋全世界</md-tooltip>
 				<span style="color:black; padding-left: 5px;">{{ vm.searchWithBound ? '視界內' : '全域' }}</span>
@@ -45,11 +45,11 @@
 							</div>
 						</div>
 						<div layout="row" layout-align="start center" style="margin:0; padding-left: 10px; padding-bottom: 15px;">
-							<div layout layout-align="start center" class="card-info">
+							<div layout layout-align="start center" class="card-info" style="display:flex; align-items:center;margin: ">
 								<i class="material-icons person" style="outline:0; margin-right:0px; font-size:20px;">person</i>
 								<span style="font-size: 14px;text-overflow: ellipsis;display: inline-block;white-space: nowrap;overflow: hidden;">{{ card.owner.name }}</span>
 							</div>
-							<div layout layout-align="start center" class="card-info favorite" ng-click="onClickFavorite($event, card)">
+							<div layout layout-align="start center" class="card-info favorite" ng-click="onClickFavorite($event, card)" style="display: flex; align-items: center;">
 								<i class="material-icons heart-seek" style="outline: 0; font-size:20px;">
 									{{ card.starredByUser ? 'favorite' : 'favorite_border' }}
 								</i>

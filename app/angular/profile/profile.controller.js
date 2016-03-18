@@ -23,6 +23,7 @@ function ProfileController(
 	vm.myGoodsPending      = profile.myGoodsPending;
 	vm.myGoodsExchanged    = profile.myGoodsExchanged;
 	vm.onClickAddFollowing = onClickAddFollowing;
+	vm.onClickFollow       = (uid, type)=> $state.go('root.oneCol.follow', { uid, type});
 	vm.onClickSendMsg      = onClickSendMsg;
 	vm.isFollowed          = false;
 	vm.getNumber           = number => new Array(number);

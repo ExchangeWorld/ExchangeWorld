@@ -6,12 +6,13 @@ const _            = require('lodash');
 followModule.controller('FollowController', FollowController);
 
 /** @ngInject */
-function FollowController($state, followService, $stateParams, $rootScope) {
+function FollowController($state, followService, $stateParams, $rootScope, $timeout) {
 	var vm         = this;
 	const types    = ['following', 'follower'];
 	vm.type        = '';
 	vm.followData  = [];
 	vm.onClickBack = $rootScope.onClickUser.bind(this, $stateParams.uid);
+	vm.loading     = true;
 
 	/////////////
 	activate();
@@ -26,9 +27,11 @@ function FollowController($state, followService, $stateParams, $rootScope) {
 				.getFollow($stateParams.uid, $stateParams.type)
 				.then(function(data) {
 					vm.followData = data;
+					$timeout(()=>{ vm.loading = false; });
 				})
 				.catch(function() {
 					vm.followData = undefined;
+					vm.loading    = false;
 				});
 		}
 	}

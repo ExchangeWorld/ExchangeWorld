@@ -29,6 +29,7 @@ function MeController(
 	vm.onClickFollow    = (uid, type)=> $state.go('root.oneCol.follow', { uid, type });
 	vm.editPhoto        = editPhoto;
 	vm.rateExchange     = rateExchange;
+	vm.acceptRequest    = acceptRequest;
 
 	activate();
 
@@ -59,6 +60,15 @@ function MeController(
 	function rateExchange(ev, idx) {
 		meService
 			.showCompleteExchange(ev, vm.myExchanges[idx], ()=> { 
+				$state.reload();
+			});
+	}
+
+	function acceptRequest(idx) {
+		meService
+			.acceptRequest(vm.selected, vm.myRequest[idx].gid)
+			.then(function(data) {
+				logger.success('成功接受一個排', null, 'DONE');
 				$state.reload();
 			});
 	}

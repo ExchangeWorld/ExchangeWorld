@@ -48,17 +48,11 @@ function getStates() {
 	}, {
 		state: 'root.oneCol.me.tab3',
 		config: {
-			url: '/exchanged',
-			templateUrl: 'me/tabs/tab3.html',
-		}
-	}, {
-		state: 'root.oneCol.me.tab4',
-		config: {
 			url: '/request',
 			templateUrl: 'me/tabs/tab4.html',
 		}
 	}, {
-		state: 'root.oneCol.me.tab5',
+		state: 'root.oneCol.me.tab4',
 		config: {
 			url: '/history',
 			templateUrl: 'me/tabs/tab5.html',

@@ -16,6 +16,7 @@ function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDia
 		getExchanges,
 		deleteExchange,
 		agreeExchange,
+		acceptRequest,
 		showCompleteExchange,
 	};
 
@@ -140,7 +141,16 @@ function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDia
 		const defer = $q.defer();
 
 		try {
-			defer.resolve([]);
+			let data = await Restangular.one('user').one('me').one('goods').one('queue').getList();
+			data.forEach((r)=> {
+				try {
+					r.photo_path = JSON.parse(r.photo_path);
+				} catch (err) {
+					r.photo_path = [];
+				}
+			});
+
+			defer.resolve(data);
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);
 			defer.reject(err);
@@ -163,6 +173,39 @@ function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDia
 				}
 			});
 			defer.resolve(exchanges);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
+	async function postExchange(goods1Gid, goods2Gid) {
+		const defer = $q.defer();
+		try {
+			let newExchange = {
+				goods_one_gid: goods1Gid,
+				goods_two_gid: goods2Gid,
+			};
+			let res = await Restangular.all('exchange/create').post(newExchange);
+
+			defer.resolve(res);
+		} catch (err) {
+			exception.catcher('唉呀出錯了！')(err);
+			defer.reject(err);
+		}
+
+		return defer.promise;
+	}
+
+	async function acceptRequest(selectedGoodsGid, hostGoodsGid) {
+		const defer = $q.defer();
+		
+		try {
+			let newExchange = await postExchange(selectedGoodsGid, hostGoodsGid);
+
+			defer.resolve(newExchange);
 		} catch (err) {
 			exception.catcher('唉呀出錯了！')(err);
 			defer.reject(err);

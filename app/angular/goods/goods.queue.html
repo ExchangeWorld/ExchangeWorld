@@ -12,7 +12,7 @@
 		<md-dialog-content style="height:100%;">
 			<!-- <div layout-padding></div> -->
 			<div layout="column" layout-align="start center" style="height: 83%;">
-				<div flex layout layout-align="center center" layout-fill ng-show="vm.myGoods.length === 0" style="height: 100%;">你沒有可以拿來排的東西
+				<div layout layout-align="center center" layout-fill ng-show="vm.myGoods.length === 0" style="min-height: 100%;">你沒有可以拿來排的東西
 					<br/>趕快去ＰＯ一些吧！</div>
 				<md-radio-group ng-model="queue.group" layout-fill>
 					<div ng-repeat="goods in vm.myGoods" style="margin:20px;">

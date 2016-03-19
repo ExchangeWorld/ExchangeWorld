@@ -135,7 +135,7 @@ function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage,
 		let mdScope = $rootScope.$new();
 		mdScope.instance = $mdDialog.show({
 			clickOutsideToClose: true,
-			fullscreen: ($mdMedia('sm') || $mdMedia('xs')),
+			fullscreen: $mdMedia('xs'),
 			templateUrl: 'utils/message/message.html',
 			controllerAs: 'vm',
 			controller: 'm_messageController',

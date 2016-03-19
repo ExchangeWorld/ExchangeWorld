@@ -84,7 +84,6 @@ function SeekController(
 		e.preventDefault();
 		e.stopPropagation();
         
-		//TODO: use /api/user/me
 		if (!$rootScope.isLoggedIn) {
 			$rootScope.openSignupModal();
 			return;

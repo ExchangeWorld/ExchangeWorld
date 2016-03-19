@@ -16,11 +16,13 @@ function NavbarController(
 	$timeout,
 	$window,
 	$q,
+	$http,
 	auth,
 	message,
 	logger,
 	exception,
 	notification,
+	facebookService,
 	AppSettings
 ) {
 	const vm    = this;
@@ -68,7 +70,15 @@ function NavbarController(
 
 	async function activate() {
 		$rootScope.isLoggedIn = Boolean($localStorage.user);
-		if ($rootScope.isLoggedIn) $rootScope.user = $localStorage.user;
+		if ($rootScope.isLoggedIn) {
+			$rootScope.user = $localStorage.user;
+
+			try {
+				await $http.get($rootScope.user.photo_path);
+			} catch (err) {
+				await facebookService.updateAvatar($rootScope.user.identity);
+			}
+		}
 
 		await updateNews();
 	}

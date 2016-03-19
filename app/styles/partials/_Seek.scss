@@ -56,7 +56,7 @@
 
 @media screen and (min-width: 300px) {
 	.grid-wrapper {
-		max-width: 85%;
+		max-width: 100%;
 		margin: 0 auto;
 		padding: 20px 0;
 	}
@@ -116,5 +116,11 @@
 		border-color: #fff;
 		background-color: #000;
 		color: #fff;
+	}
+}
+
+@media screen and (-moz-os-version) {
+	.firefox-icon {
+		margin-top: 6px;
 	}
 }

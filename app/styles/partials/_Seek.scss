@@ -118,3 +118,9 @@
 		color: #fff;
 	}
 }
+
+@media screen and (-moz-os-version) {
+	.firefox-icon {
+		margin-top: 6px;
+	}
+}

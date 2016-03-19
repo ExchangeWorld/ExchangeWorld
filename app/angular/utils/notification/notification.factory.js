@@ -88,6 +88,9 @@ function notification(Restangular, $q, exception, $localStorage, $sce, $location
 					n.text = `你關注的<b>${n.body.payload.goods.name}</b>有新的留言`;
 					break;
 				case 30001:
+					n.icon += 'exwd.svg';
+					n.url = `/me/history`;
+					n.text = `有人接受了你的排，快去看看吧！</b>`;
 					break;
 				case 30002:
 					break;

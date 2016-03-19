@@ -47,13 +47,11 @@ function MeController(
 			$state.reload();
 		}
 
-		vm.myExchanges = await meService.getExchanges(me.uid);
+		vm.myExchanges = await meService.getExchanges($localStorage.user.uid);
 		vm.myRequest = await meService.getMyRequest();
 	}
 
 	function editPhoto() {
-		if (!vm.isMe) return;
-
 		meService.uploadHeadPhoto(me);
 	}
 

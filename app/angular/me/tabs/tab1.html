@@ -1,0 +1,29 @@
+<md-divider></md-divider>
+<md-content layout-padding>
+    <div flex layout layout-align="center center" ng-show="vm.me.myStarGoods.length === 0">
+        <img class="img-null" src="../../images/emoji_null.png">
+    </div>
+    <div class="grid-wrapper">
+        <div class="grid__columns">
+            <div ng-repeat="card in vm.me.myStarGoods">
+                <md-card class="md-whiteframe-z4 item card">
+                    <a ng-href="/seek/{{card.gid}}" ng-mouseenter="onMouseOver(card.gid)" ng-mouseleave="onMouseOut(card.gid)">
+                        <img width="300" data-ng-src="{{card.photo_path[0]}}" class="md-card-image card-img">
+                        <div layout="row" layout-align="start center">
+                            <div style="padding-left:10px; padding-top:5px; width:100%;">
+                                <img data-ng-src="../../images/icon/{{card.category}}.svg" style="height:24px; width:auto; position:relative; top:4px; float:left; margin-right:3px;" />
+                                <h2 class="seek-title"> {{card.name}} </h2>
+                            </div>
+                        </div>
+                        <div layout="row" layout-align="start center" style="margin:0; padding-left: 10px; padding-bottom: 15px;">
+                            <div flex layout layout-align="start center" class="card-info">
+                                <i class="material-icons person" style="outline:0; margin-right:0px; font-size:20px;">person</i>
+                                <span style="font-size: 14px;text-overflow: ellipsis;display: inline-block;white-space: nowrap;overflow: hidden;">{{ card.owner.name }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </md-card>
+            </div>
+        </div>
+    </div>
+</md-content>

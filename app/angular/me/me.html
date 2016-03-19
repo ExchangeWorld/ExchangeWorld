@@ -1,0 +1,39 @@
+<md-content resize ng-style="resizeWithOffset(56)" style="overflow-y: scroll;">
+	<div layout="row" class="profile-top md-whiteframe-z1" layout-align="center center">
+		<div layout layout-align="center center" class="img-profile" ng-style="{'background-image':'url({{ vm.me.photo_path }})'}">
+			<a layout layout-align="center center" ng-click="vm.editPhoto()" class="uploadHead">
+				<i class="material-icons" style="font-size:64px;">camera_alt</i>
+			</a>
+		</div>
+		<div layout="column" class="profile-right">
+			<div layout="column">
+				<div layout="row" layout-align="start center" style="margin-left:25px;">
+					<h4 class="md-headline" style="margin:8px 0; text-align: center;">{{ vm.me.name }}</h4>
+					<!-- <div layout="row" layout-align="end end">
+						<p class="md-subhead text-ex reset-follow hide-i5" style="padding-top:3px;">積分：{{ vm.me.scores }}</p>
+					</div> -->
+				</div>
+				<div layout="row" layout-xs="column" layout-align="start center" layout-align-xs="start start" style="margin-left:15px;">
+					<div layout="row" layout-align="center center" class="note profile">
+						<p class="md-title text-ex follow reset-follow">追隨中</p>
+						<a ng-click="vm.onClickFollow(vm.me.uid, 'following')">{{ vm.me.follows_follower.length }}</a>
+					</div>
+					<div layout="row" layout-align="center center" class="note profile">
+						<p class="md-title text-ex follow reset-follow">被追蹤</p>
+						<a ng-click="vm.onClickFollow(vm.me.uid, 'follower')">{{ vm.me.follows_followed.length }}</a>
+					</div>
+				</div>
+			</div>
+			<div layout="row" layout-align="center center" style="margin-left:10px;margin-top: 10px;">
+				<span flex="10"></span>
+			</div>
+		</div>
+	</div>
+	<md-tabs md-selected="vm.idx" md-dynamic-height md-center-tabs md-swipe-content md-no-ink>
+		<md-tab label="願望清單({{ vm.me.myStarGoods.length }})"> </md-tab>
+		<md-tab label="等待交換({{ vm.myGoodsPending.length }})"> </md-tab>
+		<md-tab label="交換請求({{ vm.myRequest.length }})"> </md-tab>
+		<md-tab label="歷史紀錄({{ vm.myExchanges.length }})"> </md-tab>
+	</md-tabs>
+	<div id="content" ui-view flex> </div>
+</md-content>

@@ -19,21 +19,6 @@ var resolve = {
 			.catch(function() {
 				return {};
 			});
-	},
-	/** @ngInject */
-	myFavorite: function($stateParams, favorite) {
-		return favorite
-			.getMyFavorite($stateParams.uid)
-			.then(function(data) {
-				return data.map(function(g) {
-					try {
-						g.goods.photo_path = JSON.parse(g.goods.photo_path);
-					} catch (err) {
-						g.goods.photo_path = '';
-					}
-					return g.goods;
-				});
-			});
 	}
 };
 
@@ -48,6 +33,13 @@ function getStates() {
 				controllerAs: 'vm',
 				templateUrl : 'profile/profile.html',
 				resolve : resolve,
+				/** @ngInject */
+				onEnter: function($localStorage, $state, $stateParams, $timeout) {
+					if (parseInt($stateParams.uid, 10) === $localStorage.user.uid) {
+						$timeout(() => $state.go('root.oneCol.me'));
+						return;
+					}
+				}
 			}
 		}
 	];

@@ -7,11 +7,9 @@ profileModule.controller('ProfileController', ProfileController);
 /** @ngInject */
 function ProfileController(
 	profile,
-	myFavorite,
 	profileService,
 	followService,
 	auth,
-	notification,
 	logger,
 	message,
 	$state,
@@ -21,42 +19,28 @@ function ProfileController(
 ) {
 	var vm                 = this;
 	vm.profile             = profile;
-	vm.isMe                = $rootScope.isLoggedIn && (profile.uid === $localStorage.user.uid);
-	vm.favSum              = '';
-	vm.myStar              = myFavorite;
+	vm.myStarGoods         = profile.myStarGoods;
 	vm.myGoodsPending      = profile.myGoodsPending;
 	vm.myGoodsExchanged    = profile.myGoodsExchanged;
 	vm.onClickAddFollowing = onClickAddFollowing;
+	vm.onClickFollow       = (uid, type)=> $state.go('root.oneCol.follow', { uid, type});
 	vm.onClickSendMsg      = onClickSendMsg;
 	vm.isFollowed          = false;
-	vm.isReadOnly          = true;
-	vm.onClickEdit         = onClickEdit;
 	vm.getNumber           = number => new Array(number);
 	vm.onClickGoods        = gid => $state.go('root.withSidenav.goods', { gid : gid });
-	vm.getHTMLDesc         = getHTMLDesc;
-	vm.editPhoto           = editPhoto;
 	/////////////
 
 	activate();
 
 	function activate() {
-		//TODO; use /api/user/me
 		if ($localStorage.user) {
-			vm.isMe = (profile.uid === $localStorage.user.uid);
 			if (_.findWhere(profile.follows_followed, { follower_uid: $localStorage.user.uid })) {
 				vm.isFollowed = true;
 			}
 		} else {
-			vm.isMe = false;
 			$rootScope.isLoggedIn = false;
+			$state.reload();
 		}
-
-		profileService
-			.getFavoriteSum($stateParams.uid)
-			.then(function(data) {
-				vm.favSum = data;
-			});
-
 	}
 
 	function onClickAddFollowing() {
@@ -77,26 +61,4 @@ function ProfileController(
 		message.showMessagebox(ev, vm.profile.uid);
 	}
 
-	function onClickEdit() {
-		if(!vm.isReadOnly) {
-			profileService
-				.editProfile(vm.profile)
-				.then(function(data) {
-					logger.success('更新成功', data, 'EDIT');
-				})
-				.catch(function(err) {
-					logger.error('錯誤', err, 'Error');
-				});
-		}
-		vm.isReadOnly = !vm.isReadOnly;
-	}
-
-	function getHTMLDesc() {
-	}
-
-	function editPhoto() {
-		if (!vm.isMe) return;
-
-		profileService.uploadHeadPhoto(profile);
-	}
 }

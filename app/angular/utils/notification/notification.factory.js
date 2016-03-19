@@ -50,9 +50,9 @@ function notification(Restangular, $q, exception, $localStorage, $sce, $location
 			n.icon = '../../../images/notify/';
 			switch (n.body.codeType) {
 				case 10001:
-					n.text = `你關注的<b>${n.body.payload.goods.owner.name}</b>發佈<b>${n.body.payload.goods.name}</b>，趕快去看看吧！`;
-					n.url = `/seek/${n.body.payload.goods.gid}`;
 					n.icon += 'people.svg';
+					n.url = `/seek/${n.body.payload.goods.gid}`;
+					n.text = `你關注的<b>${n.body.payload.goods.owner.name}</b>發佈<b>${n.body.payload.goods.name}</b>，趕快去看看吧！`;
 					break;
 				case 10002:
 					//n.text = `<b>${n.body.payload.person.name}</b>關注了<b>${n.body.payload.goods.name}</b>，趕快去看看吧！`;
@@ -63,28 +63,29 @@ function notification(Restangular, $q, exception, $localStorage, $sce, $location
 					n.icon += 'people.svg';
 					break;
 				case 10004:
-					n.text = `<b>${n.body.payload.person.name}</b>追隨了你。`;
-					n.url = `/profile/${n.body.payload.person.uid}`;
 					n.icon += 'star.svg';
+					n.url = `/profile/${n.body.payload.person.uid}`;
+					n.text = `<b>${n.body.payload.person.name}</b>追隨了你。`;
 					break;
 				case 20001:
-					n.text = `你的<b>${n.body.payload.goods.name}</b>有新留言喔`;
-					n.url = `/seek/${n.body.payload.goods.gid}`;
 					n.icon += 'comment.svg';
+					n.url = `/seek/${n.body.payload.goods.gid}`;
+					n.text = `你的<b>${n.body.payload.goods.name}</b>有新留言喔`;
 					break;
 				case 20002:
-					n.text = `有新的物品排了你的<b>${n.body.payload.goods.name}</b>`;
-					n.url = `/seek/${n.body.payload.goods.gid}/queuing`;
+					n.icon += 'exwd.svg';
+					n.url = `/seek/${n.body.payload.queue.host_goods.gid}/queuing`;
+					n.text = `有新的物品排了你的<b>${n.body.payload.queue.host_goods.name}</b>`;
 					break;
 				case 20003:
-					n.text = `<b>${n.body.payload.person.name}</b>關注了你的物品`;
-					n.url = `/profile/${n.body.payload.person.uid}`;
 					n.icon += 'heart.svg';
+					n.url = `/profile/${n.body.payload.person.uid}`;
+					n.text = `<b>${n.body.payload.person.name}</b>關注了你的物品`;
 					break;
 				case 20004:
-					n.text = `你關注的<b>${n.body.payload.goods.name}</b>有新的留言`;
-					n.url = `/seek/${n.body.payload.goods.gid}`;
 					n.icon += 'comment.svg';
+					n.url = `/seek/${n.body.payload.goods.gid}`;
+					n.text = `你關注的<b>${n.body.payload.goods.name}</b>有新的留言`;
 					break;
 				case 30001:
 					break;

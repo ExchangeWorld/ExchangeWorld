@@ -1,75 +1,81 @@
 // Rules for sizing the icon.
 .material-icons {
-	&.md-18 {
-		font-size: 18px;
-	}
-	&.md-24 {
-		font-size: 24px;
-	}
-	&.md-36 {
-		font-size: 36px;
-	}
-	&.md-48 {
-		font-size: 48px;
-	}
-	&.md-100 {
-		font-size: 100px;
-	}
-	&.md-dark {
-		color: rgba(0, 0, 0, 0.54);
-		&.md-inactive {
-			color: rgba(0, 0, 0, 0.26);
-		}
-	}
-	&.md-light {
-		color: rgba(255, 255, 255, 1);
-		&.md-inactive {
-			color: rgba(255, 255, 255, 0.3);
-		}
-	}
-	&.hide {
-		cursor: default;
-	}
-	&.star {
-		color: #FF9700;
-		cursor: default;
-	}
-	&.heart-seek {
-		color: #f19ec2;
-		cursor: pointer;
-		/*margin-right: 5px;*/
-	}
-	&.heart-goods {
-		color: #f19ec2;
-		cursor: pointer;
-	}
-	&.blue {
-		color: #6e5fdd;
-	}
-	&.delete {
-		cursor: pointer;
-		color: rgba(0, 0, 0, 0.4);
-	}
-	&.add-photo {
-		font-size: 100px;
-		margin: 2px;
-		color: #757575;
-		border: 2px dashed;
-		transition: 0.3s;
-		&:hover {
-			opacity: 0.8;
-			filter: alpha(opacity=80);
-		}
-	}
-	&.confirm {
-		font-size: 48px;
-		color: rgb(84, 110, 122);
-	}
-	&.toolbar {
-		color: black;
-	}
+    &.md-18 {
+        font-size: 18px;
+    }
+    &.md-24 {
+        font-size: 24px;
+    }
+    &.md-36 {
+        font-size: 36px;
+    }
+    &.md-48 {
+        font-size: 48px;
+    }
+    &.md-100 {
+        font-size: 100px;
+    }
+    &.md-dark {
+        color: rgba(0, 0, 0, 0.54);
+        &.md-inactive {
+            color: rgba(0, 0, 0, 0.26);
+        }
+    }
+    &.md-light {
+        color: rgba(255, 255, 255, 1);
+        &.md-inactive {
+            color: rgba(255, 255, 255, 0.3);
+        }
+    }
+    &.hide {
+        cursor: default;
+    }
+    &.star {
+        color: #FF9700;
+        cursor: default;
+    }
+    &.heart-seek {
+        color: #f19ec2;
+        cursor: pointer;
+        /*margin-right: 5px;*/
+    }
+    &.heart-goods {
+        color: #f19ec2;
+        cursor: pointer;
+    }
+    &.blue {
+        color: #6e5fdd;
+    }
+    &.delete {
+        cursor: pointer;
+        color: rgba(0, 0, 0, 0.4);
+    }
+    &.add-photo {
+        font-size: 100px;
+        margin: 2px;
+        color: #757575;
+        border: 2px dashed;
+        transition: 0.3s;
+        &:hover {
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+        }
+    }
+    &.confirm {
+        font-size: 48px;
+        color: rgb(84, 110, 122);
+    }
+    &.toolbar {
+        color: black;
+    }
+    &.comment {
+        outline: 0;
+        font-size: 20px;
+        margin: 20px 0 0 10px;
+        cursor: pointer;
+    }
 }
 
 md-toolbar:not(.md-menu-toolbar) md-icon {
-	color: #262626;
+    color: #262626;
 }

@@ -1,163 +1,163 @@
 .navbar {
-	.md-button {
-		height: $navbar-height;
-		font-size: 1em;
-		padding: 0px 10px;
-		margin: 0px;
-		min-width: 80px;
-		md-icon {
-			vertical-align: text-bottom;
-		}
-	}
-	.active {
-		background-color: rgba(190, 190, 190, 0.5);
-	}
-	a {
-		padding-top: 20px;
-	}
-	i {
-		margin-right: 5px;
-	}
+    .md-button {
+        height: $navbar-height;
+        font-size: 1em;
+        padding: 0px 10px;
+        margin: 0px;
+        min-width: 80px;
+        md-icon {
+            vertical-align: text-bottom;
+        }
+    }
+    .active {
+        background-color: rgba(190, 190, 190, 0.5);
+    }
+    a {
+        padding-top: 20px;
+    }
+    i {
+        margin-right: 5px;
+    }
 }
 
 .md-button:not([disabled]):hover {
-	background-color: rgba(158, 158, 158, 0.2);
-	color: #90A4AE;
-	transition: 0.6s;
+    background-color: rgba(158, 158, 158, 0.2);
+    color: #90A4AE;
+    transition: 0.6s;
 }
 
 .md-button.md-fab:not([disabled]):hover {
-	background-color: rgba(158, 158, 158, 0.2);
-	color: #293D66;
-	transition: 0.6s;
+    background-color: rgba(158, 158, 158, 0.2);
+    color: #293D66;
+    transition: 0.6s;
 }
 
 .trans:not([disabled]):hover {
-	background-color: rgba(158, 158, 158, 0.2);
-	color: #293D66;
-	transition: 0.6s;
-	transition-delay: 0.2s;
+    background-color: rgba(158, 158, 158, 0.2);
+    color: #293D66;
+    transition: 0.6s;
+    transition-delay: 0.2s;
 }
 
 .md-button {
-	text-transform: capitalize;
-	&.mdbtn-border {
-		border: 1px ridge #CFD8DC;
-	}
-	&.white-btn {
-		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.35);
-		background-color: #FFF;
-	}
-	&.md-fab {
-		height: 48px;
-		width: 48px;
-		line-height: 48px;
-		&.ex-confirm {
-			height: 80px;
-			width: 80px;
-			max-width: none;
-			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.35);
-		}
-	}
-	&.new-btn {
-		border: 1px solid black;
-		font-weight: 600;
-		&.post {
-			width: 100px;
-		}
-	}
-	&.link {
-		margin-left: 15px;
-	}
+    text-transform: capitalize;
+    &.mdbtn-border {
+        border: 1px ridge #CFD8DC;
+    }
+    &.white-btn {
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.35);
+        background-color: #FFF;
+    }
+    &.md-fab {
+        height: 48px;
+        width: 48px;
+        line-height: 48px;
+        &.ex-confirm {
+            height: 80px;
+            width: 80px;
+            max-width: none;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.35);
+        }
+    }
+    &.new-btn {
+        border: 1px solid black;
+        font-weight: 600;
+        &.post {
+            width: 100px;
+        }
+    }
+    &.link {
+        margin-left: 15px;
+    }
 }
 
 .seek_btn {
-	min-width: 40px;
+    min-width: 40px;
 }
 
 .event-btn {
-	padding: 0;
-	margin: 15px 10px 10px 0;
-	height: 80px;
-	max-width: 95%;
-	cursor: pointer;
-	border-radius: 0 30px 30px 0;
-	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.35);
-	background-color: #F5F5F5;
-	transition: 0.2s;
-	&:hover {
-		transform: scale(1.05);
-	}
-	&:focus {
-		background-color: #fff;
-		//box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-		transform: scale(1.05);
-	}
+    padding: 0;
+    margin: 15px 10px 10px 0;
+    height: 80px;
+    max-width: 95%;
+    cursor: pointer;
+    border-radius: 0 30px 30px 0;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.35);
+    background-color: #F5F5F5;
+    transition: 0.2s;
+    &:hover {
+        transform: scale(1.05);
+    }
+    &:focus {
+        background-color: #fff;
+        //box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+        transform: scale(1.05);
+    }
 }
 
 .agreed-btn {
-	background-color: rgba(238, 238, 238, 0.71);
+    background-color: rgba(238, 238, 238, 0.71);
 }
 
 .anchor:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 300px) {
-	.notification {
-		position: absolute;
-		right: 20px;
-		top: 7px;
-		background-color: #FF8F00;
-		line-height: 20px;
-		width: 18px;
-		height: 18px;
-		border-radius: 50%;
-		padding-left: 6px;
-	}
-	.home-btn {
-		position: absolute;
-		border: 2px white solid;
-		color: white;
-		font-size: 18px;
-		min-height: 30px;
-		width: 28%;
-		height: 40px;
-		top: 100px;
-		left: 33%;
-	}
-	.md-button {
-		&.login-btn {
-			padding-left: 36px;
-		}
-	}
+    .notification {
+        position: absolute;
+        right: 20px;
+        top: 7px;
+        background-color: #FF8F00;
+        line-height: 20px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        padding-left: 6px;
+    }
+    .home-btn {
+        position: absolute;
+        border: 2px white solid;
+        color: white;
+        font-size: 18px;
+        min-height: 30px;
+        width: 28%;
+        height: 40px;
+        top: 100px;
+        left: 33%;
+    }
+    .md-button {
+        &.login-btn {
+            padding-left: 36px;
+        }
+    }
 }
 
 @media screen and (min-width: 600px) {
-	.notification {
-		padding-left: 0;
-		top: -2px;
-	}
-	.home-btn {
-		font-size: 20px;
-		width: 16%;
-		height: 48px;
-		top: 230px;
-		left: 40%;
-	}
-	.md-button {
-		&.login-btn {
-			padding-left: 10px;
-		}
-	}
+    .notification {
+        padding-left: 0;
+        top: -2px;
+    }
+    .home-btn {
+        font-size: 20px;
+        width: 16%;
+        height: 48px;
+        top: 185px;
+        left: 40%;
+    }
+    .md-button {
+        &.login-btn {
+            padding-left: 10px;
+        }
+    }
 }
 
 @media screen and (min-width: 960px) {
-	.home-btn {
-		font-size: 24px;
-		width: 13%;
-		height: 60px;
-		top: 420px;
-		left: 42%;
-	}
+    .home-btn {
+        font-size: 24px;
+        width: 13%;
+        height: 60px;
+        top: 420px;
+        left: 42%;
+    }
 }

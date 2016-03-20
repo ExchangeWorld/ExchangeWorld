@@ -25,11 +25,11 @@
 					<md-button class="btn-rwd new-btn" ng-show="!vm.isMe" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickAddFollowing(vm.profile.uid)">
 						<div layout="row" layout-align="center center" ng-show="!vm.isFollowed">
 							<i class="material-icons">person_add</i>
-							<span>&nbsp;追隨</span>
+							<span style="font-size:12px;">&nbsp;追隨</span>
 						</div>
 						<div layout="row" layout-align="center center" ng-show="vm.isFollowed">
 							<i class="material-icons">remove_circle</i>
-							<span>&nbsp;取消追隨</span>
+							<span style="font-size:12px;">&nbsp;取消追隨</span>
 						</div>
 					</md-button>
 				</div>
@@ -37,7 +37,7 @@
 					<md-button class="btn-rwd new-btn" ng-show="!vm.isMe" ng-disabled="!$root.isLoggedIn" ng-click="vm.onClickSendMsg($event, vm.profile.uid)" style="border: 1px solid black; font-weight: 600;">
 						<div layout="row" layout-align="center center">
 							<i class="material-icons">chat</i>
-							<span>&nbsp;送訊息</span>
+							<span style="font-size:12px;">&nbsp;送訊息</span>
 						</div>
 					</md-button>
 				</div>

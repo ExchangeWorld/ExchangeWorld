@@ -18,21 +18,21 @@
 				</div>
 			</div>
 		</div>
-		<div layout="column" offset-gt-sm="5" flex-gt-sm="55" layout-gt-xs="row">
-			<div flex="100" flex-gt-sm="50" layout layout-align="center center">
+		<div layout="column" layout-align="center center" offset-gt-sm="5" flex-gt-sm="55" layout-gt-xs="row">
+			<div flex-sm="100" flex-gt-sm="50" layout-gt-xs layout-align-gt-xs="center center">
 				<p class="md-title">{{ card.owner_goods.name }}</p>
 			</div>
-			<div flex="100" flex-gt-sm="50" layout layout-align="center center">
+			<div flex-sm="100" flex-gt-sm="50" layout-gt-xs layout-align-gt-xs="center center">
 				<p>{{ vm.me.name }}</p>
 			</div>
 		</div>
 	</md-card-content>
 	<md-card-actions layout="row" layout-xs="column">
-		<span flex-gt-xs="5"></span>
-		<md-button ng-show="!card.other_goods.rate" ng-click="vm.rateExchange($event, $index)">
+		<span flex-gt-xs></span>
+		<md-button class="new-btn" ng-show="!card.other_goods.rate" ng-click="vm.rateExchange($event, $index)">
 			<span class="md-title">交換成功，給個星評吧</span>
 		</md-button>
-		<span flex></span>
+		<!-- <span flex></span> -->
 		<div layout="row" ng-show="card.other_goods.rate" layout-align="center center" style="margin:0; padding-left: 10px; padding-bottom: 15px;">
 			<div layout layout-align="center start">
 				<div ng-repeat="n in vm.getNumber(card.other_goods.rate) track by $index">
@@ -43,6 +43,6 @@
 				</div>
 			</div>
 		</div>
-		<span flex-gt-xs="10"></span>
+		<span flex-gt-xs="5"></span>
 	</md-card-actions>
 </md-card>

@@ -10,7 +10,7 @@
 	<div layout="row" layout-align="center center" layout-wrap>
 		<div flex="45" flex-gt-sm="20" layout="column" layout-align="center center" class="md-whiteframe-z4 item follow" ng-repeat="follow in vm.followData" style="z-index:100;">
 			<div layout layout-align="center center">
-				<img flex ng-src="{{ follow.details.photo_path }}" ng-click="vm.onClickUser(follow.details.uid)" style="width: 100%;" />
+				<img flex ng-src="{{ follow.details.photo_path }}" ng-click="$root.onClickUser(follow.details.uid)" style="width: 100%; cursor:pointer;" />
 			</div>
 			<p class="md-subhead">{{ follow.details.name }}</p>
 		</div>

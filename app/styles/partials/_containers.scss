@@ -185,18 +185,14 @@ md-menu-content {
 	background: #ECEFF1;
 	margin: 5px 5px 10px 5px;
 	box-sizing: border-box;
-	// box-shadow: 2px 2px 4px 2px #607D8B;
-	/*border-radius: 8px;*/
 	img {
 		max-width: 100%;
 		max-height: 100%;
-		/*border-radius: 8px 8px 0 0;*/
 	}
 	&.profile {
 		margin: 6px 0;
 	}
 	&.follow {
-		cursor: pointer;
 		margin: 5px 5px;
 		padding: 1px;
 		img {

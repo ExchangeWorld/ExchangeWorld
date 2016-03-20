@@ -307,7 +307,7 @@ div.md-open-menu-container {
 	}
 	.switch {
 		padding-left: 25px;
-		margin-top:8px;
+		margin-top: 8px;
 		.md-label {
 			padding-left: 0%;
 		}
@@ -428,7 +428,7 @@ div.md-open-menu-container {
 	}
 	.switch {
 		padding-left: 10px;
-		margin-top:0;
+		margin-top: 0;
 		.md-label {
 			padding-right: 10px;
 		}
@@ -479,6 +479,9 @@ div.md-open-menu-container {
 		&.left {
 			margin-left: 20px;
 		}
+	}
+	.padding-gt-xs {
+		padding: 8px;
 	}
 }
 
@@ -568,9 +571,6 @@ div.md-open-menu-container {
 				height: 15vw;
 			}
 		}
-	}
-	.item-profile {
-		width: 50%;
 	}
 }
 

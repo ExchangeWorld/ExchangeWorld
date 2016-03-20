@@ -67,7 +67,7 @@
 		}
 	}
 	&.link {
-		margin-left: 15px;
+		margin-left: 25px;
 	}
 }
 
@@ -90,7 +90,6 @@
 	}
 	&:focus {
 		background-color: #fff;
-		//box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 		transform: scale(1.05);
 	}
 }

@@ -1,129 +1,130 @@
 <md-content resize ng-style="resizeWithOffset(56)" style="overflow-y: auto; overflow-x: hidden; padding: 0 8px;">
-    <div class="goods-lg" layout layout-align="center center" ng-style="vm.bgStyle">
-        <img id="img" crossorigin="anonymous" class="img-goods" ng-src="{{ vm.goodData.photo_path[0] }}" ng-click="vm.showPhotoViewer($event)" ng-style="vm.bordercolor[$index]" ng-init="$index=1" ng-mouseover="$index=0" ng-mouseleave="$index=1" />
-    </div>
-    <div style="margin:0px 20px 0px 20px;">
-        <h1 ng-show="!vm.isEditing" style="margin:0px; padding-left:6px;">
+	<div class="goods-lg" layout layout-align="center center" ng-style="vm.bgStyle">
+		<img id="img" crossorigin="anonymous" class="img-goods" ng-src="{{ vm.goodData.photo_path[0] }}" ng-click="vm.showPhotoViewer($event)" ng-style="vm.bordercolor[$index]" ng-init="$index=1" ng-mouseover="$index=0" ng-mouseleave="$index=1" />
+	</div>
+	<div style="margin:0px 20px 0px 20px;">
+		<h1 ng-show="!vm.isEditing" style="margin:0px; padding-left:6px;">
             <img data-ng-src="../../images/icon/{{vm.goodData.category}}.svg" style="height:30px; width:auto;" />
             <span ng-show="vm.goodData.exchanged === 1"> [已換出] </span>
             {{ vm.goodData.name }}
         </h1>
-        <md-input-container flex ng-show="vm.isEditing" style="padding-bottom:24px;">
-            <md-select ng-model="vm.goodData.category" aria-label="good.cate">
-                <md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}" required>
-                    {{cate.alias}}
-                </md-option>
-            </md-select>
-        </md-input-container>
-        <md-input-container ng-show="vm.isEditing">
-            <input type="string" ng-model="vm.goodData.name" aria-label="goodsName" columns="10" md-maxlength="20" required> </input>
-        </md-input-container>
-        <div flex layout="row" layout-align="start center" style="margin-top: 10px;">
-            <div flex layout layout-align="start center">
-                <md-button class="goods-info" ng-click="$root.onClickUser(vm.goodData.owner.uid)">
-                    <div layout="row" layout-align="center center">
-                        <img src="{{ vm.goodData.owner.photo_path }}" class="user-img" />
-                        <span class="nav-user goods" hide-xs style="font-size: 14px;">{{ vm.goodData.owner.name }}</span>
-                    </div>
-                </md-button>
-            </div>
-            <div flex layout layout-align="start center">
-                <md-button class="goods-info" ng-click="vm.onClickStar()">
-                    <div layout="row" layout-align="center center">
-                        <i class="material-icons heart-seek" style="outline: 0; margin-right:0px; font-size:20px;">
+		<md-input-container flex ng-show="vm.isEditing" style="padding-bottom:24px;">
+			<md-select ng-model="vm.goodData.category" aria-label="good.cate">
+				<md-option ng-repeat="cate in vm.availableCategory" value="{{cate.label}}" required>
+					{{cate.alias}}
+				</md-option>
+			</md-select>
+		</md-input-container>
+		<md-input-container ng-show="vm.isEditing">
+			<input type="string" ng-model="vm.goodData.name" aria-label="goodsName" columns="10" md-maxlength="20" required> </input>
+		</md-input-container>
+		<div flex layout="row" layout-align="start center" style="margin-top: 10px;">
+			<div flex layout layout-align="start center">
+				<md-button class="goods-info" ng-click="$root.onClickUser(vm.goodData.owner.uid)">
+					<div layout="row" layout-align="center center">
+						<img src="{{ vm.goodData.owner.photo_path }}" class="user-img" />
+						<span class="nav-user goods" hide-xs style="font-size: 14px;">{{ vm.goodData.owner.name }}</span>
+					</div>
+				</md-button>
+			</div>
+			<div flex layout layout-align="start center">
+				<md-button class="goods-info" ng-click="vm.onClickStar()">
+					<div layout="row" layout-align="center center">
+						<i class="material-icons heart-seek" style="outline: 0; margin-right:0px; font-size:20px;">
                         {{ vm.goodData.starredByUser ? 'favorite' : 'favorite_border' }}
                     </i>
-                        <span hide-xs>{{vm.goodData.starredByUser ? '已關注' : '關注'}} </span>
-                    </div>
-                    <!--<span>{{ vm.goodData.starredByUser ? vm.stars.length + 1 : vm.stars.length }}</span>-->
-                </md-button>
-            </div>
-            <div flex layout layout-align="start center" ng-show="$root.user.uid !== vm.goodData.owner.uid && vm.goodData.exchanged !== 1">
-                <md-button class="goods-info" ng-click="vm.onClickQueue($event)">
-                    <div layout="row" layout-align="center center">
-                        <i class="fa fa-hand-paper-o" style="outline:0; margin-right:0px; font-size:20px;"></i>
-                        <span hide-xs>我要排</span>
-                    </div>
-                    <!--<span>{{vm.queuingList.length}}</span>-->
-                </md-button>
-            </div>
-            <div flex layout layout-align="start center">
-                <md-button class="goods-info">
-                    <a style="display:flex; align-items:center;" href="#" socialshare socialshare-provider="facebook" socialshare-url="http://exwd.csie.org/seek/{{vm.goodData.gid}}">
-                        <i class="material-icons" style="outline:0; margin-right:0px; font-size:20px;">share</i>
-                        <span hide-xs>分享</span>
-                    </a>
-                </md-button>
-            </div>
-            <div flex layout layout-align="start center" ng-show="$root.user.uid === vm.goodData.owner.uid">
-                <md-menu>
-                    <md-button class="goods-info" ng-click="vm.openSetting($mdOpenMenu, $event)">
-                        <div layout="row" layout-align="center center">
-                            <i class="material-icons" style="outline:0; margin-right:0px; font-size:20px;">settings</i>
-                            <span hide-xs>更多</span>
-                        </div>
-                    </md-button>
-                    <md-menu-content width="3">
-                        <md-menu-item>
-                            <md-button ng-click="vm.onClickQueue($event)">
-                                <i class="material-icons" style="outline:0; margin-right:0px; font-size:20px;">remove_red_eye</i>
-                                <span>看誰排</span>
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-item>
-                            <md-button ng-click="vm.onEdit()">
-                                <i class="material-icons" style="outline:0; margin-right:0px; font-size:20px;">create</i>
-                                <span>編輯</span>
-                            </md-button>
-                        </md-menu-item>
-                        <!--<md-menu-divider></md-divider>-->
-                        <md-menu-item>
-                            <md-button ng-click="vm.onDelete()">
-                                <i class="material-icons" style="outline:0; margin-right:0px; font-size:20px;">delete</i>
-                                <span>刪除</span>
-                            </md-button>
-                        </md-menu-item>
-                    </md-menu-content>
-                    <!--<span>{{vm.queuingList.length}}</span>-->
-                </md-menu>
-            </div>
-        </div>
-    </div>
-    <div layout layout="row" style="margin:10px 20px 0px 20px;">
-        <p class="md-title" style="padding-left:10px;" ng-show="!vm.isEditing">{{ vm.goodData.description }}</p>
-        <md-input-container ng-show="vm.isEditing" style="width:100%;">
-            <textarea type="string" ng-model="vm.goodData.description" aria-label="goodsDescription" columns="10" md-maxlength="500" md-detect-hidden="true" required> </textarea>
-        </md-input-container>
-        <md-button class="md-raised md-primary" ng-show="vm.isEditing" ng-click="vm.onEdit()" style="max-height: 44px;">
-            儲存修改
-        </md-button>
-    </div>
-    <div>
-        <md-divider ng-show="vm.goodComments.length > 0"></md-divider>
-        <!-- comments -->
-        <div class="comments">
-            <div class="comment" ng-repeat="comment in vm.goodComments">
-                <a class="avatar" ng-click="$root.onClickUser(comment.commenter_uid)"> <img ng-src="{{ comment.commenter.photo_path }}"> </a>
-                <div class="content" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
-                    <a class="author" ng-click="$root.onClickUser(comment.commenter_uid)">{{ comment.commenter.name}}</a>
-                    <div class="metadata">
-                        <div flex class="date">{{ comment.timestamp }}</div>
-                    </div>
-                    <div ng-show="comment.isMe && removeMode" ng-click="vm.onDeleteComment(comment.cid)" class="cross">X</div>
-                    <div class="text">
-                        {{ comment.content }}
-                    </div>
-                </div>
-            </div>
-            <form ng-show="$root.isLoggedIn" ng-submit="vm.onSubmitComment()" style="display:flex; align-items:center; margin:0.5em 0.4em 0em;">
-                <img ng-src="{{ $root.user.photo_path }}" style="width:40px; height:40px; border-radius:5px; margin-right: 10px;" />
-                <md-input-container flex style="height:100%; top:15px;">
-                    <label style="top:-20px;">留言...</label>
-                    <input type="text" ng-model="vm.comment" name="text" />
-                </md-input-container>
-                <i class="material-icons comment" ng-click="vm.onSubmitComment()">send</i>
-                <input type="submit" id="submit" value="Submit" ng-show="false" />
-            </form>
-        </div>
-    </div>
+						<span hide-xs>{{vm.goodData.starredByUser ? '已關注' : '關注'}} </span>
+					</div>
+					<!--<span>{{ vm.goodData.starredByUser ? vm.stars.length + 1 : vm.stars.length }}</span>-->
+				</md-button>
+			</div>
+			<div flex layout layout-align="start center" ng-show="$root.user.uid !== vm.goodData.owner.uid && vm.goodData.exchanged !== 1">
+				<md-button class="goods-info" ng-click="vm.onClickQueue($event)">
+					<div layout="row" layout-align="center center">
+						<!-- <i class="fa fa-hand-paper-o" style="outline:0; margin-right:0px; font-size:20px;"></i> -->
+						<i class="material-icons">transfer_within_a_station</i>
+						<span hide-xs>我要排</span>
+					</div>
+					<!--<span>{{vm.queuingList.length}}</span>-->
+				</md-button>
+			</div>
+			<div flex layout layout-align="start center">
+				<md-button class="goods-info">
+					<a style="display:flex; align-items:center;" href="#" socialshare socialshare-provider="facebook" socialshare-url="http://exwd.csie.org/seek/{{vm.goodData.gid}}">
+						<i class="material-icons" style="outline:0; margin-right:0px; font-size:20px;">share</i>
+						<span hide-xs>分享</span>
+					</a>
+				</md-button>
+			</div>
+			<div flex layout layout-align="start center" ng-show="$root.user.uid === vm.goodData.owner.uid">
+				<md-menu>
+					<md-button class="goods-info" ng-click="vm.openSetting($mdOpenMenu, $event)">
+						<div layout="row" layout-align="center center">
+							<i class="material-icons" style="outline:0; margin-right:0px; font-size:20px;">settings</i>
+							<span hide-xs>更多</span>
+						</div>
+					</md-button>
+					<md-menu-content width="3">
+						<md-menu-item>
+							<md-button ng-click="vm.onClickQueue($event)">
+								<i class="material-icons" style="outline:0; margin-right:0px; font-size:20px;">remove_red_eye</i>
+								<span>看誰排</span>
+							</md-button>
+						</md-menu-item>
+						<md-menu-item>
+							<md-button ng-click="vm.onEdit()">
+								<i class="material-icons" style="outline:0; margin-right:0px; font-size:20px;">create</i>
+								<span>編輯</span>
+							</md-button>
+						</md-menu-item>
+						<!--<md-menu-divider></md-divider>-->
+						<md-menu-item>
+							<md-button ng-click="vm.onDelete()">
+								<i class="material-icons" style="outline:0; margin-right:0px; font-size:20px;">delete</i>
+								<span>刪除</span>
+							</md-button>
+						</md-menu-item>
+					</md-menu-content>
+					<!--<span>{{vm.queuingList.length}}</span>-->
+				</md-menu>
+			</div>
+		</div>
+	</div>
+	<div layout layout="row" style="margin:10px 20px 0px 20px;">
+		<p class="md-title" style="padding-left:10px;" ng-show="!vm.isEditing">{{ vm.goodData.description }}</p>
+		<md-input-container ng-show="vm.isEditing" style="width:100%;">
+			<textarea type="string" ng-model="vm.goodData.description" aria-label="goodsDescription" columns="10" md-maxlength="500" md-detect-hidden="true" required> </textarea>
+		</md-input-container>
+		<md-button class="md-raised md-primary" ng-show="vm.isEditing" ng-click="vm.onEdit()" style="max-height: 44px;">
+			儲存修改
+		</md-button>
+	</div>
+	<div class="padding-gt-xs">
+		<md-divider ng-show="vm.goodComments.length > 0"></md-divider>
+		<!-- comments -->
+		<div class="comments">
+			<div class="comment" ng-repeat="comment in vm.goodComments">
+				<a class="avatar" ng-click="$root.onClickUser(comment.commenter_uid)"> <img ng-src="{{ comment.commenter.photo_path }}"> </a>
+				<div class="content" ng-mouseover="removeMode=true" ng-mouseleave="removeMode=false">
+					<a class="author" ng-click="$root.onClickUser(comment.commenter_uid)">{{ comment.commenter.name}}</a>
+					<div class="metadata">
+						<div flex class="date">{{ comment.timestamp }}</div>
+					</div>
+					<div ng-show="comment.isMe && removeMode" ng-click="vm.onDeleteComment(comment.cid)" class="cross">X</div>
+					<div class="text">
+						{{ comment.content }}
+					</div>
+				</div>
+			</div>
+			<form ng-show="$root.isLoggedIn" ng-submit="vm.onSubmitComment()" style="display:flex; align-items:center; margin:0.5em 0.4em 0em;">
+				<img ng-src="{{ $root.user.photo_path }}" style="width:40px; height:40px; border-radius:5px; margin-right: 10px;" />
+				<md-input-container flex style="height:100%; top:15px;">
+					<label style="top:-20px;">留言...</label>
+					<input type="text" ng-model="vm.comment" name="text" />
+				</md-input-container>
+				<i class="material-icons comment" ng-click="vm.onSubmitComment()">send</i>
+				<input type="submit" id="submit" value="Submit" ng-show="false" />
+			</form>
+		</div>
+	</div>
 </md-content>

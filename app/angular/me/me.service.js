@@ -6,7 +6,7 @@ const _        = require('lodash');
 meModule.service('meService', meService);
 
 /** @ngInject */
-function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDialog, AvailableCategory) {
+function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDialog, AvailableCategory, $localStorage) {
 	var service = {
 		getProfile,
 		editProfile,
@@ -110,6 +110,7 @@ function meService(Restangular, $q, facebookService, exception, $mdMedia, $mdDia
 					me.route = `${me.uid}/photo`;
 					await me.put();
 
+					$localStorage.user.photo_path = me.photo_path;
 					logger.success('更新成功', null, 'DONE');
 					onCancel();
 				} catch (err) {

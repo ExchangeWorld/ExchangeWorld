@@ -116,7 +116,7 @@
 						<md-button ng-click="vm.menu('exchange')" ng-class="{'active': vm.contentIs('exchange')}">交換</md-button>
 					</md-menu-item>
 					<md-menu-item>
-						<a ng-href="/me">個人資料</a>
+						<md-button ng-href="/me">個人資料</md-button>
 					</md-menu-item>
 					<md-menu-item ng-show="$root.isLoggedIn" hide-gt-xs>
 						<md-button ng-click="vm.menu('m_messagebox')" ng-show="$root.isLoggedIn">
@@ -135,7 +135,7 @@
 						</md-button>
 					</md-menu-item>
 					<md-menu-item>
-						<a ng-href="https://goo.gl/ObSQOm" target="_blank">粉絲專頁</a>
+						<md-button ng-href="https://goo.gl/ObSQOm" target="_blank">粉絲專頁</md-button>
 					</md-menu-item>
 					<!-- <md-menu-divider></md-menu-divider> -->
 					<md-menu-item ng-show="$root.isLoggedIn">

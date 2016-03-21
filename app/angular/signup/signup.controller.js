@@ -19,6 +19,7 @@ function SignupController(
 	vm.goLogin = goLogin;
 	vm.signup = signup;
 	vm.signupFb = signupFb;
+	vm.loading = false;
 	vm.form = {
 		id: '',
 		name: '',
@@ -32,11 +33,13 @@ function SignupController(
 		}
 
 		try {
+			vm.loading = true;
 			let user = await auth.signup(vm.form);
 			$rootScope.isLoggedIn = Boolean(user);
 			$localStorage.user = user;
 			$rootScope.user = user;
 
+			vm.loading = false;
 			$state.go('root.withSidenav.seek', {}, { reload: true });
 			closePopup();
 		} catch (err) {
@@ -47,10 +50,12 @@ function SignupController(
 
 	async function signupFb() {
 		try {
+			vm.loading = true;
 			let user = await auth.login(true);
 			$rootScope.isLoggedIn = Boolean(user);
 			$localStorage.user = user;
 
+			vm.loading = false;
 			$state.go('root.withSidenav.seek', {}, { reload: true });
 			closePopup();
 		} catch (err) {

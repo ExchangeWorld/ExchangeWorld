@@ -18,6 +18,7 @@ function LoginController(
 	vm.closePopup = closePopup;
 	vm.goSignup = goSignup;
 	vm.login = login;
+	vm.loading = false;
 	vm.form = {
 		id: '',
 		pwd: ''
@@ -25,10 +26,11 @@ function LoginController(
 
 	async function login(fb) {
 		try {
+			vm.loading = true;
 			let user = await auth.login(fb, vm.form.id, vm.form.pwd);
 			$localStorage.user = user;
 			$rootScope.user = user;
-
+			vm.loading = false;
 			$state.go('root.withSidenav.seek', {}, { reload: true });
 
 			closePopup();

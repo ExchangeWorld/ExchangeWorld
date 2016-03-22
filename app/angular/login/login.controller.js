@@ -37,6 +37,7 @@ function LoginController(
 		} catch (err) {
 			if (!err.data.token) exception.catcher('帳密組合錯誤或無此帳號')(err);
 			else exception.catcher('唉呀出錯了！')(err);
+			vm.loading = false;
 		}
 	}
 

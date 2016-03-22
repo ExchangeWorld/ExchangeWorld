@@ -43,6 +43,7 @@ function SignupController(
 			$state.go('root.withSidenav.seek', {}, { reload: true });
 			closePopup();
 		} catch (err) {
+			vm.loading = false;
 			if (err.data.error === 'Email is wrong') exception.catcher('信箱格式有誤喔')(err);
 			else exception.catcher('唉呀出錯了！')(err);
 		}
@@ -59,6 +60,7 @@ function SignupController(
 			$state.go('root.withSidenav.seek', {}, { reload: true });
 			closePopup();
 		} catch (err) {
+			vm.loading = false;
 			exception.catcher('唉呀出錯了！')(err);
 		}
 	}

@@ -23,7 +23,8 @@ function NavbarController(
 	exception,
 	notification,
 	facebookService,
-	AppSettings
+	AppSettings,
+	Restangular
 ) {
 	const vm    = this;
 	vm.content             = $state.current.title;
@@ -55,13 +56,19 @@ function NavbarController(
 		//console.log(vm.content);
 	});
 	$scope.$on('chatroom:msgNew', (e)=> { 
-		$timeout(()=> { updateNews(); });
+		$timeout(()=> { 
+			$localStorage.user.extra_json.notification_numbers.message++;
+			updateNews(); 
+		});
 	});
 	$scope.$on('chatroom:msgRead', (e)=> { 
 		$timeout(()=> { updateNews(); });
 	});
 	$scope.$on('notify:notifyNew', (e, data)=> { 
-		$timeout(()=> { updateNews(); });
+		$timeout(()=> { 
+			$localStorage.user.extra_json.notification_numbers.notification++;
+			updateNews(); 
+		});
 	});
 	$scope.$on('notify:notifyRead', (e, idx)=> { 
 		//logger.success(vm.notifications[idx].text, null, 'NEWS');
@@ -71,23 +78,28 @@ function NavbarController(
 	async function activate() {
 		$rootScope.isLoggedIn = Boolean($localStorage.user);
 		if ($rootScope.isLoggedIn) {
-			$rootScope.user = $localStorage.user;
+			$rootScope.user = await Restangular.one('user').one('me').get();
+			$localStorage.user = $rootScope.user;
 
 			try {
 				await $http.get($rootScope.user.photo_path);
 			} catch (err) {
 				await facebookService.updateAvatar($rootScope.user.identity);
 			}
+			await updateNews();
 		}
 
-		await updateNews();
 	}
 
-	function openMenu($mdOpenMenu, e) {
+	function openMenu($mdOpenMenu, e, type) {
 		vm.closeMenu();
 		e.preventDefault();
 		e.stopPropagation();
 		$mdOpenMenu(e);
+
+		if (type) {
+			onClickMsgNotifyDropdown(type);
+		}
 	}
 
 	function menu(type) {
@@ -138,6 +150,11 @@ function NavbarController(
 			});
 	}
 
+	function onClickMsgNotifyDropdown(type) {
+		$localStorage.user.extra_json.notification_numbers[type] = 0;
+		updateIndicator();
+	}
+
 	async function onClickNotification(idx) {
 		vm.notifications[idx] = await notification.click(vm.notifications[idx]);
 		updateIndicator();
@@ -169,8 +186,8 @@ function NavbarController(
 
 	function updateIndicator() {
 		vm.unread = [
-			vm.messages.filter((m)=> { return !m.read; }).length,
-			vm.notifications.filter((n)=> { return !n.read; }).length
+			$localStorage.user.extra_json.notification_numbers.message,
+			$localStorage.user.extra_json.notification_numbers.notification
 		];
 
 		let unread = vm.unread[0] + vm.unread[1];

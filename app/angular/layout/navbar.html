@@ -32,7 +32,7 @@
 		<span flex-sm="15" flex-gt-sm="30" hide-xs></span>
 		<div hide-xs flex="10" flex-sm="20" flex-offset="10" flex-offset-sm="5" layout="row" layout-align="center center">
 			<md-menu flex flex-sm md-offset="-200 61" ng-show="$root.isLoggedIn">
-				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)" style="min-width:68px;">
+				<md-button ng-click="vm.openMenu($mdOpenMenu, $event, 'message')" style="min-width:68px;">
 					<md-icon class="material-icons">forum</md-icon>
 					<p class="notification md-caption" ng-show="vm.unread[0] !== 0">{{ vm.unread[0] }}</p>
 				</md-button>
@@ -63,7 +63,7 @@
 				</md-menu-content>
 			</md-menu>
 			<md-menu flex md-offset="-200 61" ng-show="$root.isLoggedIn">
-				<md-button ng-click="vm.openMenu($mdOpenMenu, $event)" style="min-width:68px;">
+				<md-button ng-click="vm.openMenu($mdOpenMenu, $event, 'notification')" style="min-width:68px;">
 					<md-icon class="material-icons">notifications</md-icon>
 					<p class="notification md-caption" ng-show="vm.unread[1] !== 0">{{ vm.unread[1] }}</p>
 				</md-button>

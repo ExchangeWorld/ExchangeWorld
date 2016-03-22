@@ -66,6 +66,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $mdMedia, Available
 			let goods = await Restangular.one('user', ownerUid).getList('goods');
 			if (!_.isArray(goods)) throw 'goods not array';
 
+			goods = goods.filter((g)=> { return g.exchanged === 0; });
 			goods.forEach(function(g) {
 				try {
 					g.category_alias = _.result(_.find(AvailableCategory, 'label', g.category), 'alias');
@@ -170,6 +171,7 @@ function goodsService(Restangular, $q, exception, $mdDialog, $mdMedia, Available
 			let goods = await Restangular.one('goods', hostGoodsGid).getList('queue');
 			if (!_.isArray(goods)) throw 'goods not array.';
 
+			goods = goods.filter((g)=> { return g.exchanged === 0; });
 			goods.forEach(function(g) {
 				try {
 					g.category_alias = _.result(_.find(AvailableCategory, 'label', g.category), 'alias');

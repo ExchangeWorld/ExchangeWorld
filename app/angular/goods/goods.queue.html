@@ -17,14 +17,14 @@
 				<md-radio-group ng-model="queue.group" layout-fill>
 					<div ng-repeat="goods in vm.myGoods" style="margin:10px 20px;">
 						<div flex layout="row" layout-align="center center">
-							<md-radio-button flex="70" flex-gt-xs="80" value="{{goods.gid}}">
-								<md-card class="md-whiteframe-z3 item-profile name-queue">
+							<div flex="70" flex-gt-xs="80">
+								<md-card class="md-whiteframe-z3 item-profile name-queue" ng-click="vm.onClickGoods(goods.gid)">
 									<md-card-content layout="column" layout-gt-xs="row">
 										<div flex-gt-xs="55" layout layout-align="center center" style=" height:150px; width:auto; border-radius:10px;">
 											<img ng-src="{{goods.photo_path[0]}}" style="max-width: 100%; max-height:100%;" />
 										</div>
 										<div flex-gt-xs="45" layout="column" layout-align="end start">
-											<div layout="column" layout-align="end start">
+											<div class="queue-gt-xs" layout="column" layout-align="end start">
 												<span class="md-headline">{{ goods.name }}</span>
 												<div layout="row" layout-algin="center center">
 													<img data-ng-src="../../images/icon/{{goods.category}}.svg" style="height:20px; width:auto;" />
@@ -34,10 +34,9 @@
 										</div>
 									</md-card-content>
 								</md-card>
+							</div>
+							<md-radio-button value="{{goods.gid}}">
 							</md-radio-button>
-							<a flex class="md-button link" ng-click="vm.onClickGoods(goods.gid)">
-								<md-icon md-font-set="material-icons">link</md-icon>
-							</a>
 						</div>
 					</div>
 				</md-radio-group>

@@ -7,7 +7,7 @@ const moment = require('moment');
 messageModule.factory('message', message);
 
 /** @ngInject */
-function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage, $rootScope, $mdMedia, logger, socket) {
+function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage, $rootScope, $mdMedia, logger, socket, $state) {
 	const service = {
 		getMessageList,
 		getChatroomInfo,
@@ -131,11 +131,14 @@ function message(Restangular, $timeout, $q, exception, $mdDialog, $localStorage,
 
 	async function showMessagebox(ev, uid, chat) {
 		let chatroom = Boolean(chat) ? chat : await createOrFindChatroom(uid);
+		if ($mdMedia('xs')) {
+			$state.go('root.oneCol.m_message', { cid: chatroom.cid });
+			return;
+		} 
 		
 		let mdScope = $rootScope.$new();
 		mdScope.instance = $mdDialog.show({
 			clickOutsideToClose: true,
-			fullscreen: $mdMedia('xs'),
 			templateUrl: 'utils/message/message.html',
 			controllerAs: 'vm',
 			controller: 'm_messageController',

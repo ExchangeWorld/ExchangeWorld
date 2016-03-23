@@ -23,6 +23,13 @@ img-crop canvas {
 	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
+.name-link {
+	cursor:pointer;
+	&:hover{
+		text-decoration: underline;
+	}
+}
+
 @media screen and (min-width: 300px) {
 	.cropArea {
 		background: #E4E4E4;

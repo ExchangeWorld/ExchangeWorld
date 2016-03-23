@@ -28,13 +28,14 @@ img-crop canvas {
 		background: #E4E4E4;
 		overflow: hidden;
 		width: 500px;
-		height: calc(100% - 56px);
+		height: 400px;
+		margin: auto 0;
 	}
 }
 
 @media screen and (min-width: 600px) {
 	.cropArea {
-		height: calc(100% - 264px);
+		height: 500px;
 	}
 }
 

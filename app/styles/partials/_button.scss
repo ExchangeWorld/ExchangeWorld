@@ -41,9 +41,6 @@
 
 .md-button {
 	text-transform: capitalize;
-	&.mdbtn-border {
-		border: 1px ridge #CFD8DC;
-	}
 	&.white-btn {
 		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.35);
 		background-color: #FFF;
@@ -92,14 +89,6 @@
 		background-color: #fff;
 		transform: scale(1.05);
 	}
-}
-
-.agreed-btn {
-	background-color: rgba(238, 238, 238, 0.71);
-}
-
-.anchor:hover {
-	cursor: pointer;
 }
 
 @media screen and (min-width: 300px) {

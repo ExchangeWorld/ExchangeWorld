@@ -534,16 +534,6 @@ div.md-open-menu-container {
 	}
 }
 
-@supports (overflow:-webkit-marquee) and (justify-content:inherit) {
-	.wtfsafari {
-		top: 1px;
-	}
-}
-
-.ex-goods-h {
-	height: calc(100% - 106px);
-}
-
 .message-box {
 	height: 250px;
 	width: 100%;

@@ -40,3 +40,15 @@ img:focus {
 		width: 80vw;
 	}
 }
+
+@supports (overflow:-webkit-marquee) and (justify-content:inherit) {
+	.wtfsafari {
+		top: 1px;
+	}
+}
+
+@media screen and (-moz-os-version) {
+	.firefox-icon {
+		margin-top: 6px;
+	}
+}

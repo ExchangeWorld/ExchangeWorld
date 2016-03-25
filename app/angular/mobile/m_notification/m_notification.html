@@ -1,16 +1,10 @@
-<style>
-md-list-item {
-	width: inherit;
-	cursor: pointer;
-}
-</style>
 <div resize ng-style="resizeWithOffset(56)">
 	<div ng-show="vm.loading" class="md-scroll-mask" style="z-index: 100; background-color: rgba(0, 0, 0, 0.10); bottom:-200px;" aria-hidden="true">
 		<md-progress-circular class="md-primary" md-mode='indeterminate' md-diameter="100" style="margin:200px auto;"></md-progress-circular>
 		<div class="md-scroll-mask-bar"></div>
 	</div>
 	<md-list ng-show="!vm.loading">
-		<md-list-item style="padding: 0;">
+		<md-list-item style="padding: 0; height:30px">
 			<div flex-offset="5" flex>
 				<p class="md-subhead">通知</p>
 			</div>
@@ -21,11 +15,7 @@ md-list-item {
 				<p class="md-body-2 note">目前沒有任何通知</p>
 			</div>
 		</md-list-item>
-		<md-list-item 
-			ng-repeat="notice in vm.notifications"
-			ng-style="!notice.read && {'background-color':'#E9F3FF'}" 
-			ng-click="vm.onClickNotification($index)"
-		>
+		<md-list-item ng-repeat="notice in vm.notifications" ng-style="!notice.read && {'background-color':'#E9F3FF'}" ng-click="vm.onClickNotification($index)">
 			<img flex style="max-height:50px; max-width:50px;" ng-src="{{ notice.icon }}" />
 			<div flex-offset="5" flex>
 				<p class="md-body-2 note" ng-bind-html="notice.textHtml"></p>

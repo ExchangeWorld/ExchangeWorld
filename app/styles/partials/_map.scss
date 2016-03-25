@@ -7,6 +7,20 @@ map {
 	}
 }
 
+.map-container {
+	position: absolute;
+	top: $navbar-height;
+	bottom: 0;
+	right: 0;
+	left: 45%;
+}
+
+@media screen and (max-width: $md) {
+	.map-container {
+		left: 0;
+	}
+}
+
 .marker {
    position: absolute;
    box-sizing: border-box;

@@ -1,4 +1,4 @@
-.grid__columns {
+.grid-columns {
 	-webkit-column-gap: 10px;
 	// -webkit-column-fill: auto;
 	-moz-column-gap: 10px;
@@ -55,7 +55,7 @@
 		margin: 0 auto;
 		padding: 20px 0;
 	}
-	.grid__columns {
+	.grid-columns {
 		padding-left: 5.5%;
 		padding-right: 2.5%;
 		column-count: 1;
@@ -72,7 +72,7 @@
 	.grid-wrapper {
 		max-width: 700px;
 	}
-	.grid__columns {
+	.grid-columns {
 		padding-left: 4.5%;
 		padding-right: 1.5%;
 		column-count: 2;
@@ -85,7 +85,7 @@
 	.grid-wrapper {
 		max-width: 850px;
 	}
-	.grid__columns {
+	.grid-columns {
 		padding-left: 2.2%;
 		padding-right: .2%;
 		column-count: 3;

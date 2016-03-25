@@ -49,6 +49,26 @@
 	}
 }
 
+.cate-btn {
+	font-size: 14px;
+	padding: 0 6px;
+	color: #000;
+	border: 1px #000 solid;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: 0.3s;
+	text-align: center;
+	&:hover {
+		background-color: #80CBC4;
+	}
+	&:focus,
+	:active {
+		border-color: #fff;
+		background-color: #000;
+		color: #fff;
+	}
+}
+
 @media screen and (min-width: 300px) {
 	.grid-wrapper {
 		max-width: 100%;
@@ -91,25 +111,5 @@
 		column-count: 3;
 		-moz-column-count: 3;
 		-webkit-column-count: 3;
-	}
-}
-
-.cate-btn {
-	font-size: 14px;
-	padding: 0 6px;
-	color: #000;
-	border: 1px #000 solid;
-	border-radius: 8px;
-	cursor: pointer;
-	transition: 0.3s;
-	text-align: center;
-	&:hover {
-		background-color: #80CBC4;
-	}
-	&:focus,
-	:active {
-		border-color: #fff;
-		background-color: #000;
-		color: #fff;
 	}
 }

@@ -68,7 +68,7 @@
 	}
 }
 
-.seek_btn {
+.seek-btn {
 	min-width: 40px;
 }
 
@@ -89,6 +89,27 @@
 		background-color: #fff;
 		transform: scale(1.05);
 	}
+}
+
+.goods-btn {
+	display: flex;
+	align-items: center;
+	margin: 0px;
+	margin-right: 10px;
+	transition: .3s ease-in-out;
+	border-width: 1px;
+	border-color: rgba(0, 0, 0, 0);
+	border-style: solid;
+	border-radius: 2px;
+	min-width: 20px;
+}
+
+.goods-btn:hover {
+	color: #f00;
+	border-width: 1px;
+	border-color: #f00;
+	border-style: solid;
+	border-radius: 2px;
 }
 
 @media screen and (min-width: 300px) {

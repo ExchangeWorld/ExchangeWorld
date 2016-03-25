@@ -165,6 +165,28 @@ a:hover {
 	}
 }
 
+.toolbar-span {
+	color: #262626;
+	font-size: 17px;
+	font-weight: 600;
+}
+
+.home-span {
+	color: #fff;
+	&.cate {
+		margin-top: 0;
+		font-size: 24px;
+	}
+	&.main {
+		margin-bottom: 0;
+		font-size: 30px;
+	}
+	&.sub {
+		margin-top: 0;
+		font-size: 16px;
+	}
+}
+
 @media screen and (min-width: 300px) {
 	.ex-story {
 		font-size: 14px;
@@ -223,27 +245,5 @@ a:hover {
 		text-align: center;
 		margin-bottom: 0;
 		color: rgb(233, 230, 232);
-	}
-}
-
-.toolbar-span {
-	color: #262626;
-	font-size: 17px;
-	font-weight: 600;
-}
-
-.home-span {
-	color: #fff;
-	&.cate {
-		margin-top: 0;
-		font-size: 24px;
-	}
-	&.main {
-		margin-bottom: 0;
-		font-size: 30px;
-	}
-	&.sub {
-		margin-top: 0;
-		font-size: 16px;
 	}
 }

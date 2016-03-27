@@ -20,7 +20,7 @@
 			</md-switch>
 		</div>
 		<div flex-xs="10">
-			<md-button class="seek_btn" ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory, bound:vm.searchWithBound ? vm.mapBound : '', global:vm.searchWithBound ? 0 : 1})" style="margin-top:8px;">
+			<md-button class="seek-btn" ng-click="vm.onSearch({name:vm.searchGoodsName, category:vm.searchGoodsCategory, bound:vm.searchWithBound ? vm.mapBound : '', global:vm.searchWithBound ? 0 : 1})" style="margin-top:8px;">
 				<md-icon md-font-set="material-icons">search</md-icon>
 			</md-button>
 		</div>
@@ -31,7 +31,7 @@
 		<img class="img-null onseek" src="../../images/emoji_null.png">
 	</div>
 	<div class="grid-wrapper">
-		<div class="grid__columns">
+		<div class="grid-columns">
 			<div ng-repeat="card in vm.goods">
 				<md-card class="md-whiteframe-z4 item card">
 					<a ng-href="/seek/{{card.gid}}" ng-mouseenter="onMouseOver(card.gid)" ng-mouseleave="onMouseOut(card.gid)">

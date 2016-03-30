@@ -39,10 +39,12 @@ function SeekController(
 		vm.loading = true;
 		vm.mapBound = bound.toUrlValue();
 		onSearch({
-			name     : vm.searchGoodsName,
-			category : vm.searchGoodsCategory,
-			bound    : vm.searchWithBound ? vm.mapBound : '',
-			global   : vm.searchWithBound ? 0 : 1,
+			name: vm.searchGoodsName,
+			category: vm.searchGoodsCategory,
+			bound: vm.searchWithBound ? vm.mapBound : '',
+			global: vm.searchWithBound ? 0 : 1
+		});
+	});
 
 	$scope.$watch('vm.searchGoodsCategory', function() {
 		onSearch({

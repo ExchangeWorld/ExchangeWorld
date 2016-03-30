@@ -34,7 +34,7 @@ function SeekController(
 	vm.loading             = false;
 
 	////////////////
-	
+
 	$scope.$on('boundChanged', function(e, bound) {
 		vm.loading = true;
 		vm.mapBound = bound.toUrlValue();
@@ -43,6 +43,13 @@ function SeekController(
 			category : vm.searchGoodsCategory,
 			bound    : vm.searchWithBound ? vm.mapBound : '',
 			global   : vm.searchWithBound ? 0 : 1,
+
+	$scope.$watch('vm.searchGoodsCategory', function() {
+		onSearch({
+			name: vm.searchGoodsName,
+			category: vm.searchGoodsCategory,
+			bound: vm.searchWithBound ? vm.mapBound : '',
+			global: vm.searchWithBound ? 0 : 1
 		});
 	});
 
@@ -60,7 +67,7 @@ function SeekController(
 		try {
 			vm.loading = true;
 			vm.goods = await seekService.getSeek(filter);
-			$timeout(()=> {
+			$timeout(() => {
 				$rootScope.$broadcast('goodsChanged', vm.goods);
 				vm.loading = false;
 			});
@@ -79,18 +86,18 @@ function SeekController(
 		$rootScope.$broadcast('highlightMarker', gid);
 		// $rootScope.$broadcast('closeGoodsOverlay');
 	}
-	
+
 	async function onClickFavorite(e, goods) {
 		e.preventDefault();
 		e.stopPropagation();
-        
+
 		if (!$rootScope.isLoggedIn) {
 			$rootScope.openSignupModal();
 			return;
-		} 
+		}
 
 		let isFavorite = await favorite.favorite(goods);
-		$timeout(()=> {
+		$timeout(() => {
 			let idx = _.indexOf(vm.goods, goods);
 			vm.goods[idx].starredByUser = isFavorite;
 		});

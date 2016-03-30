@@ -16,20 +16,6 @@ h2 {
 	word-break: break-word;
 }
 
-.goods_text {
-	padding-left: 20px;
-	padding-top: 15px;
-}
-
-.profile_text {
-	padding-left: 20px;
-}
-
-.textshade {
-	color: #616161;
-	text-shadow: 2px 2px 2px #CCCCCC;
-}
-
 a {
 	color: #212121;
 	text-decoration: none;
@@ -70,7 +56,7 @@ a:hover {
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		overflow: hidden;
-		width: 100%;
+		width: 87%;
 		line-height: 20px;
 		font-size: 12px;
 	}
@@ -78,16 +64,6 @@ a:hover {
 		font-size: 10px;
 		line-height: 20px;
 	}
-}
-
-.online:after {
-	content: '';
-	display: inline-block;
-	height: 10px;
-	width: 10px;
-	background: #39caad;
-	border-radius: 100%;
-	margin-left: 5px;
 }
 
 .text-ex {
@@ -111,7 +87,6 @@ a:hover {
 .indicators {
 	filter: opacity(0.5);
 	&:hover {
-		/*opacity: 0.5;*/
 		filter: brightness(150%);
 	}
 }
@@ -159,24 +134,6 @@ a:hover {
 	}
 }
 
-.text-noti {
-	color: #9A9A9A;
-	cursor: pointer;
-	&.left {
-		margin: 2px 12px 0 0;
-	}
-	&.right {
-		margin: 2px 0 0 0;
-	}
-	&:hover {
-		text-decoration: underline;
-	}
-}
-
-.goods-name {
-	text-align: center;
-}
-
 .nav-user {
 	text-overflow: ellipsis;
 	display: inline-block;
@@ -205,6 +162,28 @@ a:hover {
 	&.isDown {
 		margin-top: 10px;
 		margin-bottom: 10px;
+	}
+}
+
+.toolbar-span {
+	color: #262626;
+	font-size: 17px;
+	font-weight: 600;
+}
+
+.home-span {
+	color: #fff;
+	&.cate {
+		margin-top: 0;
+		font-size: 24px;
+	}
+	&.main {
+		margin-bottom: 0;
+		font-size: 30px;
+	}
+	&.sub {
+		margin-top: 0;
+		font-size: 16px;
 	}
 }
 
@@ -266,27 +245,5 @@ a:hover {
 		text-align: center;
 		margin-bottom: 0;
 		color: rgb(233, 230, 232);
-	}
-}
-
-.toolbar-span {
-	color: #262626;
-	font-size: 17px;
-	font-weight: 600;
-}
-
-.home-span {
-	color: #fff;
-	&.cate {
-		margin-top: 0;
-		font-size: 24px;
-	}
-	&.main {
-		margin-bottom: 0;
-		font-size: 30px;
-	}
-	&.sub {
-		margin-top: 0;
-		font-size: 16px;
 	}
 }

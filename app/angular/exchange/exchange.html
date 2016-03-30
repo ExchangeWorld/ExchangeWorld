@@ -1,10 +1,10 @@
 <md-content resize ng-style="resizeWithOffset(56)" ng-show="vm.exchangeList.length === 0">
 	<div layout="column" layout-align="center center" style="height:100%;">
-		<h2 class="md-display-1 xmas-font" style="margin:20px 0; text-align: center">你沒有正在交換的物品喔！</h2>
+		<h2 class="md-display-1" style="margin:20px 0; text-align: center">你沒有正在交換的物品喔！</h2>
 		<div layout layout-align="center center" style="height:50%; width:auto;">
 			<img src="../../images/emoji.png" style="max-width:90%; max-height: 90%; ">
 		</div>
-		<p class="md-title info_container xmas-font" style="text-align: center;">
+		<p class="md-title info-container" style="text-align: center;">
 			立即在探索頁面尋找您喜歡的物品吧
 		</p>
 		<div style="margin-top: 20px;">
@@ -32,7 +32,7 @@
 			<h2 class="md-display-1">點擊左側清單觀看目前正在進行的交換</h2>
 		</div>
 		<div flex-offset="5" flex="50" ng-show="vm.exchange" style="height: 100%;">
-			<div layout="row" layout-xs="column" flex="100" class="info_container layout-ex center">
+			<div layout="row" layout-xs="column" flex="100" class="info-container layout-ex center">
 				<md-card flex="40" class="md-whiteframe-z3 item hvr-glow" ng-style="vm.exchange.owner_goods.bgStyle">
 					<div layout="row" layout-gt-sm="column">
 						<md-card ng-style="vm.exchange.owner_goods.bgStyle">

@@ -1,9 +1,8 @@
 .uploadHead {
 	color: rgba(255, 255, 255, 0);
-}
-
-.uploadHead:hover {
-	color: rgba(255, 255, 255, 1);
+	&:hover{
+		color: rgba(255, 255, 255, 1);
+	}
 }
 
 img-crop {
@@ -23,18 +22,26 @@ img-crop canvas {
 	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
+.name-link {
+	cursor:pointer;
+	&:hover{
+		text-decoration: underline;
+	}
+}
+
 @media screen and (min-width: 300px) {
 	.cropArea {
 		background: #E4E4E4;
 		overflow: hidden;
 		width: 500px;
-		height: calc(100% - 56px);
+		height: 400px;
+		margin: auto 0;
 	}
 }
 
 @media screen and (min-width: 600px) {
 	.cropArea {
-		height: calc(100% - 264px);
+		height: 500px;
 	}
 }
 
